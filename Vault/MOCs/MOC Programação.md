@@ -16,6 +16,10 @@ origem: Manual do Meu Cérebro no Obsidian
 - [[Tipos e emojis de commit]]: a tabela de qual emoji usar em cada tipo.
 - [[Commit atômico]]: uma mudança por commit.
 
+## 🧠 Cofres (memórias) por projeto
+- [[Criar um novo cofre]]: como abrir uma memória nova para um projeto.
+- [[Registrar cofre no README]]: como colocar o cofre no mapa do repositório.
+
 ## 📚 Conceitos por trás
 - [[Conventional Commits]]: a especificação que inspira o meu padrão.
 - [[Versionamento semântico]]: o que significa um número como `v1.0.6`.
