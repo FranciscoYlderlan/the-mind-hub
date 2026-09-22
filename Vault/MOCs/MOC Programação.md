@@ -18,6 +18,7 @@ origem: Manual do Meu Cérebro no Obsidian
 
 ## 🧠 Cofres (memórias) por projeto
 - [[Criar um novo cofre]]: como abrir uma memória nova para um projeto.
+- [[Guia do cofre para IA]]: o `CLAUDE.md` que todo cofre tem para os agentes.
 - [[Registrar cofre no README]]: como colocar o cofre no mapa do repositório.
 
 ## 📚 Conceitos por trás
