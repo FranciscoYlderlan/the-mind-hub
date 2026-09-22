@@ -1,1 +1,6 @@
-{}
+{
+  "newFileLocation": "folder",
+  "newFileFolderPath": "Items",
+  "attachmentFolderPath": "Anexos",
+  "alwaysUpdateLinks": true
+}
