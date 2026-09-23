@@ -37,6 +37,7 @@ origem: Meu prompt de versionamento do projeto conciliador-extratos
 > - Escopo entre parênteses, nunca com barra: `feat(backend)`, e não `feat/backend`.
 > - Tipo por extenso: `refactor`, e não `refact`.
 > - `:tada:` só no **primeiro commit** do projeto.
+> - Commit só no **meu nome**: sem `Co-Authored-By` nem link de sessão de IA, mesmo quando um agente faz o commit.
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Formato único: `{emoji} {tipo}(escopo): Descrição`. Esqueleto fixo, igual às minhas notas.
