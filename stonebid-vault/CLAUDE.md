@@ -4,6 +4,26 @@ Este é um cofre do Obsidian: uma pasta de notas Markdown. Ele é a **memória d
 
 Nome do cofre no Obsidian: `stonebid-vault`. Repositório de código: [a confirmar].
 
+## Seu papel
+
+- **Se você é a sessão principal, você é o orquestrador.** Seu trabalho é ajudar o humano a gerir várias threads de agentes: ler o cofre, planejar, despachar subagentes, juntar os relatórios, falar com o humano e registrar no cofre. Não precisa que ninguém explique isso de novo.
+- **O orquestrador não implementa**, não lê código extenso e não faz pesquisa longa: delega, usando os cartões de papel de `orquestra/modelos/modelo-briefing-subagente.md`.
+- **Se você recebeu um briefing com "Papel:", você é subagente**: siga o cartão do seu papel, não escreva neste cofre e devolva o relatório.
+- **Janela de contexto entre 40% e 50%.** Ao fim de cada ciclo de tarefa, o orquestrador confere com o humano. Passou disso: passagem de turno (abaixo) e chat novo.
+
+## Início de sessão (orquestrador)
+
+1. `python orquestra/modelos/cofre.py status`: em que etapa o projeto está.
+2. O "Onde parei" do último `orquestra/diarios/diario-*.md`: próximo passo, threads abertas, dúvidas.
+3. A ordem de leitura abaixo, só no que a próxima tarefa precisa.
+
+## Passagem de turno (antes de fechar o chat)
+
+1. Registrar o que a sessão produziu (Etapas vitais B).
+2. Diário de hoje com "Onde parei": **próximo passo**, threads abertas (subagentes em andamento ou relatórios não registrados) e dúvidas para o humano.
+3. `cofre.py status --atualizar` e `cofre.py verificar` com zero ERRO.
+4. Avisar o humano: "pode abrir um chat novo".
+
 ## Ordem de leitura (toda tarefa)
 
 1. **Onde o projeto está:** `python orquestra/modelos/cofre.py status` ou o roteiro `orquestra/funcionalidades/geral/geral-plano.md` (etapas, status e notas de cada etapa).
