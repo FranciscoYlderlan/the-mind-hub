@@ -16,6 +16,7 @@ origem: manual-da-orquestra
 
 ## 🧭 Projeto
 - [[CLAUDE]]: índice que os agentes leem primeiro.
+- [[geral-plano]]: roteiro — em que etapa o projeto está e as notas geradas em cada etapa.
 - [[geral-contexto]]: objetivo, motivação, dial e decisões que valem para o projeto todo.
 
 ## 🚧 Funcionalidades

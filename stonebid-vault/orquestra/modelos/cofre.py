@@ -8,6 +8,7 @@ So usa a biblioteca padrao do Python. Rode da raiz do the-mind-hub:
   python Vault/Modelos/Orquestra/cofre.py criar <cofre> --projeto "Nome" --para-que "meia frase" [--repo LINK]
   python Vault/Modelos/Orquestra/cofre.py sincronizar <cofre>
   python Vault/Modelos/Orquestra/cofre.py verificar <cofre>      (vale para o Vault e para cofres de projeto)
+  python Vault/Modelos/Orquestra/cofre.py status <cofre> [--atualizar]   (roteiro: onde o projeto esta)
 
 Dentro de um cofre de projeto: python orquestra/modelos/cofre.py verificar .
 'verificar' sai com codigo 1 se houver ERRO. Ninguem diz "pronto" com ERRO.
@@ -26,7 +27,8 @@ MAP = {"Manual do Meu Cérebro no Obsidian": "manual-do-cerebro", "Manual da Orq
        "MOC Tema": "moc-orquestra"}
 PH_PREFIX = ("nome-da-", "bug-titulo", "Nota ", "nome-da-imagem", "nota-antiga")
 PH = {"Link", "Links", "MOC Tema"}
-SO_NO_PROJETO = {"geral-contexto", "moc-orquestra", "CLAUDE"}
+SO_NO_PROJETO = {"geral-contexto", "geral-plano", "moc-orquestra", "CLAUDE"}
+ESTADOS = ["planejada", "em-construcao", "em-verificacao", "concluida", "arquivada"]
 CODE = re.compile(r"(````.*?````|```.*?```|`[^`\n]*`)", re.S)
 LINK = re.compile(r"!?\[\[([^\]]*)\]\]")
 KEBAB = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*\.md$")
@@ -172,16 +174,18 @@ def criar(a):
 
     c = converter(ler(vault / "Modelos/Orquestra/modelo-contexto.md"))
     c = preencher(c, [("funcionalidade: \n", "funcionalidade: geral\n"), ("{{date}}", d),
+                      ("status: planejada\netapa: \n", "status: em-construcao\netapa-atual: 1\n"),
                       ("# 🧭 {{title}}", f"# 🧭 {a.projeto} — contexto geral"),
                       ("> O que esta funcionalidade é e por que existe.", f"> {a.para_que}"),
                       ("- Dial: alto | medio | baixo (padrão: o do [[geral-contexto]])", "- Dial: [a confirmar] alto | medio | baixo"),
                       ("- AAAA-MM-DD: ", f"- {d}: cofre criado com `cofre.py criar` ([[diario-{d}]])."),
-                      ("- Plano: [[nome-da-func-plano]]", "- Plano: (nenhum ainda)"),
+                      ("- Plano: [[nome-da-func-plano]]", "- Roteiro: [[geral-plano]]"),
                       ("- Decisões: [[nome-da-func-decisao-AAAA-MM-DD-titulo]]", "- Decisões: (nenhuma ainda; nomes `geral-decisao-AAAA-MM-DD-titulo`)"),
                       ("- Bugs: [[bug-titulo-AAAA-MM-DD]]", "- Bugs: (nenhum ainda)"),
                       ("- Referências: [[nome-da-referencia]]", "- Referências: [[manual-da-orquestra]], [[manual-do-cerebro]]"),
                       ("- Projeto: [[geral-contexto]]\n", "")], "modelo-contexto")
     escrever(dest / "orquestra/funcionalidades/geral/geral-contexto.md", c)
+    escrever(dest / "orquestra/funcionalidades/geral/geral-plano.md", roteiro_inicial(vault, d, a.projeto))
 
     escrever(dest / f"orquestra/diarios/diario-{d}.md", diario_criacao(vault, d, dest.name))
     for p in ("orquestra/entradas", "orquestra/arquivos", "orquestra/bugs", "Anexos"):
@@ -195,12 +199,75 @@ def diario_criacao(vault, d, nome):
     s = converter(ler(vault / "Modelos/Orquestra/modelo-diario.md"))
     return preencher(s, [
         ("{{date}}", d), ("# 📓 {{title}}", f"# 📓 Diário {d}"),
-        ("## O que foi feito\n(só fatos)", f"## O que foi feito\n- Cofre `{nome}` criado com `cofre.py criar`: estrutura `orquestra/`, kit de modelos, manuais, `CLAUDE.md`, [[moc-orquestra]] e [[geral-contexto]]."),
+        ("## O que foi feito\n(só fatos)", f"## O que foi feito\n- Cofre `{nome}` criado com `cofre.py criar`: estrutura `orquestra/`, kit de modelos, manuais, `CLAUDE.md`, [[moc-orquestra]], [[geral-contexto]] e o roteiro [[geral-plano]]."),
         ("- [[nome-da-func-decisao-AAAA-MM-DD-titulo]]", "- (nenhuma)"), ("- [[bug-titulo-AAAA-MM-DD]]", "- (nenhum)"),
         ("## Candidatos que não viraram nota\n(e por quê)", "## Candidatos que não viraram nota\n- (nenhum)"),
         ("> O próximo passo concreto para a próxima sessão.", "> Preencher o [[geral-contexto]] (objetivo, motivação, tempo, dial) e colar o trecho do modelo-claude-do-repositorio no repositório de código."),
         ("- Funcionalidades tocadas: [[nome-da-func-contexto]]", "- Funcionalidades tocadas: [[geral-contexto]]"),
         ("- Projeto: [[geral-contexto]]\n", "")], "modelo-diario")
+
+
+def roteiro_inicial(vault, d, projeto):
+    s = converter(ler(vault / "Modelos/Orquestra/modelo-roteiro.md"))
+    s = preencher(s, [("{{date}}", d), ("# 🧭 Roteiro do projeto", f"# 🧭 Roteiro — {projeto}")], "modelo-roteiro")
+    return re.sub(r"## 2\. Nome da etapa\n.*?(?=### 🔗 Conexões)", "", s, flags=re.S)
+
+
+# ---------------------------------------------------------------- roteiro e status
+def etapas(s):
+    partes = re.split(r"^## (\d+)\. (.+)$", s, flags=re.M)
+    out = []
+    for i in range(1, len(partes) - 2, 3):
+        corpo = re.split(r"^#{2,3} ", partes[i + 2], flags=re.M)[0]
+
+        def campo(k):
+            m = re.search(rf"^- \*\*{k}:\*\* ?(.*)$", corpo, re.M)
+            return m.group(1).strip() if m else ""
+        out.append({"n": int(partes[i]), "titulo": partes[i + 1].strip(), "status": campo("Status"),
+                    "data": campo("Concluída em"), "funcs": links(campo("Funcionalidades")),
+                    "notas": links(campo("Notas geradas"))})
+    return out
+
+
+def etapa_atual(etps):
+    return next((e for e in etps if e["status"] not in ("concluida", "arquivada")), None)
+
+
+def linha_atual(cur):
+    return f"Etapa atual: **{cur['n']}. {cur['titulo']}** ({cur['status']})" if cur else "Todas as etapas concluídas."
+
+
+def status(a):
+    cofre = Path(a.cofre).resolve()
+    rot = cofre / "orquestra/funcionalidades/geral/geral-plano.md"
+    gc = cofre / "orquestra/funcionalidades/geral/geral-contexto.md"
+    if not rot.exists():
+        sys.exit("ERRO: falta o roteiro orquestra/funcionalidades/geral/geral-plano.md")
+    s = ler(rot)
+    etps = etapas(s)
+    cur = etapa_atual(etps)
+    if a.atualizar:
+        novo = re.sub(r"(\[!tldr\][^\n]*\n> ).*", lambda m: m.group(1) + linha_atual(cur), s, count=1)
+        if novo != s:
+            escrever(rot, novo); print("atualizado  tldr do roteiro")
+        if gc.exists() and cur:
+            g = ler(gc)
+            g2 = re.sub(r"^etapa-atual:.*$", f"etapa-atual: {cur['n']}", g, count=1, flags=re.M)
+            if g2 != g:
+                escrever(gc, g2); print("atualizado  etapa-atual do geral-contexto")
+    ctxs = {p.stem.lower(): frontmatter(ler(p)) or {} for p in (cofre / "orquestra").rglob("*-contexto.md") if "modelos" not in p.parts}
+    feitas = sum(e["status"] in ("concluida", "arquivada") for e in etps)
+    print(f"\n== status {cofre.name}: {linha_atual(cur).replace('**', '')}")
+    for e in etps:
+        marca = {"concluida": "✔", "arquivada": "✔"}.get(e["status"], "▶" if e is cur else "·")
+        extra = f" em {e['data']}" if e["data"] else ""
+        print(f"  {marca} {e['n']}. {e['titulo']}  [{e['status']}{extra}]")
+        for f in e["funcs"]:
+            print(f"       funcionalidade {f}: {ctxs.get(f.lower(), {}).get('status', '?')}")
+        if e["notas"]:
+            print(f"       notas geradas: {', '.join(e['notas'])}")
+    print(f"\nConcluídas: {feitas}/{len(etps)}.")
+    return 0
 
 
 # ---------------------------------------------------------------- sincronizar
@@ -370,6 +437,50 @@ def verificar(cofre, vault=None):
         for n in (o / "diarios").glob("*.md"):
             if not re.fullmatch(rf"diario-{DATA}\.md", n.name):
                 E(rel(n), "nome fora do padrão diario-AAAA-MM-DD.md")
+        rot = o / "funcionalidades/geral/geral-plano.md"
+        gctx = o / "funcionalidades/geral/geral-contexto.md"
+        fm_ctx = {p.stem.lower(): (p, frontmatter(texto.get(p, "")) or {}) for p in mds if p.name.endswith("-contexto.md") and not eh_modelo(p)}
+        for st, (pc, fmc) in fm_ctx.items():
+            if fmc.get("status") not in ESTADOS:
+                E(rel(pc), f"status '{fmc.get('status')}' inválido para contexto ({' → '.join(ESTADOS)})")
+        if not rot.exists():
+            E("orquestra/funcionalidades/geral/geral-plano.md", "falta o roteiro do projeto (etapa A3)")
+        else:
+            rs = texto[rot]
+            etps = etapas(rs)
+            nums = [e["n"] for e in etps]
+            if not etps:
+                E(rel(rot), "roteiro sem etapas (seções '## 1. Nome')")
+            elif nums != list(range(1, len(nums) + 1)):
+                E(rel(rot), f"etapas fora da sequência 1..N: {nums}")
+            for e in etps:
+                tag = f"etapa {e['n']}"
+                if e["status"] not in ESTADOS:
+                    E(rel(rot), f"{tag}: status '{e['status']}' inválido")
+                if e["status"] == "concluida":
+                    if not re.fullmatch(DATA, e["data"]):
+                        E(rel(rot), f"{tag} concluída sem 'Concluída em' AAAA-MM-DD")
+                    if not [t for t in e["notas"] if t.lower() in todos]:
+                        E(rel(rot), f"{tag} concluída sem link para as notas geradas")
+                    for f in e["funcs"]:
+                        stf = fm_ctx.get(f.lower(), (None, {}))[1].get("status")
+                        if stf not in ("concluida", "arquivada"):
+                            E(rel(rot), f"{tag} concluída, mas a funcionalidade {f} está '{stf}'")
+            cur = etapa_atual(etps)
+            m = re.search(r"\[!tldr\][^\n]*\n> (.*)", rs)
+            if not m or m.group(1).strip() != linha_atual(cur):
+                E(rel(rot), "linha 'Etapa atual' desatualizada: rode cofre.py status --atualizar")
+            if gctx.exists() and cur and fm_ctx.get("geral-contexto", (None, {}))[1].get("etapa-atual") != str(cur["n"]):
+                E(rel(gctx), f"etapa-atual difere do roteiro (etapa {cur['n']}): rode cofre.py status --atualizar")
+            por_etapa = {e["n"]: {t.lower() for t in e["funcs"]} for e in etps}
+            for st, (pc, fmc) in fm_ctx.items():
+                if st == "geral-contexto":
+                    continue
+                et = fmc.get("etapa", "")
+                if not et.isdigit() or int(et) not in por_etapa:
+                    E(rel(pc), f"frontmatter 'etapa: {et}' não aponta para uma etapa do roteiro")
+                elif st not in por_etapa[int(et)]:
+                    E(rel(pc), f"funcionalidade fora da lista 'Funcionalidades' da etapa {et} no roteiro")
         vault = vault or achar_vault(None, cofre)
         if vault:
             for relk, txt in kit(vault).items():
@@ -400,11 +511,14 @@ def main():
     c.add_argument("--repo", default="[a confirmar]"); c.add_argument("--vault")
     s = sub.add_parser("sincronizar"); s.add_argument("cofre"); s.add_argument("--vault")
     v = sub.add_parser("verificar"); v.add_argument("cofre"); v.add_argument("--vault")
+    st = sub.add_parser("status"); st.add_argument("cofre"); st.add_argument("--atualizar", action="store_true")
     a = ap.parse_args()
     if a.cmd == "criar":
         sys.exit(criar(a))
     if a.cmd == "sincronizar":
         sys.exit(sincronizar(a))
+    if a.cmd == "status":
+        sys.exit(status(a))
     sys.exit(verificar(a.cofre, achar_vault(a.vault, a.cofre)))
 
 
