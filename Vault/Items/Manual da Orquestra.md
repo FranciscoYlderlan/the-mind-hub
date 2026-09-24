@@ -47,7 +47,8 @@ nome-do-cofre/
 │   ├── entradas/                 brainstorms e anotações sem destino
 │   ├── funcionalidades/          o que está em construção
 │   │   ├── geral/                o projeto inteiro (nunca vai para arquivos/)
-│   │   │   └── geral-contexto.md
+│   │   │   ├── geral-contexto.md
+│   │   │   └── geral-plano.md    roteiro: etapas do projeto e onde ele está
 │   │   └── lances-auto/
 │   │       ├── lances-auto-contexto.md
 │   │       ├── lances-auto-plano.md
@@ -61,7 +62,7 @@ nome-do-cofre/
 └── Anexos/                       imagens e PDFs
 ```
 
-- `funcionalidades/geral/` guarda o contexto e as decisões que valem para o projeto todo (arquitetura, stack, nível do dial).
+- `funcionalidades/geral/` guarda o contexto, as decisões que valem para o projeto todo (arquitetura, stack, nível do dial) e o **roteiro** (`geral-plano`).
 - O `CLAUDE.md` é o único índice. Não existe `leia-primeiro.md`.
 
 ---
@@ -72,6 +73,7 @@ nome-do-cofre/
 |---|---|---|
 | `<func>-contexto.md` | Hub da funcionalidade: objetivo, feito, tempo, links | Orquestrador, no fim da sessão |
 | `<func>-plano.md` | Proposta da IA: tarefas, prioridades, verificação | Orquestrador |
+| `geral-plano.md` (roteiro) | Etapas do projeto, status e notas geradas em cada uma | Orquestrador; a lista de etapas só muda com decisão minha |
 | `<func>-decisao-<data>-<titulo>.md` | Uma decisão minha por nota | Orquestrador, **só depois do meu aval** |
 | `bugs/bug-<titulo>-<data>.md` | Bug não trivial resolvido | Orquestrador, com meu aval |
 | `diarios/diario-<data>.md` | Fatos de uma sessão relevante | Orquestrador |
@@ -130,7 +132,7 @@ Regras de separação: o implementador de uma tarefa nunca é o verificador dela
 
 | Gatilho | Ação |
 |---|---|
-| Início de qualquer tarefa | `geral-contexto` → contexto da funcionalidade → decisões → plano |
+| Início de qualquer tarefa | `cofre.py status` (ou o roteiro `geral-plano`) → `geral-contexto` → contexto da funcionalidade → decisões → plano |
 | Antes de investigar bug | Buscar em `bugs/` por sintoma (cache, 401, race, fallback, crash) e ler as decisões |
 | Antes de decisão de arquitetura | Ler as decisões. Contradizer só de forma explícita, citando a nota |
 | Ao tocar em área sensível | Contexto, `referencias/` e bugs daquela área |
@@ -147,6 +149,7 @@ Regras de separação: o implementador de uma tarefa nunca é o verificador dela
 | Bug ficou central | Nota + link no contexto |
 | Decisão aprovada | Nota de decisão + atualizar a nota responsável |
 | Tarefa concluída | Contexto ("o que já foi feito") e verificação no plano |
+| Etapa do roteiro concluída | `concluida`, data e notas geradas no roteiro; `cofre.py status --atualizar` |
 | Sessão relevante | Nota curta em `diarios/` |
 | Estrutura se repetiu pela 3ª vez | Sugerir modelo novo |
 | Lacuna de referência | Sugerir em `referencias/` |
@@ -165,8 +168,8 @@ Lição de um bug que vale **fora** do projeto sobe para o `Vault` como nota de 
 - Datas **AAAA-MM-DD** em nome de arquivo e frontmatter.
 - Links com `[[wikilinks]]`. Nota sem link fica perdida.
 - **Notas operacionais** (contexto, plano, decisão, bug, diário) usam o modelo próprio e ficam isentas de analogia, resumo de 3 pontos e limite de ~350 palavras. Notas de `referencias/` seguem o Manual do Cérebro.
-- Frontmatter operacional: `tipo` (contexto, plano, decisao, bug, diario), `status`, `criado`, `funcionalidade`; `aliases` opcional (em bug, use os sintomas); `origem` e `tags` opcionais. Extras: decisão tem `substitui`. Notas de `referencias/` (`tipo: referencia`, com `tema`) seguem o frontmatter completo do Manual do Cérebro, com `tags`.
-- `status` por tipo: plano `proposta → aprovado → arquivado`; decisão `aprovada | substituida`; bug `resolvido`; contexto `em-andamento | arquivado`; diário `consolidada`; referência `rascunho → em-uso → consolidada`.
+- Frontmatter operacional: `tipo` (contexto, plano, decisao, bug, diario), `status`, `criado`, `funcionalidade`; `aliases` opcional (em bug, use os sintomas); `origem` e `tags` opcionais. Extras: decisão tem `substitui`; contexto de funcionalidade tem `etapa`; `geral-contexto` tem `etapa-atual`. Notas de `referencias/` (`tipo: referencia`, com `tema`) seguem o frontmatter completo do Manual do Cérebro, com `tags`.
+- `status` por tipo: plano `proposta → aprovado → arquivado`; decisão `aprovada | substituida`; bug `resolvido`; contexto e etapa do roteiro `planejada → em-construcao → em-verificacao → concluida → arquivada`; diário `consolidada`; referência `rascunho → em-uso → consolidada`.
 - Fatos que eu informei ficam preservados. Interpretação do agente fica em seção separada.
 - Tarefa **de agente** mora no plano. Tarefa **minha** vai para o TickTick.
 - O agente pede confirmação antes de apagar. Na dúvida, arquiva.
@@ -200,6 +203,20 @@ Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou 
 
 ---
 
+## 🧭 Roteiro do projeto
+
+O roteiro responde **onde o projeto está**, sem exigir que o agente entenda o projeto inteiro. Mora em `funcionalidades/geral/geral-plano.md` ([[modelo-roteiro]]) e é a primeira consulta de toda sessão, junto com `cofre.py status`.
+
+- Uma seção por **etapa geral**, na ordem em que o projeto acontece. Exemplo, uma loja de café: 1. Alugar o ponto · 2. Mobiliar · 3. Comprar a máquina · 4. Abrir a loja · 5. Iniciar as vendas.
+- Cada etapa tem: **Status**, Objetivo, Pronto quando, Funcionalidades (links para `<func>-contexto`), **Notas geradas** (links diretos para as decisões, bugs, diários e referências daquela etapa) e Concluída em.
+- Status de etapa e de funcionalidade: `planejada → em-construcao → em-verificacao → concluida → arquivada`.
+- A etapa atual é a primeira que não está concluída nem arquivada. Ela aparece no `[!tldr]` do roteiro e em `etapa-atual` no `geral-contexto`; `cofre.py status --atualizar` sincroniza os dois.
+- Todo cofre nasce com a etapa 1 "Definir o roteiro do projeto". As etapas são proposta da IA até eu aprovar (nota `geral-decisao-AAAA-MM-DD-roteiro`). Mudar a lista de etapas é uma nova decisão.
+- Cada `<func>-contexto` declara `etapa: N` e aparece em Funcionalidades da etapa N.
+- Concluiu uma etapa: o orquestrador marca `concluida`, a data e as notas geradas, e roda `cofre.py status --atualizar` (etapa B6). O `cofre.py verificar` acusa qualquer divergência.
+
+---
+
 ## 🚦 Etapas vitais
 
 Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro de processo.** "Quem cria não testa" vale também para a memória: quem aprova é o `cofre.py verificar`, não o agente que escreveu.
@@ -210,8 +227,8 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 |---|---|---|
 | A1 | Ler: `CLAUDE.md` do Vault → este manual → Criar um novo cofre | — |
 | A2 | Perguntar ao humano: nome, objetivo, repositório, tempo, dial. O que faltar vira `[a confirmar]` | Respostas registradas |
-| A3 | `cofre.py criar` (nunca montar à mão) | Estrutura, kit, `CLAUDE.md`, moc, geral-contexto e diário de criação |
-| A4 | Preencher o geral-contexto com os fatos de A2 | Seções preenchidas |
+| A3 | `cofre.py criar` (nunca montar à mão) | Estrutura, kit, `CLAUDE.md`, moc, geral-contexto, roteiro e diário de criação |
+| A4 | Preencher o geral-contexto com os fatos de A2 e propor as etapas do roteiro. Com meu aval: nota de decisão, roteiro preenchido e etapa 1 concluída | Decisão do roteiro + `cofre.py status` |
 | A5 | Ligar o repositório de código ([[modelo-claude-do-repositorio]]) | Trecho no `CLAUDE.md` do repositório |
 | A6 | `cofre.py verificar` | **Zero ERRO** |
 | A7 | Humano: abrir no Obsidian, pasta de modelos, README, commit | — |
@@ -225,7 +242,7 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 | B3 | Classificar: tipo → modelo → pasta → nome (§7). Pedir aval quando a regra exige | Aval, quando aplicável |
 | B4 | Escrever a partir do modelo, nunca do zero | Nota com o esqueleto do modelo |
 | B5 | Conectar nos dois sentidos: Conexões (saída) e hub ou MOC (entrada). Nota fora do mapa não existe | Link de entrada e 2+ de saída |
-| B6 | Propagar: contexto ("o que já foi feito" e diário), decisão substituída, histórico do manual. Mudou o original no Vault → `cofre.py sincronizar` em cada cofre de projeto | Notas afetadas atualizadas |
+| B6 | Propagar: etapa do roteiro concluída (status, data, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito" e diário), decisão substituída, histórico do manual. Mudou o original no Vault → `cofre.py sincronizar` em cada cofre de projeto | Notas afetadas atualizadas |
 | B7 | `cofre.py verificar` | **Zero ERRO**. Só então "pronto" |
 
 ---
@@ -237,6 +254,7 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 | Modelo | Para quê |
 |---|---|
 | [[modelo-contexto]] | Hub de uma funcionalidade (e o `geral-contexto` do projeto) |
+| [[modelo-roteiro]] | Roteiro do projeto (`geral-plano`): etapas, status e notas geradas |
 | [[modelo-plano]] | Proposta da IA, tarefas e verificação |
 | [[modelo-decisao]] | Uma decisão minha por nota |
 | [[modelo-bug]] | Bug não trivial resolvido |
@@ -260,3 +278,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 ## 🕓 Histórico
 - v1 (2026-10-28): criação, a partir dos dois estudos e das decisões: orquestra completa só em cofres de projeto, `funcionalidades/`, AAAA-MM-DD, kebab-case com prefixo, uma nota por decisão, só o orquestrador escreve, CLAUDE.md como índice, notas operacionais isentas, dial de estrutura e gatilhos estendidos. Revisão trimestral não adotada.
 - v2 (2026-10-28): Etapas vitais A (criar cofre) e B (atualizar memória), passo 10 do fluxo e `cofre.py` como verificador. Origem: modelos criados sem conexões e cópias com links quebrados porque a verificação só olhava links quebrados.
+- v3 (2026-10-28): roteiro do projeto (`geral-plano`) com etapas, status e notas geradas; consulta no início de toda sessão; `cofre.py status`; status de contexto com 5 fases.
