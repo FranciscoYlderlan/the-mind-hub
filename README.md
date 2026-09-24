@@ -17,21 +17,24 @@ Qual memória abrir para cada projeto:
 
 ## ➕ Novo cofre
 
-1. Crio a pasta do projeto na raiz, em kebab-case, copiando a estrutura do `Vault/`.
-2. Crio o `CLAUDE.md` na raiz do cofre, a partir de `Vault/Modelos/Modelo de CLAUDE do cofre.md`.
+1. Na raiz: `python Vault/Modelos/Orquestra/cofre.py criar nome-do-cofre --projeto "Nome" --para-que "meia frase" --repo LINK`. O script monta a estrutura `orquestra/`, o `CLAUDE.md`, o mapa e o contexto geral.
+2. Preencho o contexto geral e rodo `python Vault/Modelos/Orquestra/cofre.py verificar nome-do-cofre` até dar zero ERRO.
 3. Adiciono **uma linha** no Mapa de cofres acima.
 4. Faço dois commits: um para o cofre e outro para este README.
 
-O passo a passo completo está nas notas **Criar um novo cofre** e **Registrar cofre no README**, dentro do `Vault/`.
+O passo a passo completo está nas notas **Criar um novo cofre**, **Atualizar a memória** e **Registrar cofre no README**, dentro do `Vault/`.
 
 ## 🧭 Como cada cofre funciona
 
-- Cada cofre começa pela nota **Home**.
-- Cada cofre tem um `CLAUDE.md` na raiz: o guia que os agentes de IA leem quando o cofre entra como contexto.
+- Cada cofre tem um `CLAUDE.md` na raiz: o índice que os agentes de IA leem primeiro, com as etapas vitais.
+- O `Vault/` guarda as notas em `Items/` e os mapas em `MOCs/`, e começa pela nota **Home**.
+- Cofres de projeto usam a estrutura `orquestra/` (contexto, plano, decisões, bugs e diários) e começam por `MOCs/moc-orquestra.md`. As regras estão no **Manual da Orquestra**.
 - As regras de escrita estão no **Manual do Meu Cérebro no Obsidian**.
-- As notas ficam em `Items/`, e os mapas de assunto ficam em `MOCs/`.
-- Tarefas não moram aqui. O Obsidian guarda o que eu **sei**, e o TickTick guarda o que eu **faço**.
+- Toda escrita num cofre termina com `cofre.py verificar` com zero ERRO.
+- Minhas tarefas não moram aqui: ficam no TickTick. Tarefas de agente ficam no plano de cada funcionalidade.
 
 ## 🌿 Commits
 
 Formato único: `{emoji} {tipo}(escopo): Descrição`. A regra completa está na nota **Padrão de commit**, dentro do `Vault/`.
+
+Os cofres não têm `.git` próprio: os commits são feitos da raiz deste repositório. Ver **Commitar no the-mind-hub**.
