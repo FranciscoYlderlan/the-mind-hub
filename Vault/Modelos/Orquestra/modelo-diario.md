@@ -18,7 +18,9 @@ criado: {{date}}
 (e por quê)
 
 > [!tip] Onde parei
-> O próximo passo concreto para a próxima sessão.
+> - **Próximo passo:** 
+> - **Threads abertas:** (subagentes em andamento ou relatórios ainda não registrados)
+> - **Dúvidas para o humano:** 
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
