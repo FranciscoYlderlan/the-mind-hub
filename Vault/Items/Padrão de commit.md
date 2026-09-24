@@ -46,5 +46,5 @@ origem: Meu prompt de versionamento do projeto conciliador-extratos
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Tipos e emojis de commit]], [[Commit atômico]], [[Conventional Commits]]
+- Relacionadas: [[Tipos e emojis de commit]], [[Commit atômico]], [[Conventional Commits]], [[Commitar no the-mind-hub]]
 - Próxima: [[Tipos e emojis de commit]]
