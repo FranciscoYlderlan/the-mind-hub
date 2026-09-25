@@ -27,6 +27,7 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 > - O `CLAUDE.md` não é nota: sem frontmatter, na raiz, e é o **único índice** (sem `leia-primeiro.md`).
 > - Regra só do projeto **não** vai no `CLAUDE.md`, porque o sincronizar o regenera. Ela vira decisão em `funcionalidades/geral/`.
 > - Não apago "Como buscar" nem "Etapas vitais": são elas que obrigam o agente a consultar antes e verificar depois.
+> - "Como buscar" exige a Obsidian CLI. Se ela falhar, o agente reporta e analisa com [[Obsidian CLI via MCP não carrega]] antes de buscar nos `.md`.
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Um `CLAUDE.md` por cofre faz qualquer combinação de cofres funcionar num projeto.
