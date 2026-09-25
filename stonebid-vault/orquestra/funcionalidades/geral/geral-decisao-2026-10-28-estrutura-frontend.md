@@ -13,6 +13,10 @@ aliases: [Organização do frontend, Pastas do stonebid-web, Frontend folder str
 
 ```
 frontend/
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                   # ESLint, Prettier (checagem), tipos e build em push/PR
+│       └── cd.yml                   # Deploy automático depois do CI verde na branch principal
 ├── public/                          # Estáticos servidos como estão (favicon, robots.txt)
 ├── .env.example                     # Modelo das variáveis de ambiente
 ├── components.json                  # [shadcn] Config da CLI (aliases e caminhos)
@@ -87,13 +91,14 @@ frontend/
     - `app/`: junta providers e router. O `router.ts` injeta `queryClient` e `auth` no contexto, que é como guards e loaders os acessam.
   - **Estado:** dados do servidor no TanStack Query; estado de UI global no Zustand, só quando realmente necessário.
   - **Obrigatórios do shadcn:** `components.json`, `components/ui`, `lib/utils.ts` e `styles/globals.css`. A pasta `hooks/` é opcional, mas a CLI a usa por padrão.
-- **Alteração:** 2026-10-28: rotas e features de exemplo (`users/`, `orders/`, `auth/`) trocadas por nomes genéricos (`feature1/`, `feature2/`), para não induzir inferência sobre o domínio do problema. 2026-10-28: pasta `src/test/` retirada, porque o frontend não terá testes unitários nem de componente.
+- **Alteração:** 2026-10-28: rotas e features de exemplo (`users/`, `orders/`, `auth/`) trocadas por nomes genéricos (`feature1/`, `feature2/`), para não induzir inferência sobre o domínio do problema. 2026-10-28: pasta `src/test/` retirada, porque o frontend não terá testes unitários nem de componente. 2026-10-28: pasta `.github/workflows/` acrescentada (`ci.yml` e `cd.yml`), pelo CI/CD de [[geral-decisao-2026-10-28-stack-frontend]].
 - **Motivo:** definição base do projeto informada pelo humano.
 - **Consequências:**
   - Proibido: lógica de negócio em `routes/`, import entre features, import de camada de baixo para cima, componente próprio em `components/ui/`, editar `routeTree.gen.ts`.
   - Toda feature expõe só o `index.ts`; nada de importar arquivos internos de outra feature.
   - Criação de componentes segue [[geral-decisao-2026-10-28-criacao-de-componentes]].
   - `feature1/` e `feature2/` são **marcadores da estrutura**, não features do projeto. Agente não deduz domínio a partir deles: as features reais nascem cada uma com o próprio `<func>-contexto`.
+  - CI e CD ficam em arquivos separados em `.github/workflows/`: o `cd.yml` só roda depois do CI verde na branch principal.
   - Toda feature criada passa pelo teste com Playwright de outro agente: [[geral-decisao-2026-10-28-testes-frontend-playwright]].
 
 ### 🔗 Conexões

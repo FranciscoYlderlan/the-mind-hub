@@ -26,8 +26,9 @@ aliases: [Tecnologias do frontend, Stack do stonebid-web, Frontend stack]
 | ESLint | latest | Lint |
 | Prettier | latest | Configuração e padrão do Prettier |
 | Playwright | latest | Usado pelas subthreads de teste para validar cada funcionalidade |
+| GitHub Actions | — | CI/CD integrado ao GitHub: lint, formatação, checagem de tipos e build em todo push/PR; deploy automático depois do CI verde |
 
-- **Alteração:** 2026-10-28: lint definido como ESLint (com Prettier) e Playwright acrescentado para os testes de funcionalidade ([[geral-decisao-2026-10-28-testes-frontend-playwright]]). Sem testes unitários e de componente no frontend. Zustand (latest) acrescentado.
+- **Alteração:** 2026-10-28: lint definido como ESLint (com Prettier) e Playwright acrescentado para os testes de funcionalidade ([[geral-decisao-2026-10-28-testes-frontend-playwright]]). Sem testes unitários e de componente no frontend. Zustand (latest) acrescentado. 2026-10-28: CI/CD com GitHub Actions acrescentado, igual ao backend.
 - **Motivo:** definição base do projeto informada pelo humano; motivo de cada escolha não registrado [a confirmar].
 - **Consequências:**
   - A criação do projeto segue o passo a passo do shadcn para Vite, não um template próprio.
@@ -35,6 +36,9 @@ aliases: [Tecnologias do frontend, Stack do stonebid-web, Frontend stack]
   - Estado do servidor no TanStack Query; Zustand nunca guarda dado vindo da API; validação de formulários, search params e env com zod.
   - Trocar ou acrescentar biblioteca de base (roteador, validação, UI, estilos, lint, testes) exige nova decisão.
   - Sem testes unitários e de componente (sem Vitest, Testing Library ou MSW no frontend).
+  - CI no GitHub Actions roda ESLint, Prettier (checagem), checagem de tipos do TypeScript e build em todo push/PR; PR com CI vermelho não entra. O Playwright não roda no CI: a validação é feita pelas subthreads de teste ([[geral-decisao-2026-10-28-testes-frontend-playwright]]).
+  - CD no GitHub Actions faz o deploy automático do `stonebid-web` quando o CI passa na branch principal. Destino do deploy depende da hospedagem, ainda não escolhida [a confirmar]; nome da branch [a confirmar].
+  - Variáveis e segredos do deploy ficam nos *secrets* do GitHub, nunca no repositório.
   - Funcionalidade do frontend só está pronta depois de validada no Playwright: [[geral-decisao-2026-10-28-testes-frontend-playwright]].
   - Estrutura de pastas: [[geral-decisao-2026-10-28-estrutura-frontend]]. Regras de componentes: [[geral-decisao-2026-10-28-criacao-de-componentes]].
 
