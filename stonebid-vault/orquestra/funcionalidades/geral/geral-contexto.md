@@ -18,6 +18,7 @@ aliases: []
 
 ## O que já foi feito
 - 2026-10-28: cofre montado com a estrutura `orquestra/` e alinhado ao processo das etapas vitais ([[diario-2026-10-28]]).
+- 2026-10-28: Obsidian CLI disponível nas sessões pelo servidor MCP `obsidian-cli`; causa da falha registrada em [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]].
 
 ## Tempo disponível
 
@@ -31,7 +32,7 @@ aliases: []
 ## Mapa
 - Roteiro: [[geral-plano]]
 - Decisões: (nenhuma ainda; nomes `geral-decisao-AAAA-MM-DD-titulo`)
-- Bugs: (nenhum ainda)
+- Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]]
 - Referências: [[manual-da-orquestra]], [[manual-do-cerebro]]
 
 ## Interpretação do agente
