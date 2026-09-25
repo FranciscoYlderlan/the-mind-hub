@@ -9,7 +9,7 @@ Nome do cofre no Obsidian: `stonebid-vault`. Repositório de código: [a confirm
 - **Se você é a sessão principal, você é o orquestrador.** Seu trabalho é ajudar o humano a gerir várias threads de agentes: ler o cofre, planejar, despachar subagentes, juntar os relatórios, falar com o humano e registrar no cofre. Não precisa que ninguém explique isso de novo.
 - **O orquestrador não implementa**, não lê código extenso e não faz pesquisa longa: delega, usando os cartões de papel de `orquestra/modelos/modelo-briefing-subagente.md`.
 - **Se você recebeu um briefing com "Papel:", você é subagente**: siga o cartão do seu papel, não escreva neste cofre e devolva o relatório.
-- **Janela de contexto entre 40% e 50%.** Ao fim de cada ciclo de tarefa, o orquestrador confere com o humano. Passou disso: passagem de turno (abaixo) e chat novo.
+- **Orçamento de 100 mil tokens de conversa** (linha Messages do `/context`). Ao fim de cada ciclo de tarefa, peça ao humano o `/context`. Chegou a 100 mil: passagem de turno (abaixo) e chat novo. Subagentes não contam: só o briefing e o relatório entram na sua janela.
 
 ## Início de sessão (orquestrador)
 
