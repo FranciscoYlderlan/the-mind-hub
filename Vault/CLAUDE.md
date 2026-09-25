@@ -46,14 +46,19 @@ Os cofres moram dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 
 **Sempre** que precisar recuperar contexto, decisões, regras ou qualquer instrução registrada antes, busque neste cofre **antes** de responder ou escrever. Não responda de memória quando o assunto pode estar numa nota.
 
-1. **Obsidian CLI** (primeira opção; usa o índice do app, então acha por aliases, tags e links). Precisa do Obsidian aberto:
-   - Busca: `obsidian vault="Vault" search query="termo" limit=10`
-   - Ler uma nota: `obsidian vault="Vault" read file="Nome da nota"`
-   - Quem aponta para uma nota: `obsidian vault="Vault" backlinks file="Nome da nota"`
-   - Notas por tag: `obsidian vault="Vault" tags`
-   - Lista completa de comandos: `obsidian help`
+1. **Obsidian CLI: obrigatória** (usa o índice do app, então acha por aliases, tags e links). Precisa do Obsidian aberto.
+   - Sessão na nuvem ligada ao computador: use as ferramentas do servidor MCP `obsidian-cli` (`obsidian_search`, `obsidian_read`, `obsidian_backlinks`, `obsidian_help`), com `vault="Vault"`.
+   - Terminal no Windows:
+     - Busca: `obsidian vault="Vault" search query="termo" limit=10`
+     - Ler uma nota: `obsidian vault="Vault" read file="Nome da nota"`
+     - Quem aponta para uma nota: `obsidian vault="Vault" backlinks file="Nome da nota"`
+     - Notas por tag: `obsidian vault="Vault" tags`
+     - Lista completa de comandos: `obsidian help`
 2. Tente sinônimos e termos em inglês antes de concluir que não existe nota (as notas têm `aliases`).
-3. **Sem CLI** (comando não encontrado ou Obsidian fechado): busque nos `.md` desta pasta, incluindo os `aliases` do frontmatter, e **avise** que a busca foi feita sem a CLI.
+3. **CLI falhou** (ferramentas `obsidian_*` ausentes, comando não encontrado, "The CLI is unable to find Obsidian"): **não troque de caminho em silêncio**.
+   - **Reporte** ao humano o que falhou, com a mensagem de erro.
+   - **Analise** com a nota [[Obsidian CLI via MCP não carrega]]: causa conhecida, correção e como validar. A causa é outra? Registre o bug novo. É a mesma e voltou? Atualize a nota.
+   - Só se o humano não puder corrigir agora: busque nos `.md` desta pasta, incluindo os `aliases` do frontmatter, e **avise** que a busca foi feita sem a CLI.
 4. Ao usar uma nota, cite o nome dela na resposta, para eu saber de onde veio.
 
 ## Criar um cofre novo
