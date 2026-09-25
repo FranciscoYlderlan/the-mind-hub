@@ -1,0 +1,44 @@
+---
+tipo: decisao
+funcionalidade: geral
+status: aprovada
+criado: 2026-10-28
+substitui: 
+aliases: [Tecnologias do backend, Stack do stonebid-api, Backend stack]
+---
+# ✅ Stack do backend (stonebid-api)
+
+- **Proposta (plano):** nenhuma. A definição veio direto do humano, como base do projeto, sem proposta da IA antes.
+- **Decisão:** o repositório `stonebid-api` usa estas tecnologias e versões:
+
+| Tecnologia | Versão | Observação |
+|---|---|---|
+| Node | latest | |
+| Fastify | v5.12.7 | Framework web de alta performance e baixo overhead |
+| TypeScript | — | TypeScript first, com build otimizado |
+| Prisma | v8 | ORM |
+| PostgreSQL | latest | Banco de dados do Prisma |
+| zod | 4.6 | Schemas, inferência de tipos e validação de env |
+| Vitest | v5.0.5 | Testes unitários e E2E |
+| ESLint | latest | Lint |
+| Prettier | latest | Formatação |
+| Docker + Docker Compose | — | Dockerfile e Compose prontos para uso |
+| GitHub Actions | — | Workflows de teste e lint pré-configurados |
+
+- **Alteração:** 2026-10-28: Jest e Biome retirados. Testes só com Vitest; lint e formatação com ESLint + Prettier; banco PostgreSQL; Node e PostgreSQL na versão mais recente.
+- **Motivo:** definição base do projeto informada pelo humano. Vitest no lugar de Jest, pela integração com TypeScript.
+- **Consequências:**
+  - Todo dado que entra (body, params, query) e toda variável de ambiente é validado em tempo de execução com zod.
+  - CI no GitHub Actions roda teste e lint em todo push/PR.
+  - A aplicação sobe em contêiner (Dockerfile + Compose), o que prepara o deploy exigido pelo projeto.
+  - Estrutura de pastas e princípios: [[geral-decisao-2026-10-28-estrutura-backend]].
+  - Proibido: Jest e Biome no `stonebid-api`.
+  - Ambiente local sobe o PostgreSQL pelo Docker Compose.
+  - Trocar framework, ORM, banco ou ferramenta de teste/lint exige nova decisão.
+
+### 🔗 Conexões
+- Funcionalidade: [[geral-contexto]]
+- Plano: [[geral-plano]]
+- Projeto: [[geral-contexto]]
+- Relacionadas: [[geral-decisao-2026-10-28-stack-frontend]]
+- Regras: [[manual-da-orquestra]]

@@ -2,7 +2,7 @@
 
 Este é um cofre do Obsidian: uma pasta de notas Markdown. Ele é a **memória do projeto StoneBid**: regras de negócio, decisões, bugs e o que foi estudado para o projeto. Este arquivo é o índice: ele diz onde está cada coisa e quando consultar. Os detalhes moram nas notas.
 
-Nome do cofre no Obsidian: `stonebid-vault`. Repositório de código: [a confirmar].
+Nome do cofre no Obsidian: `stonebid-vault`. Repositório de código: `stonebid-web` (frontend) e `stonebid-api` (backend), links [a confirmar].
 
 ## Seu papel
 
