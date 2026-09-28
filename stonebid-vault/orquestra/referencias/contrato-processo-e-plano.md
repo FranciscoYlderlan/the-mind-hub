@@ -53,6 +53,9 @@ As horas por dia ainda não estão definidas, então este plano é um rascunho. 
 
 ## 11.4 Linha de corte `[PROPOSTO]` (Q-12)
 
+> [!warning] v0.3 (M-11)
+> O texto abaixo é da v0.2. Desde 2026-10-29 vale [[geral-decisao-2026-10-29-testes-no-escopo]]: o teste só sai junto com o requisito que prova. Ficam sempre T-01 a T-09 e T-10a; T-10b sai com o OPC-2 e T-11 com a RN-18.
+
 Se o tempo apertar, corte nesta ordem (o primeiro da lista sai primeiro):
 
 | Ordem de corte | O que cortar | Por quê |
@@ -99,7 +102,7 @@ Um requisito só está pronto quando:
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** seis incrementos (I0 a I5); deploy já no I0, hash junto com o primeiro lance no I2.
-* **Ponto 2:** se apertar, corta filtros, depois tema, estorno e Compose; testes T-01 a T-06 nunca ([[contrato-testes]]).
+* **Ponto 2:** se apertar, corta filtros, depois tema, estorno e Compose; teste só sai junto com o requisito: T-01 a T-09 e T-10a nunca (M-11, [[geral-decisao-2026-10-29-testes-no-escopo]]).
 * **Ponto 3:** pronto = critério verificado, teste passando, README atualizado e **no ar**.
 
 ### 🔗 Conexões

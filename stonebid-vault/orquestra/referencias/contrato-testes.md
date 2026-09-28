@@ -17,6 +17,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 10
 > [!info] Por que isso importa
 > Sommerville descreve três níveis de teste: **de desenvolvimento** (unidades, componentes e sistema), **de release** (o sistema como um todo, contra os requisitos) e **de usuário**. Ele também apresenta o desenvolvimento dirigido por testes (escrever o teste antes do código) e o teste de regressão (rodar tudo de novo para ver se algo quebrou). Pressman organiza a estratégia em teste de unidade, de integração, de validação e de sistema. Os dois dizem, em essência, a mesma coisa: **derive os testes dos requisitos**. A estratégia aqui é dar mais testes ao que mais dói se quebrar: dinheiro, concorrência e auditoria.
 
+> [!warning] v0.3 (M-11)
+> O texto abaixo é da v0.2. Desde 2026-10-29 vale [[geral-decisao-2026-10-29-testes-no-escopo]]: o teste só sai junto com o requisito que prova. Ficam sempre T-01 a T-09 e T-10a; T-10b sai com o OPC-2 e T-11 com a RN-18.
+
 | ID | Teste | Garante |
 |---|---|---|
 | T-01 | Regras de lance: primeiro lance, incremento mínimo, líder cobrindo a si mesmo, janela de tempo | RN-02 a RN-06 |
@@ -46,10 +49,10 @@ Cada requisito deve poder ser seguido até o teste que o prova e até a entrega 
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** mais testes onde mais dói: dinheiro, concorrência e auditoria ([[contrato-regras-de-negocio]]).
-* **Ponto 2:** T-01 a T-06 nunca saem do escopo, nem na linha de corte ([[contrato-processo-e-plano]]).
+* **Ponto 2:** o teste só sai junto com o requisito que prova: T-01 a T-09 e T-10a ficam sempre; T-10b sai com o OPC-2 e T-11 com a RN-18 (M-11, [[geral-decisao-2026-10-29-testes-no-escopo]]).
 * **Ponto 3:** no backend os testes rodam com Vitest ([[geral-decisao-2026-10-28-stack-backend]]); no frontend, Playwright por outro agente ([[geral-decisao-2026-10-28-testes-frontend-playwright]]).
 
 ### 🔗 Conexões
 - Mapa: [[contrato-do-projeto]] · [[moc-orquestra]]
-- Relacionadas: [[contrato-requisitos-funcionais]], [[contrato-requisitos-nao-funcionais]], [[contrato-regras-de-negocio]]
+- Relacionadas: [[geral-decisao-2026-10-29-testes-no-escopo]], [[contrato-requisitos-funcionais]], [[contrato-requisitos-nao-funcionais]], [[contrato-regras-de-negocio]]
 - Próxima: [[contrato-processo-e-plano]]

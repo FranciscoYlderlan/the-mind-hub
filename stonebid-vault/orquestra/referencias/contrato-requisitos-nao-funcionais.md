@@ -33,6 +33,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 6
 | RNF-12 `[OPC-4]` | **Testes automatizados** cobrindo T-01 a T-11, executáveis com um comando. | Organizacional | Rodar o comando de testes. | E5 |
 | RNF-13 `[OPC-5]` | **Tema claro e escuro:** segue a preferência do sistema, permite alternar e lembra a escolha. | Produto | Alternar o tema em todas as telas. | E5 |
 
+> [!warning] v0.3 (M-11)
+> O RNF-12 passa a ler: testes de todo requisito implementado, executáveis com um comando (`npm test`) e rodando no CI. Detalhe em [[geral-decisao-2026-10-29-testes-no-escopo]].
+
 > [!tip] Quando abrir esta nota
 > Ao preparar o deploy, o seed, o README ou uma revisão de segurança: cada RNF diz como verificar.
 

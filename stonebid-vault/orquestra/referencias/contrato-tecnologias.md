@@ -65,7 +65,7 @@ Você decide e preenche ao final da discussão, usando as versões mais recentes
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** quase toda a stack já está decidida; faltam **tempo real e API de itens**; a hospedagem foi decidida em 2026-10-29 ([[geral-decisao-2026-10-29-hospedagem]]).
-* **Ponto 2:** tempo real e hospedagem se decidem juntos (critério 3 e risco R-05 de [[contrato-riscos]]).
+* **Ponto 2:** com a hospedagem decidida (Cloud Run aceita WebSocket e SSE), falta só escolher o tempo real (AD-04), conferindo o critério 3 e o risco R-05 de [[contrato-riscos]].
 * **Ponto 3:** a API de itens deve dispensar chave e ter imagens estáveis.
 
 ### 🔗 Conexões
