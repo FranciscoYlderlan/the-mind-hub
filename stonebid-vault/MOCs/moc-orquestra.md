@@ -6,7 +6,7 @@ status: em-uso
 criado: 2026-10-28
 origem: manual-da-orquestra
 ---
-# 🗺️ Mapa da Orquestra — StoneBid
+# 🗺️ Mapa da Orquestra — Stonebid
 
 > [!tldr] Em uma linha
 > O mapa do cofre do projeto: daqui se chega no contexto, nas funcionalidades, nas regras e nos modelos.

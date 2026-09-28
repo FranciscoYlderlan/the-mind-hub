@@ -22,7 +22,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 **Inconsistências e lacunas que notei no enunciado:**
 
 1. O cancelamento aparece em dois lugares: no painel só vale para lote **sem lances**, e o opcional pede cancelamento com estorno automático (que implica lances). Tratei como base mais extensão (RF-22 e RF-23).
-2. "Lance inicial" (seção 01) e "valor mínimo" (seção 02) parecem o mesmo campo.
+2. "Lance inicial" (E1) e "valor mínimo" (E2) parecem o mesmo campo.
 3. A frase do anti-sniping admite duas leituras (5.4).
 4. "Lote publicado com lances abertos" nos dados de teste: interpretei como lote ao vivo com lances já feitos.
 5. "Posição do usuário nos lances" pode significar só liderando ou superado, ou um ranking.

@@ -1,5 +1,5 @@
 ---
-aliases: [Riscos do projeto, Riscos do StoneBid, RMMM, Project risks]
+aliases: [Riscos do projeto, Riscos do Stonebid, RMMM, Project risks]
 tags: [estudos/programacao]
 tipo: referencia
 tema: gestao

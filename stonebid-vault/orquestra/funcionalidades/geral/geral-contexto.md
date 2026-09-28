@@ -4,15 +4,15 @@ funcionalidade: geral
 status: em-construcao
 etapa-atual: 1
 criado: 2026-10-28
-aliases: [Contexto do StoneBid, Visão geral do projeto, Project overview]
+aliases: [Contexto do Stonebid, Visão geral do projeto, Project overview]
 ---
-# 🧭 StoneBid — contexto geral
+# 🧭 Stonebid — contexto geral
 
 > [!tldr] Em uma linha
 > Casa de leilões online com lances ao vivo, saldo simulado, comprovante compartilhável e histórico de lances auditável por qualquer pessoa.
 
 ## Objetivo e motivação
-O StoneBid é uma casa de leilões online. O leiloeiro monta lotes a partir de itens de uma API pública, e licitantes disputam cada lote com lances ao vivo, usando um saldo simulado. Quem vence recebe um comprovante compartilhável por link. Qualquer pessoa, sem login, pode auditar o histórico de lances de um lote e verificar se ele foi adulterado. A aplicação precisa estar no ar (deploy).
+O Stonebid é uma casa de leilões online. O leiloeiro monta lotes a partir de itens de uma API pública, e licitantes disputam cada lote com lances ao vivo, usando um saldo simulado. Quem vence recebe um comprovante compartilhável por link. Qualquer pessoa, sem login, pode auditar o histórico de lances de um lote e verificar se ele foi adulterado. A aplicação precisa estar no ar (deploy).
 
 Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 
@@ -29,7 +29,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - Stack do backend: Fastify v5.12.7, Prisma v8 sobre PostgreSQL, zod 4.6, Node e PostgreSQL latest, Vitest v5.0.5 (sem Jest), ESLint + Prettier (sem Biome), Docker/Compose e CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-backend]].
 - Frontend organizado por features (`routes → features → components/hooks/lib`), com nomes genéricos (`feature1`, `feature2`) na estrutura para não induzir o domínio → [[geral-decisao-2026-10-28-estrutura-frontend]].
 - Backend em Clean Architecture (`domain/`, `application/use-cases/`, `infra/`, `env/`) → [[geral-decisao-2026-10-28-estrutura-backend]].
-- Regra geral dos dois repositórios, desde a criação do projeto: nomes de arquivos e de entidades em **inglês** e **kebab-case**; identificadores no código em PascalCase e camelCase; parâmetro de rota sempre `$id.tsx` → [[geral-decisao-2026-10-28-estrutura-frontend]] e [[geral-decisao-2026-10-28-estrutura-backend]].
+- Regra geral dos dois repositórios, desde a criação do projeto: nomes de arquivos e de entidades em **inglês** e **kebab-case**; identificadores no código em PascalCase e camelCase; parâmetro de rota sempre `$id.tsx` → [[geral-decisao-2026-10-28-estrutura-frontend]] e [[geral-decisao-2026-10-28-estrutura-backend]]. Exceção registrada: hooks do React se chamam `useAlgo` (convenção do React), em arquivo `use-algo.ts` ([[geral-decisao-2026-10-28-estrutura-frontend]]).
 - 2026-10-29: a camada MCP, o staging e o teste com Playwright por outro agente **continuam no plano**; a primeira etapa é justamente deixar o projeto no ar.
 - Enunciado oficial do teste técnico (Elite Dev na Verzel) fornecido em 2026-10-29: fonte da verdade nº 1 → [[enunciado-teste-tecnico]].
 - Componentes: registro consultado antes de criar, shadcn/ui primeiro, componentes pequenos e sem repetição → [[geral-decisao-2026-10-28-criacao-de-componentes]] e [[registro-de-componentes]].
@@ -47,6 +47,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-28: Obsidian CLI disponível nas sessões pelo servidor MCP `obsidian-cli`; causa da falha registrada em [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]].
 - 2026-10-29: camada MCP do backend registrada como decisão ([[diario-2026-10-29]]).
 - 2026-10-29: enunciado do teste técnico guardado e mapeado contra o contrato ([[enunciado-teste-tecnico]]); regra de nomes em inglês + kebab-case nas decisões de estrutura.
+- 2026-10-29: padronização levada para a porta de entrada: seção Padronização e bloco `padroes` no `CLAUDE.md` (grafia `Stonebid`, enunciado citado como E1 a E6, exceção dos hooks, limite de 2073 palavras por nota), checados pelo `cofre.py verificar`; notas corrigidas ([[diario-2026-10-29]]).
 - 2026-10-29: contrato do projeto v0.2 registrado em `referencias/`, uma nota por seção, a partir de [[contrato-do-projeto]] ([[diario-2026-10-29]]).
 - 2026-10-29: hospedagem decidida (GCP + Vercel, CI/CD pelo GitHub) e propagada nas decisões de stack, na camada MCP e no contrato ([[geral-decisao-2026-10-29-hospedagem]]).
 - 2026-10-29: links dos repositórios, pasta local e regra de acesso nas etapas de programação registrados ([[diario-2026-10-29]]).

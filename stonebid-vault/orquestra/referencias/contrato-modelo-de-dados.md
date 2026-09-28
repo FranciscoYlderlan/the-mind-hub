@@ -1,5 +1,5 @@
 ---
-aliases: [Modelo de dados, Entidades do StoneBid, Data model, Modelo conceitual]
+aliases: [Modelo de dados, Entidades do Stonebid, Data model, Modelo conceitual]
 tags: [estudos/programacao]
 tipo: referencia
 tema: requisitos

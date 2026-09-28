@@ -8,7 +8,7 @@ aliases: [Ferramentas obsidian_ não aparecem, Nenhum servidor adicionado no Cla
 # 🐞 Obsidian CLI via MCP não carrega
 
 > [!tldr] Em uma linha
-> As sessões do StoneBid buscavam sem a Obsidian CLI porque o Claude Desktop lia a config MCP num caminho diferente do esperado. A lição geral está na nota "Obsidian CLI via MCP não carrega" (no Vault).
+> As sessões do Stonebid buscavam sem a Obsidian CLI porque o Claude Desktop lia a config MCP num caminho diferente do esperado. A lição geral está na nota "Obsidian CLI via MCP não carrega" (no Vault).
 
 ## Contexto
 - O `CLAUDE.md` deste cofre manda buscar **pela Obsidian CLI** (`obsidian vault="stonebid-vault" ...`).

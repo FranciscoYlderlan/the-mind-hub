@@ -1,5 +1,5 @@
 ---
-aliases: [Regras de negócio, RN do StoneBid, Regras do leilão, Anti-sniping, Saldo comprometido, Liquidação]
+aliases: [Regras de negócio, RN do Stonebid, Regras do leilão, Anti-sniping, Saldo comprometido, Liquidação]
 tags: [estudos/programacao]
 tipo: referencia
 tema: requisitos

@@ -4,7 +4,7 @@ funcionalidade: geral
 status: proposta
 criado: 2026-10-28
 ---
-# 🧭 Roteiro — StoneBid
+# 🧭 Roteiro — Stonebid
 
 > [!tldr] Onde o projeto está
 > Etapa atual: **1. Definir o roteiro do projeto** (em-construcao)

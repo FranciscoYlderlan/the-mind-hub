@@ -8,9 +8,9 @@ origem: Pesquisa sobre Obsidian + meus documentos de rotina (Sistema TickTick e 
 ---
 
 > [!info] Cópia do Vault
-> Cópia de `Vault/Items/Manual do Meu Cérebro no Obsidian.md`, versão v5. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
+> Cópia de `Vault/Items/Manual do Meu Cérebro no Obsidian.md`, versão v6. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
 >
-> **Escopo neste cofre:** vale para as notas de `referencias/` e `MOCs/` o perfil, o tom, o esqueleto, os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das notas (seção 3, item 3 da seção 10 e "Salva em Items/" do checklist) são substituídos pelo [[manual-da-orquestra]]: aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`).
+> **Escopo neste cofre:** vale para as notas de `referencias/` e `MOCs/` o perfil, o tom, o esqueleto, os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das notas (seção 3, item 3 da seção 10 e "Salva em Items/" do checklist) são substituídos pelo [[manual-da-orquestra]]: aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`). O limite de ~350 palavras (seção 6) também não vale aqui: vale o `limite-palavras` do bloco `padroes` do `CLAUDE.md`.
 
 # 🧭 Manual do Meu Cérebro no Obsidian
 
@@ -260,7 +260,7 @@ Parágrafo fluido (máx. 4 linhas) com UMA analogia do cotidiano e [[Links]] na 
 | Callout de passos | até 6 itens, 1 linha cada |
 | Resumo para o cérebro | exatamente 3 pontos |
 | Callouts por nota | até 4 |
-| Nota inteira | cabe em 1 a 2 telas. Passou de ~350 palavras: dividir em submemórias |
+| Nota inteira | cabe em 1 a 2 telas. Passou de ~350 palavras: dividir em submemórias. Em cofre de projeto vale o limite do `CLAUDE.md` do cofre ([[manual-da-orquestra]] §7) |
 
 **Mapa fixo de callouts** (sempre o mesmo visual para o mesmo papel):
 
@@ -443,6 +443,7 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - v3 (2026-10-27): todo cofre ganha um `CLAUDE.md` na raiz (seção 3).
 - v4 (2026-10-28): cofres de projeto passam a usar a estrutura `orquestra/` e as notas operacionais do [[manual-da-orquestra]] (seções 3 e 4); `status` ganha `arquivado`.
 - v5 (2026-10-28): checklist exige link de entrada e `cofre.py verificar`; aliases do Manual ajustados para 4 (seção 12).
+- v6 (2026-10-29): o limite de ~350 palavras não vale em cofre de projeto; lá vale o limite do `CLAUDE.md` do cofre (seção 6).
 
 ## 📚 Fontes
 - Links internos, blocos e embeds: https://obsidian.md/help/links

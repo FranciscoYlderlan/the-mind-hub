@@ -1,5 +1,5 @@
 ---
-aliases: [Visão e escopo, Fora do escopo, Restrições do projeto, Papéis do StoneBid]
+aliases: [Visão e escopo, Fora do escopo, Restrições do projeto, Papéis do Stonebid]
 tags: [estudos/programacao]
 tipo: referencia
 tema: requisitos
@@ -10,7 +10,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seções 1, 2 e 3
 # 📜 Contrato: visão, escopo, restrições e papéis
 
 > [!tldr] Em uma linha
-> O que o StoneBid é, o que fica fora, os limites fixos (prazo de 24 horas, os 5 opcionais) e quem usa o sistema.
+> O que o Stonebid é, o que fica fora, os limites fixos (prazo de 24 horas, os 5 opcionais) e quem usa o sistema.
 
 É a **cerca do terreno**: mostra até onde a obra vai e o que fica do lado de fora. Seções 1 a 3 do [[contrato-do-projeto|contrato]] v0.2, copiadas sem reinterpretar.
 
@@ -71,7 +71,7 @@ Tudo abaixo não foi pedido e custaria tempo que você não tem. Só entra se o 
 |---|---|---|---|
 | Prazo | 4 dias (enunciado: 7) | `[DECIDIDO]` | Você |
 | Opcionais | Todos os 5 serão feitos | `[DECIDIDO]` | Você |
-| Deploy | Obrigatório | `[DECIDIDO]` | E1/E2 (quadro "Deploy") |
+| Deploy | Obrigatório | `[DECIDIDO]` | E1 (requisito "Deploy") |
 | Front-end | React, com ou sem framework | `[DECIDIDO]` | E4 |
 | Back-end | Node.js ou Python | `[DECIDIDO]` | E4 |
 | Banco de dados | PostgreSQL, MySQL ou NoSQL (ex.: MongoDB) | `[DECIDIDO]` | E4 |
