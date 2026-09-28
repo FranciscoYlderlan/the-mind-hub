@@ -14,12 +14,16 @@ aliases: [Contexto do StoneBid, Visão geral do projeto, Project overview]
 ## Objetivo e motivação
 O StoneBid é uma casa de leilões online. O leiloeiro monta lotes a partir de itens de uma API pública, e licitantes disputam cada lote com lances ao vivo, usando um saldo simulado. Quem vence recebe um comprovante compartilhável por link. Qualquer pessoa, sem login, pode auditar o histórico de lances de um lote e verificar se ele foi adulterado. A aplicação precisa estar no ar (deploy).
 
-Motivação: [a confirmar]
+Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 
 ## Fatos que eu informei
 (o agente preserva sem reinterpretar)
 - Dois repositórios: `stonebid-web` (frontend) e `stonebid-api` (backend), ainda não criados no GitHub.
 - 2026-10-29: repositórios criados no GitHub: https://github.com/FranciscoYlderlan/stonebid-api e https://github.com/FranciscoYlderlan/stonebid-web. Pasta do projeto no computador: `C:\Users\Ylderlan\Documents\Projetos\stonebid`.
+- 2026-10-29: branches `main` (produção), `staging` e de trabalho `tipo/ID-descricao-curta` (ex.: `feat/RN-04-incremento-minimo`); boilerplate inicial direto na `main` → [[geral-decisao-2026-10-29-padrao-de-branches]].
+- 2026-10-29: configuração do GCP aprovada (São Paulo, Cloud Run com 1 instância mínima, Cloud SQL `db-f1-micro`, Workload Identity Federation, alerta de US$ 50, staging como segundo serviço) → [[geral-decisao-2026-10-29-hospedagem]].
+- 2026-10-29: Prisma com `@@map` em snake_case; testes E2E do backend em `test/e2e/` na raiz → [[geral-decisao-2026-10-28-estrutura-backend]].
+- 2026-10-29: camada MCP e Playwright entram no contrato como mudança → [[contrato-do-projeto]].
 - 2026-10-29: sempre que for etapa de programação em algum dos repositórios, o acesso é permitido para essa etapa (regra em `CLAUDE.md`, seção "Repositórios e acesso").
 - Stack do frontend: React 19.3, Vite 8.3.4, Tailwind CSS v4.3, TanStack Router v1 (só rotas, não o framework), TanStack Query v5, Zustand latest (só UI global), zod 4.6, shadcn/ui (iniciado pelo guia oficial para Vite), Node 26.13.0, npm, ESLint + Prettier, Playwright, CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-frontend]].
 - Stack do backend: Fastify v5.12.7, Prisma v8 sobre PostgreSQL, zod 4.6, Node e PostgreSQL latest, Vitest v5.0.5 (sem Jest), ESLint + Prettier (sem Biome), Docker/Compose e CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-backend]].
@@ -45,14 +49,15 @@ Motivação: [a confirmar]
 - 2026-10-29: contrato do projeto v0.2 registrado em `referencias/`, uma nota por seção, a partir de [[contrato-do-projeto]] ([[diario-2026-10-29]]).
 - 2026-10-29: hospedagem decidida (GCP + Vercel, CI/CD pelo GitHub) e propagada nas decisões de stack, na camada MCP e no contrato ([[geral-decisao-2026-10-29-hospedagem]]).
 - 2026-10-29: links dos repositórios, pasta local e regra de acesso nas etapas de programação registrados ([[diario-2026-10-29]]).
+- 2026-10-29: pendências respondidas: branches, configuração do GCP, entrega, dial, motivação, `@@map`, testes E2E e mudança do contrato ([[diario-2026-10-29]]).
 
 ## Tempo disponível
-- **24 horas** a partir de 2026-10-29 09:06 (substitui os 4 dias do contrato). Entrega por volta de 2026-10-30 09:00 [a confirmar].
+- **24 horas** a partir de 2026-10-29 09:06 (substitui os 4 dias do contrato). Entrega em **2026-10-30 09:00** (confirmado pelo humano).
 - Ritmo: trabalho contínuo, sem pausa.
 - O plano de 4 dias de [[contrato-processo-e-plano]] não cabe mais; precisa ser refeito para 24 horas.
 
 ## Dial e modelo de IA
-- Dial: [a confirmar] alto | medio | baixo
+- Dial: medio
 - Modelo de IA: 
 
 ## Áreas sensíveis
@@ -64,7 +69,7 @@ Motivação: [a confirmar]
 
 ## Mapa
 - Roteiro: [[geral-plano]]
-- Decisões: [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
+- Decisões: [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]]
 - Enunciado: [[enunciado-teste-tecnico]]
 - Contrato: [[contrato-do-projeto]] (requisitos, regras, arquitetura proposta, plano e perguntas Q)

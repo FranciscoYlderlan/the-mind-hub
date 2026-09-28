@@ -53,7 +53,7 @@ src/infra/mcp/
   - O briefing do implementador do backend aponta para esta nota; o relatório lista as tools criadas, alteradas ou removidas.
   - O verificador do backend confere se cada rota nova tem tool e exercita o fluxo pela MCP na URL de staging, depois do deploy.
   - Feature ou rota só é testada pela MCP depois que o CD publica em staging: o deploy de staging entra antes do teste no fluxo de cada funcionalidade do backend.
-  - O deploy de staging precisa existir antes da primeira funcionalidade com rota: staging no GCP, como segundo serviço no Cloud Run com banco separado (proposta da IA em [[geral-decisao-2026-10-29-hospedagem]]); branch de staging [a confirmar].
+  - O deploy de staging precisa existir antes da primeira funcionalidade com rota: staging no GCP, como segundo serviço no Cloud Run com banco separado (proposta da IA em [[geral-decisao-2026-10-29-hospedagem]]); branch de staging `staging`, pela [[geral-decisao-2026-10-29-padrao-de-branches]].
   - A camada MCP não tem regra de negócio: só traduz tool → rota. `domain/` não conhece o MCP.
   - Dependência nova no backend: SDK oficial de MCP para TypeScript (versão [a confirmar] na implementação).
   - Árvore de pastas: [[geral-decisao-2026-10-28-estrutura-backend]].

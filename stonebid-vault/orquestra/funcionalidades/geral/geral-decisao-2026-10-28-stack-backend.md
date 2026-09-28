@@ -30,7 +30,7 @@ aliases: [Tecnologias do backend, Stack do stonebid-api, Backend stack]
 - **Consequências:**
   - Todo dado que entra (body, params, query) e toda variável de ambiente é validado em tempo de execução com zod.
   - CI no GitHub Actions roda lint, testes (Vitest) e build em todo push/PR; PR com CI vermelho não entra.
-  - CD no GitHub Actions faz o deploy automático do `stonebid-api` quando o CI passa na branch principal. Destino do deploy: Cloud Run, com o PostgreSQL no Cloud SQL (GCP), pela [[geral-decisao-2026-10-29-hospedagem]]; nome da branch [a confirmar].
+  - CD no GitHub Actions faz o deploy automático do `stonebid-api` quando o CI passa na branch principal. Destino do deploy: Cloud Run, com o PostgreSQL no Cloud SQL (GCP), pela [[geral-decisao-2026-10-29-hospedagem]]; branch principal `main`, pela [[geral-decisao-2026-10-29-padrao-de-branches]].
   - Segredos do deploy (banco, segredo do HMAC etc.) ficam nos *secrets* do GitHub, nunca no repositório.
   - A aplicação sobe em contêiner (Dockerfile + Compose), o que prepara o deploy exigido pelo projeto.
   - Estrutura de pastas e princípios: [[geral-decisao-2026-10-28-estrutura-backend]].

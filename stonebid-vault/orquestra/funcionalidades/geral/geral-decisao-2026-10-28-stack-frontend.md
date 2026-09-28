@@ -29,7 +29,7 @@ aliases: [Tecnologias do frontend, Stack do stonebid-web, Frontend stack]
 | GitHub Actions | — | CI/CD integrado ao GitHub: lint, formatação, checagem de tipos e build em todo push/PR; deploy automático depois do CI verde |
 
 - **Alteração:** 2026-10-28: lint definido como ESLint (com Prettier) e Playwright acrescentado para os testes de funcionalidade ([[geral-decisao-2026-10-28-testes-frontend-playwright]]). Sem testes unitários e de componente no frontend. Zustand (latest) acrescentado. 2026-10-28: CI/CD com GitHub Actions acrescentado, igual ao backend. 2026-10-29: destino do CD definido: Vercel ([[geral-decisao-2026-10-29-hospedagem]]).
-- **Motivo:** definição base do projeto informada pelo humano; motivo de cada escolha não registrado [a confirmar].
+- **Motivo:** definição base do projeto informada pelo humano: escolha do humano (resposta de 2026-10-29).
 - **Consequências:**
   - A criação do projeto segue o passo a passo do shadcn para Vite, não um template próprio.
   - Rotas file-based com o plugin do TanStack Router no Vite; sem adotar TanStack Start nem outro framework full-stack.
@@ -37,7 +37,7 @@ aliases: [Tecnologias do frontend, Stack do stonebid-web, Frontend stack]
   - Trocar ou acrescentar biblioteca de base (roteador, validação, UI, estilos, lint, testes) exige nova decisão.
   - Sem testes unitários e de componente (sem Vitest, Testing Library ou MSW no frontend).
   - CI no GitHub Actions roda ESLint, Prettier (checagem), checagem de tipos do TypeScript e build em todo push/PR; PR com CI vermelho não entra. O Playwright não roda no CI: a validação é feita pelas subthreads de teste ([[geral-decisao-2026-10-28-testes-frontend-playwright]]).
-  - CD no GitHub Actions faz o deploy automático do `stonebid-web` quando o CI passa na branch principal. Destino do deploy: Vercel, pela [[geral-decisao-2026-10-29-hospedagem]]; nome da branch [a confirmar].
+  - CD no GitHub Actions faz o deploy automático do `stonebid-web` quando o CI passa na branch principal. Destino do deploy: Vercel, pela [[geral-decisao-2026-10-29-hospedagem]]; branch principal `main`, pela [[geral-decisao-2026-10-29-padrao-de-branches]].
   - Variáveis e segredos do deploy ficam nos *secrets* do GitHub, nunca no repositório.
   - Funcionalidade do frontend só está pronta depois de validada no Playwright: [[geral-decisao-2026-10-28-testes-frontend-playwright]].
   - Estrutura de pastas: [[geral-decisao-2026-10-28-estrutura-frontend]]. Regras de componentes: [[geral-decisao-2026-10-28-criacao-de-componentes]].

@@ -17,6 +17,8 @@ aliases: [Organização do backend, Pastas do stonebid-api, Clean Architecture d
     ├── ci.yml        # ESLint, Prettier, Vitest e build em push/PR
     └── cd.yml        # Deploy automático depois do CI verde na branch principal
 prisma/               # schema.prisma, migrations e seed
+test/
+└── e2e/              # Testes E2E do backend (Vitest), fora do src/
 Dockerfile
 docker-compose.yml    # API + PostgreSQL no ambiente local
 .env.example          # Modelo das variáveis de ambiente, sem valores reais
@@ -43,7 +45,7 @@ src/
   - **Validação de schema:** todo dado de entrada e toda variável de ambiente é validado em tempo de execução com zod.
   - **Tratamento de erro funcional:** respostas de erro consistentes e gestão de erro centralizada.
   - **Ferramentas:** ESLint + Prettier para lint e formatação; Vitest no lugar de Jest (integração com TypeScript).
-- **Alteração:** 2026-10-28: Biome trocado por ESLint + Prettier, alinhado com [[geral-decisao-2026-10-28-stack-backend]]. 2026-10-28: raiz do repositório acrescentada à árvore: `.github/workflows/` (`ci.yml` e `cd.yml`, pelo CI/CD), `prisma/`, `Dockerfile`, `docker-compose.yml` e `.env.example`. 2026-10-29: camada `application/useCases/` acrescentada (respondendo o "Em aberto" dos casos de uso). 2026-10-29: pasta `infra/mcp/` acrescentada, pela [[geral-decisao-2026-10-29-camada-mcp]]. 2026-10-29: regra de nomes do humano (inglês + kebab-case em arquivos e entidades, nos dois repositórios); a pasta `useCases/` virou `use-cases/`.
+- **Alteração:** 2026-10-28: Biome trocado por ESLint + Prettier, alinhado com [[geral-decisao-2026-10-28-stack-backend]]. 2026-10-28: raiz do repositório acrescentada à árvore: `.github/workflows/` (`ci.yml` e `cd.yml`, pelo CI/CD), `prisma/`, `Dockerfile`, `docker-compose.yml` e `.env.example`. 2026-10-29: camada `application/useCases/` acrescentada (respondendo o "Em aberto" dos casos de uso). 2026-10-29: pasta `infra/mcp/` acrescentada, pela [[geral-decisao-2026-10-29-camada-mcp]]. 2026-10-29: regra de nomes do humano (inglês + kebab-case em arquivos e entidades, nos dois repositórios); a pasta `useCases/` virou `use-cases/`. 2026-10-29: `test/e2e/` acrescentada à árvore e `@@map` em snake_case (respostas do humano ao "Em aberto").
 - **Motivo:** escalabilidade e manutenção, pela separação de responsabilidades (texto do humano).
 - **Consequências:**
   - `domain/` não importa nada de `application/`, `infra/`, Fastify ou Prisma; `application/` não importa nada de `infra/`.
@@ -57,9 +59,9 @@ src/
   - Schema, migrations e seed do Prisma ficam em `prisma/`, fora do `src/`; o acesso ao banco no código continua só em `infra/repositories/`.
   - Stack e ferramentas: [[geral-decisao-2026-10-28-stack-backend]].
   - Feature ou rota nova só está pronta com a tool correspondente em `infra/mcp/`: [[geral-decisao-2026-10-29-camada-mcp]].
-- **Em aberto:**
-  - A árvore não mostra onde ficam os testes E2E [a confirmar].
-  - No Prisma, models em PascalCase (`AuctionLot`) com tabelas mapeadas em kebab-case ou snake_case por `@@map` [a confirmar].
+- **Resolvido (humano, 2026-10-29):**
+  - Testes E2E do backend em `test/e2e/`, na raiz do repositório, fora do `src/`.
+  - No Prisma, models em PascalCase (`AuctionLot`) com tabelas e colunas mapeadas em **snake_case** por `@@map`/`@map` (ex.: `@@map("auction_lots")`).
 
 ### 🔗 Conexões
 - Funcionalidade: [[geral-contexto]]
