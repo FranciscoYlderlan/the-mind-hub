@@ -30,6 +30,7 @@ Nome do cofre no Obsidian: `Vault`.
 - Tarefas não moram aqui: viram `→ TickTick`.
 - Não invente fatos; na dúvida, marque `[a confirmar]`.
 - Nunca edite `.obsidian/` sem pedido explícito.
+- Despadronização (grafia, numeração, nome, tamanho) se corrige **primeiro na regra**: no `Modelo de CLAUDE do cofre`, nos manuais ou no `cofre.py`. Só depois nas notas.
 
 ## Etapas vitais (obrigatório)
 
@@ -48,6 +49,7 @@ Os cofres moram dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 
 1. **Obsidian CLI: obrigatória** (usa o índice do app, então acha por aliases, tags e links). Precisa do Obsidian aberto.
    - Sessão na nuvem ligada ao computador: use as ferramentas do servidor MCP `obsidian-cli` (`obsidian_search`, `obsidian_read`, `obsidian_backlinks`, `obsidian_help`), com `vault="Vault"`.
+   - **Ler também é pela CLI.** Abrir ou buscar nota com `cat`, `grep`, `find`, `Read` ou outro comando de shell é erro de processo, mesmo com acesso à pasta. O shell serve só para **escrever** notas e rodar o `cofre.py`. A única exceção é o plano B do passo 3, sempre avisado.
    - Terminal no Windows:
      - Busca: `obsidian vault="Vault" search query="termo" limit=10`
      - Ler uma nota: `obsidian vault="Vault" read file="Nome da nota"`

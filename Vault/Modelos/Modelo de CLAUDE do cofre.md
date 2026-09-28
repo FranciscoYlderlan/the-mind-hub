@@ -81,11 +81,26 @@ Regras completas: `orquestra/referencias/manual-da-orquestra.md`. Regras de escr
 - Português brasileiro. Arquivos e pastas em kebab-case, sem acento, com prefixo da funcionalidade nas notas operacionais.
 - Datas AAAA-MM-DD em nome de arquivo e frontmatter.
 - `[[wikilinks]]` sempre; nota sem link fica perdida.
-- Notas operacionais (contexto, plano, decisão, bug, diário) seguem o modelo próprio, sem analogia nem limite de tamanho. Notas de `referencias/` e `MOCs/` seguem o Manual do Cérebro (`modelo-nota.md` ou `modelo-referencia.md`).
+- Notas operacionais (contexto, plano, decisão, bug, diário) seguem o modelo próprio, sem analogia. Notas de `referencias/` e `MOCs/` seguem o Manual do Cérebro (`modelo-nota.md` ou `modelo-referencia.md`). Tamanho de qualquer nota: ver Padronização.
 - Frontmatter operacional: `tipo`, `status`, `criado`, `funcionalidade`; `aliases` opcional (em bug: os sintomas).
 - Fatos do humano preservados; interpretação do agente em seção separada; suposição marcada `[a confirmar]`.
 - Tarefa de agente mora no plano; tarefa do humano vai para o TickTick.
 - Nunca edite `.obsidian/` sem pedido explícito.
+
+## Padronização (obrigatório)
+
+Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma, **corrija primeiro a regra** (nesta seção, no bloco `padroes` ou na decisão que define o nome) e só depois as notas. O `cofre.py verificar` lê o bloco `padroes` e dá ERRO no que fugir dele.
+
+- **Nome do projeto:** uma grafia só, `{{projeto}}`, igual à do documento-fonte (contrato, glossário). Toda variante encontrada entra no bloco `padroes`.
+- **Numeração de fonte:** documento com seções próprias (enunciado, contrato) é citado pela numeração da nota que o transcreve no cofre. A numeração do original só aparece dentro da transcrição. A origem de um requisito aponta só as seções onde ele está escrito, separadas por vírgula.
+- **Nomes de arquivo e pasta:** kebab-case, sem acento, nas notas e no código. Exceção só vale se estiver escrita, com o motivo (convenção da linguagem ou exigência de ferramenta), na decisão que criou a regra e listada aqui. Sem isso, é erro.
+- **Tamanho:** o limite de ~350 palavras do Manual do Cérebro **não vale** em cofre de projeto, mas há limite: o `limite-palavras` do bloco abaixo, fixado pela maior nota registrada quando a regra nasceu. Os manuais e modelos copiados do `Vault` ficam fora da conta.
+- **Passou do limite:** divida a nota. A parte nova vira nota própria, com o nome da original + `-<assunto>` (em bug e diário, o assunto entra depois da data), o mesmo modelo e o mesmo frontmatter. Na original ficam 1 frase + `[[link]]` no lugar do trecho, e a nova aponta de volta nas Conexões.
+
+```padroes
+# termo fora do padrão => forma certa   ("re:" no início = expressão regular)
+limite-palavras: 2073
+```
 
 ## Etapas vitais (obrigatório)
 
@@ -111,6 +126,7 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 
 1. **Obsidian CLI: obrigatória** (usa o índice do app, então acha por aliases, tags e links). Precisa do Obsidian aberto.
    - Sessão na nuvem ligada ao computador: use as ferramentas do servidor MCP `obsidian-cli` (`obsidian_search`, `obsidian_read`, `obsidian_backlinks`, `obsidian_help`), com `vault="{{nome-da-pasta}}"`.
+   - **Ler também é pela CLI.** Abrir ou buscar nota com `cat`, `grep`, `find`, `Read` ou outro comando de shell é erro de processo, mesmo com acesso à pasta. O shell serve só para **escrever** notas e rodar o `cofre.py`. A única exceção é o plano B do passo 3, sempre avisado.
    - Terminal no Windows:
      - Busca: `obsidian vault="{{nome-da-pasta}}" search query="termo" limit=10`
      - Ler uma nota: `obsidian vault="{{nome-da-pasta}}" read file="nome-da-nota"`

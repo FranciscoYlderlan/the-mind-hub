@@ -37,7 +37,9 @@ ESCOPO_CEREBRO = (
     "\n>\n> **Escopo neste cofre:** vale para as notas de `referencias/` e `MOCs/` o perfil, o tom, o esqueleto, "
     "os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das "
     "notas (seção 3, item 3 da seção 10 e \"Salva em Items/\" do checklist) são substituídos pelo [[Manual da Orquestra]]: "
-    "aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`).")
+    "aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`). O limite de ~350 palavras (seção 6) também não "
+    "vale aqui: vale o `limite-palavras` do bloco `padroes` do `CLAUDE.md`.")
+PADROES = re.compile(r"^```padroes\n(.*?)^```", re.S | re.M)
 
 
 def hoje():
@@ -320,6 +322,33 @@ def lista(v):
     return []
 
 
+def padroes(claude_txt):
+    """Bloco ```padroes do CLAUDE.md -> (regras [(regex, forma certa, como aparece)], limite de palavras ou None)."""
+    m = PADROES.search(claude_txt or "")
+    regras, limite = [], None
+    if not m:
+        return regras, limite, False
+    for linha in m.group(1).splitlines():
+        linha = linha.strip()
+        if not linha or linha.startswith("#"):
+            continue
+        lm = re.fullmatch(r"limite-palavras:\s*(\d+)", linha)
+        if lm:
+            limite = int(lm.group(1)); continue
+        if "=>" not in linha:
+            continue
+        errado, certo = (x.strip() for x in linha.split("=>", 1))
+        if errado.startswith("re:"):
+            regras.append((re.compile(errado[3:]), certo, errado[3:]))
+        else:
+            regras.append((re.compile(re.escape(errado)), certo, errado))
+    return regras, limite, True
+
+
+def palavras(s):
+    return len(s.split())
+
+
 def verificar(cofre, vault=None):
     cofre = Path(cofre).resolve()
     erros, avisos = [], []
@@ -393,12 +422,31 @@ def verificar(cofre, vault=None):
     claude = cofre / "CLAUDE.md"
     if claude.exists() and "## Etapas vitais" not in ler(claude):
         E("CLAUDE.md", "sem a seção 'Etapas vitais' (regenere com sincronizar)")
+    claude_txt = ler(claude) if claude.exists() else ""
+    regras, limite, tem_bloco = padroes(claude_txt)
+    eh_kit = lambda p: rel(p).startswith(("orquestra/modelos/", "Modelos/", "orquestra/referencias/manual-"))
+    for p in mds:
+        if eh_kit(p):
+            continue
+        r = rel(p)
+        alvo_txt = PADROES.sub("", texto[p]) if p == claude else texto[p]
+        for rx, certo, como in regras:
+            achados = rx.findall(alvo_txt)
+            if achados:
+                E(r, f"{len(achados)}x fora do padrão '{como}': use {certo} (bloco padroes do CLAUDE.md)")
+        if projeto and limite and p != claude and palavras(texto[p]) > limite:
+            E(r, f"{palavras(texto[p])} palavras (limite {limite}): divida em nota nova ligada por link (Padronização do CLAUDE.md)")
+    if projeto:
+        if "## Padronização" not in claude_txt:
+            E("CLAUDE.md", "sem a seção 'Padronização' (copie do Modelo de CLAUDE do cofre)")
+        if not tem_bloco or not limite:
+            E("CLAUDE.md", "sem bloco ```padroes com 'limite-palavras: N'")
     if projeto:
         o = cofre / "orquestra"
         moc0 = cofre / "MOCs/moc-orquestra.md"
         if moc0.exists() and "Etapas vitais" not in ler(moc0):
             E("MOCs/moc-orquestra.md", "mapa sem a seção 'Etapas vitais' (etapa B5 do mapa)")
-        diarios = sorted((o / "diarios").glob("diario-*.md")) if (o / "diarios").is_dir() else []
+        diarios = sorted(d for d in (o / "diarios").glob("diario-*.md") if re.fullmatch(rf"diario-{DATA}\.md", d.name)) if (o / "diarios").is_dir() else []
         if not diarios:
             E("orquestra/diarios", "nenhum diário: falta ao menos o diário de criação (etapa A3)")
         elif not re.search(r"\*\*Próximo passo:\*\* *\S", ler(diarios[-1])):
@@ -437,11 +485,11 @@ def verificar(cofre, vault=None):
                 if ctx.stem.lower() not in moc_links:
                     E(rel(ctx), "funcionalidade fora do moc-orquestra")
         for n in (o / "bugs").glob("*.md"):
-            if not re.fullmatch(rf"bug-[a-z0-9-]+-{DATA}\.md", n.name):
-                E(rel(n), "nome fora do padrão bug-titulo-AAAA-MM-DD.md")
+            if not re.fullmatch(rf"bug-[a-z0-9-]+-{DATA}(-[a-z0-9-]+)?\.md", n.name):
+                E(rel(n), "nome fora do padrão bug-titulo-AAAA-MM-DD.md (parte dividida: bug-titulo-AAAA-MM-DD-assunto.md)")
         for n in (o / "diarios").glob("*.md"):
-            if not re.fullmatch(rf"diario-{DATA}\.md", n.name):
-                E(rel(n), "nome fora do padrão diario-AAAA-MM-DD.md")
+            if not re.fullmatch(rf"diario-{DATA}(-[a-z0-9-]+)?\.md", n.name):
+                E(rel(n), "nome fora do padrão diario-AAAA-MM-DD.md (parte dividida: diario-AAAA-MM-DD-assunto.md)")
         rot = o / "funcionalidades/geral/geral-plano.md"
         gctx = o / "funcionalidades/geral/geral-contexto.md"
         fm_ctx = {p.stem.lower(): (p, frontmatter(texto.get(p, "")) or {}) for p in mds if p.name.endswith("-contexto.md") and not eh_modelo(p)}
