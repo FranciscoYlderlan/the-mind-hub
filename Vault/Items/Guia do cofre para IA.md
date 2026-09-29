@@ -27,6 +27,7 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 > - O `CLAUDE.md` não é nota: sem frontmatter, na raiz, e é o **único índice** (sem `leia-primeiro.md`).
 > - Regra só do projeto **não** vai no `CLAUDE.md`, porque o sincronizar o regenera. Ela vira decisão em `funcionalidades/geral/`.
 > - Não apago "Como buscar", "Padronização" nem "Etapas vitais": são elas que obrigam o agente a consultar antes, seguir o padrão e verificar depois.
+> - Em cofre de projeto, o que é só do projeto (regras de padronização, bloco `padroes`, repositórios e acesso) fica entre `<!-- projeto:... -->` e `<!-- /projeto:... -->`. O `cofre.py sincronizar` refaz o resto pelo modelo e guarda esses blocos; o que ainda não foi definido nasce `[a preencher]`.
 > - "Como buscar" exige a Obsidian CLI, também para ler. Se ela falhar, o agente reporta e analisa com [[Obsidian CLI via MCP não carrega]] antes de buscar nos `.md`.
 
 ### 🛠️ Resumo direto para o cérebro

@@ -2,7 +2,7 @@
 
 Este é um cofre do Obsidian: uma pasta de notas Markdown. Ele é a **memória do projeto {{projeto}}**: {{para quê, em meia frase}}. Este arquivo é o índice: ele diz onde está cada coisa e quando consultar. Os detalhes moram nas notas.
 
-Nome do cofre no Obsidian: `{{nome-da-pasta}}`. Repositório de código: {{link ou caminho}}.
+Nome do cofre no Obsidian: `{{nome-da-pasta}}`. Repositórios de código, links e pasta local: seção "Repositórios e acesso", abaixo.
 
 ## Seu papel
 
@@ -91,16 +91,29 @@ Regras completas: `orquestra/referencias/manual-da-orquestra.md`. Regras de escr
 
 Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma, **corrija primeiro a regra** (nesta seção, no bloco `padroes` ou na decisão que define o nome) e só depois as notas. O `cofre.py verificar` lê o bloco `padroes` e dá ERRO no que fugir dele.
 
-- **Nome do projeto:** uma grafia só, `{{projeto}}`, igual à do documento-fonte (contrato, glossário). Toda variante encontrada entra no bloco `padroes`.
+- **Nome do projeto:** uma grafia só, igual à do documento-fonte (contrato, glossário). Toda variante encontrada entra no bloco `padroes`.
 - **Numeração de fonte:** documento com seções próprias (enunciado, contrato) é citado pela numeração da nota que o transcreve no cofre. A numeração do original só aparece dentro da transcrição. A origem de um requisito aponta só as seções onde ele está escrito, separadas por vírgula.
-- **Nomes de arquivo e pasta:** kebab-case, sem acento, nas notas e no código. Exceção só vale se estiver escrita, com o motivo (convenção da linguagem ou exigência de ferramenta), na decisão que criou a regra e listada aqui. Sem isso, é erro.
-- **Tamanho:** o limite de ~350 palavras do Manual do Cérebro **não vale** em cofre de projeto, mas há limite: o `limite-palavras` do bloco abaixo, fixado pela maior nota registrada quando a regra nasceu. Os manuais e modelos copiados do `Vault` ficam fora da conta.
+- **Nomes de arquivo e pasta:** kebab-case, sem acento, nas notas e no código. Exceção só vale se estiver escrita, com o motivo (convenção da linguagem ou exigência de ferramenta), na decisão que criou a regra e listada em "Regras deste projeto". Sem isso, é erro.
+- **Tamanho:** o limite de ~350 palavras do Manual do Cérebro **não vale** em cofre de projeto, mas há limite: o `limite-palavras` do bloco `padroes`, fixado pela maior nota registrada quando a regra nasceu. Os manuais e modelos copiados do `Vault` ficam fora da conta.
 - **Passou do limite:** divida a nota. A parte nova vira nota própria, com o nome da original + `-<assunto>` (em bug e diário, o assunto entra depois da data), o mesmo modelo e o mesmo frontmatter. Na original ficam 1 frase + `[[link]]` no lugar do trecho, e a nova aponta de volta nas Conexões.
+- **Blocos do projeto:** o que fica entre `<!-- projeto:... -->` e `<!-- /projeto:... -->` é deste projeto. O `cofre.py sincronizar` refaz o resto do arquivo a partir do modelo do `Vault` e guarda esses blocos como estão. Regra de projeto mora dentro de um bloco; fora dele, ela some na próxima sincronização.
+- **`[a preencher]`:** parte que o humano ainda não definiu. O agente não inventa o valor: pergunta ao humano ou anota a dúvida no "Onde parei" do diário. O `verificar` mostra cada `[a preencher]` como AVISO.
 
+### Regras deste projeto
+
+<!-- projeto:padronizacao -->
+- **Grafia do nome:** `{{projeto}}`, conforme [a preencher: documento-fonte da grafia, ex.: contrato ou glossário].
+- **Documentos-fonte e numeração:** [a preencher: quais documentos têm seções próprias e como cada um é citado no cofre].
+- **Exceções registradas:** [a preencher: nenhuma até a decisão de estrutura do código; cada exceção cita a decisão e o motivo].
+- **Limite de tamanho:** 2073 palavras, padrão herdado do `stonebid-vault` [a preencher: confirmar ou trocar pela maior nota deste projeto].
+<!-- /projeto:padronizacao -->
+
+<!-- projeto:padroes -->
 ```padroes
 # termo fora do padrão => forma certa   ("re:" no início = expressão regular)
 limite-palavras: 2073
 ```
+<!-- /projeto:padroes -->
 
 ## Etapas vitais (obrigatório)
 
@@ -119,6 +132,20 @@ Modelos e manuais deste cofre não se editam aqui: o original fica no `Vault` e 
 ## Commits
 
 Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz dele, não aqui. Se for preciso commitar e a sessão só tiver acesso a esta pasta, **peça acesso à pasta `the-mind-hub`** e permissão para apagar nela (o git cria e remove arquivos `.lock`). Passos e formato: notas "Commitar no the-mind-hub" e "Padrão de commit" do cofre pessoal `Vault`. Antes do commit: `cofre.py verificar` com zero ERRO.
+
+## Repositórios e acesso
+
+<!-- projeto:repositorios -->
+| O quê | Onde |
+|---|---|
+| Repositório de código | {{link ou caminho}} |
+| Pasta do projeto no computador | [a preencher] |
+
+- **Acesso na etapa de programação:** [a preencher: se o humano autoriza, durante a etapa de programação, pedir a pasta do projeto ou anexar o repositório sem perguntar antes].
+<!-- /projeto:repositorios -->
+
+- Fora da etapa de programação (planejamento, cofre, pesquisa), o acesso aos repositórios segue a regra normal: pedir antes.
+- Apagar arquivos, forçar push ou mexer na branch principal fora do fluxo de CI/CD sempre pede confirmação.
 
 ## Como buscar (obrigatório)
 

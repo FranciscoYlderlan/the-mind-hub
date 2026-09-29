@@ -39,6 +39,7 @@ ESCOPO_CEREBRO = (
     "notas (seção 3, item 3 da seção 10 e \"Salva em Items/\" do checklist) são substituídos pelo [[Manual da Orquestra]]: "
     "aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`). O limite de ~350 palavras (seção 6) também não "
     "vale aqui: vale o `limite-palavras` do bloco `padroes` do `CLAUDE.md`.")
+BLOCO = re.compile(r"<!-- projeto:([a-z-]+) -->\n(.*?)<!-- /projeto:\1 -->", re.S)
 PADROES = re.compile(r"^```padroes\n(.*?)^```", re.S | re.M)
 
 
@@ -139,6 +140,13 @@ def kit(vault):
     k["referencias/manual-da-orquestra.md"] = copia_manual(vault, "Manual da Orquestra.md")
     k["referencias/manual-do-cerebro.md"] = copia_manual(vault, "Manual do Meu Cérebro no Obsidian.md", ESCOPO_CEREBRO)
     return k
+
+
+def preservar(novo, atual):
+    """Copia os blocos <!-- projeto:x --> do CLAUDE.md atual para o novo. Devolve (texto, blocos que faltam no atual)."""
+    velhos = dict(BLOCO.findall(atual))
+    faltam = [n for n, _ in BLOCO.findall(novo) if n not in velhos]
+    return BLOCO.sub(lambda m: f"<!-- projeto:{m.group(1)} -->\n{velhos.get(m.group(1), m.group(2))}<!-- /projeto:{m.group(1)} -->", novo), faltam
 
 
 def claude_md(vault, pasta, projeto, para, repo):
@@ -288,14 +296,16 @@ def sincronizar(a):
     atual = ler(cofre / "CLAUDE.md") if (cofre / "CLAUDE.md").exists() else ""
     m1 = re.search(r'^# Cofre "[^"]+" — (.+?) \(guia para agentes\)', atual, re.M)
     m2 = re.search(r"\*\*memória do projeto .+?\*\*: (.+?)\. Este arquivo", atual)
-    m3 = re.search(r"Repositório de código: (.+?)\.\s*$", atual, re.M)
-    if m1 and m2 and m3:
-        novo = claude_md(vault, cofre.resolve().name, m1.group(1), m2.group(1), m3.group(1))
-        if novo != atual:
+    if m1 and m2:
+        novo, faltam = preservar(claude_md(vault, cofre.resolve().name, m1.group(1), m2.group(1), "[a preencher]"), atual)
+        if faltam:
+            print(f"AVISO  CLAUDE.md sem os blocos de projeto {faltam}: nao regenerei (perderia o que e do projeto); "
+                  "marque o trecho com <!-- projeto:nome --> ... <!-- /projeto:nome --> e rode de novo")
+        elif novo != atual:
             escrever(cofre / "CLAUDE.md", novo)
-            print("atualizado  CLAUDE.md (regenerado do Modelo de CLAUDE do cofre)")
+            print("atualizado  CLAUDE.md (regenerado do Modelo de CLAUDE do cofre, blocos do projeto preservados)")
     else:
-        print("AVISO  CLAUDE.md fora do padrao: nao regenerei; compare com o Modelo de CLAUDE do cofre")
+        print("AVISO  CLAUDE.md fora do padrao (titulo ou 'memoria do projeto'): nao regenerei; compare com o Modelo de CLAUDE do cofre")
     print("Notas do cofre (contexto, moc, diarios...) nao sao sobrescritas: se o modelo delas mudou, ajuste seguindo 'Atualizar a memoria'.")
     return verificar(cofre, vault)
 
@@ -391,6 +401,9 @@ def verificar(cofre, vault=None):
         pend = sem_codigo(s).count("[a confirmar]")
         if pend and not modelo:
             A(r, f"{pend} pendência(s) [a confirmar]")
+        apre = sem_codigo(s).count("[a preencher")
+        if apre and not modelo:
+            A(r, f"{apre} item(ns) [a preencher]: aguarda definição do humano")
         if p.name == "CLAUDE.md" or eh_captura(p):
             continue
         ent = entrada.get(p.stem.lower(), set()) - {p.stem.lower()}
@@ -441,6 +454,9 @@ def verificar(cofre, vault=None):
             E("CLAUDE.md", "sem a seção 'Padronização' (copie do Modelo de CLAUDE do cofre)")
         if not tem_bloco or not limite:
             E("CLAUDE.md", "sem bloco ```padroes com 'limite-palavras: N'")
+        for nome in ("padronizacao", "padroes", "repositorios"):
+            if f"<!-- projeto:{nome} -->" not in claude_txt:
+                E("CLAUDE.md", f"sem o bloco de projeto '{nome}' (o sincronizar não consegue preservar o que é do projeto)")
     if projeto:
         o = cofre / "orquestra"
         moc0 = cofre / "MOCs/moc-orquestra.md"
@@ -561,7 +577,7 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("criar")
     c.add_argument("cofre"); c.add_argument("--projeto", required=True); c.add_argument("--para-que", required=True)
-    c.add_argument("--repo", default="[a confirmar]"); c.add_argument("--vault")
+    c.add_argument("--repo", default="[a preencher]"); c.add_argument("--vault")
     s = sub.add_parser("sincronizar"); s.add_argument("cofre"); s.add_argument("--vault")
     v = sub.add_parser("verificar"); v.add_argument("cofre"); v.add_argument("--vault")
     st = sub.add_parser("status"); st.add_argument("cofre"); st.add_argument("--atualizar", action="store_true")
