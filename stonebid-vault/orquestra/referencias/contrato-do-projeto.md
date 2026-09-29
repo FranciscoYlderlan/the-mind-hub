@@ -36,13 +36,13 @@ Funciona como a **planta de uma obra**: o pedreiro não decide onde vai a parede
 
 ## 🔄 Mudanças da v0.3 (2026-10-29)
 
-As mudanças aprovadas (M-01 a M-12), o que continua da v0.2 e o que segue em aberto estão em [[contrato-do-projeto-mudancas]].
+As mudanças aprovadas (M-01 a M-13), o que continua da v0.2 e o que segue em aberto estão em [[contrato-do-projeto-mudancas]].
 
 ## 🗺️ Onde está cada seção
 
 | Seção | Nota |
 |---|---|
-| Mudanças da v0.3 (M-01 a M-12) | [[contrato-do-projeto-mudancas]] |
+| Mudanças da v0.3 (M-01 a M-13) | [[contrato-do-projeto-mudancas]] |
 | 0. Como ler este documento | Esta nota (abaixo) |
 | 1. Visão e escopo · 2. Restrições e premissas · 3. Papéis | [[contrato-visao-escopo-e-papeis]] |
 | 4. Requisitos funcionais (RF) | [[contrato-requisitos-funcionais]] |
@@ -96,7 +96,7 @@ Cito Sommerville (*Engenharia de Software*) e Pressman & Maxim (*Engenharia de S
 |---|---|---|
 | 0.1 | 26/10/2026 | Primeiro rascunho, para validação |
 | 0.2 | 27/10/2026 | Nome do projeto definido (Stonebid) e padrão de repositórios `stonebid-web` e `stonebid-api` |
-| 0.3 | 29/10/2026 | Prazo de 24 horas, tecnologias, pastas, nomes, hospedagem, CI/CD, camada MCP, Playwright por agentes, branches, componentes e testes no escopo (M-01 a M-12, em [[contrato-do-projeto-mudancas]]) |
+| 0.3 | 29/10/2026 | Prazo de 24 horas, tecnologias, pastas, nomes, hospedagem, CI/CD, camada MCP, Playwright por agentes, branches, componentes e testes no escopo (M-01 a M-13, em [[contrato-do-projeto-mudancas]]) |
 
 ## 16. Referências e roteiro de estudo
 

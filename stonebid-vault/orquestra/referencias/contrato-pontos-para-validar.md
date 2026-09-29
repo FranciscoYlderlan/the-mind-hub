@@ -24,7 +24,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 
 **Inconsistências e lacunas que notei no enunciado:**
 
-1. O cancelamento aparece em dois lugares: no painel só vale para lote **sem lances**, e o opcional pede cancelamento com estorno automático (que implica lances). Tratei como base mais extensão (RF-22 e RF-23).
+1. O cancelamento aparece em dois lugares: no painel só vale para lote **sem lances**, e o opcional pede cancelamento com estorno automático (que implica lances). Tratei como base mais extensão (RF-22 e RF-23). A tabela 5.1 só trazia a extensão para o lote ao vivo; corrigida em M-13 ([[geral-decisao-2026-10-29-cancelamento-ao-vivo]]).
 2. "Lance inicial" (E1) e "valor mínimo" (E2) parecem o mesmo campo.
 3. A frase do anti-sniping admite duas leituras (5.4).
 4. "Lote publicado com lances abertos" nos dados de teste: interpretei como lote ao vivo com lances já feitos.
