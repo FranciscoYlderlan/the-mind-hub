@@ -33,6 +33,8 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: a camada MCP, o staging e o teste com Playwright por outro agente **continuam no plano**; a primeira etapa é justamente deixar o projeto no ar.
 - Enunciado oficial do teste técnico (Elite Dev na Verzel) fornecido em 2026-10-29: fonte da verdade nº 1 → [[enunciado-teste-tecnico]].
 - Componentes: registro consultado antes de criar, shadcn/ui primeiro, componentes pequenos e sem repetição → [[geral-decisao-2026-10-28-criacao-de-componentes]] e [[registro-de-componentes]].
+- 2026-10-29: reuso de componentes é **padrão de todo o projeto**: compor antes de criar, sem copiar telas, extrair na segunda repetição; "reutilização de componentes bem arquitetados é princípio de clean code e de uma boa arquitetura" → [[geral-decisao-2026-10-28-criacao-de-componentes]].
+- 2026-10-29: páginas públicas do RF-03 no layout `_public/`; a sala do lote tem duas rotas (`/lots/:id` só para ver e `/bidding/:id` com lance) que compõem o mesmo componente; `/` é a vitrine → [[geral-decisao-2026-10-28-estrutura-frontend]].
 - Toda funcionalidade criada no frontend é testada com Playwright por uma **subthread de teste** (outro agente), que só testa e reporta bugs; sem testes unitários ou de componente no frontend → [[geral-decisao-2026-10-28-testes-frontend-playwright]].
 - Contrato do projeto v0.3 (2026-10-29; v0.2 de 2026-10-27 + mudanças M-01 a M-11, em [[contrato-do-projeto-mudancas]]), escrito por mim com a IA, com as perguntas Q-01 a Q-15 ainda em validação: requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
 - Do contrato (itens `[DECIDIDO]`): prazo real de **4 dias** (o enunciado fala em 7; **substituído em 2026-10-29**, ver o item seguinte); **todos os 5 opcionais** serão feitos; deploy obrigatório; desenvolvimento com IA permitido; sou júnior e aprender é objetivo do projeto → [[contrato-visao-escopo-e-papeis]].
@@ -53,6 +55,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: links dos repositórios, pasta local e regra de acesso nas etapas de programação registrados ([[diario-2026-10-29]]).
 - 2026-10-29: [[contrato-do-projeto]] atualizado para a v0.3 com o cenário atual (M-01 a M-10).
 - 2026-10-29: ambiguidade dos testes T-01 a T-11 resolvida (M-11); tabela de mudanças dividida do hub para [[contrato-do-projeto-mudancas]] pelo limite de palavras.
+- 2026-10-29: rotas públicas do RF-03 (layout `_public/`) e reuso de componentes como padrão do projeto registrados nas decisões do frontend ([[diario-2026-10-29]]).
 - 2026-10-29: pendências respondidas: branches, configuração do GCP, entrega, dial, motivação, `@@map`, testes E2E e mudança do contrato ([[diario-2026-10-29]]).
 
 ## Tempo disponível
