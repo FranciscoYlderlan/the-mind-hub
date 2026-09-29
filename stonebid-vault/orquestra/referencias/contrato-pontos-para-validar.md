@@ -12,6 +12,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 14
 > [!tldr] Em uma linha
 > As seis lacunas do enunciado e as quinze perguntas (Q-01 a Q-15) que preciso responder antes de codar.
 
+> [!warning] Mudança M-12 (2026-10-29)
+> Q-09 respondida: a tela do comprovante mostra o que está na proposta; o registro guarda os campos de [[geral-decisao-2026-10-29-comprovante-e-hash]] ([[contrato-do-projeto-mudancas]]).
+
 É o **checklist do piloto antes da decolagem**: cada item conferido evita um problema no ar. Seção 14 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar. Cada resposta aprovada vira uma nota de decisão em `funcionalidades/geral/`.
 
 Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de lacunas que preenchi com propostas. Cada um muda requisitos e testes se a resposta for outra.

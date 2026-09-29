@@ -1,5 +1,5 @@
 ---
-aliases: [Mudanças da v0.3, Mudanças do contrato, Contract changes, M-01 a M-11]
+aliases: [Mudanças da v0.3, Mudanças do contrato, Contract changes, M-01 a M-12]
 tags: [estudos/programacao]
 tipo: referencia
 tema: requisitos
@@ -10,7 +10,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27) + mudanças aprovadas em 
 # 📜 Contrato: mudanças da v0.3
 
 > [!tldr] Em uma linha
-> As mudanças aprovadas sobre o contrato v0.2 (M-01 a M-11): onde divergem das notas de seção, vale o que está aqui.
+> As mudanças aprovadas sobre o contrato v0.2 (M-01 a M-12): onde divergem das notas de seção, vale o que está aqui.
 
 É o **aditivo do contrato de aluguel**: o contrato original continua valendo, e o aditivo diz só o que mudou e desde quando. Parte do hub [[contrato-do-projeto]], dividida dele quando passou do limite de palavras.
 
@@ -31,8 +31,9 @@ Entraram pelo protocolo de mudança da seção 13.4, com o aval do humano. Cada 
 | M-09 | Branches: `main` (produção), `staging` e de trabalho `tipo/ID-descricao-curta` (ex.: `feat/RN-04-incremento-minimo`); boilerplate inicial direto na `main` | 11, 13 | [[geral-decisao-2026-10-29-padrao-de-branches]] |
 | M-10 | Componentes do frontend: registro consultado antes de criar, shadcn/ui só pela CLI | 13 | [[geral-decisao-2026-10-28-criacao-de-componentes]], [[registro-de-componentes]] |
 | M-11 | **Testes:** o teste só sai do escopo junto com o requisito que prova. Ficam sempre T-01 a T-09 e T-10a (cancelamento sem lances); T-10b (estorno) sai com o OPC-2 e T-11 com a RN-18. RNF-12: testes de todo requisito implementado, com um comando e no CI | 6, 10, 11 | [[geral-decisao-2026-10-29-testes-no-escopo]] |
+| M-12 | **Comprovante e auditoria:** o Lance guarda também o próprio hash; o Lote guarda a cabeça da cadeia (`head_seq`, `head_hash`, `head_seal`), atualizada a cada lance, no lugar de "contagem e hash final"; o Comprovante é uma fotografia selada da liquidação (`public_id`, lote, pseudônimo, valor, data, contagem, hash final e selo). Item e link da auditoria se derivam. A auditoria da 8.1 confere também os selos da cabeça e do comprovante | 4, 7, 8, 14 | [[geral-decisao-2026-10-29-comprovante-e-hash]] |
 
-**Continua da v0.2 sem mudança:** visão, papéis, RF, RN, RNF (menos o RNF-12, ver M-11), modelo de dados e riscos; os **5 opcionais** seguem no escopo; deploy obrigatório. Testes: ver M-11.
+**Continua da v0.2 sem mudança:** visão, papéis, RF, RN, RNF (menos o RNF-12, ver M-11), modelo de dados (menos lance, lote e comprovante, ver M-12) e riscos; os **5 opcionais** seguem no escopo; deploy obrigatório. Testes: ver M-11.
 
 **Ainda em aberto na v0.3:**
 - Perguntas Q-01 a Q-15 de [[contrato-pontos-para-validar]], incluindo o tempo real (AD-04) e a API pública de itens.
@@ -47,8 +48,9 @@ Entraram pelo protocolo de mudança da seção 13.4, com o aval do humano. Cada 
 * **Ponto 1:** onde a nota de seção (v0.2) diverge desta tabela, vale a tabela.
 * **Ponto 2:** cada mudança aponta para a nota de decisão que a criou.
 * **Ponto 3:** testes seguem o requisito que provam (M-11, [[geral-decisao-2026-10-29-testes-no-escopo]]).
+* **Ponto 4:** contagem e hash final só valem com selo; o comprovante é uma fotografia selada (M-12, [[geral-decisao-2026-10-29-comprovante-e-hash]]).
 
 ### 🔗 Conexões
 - Mapa: [[contrato-do-projeto]] · [[moc-orquestra]]
-- Relacionadas: [[contrato-testes]], [[contrato-processo-e-plano]], [[geral-contexto]]
+- Relacionadas: [[geral-decisao-2026-10-29-comprovante-e-hash]], [[contrato-testes]], [[contrato-processo-e-plano]], [[geral-contexto]]
 - Próxima: [[contrato-visao-escopo-e-papeis]]
