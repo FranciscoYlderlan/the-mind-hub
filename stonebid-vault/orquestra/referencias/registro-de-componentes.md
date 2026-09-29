@@ -15,7 +15,7 @@ origem: geral-decisao-2026-10-28-criacao-de-componentes
 Funciona como o **inventário da despensa** antes da feira: olho o que já tem na prateleira antes de comprar de novo. Antes de criar um componente, confiro aqui; o roteiro completo está em [[geral-decisao-2026-10-28-criacao-de-componentes]].
 
 > [!note] Como funciona
-> 1. Antes de criar: buscar aqui pelo nome e pelo que o componente faz.
+> 1. Antes de criar: buscar aqui pelo nome e pelo que o componente faz, e também por algo **parecido** que possa receber a variação por props, `children` ou slot.
 > 2. Não achou: checar o shadcn/ui e instalar pela CLI antes de criar do zero.
 > 3. Criou ou instalou: o orquestrador acrescenta **uma linha** na tabela da camada certa.
 
