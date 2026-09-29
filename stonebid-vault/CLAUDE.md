@@ -95,7 +95,7 @@ Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma
 - **Numeração de fonte:** o enunciado é citado como **E1 a E6**, a numeração de [[enunciado-teste-tecnico]] (E1 O desafio, E2 Front-End, E3 Back-End, E4 Tecnologias e requisitos, E5 Opcionais, E6 Como enviar). A numeração "01 a 05" do contrato original vira E1 a E5. A origem de um requisito aponta só as seções onde ele está escrito, separadas por vírgula (o deploy obrigatório está só no E1).
 - **Nomes de arquivo e pasta:** kebab-case, sem acento, nas notas e no código. Exceção só vale se estiver escrita, com o motivo, na decisão que criou a regra e listada aqui. Sem isso, é erro.
 - **Exceções registradas:**
-  - **Hooks do React:** o hook se chama `useAlgo`, em camelCase com prefixo `use`. É convenção obrigatória do React: as Rules of Hooks e o lint `react-hooks` reconhecem um hook pelo prefixo. O arquivo continua em kebab-case com o mesmo prefixo: `use-debounce.ts` exporta `useDebounce`, como a CLI do shadcn faz com `use-mobile.ts`. Registro: [[geral-decisao-2026-10-28-estrutura-frontend]].
+  - **Arquivos de hook do React:** o arquivo tem o mesmo nome do hook, em camelCase com prefixo `use`: `useDebounce.ts` exporta `useDebounce`, `useCreateFeature1.ts` exporta `useCreateFeature1`. Vale para **todo** arquivo de hook do projeto, global (`src/hooks/`) ou de feature (`features/<feature>/hooks/`). É a convenção do React: as Rules of Hooks e o lint `react-hooks` reconhecem um hook pelo prefixo `use`. Única exceção: `use-mobile.ts`, gerado pela CLI do shadcn e importado pelos componentes dela com esse nome. Registro: [[geral-decisao-2026-10-28-estrutura-frontend]].
   - **Gerados ou exigidos por ferramenta:** `routeTree.gen.ts`, `__root.tsx`, `components/ui/` do shadcn e `vite.config.ts`, na mesma decisão.
 - **Tamanho:** o limite de ~350 palavras do Manual do Cérebro **não vale** neste cofre, nem para as notas `contrato-*`, que copiam o contrato sem reinterpretar. O limite é o `limite-palavras` do bloco abaixo: 2073 palavras, o tamanho de [[contrato-do-projeto]], a maior nota registrada em 2026-10-29. Os manuais e modelos copiados do `Vault` ficam fora da conta.
 - **Passou do limite:** divida a nota. A parte nova vira nota própria, com o nome da original + `-<assunto>` (em bug e diário, o assunto entra depois da data), o mesmo modelo e o mesmo frontmatter. Na original ficam 1 frase + `[[link]]` no lugar do trecho, e a nova aponta de volta nas Conexões.
@@ -105,6 +105,7 @@ Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma
 StoneBid => Stonebid (grafia do contrato-glossario)
 re:[Ss]e(ç|c)(ão|ões|ao|oes) 0[1-6]\b => E1 a E6 (numeração do enunciado-teste-tecnico)
 re:\bE[1-6]/E[1-6]\b => E1, E2 (vírgula, e só as seções onde o requisito está escrito)
+re:\buse-(?!mobile\.)[a-z0-9-]+\.tsx?\b => useAlgo.ts (arquivo de hook em camelCase; só use-mobile.ts do shadcn fica)
 limite-palavras: 2073
 ```
 
