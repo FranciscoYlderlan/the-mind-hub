@@ -12,7 +12,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 13
 > [!tldr] Em uma linha
 > Quem decide, qual fonte vence num conflito, as doze regras de trabalho da IA e como o contrato muda.
 
-É o **combinado entre motorista e copiloto**: o copiloto lê o mapa e sugere, mas quem vira o volante é o motorista. Seção 13 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar. Complementa as regras do cofre em [[manual-da-orquestra]].
+É o **combinado entre motorista e copiloto**: o copiloto lê o mapa e sugere, mas quem vira o volante é o motorista. Seção 13 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3). Complementa as regras do cofre em [[manual-da-orquestra]].
 
 Esta seção é o acordo de trabalho entre você e a IA.
 

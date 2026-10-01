@@ -12,10 +12,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seções 1, 2 e 3
 > [!tldr] Em uma linha
 > O que o Stonebid é, o que fica fora, os limites fixos (prazo de 24 horas, os 5 opcionais) e quem usa o sistema.
 
-É a **cerca do terreno**: mostra até onde a obra vai e o que fica do lado de fora. Seções 1 a 3 do [[contrato-do-projeto|contrato]] v0.2, copiadas sem reinterpretar.
-
-> [!warning] Prazo mudou em 2026-10-29
-> O prazo real passou de 4 dias para **24 horas** (a partir de 2026-10-29 09:06). Onde esta nota fala em 4 dias, vale o prazo novo; o texto do contrato segue como estava até a v0.3. Fato registrado em [[geral-contexto]].
+É a **cerca do terreno**: mostra até onde a obra vai e o que fica do lado de fora. Seções 1 a 3 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3).
 
 ## 1. Visão e escopo
 
@@ -25,8 +22,8 @@ O **Stonebid** é uma casa de leilões online. O leiloeiro monta lotes a partir 
 
 ### 1.2 Objetivos de sucesso
 
-1. Cumprir todos os requisitos base e os 5 opcionais em 4 dias.
-2. Ter uma base sólida: nada de desmoronar nas etapas finais (deploy no dia 1, regras críticas testadas).
+1. Cumprir todos os requisitos base e os 5 opcionais no prazo de 24 horas (entrega em 2026-10-30 09:00).
+2. Ter uma base sólida: nada de desmoronar nas etapas finais (deploy já no primeiro incremento, regras críticas testadas).
 3. Ter um projeto de portfólio explicável: decisões documentadas e README claro.
 4. Aprender: cada decisão tem um porquê e uma base teórica.
 5. Ter um contrato que humano e IA conseguem ler e seguir.
@@ -56,7 +53,7 @@ Tudo abaixo não foi pedido e custaria tempo que você não tem. Só entra se o 
 |---|---|
 | Por que (*Why*)? | Passar no teste técnico e construir um projeto de portfólio |
 | O que (*What*)? | Casa de leilões online com lances ao vivo, carteira, comprovante e auditoria |
-| Quando (*When*)? | 24 horas a partir de 2026-10-29 09:06 (v0.3; eram 4 dias na v0.2). Entrega: **2026-10-30 09:00** |
+| Quando (*When*)? | 24 horas a partir de 2026-10-29 09:06. Entrega: **2026-10-30 09:00** |
 | Quem (*Who*)? | Você (decide e responde pelo projeto) e a IA (implementa e explica) |
 | Onde (*Where*)? | Repositório de código e aplicação em produção (URL no README) |
 | Como (*How*)? | Entrega incremental com testes nas regras críticas (seção 11) |
@@ -69,7 +66,7 @@ Tudo abaixo não foi pedido e custaria tempo que você não tem. Só entra se o 
 
 | Restrição | Valor | Status | Origem |
 |---|---|---|---|
-| Prazo | 4 dias (enunciado: 7) | `[DECIDIDO]` | Você |
+| Prazo | 24 horas a partir de 2026-10-29 09:06, entrega em 2026-10-30 09:00 (enunciado: 7 dias) | `[DECIDIDO]` | Você |
 | Opcionais | Todos os 5 serão feitos | `[DECIDIDO]` | Você |
 | Deploy | Obrigatório | `[DECIDIDO]` | E1 (requisito "Deploy") |
 | Front-end | React, com ou sem framework | `[DECIDIDO]` | E4 |

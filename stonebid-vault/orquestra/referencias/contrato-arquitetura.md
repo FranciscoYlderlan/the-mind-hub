@@ -12,20 +12,14 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 8
 > [!tldr] Em uma linha
 > As decisões de arquitetura propostas (AD-01 a AD-10), como a auditoria detecta adulteração e como lances simultâneos são tratados.
 
-É o **projeto estrutural do prédio**: onde ficam as colunas que não se mexem depois. Seção 8 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar. Os ADs aqui são **propostas**; viram decisão do cofre só com aval, numa nota `geral-decisao-*`.
-
-> [!warning] Prazo mudou em 2026-10-29
-> O prazo real passou de 4 dias para **24 horas** (a partir de 2026-10-29 09:06; entrega em 2026-10-30 09:00). Onde esta nota fala em 4 dias, vale o prazo novo; o texto do contrato segue como estava até a v0.3. Fato registrado em [[geral-contexto]].
-
-> [!warning] Mudança M-12 (2026-10-29)
-> Na seção 8.1, o hash de cada lance passa a ser **guardado** e comparado com o recalculado, e a contagem e o hash final só valem **com selo** (cabeça do lote e comprovante). Sem o selo, apagar o último lance e reescrever o resumo passaria como ÍNTEGRO. A lista "O que a página de auditoria confere" atualizada está em [[geral-decisao-2026-10-29-comprovante-e-hash]] ([[contrato-do-projeto-mudancas]]).
+É o **projeto estrutural do prédio**: onde ficam as colunas que não se mexem depois. Seção 8 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3). Os ADs aqui são **propostas**; viram decisão do cofre só com aval, numa nota `geral-decisao-*`.
 
 > [!info] Por que isso importa
-> Sommerville mostra que as decisões de arquitetura determinam o desempenho, a segurança e a manutenibilidade do sistema, e que cada decisão deve ser tomada comparando alternativas. Pressman apresenta os estilos arquiteturais e os conceitos de projeto (abstração, modularidade, separação de responsabilidades, ocultação de informação, baixo acoplamento e alta coesão). O princípio KISS ("mantenha simples"), citado por Pressman a partir de Hooker, vale em dobro com prazo de 4 dias. Anotar o porquê de cada decisão (o que, as alternativas, as consequências) também é prática de mercado conhecida como ADR.
+> Sommerville mostra que as decisões de arquitetura determinam o desempenho, a segurança e a manutenibilidade do sistema, e que cada decisão deve ser tomada comparando alternativas. Pressman apresenta os estilos arquiteturais e os conceitos de projeto (abstração, modularidade, separação de responsabilidades, ocultação de informação, baixo acoplamento e alta coesão). O princípio KISS ("mantenha simples"), citado por Pressman a partir de Hooker, vale em dobro com prazo de 24 horas. Anotar o porquê de cada decisão (o que, as alternativas, as consequências) também é prática de mercado conhecida como ADR.
 
 | ID | Decisão | Alternativa descartada | Por quê | Status |
 |---|---|---|---|---|
-| AD-01 | **Monólito modular em camadas**: tela, API, domínio e dados | Microsserviços | Uma pessoa, 4 dias, uma unidade de deploy: menos peças para quebrar. | `[PROPOSTO]` |
+| AD-01 | **Monólito modular em camadas**: tela, API, domínio e dados | Microsserviços | Uma pessoa, 24 horas, uma unidade de deploy: menos peças para quebrar. | `[PROPOSTO]` |
 | AD-02 | **Domínio isolado**: regras de lance, carteira, liquidação e auditoria num núcleo sem dependência de framework nem de banco | Regras espalhadas pelos controladores | Fica testável. A IA acerta mais quando o lugar de cada regra é claro. | `[PROPOSTO]` |
 | AD-03 | Lances de um mesmo lote são **serializados** dentro de uma transação (RN-09) | Sem controle, ou uma fila externa | Sem isso, dois lances simultâneos quebram saldo e histórico (veja 8.2). | `[PROPOSTO]`. A técnica exata depende do banco: `[PENDENTE]` |
 | AD-04 | **Mecanismo de tempo real** | Atualização periódica (polling), Server-Sent Events, WebSocket | Critérios: o servidor só precisa empurrar atualizações (o lance vai por requisição comum); o host do deploy precisa suportar a técnica; deve haver fallback simples. | `[PENDENTE]` (depende da stack) |
@@ -55,20 +49,20 @@ Ligações com os livros: AD-01 e AD-02 (Sommerville: arquitetura em camadas e a
 | Árvore de Merkle | Sim | Sim | Não, sozinha | Média-alta |
 | Âncora externa (publicar o hash fora do sistema) | Sim | Sim | Sim, até com o segredo | Alta |
 
-**Proposta:** hash encadeado com selo HMAC. O hash de cada lance é calculado a partir de lote, ordem, licitante, valor, instante e hash do lance anterior. O selo HMAC usa um segredo guardado **fora do banco** (variável de ambiente do servidor).
+**Proposta:** hash encadeado com selo HMAC. O hash de cada lance é calculado a partir de lote, ordem, pseudônimo do licitante, valor, instante e hash do lance anterior, e fica **guardado** no próprio lance. O lote guarda a **cabeça da cadeia** (número e hash do último lance, com selo), atualizada a cada lance; o comprovante guarda a contagem e o hash final com selo próprio. Campos e serialização: [[geral-decisao-2026-10-29-comprovante-e-hash]]. O selo HMAC usa um segredo guardado **fora do banco** (variável de ambiente do servidor).
 
 **O que a página de auditoria confere:**
 
 1. A numeração vai de 1 a n, sem buracos.
-2. O hash e o selo de cada lance, recalculados, batem.
-3. Cada registro aponta para o anterior.
-4. A contagem e o hash final batem com os guardados no lote e no comprovante.
+2. Para cada lance: o hash recalculado é igual ao guardado (senão, conteúdo editado), o selo confere e o hash anterior é o do lance anterior (senão, inserção ou remoção).
+3. *n*, o último hash e o selo da cabeça batem com a cabeça do lote.
+4. Se houver comprovante: o selo confere, a contagem e o hash final batem, e pseudônimo e valor batem com o último lance.
 5. O vencedor e o valor batem com a liquidação e com o extrato.
 
 **Pontos fracos e como cobri-los:**
 
 - Quem tem acesso ao banco e conhece a fórmula poderia refazer a cadeia inteira. O selo HMAC, com segredo fora do banco, impede isso.
-- Apagar só os **últimos** lances deixa uma cadeia "limpa", só que mais curta. Por isso a contagem e o hash final ficam também no lote e no comprovante, e a página confere esses valores com a liquidação e o extrato.
+- Apagar só os **últimos** lances deixa uma cadeia "limpa", só que mais curta. Por isso a cabeça da cadeia fica no lote e a contagem e o hash final no comprovante, **sempre com selo**: sem o segredo, ninguém reescreve esse resumo para esconder o truncamento, nem com o lote ao vivo.
 - **Prática:** o usuário do banco que a aplicação usa não deveria ter permissão de alterar ou apagar lances. É uma proteção em camadas.
 - **Limite honesto:** quem tiver o banco **e** o segredo pode forjar o histórico. Só uma âncora externa resolveria, e ela está fora do escopo. Escreva esse limite no README: ele mostra que você entende a técnica.
 

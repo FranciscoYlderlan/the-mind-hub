@@ -10,15 +10,14 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 10
 # 📜 Contrato: qualidade e testes (T)
 
 > [!tldr] Em uma linha
-> Os onze testes que provam as regras críticas (dinheiro, concorrência e auditoria) e a tabela que liga requisito, teste e entrega.
+> Os testes (T-01 a T-11) que provam as regras críticas (dinheiro, concorrência e auditoria) e a tabela que liga requisito, teste e entrega.
 
-É a **prova dos nove** da conta de cabeça: o resultado só vale depois de conferido. Seção 10 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
+É a **prova dos nove** da conta de cabeça: o resultado só vale depois de conferido. Seção 10 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3).
 
 > [!info] Por que isso importa
 > Sommerville descreve três níveis de teste: **de desenvolvimento** (unidades, componentes e sistema), **de release** (o sistema como um todo, contra os requisitos) e **de usuário**. Ele também apresenta o desenvolvimento dirigido por testes (escrever o teste antes do código) e o teste de regressão (rodar tudo de novo para ver se algo quebrou). Pressman organiza a estratégia em teste de unidade, de integração, de validação e de sistema. Os dois dizem, em essência, a mesma coisa: **derive os testes dos requisitos**. A estratégia aqui é dar mais testes ao que mais dói se quebrar: dinheiro, concorrência e auditoria.
 
-> [!warning] v0.3 (M-11)
-> O texto abaixo é da v0.2. Desde 2026-10-29 vale [[geral-decisao-2026-10-29-testes-no-escopo]]: o teste só sai junto com o requisito que prova. Ficam sempre T-01 a T-09 e T-10a; T-10b sai com o OPC-2 e T-11 com a RN-18.
+O teste só sai do escopo junto com o requisito que prova ([[geral-decisao-2026-10-29-testes-no-escopo]]).
 
 | ID | Teste | Garante |
 |---|---|---|
@@ -31,8 +30,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 10
 | T-07 | API externa fora do ar: vitrine, sala, auditoria e comprovante funcionam | RN-13, RNF-05 |
 | T-08 | Autorização por papel chamando a API direto | RF-02, RN-06 |
 | T-09 | Respostas públicas e comprovante sem dados pessoais | RN-15, RNF-08 |
-| T-10 | Cancelamento sem lances, com lances e estorno | RN-12, RF-22, RF-23 |
-| T-11 | Idempotência de depósito e de lance | RN-18 |
+| T-10a | Cancelamento sem lances, e recusa quando há lances | RN-12, RF-22 |
+| T-10b | Cancelamento com lances e estorno (sai junto com o OPC-2) | RN-12, RF-23 |
+| T-11 | Idempotência de depósito e de lance (sai só se a RN-18 for afrouxada) | RN-18 |
 
 ## Rastreabilidade
 

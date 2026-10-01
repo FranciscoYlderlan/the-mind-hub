@@ -12,7 +12,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 6
 > [!tldr] Em uma linha
 > Como o Stonebid deve ser (no ar, consistente, resiliente, seguro, privado, testável), sempre com um jeito de medir.
 
-É a **vistoria do carro**: não importa só que ele ande, mas que freie, não vaze óleo e passe na inspeção. Seção 6 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
+É a **vistoria do carro**: não importa só que ele ande, mas que freie, não vaze óleo e passe na inspeção. Seção 6 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3).
 
 > [!info] Por que isso importa
 > Sommerville divide os requisitos não funcionais em três grupos: de **produto** (desempenho, confiabilidade, segurança, usabilidade), **organizacionais** (processo, entrega, operação) e **externos** (leis, regulamentos). Ele também insiste que sejam escritos de forma **mensurável**, com um número ou um teste, em vez de adjetivos como "rápido" ou "fácil". A coluna "Categoria" abaixo segue essa classificação. Os números marcados como `[PROPOSTO]` são metas minhas, para você aceitar ou ajustar.
@@ -30,11 +30,8 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 6
 | RNF-09 | **Manutenibilidade e testabilidade:** as regras RN-02 a RN-12 ficam numa camada de domínio sem dependência de framework nem de banco. | Produto | Os testes de domínio rodam sem subir servidor nem banco. | Prop. |
 | RNF-10 | **Usabilidade:** toda ação recusada explica o motivo e o que fazer. O layout é usável em celular e em desktop. `[PROPOSTO]` | Produto | Revisão manual nos dois tamanhos de tela. | E2, Prop. |
 | RNF-11 `[OPC-3]` | **Docker Compose:** um comando sobe aplicação, banco e dados de teste. | Organizacional | Rodar o comando em uma máquina limpa. | E5 |
-| RNF-12 `[OPC-4]` | **Testes automatizados** cobrindo T-01 a T-11, executáveis com um comando. | Organizacional | Rodar o comando de testes. | E5 |
+| RNF-12 `[OPC-4]` | **Testes automatizados** de todo requisito implementado, executáveis com um comando (`npm test`) e rodando no CI ([[geral-decisao-2026-10-29-testes-no-escopo]]). | Organizacional | Rodar o comando de testes. | E5 |
 | RNF-13 `[OPC-5]` | **Tema claro e escuro:** segue a preferência do sistema, permite alternar e lembra a escolha. | Produto | Alternar o tema em todas as telas. | E5 |
-
-> [!warning] v0.3 (M-11)
-> O RNF-12 passa a ler: testes de todo requisito implementado, executáveis com um comando (`npm test`) e rodando no CI. Detalhe em [[geral-decisao-2026-10-29-testes-no-escopo]].
 
 > [!tip] Quando abrir esta nota
 > Ao preparar o deploy, o seed, o README ou uma revisão de segurança: cada RNF diz como verificar.
