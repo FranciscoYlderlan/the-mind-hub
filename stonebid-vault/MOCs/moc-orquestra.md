@@ -13,6 +13,7 @@ origem: manual-da-orquestra
 
 ## 🚦 Etapas vitais
 - [[manual-da-orquestra#🚦 Etapas vitais]]: toda escrita termina em `python orquestra/modelos/cofre.py verificar .` com zero ERRO.
+- [[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]: por que toda mudança de estado passa pela varredura de impacto (uma versão só por nota).
 - [[manual-da-orquestra#🔄 Passagem de turno]]: chat novo começa por `cofre.py status` e pelo "Onde parei" do último diário.
 
 ## 🧭 Projeto
@@ -20,7 +21,7 @@ origem: manual-da-orquestra
 - [[geral-plano]]: roteiro — em que etapa o projeto está e as notas geradas em cada etapa.
 - [[geral-contexto]]: objetivo, motivação, dial e decisões que valem para o projeto todo.
 - [[enunciado-teste-tecnico]]: enunciado oficial da Verzel (fonte da verdade nº 1) e o mapa contra o contrato.
-- [[contrato-do-projeto]]: contrato v0.3 (v0.2 + mudanças M-01 a M-13 de 2026-10-29, em [[contrato-do-projeto-mudancas]]: requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas Q); perguntas Q-01 a Q-15 ainda em validação.
+- [[contrato-do-projeto]]: contrato v0.3 (requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas Q; histórico das mudanças M-01 a M-13 em [[contrato-do-projeto-mudancas]]); perguntas da seção 14 em validação (a Q-09 já foi respondida).
 - Decisões de base: [[geral-decisao-2026-10-28-stack-frontend|stack do frontend]], [[geral-decisao-2026-10-28-stack-backend|stack do backend]], [[geral-decisao-2026-10-28-estrutura-frontend|pastas do frontend]], [[geral-decisao-2026-10-28-estrutura-backend|pastas do backend]], [[geral-decisao-2026-10-28-criacao-de-componentes|criação de componentes]], [[geral-decisao-2026-10-28-testes-frontend-playwright|teste Playwright por outro agente]], [[geral-decisao-2026-10-29-camada-mcp|camada MCP]], [[geral-decisao-2026-10-29-hospedagem|hospedagem (GCP + Vercel)]], [[geral-decisao-2026-10-29-padrao-de-branches|padrão de branches]], [[geral-decisao-2026-10-29-testes-no-escopo|testes no escopo (M-11)]], [[geral-decisao-2026-10-29-comprovante-e-hash|comprovante selado e hash do lance (M-12)]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo|cancelamento de lote ao vivo (M-13)]].
 
 ## 🚧 Funcionalidades
