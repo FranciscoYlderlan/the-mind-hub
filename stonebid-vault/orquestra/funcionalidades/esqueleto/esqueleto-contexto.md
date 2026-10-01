@@ -26,6 +26,7 @@ Etapa 2 do [[geral-plano]] (I0 de [[contrato-processo-e-plano]]): RF-01 a RF-03,
 - 2026-10-29: T1 e T2 de [[esqueleto-plano]] entregues e publicados na `main` de `stonebid-api` e `stonebid-web`, com CI verde nos dois.
 - 2026-10-29: T3 esperou o faturamento do GCP abrir; a troca para o Railway foi feita e desfeita no cofre quando o GCP aprovou ([[diario-2026-10-29-esqueleto]]).
 - 2026-10-29 (tarde): T3 quase concluída. GCP montado pelo `gcp-setup.sh` (Cloud SQL `stonebid-db` com os bancos `stonebid` e `stonebid_staging`, Artifact Registry, Secret Manager, contas de serviço, Workload Identity Federation) e alerta de orçamento de R$ 250. Vercel com o projeto `stonebid-web` (produção `stonebid-web.vercel.app`, proteção dos previews desligada). Secrets e variables cadastrados nos dois repositórios; branch `staging` criada nos dois. No ar: API `stonebid-api-7idhzkkvpq-rj.a.run.app`, API de staging `stonebid-api-staging-7idhzkkvpq-rj.a.run.app` e web de produção. Pendentes: PR #1 do `stonebid-web` (alias do staging) e o login dos 3 usuários na URL pública.
+- 2026-10-29 21:40: humano liberou o acesso à aplicação no ar para os agentes (projeto de teste, acesso livre); endereços e usuários em [[acesso-de-teste]].
 
 ## Tempo disponível
 O do [[geral-contexto]]: entrega em 2026-10-30 09:00.
@@ -49,5 +50,6 @@ O do [[geral-contexto]]: entrega em 2026-10-30 09:00.
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
+- Acesso de teste: [[acesso-de-teste]]
 - Projeto: [[geral-contexto]]
 - Regras: [[manual-da-orquestra]]

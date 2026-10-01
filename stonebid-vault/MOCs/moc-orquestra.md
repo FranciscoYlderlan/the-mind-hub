@@ -34,6 +34,7 @@ origem: manual-da-orquestra
 - [[manual-da-orquestra]]: estrutura, papéis, fluxo e gatilhos.
 - [[manual-do-cerebro]]: tom e esqueleto das notas de referência.
 - [[registro-de-componentes]]: o que já existe no frontend; consultar antes de criar componente.
+- [[acesso-de-teste]]: endereços no ar e usuários de teste (login livre para humano e agentes).
 
 ## 🧩 Modelos
 - Notas operacionais: [[modelo-contexto]], [[modelo-plano]], [[modelo-decisao]], [[modelo-bug]], [[modelo-diario]]

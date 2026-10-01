@@ -165,6 +165,7 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 | Frontend `stonebid-web` | https://github.com/FranciscoYlderlan/stonebid-web |
 | Pasta do projeto no computador | `C:\Users\Ylderlan\Documents\Projetos\stonebid` |
 
+- **Acesso à aplicação no ar:** livre. O Stonebid é de teste: qualquer agente pode entrar e usar a plataforma para testar, sem pedir. Endereços e usuários em [[acesso-de-teste]].
 - **Acesso na etapa de programação:** autorizado pelo humano para aquela etapa em `stonebid-api` ou `stonebid-web` (pasta do projeto e repositório no GitHub). Peça o acesso à pasta ou anexe o repositório direto, sem perguntar antes se pode.
 <!-- /projeto:repositorios -->
 

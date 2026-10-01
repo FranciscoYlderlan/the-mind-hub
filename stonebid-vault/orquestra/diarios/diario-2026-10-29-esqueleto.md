@@ -26,6 +26,8 @@ criado: 2026-10-29
 - Branch `staging` criada nos dois repositórios a partir da `main`; re-run do CI da `main` nos dois. CDs da API verdes em produção e staging; testes no Chrome: `/health` 200 nos dois, `/mcp` 404 em produção e 401 sem api_key em staging. Web de produção republicado com a URL da API; `/login` abre e o CORS aceita a origem da Vercel.
 - CD do web na `staging` publicou o preview, mas o `vercel alias set` falhou ("Error: User not found."): faltava `--scope` do time. Correção no PR #1 do `stonebid-web` (branch `fix/RNF-01-vercel-alias-scope`), CI verde, aguardando o humano decidir o merge.
 - Erro de processo: no início da sessão o `CLAUDE.md` do cofre foi lido com `cat` no shell, e não pela Obsidian CLI (as demais leituras foram pela CLI).
+- 21:40: chat novo; humano liberou o login e o uso da plataforma pelos agentes ("o projeto em si é de teste", acesso livre) e pediu a informação anexada no cofre para os testes de interface à mão. Nova referência [[acesso-de-teste]] (endereços, os 3 usuários e a senha `stonebid123`, já pública nos repositórios); link em [[moc-orquestra]], [[esqueleto-contexto]], [[esqueleto-plano]] e no bloco `projeto:repositorios` do `CLAUDE.md`. Termos varridos: "senha", "login", "3 usuários", "SEED_PASSWORD", "não é digitada pelo agente" (fica só na Verificação da T3, que é registro da data). Limite da ferramenta: o agente só digita senha no navegador em `localhost` ou em host de teste nomeado pelo humano; produção pelo navegador segue com o humano. PR #1 do `stonebid-web` conferido no GitHub: ainda aberto.
+- Erro de processo (21:40): o `CLAUDE.md` e o diário do dia foram lidos com `cat` no início, antes da Obsidian CLI; o `obsidian_read` com `file=` falhou ("Command read not found") e com `path=` funcionou.
 
 ## Decisões tomadas
 - Nenhuma vigente (a do Railway foi desfeita às 15:43).
@@ -40,7 +42,7 @@ criado: 2026-10-29
 - Referências (bloqueios do container): proxy recusa `ui.shadcn.com` (contorno: registro local com `REGISTRY_URL`), `binaries.prisma.sh`, registries Docker, a API de Actions do GitHub e `*.run.app`; Prisma 7 bloqueia `migrate reset` quando roda por agente; terminal novo do Cloud Shell não herda o `gcloud auth login`.
 
 > [!tip] Onde parei
-> - **Próximo passo:** fechar a T3 de [[esqueleto-plano]]: merge do PR #1 do `stonebid-web` (decisão do humano), depois trazer a `staging` do web para a `main` e conferir o alias `stonebid-web-staging.vercel.app`; o humano entra com os 3 usuários em `https://stonebid-web.vercel.app/login`; testar `claude mcp add` na API de staging. Depois a T4 (verificador + Playwright no ar).
+> - **Próximo passo:** fechar a T3 de [[esqueleto-plano]]: merge do PR #1 do `stonebid-web` (decisão do humano), depois trazer a `staging` do web para a `main` e conferir o alias `stonebid-web-staging.vercel.app`; login dos 3 usuários em `https://stonebid-web.vercel.app/login` ([[acesso-de-teste]]: o humano no navegador; o agente pela API ou pela MCP de staging); testar `claude mcp add` na API de staging. Depois a T4 (verificador + Playwright no ar).
 > - **Threads abertas:** PR #1 do `stonebid-web` aberto. Nenhum subagente em andamento. Código só no GitHub; a pasta local `stonebid` tem só `stonebid-infra`.
 > - **Dúvidas para o humano:** quem faz o merge do PR #1; resultado do login dos 3 usuários; aprovar os candidatos a decisão acima; Node fixo em 24 (LTS) ou 26 na imagem e no CI; validar `docker compose up` na máquina dele.
 
@@ -48,4 +50,5 @@ criado: 2026-10-29
 - Mapa: [[moc-orquestra]]
 - Funcionalidades tocadas: [[esqueleto-contexto]]
 - Diário do dia: [[diario-2026-10-29]]
+- Acesso de teste: [[acesso-de-teste]]
 - Projeto: [[geral-contexto]]
