@@ -29,7 +29,7 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Status:** em-construcao
 - **Objetivo:** boilerplate dos dois repositórios, GCP + Vercel, CI/CD, staging, login com papéis, seed e tema.
 - **Pronto quando:** aplicação vazia no ar com os usuários de teste.
-- **Funcionalidades:** 
+- **Funcionalidades:** [[esqueleto-contexto]] ([[esqueleto-plano]])
 - **Notas geradas:** 
 - **Concluída em:** 
 

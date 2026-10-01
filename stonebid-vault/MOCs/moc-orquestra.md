@@ -25,7 +25,7 @@ origem: manual-da-orquestra
 - Decisões de base: [[geral-decisao-2026-10-28-stack-frontend|stack do frontend]], [[geral-decisao-2026-10-28-stack-backend|stack do backend]], [[geral-decisao-2026-10-28-estrutura-frontend|pastas do frontend]], [[geral-decisao-2026-10-28-estrutura-backend|pastas do backend]], [[geral-decisao-2026-10-28-criacao-de-componentes|criação de componentes]], [[geral-decisao-2026-10-28-testes-frontend-playwright|teste Playwright por outro agente]], [[geral-decisao-2026-10-29-camada-mcp|camada MCP]], [[geral-decisao-2026-10-29-hospedagem|hospedagem (GCP + Vercel)]], [[geral-decisao-2026-10-29-padrao-de-branches|padrão de branches]], [[geral-decisao-2026-10-29-testes-no-escopo|testes no escopo (M-11)]], [[geral-decisao-2026-10-29-comprovante-e-hash|comprovante selado e hash do lance (M-12)]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo|cancelamento de lote ao vivo (M-13)]], [[geral-decisao-2026-10-29-roteiro|roteiro em 8 etapas]].
 
 ## 🚧 Funcionalidades
-- (nenhuma ainda; uma linha por funcionalidade: `[[nome-da-func-contexto]]` + meia frase)
+- [[esqueleto-contexto]]: etapa 2, esqueleto no ar (I0): repositórios, login com papéis, seed, CI e deploy no GCP + Vercel.
 
 ## 📦 Arquivadas
 - (nenhuma ainda)

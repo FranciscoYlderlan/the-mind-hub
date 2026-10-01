@@ -63,6 +63,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: bug de processo corrigido: mudança de estado passa por varredura de impacto, e as notas `contrato-*` ficam só no texto vigente ([[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]).
 - 2026-10-29: pendências respondidas: branches, configuração do GCP, entrega, dial, motivação, `@@map`, testes E2E e mudança do contrato ([[diario-2026-10-29]]).
 - 2026-10-29: roteiro aprovado ([[geral-decisao-2026-10-29-roteiro]]); etapa 2 (esqueleto no ar) em construção.
+- 2026-10-29: `stonebid-api` e `stonebid-web` montados e publicados na `main` com CI verde ([[esqueleto-contexto]]).
 
 ## Tempo disponível
 - **24 horas** a partir de 2026-10-29 09:06. Entrega em **2026-10-30 09:00** (confirmado pelo humano).
@@ -82,6 +83,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 
 ## Mapa
 - Roteiro: [[geral-plano]]
+- Funcionalidades: [[esqueleto-contexto]]
 - Decisões: [[geral-decisao-2026-10-29-roteiro]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]], [[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]
 - Enunciado: [[enunciado-teste-tecnico]]
