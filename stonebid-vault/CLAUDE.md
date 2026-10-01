@@ -133,6 +133,7 @@ antigo: re:(?i)copiad[ao]s? (do documento original )?sem reinterpretar => notas 
 antigo: re:texto da v0\.2 => notas contrato-* no texto vigente, v0.3 (contrato-do-projeto)
 antigo: re:\bApp\.tsx\b => app.tsx (geral-decisao-2026-10-28-estrutura-frontend)
 antigo: re:\buseCases/ => use-cases/ (geral-decisao-2026-10-28-estrutura-backend)
+antigo: re:\b(React 19\.3|Vite 8\.3\.4|Tailwind CSS v4\.3|Fastify v5\.12\.7|Prisma v8|Vitest v5\.0\.5|Node 26\.13\.0|zod 4\.6)\b(?!\+| ou mais recente) => versão citada ou mais recente, sem trava (geral-decisao-2026-10-28-stack-frontend e geral-decisao-2026-10-28-stack-backend)
 limite-palavras: 2073
 ```
 <!-- /projeto:padroes -->
