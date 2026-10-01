@@ -4,7 +4,7 @@ tags: [ferramentas/obsidian, estudos/programacao]
 tipo: procedimento
 status: em-uso
 criado: 2026-10-28
-origem: Falha de processo de 2026-10-28 (modelos sem conexões e cópias com links quebrados)
+origem: Falhas de processo de 2026-10-28 (modelos sem conexões e cópias com links quebrados) e 2026-10-29 (mudança de estado sem varredura)
 ---
 # 🛠️ Atualizar a Memória
 
@@ -16,17 +16,18 @@ origem: Falha de processo de 2026-10-28 (modelos sem conexões e cópias com lin
 ---
 
 > [!note] Passo a passo
-> 1. Acho o gatilho e **busco antes**: se a nota já existe, atualizo em vez de criar outra.
+> 1. Acho o gatilho e **busco antes**: se a nota já existe, atualizo. Mudou um fato ou regra? **Varro o impacto**: busco o estado antigo e listo toda nota que o cita.
 > 2. Classifico (tipo → modelo → pasta → nome) e peço aval quando a regra exige.
 > 3. Escrevo **a partir do modelo**, nunca do zero.
 > 4. Conecto nos dois sentidos: Conexões na nota e link de volta no hub ou MOC.
-> 5. Propago: contexto e diário; mudou o original no `Vault`? `cofre.py sincronizar` nos cofres de projeto.
+> 5. Propago: reescrevo no estado atual cada nota da varredura e anoto o estado antigo como `antigo:` no `padroes`; contexto e diário; mudou o original no `Vault`? `cofre.py sincronizar` nos cofres de projeto.
 > 6. Rodo `cofre.py verificar`. Com ERRO, volto ao passo 3. Com zero, digo "pronto".
 
 > [!warning] Armadilhas
 > - Conferir só link quebrado não basta: **link que falta não aparece como quebrado**. O verificar procura órfãs e notas com menos de 2 saídas.
 > - Quem escreveu não se autoaprova. Quem decide é o verificar.
 > - Copiar nota entre cofres à mão quebra links. Cópia é sempre pelo `cofre.py`.
+> - Atualizar só a nota dona deixa o estado antigo nas outras. Aviso "onde fala X, vale Y" por cima de texto velho **é** o erro: reescrevo.
 
 > [!tip] Quando abrir esta nota
 > Toda vez que eu ou um agente for criar, mudar, mover ou copiar uma nota.

@@ -14,7 +14,7 @@ aliases: []
 ## Objetivo e motivação
 
 ## Fatos que eu informei
-(o agente preserva sem reinterpretar)
+(o agente preserva sem reinterpretar; fato substituído sai daqui e fica no diário)
 
 ## O que já foi feito
 - AAAA-MM-DD: 
