@@ -20,6 +20,8 @@ Etapa 2 do [[geral-plano]] (I0 de [[contrato-processo-e-plano]]): RF-01 a RF-03,
 - 2026-10-29: pré-pagamento de R$ 200 feito no GCP, ainda não creditado.
 - 2026-10-29 15:43: o GCP aprovou o faturamento; seguimos com o GCP ([[geral-decisao-2026-10-29-hospedagem]]).
 - 2026-10-29 15:51: o humano mostrou a página de pagamento do faturamento como prova de que o pagamento foi efetuado.
+- 2026-10-29 22:06: "Sempre no staging e em prod quem irá testar é o agente para agilizar os processos".
+- 2026-10-29 22:08: "esse é um teste técnico todos os dados são fictícios mesmo em produção".
 - 2026-10-29: o humano fez a reautenticação da Vercel por código de e-mail e cadastrou o secret `VERCEL_TOKEN` no `stonebid-web`.
 
 ## O que já foi feito
@@ -27,6 +29,7 @@ Etapa 2 do [[geral-plano]] (I0 de [[contrato-processo-e-plano]]): RF-01 a RF-03,
 - 2026-10-29: T3 esperou o faturamento do GCP abrir; a troca para o Railway foi feita e desfeita no cofre quando o GCP aprovou ([[diario-2026-10-29-esqueleto]]).
 - 2026-10-29 (tarde): T3 quase concluída. GCP montado pelo `gcp-setup.sh` (Cloud SQL `stonebid-db` com os bancos `stonebid` e `stonebid_staging`, Artifact Registry, Secret Manager, contas de serviço, Workload Identity Federation) e alerta de orçamento de R$ 250. Vercel com o projeto `stonebid-web` (produção `stonebid-web.vercel.app`, proteção dos previews desligada). Secrets e variables cadastrados nos dois repositórios; branch `staging` criada nos dois. No ar: API `stonebid-api-7idhzkkvpq-rj.a.run.app`, API de staging `stonebid-api-staging-7idhzkkvpq-rj.a.run.app` e web de produção. Pendentes: PR #1 do `stonebid-web` (alias do staging) e o login dos 3 usuários na URL pública.
 - 2026-10-29 21:40: humano liberou o acesso à aplicação no ar para os agentes (projeto de teste, acesso livre); endereços e usuários em [[acesso-de-teste]].
+- 2026-10-29 22:09: T3 concluída: alias do staging no ar, login dos 3 usuários no staging (agente) e em produção (humano).
 
 ## Tempo disponível
 O do [[geral-contexto]]: entrega em 2026-10-30 09:00.
@@ -42,7 +45,7 @@ O do [[geral-contexto]]: entrega em 2026-10-30 09:00.
 
 ## Mapa
 - Plano: [[esqueleto-plano]]
-- Decisões: [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-camada-mcp]]
+- Decisões: [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-camada-mcp]]
 - Diário: [[diario-2026-10-29-esqueleto]]
 
 ## Interpretação do agente
