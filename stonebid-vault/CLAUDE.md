@@ -166,6 +166,7 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 | Pasta do projeto no computador | `C:\Users\Ylderlan\Documents\Projetos\stonebid` |
 
 - **Acesso à aplicação no ar:** livre. O Stonebid é de teste: qualquer agente pode entrar e usar a plataforma para testar, sem pedir. Endereços e usuários em [[acesso-de-teste]].
+- **Modo de implementação (padrão):** código no container → `git push` e PR no GitHub → CI verde → merge do humano → `cd.yml` do GitHub Actions publica no GCP e na Vercel. Consoles (Cloud Shell, Vercel, secrets do GitHub) e todo teste no ar, em staging e em produção, são feitos pelo agente no Chrome. O container e o shell do computador não alcançam `*.run.app` nem `*.vercel.app`. Detalhes em [[geral-decisao-2026-10-29-modo-de-implementacao]].
 - **Acesso na etapa de programação:** autorizado pelo humano para aquela etapa em `stonebid-api` ou `stonebid-web` (pasta do projeto e repositório no GitHub). Peça o acesso à pasta ou anexe o repositório direto, sem perguntar antes se pode.
 <!-- /projeto:repositorios -->
 
