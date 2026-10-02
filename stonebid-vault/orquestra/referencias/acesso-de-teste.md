@@ -24,7 +24,7 @@ A **porta da frente** da aplicação no ar, com as chaves penduradas ao lado. Se
 | Ambiente | Web | API |
 |---|---|---|
 | Produção | https://stonebid-web.vercel.app (login em `/login`) | https://stonebid-api-7idhzkkvpq-rj.a.run.app (`/health`) |
-| Staging | `stonebid-web-staging.vercel.app` (alias **ainda não funciona**: depende do PR #2 do `stonebid-web`) | https://stonebid-api-staging-7idhzkkvpq-rj.a.run.app (`/health`, `/mcp` com api_key) |
+| Staging | https://stonebid-web-staging.vercel.app (login em `/login`) | https://stonebid-api-staging-7idhzkkvpq-rj.a.run.app (`/health`, `/mcp` com api_key) |
 | Local | http://localhost:5173 | http://localhost:3333 (`/mcp` com api_key) |
 
 ## Usuários de teste
