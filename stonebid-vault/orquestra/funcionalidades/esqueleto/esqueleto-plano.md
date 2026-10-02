@@ -82,7 +82,7 @@ Etapa 2 do [[geral-plano]]: aplicação "vazia" no ar com os 3 usuários de test
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-T1 e T2 concluídas; T3 quase: alias do staging no ar desde 2026-10-29 22:00 (PR #2, API REST da Vercel); falta o login dos 3 usuários na URL pública (endereços e usuários em [[acesso-de-teste]]; acesso livre para agentes). Depois, T4.
+T1 e T2 concluídas; T3 quase: alias do staging no ar desde 2026-10-29 22:00 (PR #2, API REST da Vercel); login dos 3 usuários ✔ no staging (2026-10-29 22:01, agente no Chrome); falta o login em produção, pelo humano, (endereços e usuários em [[acesso-de-teste]]; acesso livre para agentes). Depois, T4.
 
 ## Prioridades
 Deploy cedo (R-05: testar o host real logo). Se apertar, T3 antes de qualquer polimento de T2.
