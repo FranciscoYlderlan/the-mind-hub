@@ -98,13 +98,13 @@ Envie pelo formulário `https://elitedev.verzel.com.br/?elite-dev-2026-2` preenc
 | Item do enunciado | Onde está no planejamento | Situação |
 |---|---|---|
 | E1 Deploy obrigatório | RNF-01, R-01 ([[contrato-requisitos-nao-funcionais]]) | Coberto no papel; **não iniciado**; hospedagem escolhida em 2026-10-29: GCP + Vercel ([[geral-decisao-2026-10-29-hospedagem]]) |
-| E1 API pública de itens | RN-13, AD-06, Q-13 ([[contrato-tecnologias]]) | Coberto; **API não escolhida** |
+| E1 API pública de itens | RN-13, AD-06, Q-13 ([[contrato-tecnologias]]) | Coberto; API do Art Institute of Chicago ([[geral-decisao-2026-10-29-api-de-itens]]) |
 | E1 Dois papéis | RF-01, RF-02, RN-06 | Coberto |
 | E1 Lote com lance inicial, incremento, início, fim | RF-21 | Coberto |
 | E1 Comprovante compartilhável | RF-51, RF-52 | Coberto |
 | E1 Auditoria sem login | RF-03, RF-60 | Coberto |
 | E2 Vitrine (cancelados ocultos) | RF-10 | Coberto |
-| E2 Painel do leiloeiro | RF-20 a RF-24 | Coberto; "valor mínimo" = lance inicial é a proposta Q-06 |
+| E2 Painel do leiloeiro | RF-20 a RF-24 | Coberto; "valor mínimo" = lance inicial (Q-06, [[geral-decisao-2026-10-29-lance-inicial-e-valor-minimo]]) |
 | E2 Sala ao vivo sem recarregar | RF-30 a RF-33, AD-04 | Coberto; **mecanismo de tempo real não decidido** |
 | E2 Carteira | RF-40, RF-41 | Coberto |
 | E2 Meus arremates | RF-50 a RF-52 | Coberto |

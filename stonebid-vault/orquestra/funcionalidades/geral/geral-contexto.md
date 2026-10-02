@@ -2,7 +2,7 @@
 tipo: contexto
 funcionalidade: geral
 status: em-construcao
-etapa-atual: 2
+etapa-atual: 3
 criado: 2026-10-28
 aliases: [Contexto do Stonebid, Visão geral do projeto, Project overview]
 ---
@@ -24,8 +24,8 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: Prisma com `@@map` em snake_case; testes E2E do backend em `test/e2e/` na raiz → [[geral-decisao-2026-10-28-estrutura-backend]].
 - 2026-10-29: camada MCP e Playwright entram no contrato como mudança → [[contrato-do-projeto]].
 - 2026-10-29: sempre que for etapa de programação em algum dos repositórios, o acesso é permitido para essa etapa (regra em `CLAUDE.md`, seção "Repositórios e acesso").
-- Stack do frontend (nenhuma versão travada: a citada ou mais recente): React 19.3+, Vite 8.3.4+, Tailwind CSS v4.3+, TanStack Router v1+ (só rotas, não o framework), TanStack Query v5+, Zustand latest (só UI global), zod 4.6+, shadcn/ui (iniciado pelo guia oficial para Vite), Node 26.13.0+, npm, ESLint + Prettier, Playwright, CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-frontend]].
-- Stack do backend (nenhuma versão travada: a citada ou mais recente): Fastify v5.12.7+, Prisma v8+ sobre PostgreSQL, zod 4.6+, Node e PostgreSQL latest, Vitest v5.0.5+ (sem Jest), ESLint + Prettier (sem Biome), Docker/Compose e CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-backend]].
+- Stack do frontend (nenhuma versão travada: a citada ou mais recente): React 19.3+, Vite 8.3.4+, Tailwind CSS v4.3+, TanStack Router v1+ (só rotas, não o framework), TanStack Query v5+, Zustand latest (só UI global; tema no `next-themes`), TypeScript 6, zod 4.6+, shadcn/ui (iniciado pelo guia oficial para Vite), Node 26.13.0+, npm, ESLint + Prettier, Playwright, CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-frontend]].
+- Stack do backend (nenhuma versão travada: a citada ou mais recente): Fastify v5.12.7+, Prisma 7.10.1+ (linha 7, [[geral-decisao-2026-10-29-prisma-7]]) sobre PostgreSQL, zod 4.6+, Node e PostgreSQL latest, Vitest v5.0.5+ (sem Jest), ESLint + Prettier (sem Biome), Docker/Compose e CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-backend]].
 - Frontend organizado por features (`routes → features → components/hooks/lib`), com nomes genéricos (`feature1`, `feature2`) na estrutura para não induzir o domínio → [[geral-decisao-2026-10-28-estrutura-frontend]].
 - Backend em Clean Architecture (`domain/`, `application/use-cases/`, `infra/`, `env/`) → [[geral-decisao-2026-10-28-estrutura-backend]].
 - Regra geral dos dois repositórios, desde a criação do projeto: nomes de arquivos e de entidades em **inglês** e **kebab-case**; identificadores no código em PascalCase e camelCase; parâmetro de rota sempre `$id.tsx` → [[geral-decisao-2026-10-28-estrutura-frontend]] e [[geral-decisao-2026-10-28-estrutura-backend]]. Exceção registrada: todo arquivo de hook se chama como o hook, em camelCase (`useDebounce.ts`), convenção do React; só o `use-mobile.ts` do shadcn fica como a CLI gera ([[geral-decisao-2026-10-28-estrutura-frontend]]).
@@ -35,7 +35,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: reuso de componentes é **padrão de todo o projeto**: compor antes de criar, sem copiar telas, extrair na segunda repetição; motivação: DRY, uma representação única de cada conhecimento; "reutilização de componentes bem arquitetados é princípio de clean code e de uma boa arquitetura" → [[geral-decisao-2026-10-28-criacao-de-componentes]].
 - 2026-10-29: páginas públicas do RF-03 no layout `_public/`; a sala do lote tem duas rotas (`/lots/:id` só para ver e `/bidding/:id` com lance) que compõem o mesmo componente; `/` é a vitrine → [[geral-decisao-2026-10-28-estrutura-frontend]].
 - Toda funcionalidade criada no frontend é testada com Playwright por uma **subthread de teste** (outro agente), que só testa e reporta bugs; sem testes unitários ou de componente no frontend → [[geral-decisao-2026-10-28-testes-frontend-playwright]].
-- Contrato do projeto v0.3 (2026-10-29; histórico de mudanças em [[contrato-do-projeto-mudancas]]), escrito por mim com a IA, com as perguntas da seção 14 ainda em validação (a Q-09 já foi respondida): requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
+- Contrato do projeto v0.3 (2026-10-29; histórico de mudanças em [[contrato-do-projeto-mudancas]]), escrito por mim com a IA, com as perguntas da seção 14 ainda em validação (Q-06, Q-07, Q-09, Q-10, Q-13 e Q-14 já respondidas): requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
 - Do contrato (itens `[DECIDIDO]`): **todos os 5 opcionais** serão feitos; deploy obrigatório; desenvolvimento com IA permitido; sou júnior e aprender é objetivo do projeto → [[contrato-visao-escopo-e-papeis]].
 - 2026-10-29 (09:06): prazo real de **24 horas** a partir de agora (o enunciado fala em 7 dias). Oficialmente estou no **terceiro dia**: nos três primeiros dias não avancei muito além dos requisitos e da arquitetura. Vou trabalhar sem pausa.
 - 2026-10-29 (12:28): aprovada a regra dos testes: o teste só sai do escopo junto com o requisito que prova; T-01 a T-09 e T-10a ficam sempre → [[geral-decisao-2026-10-29-testes-no-escopo]].
@@ -65,6 +65,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: pendências respondidas: branches, configuração do GCP, entrega, dial, motivação, `@@map`, testes E2E e mudança do contrato ([[diario-2026-10-29]]).
 - 2026-10-29: roteiro aprovado ([[geral-decisao-2026-10-29-roteiro]]); etapa 2 (esqueleto no ar) em construção.
 - 2026-10-29: `stonebid-api` e `stonebid-web` montados e publicados na `main` com CI verde ([[esqueleto-contexto]]).
+- 2026-10-29 22:20: etapa 2 concluída (aplicação no ar com os 3 usuários de teste); etapa 3 (carteira e lotes) em construção ([[carteira-e-lotes-contexto]]).
 
 ## Tempo disponível
 - **24 horas** a partir de 2026-10-29 09:06. Entrega em **2026-10-30 09:00** (confirmado pelo humano).
@@ -84,8 +85,8 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 
 ## Mapa
 - Roteiro: [[geral-plano]]
-- Funcionalidades: [[esqueleto-contexto]]
-- Decisões: [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-roteiro]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
+- Funcionalidades: [[carteira-e-lotes-contexto]], [[esqueleto-contexto]]
+- Decisões: [[geral-decisao-2026-10-29-sessao-jwt-no-cabecalho]], [[geral-decisao-2026-10-29-prisma-7]], [[geral-decisao-2026-10-29-typescript-6-no-web]], [[geral-decisao-2026-10-29-next-themes-para-o-tema]], [[geral-decisao-2026-10-29-vercel-sem-deploy-automatico]], [[geral-decisao-2026-10-29-alias-fixo-do-staging]], [[geral-decisao-2026-10-29-api-de-itens]], [[geral-decisao-2026-10-29-imagem-do-lote-no-banco]], [[geral-decisao-2026-10-29-lance-inicial-e-valor-minimo]], [[geral-decisao-2026-10-29-inicio-e-duracao-do-lote]], [[geral-decisao-2026-10-29-limites-do-deposito]], [[geral-decisao-2026-10-29-edicao-de-lote-fora]], [[geral-decisao-2026-10-29-seed-com-imagem-fixa]], [[geral-decisao-2026-10-29-seed-tambem-em-producao]], [[geral-decisao-2026-10-29-busca-so-em-dominio-publico]], [[geral-decisao-2026-10-29-codigo-do-teto-do-deposito]], [[geral-decisao-2026-10-29-sequencia-no-extrato]], [[geral-decisao-2026-10-29-node-26]], [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-roteiro]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]], [[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]
 - Enunciado: [[enunciado-teste-tecnico]]
 - Contrato: [[contrato-do-projeto]] (requisitos, regras, arquitetura proposta, plano e perguntas Q)
