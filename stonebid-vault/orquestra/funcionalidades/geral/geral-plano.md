@@ -7,7 +7,7 @@ criado: 2026-10-28
 # 🧭 Roteiro — Stonebid
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **2. Esqueleto no ar (I0)** (em-construcao)
+> Etapa atual: **3. Carteira e lotes (I1)** (em-construcao)
 
 > [!success] Aprovado
 > Etapas aprovadas em [[geral-decisao-2026-10-29-roteiro]]. Mudar a lista de etapas é uma nova decisão.
@@ -26,19 +26,19 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 2026-10-29
 
 ## 2. Esqueleto no ar (I0)
-- **Status:** em-construcao
+- **Status:** concluida
 - **Objetivo:** boilerplate dos dois repositórios, GCP + Vercel, CI/CD, staging, login com papéis, seed e tema.
 - **Pronto quando:** aplicação vazia no ar com os usuários de teste.
-- **Funcionalidades:** [[esqueleto-contexto]] ([[esqueleto-plano]])
-- **Notas geradas:** 
-- **Concluída em:** 
+- **Funcionalidades:** [[esqueleto-contexto]]
+- **Notas geradas:** [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-sessao-jwt-no-cabecalho]], [[geral-decisao-2026-10-29-prisma-7]], [[geral-decisao-2026-10-29-typescript-6-no-web]], [[geral-decisao-2026-10-29-next-themes-para-o-tema]], [[geral-decisao-2026-10-29-vercel-sem-deploy-automatico]], [[geral-decisao-2026-10-29-alias-fixo-do-staging]], [[acesso-de-teste]], [[diario-2026-10-29-esqueleto]]
+- **Concluída em:** 2026-10-29
 
 ## 3. Carteira e lotes (I1)
-- **Status:** planejada
+- **Status:** em-construcao
 - **Objetivo:** depósito simulado, busca na API de itens, criação do lote e vitrine.
 - **Pronto quando:** lote criado aparece na vitrine; licitante deposita.
-- **Funcionalidades:** 
-- **Notas geradas:** 
+- **Funcionalidades:** [[carteira-e-lotes-contexto]]
+- **Notas geradas:** [[geral-decisao-2026-10-29-api-de-itens]], [[geral-decisao-2026-10-29-imagem-do-lote-no-banco]], [[geral-decisao-2026-10-29-lance-inicial-e-valor-minimo]], [[geral-decisao-2026-10-29-inicio-e-duracao-do-lote]], [[geral-decisao-2026-10-29-limites-do-deposito]], [[geral-decisao-2026-10-29-edicao-de-lote-fora]], [[diario-2026-10-29-carteira-e-lotes]]
 - **Concluída em:** 
 
 ## 4. Lances (I2)

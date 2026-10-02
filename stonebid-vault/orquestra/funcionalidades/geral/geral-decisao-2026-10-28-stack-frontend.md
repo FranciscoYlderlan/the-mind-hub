@@ -20,7 +20,7 @@ aliases: [Tecnologias do frontend, Stack do stonebid-web, Frontend stack]
 | Tailwind CSS | v4.3 ou mais recente | |
 | TanStack Router | v1 ou mais recente | **Só a gestão de rotas**, não o framework (TanStack Start fica de fora) |
 | TanStack Query | v5 ou mais recente | Dados do servidor |
-| Zustand | latest | Só estado de UI global (sidebar, tema, preferências), quando realmente necessário |
+| Zustand | latest | Só estado de UI global (sidebar, preferências), quando realmente necessário; o tema fica no `next-themes` ([[geral-decisao-2026-10-29-next-themes-para-o-tema]]) |
 | zod | 4.6 ou mais recente | Validações e env |
 | shadcn/ui | — | Projeto iniciado pelo guia oficial para Vite: https://ui.shadcn.com/docs/installation/vite |
 | ESLint | latest | Lint |

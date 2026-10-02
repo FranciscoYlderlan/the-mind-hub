@@ -16,7 +16,7 @@ aliases: [Tecnologias do backend, Stack do stonebid-api, Backend stack]
 | Node | latest | |
 | Fastify | v5.12.7 ou mais recente | Framework web de alta performance e baixo overhead |
 | TypeScript | — | TypeScript first, com build otimizado |
-| Prisma | v8 ou mais recente | ORM |
+| Prisma | 7.10.1 ou mais recente da linha 7 ([[geral-decisao-2026-10-29-prisma-7]]) | ORM |
 | PostgreSQL | latest | Banco de dados do Prisma |
 | zod | 4.6 ou mais recente | Schemas, inferência de tipos e validação de env |
 | Vitest | v5.0.5 ou mais recente | Testes unitários e E2E |
