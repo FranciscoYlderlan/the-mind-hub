@@ -34,6 +34,13 @@ Entraram pelo protocolo de mudança da seção 13.4, com o aval do humano. Cada 
 | M-12 | **Comprovante e auditoria:** o Lance guarda também o próprio hash; o Lote guarda a cabeça da cadeia (`head_seq`, `head_hash`, `head_seal`), atualizada a cada lance, no lugar de "contagem e hash final"; o Comprovante é uma fotografia selada da liquidação (`public_id`, lote, pseudônimo, valor, data, contagem, hash final e selo). Item e link da auditoria se derivam. A auditoria da 8.1 confere também os selos da cabeça e do comprovante | 4, 7, 8, 14 | [[geral-decisao-2026-10-29-comprovante-e-hash]] |
 | M-13 | **Cancelamento ao vivo:** a linha AO_VIVO da tabela 5.1 passa a "CANCELADO (sem lances; com lances, só se `[OPC-2]`)", igual ao RF-22 e à RN-12. Uma função só decide o cancelamento, dentro da trava do lote (RN-09); o `[OPC-2]` é um sinalizador | 5 | [[geral-decisao-2026-10-29-cancelamento-ao-vivo]] |
 
+## 🔄 Mudanças depois da v0.3 (2026-10-30)
+
+| # | Mudança | Seções afetadas | Onde está |
+|---|---|---|---|
+| M-14 | Entrega passa de 2026-10-30 09:00 para **2026-10-30 16:00** | 1, 2, 11 | [[geral-decisao-2026-10-30-prazo-16h]] |
+| M-15 | **RN-19:** obra única por lote (bloqueada com lote agendado, ao vivo ou arrematado; livre se cancelado ou sem lances) | 5 | [[geral-decisao-2026-10-30-obra-unica-por-lote]] |
+
 **Continua da v0.2 sem mudança:** visão, papéis, RF, RN (menos a tabela 5.1, ver M-13), RNF (menos o RNF-12, ver M-11), modelo de dados (menos lance, lote e comprovante, ver M-12) e riscos; os **5 opcionais** seguem no escopo; deploy obrigatório. Testes: ver M-11.
 
 **Ainda em aberto na v0.3:**

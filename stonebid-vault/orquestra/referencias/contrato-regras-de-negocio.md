@@ -53,6 +53,7 @@ Os estados agendado, ao vivo e encerrado **derivam do relógio do servidor**. O 
 | RN-16 | Dinheiro é guardado em **centavos inteiros** (reais simulados). Nunca em ponto flutuante. | Prática |
 | RN-17 | O servidor é a única fonte da hora. Datas ficam em UTC no banco e são exibidas no fuso do usuário. | Prática |
 | RN-18 | Depósito e lance são **idempotentes**: repetir a mesma requisição (duplo clique, nova tentativa de rede) não duplica o efeito. | Prática |
+| RN-19 | Uma obra (mesmo item da API externa) só pode ter **um lote em aberto** e não volta a leilão depois de vendida: criar lote é recusado se há lote dela AGENDADO, AO_VIVO ou ARREMATADO; lote CANCELADO ou encerrado sem lances libera a obra. Pedidos simultâneos geram um lote só. A busca do painel mostra a situação da obra ([[geral-decisao-2026-10-30-obra-unica-por-lote]]). | Humano (2026-10-30) |
 
 ## 5.3 Exemplo da carteira (RN-07 e RN-08)
 
