@@ -34,7 +34,7 @@ Etapa 2 do [[geral-plano]] (I0 de [[contrato-processo-e-plano]]): RF-01 a RF-03,
 - 2026-10-29 22:20: etapa 2 do [[geral-plano]] concluída. Ficam para depois, sem bloqueio: `claude mcp add` em staging (precisa da `MCP_API_KEY_STAGING`), `docker compose up` na máquina do humano e o 403 do `requireRole` no ar, que a etapa 3 prova ([[carteira-e-lotes-plano]]).
 
 ## Tempo disponível
-O do [[geral-contexto]]: entrega em 2026-10-30 09:00.
+O do [[geral-contexto]]: entrega em 2026-10-30 16:00.
 
 ## Dial e modelo de IA
 - Dial: medio (o do [[geral-contexto]])

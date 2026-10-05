@@ -28,7 +28,7 @@ Funciona como a **planta de uma obra**: o pedreiro não decide onde vai a parede
 | Data | 29/10/2026 (v0.2: 27/10/2026) |
 | Autor | FranciscoYlderlan, com a IA |
 | Prazo real | **24 horas**, a partir de 2026-10-29 09:06 (o enunciado fala em 7 dias) |
-| Entrega | **2026-10-30 09:00** |
+| Entrega | **2026-10-30 16:00** |
 | Horas por dia | Trabalho contínuo, sem pausa, nas 24 horas |
 | Tecnologias | Definidas: [[geral-decisao-2026-10-28-stack-frontend]] e [[geral-decisao-2026-10-28-stack-backend]]; comparação com a seção 12 em [[contrato-tecnologias]] |
 | Hospedagem | Backend e banco no GCP (Cloud Run + Cloud SQL, São Paulo), frontend na Vercel, CI/CD no GitHub Actions → [[geral-decisao-2026-10-29-hospedagem]] |

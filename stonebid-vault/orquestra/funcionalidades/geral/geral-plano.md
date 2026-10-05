@@ -76,7 +76,7 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 ## 8. Revisão e entrega
 - **Status:** planejada
 - **Objetivo:** README, relato do uso de IA (E6), checklist e envio.
-- **Pronto quando:** checklist 11.6 completo e entrega feita até 2026-10-30 09:00.
+- **Pronto quando:** checklist 11.6 completo e entrega feita até 2026-10-30 16:00.
 - **Funcionalidades:** 
 - **Notas geradas:** 
 - **Concluída em:** 

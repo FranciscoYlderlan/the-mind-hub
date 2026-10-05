@@ -127,7 +127,7 @@ re:\bE[1-6]/E[1-6]\b => E1, E2 (vírgula, e só as seções onde o requisito est
 re:\buse-(?!mobile\.)[a-z0-9-]+\.tsx?\b => useAlgo.ts (arquivo de hook em camelCase; só use-mobile.ts do shadcn fica)
 # estado substituído (fora de diário, bug, decisão substituída e seções Histórico/Mudanças/Linha do tempo é ERRO):
 # antigo: termo do estado antigo => estado atual (nota dona)
-antigo: re:\b(4|quatro) dias\b => prazo de 24 horas a partir de 2026-10-29 09:06, entrega 2026-10-30 09:00 (geral-contexto)
+antigo: re:\b(4|quatro) dias\b => prazo de 24 horas a partir de 2026-10-29 09:06, entrega 2026-10-30 16:00 (geral-decisao-2026-10-30-prazo-16h)
 antigo: re:T-01 a T-06 => T-01 a T-09 e T-10a sempre; T-10b com o OPC-2; T-11 com a RN-18 (geral-decisao-2026-10-29-testes-no-escopo)
 antigo: re:(?i)só nas (tools|features) (com|que necessitam de) autenticação => api_key em toda conexão com o /mcp, em todos os ambientes (geral-decisao-2026-10-29-camada-mcp)
 antigo: re:(?i)restrição por IP => api_key para conectar ao /mcp (geral-decisao-2026-10-29-camada-mcp)
@@ -139,6 +139,7 @@ antigo: re:\b(React 19\.3|Vite 8\.3\.4|Tailwind CSS v4\.3|Fastify v5\.12\.7|Pris
 antigo: re:(?i)(só a Q-09 (já )?foi respondida|a Q-09 já foi respondida|quatorze perguntas abertas|API não escolhida) => Q-06, Q-07, Q-09, Q-10, Q-13 e Q-14 respondidas; API do Art Institute of Chicago (contrato-pontos-para-validar, geral-decisao-2026-10-29-api-de-itens)
 antigo: re:\bPrisma (v)?8\b => Prisma 7.10.1+ (geral-decisao-2026-10-29-prisma-7)
 antigo: re:(?i)Zustand[^|\n]{0,20}\btema\b|cookie `SameSite=None; Secure` ou token => tema no next-themes; sessão por JWT no cabeçalho (geral-decisao-2026-10-29-next-themes-para-o-tema, geral-decisao-2026-10-29-sessao-jwt-no-cabecalho)
+antigo: re:2026-10-30 09:00 => entrega em 2026-10-30 16:00 (geral-decisao-2026-10-30-prazo-16h)
 limite-palavras: 2073
 ```
 <!-- /projeto:padroes -->
