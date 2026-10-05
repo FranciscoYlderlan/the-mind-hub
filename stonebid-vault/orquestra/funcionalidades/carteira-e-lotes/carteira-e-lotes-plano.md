@@ -74,9 +74,9 @@ Construída por dois implementadores em paralelo, cada um no seu PR (pedido do h
   - [ ] CD verde em staging e produção; lotes do seed na vitrine no ar
 - **Prova:** Actions verdes; vitrine de staging no Chrome
 - **Verificação:**
-  - Data: 
-  - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+  - Data: 2026-10-29
+  - Critérios ✔/✘ com a prova de cada um: ✔ `staging` igual à `main` nos dois repositórios (`stonebid-api` `6d73b81`, `stonebid-web` `0852323`). ✔ CI e CD verdes em staging: na API, migração e seed (Cloud Run Job) e deploy no Cloud Run; no web, deploy na Vercel e alias fixo. ✔ Vitrine de staging com os 3 lotes do seed no Chrome. Produção não conferida no Chrome nesta rodada.
+  - Devolvido para correção: não
 
 ### T4: verificação no ar
 - **Faz:** orquestrador no Chrome, em staging: leiloeiro busca, cria lote e o vê na vitrine; licitante deposita (duplo clique), confere extrato; 403 com papel errado pela API; verificador independente lê o diff e os testes de T1 e T2.
@@ -86,13 +86,18 @@ Construída por dois implementadores em paralelo, cada um no seu PR (pedido do h
 - **Pronto quando:**
   - [ ] relatórios sem bloqueante
 - **Prova:** relatórios
-- **Verificação:**
-  - Data: 
+- **Verificação** (orquestrador no Chrome, staging, 23:30–23:40):
+  - Data: 2026-10-29
   - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+    - ✔ Busca real na AIC ("Monet"), o ponto não provado na T1. ✔ Lote "Water Lilies" criado (R$ 150,00, incremento R$ 10,00), imagem copiada pelo servidor (JPEG de 272 KB) e lote na vitrine em "Agendados", com imagem.
+    - ✔ Duplo clique no depósito: um `POST` só (201) e uma linha no extrato; replay da mesma chave devolve 200 sem depositar de novo.
+    - ✔ 403: leiloeiro depositando; licitante criando lote, abrindo `/auctioneer/lots` e cancelando lote. ✔ 401 sem login.
+    - ✘ **Bloqueante:** depois do depósito a tela não atualiza saldo nem extrato até recarregar, e um erro cru aparece no toast. ✘ Miniaturas da busca não carregam. ✘ Sem link da vitrine para o painel e a carteira. ✘ Verificador independente não rodou.
+  - Devolvido para correção: sim, nas tarefas T5a a T5e de [[carteira-e-lotes-plano-correcoes]].
+  - Ficaram em staging: o lote "Water Lilies" e o depósito de R$ 250,00 do licitante 1.
 
 ## Próxima tarefa e a seguinte
-T1a, T1b e T2 concluídas, com PRs abertos e CI verde. PRs #1 e #2 do `stonebid-api` e PR #3 do `stonebid-web` na `main`. O PR #3 entrou em `7e158db`, antes da arrumação: ela foi reaplicada no PR #4 do `stonebid-web` (CI verde). Próximo: merge do humano do PR #4; em seguida T3 e T4 e, em paralelo com a T4, os PRs `chore` (Node 26, job do `docker compose up`, botão do cadastro).
+T1 a T4 feitas; PRs #1 e #2 do `stonebid-api` e #3 e #4 do `stonebid-web` na `main` e em staging. A T4 devolveu correções: elas estão em [[carteira-e-lotes-plano-correcoes]] (T5a a T5e). Em paralelo, os PRs `chore` (Node 26, job do `docker compose up`, botão do cadastro). A etapa 3 fecha no [[geral-plano]] depois da T5e.
 
 ## Prioridades
 Backend primeiro (T1): o I2 grava em cima da carteira e do lote. Se apertar, o painel do leiloeiro sai antes do polimento da vitrine.
@@ -105,6 +110,7 @@ Backend primeiro (T1): o I2 grava em cima da carteira e do lote. Se apertar, o p
 
 ### 🔗 Conexões
 - Funcionalidade: [[carteira-e-lotes-contexto]]
+- Correções da T4: [[carteira-e-lotes-plano-correcoes]]
 - Roteiro: [[geral-plano]] (etapa 3)
 - Acesso: [[acesso-de-teste]]
 - Projeto: [[geral-contexto]]

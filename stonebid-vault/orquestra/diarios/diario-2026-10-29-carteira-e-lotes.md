@@ -25,6 +25,11 @@ criado: 2026-10-29
 - 23:1x: subagente do rebase entregou o PR #2 do `stonebid-api` sem conflitos (HEAD `61044aa`, 59 testes, CI verde). Registrado na Verificação da T1 de [[carteira-e-lotes-plano]]. Humano mandou o `/context`: Messages 99,1 mil, no limite do orçamento; passagem de turno feita.
 - 23:16: humano fez o merge do PR #2 do `stonebid-api` e avisou que o web não tinha PR aberto: o PR #3 entrou às 23:04 em `7e158db`, antes do push da arrumação. Os dois commits foram reaplicados sobre a `main` no PR #4 do `stonebid-web` (CI verde). Humano pediu os commits do cofre.
 - 23:20: humano perguntou onde o próximo chat vê que segue para a T3 e a T4. O "Onde parei" de [[diario-2026-10-29]] ainda mandava para a etapa 2 e podia ser lido como "último diário": passou a apontar para esta parte, e as dúvidas dele vieram para cá. Regra nova no bloco `projeto:padronizacao` do `CLAUDE.md`.
+- 23:30: humano autorizou conferir os runs de staging e seguir para a T4 no Chrome. Runs: `staging` igual à `main` nos dois repositórios, CI e CD verdes (T3 registrada em [[carteira-e-lotes-plano]]). Os repositórios foram anexados à sessão para ler os runs pelo `gh`.
+- 23:30–23:40: T4 em staging no Chrome, com leiloeiro e licitante 1. Provados: busca real na AIC, criação de lote com imagem copiada, lote na vitrine, depósito idempotente com duplo clique, 403 e 401. Achados: resposta do depósito sem `depositLimitCents` (tela não atualiza), miniaturas da AIC barradas pela Cloudflare no navegador, sem link para painel e carteira. Verificador independente não rodou.
+- 23:40: humano avisou de um erro que a verificação não captou (o toast com a mensagem crua do `ZodError`, disparado pelo `onError` do depósito) e pediu os pontos no cofre para delegar as correções. Nova nota [[carteira-e-lotes-plano-correcoes]] (T5a a T5e), separada do plano pelo limite de tamanho. Termos varridos: "depositLimitCents", "IIIF", "navegação menu painel". Tocadas: [[carteira-e-lotes-plano]] (T3, T4, próxima tarefa, Conexões), [[carteira-e-lotes-contexto]], este diário.
+- Regra corrigida antes da nota: o `cofre.py verificar` dava ERRO em `carteira-e-lotes-plano-correcoes.md`, embora a Padronização mande dividir com `-<assunto>`; o original em `Vault/Modelos/Orquestra/cofre.py` passou a aceitar `<func>-plano-<assunto>.md`, chegou aqui por `cofre.py sincronizar` (`CLAUDE.md` sem mudança) e o `verificar` deu zero ERRO.
+- Erro de processo: no início desta sessão, `CLAUDE.md`, [[carteira-e-lotes-plano]], [[geral-decisao-2026-10-29-alias-fixo-do-staging]], [[acesso-de-teste]] e este diário foram lidos com `cat` e `grep` no shell, e não pela Obsidian CLI; a partir das 23:40, leitura pela CLI.
 
 ## Decisões tomadas
 - [[geral-decisao-2026-10-29-api-de-itens]], [[geral-decisao-2026-10-29-imagem-do-lote-no-banco]], [[geral-decisao-2026-10-29-lance-inicial-e-valor-minimo]], [[geral-decisao-2026-10-29-inicio-e-duracao-do-lote]], [[geral-decisao-2026-10-29-limites-do-deposito]], [[geral-decisao-2026-10-29-edicao-de-lote-fora]]
@@ -38,12 +43,13 @@ criado: 2026-10-29
 - Os da etapa 2, ainda sem aval (lista em [[diario-2026-10-29-esqueleto]]).
 
 > [!tip] Onde parei
-> - **Próximo passo:** merge do humano no PR #4 do `stonebid-web` (arrumação, CI verde); então T3 e T4 de [[carteira-e-lotes-plano]], e fechar a etapa 3 no [[geral-plano]].
-> - **Threads abertas:** nenhum subagente rodando. Depois da T3: PR `chore` na API (Node 26 e job do `docker compose up`) e no web (Node 26, cadastro com o `SubmitButton` comum, apagar o do `auth`); registro de componentes com os candidatos da T2 ([[carteira-e-lotes-plano]], Candidatos a registro).
-> - **Dúvidas para o humano:** herdadas de [[diario-2026-10-29]], sem confirmação de que seguem abertas: se o "Request headers" aparece na conta para o conector do app ([[geral-decisao-2026-10-29-camada-mcp]]); tempo real (AD-04); como registrar o uso de IA para o formulário (E6).
+> - **Próximo passo:** despachar T5a (API, bloqueante), T5b e T5d (web) em paralelo, com os briefings tirados de [[carteira-e-lotes-plano-correcoes]]; pedir o aval da T5c; depois, T5e (repetir a T4 e rodar o verificador independente) e fechar a etapa 3 no [[geral-plano]].
+> - **Threads abertas:** nenhum subagente rodando. PRs `chore` do Node 26 na API (com o job do `docker compose up`) e no web (cadastro com o `SubmitButton` comum, apagar o do `auth`), em paralelo com a T5. Registro de componentes com os candidatos da T2 ([[carteira-e-lotes-plano]], Candidatos a registro).
+> - **Dúvidas para o humano:** miniatura da busca (T5c): rota da API que entrega a imagem ou busca sem imagem? Confirmar que o erro não captado era o toast do `ZodError` no depósito. Herdadas de [[diario-2026-10-29]]: "Request headers" do conector ([[geral-decisao-2026-10-29-camada-mcp]]), tempo real (AD-04) e registro do uso de IA (E6).
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
 - Funcionalidades tocadas: [[carteira-e-lotes-contexto]], [[esqueleto-contexto]]
+- Correções da T4: [[carteira-e-lotes-plano-correcoes]]
 - Diário do dia: [[diario-2026-10-29]]
 - Projeto: [[geral-contexto]]
