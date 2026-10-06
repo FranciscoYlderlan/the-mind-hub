@@ -87,10 +87,10 @@ T5c, T5d e T5f a T5h estão verificadas no ar: [[carteira-e-lotes-plano-correcoe
 - **Depende de:** nenhuma (aval do humano em 2026-10-30 07:5x, com o alvo de toque de 40 px dentro)
 - **Fluxo:** cada implementador abre o próprio PR assim que a sua tarefa termina, sem esperar o outro (humano, 2026-10-30 08:0x).
 - **Verificação no ar:** ao fim da implementação, depois do merge e do CD de staging, um subagente verificador no Chrome, diferente dos implementadores, testa as alterações em staging e repete a T5e; então fechar a etapa 3 (humano, 2026-10-30 08:0x).
-- **Andamento:** implementado nas worktrees, prova verde: web `03742ca` (branch `fix/RF-40-erro-cru-no-carregamento`, 67 testes no Playwright, lint, tipos e build); API `65069ef` (branch `fix/RF-40-mensagens-em-portugues`, 111 testes). Push e PR esperam os repositórios reanexados à sessão (proxy deu 403).
+- **Andamento:** PR #12 do `stonebid-web` (67 testes no Playwright, lint, tipos e build) e PR #9 do `stonebid-api` (111 testes), CI verde; merge do humano em 2026-10-30 08:11; `staging` avançada (web `5489733`, API `4d0e021`). Verificador no Chrome despachado (T5l e repetição da T5e).
 
 ## Próxima tarefa e a seguinte
-T5a a T5d e T5f a T5k verificadas no ar; T5e devolvida (B1). Agora: push e PR da T5l, merge, verificador no Chrome repete a T5e e fechar a etapa 3; depois a etapa 4 (Lances). Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58).
+T5a a T5d e T5f a T5k verificadas no ar; T5e devolvida (B1). Agora: relatório do verificador no Chrome (T5l e T5e) e fechar a etapa 3; depois a etapa 4 (Lances). Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58).
 
 ## Prioridades
 T5a primeiro: é o bloqueante e o I2 grava saldo em cima da carteira. T5c pode ficar para depois se apertar.
