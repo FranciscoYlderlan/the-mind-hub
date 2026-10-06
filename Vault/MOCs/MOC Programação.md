@@ -31,6 +31,11 @@ origem: Manual do Meu Cérebro no Obsidian
 ## 🐞 Bugs de ambiente
 - [[Obsidian CLI via MCP não carrega]]: ferramentas `obsidian_*` ausentes na sessão; a config MCP certa é a que o botão "Editar configuração" abre.
 
+## 🧪 Lições de projeto (valem para todos)
+- [[API simulada conferida contra a API real]]: mock segue o presenter da API; erro que não veio da API não vai cru para a tela.
+- [[Imagem de terceiro com anti-robô passa pelo servidor]]: rota própria com id validado, cache e limite.
+- [[Teste de corrida com janela forçada]]: a prova de uma trava é o teste falhar sem ela.
+
 ## 🎼 Agentes em paralelo
 - [[Manual da Orquestra]]: orquestrador, subagentes, fluxo de uma sessão e a estrutura `orquestra/` dos cofres de projeto.
 
