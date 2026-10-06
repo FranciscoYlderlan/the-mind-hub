@@ -99,8 +99,25 @@ T5c, T5d e T5f a T5h estão verificadas no ar: [[carteira-e-lotes-plano-correcoe
     - ✔ Cabeçalho de visitante, licitante e leiloeiro com 40 × 40 px (menu 42 × 40), sem rolagem a 305 e 320 px.
   - Devolvido para correção: não. Opcionais: `/auth/me` com falha mostra visitante sem aviso; nome e senha sem `maxLength` (o erro só aparece ao enviar). Sem prova: limite no formulário de login.
 
+### T5m: opcionais da T5l
+- **Faz:** web: aviso em português quando o `/auth/me` falha por motivo que não é 401 (o token fica; 401 segue deslogando); `maxLength` de 120 no nome e 128 na senha, no login e no cadastro.
+- **Toca em:** `stonebid-web`: `__root.tsx`, `src/features/auth/`, `e2e/`.
+- **Depende de:** nenhuma (aval do humano em 2026-10-30 08:28: em paralelo com a etapa 4)
+- **Pronto quando:**
+  - [ ] aviso só em falha não-401; limites na digitação; Playwright e CI verdes; Chrome em staging
+- **Prova:** Playwright; Chrome em staging
+- **Verificação:**
+  - Data: 2026-10-30 08:40 (merge: PR #13 do `stonebid-web`, `fc92756`, 72 testes no Playwright; `staging` avançada, CI e CD verdes) e 08:5x (Chrome, staging)
+  - Critérios ✔/✘ com a prova de cada um:
+    - ✔ `/auth/me` com 500 e com falha de rede (forçados num iframe da mesma origem) mostra a faixa com "Recarregar"; o token fica e "Recarregar" volta à sessão real.
+    - ✔ Token inválido (401): visitante, sem faixa, token apagado. Sessão válida: sem faixa.
+    - ✔ Nome 120 e senha 128 no cadastro, senha 128 no login, digitando de verdade.
+    - ✔ Login, carteira e vitrine abrem; console sem erro.
+  - Devolvido para correção: não. Achado: na falha não-401 o cabeçalho mostra "Entrar / Cadastrar", embora o token fique.
+  - Fora do escopo (implementador): com a API fora, cada navegação espera ~3 s pelas novas tentativas do `/auth/me`; e-mail sem `maxLength`; aviso de "script tag" no console (provável next-themes).
+
 ## Próxima tarefa e a seguinte
-T5a a T5l verificadas no ar, sem bloqueante; etapa 3 concluída em 2026-10-30. Agora: depois a etapa 4 (Lances). Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58).
+T5a a T5l verificadas no ar, sem bloqueante; etapa 3 concluída em 2026-10-30. T5m verificada no ar em 2026-10-30 08:5x. Agora: etapa 4 (Lances). Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58).
 
 ## Prioridades
 T5a primeiro: é o bloqueante e o I2 grava saldo em cima da carteira. T5c pode ficar para depois se apertar.
