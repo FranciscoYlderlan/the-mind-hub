@@ -1,7 +1,7 @@
 ---
 tipo: contexto
 funcionalidade: carteira-e-lotes
-status: em-construcao
+status: concluida
 etapa: 3
 criado: 2026-10-29
 aliases: [Carteira e lotes, I1, Depósito simulado, Criação de lote, Vitrine, Wallet and lots]
@@ -31,7 +31,8 @@ Etapa 3 do [[geral-plano]] (I1 de [[contrato-processo-e-plano]]): RF-40 a RF-42,
 - 2026-10-29 23:30–23:40: verificação no ar (T4) em staging: busca, criação de lote, depósito idempotente e 403 provados; bloqueante no depósito pela tela e outros três achados, devolvidos como T5a a T5e em [[carteira-e-lotes-plano-correcoes]] ([[carteira-e-lotes-plano-correcoes-t5a-e-t5b]] · [[carteira-e-lotes-plano-correcoes-t5c-a-t5h]]).
 - 2026-10-29 23:47 – 2026-10-30 00:10: T5a (PR #3 do `stonebid-api`), T5b (PR #6), T5d (PR #5) e T5c (PR #4 do `stonebid-api` e #7 do `stonebid-web`) entregues por subagentes em paralelo e mergeadas pelo humano. T5a, T5b e T5d aprovadas por verificadores de código e por um verificador no Chrome em staging; T5c ainda sem a verificação no Chrome. Achados viraram a T5f (proposta).
 - 2026-10-30: T5c verificada no Chrome (miniaturas pela API, nada em `artic.edu`; centavos da T5a batem). Mergeados: T5f (#8 do web, `a3836fc`), T5g (#5 da API, `7246bf1`) e T5h (#6 da API, `ad06247`); staging igual à `main`.
-- 2026-10-30 07:0x: verificadas no Chrome a T5h (IP do cliente no Cloud Logging), a T5i (feedback ao criar lote, #9 do web), a T5j (RN-19: #7 da API e #10 do web; selo "Vendido" sem prova no ar antes do I2) e a T5k (#8 da API, #11 do web). Staging: API `e4397c9`, web `492ee4f`. Falta a T5e.
+- 2026-10-30 07:0x: verificadas no Chrome a T5h (IP do cliente no Cloud Logging), a T5i (feedback ao criar lote, #9 do web), a T5j (RN-19: #7 da API e #10 do web; selo "Vendido" sem prova no ar antes do I2) e a T5k (#8 da API, #11 do web). Staging: API `e4397c9`, web `492ee4f`.
+- 2026-10-30 08:1x–08:2x: T5l (#12 do web, #9 da API) mergeada e verificada no Chrome com a repetição da T5e, sem bloqueante. Etapa 3 concluída. Staging: API `4d0e021`, web `5489733`.
 
 ## Tempo disponível
 O do [[geral-contexto]]: entrega em 2026-10-30 16:00.

@@ -7,7 +7,7 @@ criado: 2026-10-28
 # 🧭 Roteiro — Stonebid
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **3. Carteira e lotes (I1)** (em-construcao)
+> Etapa atual: **4. Lances (I2)** (planejada)
 
 > [!success] Aprovado
 > Etapas aprovadas em [[geral-decisao-2026-10-29-roteiro]]. Mudar a lista de etapas é uma nova decisão.
@@ -34,12 +34,12 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 2026-10-29
 
 ## 3. Carteira e lotes (I1)
-- **Status:** em-construcao
+- **Status:** concluida
 - **Objetivo:** depósito simulado, busca na API de itens, criação do lote e vitrine.
 - **Pronto quando:** lote criado aparece na vitrine; licitante deposita.
 - **Funcionalidades:** [[carteira-e-lotes-contexto]]
-- **Notas geradas:** [[geral-decisao-2026-10-29-api-de-itens]], [[geral-decisao-2026-10-29-imagem-do-lote-no-banco]], [[geral-decisao-2026-10-29-lance-inicial-e-valor-minimo]], [[geral-decisao-2026-10-29-inicio-e-duracao-do-lote]], [[geral-decisao-2026-10-29-limites-do-deposito]], [[geral-decisao-2026-10-29-edicao-de-lote-fora]], [[diario-2026-10-29-carteira-e-lotes]]
-- **Concluída em:** 
+- **Notas geradas:** [[geral-decisao-2026-10-29-api-de-itens]], [[geral-decisao-2026-10-29-imagem-do-lote-no-banco]], [[geral-decisao-2026-10-29-lance-inicial-e-valor-minimo]], [[geral-decisao-2026-10-29-inicio-e-duracao-do-lote]], [[geral-decisao-2026-10-29-limites-do-deposito]], [[geral-decisao-2026-10-29-edicao-de-lote-fora]], [[geral-decisao-2026-10-29-seed-com-imagem-fixa]], [[geral-decisao-2026-10-29-seed-tambem-em-producao]], [[geral-decisao-2026-10-29-busca-so-em-dominio-publico]], [[geral-decisao-2026-10-29-codigo-do-teto-do-deposito]], [[geral-decisao-2026-10-29-sequencia-no-extrato]], [[geral-decisao-2026-10-29-miniatura-da-busca-pela-api]], [[geral-decisao-2026-10-30-cache-e-limite-da-miniatura]], [[geral-decisao-2026-10-30-obra-unica-por-lote]], [[geral-decisao-2026-10-30-prazo-16h]], [[passo-a-passo-do-agente]], [[diario-2026-10-29-carteira-e-lotes]], [[diario-2026-10-30]]
+- **Concluída em:** 2026-10-30
 
 ## 4. Lances (I2)
 - **Status:** planejada
