@@ -44,17 +44,36 @@ O **manual de bordo** do projeto: a decisão [[geral-decisao-2026-10-29-modo-de-
 > [!warning] Se o push for recusado
 > Commitar na worktree, gerar `git format-patch origin/main --stdout > <arquivo>.patch` e gravar o arquivo pelo bridge em `C:\Users\Ylderlan\Documents\Projetos\stonebid\patches-<tarefa>\`. Na sessão seguinte: anexar com `push`, clonar, `git checkout -b <branch>`, `git am <arquivo>.patch`, push e PR (feito assim na T5l, PRs #12 do web e #9 da API).
 
-## 5. Depois do merge
-- **Avançar a `staging`** em cada repositório: `git fetch origin main && git push origin origin/main:refs/heads/staging`. Pela API (`gh api .../git/refs`) o proxy recusa.
-- O `cd.yml` publica sozinho: `main` em produção, `staging` em staging. O agente nunca publica direto.
-- **Apagar branch** não passa pelo proxy: o humano apaga pelo GitHub.
+## 5. Depois do merge: avançar a `staging` para a `main`
+### Como
+1. Esperar o merge do humano no GitHub.
+2. Em cada repositório que recebeu merge: `git fetch origin main && git push origin origin/main:refs/heads/staging`.
+3. Conferir a saída: `<sha antigo>..<sha novo>  origin/main -> staging`. Anotar os dois sha no plano e no diário.
+4. O push na `staging` dispara o `cd.yml`, que publica a API de staging no Cloud Run e o web de staging no alias `stonebid-web-staging.vercel.app` ([[geral-decisao-2026-10-29-alias-fixo-do-staging]]). O agente nunca publica direto.
+5. Esperar o CD de staging e só então mandar o verificador no Chrome (seção 6).
+6. **Recusado como "non-fast-forward"?** A `staging` tem commit que a `main` não tem. Parar e avisar o humano. Nunca usar `--force` sem confirmação ([[CLAUDE]], "Repositórios e acesso").
 
-## 6. Testar no ar
+### Por quê (fatos registrados)
+- **Avanço de ponteiro, não merge:** a decisão [[geral-decisao-2026-10-29-modo-de-implementacao]] manda a IA avançar a `staging` para a `main` depois do merge, "só como avanço de ponteiro". A `main` só recebe código por PR com CI verde e merge do humano ([[geral-decisao-2026-10-29-padrao-de-branches]]). A `staging` não tem PR nem trabalho próprio.
+- **Por que existe a `staging`:** a MCP fica ligada só no ambiente local e em staging, desligada em produção ([[geral-decisao-2026-10-29-camada-mcp]]). Por isso a [[geral-decisao-2026-10-29-hospedagem]] criou um segundo serviço no Cloud Run, com `MCP_ENABLED=true` e banco separado.
+- **Por que testar ali:** quem testa no ar é o agente. Na produção, o login pelo navegador fica com o humano, e no staging o agente entra com os usuários de teste ([[acesso-de-teste]]). Os dados de teste (lotes, depósitos) ficam em staging (humano, 2026-10-30 07:05). A verificação vale no Chrome, por ser teste verídico (humano, 2026-10-29 23:58).
+- **Por que `git push` e não a API:** o proxy da sessão recusa escrita de ref por `gh api .../git/refs`, e o `git push` passa (diário de 2026-10-30, 06:48).
+- **Por que só o `cd.yml`:** nenhum deploy fora do CI verde; a integração Git da Vercel fica desligada para não publicar duas vezes nem publicar com CI vermelho ([[geral-decisao-2026-10-29-vercel-sem-deploy-automatico]]).
+
+### Motivação (interpretação do agente)
+- A `staging` fica sempre no mesmo commit da `main`. O que o verificador aprova no Chrome é exatamente o que está em produção, sem histórico divergente, commit de merge extra nem conflito entre as duas branches.
+- O push sem `--force` só anda para a frente: se a `staging` tiver algo fora da `main`, o git recusa sozinho, e nada se perde em silêncio.
+- A ordem "merge na `main` primeiro, staging depois" é o que o projeto faz hoje. Testar na staging antes do merge na `main` exigiria outro fluxo, e mudar isso é decisão nova.
+
+## 6. Apagar branch
+- Apagar branch não passa pelo proxy: o humano apaga pelo GitHub.
+
+## 7. Testar no ar
 - Container e shell do computador não alcançam `*.run.app` nem `*.vercel.app`: todo teste no ar é pelo Claude in Chrome, com os usuários de [[acesso-de-teste]].
 - Quem verifica é um subagente diferente do implementador, e só um verificador no Chrome por vez, porque o navegador é um só. Se a extensão estiver desconectada, pedir ao humano para conectar.
 - Briefing pelo [[modelo-briefing-subagente]]; o relatório volta pelo [[modelo-relatorio-subagente]].
 
-## 7. Registrar e commitar o cofre
+## 8. Registrar e commitar o cofre
 1. Escrever pelas Etapas vitais do [[CLAUDE]] e rodar `python orquestra/modelos/cofre.py verificar .` com zero ERRO.
 2. O `.git` mora em `C:\Users\Ylderlan\Documents\Projetos\the-mind-hub`: pedir acesso a essa pasta e permissão de apagar nela (arquivos `.lock`).
 3. Autor só no comando, sem `git config`: `git -c user.name=franciscoylderlan -c user.email=ylderlan@nca.ufma.br commit ...`. Mensagem no formato `:emoji: tipo(escopo): Description`, sem `Co-Authored-By` nem link de sessão. Regras completas nas notas "Commitar no the-mind-hub" e "Padrão de commit" do cofre `Vault`.
