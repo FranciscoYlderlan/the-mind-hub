@@ -60,7 +60,7 @@ O **manual de bordo** do projeto: a decisão [[geral-decisao-2026-10-29-modo-de-
 - **Por que `git push` e não a API:** o proxy da sessão recusa escrita de ref por `gh api .../git/refs`, e o `git push` passa (diário de 2026-10-30, 06:48).
 - **Por que só o `cd.yml`:** nenhum deploy fora do CI verde; a integração Git da Vercel fica desligada para não publicar duas vezes nem publicar com CI vermelho ([[geral-decisao-2026-10-29-vercel-sem-deploy-automatico]]).
 
-### Motivação (interpretação do agente)
+### Motivação (humano, 2026-10-30 08:22: "é exatamente isso")
 - A `staging` fica sempre no mesmo commit da `main`. O que o verificador aprova no Chrome é exatamente o que está em produção, sem histórico divergente, commit de merge extra nem conflito entre as duas branches.
 - O push sem `--force` só anda para a frente: se a `staging` tiver algo fora da `main`, o git recusa sozinho, e nada se perde em silêncio.
 - A ordem "merge na `main` primeiro, staging depois" é o que o projeto faz hoje. Testar na staging antes do merge na `main` exigiria outro fluxo, e mudar isso é decisão nova.
