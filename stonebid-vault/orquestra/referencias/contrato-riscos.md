@@ -15,7 +15,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 9
 É o **guarda-chuva na mochila**: decidido antes de sair de casa, não quando começa a chover. Seção 9 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3).
 
 > [!note] Situação do R-02
-> O risco já se materializou em parte: três dias passaram só com requisitos e arquitetura, e o prazo ficou em **24 horas** a partir de 2026-10-29 09:06 ([[geral-contexto]]).
+> O risco já se materializou em parte: três dias passaram só com requisitos e arquitetura, e o prazo ficou de 2026-10-29 09:06 até **2026-10-30 16:00** ([[geral-contexto]]).
 
 > [!info] Por que isso importa
 > Pressman distingue a estratégia *reativa* (esperar o problema aparecer) da *proativa* (listar riscos antes, estimar probabilidade e impacto, e planejar mitigação, monitoramento e contingência, o chamado RMMM). Sommerville descreve o mesmo ciclo: identificar, analisar, planejar e monitorar os riscos. Probabilidade e impacto abaixo são **estimativas qualitativas minhas**; revise-as.
@@ -23,7 +23,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 9
 | ID | Risco | Prob. | Impacto | Mitigação | Sinal de alerta |
 |---|---|---|---|---|---|
 | R-01 | Deploy deixado para o fim e falhar | Média | Alta | Deploy no primeiro incremento (I0) com a aplicação "vazia". Cada incremento vai para produção. | O I0 terminou sem URL no ar |
-| R-02 | Estourar o prazo de 24 horas | Alta | Alta | Incrementos pequenos, núcleo primeiro e linha de corte (11.4) | Na metade do prazo, RN-02 a RN-09 sem testes passando |
+| R-02 | Estourar o prazo (entrega em 2026-10-30 16:00) | Alta | Alta | Incrementos pequenos, núcleo primeiro e linha de corte (11.4) | Na metade do prazo, RN-02 a RN-09 sem testes passando |
 | R-03 | API externa lenta, com limite de chamadas ou fora do ar | Média | Média | Escolher API sem chave e com imagens estáveis. Cópia do item, cache e tempo limite (AD-06). | Respostas de erro 429 ou 5xx já no I0 |
 | R-04 | Condição de corrida nos lances | Média | Alta | AD-03 e teste T-02 | Saldo negativo ou dois "líderes" num teste |
 | R-05 | Tempo real não funcionar no host do deploy | Média | Média | Testar no ambiente real já no I0. Ter fallback por polling. | A conexão cai poucos segundos depois de abrir |

@@ -37,7 +37,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - Toda funcionalidade criada no frontend é testada com Playwright por uma **subthread de teste** (outro agente), que só testa e reporta bugs; sem testes unitários ou de componente no frontend → [[geral-decisao-2026-10-28-testes-frontend-playwright]].
 - Contrato do projeto v0.3 (2026-10-29; histórico de mudanças em [[contrato-do-projeto-mudancas]]), escrito por mim com a IA, com as perguntas da seção 14 ainda em validação (Q-06, Q-07, Q-09, Q-10, Q-13 e Q-14 já respondidas): requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
 - Do contrato (itens `[DECIDIDO]`): **todos os 5 opcionais** serão feitos; deploy obrigatório; desenvolvimento com IA permitido; sou júnior e aprender é objetivo do projeto → [[contrato-visao-escopo-e-papeis]].
-- 2026-10-29 (09:06): prazo real de **24 horas** a partir de agora (o enunciado fala em 7 dias). Oficialmente estou no **terceiro dia**: nos três primeiros dias não avancei muito além dos requisitos e da arquitetura. Vou trabalhar sem pausa.
+- 2026-10-29 (09:06): prazo real contado a partir de agora, hoje até **2026-10-30 16:00** (o enunciado fala em 7 dias; a cronologia do prazo está em [[diario-2026-10-29]] e [[geral-decisao-2026-10-30-prazo-16h]]). Oficialmente estou no **terceiro dia**: nos três primeiros dias não avancei muito além dos requisitos e da arquitetura. Vou trabalhar sem pausa.
 - 2026-10-29 (12:28): aprovada a regra dos testes: o teste só sai do escopo junto com o requisito que prova; T-01 a T-09 e T-10a ficam sempre → [[geral-decisao-2026-10-29-testes-no-escopo]].
 - 2026-10-29 (13:22): aprovada a solução do comprovante e da auditoria: hash guardado no lance, cabeça da cadeia com selo no lote e comprovante como fotografia selada da liquidação → [[geral-decisao-2026-10-29-comprovante-e-hash]].
 - 2026-10-29 (13:31): aprovada a correção do cancelamento ao vivo, "vamos deixar os dois casos": lote ao vivo vai para CANCELADO sem lances; com lances, só com o `[OPC-2]` → [[geral-decisao-2026-10-29-cancelamento-ao-vivo]].
@@ -68,9 +68,9 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29 22:20: etapa 2 concluída (aplicação no ar com os 3 usuários de teste); etapa 3 (carteira e lotes) em construção ([[carteira-e-lotes-contexto]]).
 
 ## Tempo disponível
-- **24 horas** a partir de 2026-10-29 09:06. Entrega em **2026-10-30 16:00**, estendida pelo humano em 2026-10-30 06:16 ([[geral-decisao-2026-10-30-prazo-16h]]).
+- De 2026-10-29 09:06 até a entrega, em **2026-10-30 16:00**, estendida pelo humano em 2026-10-30 06:16 ([[geral-decisao-2026-10-30-prazo-16h]]).
 - Ritmo: trabalho contínuo, sem pausa.
-- O plano com horários para as 24 horas ainda não foi feito: sai dos incrementos de [[contrato-processo-e-plano]], com a linha de corte aplicada.
+- O plano com horários até a entrega ainda não foi feito: sai dos incrementos de [[contrato-processo-e-plano]], com a linha de corte aplicada.
 
 ## Dial e modelo de IA
 - Dial: medio

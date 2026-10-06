@@ -10,7 +10,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 11
 # 📜 Contrato: processo e plano
 
 > [!tldr] Em uma linha
-> Entrega incremental (I0 a I5) no prazo de 24 horas, com o que cortar primeiro se o tempo apertar, a definição de pronto e o checklist final.
+> Entrega incremental (I0 a I5) até a entrega (2026-10-30 16:00), com o que cortar primeiro se o tempo apertar, a definição de pronto e o checklist final.
 
 É a **receita com a ordem dos passos**: cada etapa já sai pronta para comer, e se faltar tempo você sabe o que pular. Seção 11 do [[contrato-do-projeto|contrato]], no texto vigente (v0.3). O roteiro oficial do cofre continua em [[geral-plano]].
 
@@ -35,7 +35,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 11
 
 ## 11.3 Plano de entrega
 
-Prazo de **24 horas** a partir de 2026-10-29 09:06, entrega em 2026-10-30 16:00, com trabalho contínuo. O plano com horários **ainda não foi feito**: sai destes incrementos, com a linha de corte (11.4) aplicada, e é o próximo passo do [[geral-plano]]. As últimas horas ficam **só** para revisão e deploy final, sem nada novo.
+Prazo de 2026-10-29 09:06 até a entrega, em **2026-10-30 16:00**, com trabalho contínuo. O plano com horários **ainda não foi feito**: sai destes incrementos, com a linha de corte (11.4) aplicada, e é o próximo passo do [[geral-plano]]. As últimas horas ficam **só** para revisão e deploy final, sem nada novo.
 
 | Incremento | Entrega (fatia de ponta a ponta) | Requisitos | Pronto quando |
 |---|---|---|---|
@@ -46,7 +46,7 @@ Prazo de **24 horas** a partir de 2026-10-29 09:06, entrega em 2026-10-30 16:00,
 | I4 | **Auditoria pública** | RF-60, RF-61, RN-14, RN-15 | T-06 detecta os 4 tipos de adulteração |
 | I5 | **Opcionais restantes e fechamento:** busca e filtros, cancelamento com estorno, polimento do tema, README e revisão final | RF-11, RF-23, RNF-13, RNF-03 | Checklist final 100% (11.6) |
 
-**Observação do plano:** a escrita do histórico com hash (I2) nasce junto com o primeiro lance. Deixar o hash para depois, sobre dados já gravados, custaria muito mais. I3 e I4 são os incrementos mais carregados e os primeiros a ajustar no plano de 24 horas.
+**Observação do plano:** a escrita do histórico com hash (I2) nasce junto com o primeiro lance. Deixar o hash para depois, sobre dados já gravados, custaria muito mais. I3 e I4 são os incrementos mais carregados e os primeiros a ajustar no plano até a entrega.
 
 ## 11.4 Linha de corte `[PROPOSTO]` (Q-12)
 

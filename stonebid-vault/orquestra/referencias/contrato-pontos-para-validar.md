@@ -26,7 +26,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 3. A frase do anti-sniping admite duas leituras (5.4).
 4. "Lote publicado com lances abertos" nos dados de teste: interpretei como lote ao vivo com lances já feitos.
 5. "Posição do usuário nos lances" pode significar só liderando ou superado, ou um ranking.
-6. O prazo é 7 dias no enunciado; o prazo real é de **24 horas**, com entrega em 2026-10-30 16:00.
+6. O prazo é 7 dias no enunciado; o prazo real termina em **2026-10-30 16:00**.
 
 | ID | Pergunta | Proposta | Afeta |
 |---|---|---|---|
