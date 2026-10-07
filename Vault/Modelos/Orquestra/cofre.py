@@ -35,6 +35,7 @@ CODE = re.compile(r"(````.*?````|```.*?```|`[^`\n]*`)", re.S)
 LINK = re.compile(r"!?\[\[([^\]]*)\]\]")
 KEBAB = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*\.md$")
 DATA = r"\d{4}-\d{2}-\d{2}"
+COMMIT_NOTAS = ("Padrão de commit", "Commitar no the-mind-hub")
 ESCOPO_CEREBRO = (
     "\n>\n> **Escopo neste cofre:** vale para as notas de `referencias/` e `MOCs/` o perfil, o tom, o esqueleto, "
     "os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das "
@@ -402,6 +403,15 @@ def palavras(s):
     return len(s.split())
 
 
+def secao_commits(claude_txt):
+    """Seção '## Commits' do CLAUDE.md -> lista de faltas (vazia = ok). Commit é padrão de trabalho do humano em todo cofre."""
+    m = re.search(r"^## Commits[ \t]*\n(.*?)(?=^## |\Z)", claude_txt or "", re.S | re.M)
+    if not m:
+        return ["sem a seção '## Commits' (copie do Modelo de CLAUDE do cofre)"]
+    return [f"seção 'Commits' sem link ou menção a '{n}' (copie do Modelo de CLAUDE do cofre)"
+            for n in COMMIT_NOTAS if n.lower() not in m.group(1).lower()]
+
+
 def verificar(cofre, vault=None):
     cofre = Path(cofre).resolve()
     erros, avisos = [], []
@@ -479,6 +489,9 @@ def verificar(cofre, vault=None):
     if claude.exists() and "## Etapas vitais" not in ler(claude):
         E("CLAUDE.md", "sem a seção 'Etapas vitais' (regenere com sincronizar)")
     claude_txt = ler(claude) if claude.exists() else ""
+    if claude.exists():
+        for falta in secao_commits(claude_txt):
+            E("CLAUDE.md", falta)
     regras, limite, tem_bloco, antigos = padroes(claude_txt)
     eh_kit = lambda p: rel(p).startswith(("orquestra/modelos/", "Modelos/", "orquestra/referencias/manual-"))
     for p in mds:
