@@ -40,13 +40,13 @@ Em blocos do Pomodoro Curto 15-5 (no Vault): 15 min de foco, 5 de pausa, pausa l
 - **Depende de:** nenhuma
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] `teste_conexao.py` lista 9 tabelas com linhas
-  - [ ] conexão funciona também do Windows (`localhost:3306`)
+  - [x] `teste_conexao.py` lista 9 tabelas com linhas
+  - [x] conexão funciona também do Windows (`localhost:3306`)
 - **Prova:** saída do `teste_conexao.py` colada no chat
 - **Verificação:**
-  - Data:
-  - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+  - Data: 2026-11-05
+  - Critérios ✔/✘ com a prova de cada um: ✔ ambiente no ar, confirmado pelo humano no chat ("está tudo pronto"); a saída do `teste_conexao.py` não foi colada.
+  - Devolvido para correção: não
 
 ### T1: Cenário 3, pipeline (prioridade de treino)
 - **Faz:** Q3.1 a Q3.9. Começa por aqui porque é lacuna minha e gera a tabela limpa usada no cenário 6.
@@ -147,7 +147,7 @@ Em blocos do Pomodoro Curto 15-5 (no Vault): 15 min de foco, 5 de pausa, pausa l
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-T0 (subir o ambiente) e depois T1 (cenário 3).
+T1 (cenário 3) e depois T2 (cenário 1).
 
 ## Prioridades
 1. T0. 2. T1, T5 e T6 (maiores lacunas, ver [[cenarios-de-pratica]]). 3. T2, T3, T4. 4. T7. [a confirmar: tempo disponível até o teste real]

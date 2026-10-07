@@ -1,7 +1,7 @@
 ---
 tipo: contexto
 funcionalidade: banco-mocado
-status: em-construcao
+status: concluida
 etapa: 2
 criado: 2026-11-05
 aliases: [Banco de dados mocado, Mock database, Ambiente de treino com dados simulados]
@@ -26,6 +26,7 @@ Preparar o estudo de caso do BTG Pactual ([[processo-seletivo-btg]]) praticando 
 - 2026-11-05: funcionalidade registrada no cofre, sem implementação ([[diario-2026-11-05]]).
 - 2026-11-05: ambiente `mysql-estudos` entregue em .zip: docker-compose com MySQL 8.4, schema de Compliance/PLD, cerca de 67 mil transações simuladas, 1,9 mil alertas, listas restritivas e PEP, staging com problemas de qualidade, banco `gabarito` com 62 casos plantados para os cenários 1, 2, 3 e 5, e scripts Python (`conexao.py`, `teste_conexao.py`, exemplos). Testado carregando em MariaDB 10.11; ainda não rodado no MySQL 8.4 do humano.
 - 2026-11-05: questões registradas em [[questoes-por-cenario]] e plano de treino em [[banco-mocado-plano]].
+- 2026-11-05: T0 concluída: o humano subiu o `mysql-estudos` no WSL e confirmou o ambiente pronto. Próximo: T1 (cenário 3).
 
 ## Tempo disponível
 [a preencher]
