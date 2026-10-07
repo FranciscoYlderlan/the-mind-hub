@@ -90,13 +90,13 @@ G1 interface antes do paralelo; G2 partir para paralelizar; G3 cadeia fica com u
 
 ## Conflitos resolvidos
 - K1 a K3: vale o Stonebid (N01, N12, S03/G5). K4: estudo ganha cofre, com plano.
-- **K5:** humano, 09:28: não usar regra de projeto em bloco do CLAUDE.md, "justamente pelo crescimento desnecessário do arquivo"; vale o outro padrão do Guia do cofre para IA: regra só do projeto vira nota de decisão em `funcionalidades/geral/`, e o CLAUDE.md não cresce. O trecho dos blocos no Guia é reescrito. [a confirmar: se o bloco `padroes` sai para nota própria e se o teto de palavras no `verificar` continua]
+- **K5:** humano, 09:28: não usar regra de projeto em bloco do CLAUDE.md, "justamente pelo crescimento desnecessário do arquivo"; vale o outro padrão do Guia do cofre para IA: regra só do projeto vira nota de decisão em `funcionalidades/geral/`. Humano, 09:30: "no claude.md fará referência ao funcionalidades/geral/ para ser pesquisado via cli do obsidian", para o consumo de tokens não escalar. O CLAUDE.md só aponta para `funcionalidades/geral/` e manda buscar lá pela CLI; o trecho dos blocos no Guia é reescrito. Humano, 09:30, "sim": o bloco `padroes` sai do CLAUDE.md para nota própria lida pelo `cofre.py` (ajuste no script), e o `verificar` ganha teto de palavras no CLAUDE.md (1000 no modelo, 1500 em cada cofre).
 - **K6:** `limite-palavras` fixo em 2000 a partir de agora; o `stonebid-vault` fica com o dele (nasceu antes).
 
 > [!tip] Onde parei
-> - **Próximo passo:** escrever o pacote no `Vault` em lotes, seguindo as Etapas vitais B, mostrando cada lote ao humano antes do commit. Ordem sugerida: (1) modelo de CLAUDE enxuto + `padroes` fora + teto no `cofre.py`; (2) núcleo neutro e paralelismo no Manual da Orquestra; (3) perfil prático e lugar do perfil estudo; (4) padrão de software e commits; (5) notas de lição técnica; (6) `cofre.py sincronizar` nos cofres de projeto.
+> - **Próximo passo:** chat novo escreve o pacote no `Vault` em lotes, seguindo as Etapas vitais B e mostrando cada lote ao humano antes do commit: (1) modelo de CLAUDE enxuto, que aponta para `funcionalidades/geral/` pela CLI, `padroes` em nota própria e teto no `cofre.py verificar`; (2) núcleo neutro e paralelismo (G1 a G11) no Manual da Orquestra; (3) perfil prático e lugar do perfil estudo; (4) padrão de software e commits (os dois modelos de CLAUDE); (5) notas de lição técnica; (6) `cofre.py sincronizar` nos cofres de projeto. Lacuna achada: o `verificar` cobra "Próximo passo" no diário principal, não na parte mais recente (N04): ajustar no lote 1.
 > - **Threads abertas:** nenhuma.
-> - **Dúvidas para o humano:** atualizar [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]] com a falha do `file=`?
+> - **Dúvidas para o humano:** o `PrepBTG-vault` tem mudanças sem commit (inclusive no `cofre.py`): commitar antes do lote 6? Atualizar [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]] com a falha do `obsidian_read` com `file=`?
 
 ### 🔗 Conexões
 - Diário do dia: [[diario-2026-11-16]]
