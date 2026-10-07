@@ -142,6 +142,8 @@ antigo: re:\bPrisma (v)?8\b => Prisma 7.10.1+ (geral-decisao-2026-10-29-prisma-7
 antigo: re:(?i)Zustand[^|\n]{0,20}\btema\b|cookie `SameSite=None; Secure` ou token => tema no next-themes; sessão por JWT no cabeçalho (geral-decisao-2026-10-29-next-themes-para-o-tema, geral-decisao-2026-10-29-sessao-jwt-no-cabecalho)
 antigo: re:2026-10-30 09:00 => entrega em 2026-10-30 16:00 (geral-decisao-2026-10-30-prazo-16h)
 antigo: re:(?i)(sequência|seq)[^|\n]{0,40}(crescente |única )?por carteira => sequência global crescente no WalletMovement (geral-decisao-2026-10-29-sequencia-no-extrato)
+antigo: re:/audits/:id|/auditoria/:lotId|audits/\$id => /lots/:id/audit (geral-decisao-2026-10-30-caminho-da-auditoria)
+antigo: re:(?i)_public[^|\n]{0,10} nunca lê (a )?sessão => só a sala do lote lê a sessão já resolvida (geral-decisao-2026-10-30-sala-publica-le-a-sessao)
 limite-palavras: 2073
 ```
 <!-- /projeto:padroes -->

@@ -20,7 +20,7 @@ aliases: [Comprovante e hash, Selo da cabeça da cadeia, Comprovante selado, Has
     - `seal = HMAC-SHA256(segredo, "bid:v1" + hash)`.
   - **Lote** guarda a **cabeça da cadeia**: `head_seq`, `head_hash` e `head_seal = HMAC(segredo, "head:v1" + lotId + seq + hash)`, atualizados na mesma transação do lance (a linha do lote já fica travada pela serialização da AD-03). Na liquidação a cabeça congela e é a "contagem e hash final" do contrato (os dois campos deixam de existir à parte).
   - **Comprovante** é uma fotografia selada da liquidação. Guarda: `public_id` (16 bytes aleatórios em base64url, RF-52), `lot_id` (único), `winner_pseudonym`, `amount_cents`, `settled_at`, `bid_count`, `final_hash` e `seal = HMAC(segredo, "receipt:v1" + todos esses campos)`.
-    - **Não guarda, deriva:** o item (cópia imutável no lote, RN-13), o link da auditoria (rota `/auditoria/:lotId`; gravar a URL prende o registro ao domínio do deploy), o "resultado" (comprovante só existe para lote arrematado; o resultado fica no lote) e nenhum dado pessoal (RN-15).
+    - **Não guarda, deriva:** o item (cópia imutável no lote, RN-13), o link da auditoria (rota `/lots/:id/audit`, [[geral-decisao-2026-10-30-caminho-da-auditoria]]; gravar a URL prende o registro ao domínio do deploy), o "resultado" (comprovante só existe para lote arrematado; o resultado fica no lote) e nenhum dado pessoal (RN-15).
     - A **tela** do comprovante mostra tudo o que o RF-51 e a Q-09 pedem: item, valor, data e hora, pseudônimo, hash final e link da auditoria.
   - **Uma função só** `seal(tag, ...campos)` para os três selos; as etiquetas `bid:v1`, `head:v1` e `receipt:v1` impedem que um selo de um tipo sirva para outro.
   - **A auditoria (8.1) passa a conferir:**
