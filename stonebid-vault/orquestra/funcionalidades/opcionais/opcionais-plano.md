@@ -36,6 +36,7 @@ Estorno no cancelamento e busca na vitrine no ar em staging, nessa ordem. Base: 
 ### B3: verificação do estorno no Chrome (P)
 - **Faz:** merge do humano, `staging` avançada, cancelamento com lances em staging, posição `CANCELED`, auditoria ÍNTEGRO.
 - **Depende de:** B1, B2
+- **Verificação:** 2026-10-30 19:2x, no Chrome em staging (API `f6f07e9`, web `955d2f0`). Lote `a785a3b4` com 2 lances cancelado: diálogo com o aviso de estorno, `REFUND` de R$ 15,00 no extrato do líder, comprometido 63000 → 61500, posição `CANCELED`, superado só com `COMMIT` e `RELEASE`, auditoria ÍNTEGRO. Limite: a `/wallet` aberta durante o cancelamento não atualiza; a sala do lote e a navegação seguinte, sim.
 
 ### A1: busca na API (M)
 - **Faz:** itens 1 a 6, 8 e 9 de [[geral-decisao-2026-10-30-busca-na-vitrine]].
@@ -51,7 +52,7 @@ Estorno no cancelamento e busca na vitrine no ar em staging, nessa ordem. Base: 
 - **Depende de:** A1, A2
 
 ## Próxima tarefa e a seguinte
-B3 (verificação no Chrome); em seguida A1 e A2.
+Nenhuma nesta rodada: a busca (A1 a A3) ficou fora da etapa 7 (humano, 2026-10-30 18:29).
 
 ## Prioridades
 Corte: conferência do estorno na auditoria e aviso do diálogo; na busca, faixa de preço e ordenação, depois filtro só no navegador.

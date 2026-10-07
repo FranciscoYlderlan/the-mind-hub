@@ -31,18 +31,22 @@ Parte de [[diario-2026-10-30]], depois de [[diario-2026-10-30-auditoria-publica-
 - 19:1x: R2 com aval do humano: `main` e `staging` reescritas com `--force-with-lease`. API `3f7eaed` → `f6f07e9` (33 commits), web `b4440e0` → `955d2f0` (47 commits). Árvore idêntica, datas preservadas, autor `franciscoylderlan`, sem Co-Authored-By.
 - Termos varridos: "comportamentos inesperados", "Padrão de commit", "REFUND", "estorno". Tocadas: [[revisao-e-entrega-plano]], [[opcionais-plano]], este diário; no `Vault`: Modelo de CLAUDE do cofre, Criar um novo cofre, `cofre.py`.
 
+- 19:12: sessão nova pelo "Onde parei", lido pela Obsidian CLI. Erro de processo: depois de editar o [[opcionais-plano]], a conferência foi feita com `grep` na nota; o resto da leitura foi pela CLI.
+- 19:1x: CI e CD conferidos depois da reescrita: API `f6f07e9` e web `955d2f0`, `main` = `staging`, `ci`, Lint, Playwright e `deploy` em `success` nos dois.
+- 19:2x: verificador no Chrome em staging: T11, estorno, READMEs e `/health` ✔ ([[opcionais-plano]], B3; [[revisao-e-entrega-plano]], T11). Limite achado: a `/wallet` aberta durante o cancelamento não atualiza. Lotes de teste deixados em staging: `a785a3b4`, `51519139`, `aa6caa7e` (cancelados) e `98b72267` (encerrado).
+- 19:2x: contagem de `REFUND` em produção não rodou: a aba do Cloud Shell parou de responder (CDP sem resposta ao digitar e ao capturar), antes e depois de recarregar. Corte para a consulta: fim do CD do #20 (`3f7eaed`) em 2026-10-30 22:07:45Z. Humano dispensou a contagem (19:31: "vamos presumir que funcionou"), por causa do prazo: não verificado, presumido.
+- Termos varridos: "currentBidCents === null", "Cancelar", "B3", "busca". Tocadas: [[revisao-e-entrega-plano]] (T11 no estado atual do "Cancelar"), [[opcionais-plano]] (B3 e próxima tarefa), este diário.
+
 ## Decisões tomadas
 - [[geral-decisao-2026-10-30-estorno-no-cancelamento]], [[geral-decisao-2026-10-30-busca-na-vitrine]], [[geral-decisao-2026-10-30-datas-dos-commits]], [[geral-decisao-2026-10-30-relato-de-uso-de-ia]].
 
 > [!tip] Onde parei
 > - **Próximo passo:**
->   1. Conferir CI e CD de `main` e `staging` nos dois repositórios depois da reescrita (API `f6f07e9`, web `955d2f0`).
->   2. Verificador no Chrome em staging: T11 (link na sala, "Cancelar", "Fim" após prorrogação, campo de lance), estorno (cancelar lote com lances, `REFUND` no extrato, posição `CANCELED`, auditoria ÍNTEGRO), seção de características e `docs/uso-de-ia.md` nos READMEs.
->   3. Conferir no banco de produção (`stonebid-db`, banco `stonebid`) os `REFUND` existentes: só podem ser de cancelamentos feitos depois do deploy do #20.
->   4. Etapa 7 restante: busca na vitrine (A1, A2, A3 de [[opcionais-plano]]).
+>   1. Push do commit do cofre no `the-mind-hub`, se o humano autorizar.
+>   2. Entrega (etapa 8): conferir o checklist de [[revisao-e-entrega-plano]].
 > - **Threads abertas:** nenhuma.
-> - **Dúvidas para o humano:** escopos que a R2 escolheu sem ID no commit original (API: `setup`, `RNF-11` no Docker/CI; web: `setup`, `ui`, `RNF-12`, `RNF-13`, `RF-41`, `RF-20`), e o tipo `ci` virar `:wrench: chore`, já que a tabela de emojis não tem `ci`.
-> - **Candidatos a nota:** bug do `mutate` do TanStack Query sem callback quando o componente desmonta (usar `mutateAsync`; vale para o `Vault`); `PORT` por ambiente no `playwright.config.ts`; contorno do Prisma no container (`npx` substituto que pula `migrate deploy`) para o [[passo-a-passo-do-agente]]; briefing de implementador precisa citar o Padrão de commit; rebase-merge do GitHub faz PR empilhado conflitar; teste "card novo realçado" (`e2e/auctioneer.spec.ts:68`) instável sob 4 workers.
+> - **Dúvidas para o humano:** a `/wallet` aberta não atualizar no cancelamento é falha a corrigir ou limite a registrar nos READMEs? Escopos que a R2 escolheu sem ID no commit original (API: `setup`, `RNF-11`; web: `setup`, `ui`, `RNF-12`, `RNF-13`, `RF-41`, `RF-20`) e o tipo `ci` virar `:wrench: chore`.
+> - **Candidatos a nota:** bug do `mutate` do TanStack Query sem callback quando o componente desmonta (usar `mutateAsync`; vale para o `Vault`); `PORT` por ambiente no `playwright.config.ts`; contorno do Prisma no container; login `POST /auth/login` e `Idempotency-Key` no `POST /lots/:id/bids` para o [[passo-a-passo-do-agente]]; briefing de implementador precisa citar o Padrão de commit; rebase-merge do GitHub faz PR empilhado conflitar; teste "card novo realçado" instável sob 4 workers; Cloud Shell trava com comando longo digitado pelo Chrome, e dois agentes no mesmo Chrome travam a aba de fundo.
 
 ### 🔗 Conexões
 - Diário do dia: [[diario-2026-10-30]]
