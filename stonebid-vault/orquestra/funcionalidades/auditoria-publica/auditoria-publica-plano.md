@@ -73,23 +73,31 @@ Aval em 2026-10-30 13:2x, todos como propostos:
 - **Toca em:** `stonebid-api`: `src/domain/integrity/lot-audit.ts`, `bid-chain.ts`, `src/infra/` (`prisma-lot-audit-reader.ts`), `test/`, `README.md`. Branch `fix/RF-60-conferencia-da-auditoria`.
 - **Paralelo:** sim, com T7
 - **Pronto quando:**
-  - [ ] T-06 com os casos novos; CI verde
+  - [x] T-06 com os casos novos; CI verde
 - **Prova:** `npm run lint && npm run typecheck && npm test && npm run build`
+
+- **Verificação:**
+  - Data: 2026-10-30 15:1x. PR #15 do `stonebid-api` (`9f6b500`), CI verde, 229 testes. Ordem: cadeia, comprovante, liquidação, lance atual e líder. Resultado trocado para `NO_WINNER` sem comprovante e DEBIT dá `TAMPERED`; CREDIT do leiloeiro conferido; `RECEIPT_MISMATCH` e `SETTLEMENT_MISMATCH` com `seq: null`; README com a tabela de motivos e a cadeia vazia no "Limite".
+  - Lance atual e líder fora do último lance dão `HEAD_MISMATCH` com `seq: null` (gravados junto com a cabeça; valem também no lote ao vivo).
+  - Também recusa `SOLD` sem lances (sai `RECEIPT_MISMATCH`, porque o comprovante vem antes) e `settledAt`/`result` com só um preenchido. T-06 por SQL ao vivo e liquidado: `BAD_SEAL`, `BROKEN_LINK` (montado com o `SEAL_SECRET` de teste), lance atual e líder; no liquidado, CREDIT alterado e apagado e resultado trocado. O que os CHECK do banco impedem fica só no teste unitário.
 
 ### T7: link da auditoria em sala 404 (web)
 - **Faz:** item 5 de [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]]: "Ver auditoria" só dentro da sala que carregou (hoje fica fora do `LotRoom`, em `routes/_public/lots/$id.tsx:41`); Playwright do caso 404.
 - **Toca em:** `stonebid-web`: `src/routes/_public/lots/$id.tsx`, `src/features/lots/`, `e2e/`. Branch `fix/RF-60-link-da-auditoria`.
 - **Paralelo:** sim, com T6
 - **Pronto quando:**
-  - [ ] Playwright do 404 sem o link; CI verde
+  - [x] Playwright do 404 sem o link; CI verde
 - **Prova:** `npm run lint && npm run typecheck && npm run build`; Playwright
+
+- **Verificação:**
+  - Data: 2026-10-30 15:1x. PR #20 do `stonebid-web` (`9365f7e`), CI verde, 127 testes Playwright (2 novos). `LotRoom` ganhou `auditSlot`, mostrado só com o lote carregado; a rota passa o `Link` por ele. Casos novos: sala 404 sem o link e sem chamada à auditoria; leiloeiro vê o link na sala carregada.
 
 ### T8: merge, staging e verificação
 - **Faz:** merge do humano em T6 e T7; `staging` avançada nos dois; CD de staging verde; verificador no Chrome (auditoria dos lotes da T5 segue ÍNTEGRO; sala 404 sem o link) e verificador de código nos dois diffs.
 - **Depende de:** T6, T7
 
 ## Próxima tarefa e a seguinte
-T1 a T5 feitas. Agora: T6 e T7 em paralelo. Depois: T8; em seguida, a etapa 8 (README e relato do uso de IA, E6).
+T1 a T7 feitas (PRs #15 da API e #20 do web, CI verde). Agora: T8, a partir do merge do humano; em seguida, a etapa 8 (README e relato do uso de IA, E6).
 
 ## Prioridades
 T2 é o caminho crítico. Se apertar: corta a tool `lots_audit`, depois a conferência do extrato.
