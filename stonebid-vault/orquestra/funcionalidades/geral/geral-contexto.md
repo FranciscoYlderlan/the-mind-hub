@@ -45,7 +45,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29 (22:13): modo de implementação adotado como padrão (container → GitHub → Actions → GCP/Vercel; consoles e testes no ar pelo agente no Chrome) → [[geral-decisao-2026-10-29-modo-de-implementacao]].
 - Camada MCP no backend para expor as rotas e testar o fluxo pela Claude; sempre que uma feature e uma rota forem criadas, a MCP é atualizada → [[geral-decisao-2026-10-29-camada-mcp]].
 - 2026-10-31: projeto entregue para avaliação; todas as etapas finalizadas.
-- 2026-10-29: hospedagem: backend e banco no **GCP**, frontend na **Vercel**, os dois repositórios no GitHub com CI/CD validando a integração. Custo zero: a aplicação fica no ar no máximo 7 dias, é avaliada em menos de 1 hora e depois é fechada → [[geral-decisao-2026-10-29-hospedagem]].
+- 2026-10-29: hospedagem: backend e banco no **GCP**, frontend na **Vercel**, os dois repositórios no GitHub com CI/CD validando a integração. Custo zero: a aplicação ficou no ar de 2026-10-29 a 2026-11-13, durante a avaliação, e foi fechada com o encerramento da conta de faturamento do GCP ([[diario-2026-11-13]]) → [[geral-decisao-2026-10-29-hospedagem]].
 
 ## O que já foi feito
 - 2026-10-28: cofre montado com a estrutura `orquestra/` e alinhado ao processo das etapas vitais ([[diario-2026-10-28]]).
@@ -70,6 +70,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-30 08:2x: etapa 3 concluída (T5a a T5l verificadas no Chrome em staging, sem bloqueante).
 - 2026-10-30: etapas 4 a 7 concluídas (lances, sala ao vivo e liquidação, auditoria pública, estorno no cancelamento; busca na vitrine fora); entrega e refinamentos até 19:2x ([[diario-2026-10-30]]).
 - 2026-10-31: etapa 8 concluída. Teste final de aceitação no ar: **nota 8,9 de 10**; todos os requisitos obrigatórios aceitos, menos a posição do usuário na sala (E2.3, parcial); regra de negócio condizente ([[revisao-e-entrega-plano]], TF; [[diario-2026-10-31]]).
+- 2026-11-13: conta de faturamento do GCP encerrada a pedido do humano, com reembolso de ~R$ 200 do pré-pagamento por Pix em até 60 dias. O Stonebid ficou no ar de 2026-10-29 a 2026-11-13 e está offline; READMEs dos dois repositórios atualizados por PR (API #22, web #28) ([[diario-2026-11-13]]).
 
 ## Tempo disponível
 - De 2026-10-29 09:06 até a entrega, em **2026-10-30 16:00**, estendida pelo humano em 2026-10-30 06:16 ([[geral-decisao-2026-10-30-prazo-16h]]).

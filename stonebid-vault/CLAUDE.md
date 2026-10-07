@@ -145,6 +145,7 @@ antigo: re:(?i)(sequência|seq)[^|\n]{0,40}(crescente |única )?por carteira => 
 antigo: re:/audits/:id|/auditoria/:lotId|audits/\$id => /lots/:id/audit (geral-decisao-2026-10-30-caminho-da-auditoria)
 antigo: re:(?i)_public[^|\n]{0,10} nunca lê (a )?sessão => só a sala do lote lê a sessão já resolvida (geral-decisao-2026-10-30-sala-publica-le-a-sessao)
 antigo: re:memória guarda padrões do projeto, planos => memória guarda padrões, workflow, andamento, planos, decisões e bugs (geral-decisao-2026-10-30-relato-de-uso-de-ia)
+antigo: re:(?i)acesso à aplicação no ar:\*\* livre|fica no ar no máximo 7 dias => aplicação offline desde 2026-11-13; ficou no ar de 2026-10-29 a 2026-11-13 (acesso-de-teste)
 limite-palavras: 2073
 ```
 <!-- /projeto:padroes -->
@@ -183,7 +184,7 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 | Frontend `stonebid-web` | https://github.com/FranciscoYlderlan/stonebid-web |
 | Pasta do projeto no computador | `C:\Users\Ylderlan\Documents\Projetos\stonebid` |
 
-- **Acesso à aplicação no ar:** livre. O Stonebid é de teste: qualquer agente pode entrar e usar a plataforma para testar, sem pedir. Endereços e usuários em [[acesso-de-teste]].
+- **Aplicação offline:** o Stonebid ficou no ar de 2026-10-29 a 2026-11-13 e está offline desde que a conta de faturamento do GCP foi encerrada ([[diario-2026-11-13]]). Só o ambiente local funciona; endereços antigos e usuários de teste em [[acesso-de-teste]].
 - **Passo a passo do agente:** comandos já provados (anexar repositório com escrita, push, PR, CI, `staging`, Chrome, commit do cofre) em [[passo-a-passo-do-agente]]. Agente novo lê essa nota antes de mexer nos repositórios.
 - **Modo de implementação (padrão):** código no container → `git push` e PR no GitHub → CI verde → merge do humano → `cd.yml` do GitHub Actions publica no GCP e na Vercel. Consoles (Cloud Shell, Vercel, secrets do GitHub) e todo teste no ar, em staging e em produção, são feitos pelo agente no Chrome. O container e o shell do computador não alcançam `*.run.app` nem `*.vercel.app`. Detalhes em [[geral-decisao-2026-10-29-modo-de-implementacao]].
 - **Acesso na etapa de programação:** autorizado pelo humano para aquela etapa em `stonebid-api` ou `stonebid-web` (pasta do projeto e repositório no GitHub). Peça o acesso à pasta ou anexe o repositório direto, sem perguntar antes se pode.
