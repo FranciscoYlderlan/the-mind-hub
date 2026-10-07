@@ -95,7 +95,7 @@ Aval em 2026-10-30 08:4x, todos como propostos:
 - **Prova:** relatórios
 
 ## Próxima tarefa e a seguinte
-T1 a T4 feitas (merge e staging em 2026-10-30 09:1x). Agora: T5, verificador no Chrome em staging e verificador de código.
+T1 a T4 feitas (merge e staging em 2026-10-30 09:1x). T5: verificador no Chrome despachado em 2026-10-30 11:3x, em paralelo com o I3 ([[sala-ao-vivo-plano]]); o verificador de código do I2 fica junto com o do I3.
 
 ## Prioridades
 T2a é o caminho crítico (concorrência e hash). T3 pode encolher (sem "login e volta") se apertar.
