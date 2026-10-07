@@ -26,10 +26,10 @@ origem: manual-da-orquestra
 
 ## 🚧 Funcionalidades
 - [[sala-ao-vivo-contexto]]: etapa 5 (concluída), sala ao vivo e liquidação (I3): SSE, anti-sniping, liquidação, comprovante e Meus arremates.
-- [[revisao-e-entrega-contexto]]: etapa 8 (em construção), revisão e entrega: READMEs, checklist 11.6, relato do uso de IA e refinamentos.
-- [[opcionais-contexto]]: etapa 7 (em construção), opcionais (I5): cancelamento com estorno e busca na vitrine.
+- [[revisao-e-entrega-contexto]]: etapa 8 (concluída), revisão e entrega: READMEs, checklist 11.6, relato do uso de IA, refinamentos e teste final de aceitação (nota 8,9 de 10).
+- [[opcionais-contexto]]: etapa 7 (concluída), opcionais (I5): cancelamento com estorno; busca na vitrine fora.
 - [[auditoria-publica-contexto]]: etapa 6 (concluída), auditoria pública (I4): rota e página da auditoria, veredito ÍNTEGRO ou ADULTERADO e T-06.
-- [[lances-contexto]]: etapa 4 (em construção), lances (I2): validação, saldo comprometido, recusas e hash encadeado.
+- [[lances-contexto]]: etapa 4 (concluída), lances (I2): validação, saldo comprometido, recusas e hash encadeado.
 - [[carteira-e-lotes-contexto]]: etapa 3 (concluída), carteira e lotes (I1): depósito simulado, busca na API de itens, criação do lote e vitrine.
 - [[esqueleto-contexto]]: etapa 2 (concluída), esqueleto no ar (I0): repositórios, login com papéis, seed, CI e deploy no GCP + Vercel.
 

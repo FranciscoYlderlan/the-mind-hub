@@ -43,8 +43,23 @@ READMEs e correções do checklist no ar; depois os refinamentos R1, R2 e R3. Ba
 - **Faz:** `.md` próprio com o conteúdo de [[geral-decisao-2026-10-30-relato-de-uso-de-ia]], diagrama do grafo em Mermaid e a tabela; link nos dois READMEs.
 - **Verificação:** 2026-10-30 18:4x. `docs/uso-de-ia.md` no web (PR #25), link na API (PR #19); Mermaid renderiza; CI verde; merge feito.
 
+### TF: teste final de aceitação (2026-10-31)
+- **Faz:** pedido do humano (2026-10-31 17:09): conferir no Chrome, seguindo o enunciado ([[enunciado-teste-tecnico]], E1 a E6), se todos os requisitos foram aceitos e se a regra de negócio está condizente, sem alterar o projeto. Login só em staging (aval do humano, 17:1x); produção só sem login.
+- **Verificação:** 2026-10-31 17:1x a 17:5x, quatro verificadores e um avaliador independente. Produção em `main` = `staging` (API `f6f07e9`, web `955d2f0`).
+  - **TF-A (público, produção e staging):** deploy e `/health` ✔; vitrine com Ao vivo, Agendados e Encerrados ✔; seed com lote ao vivo e 3 lances ✔; auditoria sem login ÍNTEGRO com hash encadeado ✔; comprovante por link sem login ✔; privacidade por pseudônimo ✔; sala sem login com SSE ✔; tema escuro ✔; nenhuma chamada à AIC fora da busca ✔; busca na vitrine ✘ (fora, como decidido).
+  - **TF-B (leiloeiro, carteira e lances, staging):** 7 de 7 ✔: criação de lote pela busca na AIC; leiloeiro recusado (403); cancelamento sem lances some da vitrine; resultados e total recebido; carteira e depósito com limites; as cinco recusas com mensagem (`BID_BELOW_MINIMUM`, `INSUFFICIENT_FUNDS`, líder, `LOT_NOT_STARTED`, `LOT_ENDED`); comprometido volta na hora ao ser coberto.
+  - **TF-C (sala, anti-sniping, liquidação, estorno, staging):** sala atualiza sem recarregar ✔; anti-sniping ✔ (fim = lance + 2 min, duas prorrogações seguidas); liquidação e lote sem lances sem vencedor ✔; Meus arremates e comprovante ✔; auditoria com hash final igual ao do comprovante ✔; cancelamento com estorno ✔. E2.3 parcial: a sala não mostra a posição do usuário nem destaca o próprio lance.
+  - **TF-D (repositórios, leitura):** stack, READMEs, seed, regras com transação e `FOR UPDATE`, hash SHA-256 encadeado com selo HMAC e teste que adultera por SQL, Docker Compose, cerca de 220 testes na API e 115 Playwright ✔. CI não lido (403) e testes não rodados (proxy do Prisma).
+  - **Avaliador (TF-F):** **nota 8,9 de 10** (funcionais 57,5 de 60; stack, seed e README 12 de 15; qualidade e testes 12 de 15; opcionais 7,5 de 10). Obrigatórios: todos aceitos, menos a posição do usuário na sala (E2.3, parcial). Regra de negócio: condizente.
+  - **Pontos a corrigir, do mais grave ao menos grave:** posição do usuário na sala (E2.3); lote ao vivo do seed encerra por volta de 2026-11-13, e depois disso o ambiente fica sem lote ao vivo com lances (E4.2); commits de 2026-10-30 19:0x, depois das 16:00; valores com ponto nas mensagens de lance do web ("R$ 20.00"); rótulo "Lance atual" em lote encerrado; carteira sem atualização em tempo real; README não diz que a busca (E5.1) ficou fora.
+  - **Dados de teste em staging:** lotes `19658df2` (cancelado), `676dfe35` (vendido, R$ 35), `e74f4d1a` (vendido, R$ 140, com anti-sniping), `67ad6502` (sem vencedor), `62a231d0` (cancelado com estorno de R$ 150); depósito de R$ 3,21 do Licitante 1.
+
+### TF-E: workflow e andamento no relato de uso de IA
+- **Faz:** "O que a memória guarda" em `docs/uso-de-ia.md` do web passa a citar o workflow e o andamento do desenvolvimento, e o rótulo do diagrama acompanha ([[geral-decisao-2026-10-30-relato-de-uso-de-ia]]).
+- **Verificação:** 2026-10-31 17:3x. PR #27 do web (`9d7c93e`), CI verde, merge do humano (`b8c8b49`); `staging` do web avançada `955d2f0..b8c8b49`.
+
 ## Próxima tarefa e a seguinte
-Verificação no Chrome em staging de T11, estorno e READMEs; depois a busca na vitrine ([[opcionais-plano]]).
+Nenhuma: projeto entregue. Os pontos a corrigir da TF ficam com o humano.
 
 ### 🔗 Conexões
 - Funcionalidade: [[revisao-e-entrega-contexto]]

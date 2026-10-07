@@ -17,7 +17,7 @@ aliases: [Relato de uso de IA, Uso de IA no projeto, E6 uso de IA, AI usage repo
      - Agentes em várias threads e graph engineering, "dividir para conquistar": o problema vira problemas menores, em paralelo.
      - **Representação visual:** o orquestrador acessa a memória "Obsidian graph", divide a tarefa entre vários subagentes em paralelo; o resultado volta ao orquestrador, que registra na memória o resultado e o status das tarefas.
      - MCP do Obsidian para a máquina Linux usar a Obsidian CLI; spec-driven na memória, lida pela CLI, para gastar menos contexto, já que o código nem sempre deixa explícitos padrões e estrutura.
-     - A memória guarda padrões do projeto, planos (sugestões da IA), decisões (o que o desenvolvedor escolheu) e bugs; bug recorrente fica no histórico com o que ocorreu, por quê, suposições e como foi resolvido, para não voltar.
+     - A memória guarda padrões do projeto, o workflow (etapas, quem faz o quê e como orquestrador e subagentes trabalham, do plano ao teste em staging), o andamento do desenvolvimento (roteiro com o status de cada etapa e o "onde parei" de cada sessão nos diários), planos (sugestões da IA), decisões (o que o desenvolvedor escolheu) e bugs (humano, 2026-10-31 17:32, para workflow e andamento); bug recorrente fica no histórico com o que ocorreu, por quê, suposições e como foi resolvido, para não voltar.
      - Orquestrador gerencia e escreve na memória; subagentes desenvolvem e testam com Playwright. Quem cria não é quem testa; por padrão, ao fim, os testes rodam em staging.
      - Corrigir a causa, não o sintoma: o código é sintoma de um processo mal estruturado ou ambíguo; o harness guarda padrões e decisões históricas para o mínimo de erro e de código fora do padrão.
      - Pontos a aprimorar: primeira vez com essas técnicas; gostou do resultado, aprendeu muito e agradece a oportunidade do teste técnico.
@@ -36,9 +36,9 @@ aliases: [Relato de uso de IA, Uso de IA no projeto, E6 uso de IA, AI usage repo
 | Escrita de código | 👤 | 🧠 | 👤 |
 | Testes | 🧠 | 🧠 | 🧠 |
 
-- **Alteração:** o rascunho da IA citava o modelo e não tinha harness, graph engineering, benchmarking nem a tabela; o humano trouxe esse conteúdo e tirou o modelo.
+- **Alteração:** o rascunho da IA citava o modelo e não tinha harness, graph engineering, benchmarking, a tabela nem o workflow e o andamento entre o que a memória guarda; o humano trouxe esse conteúdo e tirou o modelo.
 - **Motivo:** o E6 pede onde e como a IA foi usada e o que foi revisado; a IA não tinha o histórico da modelagem do harness, feita pelo humano.
-- **Consequências:** tarefa R3 em [[revisao-e-entrega-plano]].
+- **Consequências:** tarefas R3 e TF-E em [[revisao-e-entrega-plano]]; `docs/uso-de-ia.md` do web.
 
 ### 🔗 Conexões
 - Funcionalidade: [[revisao-e-entrega-contexto]]

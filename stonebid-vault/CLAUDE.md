@@ -144,6 +144,7 @@ antigo: re:2026-10-30 09:00 => entrega em 2026-10-30 16:00 (geral-decisao-2026-1
 antigo: re:(?i)(sequência|seq)[^|\n]{0,40}(crescente |única )?por carteira => sequência global crescente no WalletMovement (geral-decisao-2026-10-29-sequencia-no-extrato)
 antigo: re:/audits/:id|/auditoria/:lotId|audits/\$id => /lots/:id/audit (geral-decisao-2026-10-30-caminho-da-auditoria)
 antigo: re:(?i)_public[^|\n]{0,10} nunca lê (a )?sessão => só a sala do lote lê a sessão já resolvida (geral-decisao-2026-10-30-sala-publica-le-a-sessao)
+antigo: re:memória guarda padrões do projeto, planos => memória guarda padrões, workflow, andamento, planos, decisões e bugs (geral-decisao-2026-10-30-relato-de-uso-de-ia)
 limite-palavras: 2073
 ```
 <!-- /projeto:padroes -->

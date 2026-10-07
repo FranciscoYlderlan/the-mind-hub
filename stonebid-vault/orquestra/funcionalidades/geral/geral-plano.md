@@ -7,7 +7,7 @@ criado: 2026-10-28
 # 🧭 Roteiro — Stonebid
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **7. Opcionais (I5)** (em-construcao)
+> Todas as etapas concluídas.
 
 > [!success] Aprovado
 > Etapas aprovadas em [[geral-decisao-2026-10-29-roteiro]]. Mudar a lista de etapas é uma nova decisão.
@@ -66,20 +66,22 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 2026-10-30
 
 ## 7. Opcionais (I5)
-- **Status:** em-construcao
+- **Status:** concluida
 - **Objetivo:** busca e filtros, cancelamento com estorno, tema escuro, Docker Compose.
 - **Pronto quando:** opcionais no ar, respeitando a linha de corte.
+- **Fechamento:** estorno no cancelamento no ar; busca e filtro na vitrine fora da etapa, por escolha do humano (2026-10-30 18:29).
 - **Funcionalidades:** [[opcionais-contexto]]
 - **Notas geradas:** [[geral-decisao-2026-10-30-estorno-no-cancelamento]], [[geral-decisao-2026-10-30-busca-na-vitrine]]
-- **Concluída em:** 
+- **Concluída em:** 2026-10-30
 
 ## 8. Revisão e entrega
-- **Status:** em-construcao
+- **Status:** concluida
 - **Objetivo:** README, relato do uso de IA (E6), checklist e envio.
 - **Pronto quando:** checklist 11.6 completo e entrega feita até 2026-10-30 16:00.
+- **Fechamento:** projeto entregue para avaliação; teste final de aceitação no ar em 2026-10-31, nota 8,9 de 10 ([[revisao-e-entrega-plano]], TF).
 - **Funcionalidades:** [[revisao-e-entrega-contexto]]
-- **Notas geradas:** [[geral-decisao-2026-10-30-datas-dos-commits]], [[geral-decisao-2026-10-30-relato-de-uso-de-ia]], [[diario-2026-10-30-revisao-e-entrega]]
-- **Concluída em:** 
+- **Notas geradas:** [[geral-decisao-2026-10-30-datas-dos-commits]], [[geral-decisao-2026-10-30-relato-de-uso-de-ia]], [[diario-2026-10-30-revisao-e-entrega]], [[diario-2026-10-31]]
+- **Concluída em:** 2026-10-31
 
 ### 🔗 Conexões
 - Projeto: [[geral-contexto]]
