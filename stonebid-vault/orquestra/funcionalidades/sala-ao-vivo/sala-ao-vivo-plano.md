@@ -50,7 +50,7 @@ Também entram aqui, do I2: [[geral-decisao-2026-10-30-pseudonimo-com-6-digitos]
 - **Verificação:**
   - Data: 2026-10-30 12:1x. PR #13 do `stonebid-api` (`b2bd859`), rebaseado sobre o #12, CI verde, 193 testes; merge do humano às 12:07 (`f756ac2`); `staging` avançada (`8c27da3..f756ac2`).
   - Disparo duplo: 5 disparos simultâneos dão 1 comprovante e 1 DEBIT/CREDIT; índice parcial único de DEBIT/CREDIT por lote como segunda barreira. `settled` publicado no SSE depois do COMMIT. Migration `20261030110000_reset_bids_pseudonym_6` apaga os lances de teste no próximo CD. Seed: `seed-3` liquidado, `licitante-2` vence por R$ 350,00.
-  - Desvios (sem aval): cancelar lote encerrado ainda não liquidado dá 409 `LOT_ENDED` (antes `LOT_NOT_CANCELABLE`); `GET /receipts/:publicId` não liquida na leitura (o comprovante só existe depois); 422 só no cancelamento (o resto segue 400 `VALIDATION_ERROR`); `lots_get` da MCP manda o token para o `viewer`.
+  - Desvios (aprovados em 2026-10-30 12:44, [[geral-decisao-2026-10-30-lot-ended-no-cancelamento]] e [[geral-decisao-2026-10-30-422-no-cancelamento]]): cancelar lote encerrado ainda não liquidado dá 409 `LOT_ENDED` (antes `LOT_NOT_CANCELABLE`); `GET /receipts/:publicId` não liquida na leitura (o comprovante só existe depois); 422 só no cancelamento (o resto segue 400 `VALIDATION_ERROR`); `lots_get` da MCP manda o token para o `viewer`.
 
 ### T2b: tempo real por SSE (API)
 - **Faz:** port de publicação de eventos, barramento em memória, rota do stream, publicação depois do COMMIT no lance e no cancelamento, `--max-instances=1` no `cd.yml`.
@@ -63,7 +63,7 @@ Também entram aqui, do I2: [[geral-decisao-2026-10-30-pseudonimo-com-6-digitos]
 - **Verificação:**
   - Data: 2026-10-30 11:49. PR #12 do `stonebid-api` (`e935308`), CI verde, 160 testes; merge do humano (`8c27da3`); `staging` avançada (`55b1400..8c27da3`).
   - Port `LotEventsPublisher.publish(lotId, 'bid'|'canceled'|'settled')` (`src/application/lot-events-publisher.ts`), factory `makeLotEventsPublisher()`; barramento relê o lote uma vez por evento, em fila por lote; rota inscreve antes do snapshot; replay da mesma chave não gera evento.
-  - Desvios: `--concurrency=1000` além do `--max-instances=1` no `cd.yml` (cada stream ocupa uma vaga; o padrão de 80 enfileiraria o 81º); sem tool MCP para o stream (MCP é pedido e resposta). Falta: `settled` publicado pela T2a; medir buffer do Cloud Run e os 2 s do RNF-06 no Chrome.
+  - Desvios (aprovados em 2026-10-30 12:44, [[geral-decisao-2026-10-30-concorrencia-do-cloud-run]]): `--concurrency=1000` além do `--max-instances=1` no `cd.yml` (cada stream ocupa uma vaga; o padrão de 80 enfileiraria o 81º); sem tool MCP para o stream (MCP é pedido e resposta). Falta: `settled` publicado pela T2a; medir buffer do Cloud Run e os 2 s do RNF-06 no Chrome.
 
 ### T3: sala ao vivo (web)
 - **Faz:** `EventSource` com plano B de 3 s; contagem pelo `serverTime` e aviso de prorrogação; "ganhando" ou "superado"; estados vendido, sem vencedor e cancelado com motivo; "Dar lance" escondido do leiloeiro.
@@ -76,7 +76,7 @@ Também entram aqui, do I2: [[geral-decisao-2026-10-30-pseudonimo-com-6-digitos]
 - **Verificação:**
   - Data: 2026-10-30 12:2x. PR #15 do `stonebid-web` (`3000135`), CI verde, 104 testes Playwright; merge do humano às 12:17 (`ab1c809` na `main`).
   - `useLotStream` com `snapshot`, `bid`, `canceled` e `settled`, mantendo o `viewer` do `GET /lots/:id`; reabre o stream 5 s depois de erro HTTP; plano B de 3 s, recarga de 15 s removida; "Prorrogado +2 min" por 6 s; estados de fim com link do comprovante; "Dar lance" escondido do leiloeiro.
-  - Desvios (sem aval): `routes/_public/lots/$id.tsx` lê o `user` da sessão já resolvida no layout raiz, sem consulta e sem redirecionar, contra o "`_public` nunca lê sessão" de [[geral-decisao-2026-10-28-estrutura-frontend]]; link do comprovante por `<a href>`; `BidHistory` recebe a consulta da sala em vez do `id`.
+  - Desvios (aprovados em 2026-10-30 12:44): `routes/_public/lots/$id.tsx` lê o `user` da sessão já resolvida no layout raiz, sem consulta e sem redirecionar ([[geral-decisao-2026-10-30-sala-publica-le-a-sessao]]); link do comprovante por `<a href>`; `BidHistory` recebe a consulta da sala em vez do `id`.
 
 ### T4: Meus arremates, comprovante e total (web)
 - **Faz:** página pública `/receipts/$publicId` com cópia do link; Meus arremates; total recebido e resultado no painel do leiloeiro; motivo no cancelamento.
@@ -101,10 +101,22 @@ Também entram aqui, do I2: [[geral-decisao-2026-10-30-pseudonimo-com-6-digitos]
 - **Faz:** verificador no Chrome em staging: leilão completo com dois licitantes (lance que chega à outra aba sem recarregar, anti-sniping num lote curto, liquidação, comprovante por link sem login, Meus arremates, total do leiloeiro, cancelamento com motivo); verificador de código lê os diffs.
 - **Depende de:** T5
 - **Pronto quando:**
-  - [ ] relatórios sem bloqueante
+  - [x] relatórios sem bloqueante (2026-10-30 12:4x–13:0x)
+
+- **Verificação:**
+  - Código (API `f756ac2`, web `728210a`, sobre o estado final da `main`; PRs empilhados): sem bloqueante. ✔ liquidação idempotente (`FOR UPDATE`, índices únicos, prova sem a trava), ✔ SSE depois do COMMIT e limpeza ao fechar, ✔ anti-sniping, ✔ trava e ordem do lance, ✔ comprovante sem dado pessoal, ✔ `viewer` só com JWT de licitante. Deve corrigir: `viewer` sobrevivendo à troca de sessão (PR #17 do `/register` e PR #18 do `viewer`, abaixo) e link da auditoria em 404 até o I4 ([[geral-decisao-2026-10-30-caminho-da-auditoria]]). Opcionais: separador no selo do comprovante (v2), SSE sem contrapressão, posição `WON` antes da liquidação por um instante, agendador parado em staging pelo `--cpu-throttling` (a leitura cobre).
+  - Chrome em staging: sem bloqueante, 10 de 12 ✔. Lance chega na outra aba em 194 ms pelo `EventSource`, sem buffer no Cloud Run (RNF-06); anti-sniping leva o fim a lance + 2 min nas duas abas; `settled` 1,2 s depois do fim; COMMIT, RELEASE e DEBIT sem duplicar; comprovante abre deslogado e id inválido dá 404 amigável; Meus arremates, "Total recebido" (R$ 350,00 → R$ 480,00), cancelamento com motivo pelo SSE, `seed-3` e "Dar lance" escondido do leiloeiro ✔; console limpo. Sem prova: MCP (sem chave; humano aceitou seguir sem, 12:44) e posição `CANCELED` (inalcançável: só se cancela lote sem lances; fica como está, [[geral-decisao-2026-10-30-posicao-cancelado-inalcancavel]]). Opcionais: aviso "Prorrogado +32 s" mostra o quanto o fim andou, não "+2 min"; botão "Cancelar" visível em lote com lances; rótulo "Lance atual" em lote encerrado.
+  - Dados de teste em staging: lotes "Arrival of the Normandy Train" (vendido, R$ 130,00), "Stacks of Wheat" (lance de R$ 100,00 até 13:30) e "Water Lilies" (cancelado).
+
+### T7: correções da T6 (web)
+- **Faz:** mensagem em português do papel no `/register` (PR #17, merge do humano às 12:54); cache descartado no login e no logout, para o `viewer` não sobreviver à troca de sessão (PR #18, CI verde, 112 testes Playwright, merge do humano às 13:06). `staging` do web avançada (`728210a..9e68191`).
+- **Pronto quando:**
+  - [x] PR #17 com merge
+  - [x] PR #18 com merge e `staging` do web avançada (`9e68191`)
+  - [ ] verificador no Chrome em staging: `/register` sem papel e troca de sessão na sala (logout some o estado pessoal; login pelo "Dar lance" mostra o próprio estado)
 
 ## Próxima tarefa e a seguinte
-T2a, T2b e T3 com merge; API em staging (`f756ac2`). T5 feita (só falta conferir o CD de staging do web). Agora: T6, verificador no Chrome e verificador de código (que também lê os diffs do I2).
+T1 a T6 feitas. Agora: verificador no Chrome da T7 (conferir antes o CD de staging do web em `9e68191`). Depois, o plano do I4.
 
 ## Prioridades
 T2a é o caminho crítico. Se apertar: corta o seed liquidado, depois o aviso de prorrogação no web.
@@ -112,10 +124,7 @@ T2a é o caminho crítico. Se apertar: corta o seed liquidado, depois o aviso de
 ## Candidatos a registro
 - Bug de ambiente: o `global-setup` dos testes precisa apagar comprovantes antes dos lotes (FK RESTRICT); sem isso a 2ª execução local falha com "No test files found" e `code.charCodeAt`.
 - Receita do binário falso do schema engine que funciona com `prisma migrate deploy` (sai 0 em `cli ...` e responde JSON-RPC): seção 3 de [[passo-a-passo-do-agente]].
-- Decisão para o I4: caminho da auditoria no web, `/lots/:id/audit` (o `auditPath` do contrato da T1) ou `/audits/:id` (previsto em [[geral-decisao-2026-10-28-estrutura-frontend]]).
 - Registro de componentes: os 6 novos da T4 e os 3 da T3 (`lot-outcome`, `lot-room-countdown`, `viewer-position`).
-- Exceção a registrar: rota `_public` do lote lendo a sessão já resolvida (desvio da T3).
-- Decisão: `LOT_ENDED` no cancelamento de lote encerrado ou liquidado (desvio 1 da T2a).
 
 ### 🔗 Conexões
 - Funcionalidade: [[sala-ao-vivo-contexto]]

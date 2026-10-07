@@ -22,18 +22,25 @@ Parte de [[diario-2026-10-30]], depois de [[diario-2026-10-30-lances]].
 - Termos varridos: "T2a", "T2b", "T3", "T4", "staging". Tocada: [[sala-ao-vivo-plano]] (Verificação de T2a a T4, candidatos).
 - 12:3x: #16 com os conflitos resolvidos por merge da `main` (`10e59fd`), CI verde, 111 testes; aguarda o merge do humano. 12:30: humano fez o merge do #16; `staging` do web avançada (`c366aef..728210a`). Passagem de turno para outro agente (pedido do humano, 12:17). Tocadas: [[sala-ao-vivo-plano]] (T4, T5, próxima tarefa), [[sala-ao-vivo-contexto]].
 
+- 12:38: sessão nova pelo "Onde parei". Repositórios anexados com `push` e clonados; CD de staging verde nos dois (API `f756ac2`, web `728210a`). T6 despachada: verificador no Chrome e verificador de código.
+- 12:44: humano respondeu as dúvidas: auditoria em `/lots/:id/audit`; aceitos os desvios da T2a, T2b e T3; MCP de staging segue sem prova; corrigir o `/register`. Implementador do `/register` despachado (PR #17 do web, merge do humano às 12:54).
+- 12:4x: verificador de código sem bloqueante; deve corrigir: `viewer` sobrevivendo à troca de sessão e link da auditoria em 404 até o I4. 12:47: humano aprovou a correção do `viewer` (PR #18, merge às 13:06) e os registros. Gravadas [[geral-decisao-2026-10-30-caminho-da-auditoria]], [[geral-decisao-2026-10-30-sala-publica-le-a-sessao]], [[geral-decisao-2026-10-30-lot-ended-no-cancelamento]], [[geral-decisao-2026-10-30-422-no-cancelamento]], [[geral-decisao-2026-10-30-concorrencia-do-cloud-run]]; substituição parcial em [[geral-decisao-2026-10-28-estrutura-frontend]] e [[geral-decisao-2026-10-29-comprovante-e-hash]]. Termos varridos: "audits", "auditoria/:lotId", "nunca lê sessão", "dado pessoal", "sem aval". Bloco `padroes` com dois `antigo:` novos.
+- 13:0x: verificador no Chrome sem bloqueante, 10 de 12 ✔ (lance na outra aba em 194 ms, sem buffer no Cloud Run). Etapas 4 e 5 concluídas no [[geral-plano]]; [[lances-contexto]] e [[sala-ao-vivo-contexto]] `concluida`. 13:06: humano: posição `CANCELED` fica como está ([[geral-decisao-2026-10-30-posicao-cancelado-inalcancavel]]). `staging` do web avançada (`728210a..9e68191`, PRs #17 e #18). Passagem de turno (Messages em 109 mil).
+- Erro de processo: a seção "O que já foi feito" de dois contextos foi localizada com `grep` no shell; o resto foi lido pela Obsidian CLI.
+- Tocadas: [[sala-ao-vivo-plano]] (T6, T7, próxima tarefa, candidatos), [[sala-ao-vivo-contexto]], [[lances-contexto]], [[geral-plano]], [[geral-contexto]], `CLAUDE.md` (bloco `padroes`).
+
 ## Decisões tomadas
 - As 9 do I3 em [[sala-ao-vivo-plano]] e as 3 do I2 em [[lances-contexto]].
 
 > [!tip] Onde parei
 > - **Próximo passo** (agente novo, entrega às **16:00**):
->   1. Anexar `stonebid-api` e `stonebid-web` com `access: "push"` e clonar ([[passo-a-passo-do-agente]], seção 2).
->   2. Conferir que o CD de staging do web (`728210a`) ficou verde: `gh api "repos/FranciscoYlderlan/stonebid-web/actions/runs?branch=staging&per_page=1"`. `main` = `staging` nos dois: API `f756ac2`, web `728210a`.
->   3. T6 de [[sala-ao-vivo-plano]]: um verificador no Chrome em staging faz o leilão completo com dois licitantes (lance chegando na outra aba sem recarregar, em < 2 s; anti-sniping num lote curto criado pelo leiloeiro; liquidação; comprovante por link sem login; Meus arremates; "Total recebido"; cancelamento com motivo; seed `seed-3` liquidado com comprovante do `licitante-2`; MCP sem chave, então só se o humano testar). Mede também se o Cloud Run segura o SSE em buffer. Em paralelo, um verificador de código lê os diffs dos PRs #10, #11, #12, #13 da API e #14, #15, #16 do web.
->   4. Registrar os relatórios, fechar as etapas 4 e 5 no [[geral-plano]] e abrir a 6 (auditoria pública, I4: RF-60, RF-61, RN-14, RN-15, T-06).
-> - **Threads abertas:** nenhum subagente rodando. Worktrees do container se perdem no chat novo; nada sem push.
-> - **Dúvidas para o humano:** (a) caminho da auditoria no web: `/lots/:id/audit` (`auditPath` da API) ou `/audits/:id` ([[geral-decisao-2026-10-28-estrutura-frontend]]); decidir antes do I4; (b) aceitar os desvios sem aval da T2a (cancelar lote encerrado dá `LOT_ENDED`), da T2b (`--concurrency=1000`) e da T3 (rota pública do lote lê a sessão já resolvida); (c) MCP de staging sem prova no ar (chave só no Secret Manager); (d) `/register` sem papel mostra erro do Zod em inglês. Herdadas: "Request headers" do conector ([[geral-decisao-2026-10-29-camada-mcp]]), registro do uso de IA (E6), achados da T5m (cabeçalho "Entrar / Cadastrar" na falha não-401; e-mail sem `maxLength`).
-> - **Candidatos a nota:** os de [[sala-ao-vivo-plano]] (bug do `global-setup` com FK do comprovante, binário falso do schema engine no passo a passo, registro de componentes).
+>   1. Anexar `stonebid-api` e `stonebid-web` com `access: "push"` e clonar ([[passo-a-passo-do-agente]], seção 2). `main` = `staging`: API `f756ac2`, web `9e68191`.
+>   2. Conferir o CD de staging do web em `9e68191`: `gh api "repos/FranciscoYlderlan/stonebid-web/actions/runs?per_page=4"`.
+>   3. Verificador no Chrome da T7 de [[sala-ao-vivo-plano]]: `/register` sem papel em português; logout tira o estado pessoal da sala; login pelo "Dar lance" mostra o próprio estado.
+>   4. Abrir a etapa 6 (auditoria pública, I4: RF-60, RF-61, RN-14, RN-15, T-06) no [[geral-plano]]: contexto e plano da funcionalidade, rota `/lots/:id/audit` no web ([[geral-decisao-2026-10-30-caminho-da-auditoria]]), aval do humano nos pontos do plano. Depois, a etapa 8 (README e relato do uso de IA, E6) antes das 16:00.
+> - **Threads abertas:** nenhum subagente rodando; nada sem push.
+> - **Dúvidas para o humano:** opcionais da T6 sem tarefa ("Prorrogado +32 s" em vez de "+2 min", botão "Cancelar" visível em lote com lances, rótulo "Lance atual" em lote encerrado). Herdadas: "Request headers" do conector ([[geral-decisao-2026-10-29-camada-mcp]]), registro do uso de IA (E6), achados da T5m (cabeçalho "Entrar / Cadastrar" na falha não-401; e-mail sem `maxLength`).
+> - **Candidatos a nota:** os de [[sala-ao-vivo-plano]]; bug "`viewer` do lote sobrevive à troca de sessão" (cache sem a sessão na chave; corrigido no PR #18); regra "todo campo de formulário com zod leva a sua mensagem" (`z.enum` sem mensagem mostra inglês); porta do Playwright fixa em 4173 no `playwright.config.ts` (worktree precisa de config local).
 
 ### 🔗 Conexões
 - Diário do dia: [[diario-2026-10-30]]
