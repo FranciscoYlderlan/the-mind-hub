@@ -7,7 +7,7 @@ criado: 2026-10-28
 # 🧭 Roteiro — Stonebid
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **6. Auditoria pública (I4)** (planejada)
+> Etapa atual: **6. Auditoria pública (I4)** (em-construcao)
 
 > [!success] Aprovado
 > Etapas aprovadas em [[geral-decisao-2026-10-29-roteiro]]. Mudar a lista de etapas é uma nova decisão.
@@ -58,11 +58,11 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 2026-10-30
 
 ## 6. Auditoria pública (I4)
-- **Status:** planejada
+- **Status:** em-construcao
 - **Objetivo:** histórico sem login com veredito íntegro ou adulterado.
 - **Pronto quando:** T-06 detecta as adulterações.
-- **Funcionalidades:** 
-- **Notas geradas:** 
+- **Funcionalidades:** [[auditoria-publica-contexto]]
+- **Notas geradas:** [[geral-decisao-2026-10-30-auditoria-publica]], [[geral-decisao-2026-10-30-adulterado-provado-no-ci]], [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]], [[diario-2026-10-30-auditoria-publica-correcoes]]
 - **Concluída em:** 
 
 ## 7. Opcionais (I5)

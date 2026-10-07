@@ -113,10 +113,13 @@ Também entram aqui, do I2: [[geral-decisao-2026-10-30-pseudonimo-com-6-digitos]
 - **Pronto quando:**
   - [x] PR #17 com merge
   - [x] PR #18 com merge e `staging` do web avançada (`9e68191`)
-  - [ ] verificador no Chrome em staging: `/register` sem papel e troca de sessão na sala (logout some o estado pessoal; login pelo "Dar lance" mostra o próprio estado)
+  - [x] verificador no Chrome em staging: `/register` sem papel e troca de sessão na sala (logout some o estado pessoal; login pelo "Dar lance" mostra o próprio estado)
+
+- **Verificação:**
+  - Data: 2026-10-30 13:3x, Chrome em staging (web `9e68191`): 4 de 4 ✔, sem bloqueante. `/register` sem papel mostra "Escolha se você vai ser leiloeiro ou licitante."; logout e volta à sala sem recarregar tira "Você está ganhando"; "Dar lance" deslogado leva a `/login?redirect=/bidding/:id` e o Licitante 2 vê "Você foi superado"; a troca ao contrário também não guarda o estado do outro; console limpo. Nenhum dado de teste criado.
 
 ## Próxima tarefa e a seguinte
-T1 a T6 feitas. Agora: verificador no Chrome da T7 (conferir antes o CD de staging do web em `9e68191`). Depois, o plano do I4.
+T1 a T7 feitas. Próxima etapa: [[auditoria-publica-plano]].
 
 ## Prioridades
 T2a é o caminho crítico. Se apertar: corta o seed liquidado, depois o aviso de prorrogação no web.
