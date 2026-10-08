@@ -1,5 +1,5 @@
 ---
-aliases: [Ferramentas obsidian_ não aparecem, Nenhum servidor adicionado no Claude Desktop, Obsidian CLI MCP not loading, The CLI is unable to find Obsidian]
+aliases: [Ferramentas obsidian_ não aparecem, Nenhum servidor adicionado no Claude Desktop, The CLI is unable to find Obsidian, Command read not found]
 tags: [ferramentas/obsidian, estudos/programacao]
 tipo: bug
 status: resolvido
@@ -20,6 +20,7 @@ origem: Sessão de 2026-10-28 no projeto stonebid (chat "CLI do Obsidian via MCP
 - Esperado: as ferramentas `obsidian_*` aparecem na sessão (prefixo `mcp__remote-devices__obsidian-cli__`).
 - Observado: nenhuma ferramenta do Obsidian; no shell, `obsidian` não existe; em Configurações → Desenvolvedor do Claude Desktop, **"Nenhum servidor adicionado"**, mesmo com o `obsidian-cli` escrito em `claude_desktop_config.json`.
 - Sinal paralelo: `The CLI is unable to find Obsidian. Please make sure Obsidian is running and try again.` quando o app está fechado.
+- Sinal paralelo 2: `Command "read" not found. Did you mean: sync:read, daily:read, template:read?` logo depois de abrir o Obsidian. O app responde, mas ainda não registrou os comandos.
 
 ## Impacto
 - Os agentes buscavam sem a CLI (busca direta nos `.md`), sem o índice de aliases e backlinks. O diário de 2026-10-28 do stonebid registra isso.
@@ -33,6 +34,7 @@ origem: Sessão de 2026-10-28 no projeto stonebid (chat "CLI do Obsidian via MCP
 5. ❌ O app lê `%APPDATA%\Claude\claude_desktop_config.json` (caminho da documentação). **Descartada:** gravado ali, a tela seguiu vazia.
 6. ❌ O app lê a pasta do pacote da Microsoft Store (`%LOCALAPPDATA%\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude`). **Descartada:** era onde o `obsidian-cli` já estava; a pasta tem o marcador `.user-data-left` (dados que o app deixou para trás).
 7. ✅ O app lê **`%LOCALAPPDATA%\Claude-Data\claude_pzs8sxrjxfjjc\claude_desktop_config.json`**. Causa raiz.
+8. ⚠️ (2026-11-16) `Command "read" not found` é falha do parâmetro `file=`. **Descartada:** o mesmo `obsidian_read` com `file=` funcionou minutos depois. Causa provável: o Obsidian acabara de abrir e ainda carregava os comandos [inferência: não reproduzido].
 
 ## Linha do tempo técnica
 (2026-10-28, horário de Brasília)
@@ -45,6 +47,7 @@ origem: Sessão de 2026-10-28 no projeto stonebid (chat "CLI do Obsidian via MCP
 - 22:22: Desenvolvedor mostra "Nenhum servidor adicionado".
 - 22:24: "Editar configuração" abre `Claude-Data\claude_pzs8sxrjxfjjc`.
 - 22:26: entrada gravada ali, app reiniciado pela bandeja: `obsidian-cli` "Em execução" e ferramentas na sessão.
+- 2026-11-16 08:30: sessão com o Obsidian fechado: "unable to find Obsidian". O humano abriu o app; a primeira leitura deu `Command "read" not found`; a busca seguinte e as leituras depois funcionaram.
 
 ## Pseudocódigo do problema
 ```
@@ -95,7 +98,7 @@ Entrada gravada no arquivo real (backup antes, JSON sem BOM):
 ## Solução
 1. Nunca adivinhar o caminho: em Configurações → Desenvolvedor, clicar **"Editar configuração"** e editar o arquivo que ele abre.
 2. Reiniciar o Claude Desktop **saindo pela bandeja** (botão direito → Sair); fechar a janela não basta.
-3. Deixar o Obsidian aberto: a CLI só responde com o app rodando.
+3. Deixar o Obsidian aberto: a CLI só responde com o app rodando. Se acabou de abrir e a CLI responde `Command "…" not found`, esperar alguns segundos e repetir a mesma chamada: o app ainda está carregando.
 4. Abrir um chat novo: as ferramentas entram quando a sessão carrega.
 
 ## Como validar que não voltou
@@ -114,7 +117,7 @@ Entrada gravada no arquivo real (backup antes, JSON sem BOM):
 - PowerShell 5 grava UTF-8 **com BOM** em `Set-Content -Encoding utf8`; para JSON de config, gravar sem BOM.
 
 > [!tip] Quando abrir esta nota
-> Quando a busca pela Obsidian CLI falhar numa sessão: ferramentas `obsidian_*` ausentes, `obsidian` não encontrado ou "unable to find Obsidian".
+> Quando a busca pela Obsidian CLI falhar numa sessão: ferramentas `obsidian_*` ausentes, `obsidian` não encontrado, "unable to find Obsidian" ou `Command "…" not found`.
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
