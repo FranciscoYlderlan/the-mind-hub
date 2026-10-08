@@ -28,7 +28,8 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 > - Regra só do projeto **não** vai no `CLAUDE.md`, porque o sincronizar o regenera. Ela vira decisão em `funcionalidades/geral/`.
 > - Não apago "Como buscar", "Padronização" nem "Etapas vitais": são elas que obrigam o agente a consultar antes, seguir o padrão e verificar depois.
 > - Em cofre de projeto, o que é só do projeto (regras de padronização, bloco `padroes`, repositórios e acesso) fica entre `<!-- projeto:... -->` e `<!-- /projeto:... -->`. O `cofre.py sincronizar` refaz o resto pelo modelo e guarda esses blocos; o que ainda não foi definido nasce `[a preencher]`.
-> - "Como buscar" exige a Obsidian CLI, também para ler. Se ela falhar, o agente reporta e analisa com [[Obsidian CLI via MCP não carrega]] antes de buscar nos `.md`.
+> - O `CLAUDE.md` só é lido depois que o agente já escolheu por onde ler. Numa sessão que entra por um projeto do claude.ai, a primeira coisa lida são as **instruções do projeto**: elas recebem o bloco do [[modelo-instrucoes-do-projeto-claude]], que manda usar a CLI (carregando as ferramentas adiadas com `ToolSearch`) e proíbe ler ou escrever o cofre pela ferramenta `Projects`.
+> - "Como buscar" exige a Obsidian CLI, também para ler, antes de qualquer outra ferramenta; o aviso "Leitura: Obsidian CLI primeiro" no topo repete isso. O `cofre.py verificar` dá ERRO se faltar o aviso, a seção ou o `vault="nome-da-pasta"` certo. Se a CLI falhar, o agente reporta e analisa com [[Obsidian CLI via MCP não carrega]] antes de buscar nos `.md`.
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Um `CLAUDE.md` por cofre faz qualquer combinação de cofres funcionar num projeto.
