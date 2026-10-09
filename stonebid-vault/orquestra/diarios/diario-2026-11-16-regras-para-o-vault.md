@@ -95,7 +95,7 @@ G1 interface antes do paralelo; G2 partir para paralelizar; G3 cadeia fica com u
 
 > [!tip] Onde parei
 > - **Próximo passo:** este chat continua (humano, 09:32: sem passagem de turno) e escreve o pacote no `Vault` em lotes, seguindo as Etapas vitais B e mostrando cada lote ao humano antes do commit: (1) modelo de CLAUDE enxuto, que aponta para `funcionalidades/geral/` pela CLI, `padroes` em nota própria e teto no `cofre.py verificar`; (2) núcleo neutro e paralelismo (G1 a G11) no Manual da Orquestra; (3) perfil prático e lugar do perfil estudo; (4) padrão de software e commits (os dois modelos de CLAUDE); (5) notas de lição técnica; (6) `cofre.py sincronizar` nos cofres de projeto. Lacuna achada: o `verificar` cobra "Próximo passo" no diário principal, não na parte mais recente (N04): ajustar no lote 1.
-> - **Threads abertas:** nenhuma.
+> - **Threads abertas:** implementador do lote 1 na worktree `$HOME/wt-lote1`, branch `vault/lote-1-claude-enxuto` (despachado 09:4x). O merge só depois do aval do humano.
 > - **Dúvidas para o humano:** nenhuma. O `PrepBTG-vault` é de estudo e fica fora do lote 6 por ora (humano, 09:32).
 
 ### 🔗 Conexões
