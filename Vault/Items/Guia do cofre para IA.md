@@ -16,8 +16,8 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 ---
 
 > [!note] Passo a passo
-> 1. O `cofre.py criar` gera o `CLAUDE.md` a partir do [[Modelo de CLAUDE do cofre]], já com pasta, projeto, objetivo e repositório.
-> 2. Mudou o modelo? `cofre.py sincronizar` regenera o `CLAUDE.md` de cada cofre de projeto, preservando projeto, objetivo e repositório.
+> 1. O `cofre.py criar` gera o `CLAUDE.md` a partir do [[Modelo de CLAUDE do cofre]], já com pasta, projeto e objetivo, e gera `orquestra/padroes.md` com o bloco `padroes` (`limite-palavras: 2000`).
+> 2. Mudou o modelo? `cofre.py sincronizar` regenera o `CLAUDE.md` de cada cofre de projeto, preservando projeto e objetivo.
 > 3. O mesmo comando recopia modelos e manuais, convertendo os links (kebab-case, mapa `moc-orquestra`, outras notas do `Vault` viram "(no Vault)").
 > 4. Confiro que o arquivo cita **só o próprio cofre**. Cofres vizinhos entram apenas pela regra de fronteira.
 > 5. Fecho com `cofre.py verificar`: zero ERRO.
@@ -25,9 +25,11 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 > [!warning] Armadilhas
 > - Nome do arquivo em maiúsculas: `CLAUDE.md`. Outro nome o agente não lê sozinho.
 > - O `CLAUDE.md` não é nota: sem frontmatter, na raiz, e é o **único índice** (sem `leia-primeiro.md`).
-> - Regra só do projeto **não** vai no `CLAUDE.md`, porque o sincronizar o regenera. Ela vira decisão em `funcionalidades/geral/`.
-> - Não apago "Como buscar", "Padronização" nem "Etapas vitais": são elas que obrigam o agente a consultar antes, seguir o padrão e verificar depois.
-> - Em cofre de projeto, o que é só do projeto (regras de padronização, bloco `padroes`, repositórios e acesso) fica entre `<!-- projeto:... -->` e `<!-- /projeto:... -->`. O `cofre.py sincronizar` refaz o resto pelo modelo e guarda esses blocos; o que ainda não foi definido nasce `[a preencher]`.
+> - O `CLAUDE.md` é **índice, não manual**: cada regra geral fica em 1 linha imperativa (gatilho e o que fazer) com link para a nota que detalha, lida pela CLI quando a tarefa toca no assunto. Explicação, exemplo e passo a passo moram nos manuais. O `cofre.py verificar` dá ERRO se o modelo ou o `CLAUDE.md` de um cofre passar de 2500 palavras (teto, não meta).
+> - Regra só do projeto (grafia, documentos-fonte, exceções de nome, repositórios e acesso) vira decisão em `orquestra/funcionalidades/geral/`, com aval do humano. O `CLAUDE.md` só aponta para lá e manda buscar pela CLI, para o consumo de tokens não crescer com o projeto.
+> - O bloco `padroes` mora em `orquestra/padroes.md`, lido pelo `cofre.py verificar`. No `Vault`, que não tem `orquestra/`, ele fica no próprio `CLAUDE.md`.
+> - Cofre antigo ainda guarda regras em blocos `<!-- projeto:... -->` no `CLAUDE.md`: o `sincronizar` os preserva como estão (no fim do arquivo, se o modelo não tem lugar para eles), o `verificar` lê o `padroes` dali enquanto não houver `orquestra/padroes.md` e dá só AVISO pelo tamanho até a migração.
+> - Não apago "Como buscar", "Padronização", "Etapas vitais" nem "Commits": são elas que obrigam o agente a consultar antes, seguir o padrão e verificar depois.
 > - O `CLAUDE.md` só é lido depois que o agente já escolheu por onde ler. Numa sessão que entra por um projeto do claude.ai, a primeira coisa lida são as **instruções do projeto**: elas recebem o bloco do [[modelo-instrucoes-do-projeto-claude]], que manda usar a CLI (carregando as ferramentas adiadas com `ToolSearch`) e proíbe ler ou escrever o cofre pela ferramenta `Projects`.
 > - "Como buscar" exige a Obsidian CLI, também para ler, antes de qualquer outra ferramenta; o aviso "Leitura: Obsidian CLI primeiro" no topo repete isso. O `cofre.py verificar` dá ERRO se faltar o aviso, a seção ou o `vault="nome-da-pasta"` certo. Se a CLI falhar, o agente reporta e analisa com [[Obsidian CLI via MCP não carrega]] antes de buscar nos `.md`.
 
