@@ -10,7 +10,7 @@ origem: Pesquisa sobre Obsidian + meus documentos de rotina (Sistema TickTick e 
 > [!info] Cópia do Vault
 > Cópia de `Vault/Items/Manual do Meu Cérebro no Obsidian.md`, versão v7. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
 >
-> **Escopo neste cofre:** vale para as notas de `referencias/` e `MOCs/` o perfil, o tom, o esqueleto, os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das notas (seção 3, item 3 da seção 10 e "Salva em Items/" do checklist) são substituídos pelo [[manual-da-orquestra]]: aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`). O limite de ~350 palavras (seção 6) também não vale aqui: vale o `limite-palavras` do bloco `padroes` do `CLAUDE.md`.
+> **Escopo neste cofre:** vale para as notas de `referencias/` e `MOCs/` o perfil, o tom, o esqueleto, os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das notas (seção 3, item 3 da seção 10 e "Salva em Items/" do checklist) são substituídos pelo [[manual-da-orquestra]]: aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`). O limite de ~350 palavras (seção 6) também não vale aqui: vale o `limite-palavras` do bloco `padroes` do cofre (`orquestra/padroes.md`).
 
 # 🧭 Manual do Meu Cérebro no Obsidian
 
