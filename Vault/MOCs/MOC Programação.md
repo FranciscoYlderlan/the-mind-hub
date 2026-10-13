@@ -40,6 +40,8 @@ origem: Manual do Meu Cérebro no Obsidian
 - [[Manual da Orquestra]]: orquestrador, subagentes, fluxo de uma sessão e a estrutura `orquestra/` dos cofres de projeto.
 - [[Manual da Orquestra - Núcleo comum]]: fontes, conduta da IA, pedido, entrega, riscos e convenções de todo cofre (prático e estudo).
 - [[Manual da Orquestra - Agentes em paralelo]]: G1 a G11, da interface antes do paralelo ao teto de 5 agentes que escrevem.
+- [[Manual da Orquestra - Perfil projeto prático]]: P01 a P16 (contrato, fatias, verificação, aceitação) e o lado concreto das regras neutras (worktree, diff, testes).
+- [[Manual da Orquestra - Perfil estudo]]: lugar reservado para as regras do futuro agente de estudo.
 
 ## 📚 Conceitos por trás
 - [[Conventional Commits]]: a especificação que inspira o meu padrão.

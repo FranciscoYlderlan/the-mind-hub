@@ -17,4 +17,4 @@ A memória deste projeto é o cofre Obsidian `{{nome-do-cofre}}`, em `{{caminho-
 ### 🔗 Conexões
 - Lado do cofre: o `CLAUDE.md` do cofre, gerado de `Modelo de CLAUDE do cofre`
 - Formato dos subagentes: [[modelo-briefing-subagente]], [[modelo-relatorio-subagente]]
-- Regras: [[Manual da Orquestra]]
+- Regras: [[Manual da Orquestra]] e [[Manual da Orquestra - Perfil projeto prático]]

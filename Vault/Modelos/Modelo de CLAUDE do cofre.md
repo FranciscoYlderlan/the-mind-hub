@@ -88,10 +88,10 @@ Detalhe: [[Manual da Orquestra#🚦 Etapas vitais]] (ler pela CLI). Modelos e ma
 - **Passos:** `.git` na raiz do `the-mind-hub` (peça a pasta e permissão para apagar); `verificar` zero ERRO; sem identidade, `git -c user.name=... -c user.email=...`, nunca `git config`; cofre e README em commits separados.
 - Detalhe: [[Padrão de commit]] e [[Commitar no the-mind-hub]] (ler pela CLI).
 
-## Repositórios e acesso
+## Acesso e ações irreversíveis
 
-- Onde ficam e o que o agente pode sem perguntar: decisão em `funcionalidades/geral/` (busque "repositório"). Sem decisão, pedir antes.
-- Apagar arquivos, forçar push ou mexer na branch principal fora do CI/CD: sempre pedir confirmação.
+- Onde fica cada coisa e o que o agente pode sem perguntar: decisão em `funcionalidades/geral/` (busque "acesso" e "repositório"). Sem decisão, pedir antes.
+- Apagar ou sobrescrever o que não se recupera: sempre pedir confirmação. No projeto prático (repositório, `--force`, branch principal): [[Manual da Orquestra - Perfil projeto prático]] (ler pela CLI).
 
 ## Como buscar (obrigatório)
 
