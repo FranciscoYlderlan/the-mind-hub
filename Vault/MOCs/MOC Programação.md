@@ -38,6 +38,8 @@ origem: Manual do Meu Cérebro no Obsidian
 
 ## 🎼 Agentes em paralelo
 - [[Manual da Orquestra]]: orquestrador, subagentes, fluxo de uma sessão e a estrutura `orquestra/` dos cofres de projeto.
+- [[Manual da Orquestra - Núcleo comum]]: fontes, conduta da IA, pedido, entrega, riscos e convenções de todo cofre (prático e estudo).
+- [[Manual da Orquestra - Agentes em paralelo]]: G1 a G11, da interface antes do paralelo ao teto de 5 agentes que escrevem.
 
 ## 📚 Conceitos por trás
 - [[Conventional Commits]]: a especificação que inspira o meu padrão.

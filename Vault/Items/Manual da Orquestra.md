@@ -25,7 +25,7 @@ O resultado de um agente depende menos do modelo e mais do que existe em volta d
 | 2 | O cofre é a fonte de conhecimento do projeto. Ordem de leitura: contexto → decisões → plano |
 | 3 | Plano é sugestão da IA. Decisão é minha. Nunca se misturam |
 | 4 | Quem cria nunca testa. Funcionalidades diferentes, agentes diferentes |
-| 5 | Tarefas independentes rodam em paralelo; tarefas que tocam nos mesmos arquivos rodam em série |
+| 5 | Tarefas independentes rodam em paralelo; tarefas que tocam nos mesmos arquivos rodam em série. Regras G1 a G11 (interface antes, integração com aval, teto de 5 que escrevem): [[Manual da Orquestra - Agentes em paralelo]] |
 | 6 | Contexto é finito: cada agente recebe só o que a tarefa precisa e sabe onde buscar o resto |
 | 7 | Feedback determinístico (testes, lint, tipos, CI) vale mais que o julgamento do agente |
 | 8 | Registrar assim que chega: relatório de subagente e decisão aprovada entram no cofre na hora, sem esperar o fim da sessão. Atualizar a nota existente em vez de duplicar |
@@ -33,6 +33,8 @@ O resultado de um agente depende menos do modelo e mais do que existe em volta d
 | 10 | Eu decido em dois pontos fixos: aprovar o plano e revisar o que é crítico |
 
 Diagnóstico quando o agente erra (antes de culpar o modelo): faltou **instrução** clara? Faltou **contexto** ou havia nota velha enviesando? Faltou **ferramenta** para testar e um critério de pronto? Faltou **memória** no cofre? A resposta vira ajuste no cofre (princípio 1).
+
+O resto do núcleo comum, que vale em cofre de projeto prático e de estudo (fontes, conduta da IA, pedido, entrega, riscos, convenções), está em [[Manual da Orquestra - Núcleo comum]].
 
 ---
 
@@ -207,7 +209,7 @@ Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou 
 |---|---|
 | Nota velha enviesa o agente | Atualizar em vez de duplicar; decisão substituída é marcada |
 | Excesso de notas vira ruído | Gatilhos de consulta, CLAUDE.md enxuto, regra do bug trivial |
-| Agentes paralelos colidem | Só o orquestrador escreve no cofre; worktree por implementador; "toca em" no plano |
+| Agentes paralelos colidem | Só o orquestrador escreve no cofre; worktree por implementador; "toca em" no plano; regras de [[Manual da Orquestra - Agentes em paralelo]] |
 | Proposta registrada como decisão | Nota de decisão só nasce depois do meu aval |
 | Verificador tão fraco quanto o implementador | Sempre junto com testes, lint e tipos |
 | Cópias dos manuais divergem entre cofres | Cada cópia traz a versão e a data; ao mudar o original, atualizo as cópias |
@@ -313,6 +315,7 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 
 ## 🔗 Conexões
 - Mapa: [[MOC Programação]]
+- Partes deste manual: [[Manual da Orquestra - Núcleo comum]], [[Manual da Orquestra - Agentes em paralelo]]
 - Relacionadas: [[Manual do Meu Cérebro no Obsidian]], [[Criar um novo cofre]], [[Atualizar a memória]], [[Guia do cofre para IA]]
 - Mapa do cofre de projeto: [[modelo-moc-orquestra]]
 
@@ -325,3 +328,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v6 (2026-10-29): Padronização no `CLAUDE.md` com bloco `padroes` checado pelo `verificar`; limite de tamanho próprio do cofre de projeto (substitui a isenção e os ~350 palavras); leitura de notas só pela CLI (seção 7). Origem: grafia do nome, numeração do enunciado, nome de hook e tamanho das notas fora do padrão no `stonebid-vault`, sem ERRO no `verificar`.
 - v7 (2026-10-29): varredura de impacto (B2), reescrita no estado atual (B6) e regra "Uma versão só" (§7); bloco `padroes` ganha linhas `antigo:`; o `verificar` dá ERRO em estado antigo ou aviso de prevalência fora do histórico. Origem: mais de 10 casos de nota com estado anterior depois de uma mudança (bug de processo registrado no `stonebid-vault`).
 - v8 (2026-11-16): `CLAUDE.md` vira índice, com teto de 2500 palavras no `verificar`; regra de projeto vira decisão em `funcionalidades/geral/`, buscada pela CLI; bloco `padroes` em `orquestra/padroes.md`; `limite-palavras` de 2000 em cofre novo. Origem: o `CLAUDE.md` do `stonebid-vault` chegou a 3318 palavras lidas a cada execução.
+- v9 (2026-11-16): núcleo comum neutro (N01 a N21) e agentes em paralelo (G1 a G11), com N05 a N21 e G1 a G11 em notas próprias; princípio 8 passa a registrar assim que chega; alteração e substituição parcial de decisão (§3), diário com partes (§7), passagem por limite de uso e commit do cofre a cada ciclo; integração só com meu aval. Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
