@@ -11,7 +11,7 @@ origem: Regras P01 a P16 do pacote aprovado pelo humano em 2026-11-16 (diario-20
 > [!tldr] Em uma linha
 > O que vale a mais num cofre de projeto que entrega algum produto: contrato, roteiro em fatias, verificação, aceitação final e o lado concreto (worktree, diff, testes) das regras neutras do Manual.
 
-É a **obra com planta aprovada**: o regulamento do condomínio ([[Manual da Orquestra - Núcleo comum]]) vale para todo mundo, mas quem está construindo tem também alvará, vistoria e entrega das chaves. Este é um perfil do [[Manual da Orquestra]]; o outro é o [[Manual da Orquestra - Perfil estudo]].
+É a **obra com planta aprovada**: o regulamento do condomínio ([[Manual da Orquestra - Núcleo comum]]) vale para todo mundo, mas quem está construindo tem também alvará, vistoria e entrega das chaves. Este é um perfil do [[Manual da Orquestra]]; o outro é o [[Manual da Orquestra - Perfil estudo]]. Projeto de software soma o [[Padrão de projeto de software]] e, na criação, a proposta da [[Referência de arquitetura e stack]].
 
 ---
 
@@ -53,14 +53,14 @@ O [[Manual da Orquestra]] diz cada regra em forma neutra; no projeto prático el
 | §5 passo 8 (juntar) | Merge das branches só com aval do humano; depois, a suíte inteira |
 | §8 Dial | `alto` para código legado; `baixo` para código bem estruturado |
 | §9 Riscos | Worktree por implementador evita colisão; verificador sempre junto com testes, lint e tipos |
-| A2 e A5 de [[Criar um novo cofre]] | Perguntar o repositório; ligar o repositório com o [[modelo-claude-do-repositorio]] |
+| A2 e A5 de [[Criar um novo cofre]] | Perguntar o repositório; ligar o repositório com o [[modelo-claude-do-repositorio]]; em software, propor arquitetura e stack (S25) |
 | "Acesso" do [[Modelo de CLAUDE do cofre]] | Onde ficam os repositórios vira decisão em `funcionalidades/geral/`; apagar arquivos, forçar push ou mexer na branch principal fora do CI/CD: sempre com confirmação |
 | [[modelo-briefing-subagente]] | "Trabalhe em" = worktree; "Prova" = comando de teste, lint ou tipos |
 
 ## 🔗 Conexões
 - Mapa: [[MOC Programação]]
 - Nota-mãe: [[Manual da Orquestra]]
-- Relacionadas: [[Manual da Orquestra - Perfil estudo]], [[Manual da Orquestra - Núcleo comum]]
+- Relacionadas: [[Manual da Orquestra - Perfil estudo]], [[Manual da Orquestra - Núcleo comum]], [[Padrão de projeto de software]]
 
 ## 🕓 Histórico
 - v1 (2026-11-16): criação, com P01 a P16 e os trechos do Manual que presumiam software (princípio 7, §4, §5 passos 5, 6 e 8, §8, §9, A2, A5, acesso do modelo de CLAUDE, briefing).

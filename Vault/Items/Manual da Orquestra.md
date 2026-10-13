@@ -34,7 +34,7 @@ O resultado de um agente depende menos do modelo e mais do que existe em volta d
 
 Diagnóstico quando o agente erra (antes de culpar o modelo): faltou **instrução** clara? Faltou **contexto** ou havia nota velha enviesando? Faltou **ferramenta** para testar e um critério de pronto? Faltou **memória** no cofre? A resposta vira ajuste no cofre (princípio 1).
 
-O resto do núcleo comum, que vale em cofre de projeto prático e de estudo (fontes, conduta da IA, pedido, entrega, riscos, convenções), está em [[Manual da Orquestra - Núcleo comum]]. O que vale só para um tipo de cofre mora no perfil dele: [[Manual da Orquestra - Perfil projeto prático]] ou [[Manual da Orquestra - Perfil estudo]].
+O resto do núcleo comum, que vale em cofre de projeto prático e de estudo (fontes, conduta da IA, pedido, entrega, riscos, convenções), está em [[Manual da Orquestra - Núcleo comum]]. O que vale só para um tipo de cofre mora no perfil dele: [[Manual da Orquestra - Perfil projeto prático]] (e, para software, [[Padrão de projeto de software]]) ou [[Manual da Orquestra - Perfil estudo]].
 
 ---
 
@@ -262,7 +262,7 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 | A2 | Perguntar ao humano: nome, objetivo, perfil (prático ou estudo), tempo, dial e o que o perfil pedir. O que faltar vira `[a confirmar]` | Respostas registradas |
 | A3 | `cofre.py criar` (nunca montar à mão) | Estrutura, kit, `CLAUDE.md`, moc, geral-contexto, roteiro e diário de criação |
 | A4 | Preencher o geral-contexto com os fatos de A2 e propor as etapas do roteiro. Com meu aval: nota de decisão, roteiro preenchido e etapa 1 concluída | Decisão do roteiro + `cofre.py status` |
-| A5 | Aplicar o perfil: os passos que ele pede na criação (prático: repositório; ver [[Manual da Orquestra - Perfil projeto prático]]) | O que o perfil pede como prova |
+| A5 | Aplicar o perfil: os passos que ele pede na criação (prático: repositório; em software, proposta de arquitetura e stack a partir da [[Referência de arquitetura e stack]]; ver [[Manual da Orquestra - Perfil projeto prático]]) | O que o perfil pede como prova (em software: decisões de estrutura e stack com aval) |
 | A6 | `cofre.py verificar` | **Zero ERRO** |
 | A7 | Humano: abrir no Obsidian, pasta de modelos, README, commit | — |
 
@@ -317,7 +317,7 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 ## 🔗 Conexões
 - Mapa: [[MOC Programação]]
 - Partes deste manual: [[Manual da Orquestra - Núcleo comum]], [[Manual da Orquestra - Agentes em paralelo]]
-- Perfis: [[Manual da Orquestra - Perfil projeto prático]], [[Manual da Orquestra - Perfil estudo]]
+- Perfis: [[Manual da Orquestra - Perfil projeto prático]], [[Manual da Orquestra - Perfil estudo]], [[Padrão de projeto de software]]
 - Relacionadas: [[Manual do Meu Cérebro no Obsidian]], [[Criar um novo cofre]], [[Atualizar a memória]], [[Guia do cofre para IA]]
 - Mapa do cofre de projeto: [[modelo-moc-orquestra]]
 
@@ -331,4 +331,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v7 (2026-10-29): varredura de impacto (B2), reescrita no estado atual (B6) e regra "Uma versão só" (§7); bloco `padroes` ganha linhas `antigo:`; o `verificar` dá ERRO em estado antigo ou aviso de prevalência fora do histórico. Origem: mais de 10 casos de nota com estado anterior depois de uma mudança (bug de processo registrado no `stonebid-vault`).
 - v8 (2026-11-16): `CLAUDE.md` vira índice, com teto de 2500 palavras no `verificar`; regra de projeto vira decisão em `funcionalidades/geral/`, buscada pela CLI; bloco `padroes` em `orquestra/padroes.md`; `limite-palavras` de 2000 em cofre novo. Origem: o `CLAUDE.md` do `stonebid-vault` chegou a 3318 palavras lidas a cada execução.
 - v9 (2026-11-16): núcleo comum neutro (N01 a N21) e agentes em paralelo (G1 a G11), com N05 a N21 e G1 a G11 em notas próprias; princípio 8 passa a registrar assim que chega; alteração e substituição parcial de decisão (§3), diário com partes (§7), passagem por limite de uso e commit do cofre a cada ciclo; integração só com meu aval. Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
-- v10 (2026-11-16): Manual neutro; o que presume software (princípio 7, worktree, diff e revisor do §4, passos 5, 6 e 8 do §5, "código legado" do §8, riscos de worktree e testes do §9, A2 e A5) vai para o perfil projeto prático (P01 a P16); perfil estudo reservado. Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
+- v10 (2026-11-16): Manual neutro; o que presume software (princípio 7, worktree, diff e revisor do §4, passos 5, 6 e 8 do §5, "código legado" do §8, riscos de worktree e testes do §9, A2 e A5) vai para o perfil projeto prático (P01 a P16); perfil estudo reservado; padrão de projeto de software (S01 a S25) e referência de arquitetura e stack. Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
