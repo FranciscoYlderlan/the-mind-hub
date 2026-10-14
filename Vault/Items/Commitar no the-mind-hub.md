@@ -21,7 +21,7 @@ origem: Sessão de 2026-10-28: commit bloqueado porque a sessão só tinha acess
 > 3. Peço também permissão para apagar no `the-mind-hub`: o git cria e remove arquivos `.lock` a cada commit.
 > 4. Rodo `cofre.py verificar` nos cofres alterados: zero ERRO. Ver [[Atualizar a memória]].
 > 5. Confiro a identidade do git: `git log -3 --format='%an <%ae>'`. Se a sessão não tiver nome e e-mail configurados (erro "Author identity unknown"), uso o mesmo autor dos commits anteriores **só no comando**: `git -c user.name=franciscoylderlan -c user.email=ylderlan@nca.ufma.br commit ...`.
-> 6. Commito da raiz do `the-mind-hub`, um assunto por commit, com o escopo da lista fechada do `CLAUDE.md` (o nome da pasta do cofre, ou `readme`). Ver [[Commit atômico]].
+> 6. Commito da raiz do `the-mind-hub`, um assunto por commit, com o escopo da lista fechada do `CLAUDE.md`: o nome da pasta do cofre para as notas, `readme` para o README da raiz. Toda lista de cofre começa com esses dois; os escopos acrescentados na criação (área, ID do requisito) são do repositório de código. Ver [[Commit atômico]].
 
 > [!warning] Armadilhas
 > - Sem a pasta raiz, o commit falha com "not a git repository".

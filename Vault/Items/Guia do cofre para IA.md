@@ -16,7 +16,7 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 ---
 
 > [!note] Passo a passo
-> 1. O `cofre.py criar` gera o `CLAUDE.md` a partir do [[Modelo de CLAUDE do cofre]], já com pasta, projeto e objetivo, e gera `orquestra/padroes.md` com o bloco `padroes` (`limite-palavras: 2000`).
+> 1. O `cofre.py criar` gera o `CLAUDE.md` a partir do [[Modelo de CLAUDE do cofre]], já com pasta, projeto, objetivo e o bloco de escopos (nome da pasta e `readme`), e gera `orquestra/padroes.md` com o bloco `padroes` (`limite-palavras: 2000`).
 > 2. Mudou o modelo? `cofre.py sincronizar` regenera o `CLAUDE.md` de cada cofre de projeto, preservando projeto e objetivo.
 > 3. O mesmo comando recopia modelos e manuais, convertendo os links (kebab-case, mapa `moc-orquestra`, outras notas do `Vault` viram "(no Vault)").
 > 4. Confiro que o arquivo cita **só o próprio cofre**. Cofres vizinhos entram apenas pela regra de fronteira.
@@ -28,7 +28,8 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 > - O `CLAUDE.md` é **índice, não manual**: cada regra geral fica em 1 linha imperativa (gatilho e o que fazer) com link para a nota que detalha, lida pela CLI quando a tarefa toca no assunto. Explicação, exemplo e passo a passo moram nos manuais. O `cofre.py verificar` dá ERRO se o modelo ou o `CLAUDE.md` de um cofre passar de 2500 palavras (teto, não meta).
 > - Regra só do projeto (grafia, documentos-fonte, exceções de nome, repositórios e acesso) vira decisão em `orquestra/funcionalidades/geral/`, com aval do humano. O `CLAUDE.md` só aponta para lá e manda buscar pela CLI, para o consumo de tokens não crescer com o projeto.
 > - O bloco `padroes` mora em `orquestra/padroes.md`, lido pelo `cofre.py verificar`. No `Vault`, que não tem `orquestra/`, ele fica no próprio `CLAUDE.md`.
-> - O único bloco de projeto do modelo é `<!-- projeto:escopos -->`, na seção Commits: a lista fechada de escopos de commit, escolhida na criação. O `sincronizar` o preserva, e o `verificar` dá ERRO se ele faltar.
+> - O único bloco de projeto do modelo é `<!-- projeto:escopos -->`, na seção Commits: a lista fechada de escopos de commit, que nasce com o nome da pasta e `readme` e ganha na criação os escopos do projeto. O `sincronizar` o preserva, e o `verificar` dá ERRO se ele faltar ou estiver sem nenhum escopo.
+> - Nota do `Vault` citada dentro de um cofre de projeto (no `CLAUDE.md`, numa decisão, no `geral-plano`) é escrita como texto "Nome (no Vault)", nunca como wikilink: lá ela não existe, e o link ficaria quebrado. O `cofre.py` já converte assim os links das cópias de modelos e manuais.
 > - Cofre antigo ainda guarda regras em outros blocos `<!-- projeto:... -->` no `CLAUDE.md`: o `sincronizar` os preserva como estão (no fim do arquivo, se o modelo não tem lugar para eles), o `verificar` lê o `padroes` dali enquanto não houver `orquestra/padroes.md` e dá só AVISO pelo tamanho até a migração.
 > - Não apago "Como buscar", "Padronização", "Etapas vitais" nem "Commits": são elas que obrigam o agente a consultar antes, seguir o padrão e verificar depois.
 > - O `CLAUDE.md` só é lido depois que o agente já escolheu por onde ler. Numa sessão que entra por um projeto do claude.ai, a primeira coisa lida são as **instruções do projeto**: elas recebem o bloco do [[modelo-instrucoes-do-projeto-claude]], que manda usar a CLI (carregando as ferramentas adiadas com `ToolSearch`) e proíbe ler ou escrever o cofre pela ferramenta `Projects`.

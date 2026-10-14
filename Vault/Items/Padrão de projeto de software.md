@@ -59,7 +59,7 @@ origem: Regras S01 a S25 do pacote aprovado pelo humano em 2026-11-16 (diario-20
 
 ## 6. 🏗️ Arquitetura proposta na criação
 
-- **S25** Ao criar um cofre de projeto prático de software, o agente **propõe a arquitetura (frontend e backend) e as tecnologias** a partir da [[Referência de arquitetura e stack]], para o humano ajustar em vez de partir do zero. O aval vira as decisões de estrutura e stack do cofre novo. Fala do humano (2026-11-16, 09:56): "essa arquitetura deve ser proposta e apresentada sempre que for criar um vault do tipo projeto ... e as tecnologias devem ser proposta também para que eu posso propor sugestões de mudança em cima delas e não precisar partir do absoluto 0". Passo em [[Criar um novo cofre]].
+- **S25** Ao criar um cofre de projeto prático de software, o agente **propõe a arquitetura (frontend e backend) e as tecnologias** a partir da [[Referência de arquitetura e stack]], para o humano ajustar em vez de partir do zero. A proposta fica na seção "Proposta de arquitetura e stack" do `geral-plano` do cofre novo; o aval vira as decisões de estrutura e stack, que citam essa seção no campo Proposta. Lá dentro, esta nota e a Referência são citadas como texto "Nome (no Vault)", nunca como wikilink. Fala do humano (2026-11-16, 09:56): "essa arquitetura deve ser proposta e apresentada sempre que for criar um vault do tipo projeto ... e as tecnologias devem ser proposta também para que eu posso propor sugestões de mudança em cima delas e não precisar partir do absoluto 0". Passo em [[Criar um novo cofre]].
 
 ## 🔗 Conexões
 - Mapa: [[MOC Programação]]
@@ -68,3 +68,4 @@ origem: Regras S01 a S25 do pacote aprovado pelo humano em 2026-11-16 (diario-20
 
 ## 🕓 Histórico
 - v1 (2026-11-16): criação, com S01 a S25.
+- v2 (2026-11-16): S25 diz onde a proposta mora (`geral-plano` do cofre novo), que as decisões a citam e que nota do `Vault` é citada lá como texto "Nome (no Vault)".

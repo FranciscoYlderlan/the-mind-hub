@@ -30,6 +30,13 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Notas geradas:** [[nome-da-func-decisao-AAAA-MM-DD-titulo]], [[bug-titulo-AAAA-MM-DD]]
 - **Concluída em:** 
 
+## Proposta de arquitetura e stack
+Só no projeto prático de software (S25 do [[Padrão de projeto de software]]); em outro projeto prático, apagar esta seção. Proposta da IA a partir da [[Referência de arquitetura e stack]], em linguagem leiga, no passo 4 de [[Criar um novo cofre]]. Com o aval, cada escolha vira decisão em `funcionalidades/geral/` (`geral-decisao-AAAA-MM-DD-estrutura`, `geral-decisao-AAAA-MM-DD-stack`), com o link para esta seção no campo Proposta.
+- **Frontend:** [a preencher]
+- **Backend:** [a preencher]
+- **Tecnologias e versões:** [a preencher]
+- **Ajustes do humano:** (nenhum ainda)
+
 ### 🔗 Conexões
 - Projeto: [[geral-contexto]]
 - Mapa: [[moc-orquestra]]

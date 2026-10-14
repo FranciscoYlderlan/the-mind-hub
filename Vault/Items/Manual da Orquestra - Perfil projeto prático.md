@@ -53,7 +53,7 @@ O [[Manual da Orquestra]] diz cada regra em forma neutra; no projeto prático el
 | §5 passo 8 (juntar) | Merge das branches só com aval do humano; depois, a suíte inteira |
 | §8 Dial | `alto` para código legado; `baixo` para código bem estruturado |
 | §9 Riscos | Worktree por implementador evita colisão; verificador sempre junto com testes, lint e tipos |
-| A2 e A5 de [[Criar um novo cofre]] | Perguntar o repositório; ligar o repositório com o [[modelo-claude-do-repositorio]]; em software, propor arquitetura e stack (S25) |
+| A2 e A5 de [[Criar um novo cofre]] | Perguntar o repositório e se o projeto será publicado ou só local (`--publicado` do `cofre.py criar`); ligar o repositório com o [[modelo-claude-do-repositorio]]; em software, propor arquitetura e stack no `geral-plano` (S25) |
 | "Acesso" do [[Modelo de CLAUDE do cofre]] | Onde ficam os repositórios vira decisão em `funcionalidades/geral/`; apagar arquivos, forçar push ou mexer na branch principal fora do CI/CD: sempre com confirmação |
 | [[modelo-briefing-subagente]] | "Trabalhe em" = worktree; "Prova" = comando de teste, lint ou tipos |
 
@@ -64,3 +64,4 @@ O [[Manual da Orquestra]] diz cada regra em forma neutra; no projeto prático el
 
 ## 🕓 Histórico
 - v1 (2026-11-16): criação, com P01 a P16 e os trechos do Manual que presumiam software (princípio 7, §4, §5 passos 5, 6 e 8, §8, §9, A2, A5, acesso do modelo de CLAUDE, briefing).
+- v2 (2026-11-16): A2 e A5 perguntam se o projeto será publicado ou só local (`--publicado` do `cofre.py criar`) e põem a proposta de arquitetura e stack no `geral-plano`.

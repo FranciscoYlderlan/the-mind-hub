@@ -64,7 +64,7 @@ nome-do-cofre/
 └── Anexos/                       imagens e PDFs
 ```
 
-- `funcionalidades/geral/` guarda o contexto, as decisões que valem para o projeto todo (arquitetura, stack, nível do dial) e o **roteiro** (`geral-plano`).
+- `funcionalidades/geral/` guarda o contexto, as decisões que valem para o projeto todo (arquitetura, stack, nível do dial) e o **roteiro** (`geral-plano`), que no projeto prático de software também guarda a proposta de arquitetura e stack.
 - O `CLAUDE.md` é o único índice. Não existe `leia-primeiro.md`.
 
 ---
@@ -177,7 +177,7 @@ Lição de um bug que vale **fora** do projeto sobe para o `Vault` como nota de 
 - Português brasileiro.
 - Arquivos e pastas em **kebab-case**, sem acento. Notas operacionais levam **prefixo da funcionalidade** (`lances-auto-plano.md`) para não haver dois `plano.md`.
 - Datas **AAAA-MM-DD** em nome de arquivo e frontmatter.
-- Links com `[[wikilinks]]`. Nota sem link fica perdida.
+- Links com `[[wikilinks]]`. Nota sem link fica perdida. Nota do `Vault` citada num cofre de projeto é texto "Nome (no Vault)", nunca wikilink: lá ela não existe (o `cofre.py` converte assim os links das cópias).
 - **Notas operacionais** (contexto, plano, decisão, bug, diário) usam o modelo próprio e ficam isentas de analogia e resumo de 3 pontos. Notas de `referencias/` seguem o Manual do Cérebro.
 - **Tamanho:** o limite de ~350 palavras do Manual do Cérebro não vale em cofre de projeto, nem em `referencias/`. Vale o `limite-palavras` do bloco `padroes` em `orquestra/padroes.md`: 2000 palavras em cofre novo; cofre que nasceu antes dessa regra mantém o valor que já tinha. Passou do limite: a parte nova vira nota própria (nome da original + `-<assunto>`), ligada nos dois sentidos.
 - **Padronização:** grafia única do nome do projeto, fonte citada pela numeração da nota que a transcreve, exceção de nome só se estiver registrada em decisão. A regra de cada projeto vira decisão em `funcionalidades/geral/`; o termo fora do padrão entra no bloco `padroes` de `orquestra/padroes.md`; o `CLAUDE.md` só aponta para os dois. O `cofre.py verificar` checa.
@@ -259,10 +259,10 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 | # | Etapa | Prova de que aconteceu |
 |---|---|---|
 | A1 | Ler: `CLAUDE.md` do Vault → este manual → Criar um novo cofre | — |
-| A2 | Perguntar ao humano: nome, objetivo, perfil (prático ou estudo), tempo, dial e o que o perfil pedir. O que faltar vira `[a confirmar]` | Respostas registradas |
-| A3 | `cofre.py criar` (nunca montar à mão) | Estrutura, kit, `CLAUDE.md`, moc, geral-contexto, roteiro e diário de criação |
+| A2 | Perguntar ao humano: nome, objetivo, perfil (prático ou estudo), tempo, dial, os escopos de commit a acrescentar e o que o perfil pedir (prático: repositório e se será publicado ou só local). O que faltar vira `[a confirmar]` | Respostas registradas |
+| A3 | `cofre.py criar` com `--perfil` (no prático, `--publicado` e `--repo`); nunca montar à mão | Estrutura, kit, `CLAUDE.md`, moc, geral-contexto com o perfil, roteiro e diário de criação |
 | A4 | Preencher o geral-contexto com os fatos de A2 e propor as etapas do roteiro. Com meu aval: nota de decisão, roteiro preenchido e etapa 1 concluída | Decisão do roteiro + `cofre.py status` |
-| A5 | Aplicar o perfil: os passos que ele pede na criação (prático: repositório; em software, proposta de arquitetura e stack a partir da [[Referência de arquitetura e stack]]; ver [[Manual da Orquestra - Perfil projeto prático]]) | O que o perfil pede como prova (em software: decisões de estrutura e stack com aval) |
+| A5 | Aplicar o perfil e acrescentar os escopos de A2 ao bloco `projeto:escopos` (depois do nome da pasta e de `readme`). Prático: repositório; em software, proposta de arquitetura e stack no `geral-plano`, a partir da [[Referência de arquitetura e stack]]; ver [[Manual da Orquestra - Perfil projeto prático]] | Escopos no `CLAUDE.md` e o que o perfil pede como prova (em software: decisões de estrutura e stack com aval, citando a proposta) |
 | A6 | `cofre.py verificar` | **Zero ERRO** |
 | A7 | Humano: abrir no Obsidian, pasta de modelos, README, commit | — |
 
@@ -332,3 +332,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v8 (2026-11-16): `CLAUDE.md` vira índice, com teto de 2500 palavras no `verificar`; regra de projeto vira decisão em `funcionalidades/geral/`, buscada pela CLI; bloco `padroes` em `orquestra/padroes.md`; `limite-palavras` de 2000 em cofre novo. Origem: o `CLAUDE.md` do `stonebid-vault` chegou a 3318 palavras lidas a cada execução.
 - v9 (2026-11-16): núcleo comum neutro (N01 a N21) e agentes em paralelo (G1 a G11), com N05 a N21 e G1 a G11 em notas próprias; princípio 8 passa a registrar assim que chega; alteração e substituição parcial de decisão (§3), diário com partes (§7), passagem por limite de uso e commit do cofre a cada ciclo; integração só com meu aval. Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
 - v10 (2026-11-16): Manual neutro; o que presume software (princípio 7, worktree, diff e revisor do §4, passos 5, 6 e 8 do §5, "código legado" do §8, riscos de worktree e testes do §9, A2 e A5) vai para o perfil projeto prático (P01 a P16); perfil estudo reservado; padrão de projeto de software (S01 a S25) e referência de arquitetura e stack; commit do cofre a cada registro concluído e na passagem de turno, com escopos em lista fechada (bloco `projeto:escopos`). Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
+- v11 (2026-11-16): A2 pergunta os escopos de commit e, no prático, publicado ou local; A3 com `--perfil`, `--publicado` e `--repo`; A5 acrescenta os escopos depois do nome da pasta e de `readme` e põe a proposta de arquitetura e stack no `geral-plano`; nota do `Vault` citada em cofre de projeto é texto "Nome (no Vault)" (§7). Origem: teste de criação de cofre de projeto em 2026-11-16.
