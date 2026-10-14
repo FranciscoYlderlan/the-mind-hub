@@ -24,6 +24,8 @@ O CLAUDE.md e indice, nao manual: 'verificar' da ERRO se o Modelo de CLAUDE do c
 CLAUDE.md de um cofre passar de 2500. O unico bloco do modelo e <!-- projeto:escopos --> (escopos de commit, lista
 fechada), cobrado na secao Commits: 'verificar' da ERRO se o bloco faltar ou estiver sem nenhum escopo. Cofre no formato antigo (com outros blocos <!-- projeto: --> no CLAUDE.md) recebe AVISO
 em vez de ERRO, ate migrar as regras para decisoes em orquestra/funcionalidades/geral/.
+Modelos do repositorio: Vault/Modelos/Orquestra/contrato/ (contrato funcional, copiado para docs/contrato/ do repositorio de
+codigo) vai no kit para orquestra/modelos/contrato/; e Markdown puro, sem frontmatter nem Conexoes, e o 'verificar' nao o le.
 Diario com partes: o "Onde parei" vigente mora na parte mais recente do dia (diario-AAAA-MM-DD-assunto.md), e o
 diario principal aponta para ela no proprio "Onde parei"; 'verificar' cobra o "Proximo passo" nessa parte.
 """
@@ -46,6 +48,8 @@ LIMITE_PADRAO = 2000          # limite-palavras de cofre novo
 TETO_MODELO_CLAUDE = 2500     # palavras do Modelo de CLAUDE do cofre (teto, nao meta)
 TETO_CLAUDE = 2500            # palavras do CLAUDE.md de cada cofre (formato novo; antigo: AVISO)
 PADROES_NOTA = "orquestra/padroes.md"
+# Modelos de arquivos do repositorio de codigo (nao sao notas): copiados no kit, ignorados pelo verificar.
+MODELOS_DO_REPO = ("Modelos/Orquestra/contrato/", "orquestra/modelos/contrato/")
 ESTADOS = ["planejada", "em-construcao", "em-verificacao", "concluida", "arquivada"]
 CODE = re.compile(r"(````.*?````|```.*?```|`[^`\n]*`)", re.S)
 LINK = re.compile(r"!?\[\[([^\]]*)\]\]")
@@ -169,6 +173,8 @@ def kit(vault):
             k["modelos/" + f.name] = converter(ler(f))
         elif f.name == "cofre.py":
             k["modelos/cofre.py"] = ler(f)
+    for f in sorted((vault / "Modelos" / "Orquestra" / "contrato").glob("*.md")):
+        k["modelos/contrato/" + f.name] = ler(f)  # Markdown puro do repositorio: copia sem converter
     k["modelos/modelo-nota.md"] = converter(ler(vault / "Modelos" / "Modelo de nota.md"))
     k["referencias/manual-da-orquestra.md"] = copia_manual(vault, "Manual da Orquestra.md")
     k["referencias/manual-do-cerebro.md"] = copia_manual(vault, "Manual do Meu Cérebro no Obsidian.md", ESCOPO_CEREBRO)
@@ -313,8 +319,9 @@ def diario_criacao(vault, d, nome, pratico=True):
         ("## Candidatos que não viraram nota\n(e por quê)", "## Candidatos que não viraram nota\n- (nenhum)"),
         ("> - **Próximo passo:** ", "> - **Próximo passo:** etapa 1 do [[geral-plano]]: preencher o [[geral-contexto]] (objetivo, motivação, tempo, dial), "
          "propor as etapas do roteiro (com aval: decisão do roteiro e etapa 1 concluída) e acrescentar os escopos de commit ao bloco do `CLAUDE.md`"
-         + (("; colar o trecho do modelo-claude-do-repositorio no repositório de código e, se for software, propor a arquitetura e a stack "
-             "na seção \"Proposta de arquitetura e stack\" do [[geral-plano]].") if pratico else ".")),
+         + (("; colar o trecho do modelo-claude-do-repositorio no repositório de código, copiar `orquestra/modelos/contrato/` para "
+             "`docs/contrato/` do repositório e preencher o `00-requisitos.md` a partir do documento-fonte e, se for software, propor "
+             "a arquitetura e a stack na seção \"Proposta de arquitetura e stack\" do [[geral-plano]].") if pratico else ".")),
         ("(subagentes em andamento ou relatórios ainda não registrados)", "nenhuma"),
         ("> - **Dúvidas para o humano:** ", "> - **Dúvidas para o humano:** as pendências [a confirmar] do geral-contexto."),
         ("- Funcionalidades tocadas: [[nome-da-func-contexto]]", "- Funcionalidades tocadas: [[geral-contexto]]"),
@@ -553,7 +560,7 @@ def verificar(cofre, vault=None):
     projeto = (cofre / "orquestra").is_dir()
     rel = lambda p: p.relative_to(cofre).as_posix()
     oculto = lambda p: any(x.startswith(".") for x in p.relative_to(cofre).parts)
-    mds = [p for p in cofre.rglob("*.md") if not oculto(p)]
+    mds = [p for p in cofre.rglob("*.md") if not oculto(p) and not rel(p).startswith(MODELOS_DO_REPO)]
     todos = {p.stem.lower() for p in mds} | {p.name.lower() for p in cofre.rglob("*") if p.is_file() and not oculto(p)}
     texto = {p: ler(p) for p in mds}
     saida = {p: links(texto[p]) for p in mds}
