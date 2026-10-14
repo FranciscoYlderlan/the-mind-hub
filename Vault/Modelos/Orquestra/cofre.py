@@ -500,11 +500,14 @@ def palavras(s):
 
 
 def escopos(claude_txt):
-    """Escopos do bloco <!-- projeto:escopos --> (texto entre crases fora do rotulo em negrito), ou None sem bloco."""
+    """Escopos do bloco <!-- projeto:escopos --> (texto entre crases fora do rotulo em negrito e fora de parenteses), ou None sem bloco."""
     m = re.search(r"<!-- projeto:escopos -->\n(.*?)<!-- /projeto:escopos -->", claude_txt or "", re.S)
     if not m:
         return None
-    return re.findall(r"`([^`\n]+)`", re.sub(r"\*\*.*?\*\*", "", m.group(1)))
+    corpo = re.sub(r"\*\*.*?\*\*", "", m.group(1))
+    while re.search(r"\([^()]*\)", corpo):  # explicacao entre parenteses nao e escopo
+        corpo = re.sub(r"\([^()]*\)", "", corpo)
+    return [e for e in re.findall(r"`([^`\n]+)`", corpo) if "[a preencher]" not in e]
 
 
 def secao_commits(claude_txt):
@@ -626,8 +629,8 @@ def verificar(cofre, vault=None):
             E("CLAUDE.md", falta)
         esc = escopos(claude_txt) or []
         if projeto and esc and [x for x in (cofre.name, "readme") if x not in esc]:
-            A("CLAUDE.md", f"escopos {esc}: a lista do cofre começa com `{cofre.name}` e `readme` "
-                           "(acrescente com aval; ver Criar um novo cofre, passo 4)")
+            E("CLAUDE.md", f"escopos {esc}: a lista do cofre começa com `{cofre.name}` e `readme`, que não saem "
+                           "(ver Criar um novo cofre, passo 4)")
     pnota = cofre / PADROES_NOTA
     fonte_p = pnota if (projeto and pnota.exists()) else claude
     nome_p = rel(fonte_p) if fonte_p.exists() else "CLAUDE.md"
