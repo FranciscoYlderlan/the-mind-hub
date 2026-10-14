@@ -52,12 +52,17 @@ Lido pelo `cofre.py verificar`. Sintaxe: `termo => forma certa`; `antigo: termo 
 antigo: re:40% a 50% => orçamento de 100 mil tokens na linha Messages do /context (Manual da Orquestra)
 antigo: re:bloco `padroes` do `CLAUDE.md`|Padronização \+ bloco `padroes`|2073 palavras no `stonebid-vault` => regra de projeto em decisão de funcionalidades/geral/ e padroes em orquestra/padroes.md; CLAUDE.md é índice (Manual da Orquestra)
 antigo: re:Estudo não ganha cofre|Feedback determinístico \(testes|cada um na sua git worktree|Constrói \*\*uma\*\* tarefa, na própria worktree => Manual neutro; o lado de software (worktree, diff, testes) e o estudo com plano em perfis (Manual da Orquestra - Perfil projeto prático, Criar um novo cofre)
+antigo: re:commitado ao fim de cada ciclo|commito o cofre \(a cada ciclo|commita o cofre a cada ciclo|Defino o escopo: a pasta ou área real => commit do cofre a cada registro concluído e na passagem de turno; escopo da lista fechada do bloco projeto:escopos (Padrão de commit)
 antigo: re:Registrar no fim, não no meio|Orquestrador, no fim da sessão|Alimentar \(no fim do trabalho\)|escreve no cofre, no fim do trabalho|alimentar no fim => registrar relatório e decisão aprovada assim que chegam (Manual da Orquestra, princípio 8)
 ```
 
 ## Commits
 
-Os cofres moram dentro do repositório `the-mind-hub`, e o `.git` fica na raiz dele. Se for preciso commitar e a sessão só tiver acesso à pasta de um cofre, **peça acesso à pasta `the-mind-hub`** e permissão para apagar nela (o git cria e remove arquivos `.lock`). Passos: `Items/Commitar no the-mind-hub.md`. Formato: `Items/Padrão de commit.md`.
+Os cofres moram dentro do repositório `the-mind-hub`, e o `.git` fica na raiz dele. Se for preciso commitar e a sessão só tiver acesso à pasta de um cofre, **peça acesso à pasta `the-mind-hub`** e permissão para apagar nela (o git cria e remove arquivos `.lock`). Passos: `Items/Commitar no the-mind-hub.md`. Formato: `Items/Padrão de commit.md`, que vale em todo cofre e repositório. Quando: a cada registro concluído e na passagem de turno.
+
+<!-- projeto:escopos -->
+- **Escopos do `the-mind-hub`** (lista fechada): `Vault` (este cofre), `readme` (README da raiz, commit separado) e, para cada cofre de projeto, o nome da pasta dele.
+<!-- /projeto:escopos -->
 
 ## Como buscar (obrigatório)
 

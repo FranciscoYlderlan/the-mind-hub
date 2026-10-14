@@ -9,7 +9,7 @@ origem: Meu prompt de versionamento do projeto conciliador-extratos
 # 🛠️ Padrão de Commit
 
 > [!tldr] Em uma linha
-> Toda mensagem de commit segue um formato fixo: `emoji tipo(escopo): Descrição`, sem variações.
+> Toda mensagem de commit, em todo cofre (prático e estudo) e em todo repositório, segue um formato fixo: `emoji tipo(escopo): Descrição`, sem variações.
 
 É como **o rótulo dos potes da despensa**. Se todo pote tem etiqueta no mesmo formato, eu acho o açúcar sem abrir nada. No histórico do Git é igual: bato o olho e sei o que cada commit fez. Esse formato vem do [[Conventional Commits]], com os emojis da minha [[Tipos e emojis de commit|tabela de tipos]].
 
@@ -18,7 +18,7 @@ origem: Meu prompt de versionamento do projeto conciliador-extratos
 ```
 :sparkles: feat(backend): Add bank statement upload endpoint
 │          │    │          └─ Descrição: imperativo, maiúscula, sem ponto final
-│          │    └─ Escopo: a área do projeto, sempre entre parênteses
+│          │    └─ Escopo: um da lista fechada do projeto, sempre entre parênteses
 │          └─ Tipo: o que a mudança é, sem abreviar
 └─ Emoji: código do tipo (o GitHub mostra o desenho)
 ```
@@ -28,7 +28,7 @@ origem: Meu prompt de versionamento do projeto conciliador-extratos
 > [!note] Passo a passo
 > 1. Confiro se o commit tem **uma mudança só**. Ver [[Commit atômico]].
 > 2. Escolho o tipo e o emoji na [[Tipos e emojis de commit|tabela]].
-> 3. Defino o escopo: a pasta ou área real (`backend`, `frontend`, `infra`, `readme`, `setup`).
+> 3. Escolho o escopo na **lista fechada** do projeto: o bloco `<!-- projeto:escopos -->` do `CLAUDE.md` do cofre ou do repositório. Não há regra geral: a lista é escolhida na criação (área como `backend` e `frontend`, ID do requisito ou outra) e só muda com aval.
 > 4. Escrevo a descrição em inglês, no imperativo: `Add`, e não `Added`.
 > 5. Começo com maiúscula e termino sem ponto.
 
@@ -36,8 +36,14 @@ origem: Meu prompt de versionamento do projeto conciliador-extratos
 > - Escopo **sempre presente**: nunca `feat:` sozinho.
 > - Escopo entre parênteses, nunca com barra: `feat(backend)`, e não `feat/backend`.
 > - Tipo por extenso: `refactor`, e não `refact`.
+> - Escopo fora da lista fechada: não invento; peço para incluir na lista.
 > - `:tada:` só no **primeiro commit** do projeto.
 > - Commit só no **meu nome**: sem `Co-Authored-By` nem link de sessão de IA, mesmo quando um agente faz o commit.
+
+> [!tip] Quando commitar
+> - **Cofre:** a cada registro concluído e na passagem de turno.
+> - **Código:** um commit por unidade lógica, e PR ao fim da tarefa.
+> - Os dois modelos de `CLAUDE.md` (do [[Modelo de CLAUDE do cofre|cofre]] e do [[modelo-claude-do-repositorio|repositório]]) trazem a seção de commits.
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Formato único: `{emoji} {tipo}(escopo): Descrição`. Esqueleto fixo, igual às minhas notas.

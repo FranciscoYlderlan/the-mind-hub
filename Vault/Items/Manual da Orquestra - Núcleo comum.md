@@ -55,7 +55,7 @@ As regras N01 a N04, N12, N14 e N15 moram no próprio Manual, na seção que mud
 | N01 a N03 (alteração e substituição de decisão) | [[Manual da Orquestra#3. ✍️ Quem escreve o quê]] |
 | N04 (diário com partes) | [[Manual da Orquestra#7. 📏 Convenções do cofre de projeto]] |
 | N12 (registrar assim que chega) | [[Manual da Orquestra#1. 🎯 Tese e princípios]], princípio 8 |
-| N14 e N15 (passagem por limite de uso; commit a cada ciclo) | [[Manual da Orquestra#🔄 Passagem de turno]] |
+| N14 e N15 (passagem por limite de uso; commit a cada registro concluído) | [[Manual da Orquestra#🔄 Passagem de turno]] |
 | G1 a G11 (agentes em paralelo) | [[Manual da Orquestra - Agentes em paralelo]] |
 | P01 a P16 (só projeto prático) | [[Manual da Orquestra - Perfil projeto prático]] |
 | S01 a S25 (só projeto de software) | [[Padrão de projeto de software]] |
