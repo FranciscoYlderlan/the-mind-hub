@@ -4,7 +4,7 @@ tags: [estudos/programacao]
 tipo: manual
 status: em-uso
 criado: 2026-11-16
-origem: Regras S01 a S25 do pacote aprovado pelo humano em 2026-11-16 (diario-2026-11-16-regras-para-o-vault, no stonebid-vault)
+origem: Regras S01 a S25 do pacote aprovado pelo humano em 2026-11-16 (diario-2026-11-16-regras-para-o-vault, no stonebid-vault); S26 e S27 do pacote "contrato funcional e validação" de 2026-11-17
 ---
 # 💻 Padrão de projeto de software
 
@@ -44,6 +44,8 @@ origem: Regras S01 a S25 do pacote aprovado pelo humano em 2026-11-16 (diario-20
 - **S14 Regra de negócio no domínio;** autorização, validação e dinheiro sempre no servidor.
 - **S15 Erro com código próprio** e `details` acionável; o teste confere o código, não a mensagem.
 - **S23 Camada MCP para agentes testarem:** uma tool por rota, desligada em produção, chave obrigatória.
+- **S26 Campo de entrada nasce do contrato:** todo campo de entrada do frontend tem schema zod tirado do ENT-xx de `docs/contrato/` (tipo, tamanho, formato, valores permitidos, teto), uma mensagem diferente para cada violação (a do ERR-xx) e impede o impossível (ex.: campo de valor só aceita número). O schema da entidade é a fonte; a tela não inventa regra (Q02 do [[Manual da Orquestra - Perfil projeto prático|perfil]], [[Contrato funcional]]). É o par de frontend do S14.
+- **S27 Comentário curto e pontual:** só o porquê que o código não mostra, em poucas linhas, sem repetir o código. ID citado só se existir em `docs/contrato/`. Fala do humano (2026-11-17): "comentários devem ser menos extensos e mais pontuais".
 
 ## 4. 📦 Versões e dependências
 
@@ -64,8 +66,9 @@ origem: Regras S01 a S25 do pacote aprovado pelo humano em 2026-11-16 (diario-20
 ## 🔗 Conexões
 - Mapa: [[MOC Programação]]
 - Perfil: [[Manual da Orquestra - Perfil projeto prático]]
-- Relacionadas: [[Referência de arquitetura e stack]], [[Padrão de commit]], [[Criar um novo cofre]]
+- Relacionadas: [[Referência de arquitetura e stack]], [[Padrão de commit]], [[Criar um novo cofre]], [[Contrato funcional]]
 
 ## 🕓 Histórico
 - v1 (2026-11-16): criação, com S01 a S25.
 - v2 (2026-11-16): S25 diz onde a proposta mora (`geral-plano` do cofre novo), que as decisões a citam e que nota do `Vault` é citada lá como texto "Nome (no Vault)".
+- v3 (2026-11-17): S26 (campo de entrada com schema tirado do ENT do contrato e mensagem por violação) e S27 (comentário curto e pontual).
