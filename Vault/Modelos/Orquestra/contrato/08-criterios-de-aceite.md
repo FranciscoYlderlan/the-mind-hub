@@ -1,6 +1,6 @@
 # Critérios de aceite (AC)
 
-Um critério por fluxo (principal, alternativo e exceção), no formato dado / quando / então. Ao final de cada funcionalidade, o verificador de fluxo principal executa os AC dos fluxos principais e, depois, o adversarial executa os dos FA e FE, no frontend e no backend.
+Um critério por fluxo (principal, alternativo e exceção), no formato dado / quando / então. Ao final de cada funcionalidade, o verificador de fluxo principal executa os AC dos fluxos principais e, depois, o adversarial executa os dos FA e FE: no backend pela API e, se a funcionalidade tem interface, também no frontend.
 
 | ID | UC | Fluxo | Dado | Quando | Então |
 |---|---|---|---|---|---|

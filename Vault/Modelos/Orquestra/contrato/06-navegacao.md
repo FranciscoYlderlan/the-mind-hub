@@ -1,6 +1,6 @@
 # Estados e navegação (NAV)
 
-Cada transição diz de onde, com que evento, sob que condição e para onde. Os estados são lógicos; o mapa para telas vem depois, na última coluna.
+Só para funcionalidade com interface. Cada transição diz de onde, com que evento, sob que condição e para onde. Os estados são lógicos; o mapa para telas vem depois, na última coluna.
 
 | ID | Origem | Evento | Condição | Destino | Tela (preencher depois) |
 |---|---|---|---|---|---|

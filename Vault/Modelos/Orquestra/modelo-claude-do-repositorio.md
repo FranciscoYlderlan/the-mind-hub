@@ -19,7 +19,7 @@ A memória deste projeto é o cofre Obsidian `{{nome-do-cofre}}`, em `{{caminho-
 - Tela não cria regra: cada tela realiza CMP, UC e NAV do contrato. Regra que falta entra primeiro no contrato, com aval do humano e item em `docs/contrato/mudancas.md`.
 - Campo de entrada: schema zod tirado do ENT (tipo, tamanho, formato, valores, teto), uma mensagem por violação (a do ERR) e o campo impede o impossível (S26 da nota `Padrão de projeto de software` do cofre `Vault`).
 - Comentário curto e pontual: só o porquê que o código não mostra; ID citado só se existir em `docs/contrato/` (S27).
-- Ao final de cada funcionalidade, o orquestrador roda o verificador de fluxo principal e depois o adversarial, no frontend e no backend: eles executam os AC. Nenhuma suíte de E2E de interface fica no repositório.
+- Toda funcionalidade tem contrato (ENT, UC com FA e FE, ERR, AC); com interface, também CMP e NAV. Ao final de cada uma, o orquestrador roda o verificador de fluxo principal e depois o adversarial: eles executam os AC pela API e, com interface, na tela. Nenhuma suíte de E2E de interface fica no repositório.
 
 ## Commits
 
