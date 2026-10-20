@@ -9,7 +9,7 @@ Só para funcionalidade com interface. Descreve o papel do componente, não a ap
 - **Saídas:** reserva criada (ENT-01) ou erro (ERR-xx).
 - **Eventos:** `alterou-campo`, `confirmou`, `cancelou`.
 - **Atende:** UC-01 (passos 1 a 5, FA-01, FE-01, FE-02).
-- **Valida:** `sala`, `inicio`, `pessoas` e `observacao` de ENT-01.
+- **Valida:** `sala`, `inicio`, `fim`, `pessoas` e `observacao` de ENT-01.
 
 ### Estados obrigatórios
 

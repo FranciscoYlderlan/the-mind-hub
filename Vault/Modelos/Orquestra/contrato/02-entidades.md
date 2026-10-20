@@ -10,12 +10,13 @@ As validações pertencem à entidade, não à tela: toda tela que mostra ou edi
 |---|---|---|---|---|---|---|
 | sala | referência | — | sim | id de sala | só sala ativa | inativa: ERR-05 |
 | inicio | data e hora | a partir de agora | sim | AAAA-MM-DD HH:mm | — | no passado: ERR-02 |
+| fim | data e hora | depois do início, no mesmo dia | sim | AAAA-MM-DD HH:mm | — | antes ou igual ao início: ERR-06 |
 | pessoas | inteiro | 1 a 20 | sim | só algarismos | — | não numérico: ERR-03; fora da faixa: ERR-04 |
 | observacao | texto | até 200 caracteres | não | livre | — | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
-- O fim é depois do início.
+- O fim é depois do início (violação: ERR-06).
 - A mesma sala não tem duas reservas que se sobrepõem (RN-01; violação: ERR-01).
 
 ### Estados do ciclo de vida

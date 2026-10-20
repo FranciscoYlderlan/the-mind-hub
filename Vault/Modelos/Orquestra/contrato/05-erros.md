@@ -9,6 +9,7 @@ Um erro por condição. O código do ERR é o código de erro que o servidor dev
 | ERR-03 | `PESSOAS_NAO_NUMERICO` | `pessoas` não é um número inteiro | bloquear | Informe o número de pessoas só com algarismos. | campo destacado |
 | ERR-04 | `PESSOAS_FORA_DA_FAIXA` | `pessoas` fora de 1 a 20 | bloquear | A sala comporta de 1 a 20 pessoas. | campo destacado |
 | ERR-05 | `SALA_INATIVA` | a sala escolhida não está ativa | voltar | Essa sala não está disponível. Escolha outra. | nada gravado; lista de salas recarregada |
+| ERR-06 | `FIM_ANTES_DO_INICIO` | o fim é antes ou igual ao início | bloquear | O fim precisa ser depois do início. | campo destacado |
 
 ## Tratamentos
 

@@ -14,7 +14,7 @@ Um caso de uso por objetivo do ator. O fluxo principal vem em passos numerados (
 
 1. Ator escolhe "Nova reserva".
 2. Sistema mostra o formulário com as salas ativas.
-3. Ator escolhe sala, início e número de pessoas e confirma.
+3. Ator escolhe sala, início, fim e número de pessoas e confirma.
 4. Sistema valida os campos (ENT-01) e a sobreposição (RN-01).
 5. Sistema grava a reserva em `pendente` e mostra a confirmação.
 
