@@ -68,7 +68,7 @@ O orquestrador copia o **bloco comum**, preenche e cola logo abaixo o **cartão 
   1. Valores fora de cada restrição de campo do ENT: letras em número, abaixo e acima dos limites, vazio, formato errado.
   2. Perfil errado.
   3. Requisição repetida.
-  4. Ação durante a atualização em tempo real.
+  4. Se houver tempo real: ação durante a atualização.
   5. Mensagem ou código de erro igual para erros diferentes (cada ERR tem o seu).
   Só com interface (ataques de tela):
   6. Duplo clique.
