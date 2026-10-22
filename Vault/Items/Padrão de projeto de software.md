@@ -57,7 +57,7 @@ origem: Regras S01 a S25 do pacote aprovado pelo humano em 2026-11-16 (diario-20
 
 - **S20 Teste de correção falha sem a correção** (ver [[Teste de corrida com janela forçada]]).
 - **S21 Opcional desligado não restringe o caso base;** regra arriscada fica atrás de flag, testada ligada e desligada.
-- **S22 Estado inválido provado no CI**, nunca como dado de demonstração.
+- **S22 Estado inválido provado no CI**, nunca como dado de demonstração. A suíte do repositório é de unitário e de API do backend; o E2E de interface é dos agentes de validação (Q04 e Q05 do perfil), sem suíte no repositório.
 
 ## 6. 🏗️ Arquitetura proposta na criação
 

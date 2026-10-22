@@ -56,7 +56,7 @@ src/
 | Runtime e framework | Node + Fastify + TypeScript | |
 | Banco e ORM | PostgreSQL + Prisma | Models em PascalCase, tabelas e colunas em snake_case por `@map` |
 | Validação | zod | Toda entrada e toda variável de ambiente |
-| Teste | Vitest | Unitário e E2E (`test/e2e/`, fora do `src/`); ao final de cada funcionalidade, os mesmos dois agentes executam os AC pela API (HTTP ou camada MCP, S23) |
+| Teste | Vitest | A suíte do repositório: unitário e de API do backend (`test/e2e/`, fora do `src/`), no CI (S22). E2E de interface não tem suíte: ao final de cada funcionalidade, os dois agentes executam os AC pela API (HTTP ou camada MCP, S23) e, com interface, na tela |
 | Qualidade | ESLint + Prettier | |
 | Ambiente | Docker + Docker Compose | API e banco locais |
 | CI/CD | GitHub Actions | `ci.yml` e `cd.yml` separados (S04, só com deploy) |
