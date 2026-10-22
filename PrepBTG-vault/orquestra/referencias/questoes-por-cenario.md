@@ -18,10 +18,19 @@ Os [[cenarios-de-pratica]] são o **título da prova**; esta nota é a **folha d
 > Questões criadas pelo Claude. Os dados são 100% simulados.
 
 > [!note] Legenda
-> **SQL** = consulta pura · **PY** = Python/pandas · **ORAL** = só raciocínio, sem código.
+> **SQL** = consulta pura · **PY** = Python/pandas · **ORAL** = só raciocínio, sem código. Em todo cenário com dados: SQL extrai, Python analisa ([[geral-decisao-2026-11-05-trilha-sql-e-python]]).
 > Tabelas do banco `compliance`: `clientes`, `socios_pj`, `contas`, `transacoes`, `paises_risco`, `regras_monitoramento`, `alertas`, `lista_restritiva`, `stg_transacoes_bruto`.
 
 ---
+
+## 0. Primeira olhada nos dados (análise exploratória)
+
+> Enunciado em reescrita como cenário concreto (caso C8, [[geral-decisao-2026-11-05-treino-por-cenarios-concretos]]). As questões abaixo viram os primeiros passos dele.
+
+- **Q0.1 (SQL + PY)** Extraia `transacoes` com SQL e, em pandas, mostre formato, tipos, nulos e duplicados.
+- **Q0.2 (PY)** `describe` com percentis 50, 90 e 99 do `valor`. Média e mediana estão perto? O que isso diz?
+- **Q0.3 (PY)** Histograma em escala log e boxplot do `valor` por segmento.
+- **Q0.4 (PY + ORAL)** z-score robusto (mediana e MAD) por cliente: quem fica fora da curva? Que 2 ou 3 hipóteses você levaria à head?
 
 ## 1. Faturamento incompatível de PJ (e outros sinais de PLD)
 
@@ -55,14 +64,20 @@ Os [[cenarios-de-pratica]] são o **título da prova**; esta nota é a **folha d
 > *"As transações chegam de três sistemas, com atraso, repetidas e cada uma num formato. As regras rodam em cima disso. Como você garante que o dado é confiável?"*
 
 - **Q3.1 (SQL)** Perfil da `stg_transacoes_bruto`: linhas por sistema, nulos e exemplos de cada formato.
-- **Q3.2 (PY)** Converta `data_evento_texto` para data e hora, tratando cada formato e o fuso.
-- **Q3.3 (PY)** Converta `valor_texto` para decimal: vírgula, "R$" e valores em centavos.
-- **Q3.4 (PY)** Padronize conta, tipo e direção para os mesmos domínios da tabela `transacoes`.
+- **Q3.2 (SQL + PY)** Converta `data_evento_texto` para data e hora, tratando cada formato e o fuso.
+- **Q3.3 (SQL + PY)** Converta `valor_texto` para decimal: vírgula, "R$" e valores em centavos.
+- **Q3.4 (SQL + PY)** Padronize conta, tipo e direção para os mesmos domínios da tabela `transacoes`.
 - **Q3.5 (SQL ou PY)** Duplicados: qual é a chave? Quando o reenvio muda o valor, qual versão vale e por quê?
 - **Q3.6 (PY)** Atraso: distribuição de `recebido_em` menos a data do evento. Que janela de reprocessamento você adotaria, e o que acontece com uma regra que roda em D+1?
 - **Q3.7 (SQL)** Reconcilie a staging limpa com `transacoes`: contagem, soma e divergências.
 - **Q3.8 (SQL + PY)** Grave uma tabela limpa e uma de quarentena. Que checagens rodam a cada carga? Como a carga continua segura se rodar duas vezes?
 - **Q3.9 (ORAL)** Como você monitora o pipeline: volume, atraso, mudança de formato, linhagem do dado?
+- **Q3.10 (SQL)** Particione a tabela limpa por mês no MySQL. Como reprocessar só um mês sem tocar nos outros?
+- **Q3.11 (PY)** Exporte as tabelas para Parquet particionado por mês (`mes=AAAA-MM/`) com pandas e pyarrow.
+- **Q3.12 (SQL no DuckDB)** Consulte o Parquet com DuckDB: refaça a reconciliação da Q3.7 e compare o tempo com o MySQL.
+
+> [!note] Regras do cenário 3
+> Q3.2 a Q3.4 são resolvidas **em SQL e em Python**, com reconciliação entre os dois ([[geral-decisao-2026-11-05-trilha-sql-e-python]]). Nulo em valor, data ou cliente vai para a quarentena ([[tratamento-de-nulos]]).
 
 ## 4. Assistente de GenAI com RAG para Compliance
 
@@ -100,13 +115,13 @@ Os [[cenarios-de-pratica]] são o **título da prova**; esta nota é a **folha d
 ---
 
 > [!info] Fechamento de cada cenário
-> Resposta nos 5 blocos de [[cenarios-de-pratica]] e a versão de cerca de 90 segundos em voz alta.
+> Resposta nos 6 passos do [[esqueleto-de-6-passos]] e a versão de cerca de 90 segundos em voz alta. Roteiros guiados dos cenários 1 a 3: [[roteiros-dos-cenarios-genericos]]. Casos extras: [[casos-de-treino-em-6-passos]].
 
 > [!tip] Quando abrir esta nota
 > No começo de cada sessão de treino, para escolher a próxima questão do [[banco-mocado-plano]].
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** 6 cenários, 44 questões; 1, 2, 3 e 5 usam dados, 4 e 6 são quase só raciocínio.
+* **Ponto 1:** 6 cenários e a primeira olhada (0), 51 questões; 0, 1, 2, 3 e 5 usam dados, 4 e 6 são quase só raciocínio.
 * **Ponto 2:** O cenário 3 gera a tabela limpa que o 6 usa; o 1 gera os casos que o 2 usa para medir cobertura.
 * **Ponto 3:** Gabarito só depois de tentar: `SELECT * FROM gabarito.casos_plantados`.
 

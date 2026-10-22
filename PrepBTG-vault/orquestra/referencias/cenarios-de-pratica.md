@@ -21,19 +21,21 @@ Os cenários são como **um circuito de treino de academia**: cada estação tra
 
 | # | Cenário | O que testa | Situação |
 |---|---|---|---|
-| 1 | Faturamento incompatível de PJ | Análise de dados e regras de Compliance | resposta-modelo existe [a confirmar: copiar para o cofre] |
-| 2 | Alertas demais, pouco valor | Falsos positivos, priorização e métricas | resposta-modelo existe [a confirmar: copiar para o cofre] |
-| 3 | Pipeline confiável (dados atrasados, duplicados e em formatos diferentes) | Engenharia de dados e qualidade | **prioridade de treino** |
+| 1 | Faturamento incompatível de PJ | Análise de dados e regras de Compliance | enunciado original e roteiro em [[roteiros-dos-cenarios-genericos]] |
+| 2 | Alertas demais, pouco valor | Falsos positivos, priorização e métricas | enunciado original e roteiro em [[roteiros-dos-cenarios-genericos]] |
+| 3 | Pipeline confiável (dados atrasados, duplicados e em formatos diferentes) | Engenharia de dados e qualidade | **prioridade de treino**; roteiro em [[roteiros-dos-cenarios-genericos]] |
 | 4 | Assistente de GenAI com RAG para Compliance | GenAI, RAG e governança | **prioridade de treino** |
 | 5 | Screening de nomes contra listas restritivas e PEP | Correspondência de nomes e explicabilidade | situação [a confirmar] |
 | 6 | Arquitetura na AWS para processar transações e entregar alertas | Nuvem e arquitetura | **prioridade de treino** |
 
 > [!note] Como responder (formato do treino)
-> 1. Perguntas de esclarecimento.
-> 2. Abordagem.
-> 3. Dados e variáveis.
-> 4. Controles e governança.
-> 5. Riscos e métricas.
+> 1. Esclarecer.
+> 2. Definir a referência.
+> 3. Simples antes de sofisticado.
+> 4. Acionável e explicável.
+> 5. Medir e validar.
+> 6. Governar.
+> Detalhes e o porquê de cada passo: [[esqueleto-de-6-passos]].
 >
 > Ao final, uma versão curta de cerca de **90 segundos** para falar em voz alta.
 
@@ -45,10 +47,10 @@ Os cenários são como **um circuito de treino de academia**: cada estação tra
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Os 3, 4 e 6 são os mais distantes da experiência e pedem mais treino.
-* **Ponto 2:** Cada resposta segue 5 blocos e fecha com a versão de 90 segundos.
+* **Ponto 2:** Cada resposta segue os 6 passos do [[esqueleto-de-6-passos]] e fecha com a versão de 90 segundos.
 * **Ponto 3:** Resposta-modelo lida não vale como treino; só a resposta montada por mim mostra a lacuna.
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
-- Relacionadas: [[vaga-compliance-engineering]], [[instrucoes-do-coach-de-entrevista]], [[banco-mocado-contexto]], [[questoes-por-cenario]]
+- Relacionadas: [[vaga-compliance-engineering]], [[instrucoes-do-coach-de-entrevista]], [[banco-mocado-contexto]], [[questoes-por-cenario]], [[esqueleto-de-6-passos]], [[casos-de-treino-em-6-passos]]
 - Próxima: [[pontos-delicados]]

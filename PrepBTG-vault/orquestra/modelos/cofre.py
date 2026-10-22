@@ -14,6 +14,8 @@ Dentro de um cofre de projeto: python orquestra/modelos/cofre.py verificar .
 'verificar' sai com codigo 1 se houver ERRO. Ninguem diz "pronto" com ERRO.
 'verificar' tambem da ERRO em estado substituido (linhas 'antigo:' do bloco padroes) e em aviso de
 prevalencia ('onde esta nota fala em X, vale Y') fora dos lugares de historico: uma versao so.
+'verificar' tambem cobra a leitura pela Obsidian CLI em todo cofre: aviso "Obsidian CLI primeiro" no topo do
+CLAUDE.md e secao "Como buscar" completa, com vault="<nome da pasta>".
 """
 import argparse, datetime, re, sys
 from pathlib import Path
@@ -36,6 +38,10 @@ LINK = re.compile(r"!?\[\[([^\]]*)\]\]")
 KEBAB = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*\.md$")
 DATA = r"\d{4}-\d{2}-\d{2}"
 COMMIT_NOTAS = ("Padrão de commit", "Commitar no the-mind-hub")
+# Trechos que a secao "Como buscar" precisa ter: CLI antes de qualquer ferramenta, tambem para ler, e plano B avisado.
+BUSCA_TRECHOS = ("Obsidian CLI: obrigatória", "obsidian_search", "Ler também é pela CLI", "CLI falhou",
+                 "Obsidian CLI via MCP não carrega", "Ferramenta adiada não é CLI falhando", "ToolSearch",
+                 "Projeto do claude.ai não é o cofre")
 ESCOPO_CEREBRO = (
     "\n>\n> **Escopo neste cofre:** vale para as notas de `referencias/` e `MOCs/` o perfil, o tom, o esqueleto, "
     "os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das "
@@ -214,6 +220,8 @@ def criar(a):
         if not any((dest / p).iterdir()):
             (dest / p / ".gitkeep").touch()
     print(f"Cofre {dest} criado. Proximo passo: preencher o geral-contexto e rodar verificar.")
+    print(f"Leitura pela Obsidian CLI: abra a pasta {dest.name} como cofre no Obsidian (nome no app = nome da pasta) e "
+          f'valide com obsidian_search vault="{dest.name}" (ou: obsidian vault="{dest.name}" search query="contexto").')
     return verificar(dest, vault)
 
 
@@ -412,6 +420,26 @@ def secao_commits(claude_txt):
             for n in COMMIT_NOTAS if n.lower() not in m.group(1).lower()]
 
 
+def secao_busca(claude_txt, nome):
+    """Leitura pela Obsidian CLI -> lista de faltas (vazia = ok). Vale para todo cofre, pessoal ou de projeto."""
+    t = claude_txt or ""
+    faltas = []
+    topo = re.split(r"^## ", t, maxsplit=1, flags=re.M)[0]
+    if "Obsidian CLI primeiro" not in topo:
+        faltas.append("sem o aviso 'Leitura: Obsidian CLI primeiro' antes da primeira seção (copie do Modelo de CLAUDE do cofre)")
+    m = re.search(r"^## Como buscar.*?\n(.*?)(?=^## |\Z)", t, re.S | re.M)
+    if not m:
+        return faltas + ["sem a seção '## Como buscar' (copie do Modelo de CLAUDE do cofre)"]
+    sec = m.group(1)
+    faltas += [f"seção 'Como buscar' sem '{x}' (copie do Modelo de CLAUDE do cofre)" for x in BUSCA_TRECHOS if x not in sec]
+    nomes = set(re.findall(r'vault="([^"]+)"', t))
+    if nome not in nomes:
+        faltas.append(f'CLAUDE.md sem vault="{nome}": a CLI precisa do nome do cofre no Obsidian (= nome da pasta)')
+    for outro in sorted(nomes - {nome}):
+        faltas.append(f'CLAUDE.md usa vault="{outro}", mas este cofre é "{nome}": a CLI leria outro cofre')
+    return faltas
+
+
 def verificar(cofre, vault=None):
     cofre = Path(cofre).resolve()
     erros, avisos = [], []
@@ -491,6 +519,8 @@ def verificar(cofre, vault=None):
     claude_txt = ler(claude) if claude.exists() else ""
     if claude.exists():
         for falta in secao_commits(claude_txt):
+            E("CLAUDE.md", falta)
+        for falta in secao_busca(claude_txt, cofre.name):
             E("CLAUDE.md", falta)
     regras, limite, tem_bloco, antigos = padroes(claude_txt)
     eh_kit = lambda p: rel(p).startswith(("orquestra/modelos/", "Modelos/", "orquestra/referencias/manual-"))

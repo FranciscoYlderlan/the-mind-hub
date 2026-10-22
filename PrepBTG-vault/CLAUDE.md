@@ -4,6 +4,8 @@ Este é um cofre do Obsidian: uma pasta de notas Markdown. Ele é a **memória d
 
 Nome do cofre no Obsidian: `PrepBTG-vault`. Repositórios de código, links e pasta local: seção "Repositórios e acesso", abaixo.
 
+> **Leitura: Obsidian CLI primeiro.** Antes de qualquer outra ferramenta (`cat`, `grep`, `find`, `Read`, busca de subagente, documentos do projeto do claude.ai), leia e busque este cofre pela Obsidian CLI, com `vault="PrepBTG-vault"`. Ferramentas `obsidian_*` fora da lista podem estar só adiadas: carregue com `ToolSearch` antes de concluir que a CLI falhou. Regras, comandos e plano B: seção "Como buscar".
+
 ## Seu papel
 
 - **Se você é a sessão principal, você é o orquestrador.** Seu trabalho é ajudar o humano a gerir várias threads de agentes: ler o cofre, planejar, despachar subagentes, juntar os relatórios, falar com o humano e registrar no cofre. Não precisa que ninguém explique isso de novo.
@@ -114,6 +116,56 @@ Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma
 # termo fora do padrão => forma certa   ("re:" no início = expressão regular)
 # antigo: termo do estado substituído => estado atual (nota dona)   (ERRO só fora do histórico)
 limite-palavras: 2073
+antigo: 5 blocos => 6 passos (geral-decisao-2026-11-05-esqueleto-de-6-passos)
+antigo: Python só quando o SQL fica difícil => SQL extrai, Python analisa (geral-decisao-2026-11-05-trilha-sql-e-python)
+antigo: 44 questões => 51 questões (questoes-por-cenario)
+antigo: 15 minutos com esta tabela => cenário concreto do C8 (geral-decisao-2026-11-05-treino-por-cenarios-concretos)
+antigo: T8 diagnóstico + T9 D2 e D3 => T8 começa pela trilha didática de SQL (geral-decisao-2026-11-06-trilha-didatica-antes-dos-drills)
+antigo: diagnóstico com S2, S3, S8 e S13 => trilha didática de SQL antes dos drills (geral-decisao-2026-11-06-trilha-didatica-antes-dos-drills)
+antigo: T8 fase A: M0 de => T8 fase A: M1, no sábado de manhã (banco-mocado-plano)
+antigo: M0 e M1 (leves => M0 feito na sexta; M1 no sábado de manhã (banco-mocado-plano)
+antigo: 📊 M1: 3 de 7 => barra de progresso visual (geral-decisao-2026-11-06-progresso-a-cada-questao)
+antigo: ▓▓▓▓░░░░░░  3/7 => `▰▰▰▰▱▱` 4 de 6 (geral-decisao-2026-11-06-progresso-a-cada-questao)
+antigo: M1 de [[trilha-sql-didatica]] no sábado de manhã, depois M2 => T8 fase A: M3 no sábado à tarde (banco-mocado-plano)
+antigo: M2 de [[trilha-sql-didatica]] no sábado, depois M3 => T8 fase A: M3 no sábado à tarde (banco-mocado-plano)
+antigo: M3 de [[trilha-sql-didatica]] no sábado à tarde => T8 fase A: M4 no domingo de manhã (banco-mocado-plano)
+antigo: T8 trilha: M5 a M7 => T8 trilha: M4 e M5 no domingo de manhã (banco-mocado-plano-agenda)
+antigo: depois O7.6 e O7.3 => depois o acumulado da O7.3 e os empates da O7.2 (trilha-sql-didatica-avancado)
+antigo: acumulado da O7.4 => acumulado da O7.3 (trilha-sql-didatica-avancado)
+antigo: até 6 questões por módulo => 5 questões por módulo e uma bônus (geral-decisao-2026-11-08-cinco-questoes-e-bonus)
+antigo: até 6 questões cada => 5 questões e 1 bônus cada (banco-mocado-plano-agenda)
+antigo: T8 fase A: M4 de => T8 fase A: M7 de (banco-mocado-plano)
+antigo: T8 fase A: M5 de => T8 fase A: M7 de (banco-mocado-plano)
+antigo: M4 ✅ e M5, 5 questões => M4 ✅ e M5 ✅ (banco-mocado-plano-agenda)
+antigo: variante de O5.5 => variante de O5.4 (trilha-sql-didatica-extras)
+antigo: variante de O7.4 => variante de O7.3 (trilha-sql-didatica-extras)
+antigo: variante de O8.5 => variante de O8.4 (trilha-sql-didatica-extras)
+antigo: variante de O3.6 => variante de O3.5 (trilha-sql-didatica-extras)
+antigo: T8 fase A: avaliador do M5 => T8 fase A: M7 de (banco-mocado-plano)
+antigo: agente avaliador do M5 | => avaliador do M5 ✅ (banco-mocado-plano-agenda)
+antigo: T8 trilha: M6 e M7 => M6 pausado em 2 de 5 e M7 antes do simulado das 15h (banco-mocado-plano-agenda)
+antigo: razão volume ÷ renda => razão créditos ÷ renda anual (trilha-sql-didatica-avancado)
+antigo: Próximo: avaliador do M5 => avaliador do M5 rodado (banco-mocado-contexto)
+antigo: M7 antes do simulado das 15h => M7 pausado em 2 de 5 (banco-mocado-plano-agenda)
+antigo: antes do simulado com um amigo às 15h de domingo => M7 pausado em 2 de 5 (banco-mocado-plano)
+antigo: pergunta curta de checagem a cada ideia => 2 checagens por módulo e exercícios cobrindo todos os conceitos (geral-decisao-2026-11-09-revisao-leve-do-dia-do-teste)
+antigo: vale também para as questões do M5 e do M7 => M5 e M7 com exercícios próprios (geral-decisao-2026-11-09-revisao-leve-do-dia-do-teste)
+antigo: pausado em 2 de 5 (faltam O7.3 => revisão didática leve de M0 a M8 (banco-mocado-plano)
+antigo: re:2026-11-09( \(segunda\))?, 13h => teste em 2026-11-09, 15h (processo-seletivo-btg)
+antigo: 13h teste => 15h teste (banco-mocado-plano-agenda)
+antigo: **1 extra opcional** => 1 questão só por módulo (geral-decisao-2026-11-09-revisao-leve-do-dia-do-teste)
+antigo: as 2 questões por módulo da revisão => a questão única por módulo da revisão (geral-decisao-2026-11-09-revisao-leve-do-dia-do-teste)
+antigo: (6 no total: M0, M1, M2, M3, M4 e M6) => 8 no total, com M5 e M7 por último (geral-decisao-2026-11-09-revisao-leve-do-dia-do-teste)
+antigo: Agora é o estudo de caso => conversa com o head do time em 2026-11-11, 14h (processo-seletivo-btg)
+antigo: o estudo de caso é o atual => a conversa com o head é a atual (processo-seletivo-btg)
+antigo: etapa final conhecida do processo => conversa com o head do time (processo-seletivo-btg)
+antigo: referência técnica → liderar → sócio pelo resultado => aprender → entregar → preparar quem me substitui → liderar (roteiro-conversa-com-o-head)
+antigo: entregar → liderar → sócio pelo resultado => ciclo da casa com o sucessor (geral-decisao-2026-11-11-modulos-da-conversa-com-o-head)
+antigo: entregar, liderar, virar sócio pelo mérito => aprender, entregar, formar o sucessor, liderar (roteiro-conversa-com-o-head)
+antigo: os 6 pilares têm prova => os 7 pilares têm prova (roteiro-conversa-com-o-head)
+antigo: re:2026-11-11(,| \(quarta\),) 14h => conversa com o head em 2026-11-11, 18h, com 30 min (processo-seletivo-btg)
+antigo: ler às 13h30 => ler às 17h30 (roteiro-conversa-com-o-head-cartao)
+antigo: viram decisão segura => processo bem definido e dado bem estruturado geram decisão confiável (roteiro-conversa-com-o-head)
 ```
 <!-- /projeto:padroes -->
 
@@ -149,6 +201,9 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 |---|---|
 | Repositório de código | [a confirmar] |
 | Pasta do projeto no computador | [a preencher] |
+| Cofre | `C:\Users\Ylderlan\Documents\Projetos\the-mind-hub\PrepBTG-vault`, ligado ao chat como pasta real (o projeto do claude.ai fica vazio) |
+| Banco de treino | `\\wsl.localhost\Ubuntu\home\ylderlan\docker\containers\mysql-estudos` (container `mysql-compliance`) |
+| Cópia do banco para a IA | `C:\Users\Ylderlan\Documents\Projetos\mysql-estudos-dump` ([[esquema-do-banco-compliance]]) |
 
 - **Acesso na etapa de programação:** [a preencher: se o humano autoriza, durante a etapa de programação, pedir a pasta do projeto ou anexar o repositório sem perguntar antes].
 <!-- /projeto:repositorios -->
@@ -162,6 +217,8 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 
 1. **Obsidian CLI: obrigatória** (usa o índice do app, então acha por aliases, tags e links). Precisa do Obsidian aberto.
    - Sessão na nuvem ligada ao computador: use as ferramentas do servidor MCP `obsidian-cli` (`obsidian_search`, `obsidian_read`, `obsidian_backlinks`, `obsidian_help`), com `vault="PrepBTG-vault"`.
+   - **Ferramenta adiada não é CLI falhando.** Se as `obsidian_*` não estão na lista de ferramentas, carregue-as com `ToolSearch` (`select:mcp__remote-devices__obsidian-cli__obsidian_search,mcp__remote-devices__obsidian-cli__obsidian_read,mcp__remote-devices__obsidian-cli__obsidian_backlinks,mcp__remote-devices__obsidian-cli__obsidian_help`). Só se não vierem depois disso vale o passo 3.
+   - **Projeto do claude.ai não é o cofre.** Os documentos de um projeto do claude.ai (ferramenta `Projects`: `project_info`, `project_read`, `project_search`, `project_write`) são uma cópia que envelhece. Nunca leia nem escreva o cofre por eles. A fonte da verdade é a pasta no computador: ler pela CLI; escrever pelo shell (`device_bash`), com a pasta `the-mind-hub` conectada (`device_request_folder_access`). Para a sessão já entrar sabendo disso, as instruções do projeto do claude.ai recebem o bloco do [[modelo-instrucoes-do-projeto-claude]].
    - **Ler também é pela CLI.** Abrir ou buscar nota com `cat`, `grep`, `find`, `Read` ou outro comando de shell é erro de processo, mesmo com acesso à pasta. O shell serve só para **escrever** notas e rodar o `cofre.py`. A única exceção é o plano B do passo 3, sempre avisado.
    - Terminal no Windows:
      - Busca: `obsidian vault="PrepBTG-vault" search query="termo" limit=10`

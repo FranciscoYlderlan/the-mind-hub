@@ -30,9 +30,22 @@ origem: Manual da Orquestra
 - [[processo-seletivo-btg]]: etapas, status e formato do estudo de caso.
 - [[vaga-compliance-engineering]]: descrição-base da vaga e requisitos.
 - [[cenarios-de-pratica]]: as 6 questões de treino (não são o teste real).
-- [[questoes-por-cenario]]: as 44 questões concretas de cada cenário, ligadas ao banco simulado.
+- [[questoes-por-cenario]]: as 51 questões concretas de cada cenário, ligadas ao banco simulado.
 - [[pontos-delicados]]: AWS, TM Mentoring, mudança, salário e "JEV".
 - [[instrucoes-do-coach-de-entrevista]]: como a IA age no treino.
+- [[esqueleto-de-6-passos]]: o formato de toda resposta (decisão: [[geral-decisao-2026-11-05-esqueleto-de-6-passos]]).
+- [[roteiros-dos-cenarios-genericos]]: cenários 1 a 3 com enunciado original, roteiro e SQL.
+- [[casos-de-treino-em-6-passos]]: 8 casos curtos (C1 a C8), um conceito cada.
+- [[relato-do-colega-do-time]]: como o time da vaga trabalha (SQL extrai, Python analisa).
+- [[tratamento-de-nulos]]: COALESCE e a regra da quarentena.
+- [[estatistica-basica-e-eda]]: análise exploratória e estatística básica em Python.
+- [[sql-window-functions-mysql]]: 7 padrões de janela no dialeto do MySQL.
+- [[esquema-do-banco-compliance]]: tabelas, colunas e ligações do banco `compliance`, e como a IA lê o banco.
+- [[trilha-sql-didatica]]: curso de SQL em 9 módulos (M0 a M4 aqui), antes dos drills; M5 a M8 em [[trilha-sql-didatica-avancado]]; questões extras em [[trilha-sql-didatica-extras]].
+- [[banco-mocado-plano-registro-sql]]: registro de cada operação da trilha e o protocolo de score do agente avaliador.
+- [[questoes-sql-de-prova]]: 18 drills de SQL com tempo-alvo.
+- [[questoes-tomada-de-decisao]]: 12 cases discursivos de decisão.
+- [[banco-mocado-plano-evolucao]]: rubricas e placar da reta final.
 
 ## 📚 Regras e referências
 - [[manual-da-orquestra]]: estrutura, papéis, fluxo e gatilhos.
