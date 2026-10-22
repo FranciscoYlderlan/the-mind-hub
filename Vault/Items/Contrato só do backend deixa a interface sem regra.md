@@ -16,7 +16,7 @@ origem: projeto Stonebid (feedback da avaliação técnica e diagnóstico do hum
 > [!note] Como funciona
 > 1. **Sintoma:** servidor impecável e interface fraca: ação principal difícil de achar, campo de valor aceitando letras, a mesma mensagem para erros diferentes, menu que só aparece depois de um clique, clique perdido durante a atualização automática, comentários longos citando códigos de uma especificação que não está no repositório.
 > 2. **Causa:** o contrato descrevia só o backend; a tela não tinha de onde tirar campos, erros, estados e navegação. Fala do humano: "acredito que caiu nesse erro pois o frontend não havia nenhuma documentação ou contrato do lado do frontend apenas do backend".
-> 3. **O que fazer:** [[Contrato funcional]] em `docs/contrato/` (Q01), tela que não cria regra (Q02), contrato antes da primeira tela (Q03), verificador de fluxo principal (Q04), adversarial (Q05) e roteiro do humano no fim (Q06), do [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]].
+> 3. **O que fazer:** [[Contrato funcional]] em `docs/contrato/` (Q01), tela que não cria regra (Q02), contrato antes do código (Q03), verificador de fluxo principal (Q04), adversarial (Q05) e roteiro do humano no fim (Q06), do [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]].
 > 4. **No código:** campo com schema tirado do ENT e mensagem por violação (S26); comentário curto e pontual (S27), do [[Padrão de projeto de software]].
 
 > [!tip] Quando abrir esta nota

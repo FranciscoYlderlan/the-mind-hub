@@ -59,6 +59,7 @@ antigo: re:mora num hub com uma nota por seção vigente|nota .-mudancas. com os
 antigo: re:Playwright, por um agente verificador => verificador de fluxo principal e adversarial, agentes ao final de cada funcionalidade, sem suíte de E2E de interface no repositório (Manual da Orquestra - Perfil projeto prático, Q04 e Q05)
 antigo: re:Formulários, search params e env => todo campo de entrada com schema zod tirado do ENT do contrato e mensagem por violação (Padrão de projeto de software, S26)
 antigo: re:S01 a S25 \((branches|só projeto)|S01 a S24;|P01 a P16 \(só projeto prático\) => P01 a P16 e Q01 a Q06; S01 a S27 (Manual da Orquestra - Perfil projeto prático, Padrão de projeto de software)
+antigo: re:poucos fluxos que cobrem o máximo|depois do roteiro do humano \(Q06\): verificadores => roteiro curto e didático que passa por todas as funcionalidades; o aceite do humano fecha a aceitação final (Manual da Orquestra - Perfil projeto prático, Q06 e P07)
 ```
 
 ## Commits

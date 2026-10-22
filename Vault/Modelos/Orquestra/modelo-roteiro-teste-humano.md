@@ -7,14 +7,14 @@ criado: {{date}}
 # 🧪 Fluxos de teste e roteiro do humano
 
 > [!tldr] Em uma linha
-> Registro acumulado dos fluxos de teste de cada funcionalidade, que o humano pode usar a qualquer momento, e o roteiro final, sucinto, entregue só no fim do projeto.
+> Registro acumulado dos fluxos de teste de cada funcionalidade, que o humano pode usar a qualquer momento, e o roteiro final, curto e didático, que passa por todas as funcionalidades e é entregue só no fim do projeto.
 
 > [!warning] Quem escreve e quando
 > - **A cada funcionalidade** que passou no verificador de fluxo principal e no adversarial: o orquestrador acrescenta a seção dela em "Fluxos registrados". Nada é entregue ao humano nessa hora.
-> - **Na etapa final**, com todas as funcionalidades passando nos dois agentes: o orquestrador monta o "Roteiro final" a partir dos fluxos registrados e o entrega ao humano, antes da aceitação final (Q06 e P07 do [[Manual da Orquestra - Perfil projeto prático]]).
+> - **Na etapa final**, com todas as funcionalidades passando nos dois agentes: o orquestrador monta o "Roteiro final" a partir dos fluxos registrados e o entrega ao humano depois dos verificadores e do avaliador independente da aceitação final. O humano é a voz final da qualidade: o aceite dele fecha a aceitação (Q06 e P07 do [[Manual da Orquestra - Perfil projeto prático]]).
 > - Nota única do projeto: `funcionalidades/geral/geral-plano-teste-humano.md`. Nasce com a primeira funcionalidade que passa nos dois agentes, já ligada nos dois sentidos: o [[geral-contexto]] ganha o link para ela nas Conexões, e ela aponta de volta nas Conexões abaixo; a última etapa do [[geral-plano]] também a cita. Passou do limite de palavras: a seção de uma funcionalidade vira `geral-plano-teste-humano-<funcionalidade>.md`, com link nos dois sentidos.
 
-Fala do humano (2026-11-17): "o objetivo é eu conseguir testar o máximo de coisa possível em poucos fluxos ... mas no obsidian esses fluxos são registrados para caso eu quero realizar um teste a qualquer momento".
+Falas do humano (2026-11-17): "no obsidian esses fluxos são registrados para caso eu quero realizar um teste a qualquer momento"; "O roteiro é curto ... didático e sucinto ... mas tem o objetivo de passar por todas as funcionalidades do sistema ... pois eu sou a voz final da qualidade do sistema".
 
 ## Fluxos registrados
 
@@ -39,15 +39,26 @@ Só o objetivo, sem dizer onde clicar. O humano anota onde travou, o que procuro
 |---|---|---|---|---|---|
 | 1 | Crie uma reserva que comece amanhã. | UC-01 | | | |
 
-### Parte 2: poucos fluxos guiados
-Poucos fluxos que cobrem o máximo de AC: cada fluxo atravessa vários UC, com alguns FA e FE no caminho. Tirados dos fluxos registrados.
+### Parte 2: fluxos guiados
+Didáticos e sucintos, tirados dos fluxos registrados. Cada fluxo pode atravessar vários UC, com FA e FE no caminho; juntos, passam por todas as funcionalidades.
 
 | Fluxo | Passo | AC | Faça | Clique em | Esperado | ✔/✘ | Observação |
 |---|---|---|---|---|---|---|---|
 | A | 1 | AC-01 | Entre como cliente | "Nova reserva" | O formulário abre com as salas ativas | | |
 | A | 2 | AC-04 | Digite "dez" em pessoas | — | O campo não aceita letras | | |
 
-- **Cobertura:** AC cobertos / AC do contrato (os que ficaram de fora, listados aqui).
+### Cobertura por funcionalidade
+Toda funcionalidade do roteiro do projeto aparece em ao menos uma tarefa ou fluxo. Linha sem tarefa nem fluxo é lacuna: o roteiro não é entregue assim.
+
+| Funcionalidade | Tarefa (parte 1) | Fluxo (parte 2) |
+|---|---|---|
+| [[nome-da-func-contexto]] | 1 | A |
+
+- **AC cobertos:** AC cobertos / AC do contrato (informativo; os de fora listados aqui).
+
+### Aceite do humano
+A palavra final da aceitação (P07).
+- **Aceite:** ✔ aceito | ✘ não aceito · **Data:** AAAA-MM-DD · **Observação:** 
 
 ## Achados
 Cada achado vai ao humano como opções (P06): corrigir, registrar como limite ou deixar como opcional.

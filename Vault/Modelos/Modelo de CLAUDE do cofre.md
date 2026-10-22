@@ -55,7 +55,7 @@ Moram em `orquestra/funcionalidades/geral/`, uma decisão por nota (grafia, docu
 - **Contrato antes do código:** toda funcionalidade começa preenchendo os blocos dela em `docs/contrato/` do repositório (ENT, UC com FA e FE, ERR, AC; com interface, também CMP e NAV; modelos em `orquestra/modelos/contrato/`); tela não cria regra.
 - **Ao final de cada funcionalidade:** despache o verificador de fluxo principal (AC dos fluxos principais) e, sem bug aberto, o adversarial (AC dos FA e FE e a lista fixa de ataques), no backend pela API ou camada MCP e, com interface, no frontend pelo Playwright, com os cartões do `modelo-briefing-subagente`. Bug volta para um implementador novo; corrigido, os dois rodam de novo. Pronto = AC dos UC passando nos dois.
 - **Passou nos dois:** registre os fluxos de teste dela em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]); na primeira vez, a nota nasce ligada no [[geral-contexto]], nos dois sentidos. Nada vai ao humano nessa hora.
-- **Etapa final:** monte desse registro o roteiro do humano, sucinto (descoberta + poucos fluxos que cobrem o máximo de AC), e entregue antes da aceitação final.
+- **Etapa final:** monte desse registro o roteiro do humano, curto e didático, passando por todas as funcionalidades (tabela funcionalidade → tarefa ou fluxo, sem lacuna); entregue depois dos verificadores e do avaliador da aceitação final: o aceite do humano é a palavra final.
 - Detalhe: [[Manual da Orquestra - Perfil projeto prático]] (Q01 a Q06) e [[Contrato funcional]] (ler pela CLI).
 
 ## Convenções
