@@ -17,8 +17,11 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 
 | Onde guardar | Exemplo |
 |---|---|
-| `Vault/` (pessoal) | O que vale para **todos** os projetos: perfil, rotina, [[Padrão de commit]] |
-| Cofre do projeto | O que vale **só** para aquele projeto: regras de negócio, decisões, aprendizados |
+| `Vault/` (minha vida) | Perfil, rotina, **estudos** e o que vale para todos os projetos, como o [[Padrão de commit]] |
+| Cofre do projeto | O que vale **só** para aquele projeto: regras de negócio, decisões e o que estudei para ele |
+
+> [!warning] Estudo não ganha cofre
+> Eu estudo coisa nova o tempo todo. Um cofre por estudo viraria uma estante de cadernos com uma página só. Estudo geral vai para o `Vault/`; estudo ligado a um projeto vai para o cofre do projeto.
 
 ---
 
@@ -35,7 +38,7 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 > → Commit: `:wrench: chore(nome-do-cofre): Add initial vault structure`
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** Um projeto = um cofre. A estrutura é sempre a mesma.
+* **Ponto 1:** Só existem dois tipos de cofre: a minha vida (`Vault/`) e um por projeto.
 * **Ponto 2:** Conhecimento geral fica no `Vault/`. Conhecimento do projeto fica no cofre dele.
 * **Ponto 3:** Erro comum: esquecer o README. Um cofre que não está no mapa vira um cofre perdido.
 
