@@ -2,3 +2,6 @@
 **/.obsidian/workspace.json
 **/.obsidian/workspace-mobile.json
 **/.trash/
+
+# Python: cache do cofre.py
+**/__pycache__/
