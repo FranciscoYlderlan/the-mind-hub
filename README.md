@@ -4,13 +4,23 @@
 
 Pense numa **estante com vários cadernos**. Cada caderno tem um assunto: a minha vida, um projeto, um estudo. A estante é este repositório. Os cadernos são os cofres do [Obsidian](https://obsidian.md).
 
-## 📚 Cofres
+## 🗺️ Mapa de cofres
 
-| Cofre | Para quê |
-|---|---|
-| `Vault/` | Meu cofre pessoal: quem eu sou, como eu funciono e como eu trabalho |
+Qual memória abrir para cada projeto:
 
-Novos cofres entram aqui como novas pastas, um por projeto.
+| Cofre | Projeto | Para quê | Quando abrir |
+|---|---|---|---|
+| `Vault/` | Pessoal | Quem eu sou, como eu funciono e padrões que valem para todos os projetos | Rotina, perfil, padrão de commit |
+
+> Regra: o que vale para **todos** os projetos fica no `Vault/`. O que vale para **um** projeto fica no cofre dele.
+
+## ➕ Novo cofre
+
+1. Crio a pasta do projeto na raiz, em kebab-case, copiando a estrutura do `Vault/`.
+2. Adiciono **uma linha** no Mapa de cofres acima.
+3. Faço dois commits: um para o cofre e outro para este README.
+
+O passo a passo completo está nas notas **Criar um novo cofre** e **Registrar cofre no README**, dentro do `Vault/`.
 
 ## 🧭 Como cada cofre funciona
 
