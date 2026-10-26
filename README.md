@@ -2,7 +2,7 @@
 
 > Um lugar para guardar o que eu sei e penso, dividido em vários segundos cérebros.
 
-Pense numa **estante com vários cadernos**. Cada caderno tem um assunto: a minha vida, um projeto, um estudo. A estante é este repositório. Os cadernos são os cofres do [Obsidian](https://obsidian.md).
+Pense numa **estante com vários cadernos**. Só existem dois tipos de caderno: o da minha vida e um para cada projeto. A estante é este repositório. Os cadernos são os cofres do [Obsidian](https://obsidian.md).
 
 ## 🗺️ Mapa de cofres
 
@@ -10,9 +10,9 @@ Qual memória abrir para cada projeto:
 
 | Cofre | Projeto | Para quê | Quando abrir |
 |---|---|---|---|
-| `Vault/` | Pessoal | Quem eu sou, como eu funciono e padrões que valem para todos os projetos | Rotina, perfil, padrão de commit |
+| `Vault/` | Minha vida | Quem eu sou, como eu funciono, meus estudos e padrões que valem para todos os projetos | Rotina, perfil, estudos, padrão de commit |
 
-> Regra: o que vale para **todos** os projetos fica no `Vault/`. O que vale para **um** projeto fica no cofre dele.
+> Regra: cofre novo só para **projeto novo**. Estudo não ganha cofre: estudo geral fica no `Vault/`, e estudo de um projeto fica no cofre dele.
 
 ## ➕ Novo cofre
 
