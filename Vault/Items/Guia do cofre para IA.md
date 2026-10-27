@@ -25,6 +25,7 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 > [!warning] Armadilhas
 > - Nome do arquivo em maiúsculas: `CLAUDE.md`. Outro nome o agente não lê sozinho.
 > - O `CLAUDE.md` não é nota: sem frontmatter e fora de `Items/`.
+> - Não apago a seção "Como buscar": é ela que obriga o agente a consultar o cofre pela Obsidian CLI antes de responder de memória.
 > - Mudou uma regra do Manual? Atualizo o resumo nos `CLAUDE.md` dos cofres.
 
 ### 🛠️ Resumo direto para o cérebro

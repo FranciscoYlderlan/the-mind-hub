@@ -32,11 +32,19 @@ Nome do cofre no Obsidian: `stonebid-vault`.
 - Não invente fatos; na dúvida, marque `[a confirmar]`.
 - Nunca edite `.obsidian/` sem pedido explícito.
 
-## Como buscar
+## Como buscar (obrigatório)
 
-1. **Obsidian CLI** (preferido; precisa do Obsidian aberto):
-   - `obsidian vault="stonebid-vault" search query="termo" limit=10`
-2. **Sem CLI:** busque nos `.md` desta pasta, incluindo os `aliases` do frontmatter.
+**Sempre** que precisar recuperar contexto, decisões, regras ou qualquer instrução registrada antes, busque neste cofre **antes** de responder ou escrever. Não responda de memória quando o assunto pode estar numa nota.
+
+1. **Obsidian CLI** (primeira opção; usa o índice do app, então acha por aliases, tags e links). Precisa do Obsidian aberto:
+   - Busca: `obsidian vault="stonebid-vault" search query="termo" limit=10`
+   - Ler uma nota: `obsidian vault="stonebid-vault" read file="Nome da nota"`
+   - Quem aponta para uma nota: `obsidian vault="stonebid-vault" backlinks file="Nome da nota"`
+   - Notas por tag: `obsidian vault="stonebid-vault" tags`
+   - Lista completa de comandos: `obsidian help`
+2. Tente sinônimos e termos em inglês antes de concluir que não existe nota (as notas têm `aliases`).
+3. **Sem CLI** (comando não encontrado ou Obsidian fechado): busque nos `.md` desta pasta, incluindo os `aliases` do frontmatter, e **avise** que a busca foi feita sem a CLI.
+4. Ao usar uma nota, cite o nome dela na resposta, para eu saber de onde veio.
 
 ## Se houver outros cofres conectados
 
