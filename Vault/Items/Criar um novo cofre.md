@@ -30,7 +30,7 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 > 2. Copio a estrutura: `00 Inbox/` (com `.gitkeep`), `Items/`, `MOCs/`, `Anexos/` e `Modelos/`.
 > 3. Copio o Manual e o Modelo de nota. Do `.obsidian/`, copio só `app.json` e `core-plugins.json`.
 > 4. No Obsidian: "Abrir pasta como cofre" e escolho a pasta nova.
-> 5. Crio a `Home` dizendo, em uma linha, qual é o projeto e o link do repositório de código.
+> 5. Crio a `Home` (o projeto em uma linha + link do repositório) e o `CLAUDE.md` do cofre. Ver [[Guia do cofre para IA]].
 > 6. Registro o cofre no README. Ver [[Registrar cofre no README]].
 
 > [!tip] Quando abrir esta nota
@@ -44,5 +44,5 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Registrar cofre no README]], [[Padrão de commit]]
+- Relacionadas: [[Guia do cofre para IA]], [[Registrar cofre no README]], [[Padrão de commit]]
 - Próxima: [[Registrar cofre no README]]

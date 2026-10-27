@@ -103,7 +103,8 @@ Cofre/
 ├── Items/         TODAS as notas (pensamentos), incluindo a Home
 ├── MOCs/          mapas de assunto
 ├── Anexos/        imagens e PDFs
-└── Modelos/       esqueletos (templates)
+├── Modelos/       esqueletos (templates)
+└── CLAUDE.md      guia do cofre para agentes de IA (ver [[Guia do cofre para IA]])
 ```
 
 > [!note] Regra da pasta Items
@@ -429,6 +430,7 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 ## 🕓 Histórico
 - v1 (2026-10-26): criação, a partir da pesquisa e dos meus documentos de rotina.
 - v2 (2026-10-26): todas as notas passam a morar na pasta `Items/` (seção 3, seção 10 e checklist).
+- v3 (2026-10-27): todo cofre ganha um `CLAUDE.md` na raiz (seção 3).
 
 ## 📚 Fontes
 - Links internos, blocos e embeds: https://obsidian.md/help/links
