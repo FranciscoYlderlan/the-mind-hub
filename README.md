@@ -18,14 +18,16 @@ Qual memória abrir para cada projeto:
 ## ➕ Novo cofre
 
 1. Crio a pasta do projeto na raiz, em kebab-case, copiando a estrutura do `Vault/`.
-2. Adiciono **uma linha** no Mapa de cofres acima.
-3. Faço dois commits: um para o cofre e outro para este README.
+2. Crio o `CLAUDE.md` na raiz do cofre, a partir de `Vault/Modelos/Modelo de CLAUDE do cofre.md`.
+3. Adiciono **uma linha** no Mapa de cofres acima.
+4. Faço dois commits: um para o cofre e outro para este README.
 
 O passo a passo completo está nas notas **Criar um novo cofre** e **Registrar cofre no README**, dentro do `Vault/`.
 
 ## 🧭 Como cada cofre funciona
 
 - Cada cofre começa pela nota **Home**.
+- Cada cofre tem um `CLAUDE.md` na raiz: o guia que os agentes de IA leem quando o cofre entra como contexto.
 - As regras de escrita estão no **Manual do Meu Cérebro no Obsidian**.
 - As notas ficam em `Items/`, e os mapas de assunto ficam em `MOCs/`.
 - Tarefas não moram aqui. O Obsidian guarda o que eu **sei**, e o TickTick guarda o que eu **faço**.
