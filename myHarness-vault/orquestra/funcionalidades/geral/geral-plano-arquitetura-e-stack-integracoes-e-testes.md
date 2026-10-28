@@ -87,6 +87,15 @@ Nomes de arquivo em inglês e kebab-case (S12) onde a linguagem permite; em Rust
 | P4 | 6 `fake-claude` transmitindo ao mesmo tempo | RNF-01, RNF-02, RNF-03 | 95% dos eventos na tela em até 200 ms; nenhuma tarefa da tela acima de 50 ms |
 | P5 | Do container, o cliente MCP alcança o servidor da Obsidian CLI no Windows por HTTP e busca em 3 cofres | RN-02, RN-30, RNF-14 | Até 3 s, cada nota com o cofre de origem |
 
+### 10. ✅ Resultados dos protótipos (2026-11-19, no Windows do humano)
+
+| # | Resultado | Prova |
+|---|---|---|
+| P1 | **Passou:** 8 de 8 tentativas no esperado. T1 a T4 (escrita no cofre, `git merge`, `push --force`, leitura de `.md`) negadas pelo `harness-gate` (camada 3); T5 (`git push` comum) pelo `dontAsk` (camada 2); T6 (`WebFetch`) sem a ferramenta (camada 1); T7 e T8 permitidas. Disco confere: nada no cofre, sem merge, remoto intacto. Gancho: mediana 8,6 ms internos, 56 ms com a partida do Node, máximo 155 ms. Nada pessoal carregado (sem MCP, skill, comando ou `CLAUDE.md`; só plugins `@builtin` do CLI) | `prototipos/p1-permissao/resultado-p1.txt` (CLI 2.1.328, haiku) |
+| P5 | **Passou no Windows:** 2 cofres em paralelo em 387 ms (limite 3 s), cada nota com o cofre de origem, as 4 ferramentas expostas, porta 27180. **Falta** a chamada a partir do container (`host.docker.internal`) | `prototipos/p5-ponte-mcp/resultado-p5.txt` |
+
+Respostas às dúvidas do preparo: no Windows o agente usa a ferramenta `PowerShell` (o gate já a cobre); os ganchos de `--settings` rodam nesta máquina; `--setting-sources ""` não entrega o `CLAUDE.md` pessoal; a Obsidian CLI aceita chamadas em paralelo. O `claude -p` exige login próprio da CLI (`/login`): sem ele, sai com `authentication_failed`, e o P1 detecta.
+
 ### 🔗 Fontes consultadas (2026-11-19)
 - Parâmetros do CLI: https://code.claude.com/docs/en/CLI-reference
 - Permissões do Agent SDK (ordem de avaliação, modos, regras de negação): https://code.claude.com/docs/en/agent-sdk/permissions
