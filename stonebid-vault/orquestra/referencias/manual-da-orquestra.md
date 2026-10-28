@@ -8,7 +8,7 @@ origem: Estudos "Modelo de Orquestra de IA" e "Arquitetura Orquestra de IA" (202
 ---
 
 > [!info] Cópia do Vault
-> Cópia de `Vault/Items/Manual da Orquestra.md`, versão v4. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
+> Cópia de `Vault/Items/Manual da Orquestra.md`, versão v5. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
 
 # 🎼 Manual da Orquestra
 
@@ -209,13 +209,14 @@ Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou 
 
 ## 🔄 Passagem de turno
 
-O orquestrador trabalha com a janela de contexto **entre 40% e 50%**. Acima disso, a qualidade cai e o chat precisa ser trocado. O que mantém a continuidade é o cofre, não o chat.
+O orquestrador trabalha com um **orçamento de 100 mil tokens de conversa**: a linha **Messages** do `/context`. Somado ao custo fixo de ferramentas e instruções (~150 mil), dá perto de 25% de uma janela de 1 milhão. Contar em tokens, e não em porcentagem, mantém a regra igual em modelos com janela menor. Chegou a 100 mil: passagem de turno e chat novo. O que mantém a continuidade é o cofre, não o chat.
 
 - **Quem é quem:** o cartão "Seu papel" no `CLAUDE.md` do cofre diz que a sessão principal é o orquestrador, e que quem recebeu briefing com "Papel:" é subagente. Ninguém precisa explicar o papel de novo.
-- **Quando checar:** ao fim de cada ciclo de tarefa (pesquisa → plano → implementação → verificação → registro), o orquestrador confere a janela com o humano.
+- **Quando checar:** ao fim de cada ciclo de tarefa (pesquisa → plano → implementação → verificação → registro), o orquestrador pede ao humano o `/context` e confere a linha Messages.
 - **Antes de fechar o chat:** registrar (B), diário com "Onde parei" (próximo passo, threads abertas, dúvidas), `cofre.py status --atualizar`, `cofre.py verificar` com zero ERRO e avisar o humano.
 - **Chat novo:** `cofre.py status` → "Onde parei" do último diário → ordem de leitura. O `verificar` acusa um último diário sem "Próximo passo".
-- **Medir a janela:** o orquestrador não mede a própria janela com precisão. Quem vê a porcentagem é o humano, pelo indicador da ferramenta.
+- **Medir a janela:** o orquestrador não mede a própria janela com precisão. No app do Claude, o humano digita `/context` (não há barra fixa). No Claude Code no terminal, também dá para usar `/statusline` com a porcentagem sempre visível.
+- **Subagentes não contam** na janela do orquestrador: cada um tem a própria. Entram só o briefing enviado e o relatório recebido, por isso o relatório é curto. Subagentes consomem, sim, o limite de uso do plano.
 
 ---
 
@@ -265,7 +266,7 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 
 | # | Etapa | Prova de que aconteceu |
 |---|---|---|
-| C1 | Fim de ciclo de tarefa: conferir a janela com o humano (meta 40% a 50%) | — |
+| C1 | Fim de ciclo de tarefa: humano roda `/context`; troca quando Messages ≥ 100 mil tokens | Valor de Messages |
 | C2 | Registrar o que a sessão produziu (B1 a B6) | Notas atualizadas |
 | C3 | Diário de hoje com "Onde parei": próximo passo, threads abertas, dúvidas | "Próximo passo" preenchido |
 | C4 | `cofre.py status --atualizar` e `cofre.py verificar` | **Zero ERRO** |
@@ -307,3 +308,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v2 (2026-10-28): Etapas vitais A (criar cofre) e B (atualizar memória), passo 10 do fluxo e `cofre.py` como verificador. Origem: modelos criados sem conexões e cópias com links quebrados porque a verificação só olhava links quebrados.
 - v3 (2026-10-28): roteiro do projeto (`geral-plano`) com etapas, status e notas geradas; consulta no início de toda sessão; `cofre.py status`; status de contexto com 5 fases.
 - v4 (2026-10-28): passagem de turno (janela 40% a 50%, checada a cada ciclo), Etapas vitais C, cartão "Seu papel" no CLAUDE.md e cartões por papel no briefing.
+- v5 (2026-10-28): orçamento do orquestrador passa a ser 100 mil tokens na linha Messages do `/context` (substitui 40% a 50%); subagentes não contam na janela.
