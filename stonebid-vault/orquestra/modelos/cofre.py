@@ -202,7 +202,9 @@ def diario_criacao(vault, d, nome):
         ("## O que foi feito\n(só fatos)", f"## O que foi feito\n- Cofre `{nome}` criado com `cofre.py criar`: estrutura `orquestra/`, kit de modelos, manuais, `CLAUDE.md`, [[moc-orquestra]], [[geral-contexto]] e o roteiro [[geral-plano]]."),
         ("- [[nome-da-func-decisao-AAAA-MM-DD-titulo]]", "- (nenhuma)"), ("- [[bug-titulo-AAAA-MM-DD]]", "- (nenhum)"),
         ("## Candidatos que não viraram nota\n(e por quê)", "## Candidatos que não viraram nota\n- (nenhum)"),
-        ("> O próximo passo concreto para a próxima sessão.", "> Preencher o [[geral-contexto]] (objetivo, motivação, tempo, dial) e colar o trecho do modelo-claude-do-repositorio no repositório de código."),
+        ("> - **Próximo passo:** ", "> - **Próximo passo:** etapa 1 do [[geral-plano]]: preencher o [[geral-contexto]] (objetivo, motivação, tempo, dial), propor as etapas do roteiro e colar o trecho do modelo-claude-do-repositorio no repositório de código."),
+        ("(subagentes em andamento ou relatórios ainda não registrados)", "nenhuma"),
+        ("> - **Dúvidas para o humano:** ", "> - **Dúvidas para o humano:** as pendências [a confirmar] do geral-contexto."),
         ("- Funcionalidades tocadas: [[nome-da-func-contexto]]", "- Funcionalidades tocadas: [[geral-contexto]]"),
         ("- Projeto: [[geral-contexto]]\n", "")], "modelo-diario")
 
@@ -396,8 +398,11 @@ def verificar(cofre, vault=None):
         moc0 = cofre / "MOCs/moc-orquestra.md"
         if moc0.exists() and "Etapas vitais" not in ler(moc0):
             E("MOCs/moc-orquestra.md", "mapa sem a seção 'Etapas vitais' (etapa B5 do mapa)")
-        if (o / "diarios").is_dir() and not list((o / "diarios").glob("diario-*.md")):
+        diarios = sorted((o / "diarios").glob("diario-*.md")) if (o / "diarios").is_dir() else []
+        if not diarios:
             E("orquestra/diarios", "nenhum diário: falta ao menos o diário de criação (etapa A3)")
+        elif not re.search(r"\*\*Próximo passo:\*\* *\S", ler(diarios[-1])):
+            E(rel(diarios[-1]), "último diário sem 'Próximo passo' no Onde parei (passagem de turno, etapa C3)")
         for pz in PASTAS:
             if not (o / pz).is_dir():
                 E("orquestra/" + pz, "pasta obrigatória ausente")
