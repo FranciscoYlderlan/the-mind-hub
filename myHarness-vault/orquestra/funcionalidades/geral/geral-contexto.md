@@ -21,7 +21,7 @@ aliases: [contexto do MyHarness, MyHarness context]
 - Perfil: prático (Manual da Orquestra - Perfil projeto prático (no Vault)).
 - Publicação: só local, app desktop para uma pessoa (sem o bloco "só com deploy"). Ambiente de desenvolvimento: WSL + Docker (`compose.yaml` do repositório). Plataforma final do app: Windows (nativo).
 - Acesso ao Obsidian: o Obsidian roda no Windows e é acessado via MCP.
-- Repositório de código: pasta local `C:\Users\Ylderlan\Documents\Projetos\my-harness`, que o agente não acessa; o agente implementa e testa na própria máquina virtual e entrega os arquivos. GitHub: [a preencher]. Onde fica e o que o agente pode sem perguntar vira decisão em `funcionalidades/geral/`.
+- Repositório de código: pasta local `C:\Users\Ylderlan\Documents\Projetos\my-harness`, onde o agente escreve direto; ele implementa e testa na própria máquina virtual ([[geral-decisao-2026-11-19-acesso-ao-repositorio]]). GitHub: [a preencher]. Onde fica e o que o agente pode sem perguntar vira decisão em `funcionalidades/geral/`.
 - Enquanto o MyHarness está em desenvolvimento, o trabalho segue o método manual da orquestra, sem o MyHarness: governança e memória andam juntas neste cofre. Quando o MyHarness estiver pronto, a governança passa para ele e o cofre fica só como memória.
 - Nesta fase inicial: vários agentes em paralelo para acelerar.
 - Escopos de commit: por ID de requisito.
@@ -44,7 +44,7 @@ aliases: [contexto do MyHarness, MyHarness context]
 ## Mapa
 - Roteiro: [[geral-plano]]
 - Proposta de arquitetura e stack: [[geral-plano-arquitetura-e-stack]], [[geral-plano-arquitetura-e-stack-integracoes-e-testes]]
-- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-repositorio-e-ambiente]], [[geral-decisao-2026-11-19-plataforma-final]], [[geral-decisao-2026-11-19-acesso-ao-obsidian]], [[geral-decisao-2026-11-19-roteiro]], [[geral-decisao-2026-11-19-estrutura]], [[geral-decisao-2026-11-19-stack]], [[geral-decisao-2026-11-19-teste-da-tela]]
+- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-repositorio-e-ambiente]], [[geral-decisao-2026-11-19-plataforma-final]], [[geral-decisao-2026-11-19-acesso-ao-obsidian]], [[geral-decisao-2026-11-19-roteiro]], [[geral-decisao-2026-11-19-estrutura]], [[geral-decisao-2026-11-19-stack]], [[geral-decisao-2026-11-19-teste-da-tela]], [[geral-decisao-2026-11-19-github-oauth-proprio]], [[geral-decisao-2026-11-19-configuracoes-dos-agentes]], [[geral-decisao-2026-11-19-ci-no-github]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]]
 - Bugs: (nenhum ainda)
 - Referências: [[manual-da-orquestra]], [[manual-do-cerebro]]
 - Documento-fonte: `Anexos/harness-especificacao-funcional-2026-11-18.txt`

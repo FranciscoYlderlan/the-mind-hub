@@ -49,7 +49,7 @@ Primeira parte: [[geral-plano-arquitetura-e-stack]]. Resumo e aval: [[geral-plan
 | Acessibilidade | `axe` nos testes da tela (RNF-12) | Contraste e rótulos | Só roteiro manual |
 | Comando único de checagem | `pnpm check` (roda tudo acima) | Mesma prova para agente e humano ("Prova" do briefing) | `just` como orquestrador de tarefas |
 | CI local | Gancho de git antes do push (`lefthook`) roda `pnpm check` | Projeto não é publicado; a prova roda na máquina | Só manual |
-| CI no GitHub | GitHub Actions em `windows-latest` (plataforma final) e `ubuntu-latest` (o mesmo Linux do container), só checagem em PR (sem CD) | Mostra o ✔ no PR antes do merge do humano (S03) | Sem CI remoto (ver dúvida 2) |
+| CI no GitHub | GitHub Actions em `windows-latest` (plataforma final) e `ubuntu-latest` (o mesmo Linux do container), só checagem em PR (sem CD) | Mostra o ✔ no PR antes do merge do humano (S03) | Sem CI remoto: descartado em [[geral-decisao-2026-11-19-ci-no-github]] |
 | Gerenciador de pacotes JS | `pnpm` | Rápido e rígido com dependências | `npm` |
 
 ### 8. 📁 Estrutura de pastas do repositório
