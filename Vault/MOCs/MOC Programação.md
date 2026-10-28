@@ -20,6 +20,7 @@ origem: Manual do Meu Cérebro no Obsidian
 ## 🚦 Etapas vitais (não pular)
 - [[Criar um novo cofre]]: etapas A, do pedido ao `cofre.py verificar` com zero ERRO.
 - [[Atualizar a memória]]: etapas B, para toda escrita em qualquer cofre.
+- [[Manual da Orquestra#🔄 Passagem de turno]]: etapas C, para trocar de chat sem perder o fio.
 - [[Manual da Orquestra#🚦 Etapas vitais]]: a tabela-fonte, com a prova de cada etapa.
 
 ## 🧠 Cofres (memórias) por projeto

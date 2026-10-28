@@ -13,6 +13,7 @@ origem: Manual da Orquestra
 
 ## 🚦 Etapas vitais
 - [[Manual da Orquestra#🚦 Etapas vitais]]: toda escrita termina em `python orquestra/modelos/cofre.py verificar .` com zero ERRO.
+- [[Manual da Orquestra#🔄 Passagem de turno]]: chat novo começa por `cofre.py status` e pelo "Onde parei" do último diário.
 
 ## 🧭 Projeto
 - [[CLAUDE]]: índice que os agentes leem primeiro.

@@ -88,7 +88,7 @@ Decisão que contradiz outra: nasce uma nota nova com `substitui: [[nota antiga]
 
 ## 4. 🎭 Papéis
 
-Papel é função, não agente fixo: um agente genérico assume o papel carregando o briefing certo (`modelos/modelo-briefing-subagente.md`).
+Papel é função, não agente fixo: um agente genérico assume o papel carregando o briefing certo, com o cartão do papel (`modelos/modelo-briefing-subagente.md`). O orquestrador se reconhece pelo cartão "Seu papel" do `CLAUDE.md`.
 
 | Papel | Faz | Lê | Devolve |
 |---|---|---|---|
@@ -132,7 +132,7 @@ Regras de separação: o implementador de uma tarefa nunca é o verificador dela
 
 | Gatilho | Ação |
 |---|---|
-| Início de qualquer tarefa | `cofre.py status` (ou o roteiro `geral-plano`) → `geral-contexto` → contexto da funcionalidade → decisões → plano |
+| Início de qualquer tarefa | `cofre.py status` (ou o roteiro `geral-plano`) → "Onde parei" do último diário → `geral-contexto` → contexto da funcionalidade → decisões → plano |
 | Antes de investigar bug | Buscar em `bugs/` por sintoma (cache, 401, race, fallback, crash) e ler as decisões |
 | Antes de decisão de arquitetura | Ler as decisões. Contradizer só de forma explícita, citando a nota |
 | Ao tocar em área sensível | Contexto, `referencias/` e bugs daquela área |
@@ -203,6 +203,18 @@ Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou 
 
 ---
 
+## 🔄 Passagem de turno
+
+O orquestrador trabalha com a janela de contexto **entre 40% e 50%**. Acima disso, a qualidade cai e o chat precisa ser trocado. O que mantém a continuidade é o cofre, não o chat.
+
+- **Quem é quem:** o cartão "Seu papel" no `CLAUDE.md` do cofre diz que a sessão principal é o orquestrador, e que quem recebeu briefing com "Papel:" é subagente. Ninguém precisa explicar o papel de novo.
+- **Quando checar:** ao fim de cada ciclo de tarefa (pesquisa → plano → implementação → verificação → registro), o orquestrador confere a janela com o humano.
+- **Antes de fechar o chat:** registrar (B), diário com "Onde parei" (próximo passo, threads abertas, dúvidas), `cofre.py status --atualizar`, `cofre.py verificar` com zero ERRO e avisar o humano.
+- **Chat novo:** `cofre.py status` → "Onde parei" do último diário → ordem de leitura. O `verificar` acusa um último diário sem "Próximo passo".
+- **Medir a janela:** o orquestrador não mede a própria janela com precisão. Quem vê a porcentagem é o humano, pelo indicador da ferramenta.
+
+---
+
 ## 🧭 Roteiro do projeto
 
 O roteiro responde **onde o projeto está**, sem exigir que o agente entenda o projeto inteiro. Mora em `funcionalidades/geral/geral-plano.md` ([[modelo-roteiro]]) e é a primeira consulta de toda sessão, junto com `cofre.py status`.
@@ -245,6 +257,17 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 | B6 | Propagar: etapa do roteiro concluída (status, data, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito" e diário), decisão substituída, histórico do manual. Mudou o original no Vault → `cofre.py sincronizar` em cada cofre de projeto | Notas afetadas atualizadas |
 | B7 | `cofre.py verificar` | **Zero ERRO**. Só então "pronto" |
 
+**C. Trocar de chat (passagem de turno)** (detalhe em "Passagem de turno", acima)
+
+| # | Etapa | Prova de que aconteceu |
+|---|---|---|
+| C1 | Fim de ciclo de tarefa: conferir a janela com o humano (meta 40% a 50%) | — |
+| C2 | Registrar o que a sessão produziu (B1 a B6) | Notas atualizadas |
+| C3 | Diário de hoje com "Onde parei": próximo passo, threads abertas, dúvidas | "Próximo passo" preenchido |
+| C4 | `cofre.py status --atualizar` e `cofre.py verificar` | **Zero ERRO** |
+| C5 | Avisar o humano que pode abrir um chat novo | — |
+| C6 | Chat novo: `cofre.py status` → "Onde parei" → ordem de leitura | — |
+
 ---
 
 ## 🧩 Modelos
@@ -261,7 +284,7 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 | [[modelo-diario]] | Fatos de uma sessão |
 | [[modelo-referencia]] | Uma abordagem do acervo de orquestração |
 | [[modelo-moc-orquestra]] | Mapa do cofre de projeto (`MOCs/moc-orquestra.md`) |
-| [[modelo-briefing-subagente]] | O que o orquestrador envia a cada subagente |
+| [[modelo-briefing-subagente]] | O que o orquestrador envia a cada subagente, com os cartões de cada papel |
 | [[modelo-relatorio-subagente]] | O que cada subagente devolve |
 | [[modelo-claude-do-repositorio]] | Trecho que liga o repositório de código ao cofre |
 | [[Modelo de CLAUDE do cofre]] | O `CLAUDE.md` do cofre de projeto |
@@ -279,3 +302,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v1 (2026-10-28): criação, a partir dos dois estudos e das decisões: orquestra completa só em cofres de projeto, `funcionalidades/`, AAAA-MM-DD, kebab-case com prefixo, uma nota por decisão, só o orquestrador escreve, CLAUDE.md como índice, notas operacionais isentas, dial de estrutura e gatilhos estendidos. Revisão trimestral não adotada.
 - v2 (2026-10-28): Etapas vitais A (criar cofre) e B (atualizar memória), passo 10 do fluxo e `cofre.py` como verificador. Origem: modelos criados sem conexões e cópias com links quebrados porque a verificação só olhava links quebrados.
 - v3 (2026-10-28): roteiro do projeto (`geral-plano`) com etapas, status e notas geradas; consulta no início de toda sessão; `cofre.py status`; status de contexto com 5 fases.
+- v4 (2026-10-28): passagem de turno (janela 40% a 50%, checada a cada ciclo), Etapas vitais C, cartão "Seu papel" no CLAUDE.md e cartões por papel no briefing.
