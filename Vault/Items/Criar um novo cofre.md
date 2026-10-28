@@ -9,9 +9,9 @@ origem: Estrutura do repositório the-mind-hub
 # 🛠️ Criar um Novo Cofre
 
 > [!tldr] Em uma linha
-> Cada projeto ganha a sua própria memória: um cofre novo dentro do the-mind-hub, com a mesma estrutura do `Vault/`.
+> Cada projeto ganha a sua própria memória: um cofre novo dentro do the-mind-hub, com a estrutura `orquestra/` e as regras do Manual.
 
-Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo manual, então eu sei onde fica cada coisa. O que muda é o que ela vende. Cada cofre novo copia a estrutura e as regras do [[Manual do Meu Cérebro no Obsidian|Manual]], e o conteúdo é só do projeto.
+Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo manual, então eu sei onde fica cada coisa. O que muda é o que ela vende. Cada cofre novo copia a planta da [[Manual da Orquestra|orquestra]] e as regras do [[Manual do Meu Cérebro no Obsidian|Manual]], e o conteúdo é só do projeto.
 
 ---
 
@@ -26,12 +26,12 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 ---
 
 > [!note] Passo a passo
-> 1. Crio a pasta do cofre na raiz do `the-mind-hub`, com o nome do projeto em kebab-case. Exemplo: `conciliador-extratos/`.
-> 2. Copio a estrutura: `00 Inbox/` (com `.gitkeep`), `Items/`, `MOCs/`, `Anexos/` e `Modelos/`.
-> 3. Copio o Manual e o Modelo de nota. Do `.obsidian/`, copio só `app.json` e `core-plugins.json`.
-> 4. No Obsidian: "Abrir pasta como cofre" e escolho a pasta nova.
-> 5. Crio a `Home` (o projeto em uma linha + link do repositório) e o `CLAUDE.md` do cofre. Ver [[Guia do cofre para IA]].
-> 6. Registro o cofre no README. Ver [[Registrar cofre no README]].
+> 1. Leio o [[Manual da Orquestra]] e pergunto ao humano: nome, objetivo em meia frase, repositório, tempo e dial. O que faltar vira `[a confirmar]`.
+> 2. Na raiz do `the-mind-hub`: `python Vault/Modelos/Orquestra/cofre.py criar nome-do-cofre --projeto "Nome" --para-que "meia frase" --repo LINK`. **Nunca monto à mão.**
+> 3. Preencho o `geral-contexto` com os fatos do passo 1, seguindo [[Atualizar a memória]].
+> 4. No repositório de código, colo o trecho do [[modelo-claude-do-repositorio]].
+> 5. Rodo `python Vault/Modelos/Orquestra/cofre.py verificar nome-do-cofre`. Só sigo com **zero ERRO**.
+> 6. Abro o cofre no Obsidian, aponto Modelos para `orquestra/modelos` e registro no README. Ver [[Registrar cofre no README]].
 
 > [!tip] Quando abrir esta nota
 > Quando eu começar um projeto novo e quiser um lugar para pensar sobre ele.
@@ -39,10 +39,10 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Só existem dois tipos de cofre: a minha vida (`Vault/`) e um por projeto.
-* **Ponto 2:** Conhecimento geral fica no `Vault/`. Conhecimento do projeto fica no cofre dele.
-* **Ponto 3:** Erro comum: esquecer o README. Um cofre que não está no mapa vira um cofre perdido.
+* **Ponto 2:** Conhecimento geral fica no `Vault/`. Conhecimento do projeto fica no cofre dele, na `orquestra/`, nunca nas 5 pastas do `Vault`.
+* **Ponto 3:** Erro comum: montar à mão ou pular o verificar. Foi assim que nasceram modelos sem conexões e cópias com links quebrados.
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Guia do cofre para IA]], [[Registrar cofre no README]], [[Padrão de commit]]
+- Relacionadas: [[Manual da Orquestra]], [[Atualizar a memória]], [[Guia do cofre para IA]], [[Registrar cofre no README]]
 - Próxima: [[Registrar cofre no README]]

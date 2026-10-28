@@ -16,17 +16,17 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 ---
 
 > [!note] Passo a passo
-> 1. Copio `Vault/Modelos/Modelo de CLAUDE do cofre.md` para a raiz do cofre novo, com o nome exato `CLAUDE.md`.
-> 2. Troco `{{nome-da-pasta}}` pelo nome da pasta do cofre (é o nome que a Obsidian CLI usa).
-> 3. Troco `{{projeto}}` e `{{para quê}}` pelo projeto e por meia frase de objetivo.
+> 1. O `cofre.py criar` gera o `CLAUDE.md` a partir do [[Modelo de CLAUDE do cofre]], já com pasta, projeto, objetivo e repositório.
+> 2. Mudou o modelo? `cofre.py sincronizar` regenera o `CLAUDE.md` de cada cofre de projeto, preservando projeto, objetivo e repositório.
+> 3. O mesmo comando recopia modelos e manuais, convertendo os links (kebab-case, mapa `moc-orquestra`, outras notas do `Vault` viram "(no Vault)").
 > 4. Confiro que o arquivo cita **só o próprio cofre**. Cofres vizinhos entram apenas pela regra de fronteira.
-> 5. Copio o Manual para `Items/` do cofre novo, para o `CLAUDE.md` funcionar mesmo sem o `Vault` conectado.
+> 5. Fecho com `cofre.py verificar`: zero ERRO.
 
 > [!warning] Armadilhas
 > - Nome do arquivo em maiúsculas: `CLAUDE.md`. Outro nome o agente não lê sozinho.
-> - O `CLAUDE.md` não é nota: sem frontmatter e fora de `Items/`.
-> - Não apago a seção "Como buscar": é ela que obriga o agente a consultar o cofre pela Obsidian CLI antes de responder de memória.
-> - Mudou uma regra do Manual? Atualizo o resumo nos `CLAUDE.md` dos cofres.
+> - O `CLAUDE.md` não é nota: sem frontmatter, na raiz, e é o **único índice** (sem `leia-primeiro.md`).
+> - Regra só do projeto **não** vai no `CLAUDE.md`, porque o sincronizar o regenera. Ela vira decisão em `funcionalidades/geral/`.
+> - Não apago "Como buscar" nem "Etapas vitais": são elas que obrigam o agente a consultar antes e verificar depois.
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Um `CLAUDE.md` por cofre faz qualquer combinação de cofres funcionar num projeto.
@@ -35,5 +35,5 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Criar um novo cofre]], [[Registrar cofre no README]]
+- Relacionadas: [[Criar um novo cofre]], [[Atualizar a memória]], [[Manual da Orquestra]]
 - Próxima: [[Registrar cofre no README]]

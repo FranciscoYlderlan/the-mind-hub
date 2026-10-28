@@ -1,5 +1,5 @@
 ---
-aliases: [Manual do Obsidian, Regras das minhas notas, Perfil e regras de escrita, Obsidian rules, Guia de escrita do cofre]
+aliases: [Manual do Obsidian, Regras das minhas notas, Obsidian rules, Guia de escrita do cofre]
 tags: [ferramentas/obsidian, perfil/regras]
 tipo: manual
 status: rascunho
@@ -107,6 +107,9 @@ Cofre/
 └── CLAUDE.md      guia do cofre para agentes de IA (ver [[Guia do cofre para IA]])
 ```
 
+> [!info] Cofres de projeto são diferentes
+> As 5 pastas valem para o `Vault` (minha vida). Cofres de projeto usam a estrutura `orquestra/`, com notas operacionais (contexto, plano, decisão, bug, diário) em kebab-case. Ver [[Manual da Orquestra]].
+
 > [!note] Regra da pasta Items
 > 1. Todo pensamento novo (conceito, memória, procedimento ou manual) nasce em `Items/`.
 > 2. Fora dela, só: capturas no `00 Inbox`, mapas em `MOCs`, arquivos em `Anexos` e esqueletos em `Modelos`.
@@ -140,8 +143,8 @@ Todo arquivo começa assim, sem exceção:
 |---|---|---|
 | `aliases` | lista de 2 a 4 | Sinônimo, termo em inglês, sigla, e "como eu falaria esquecendo o nome" |
 | `tags` | lista de 1 a 3 | Da taxonomia fechada abaixo. Minúsculas, sem acento, sem `#` |
-| `tipo` | conceito, memoria, procedimento, moc, manual | Um só |
-| `status` | rascunho, em-uso, consolidada | Nasce `rascunho` |
+| `tipo` | conceito, memoria, procedimento, moc, manual | Um só. Em cofres de projeto, também contexto, plano, decisao, bug, diario, referencia ([[Manual da Orquestra]] §7) |
+| `status` | rascunho, em-uso, consolidada, arquivado | Nasce `rascunho` |
 | `criado` | AAAA-MM-DD | Data de criação |
 | `origem` | texto curto ou URL | De onde veio (aula, vídeo, conversa, experiência). Opcional, mas incentivado |
 
@@ -417,7 +420,8 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - [ ] Parágrafo fluido com até 4 linhas e 1 analogia.
 - [ ] Contraste de ritmo: nenhum bloco igual colado em outro.
 - [ ] Resumo com exatamente 3 pontos.
-- [ ] 2+ links de saída e 1 MOC.
+- [ ] 2+ links de saída **e** link de entrada (aparece num MOC ou hub). Saída sem entrada é nota órfã.
+- [ ] Segui [[Atualizar a memória]] e rodei `cofre.py verificar` com zero ERRO.
 - [ ] Nada de tarefa solta: ação vira `→ TickTick`.
 - [ ] Tom limpo: sem culpa, sem drama, sem clínico.
 
@@ -431,6 +435,8 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - v1 (2026-10-26): criação, a partir da pesquisa e dos meus documentos de rotina.
 - v2 (2026-10-26): todas as notas passam a morar na pasta `Items/` (seção 3, seção 10 e checklist).
 - v3 (2026-10-27): todo cofre ganha um `CLAUDE.md` na raiz (seção 3).
+- v4 (2026-10-28): cofres de projeto passam a usar a estrutura `orquestra/` e as notas operacionais do [[Manual da Orquestra]] (seções 3 e 4); `status` ganha `arquivado`.
+- v5 (2026-10-28): checklist exige link de entrada e `cofre.py verificar`; aliases do Manual ajustados para 4 (seção 12).
 
 ## 📚 Fontes
 - Links internos, blocos e embeds: https://obsidian.md/help/links

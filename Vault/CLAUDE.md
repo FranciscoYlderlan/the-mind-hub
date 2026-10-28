@@ -9,6 +9,7 @@ Nome do cofre no Obsidian: `Vault`.
 1. `Items/Home.md`: porta de entrada; daqui se chega em tudo.
 2. `Items/Manual do Meu Cérebro no Obsidian.md`: **regras obrigatórias** de escrita e organização. Leia antes de criar ou editar qualquer nota.
 3. `MOCs/`: mapas de assunto (`MOC Perfil`, `MOC Programação`).
+4. `Items/Manual da Orquestra.md`: como vários agentes trabalham em paralelo num projeto usando um cofre como memória. Leia antes de orquestrar subagentes ou de criar um cofre de projeto.
 
 ## Estrutura
 
@@ -18,17 +19,28 @@ Nome do cofre no Obsidian: `Vault`.
 | `Items/` | Todas as notas, incluindo a Home |
 | `MOCs/` | Mapas de assunto, nome começa com "MOC " |
 | `Anexos/` | Imagens e PDFs (kebab-case, sem acento) |
-| `Modelos/` | Esqueletos; o padrão é `Modelos/Modelo de nota.md` |
+| `Modelos/` | Esqueletos; o padrão é `Modelos/Modelo de nota.md`. `Modelos/Orquestra/` guarda os modelos dos cofres de projeto |
 
 ## Regras essenciais (resumo do Manual)
 
 - Toda nota nova nasce em `Items/` com o esqueleto do Modelo de nota.
-- Frontmatter: `aliases` (2–4) e `tags` (1–3, da taxonomia fechada do Manual) **sempre em lista**, mais `tipo`, `status` e `criado`.
+- Frontmatter: `aliases` (2–4) e `tags` (1–3, da taxonomia fechada do Manual) **sempre em lista**, mais `tipo`, `status`, `criado` e `origem` (opcional).
 - Nome do arquivo sem emoji; o emoji fica no `# Título`.
 - Toda nota tem 2+ links de saída e aparece em pelo menos um MOC.
 - Tarefas não moram aqui: viram `→ TickTick`.
 - Não invente fatos; na dúvida, marque `[a confirmar]`.
 - Nunca edite `.obsidian/` sem pedido explícito.
+
+## Etapas vitais (obrigatório)
+
+- Criar cofre de projeto: siga `Items/Criar um novo cofre.md` (etapas A). Nunca monte à mão: use `Modelos/Orquestra/cofre.py criar`.
+- Escrever, mover ou copiar qualquer nota (aqui ou num cofre de projeto): siga `Items/Atualizar a memória.md` (etapas B).
+- Ninguém diz "pronto" sem rodar `python Modelos/Orquestra/cofre.py verificar .` com **zero ERRO**.
+- Mudou um manual ou modelo daqui? Rode `cofre.py sincronizar` em cada cofre de projeto.
+
+## Commits
+
+Os cofres moram dentro do repositório `the-mind-hub`, e o `.git` fica na raiz dele. Se for preciso commitar e a sessão só tiver acesso à pasta de um cofre, **peça acesso à pasta `the-mind-hub`** e permissão para apagar nela (o git cria e remove arquivos `.lock`). Passos: `Items/Commitar no the-mind-hub.md`. Formato: `Items/Padrão de commit.md`.
 
 ## Como buscar (obrigatório)
 
@@ -46,8 +58,8 @@ Nome do cofre no Obsidian: `Vault`.
 
 ## Criar um cofre novo
 
-Siga `Items/Criar um novo cofre.md` (estrutura de pastas, Manual, Home) e `Items/Guia do cofre para IA.md` (o `CLAUDE.md` do cofre novo, a partir de `Modelos/Modelo de CLAUDE do cofre.md`). O cofre novo nasce na raiz do repositório `the-mind-hub`, ao lado deste, e precisa ser registrado no `README.md` da raiz (`Items/Registrar cofre no README.md`).
+Cofre de projeto usa a estrutura `orquestra/` do `Items/Manual da Orquestra.md`. Siga `Items/Criar um novo cofre.md` (pastas, modelos, manuais, contexto geral, trecho para o repositório de código) e `Items/Guia do cofre para IA.md` (o `CLAUDE.md` do cofre novo, a partir de `Modelos/Modelo de CLAUDE do cofre.md`). O cofre novo nasce na raiz do repositório `the-mind-hub`, ao lado deste, e precisa ser registrado no `README.md` da raiz (`Items/Registrar cofre no README.md`).
 
 ## Se houver outros cofres conectados
 
-Cada cofre tem o próprio `CLAUDE.md`. Regra de fronteira: o que vale **para a minha vida e para todos os projetos** vem para cá; o que vale **só para um projeto** vai para o cofre daquele projeto. Não misture os dois numa mesma nota.
+Cada cofre tem o próprio `CLAUDE.md`. Regra de fronteira: o que vale **para a minha vida e para todos os projetos** vem para cá; o que vale **só para um projeto** vai para o cofre daquele projeto. Não misture os dois numa mesma nota. A lição de um bug de projeto que vale para qualquer projeto sobe para cá como nota de conceito.

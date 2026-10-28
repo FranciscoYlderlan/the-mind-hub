@@ -15,11 +15,20 @@ origem: Manual do Meu Cérebro no Obsidian
 - [[Padrão de commit]]: o formato fixo das minhas mensagens. Comece por aqui.
 - [[Tipos e emojis de commit]]: a tabela de qual emoji usar em cada tipo.
 - [[Commit atômico]]: uma mudança por commit.
+- [[Commitar no the-mind-hub]]: o `.git` fica na raiz; sem acesso a ela, peço a pasta antes de commitar.
+
+## 🚦 Etapas vitais (não pular)
+- [[Criar um novo cofre]]: etapas A, do pedido ao `cofre.py verificar` com zero ERRO.
+- [[Atualizar a memória]]: etapas B, para toda escrita em qualquer cofre.
+- [[Manual da Orquestra#🚦 Etapas vitais]]: a tabela-fonte, com a prova de cada etapa.
 
 ## 🧠 Cofres (memórias) por projeto
 - [[Criar um novo cofre]]: como abrir uma memória nova para um projeto.
 - [[Guia do cofre para IA]]: o `CLAUDE.md` que todo cofre tem para os agentes.
 - [[Registrar cofre no README]]: como colocar o cofre no mapa do repositório.
+
+## 🎼 Agentes em paralelo
+- [[Manual da Orquestra]]: orquestrador, subagentes, fluxo de uma sessão e a estrutura `orquestra/` dos cofres de projeto.
 
 ## 📚 Conceitos por trás
 - [[Conventional Commits]]: a especificação que inspira o meu padrão.
