@@ -1,7 +1,8 @@
 ---
 tipo: contexto
 funcionalidade: geral
-status: em-andamento
+status: em-construcao
+etapa-atual: 1
 criado: 2026-10-28
 aliases: []
 ---
@@ -28,7 +29,7 @@ aliases: []
 (onde ler bugs e referências antes de mexer)
 
 ## Mapa
-- Plano: (nenhum ainda)
+- Roteiro: [[geral-plano]]
 - Decisões: (nenhuma ainda; nomes `geral-decisao-AAAA-MM-DD-titulo`)
 - Bugs: (nenhum ainda)
 - Referências: [[manual-da-orquestra]], [[manual-do-cerebro]]
