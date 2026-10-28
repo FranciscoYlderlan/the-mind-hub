@@ -91,11 +91,11 @@ Direção: `app → features → components / hooks / lib`; uma feature não imp
 
 Detalhes que completam:
 - **Prompt de papel antes de tudo (RN-25):** vai em `--append-system-prompt`, com a versão gravada na execução (RN-28).
-- **Configuração pessoal não vaza para o papel:** carregar só as fontes de configuração que o núcleo escolher (`--setting-sources`) e só os MCP dele (`--strict-mcp-config`). 🧪 confirmar quais fontes deixar.
+- **Configuração pessoal não vaza para o papel:** carregar só as fontes de configuração que o núcleo escolher (`--setting-sources`) e só os MCP dele (`--strict-mcp-config`). O P1 confirmou `--setting-sources ""` com `--settings` do papel: nada pessoal carregado.
 - **Leitura do cofre pela CLI (RN-02):** o núcleo fala com o Obsidian, que roda no Windows, só via MCP (servidor da Obsidian CLI). No container de desenvolvimento, o transporte é HTTP em `OBSIDIAN_MCP_URL`; no app final no Windows, o mesmo cliente MCP, local [a confirmar: HTTP ou stdio]. Para os agentes, o núcleo oferece um servidor MCP próprio (`obsidian_search`, `obsidian_read`; `obsidian_write` só para o orquestrador). Ele repete a busca em todos os cofres ativos e marca a origem (RN-30, RF-34) e já registra a leitura para a aba "Obsidian usado" (RF-14). Ler `.md` do cofre direto fica negado por regra de caminho.
-- **Plano B (S4):** se o protótipo P1 mostrar que o gancho por programa é lento ou deixa passar algo, troca-se a implementação do `AgentRunner` pelo SDK em Node. Como o resto do núcleo só conhece a interface, a troca não mexe nas regras nem nas telas.
+- **S4 fora do plano:** o P1 aprovou a S3 ([[geral-decisao-2026-11-19-agente-por-claude-p]]). O `AgentRunner` segue atrás de uma interface, então uma troca futura não mexe nas regras nem nas telas.
 
-🧪 **Protótipo P1** decide S3 × S4 de vez.
+✅ **Protótipo P1** decidiu S3 × S4: S3.
 
 
 ### 🔗 Conexões

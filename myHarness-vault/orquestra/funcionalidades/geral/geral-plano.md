@@ -32,8 +32,8 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 - **Pronto quando:** `docs/contrato/` com `00-requisitos` preenchido do documento-fonte e rastreabilidade RF → UC → TEL; decisões de estrutura, stack, S3/S4 e fonte do consumo aprovadas em `funcionalidades/geral/`; app vazio compila e abre na máquina virtual do agente, com o SQLite criado; interfaces comuns definidas (G1): trait `Integracao` (RNF-11), esquema SQLite das entidades, contrato de comandos e eventos Tauri (IPC), módulo de mascaramento de segredo (RN-04) e módulo de "montagem da chamada" ao Claude CLI.
 - **Ciclo** (prático): sem funcionalidade de produto; protótipo de pesquisa com relatório e prova (saída real do `claude -p` e da fonte de consumo anexada), depois tarefas-interface (P12, G1).
 - **Funcionalidades:** `fundacao` (sem RF próprio; prepara RF-05, RF-10, RF-18, RF-29, RF-32)
-- **Paralelo:** os protótipos S2, S3/S4 e S5 são pesquisa, só leitura, sem teto (G11) e em paralelo; o esqueleto do repositório é uma cadeia com um agente só (G3); as tarefas-interface rodam em série depois da decisão S4.
-- **Notas geradas:** 
+- **Paralelo:** os protótipos S2, S3/S4 e S5 são pesquisa, só leitura, sem teto (G11) e em paralelo; o esqueleto do repositório é uma cadeia com um agente só (G3); as tarefas-interface rodam em série depois da decisão S3 × S4.
+- **Notas geradas:** [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-fonte-do-consumo]]
 - **Concluída em:** 
 
 ## 3. Integrações
@@ -121,7 +121,7 @@ Só no projeto prático de software (S25 do Padrão de projeto de software (no V
 **Ideia geral, numa frase:** a tela (React) só mostra e pede; o núcleo (Rust) decide tudo, inclusive o que cada agente pode fazer; cada agente é um processo do Claude CLI que o núcleo abre já "de mãos amarradas" para o seu papel.
 
 - **Frontend:** React + Vite + TypeScript, Tailwind + shadcn/ui, TanStack Query, Zustand, zod; lista virtualizada para a saída dos agentes. Sem rotas de URL no começo.
-- **Backend:** núcleo em Rust dentro do Tauri 2, em camadas (regras → casos de uso → integrações), com cada integração atrás de uma interface trocável (RNF-11). Agentes rodam como `claude -p` direto (S3), com permissão imposta em quatro camadas. Agent SDK em processo Node (S4) fica como plano B.
+- **Backend:** núcleo em Rust dentro do Tauri 2, em camadas (regras → casos de uso → integrações), com cada integração atrás de uma interface trocável (RNF-11). Agentes rodam como `claude -p` direto (S3), com permissão imposta em quatro camadas. S4 descartada pelo P1.
 - **Tecnologias e versões:** a mais recente estável no momento de criar o repositório, sem trava (S16); conferir que não é rc. Lista na tabela abaixo.
 - **Detalhe e protótipos:** [[geral-plano-arquitetura-e-stack]] (tela, núcleo, banco, S3 × S4) e [[geral-plano-arquitetura-e-stack-integracoes-e-testes]] (integrações, consumo S2, testes, pastas, protótipos P1 a P5).
 - **Ajustes do humano:** nenhum; aprovada em [[geral-decisao-2026-11-19-estrutura]] e [[geral-decisao-2026-11-19-stack]]
