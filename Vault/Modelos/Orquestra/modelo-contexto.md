@@ -1,7 +1,8 @@
 ---
 tipo: contexto
 funcionalidade: 
-status: em-andamento
+status: planejada
+etapa: 
 criado: {{date}}
 aliases: []
 ---

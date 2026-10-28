@@ -6,16 +6,17 @@ Nome do cofre no Obsidian: `{{nome-da-pasta}}`. Repositório de código: {{link 
 
 ## Ordem de leitura (toda tarefa)
 
-1. `orquestra/funcionalidades/geral/geral-contexto.md`: o projeto inteiro, dial e modelo de IA.
-2. Contexto da funcionalidade: `orquestra/funcionalidades/<func>/<func>-contexto.md`.
-3. Decisões: `<func>-decisao-*.md` da funcionalidade e de `geral/`.
-4. Só então o plano: `<func>-plano.md` (proposta, não decisão).
+1. **Onde o projeto está:** `python orquestra/modelos/cofre.py status` ou o roteiro `orquestra/funcionalidades/geral/geral-plano.md` (etapas, status e notas de cada etapa).
+2. `orquestra/funcionalidades/geral/geral-contexto.md`: o projeto inteiro, dial e modelo de IA.
+3. Contexto da funcionalidade: `orquestra/funcionalidades/<func>/<func>-contexto.md`.
+4. Decisões: `<func>-decisao-*.md` da funcionalidade e de `geral/`.
+5. Só então o plano: `<func>-plano.md` (proposta, não decisão).
 
 Regras completas: `orquestra/referencias/manual-da-orquestra.md`. Regras de escrita: `orquestra/referencias/manual-do-cerebro.md`.
 
 ## Mapa no Obsidian
 
-[[moc-orquestra]] · [[geral-contexto]] · [[Manual da Orquestra]] · [[Manual do Meu Cérebro no Obsidian]]
+[[moc-orquestra]] · [[geral-plano]] · [[geral-contexto]] · [[Manual da Orquestra]] · [[Manual do Meu Cérebro no Obsidian]]
 
 ## Estrutura
 
@@ -50,6 +51,7 @@ Regras completas: `orquestra/referencias/manual-da-orquestra.md`. Regras de escr
 - Bug não trivial resolvido → nota em `bugs/`. Bug que reaparece → atualizar a nota existente.
 - Decisão aprovada → nota de decisão + atualizar a nota responsável.
 - Tarefa concluída → contexto ("o que já foi feito") e verificação no plano.
+- Etapa do roteiro concluída → `concluida`, data e notas geradas no `geral-plano`; rodar `cofre.py status --atualizar`.
 - Sessão relevante → `diarios/`.
 - Candidatos e dúvidas → uma pergunta única ao humano no fim.
 - Bug trivial (typo, compilação, layout simples) não vira nota.
@@ -74,7 +76,7 @@ Toda escrita neste cofre (criar, mudar, mover ou copiar nota) segue estas etapas
 3. Classificar: tipo → modelo → pasta → nome. Aval do humano quando a regra exige.
 4. Escrever a partir de `orquestra/modelos/`, nunca do zero.
 5. Conectar nos dois sentidos: Conexões na nota e link de volta no hub (`<func>-contexto`) ou em `moc-orquestra`.
-6. Propagar: contexto ("o que já foi feito"), diário, decisão substituída.
+6. Propagar: roteiro (etapa concluída, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito"), diário, decisão substituída.
 7. Rodar `python orquestra/modelos/cofre.py verificar .` → **zero ERRO**. Só então "pronto".
 
 Modelos e manuais deste cofre não se editam aqui: o original fica no `Vault` e chega por `cofre.py sincronizar`.
