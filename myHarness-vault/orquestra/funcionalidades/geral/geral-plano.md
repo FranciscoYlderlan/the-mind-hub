@@ -7,7 +7,7 @@ criado: 2026-11-19
 # 🧭 Roteiro — MyHarness
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **2. Fundação e protótipo das suposições** (planejada)
+> Etapa atual: **2. Fundação e protótipo das suposições** (em-construcao)
 
 > [!warning] Proposta da IA até eu aprovar
 > As etapas nascem como proposta. Aprovadas, viram a nota `geral-decisao-AAAA-MM-DD-roteiro` e este plano passa a `status: aprovado`. Mudar a lista de etapas é uma nova decisão.
@@ -27,7 +27,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 - **Concluída em:** 2026-11-19
 
 ## 2. Fundação e protótipo das suposições
-- **Status:** planejada
+- **Status:** em-construcao
 - **Objetivo:** criar o repositório e o esqueleto Tauri + Rust + React + SQLite (WAL), preencher o contrato em `docs/contrato/` a partir da especificação e provar, num protótipo descartável, as suposições que decidem a arquitetura do backend: saída de `claude -p` em fluxo JSON com modelo, ferramentas, pastas e instruções por parâmetro (S3); CLI direta ou Claude Agent SDK num processo Node (S4); fonte legível por máquina do consumo semanal e da janela, com o plano B dos registros locais (S2); duração da janela, 4 h ou 5 h (S1); forma de login das três integrações (S5).
 - **Pronto quando:** `docs/contrato/` com `00-requisitos` preenchido do documento-fonte e rastreabilidade RF → UC → TEL; decisões de estrutura, stack, S3/S4 e fonte do consumo aprovadas em `funcionalidades/geral/`; app vazio compila e abre na máquina virtual do agente, com o SQLite criado; interfaces comuns definidas (G1): trait `Integracao` (RNF-11), esquema SQLite das entidades, contrato de comandos e eventos Tauri (IPC), módulo de mascaramento de segredo (RN-04) e módulo de "montagem da chamada" ao Claude CLI.
 - **Ciclo** (prático): sem funcionalidade de produto; protótipo de pesquisa com relatório e prova (saída real do `claude -p` e da fonte de consumo anexada), depois tarefas-interface (P12, G1).
