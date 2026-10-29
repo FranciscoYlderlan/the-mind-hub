@@ -25,11 +25,13 @@ Motivação: [a confirmar]
 - Backend em Clean Architecture (`domain/`, `infra/`, `env/`) → [[geral-decisao-2026-10-28-estrutura-backend]].
 - Componentes: registro consultado antes de criar, shadcn/ui primeiro, componentes pequenos e sem repetição → [[geral-decisao-2026-10-28-criacao-de-componentes]] e [[registro-de-componentes]].
 - Toda funcionalidade criada no frontend é testada com Playwright por uma **subthread de teste** (outro agente), que só testa e reporta bugs; sem testes unitários ou de componente no frontend → [[geral-decisao-2026-10-28-testes-frontend-playwright]].
+- Camada MCP no backend para expor as rotas e testar o fluxo pela Claude; sempre que uma feature e uma rota forem criadas, a MCP é atualizada → [[geral-decisao-2026-10-29-camada-mcp]].
 
 ## O que já foi feito
 - 2026-10-28: cofre montado com a estrutura `orquestra/` e alinhado ao processo das etapas vitais ([[diario-2026-10-28]]).
 - 2026-10-28: stack, organização do frontend e do backend e regras de componentes registradas como decisões; registro de componentes criado ([[diario-2026-10-28]]).
 - 2026-10-28: Obsidian CLI disponível nas sessões pelo servidor MCP `obsidian-cli`; causa da falha registrada em [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]].
+- 2026-10-29: camada MCP do backend registrada como decisão ([[diario-2026-10-29]]).
 
 ## Tempo disponível
 
@@ -39,12 +41,13 @@ Motivação: [a confirmar]
 
 ## Áreas sensíveis
 (onde ler bugs e referências antes de mexer)
+- Rotas do backend: criar, alterar ou remover rota mexe na camada MCP; ler [[geral-decisao-2026-10-29-camada-mcp]].
 - Componentes do frontend: ler [[registro-de-componentes]] e [[geral-decisao-2026-10-28-criacao-de-componentes]] antes de criar qualquer componente.
 - Busca no cofre (Obsidian CLI): se as ferramentas `obsidian_*` faltarem ou a CLI falhar, ler [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]] antes de buscar nos `.md`.
 
 ## Mapa
 - Roteiro: [[geral-plano]]
-- Decisões: [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
+- Decisões: [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]]
 - Referências: [[registro-de-componentes]], [[manual-da-orquestra]], [[manual-do-cerebro]]
 

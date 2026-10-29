@@ -36,11 +36,12 @@ aliases: [Tecnologias do backend, Stack do stonebid-api, Backend stack]
   - Estrutura de pastas e princípios: [[geral-decisao-2026-10-28-estrutura-backend]].
   - Proibido: Jest e Biome no `stonebid-api`.
   - Ambiente local sobe o PostgreSQL pelo Docker Compose.
+  - 2026-10-29: SDK oficial de MCP para TypeScript entra no backend, pela [[geral-decisao-2026-10-29-camada-mcp]].
   - Trocar framework, ORM, banco ou ferramenta de teste/lint exige nova decisão.
 
 ### 🔗 Conexões
 - Funcionalidade: [[geral-contexto]]
 - Plano: [[geral-plano]]
 - Projeto: [[geral-contexto]]
-- Relacionadas: [[geral-decisao-2026-10-28-stack-frontend]]
+- Relacionadas: [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-29-camada-mcp]]
 - Regras: [[manual-da-orquestra]]
