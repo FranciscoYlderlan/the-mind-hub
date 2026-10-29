@@ -23,8 +23,14 @@ Motivação: [a confirmar]
 - Stack do backend: Fastify v5.12.7, Prisma v8 sobre PostgreSQL, zod 4.6, Node e PostgreSQL latest, Vitest v5.0.5 (sem Jest), ESLint + Prettier (sem Biome), Docker/Compose e CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-backend]].
 - Frontend organizado por features (`routes → features → components/hooks/lib`), com nomes genéricos (`feature1`, `feature2`) na estrutura para não induzir o domínio → [[geral-decisao-2026-10-28-estrutura-frontend]].
 - Backend em Clean Architecture (`domain/`, `infra/`, `env/`) → [[geral-decisao-2026-10-28-estrutura-backend]].
+- Regra geral dos dois repositórios, desde a criação do projeto: nomes de arquivos e de entidades em **inglês** e **kebab-case**; identificadores no código em PascalCase e camelCase; parâmetro de rota sempre `$id.tsx` → [[geral-decisao-2026-10-28-estrutura-frontend]] e [[geral-decisao-2026-10-28-estrutura-backend]].
+- 2026-10-29: a camada MCP, o staging e o teste com Playwright por outro agente **continuam no plano**; a primeira etapa é justamente deixar o projeto no ar.
+- Enunciado oficial do teste técnico (Elite Dev na Verzel) fornecido em 2026-10-29: fonte da verdade nº 1 → [[enunciado-teste-tecnico]].
 - Componentes: registro consultado antes de criar, shadcn/ui primeiro, componentes pequenos e sem repetição → [[geral-decisao-2026-10-28-criacao-de-componentes]] e [[registro-de-componentes]].
 - Toda funcionalidade criada no frontend é testada com Playwright por uma **subthread de teste** (outro agente), que só testa e reporta bugs; sem testes unitários ou de componente no frontend → [[geral-decisao-2026-10-28-testes-frontend-playwright]].
+- Contrato do projeto v0.2 (2026-10-27), escrito por mim com a IA e ainda em validação: requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
+- Do contrato (itens `[DECIDIDO]`): prazo real de **4 dias** (o enunciado fala em 7; **substituído em 2026-10-29**, ver o item seguinte); **todos os 5 opcionais** serão feitos; deploy obrigatório; desenvolvimento com IA permitido; sou júnior e aprender é objetivo do projeto → [[contrato-visao-escopo-e-papeis]].
+- 2026-10-29 (09:06): o prazo real passou de 4 dias para **24 horas** a partir de agora. Oficialmente estou no **terceiro dia**: nos três primeiros dias não avancei muito além dos requisitos e da arquitetura. Vou trabalhar sem pausa.
 - Camada MCP no backend para expor as rotas e testar o fluxo pela Claude; sempre que uma feature e uma rota forem criadas, a MCP é atualizada → [[geral-decisao-2026-10-29-camada-mcp]].
 
 ## O que já foi feito
@@ -32,8 +38,13 @@ Motivação: [a confirmar]
 - 2026-10-28: stack, organização do frontend e do backend e regras de componentes registradas como decisões; registro de componentes criado ([[diario-2026-10-28]]).
 - 2026-10-28: Obsidian CLI disponível nas sessões pelo servidor MCP `obsidian-cli`; causa da falha registrada em [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]].
 - 2026-10-29: camada MCP do backend registrada como decisão ([[diario-2026-10-29]]).
+- 2026-10-29: enunciado do teste técnico guardado e mapeado contra o contrato ([[enunciado-teste-tecnico]]); regra de nomes em inglês + kebab-case nas decisões de estrutura.
+- 2026-10-29: contrato do projeto v0.2 registrado em `referencias/`, uma nota por seção, a partir de [[contrato-do-projeto]] ([[diario-2026-10-29]]).
 
 ## Tempo disponível
+- **24 horas** a partir de 2026-10-29 09:06 (substitui os 4 dias do contrato). Entrega por volta de 2026-10-30 09:00 [a confirmar].
+- Ritmo: trabalho contínuo, sem pausa.
+- O plano de 4 dias de [[contrato-processo-e-plano]] não cabe mais; precisa ser refeito para 24 horas.
 
 ## Dial e modelo de IA
 - Dial: [a confirmar] alto | medio | baixo
@@ -41,6 +52,7 @@ Motivação: [a confirmar]
 
 ## Áreas sensíveis
 (onde ler bugs e referências antes de mexer)
+- Lances, carteira, liquidação, cancelamento e auditoria: regras em [[contrato-regras-de-negocio]], técnica em [[contrato-arquitetura]] e testes T-01 a T-06 em [[contrato-testes]].
 - Rotas do backend: criar, alterar ou remover rota mexe na camada MCP; ler [[geral-decisao-2026-10-29-camada-mcp]].
 - Componentes do frontend: ler [[registro-de-componentes]] e [[geral-decisao-2026-10-28-criacao-de-componentes]] antes de criar qualquer componente.
 - Busca no cofre (Obsidian CLI): se as ferramentas `obsidian_*` faltarem ou a CLI falhar, ler [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]] antes de buscar nos `.md`.
@@ -49,12 +61,15 @@ Motivação: [a confirmar]
 - Roteiro: [[geral-plano]]
 - Decisões: [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]]
+- Enunciado: [[enunciado-teste-tecnico]]
+- Contrato: [[contrato-do-projeto]] (requisitos, regras, arquitetura proposta, plano e perguntas Q)
 - Referências: [[registro-de-componentes]], [[manual-da-orquestra]], [[manual-do-cerebro]]
 
 ## Interpretação do agente
 (separada dos fatos; marcar [a confirmar] quando for suposição)
 - As versões foram registradas como informadas, sem checagem contra os registros do npm.
-- Áreas candidatas a sensíveis: lances ao vivo (concorrência) e a verificação de adulteração do histórico [a confirmar].
+- Lances ao vivo (concorrência) e a verificação de adulteração do histórico passaram a constar como áreas sensíveis, com base no contrato; o contrato ainda está em validação ([[contrato-pontos-para-validar]]).
+- Os itens `[PROPOSTO]` do contrato (AD-01 a AD-10, RN-10, fora do escopo, plano de 4 dias) ainda não são decisões do cofre.
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
