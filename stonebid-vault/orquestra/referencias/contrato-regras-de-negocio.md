@@ -22,9 +22,12 @@ São as **regras do jogo de futebol**: o juiz (o domínio) aplica, ninguém nego
 | Estado | Quando | Pode ir para |
 |---|---|---|
 | AGENDADO | agora < início | AO_VIVO (pelo relógio) ou CANCELADO |
-| AO_VIVO | início ≤ agora < fim | ENCERRADO (pelo relógio) ou CANCELADO (se `[OPC-2]` e houver lances) |
+| AO_VIVO | início ≤ agora < fim | ENCERRADO (pelo relógio) ou CANCELADO (sem lances; com lances, só se `[OPC-2]`) |
 | ENCERRADO | agora ≥ fim (o fim pode ter sido prorrogado) | Estado final: resultado ARREMATADO ou SEM_VENCEDOR |
 | CANCELADO | O leiloeiro cancelou | Estado final |
+
+> [!note] Corrigido na v0.3 (M-13)
+> A linha AO_VIVO dizia "CANCELADO (se `[OPC-2]` e houver lances)" e perdia o caso base do RF-22 e da RN-12. Corrigida em 2026-10-29: [[geral-decisao-2026-10-29-cancelamento-ao-vivo]].
 
 Os estados agendado, ao vivo e encerrado **derivam do relógio do servidor**. O cancelamento e o resultado da liquidação são **gravados**.
 
@@ -83,5 +86,5 @@ Um lance às 19:50:00 não prorroga nada. O enunciado não deixa claro qual das 
 
 ### 🔗 Conexões
 - Mapa: [[contrato-do-projeto]] · [[moc-orquestra]]
-- Relacionadas: [[contrato-requisitos-funcionais]], [[contrato-arquitetura]], [[contrato-testes]], [[contrato-modelo-de-dados]]
+- Relacionadas: [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[contrato-requisitos-funcionais]], [[contrato-arquitetura]], [[contrato-testes]], [[contrato-modelo-de-dados]]
 - Próxima: [[contrato-requisitos-nao-funcionais]]
