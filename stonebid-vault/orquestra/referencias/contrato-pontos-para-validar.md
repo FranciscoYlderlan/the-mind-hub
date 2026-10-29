@@ -26,7 +26,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 3. A frase do anti-sniping admite duas leituras (5.4).
 4. "Lote publicado com lances abertos" nos dados de teste: interpretei como lote ao vivo com lances já feitos.
 5. "Posição do usuário nos lances" pode significar só liderando ou superado, ou um ranking.
-6. O prazo é 7 dias no enunciado e 4 na realidade.
+6. O prazo é 7 dias no enunciado; na realidade eram 4 dias (v0.2) e, desde a v0.3, são **24 horas**, com entrega em 2026-10-30 09:00.
 
 | ID | Pergunta | Proposta | Afeta |
 |---|---|---|---|
@@ -46,7 +46,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 | Q-14 | Edição de lote fica fora do escopo? | Sim | Seção 1.4 |
 | Q-15 | Quanto você já domina de React, Node ou Python, e SQL? | (A resposta define o risco R-09) | Seção 12 |
 
-Também faltam, no topo do documento, a **data e hora exata da entrega** e as **horas por dia** que você consegue dedicar.
+Resolvido na v0.3 ([[contrato-do-projeto]]): entrega em **2026-10-30 09:00** e trabalho contínuo, sem pausa.
 
 > [!warning] Situação em 2026-10-29
 > Nenhuma das perguntas Q-01 a Q-15 foi respondida no cofre ainda. Q-13 ainda depende da escolha da API; a parte de stack de Q-15 já foi respondida pelas decisões de stack ([[contrato-tecnologias]]), mas o nível de domínio não.
@@ -57,7 +57,7 @@ Também faltam, no topo do documento, a **data e hora exata da entrega** e as **
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** quinze perguntas abertas; cada resposta aprovada vira uma nota `geral-decisao-*`.
 * **Ponto 2:** as que mais mudam código: Q-03 (anti-sniping), Q-04 (instante do fim) e Q-05 (cancelamento com lances).
-* **Ponto 3:** faltam também a **data de entrega** e as **horas por dia** ([[geral-contexto]]).
+* **Ponto 3:** data de entrega (2026-10-30 09:00) e ritmo (trabalho contínuo) já definidos na v0.3 ([[geral-contexto]]).
 
 ### 🔗 Conexões
 - Mapa: [[contrato-do-projeto]] · [[moc-orquestra]]

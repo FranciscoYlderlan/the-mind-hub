@@ -10,7 +10,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seções 1, 2 e 3
 # 📜 Contrato: visão, escopo, restrições e papéis
 
 > [!tldr] Em uma linha
-> O que o StoneBid é, o que fica fora, os limites fixos (prazo de 4 dias, os 5 opcionais) e quem usa o sistema.
+> O que o StoneBid é, o que fica fora, os limites fixos (prazo de 24 horas, os 5 opcionais) e quem usa o sistema.
 
 É a **cerca do terreno**: mostra até onde a obra vai e o que fica do lado de fora. Seções 1 a 3 do [[contrato-do-projeto|contrato]] v0.2, copiadas sem reinterpretar.
 
@@ -56,11 +56,11 @@ Tudo abaixo não foi pedido e custaria tempo que você não tem. Só entra se o 
 |---|---|
 | Por que (*Why*)? | Passar no teste técnico e construir um projeto de portfólio |
 | O que (*What*)? | Casa de leilões online com lances ao vivo, carteira, comprovante e auditoria |
-| Quando (*When*)? | 4 dias corridos. Entrega: [A PREENCHER] |
+| Quando (*When*)? | 24 horas a partir de 2026-10-29 09:06 (v0.3; eram 4 dias na v0.2). Entrega: **2026-10-30 09:00** |
 | Quem (*Who*)? | Você (decide e responde pelo projeto) e a IA (implementa e explica) |
 | Onde (*Where*)? | Repositório de código e aplicação em produção (URL no README) |
 | Como (*How*)? | Entrega incremental com testes nas regras críticas (seção 11) |
-| Quanto (*How much*)? | [A PREENCHER] horas por dia, infraestrutura gratuita ou de baixo custo |
+| Quanto (*How much*)? | Trabalho contínuo, sem pausa, nas 24 horas; infraestrutura gratuita ou de baixo custo |
 
 > [!info] Por que isso importa
 > Pressman descreve a atividade de *comunicação* como o começo do trabalho: entender o problema, quem é afetado e qual é o objetivo, antes de construir qualquer coisa. Ele também apresenta o princípio W5HH (de Barry Boehm): sete perguntas que definem um projeto. Sommerville trata a engenharia de requisitos de forma parecida: primeiro entender o que o sistema deve fazer e onde ele termina. Os dois livros tratam a mudança de requisitos como inevitável e pedem que ela seja controlada. Daí vêm a lista "fora do escopo" e o protocolo de mudança da seção 13.4. O princípio de Hooker "a razão de tudo existir" (citado por Pressman) diz o mesmo: todo requisito deve servir ao objetivo do sistema.
@@ -102,7 +102,7 @@ Tudo abaixo não foi pedido e custaria tempo que você não tem. Só entra se o 
 > Quando surgir "e se a gente fizesse também...": conferir o fora do escopo antes e, se for entrar, seguir o protocolo de mudança em [[contrato-trabalho-com-a-ia]].
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** prazo real de **4 dias**, com os 5 opcionais; o corte de emergência está em [[contrato-processo-e-plano]].
+* **Ponto 1:** prazo real de **24 horas** (entrega em 2026-10-30 09:00), com os 5 opcionais; o corte de emergência está em [[contrato-processo-e-plano]].
 * **Ponto 2:** dois papéis no sistema (leiloeiro e licitante), mais o visitante sem login que audita.
 * **Ponto 3:** tudo fora do escopo só entra mudando o contrato.
 

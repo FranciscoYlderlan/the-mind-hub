@@ -125,7 +125,7 @@ Envie pelo formulário `https://elitedev.verzel.com.br/?elite-dev-2026-2` preenc
 | E5 Opcionais (5) | RF-11, RF-23, RNF-11, RNF-12, RNF-13 | Coberto; o contrato faz todos, o que não cabe em 24 horas |
 | E5 Não precisa fazer | Fora do escopo (1.4) | Parcial: recuperação de senha está lá; nota fiscal, revenda e app nativo não estão listados |
 | E1 Referências (Catawiki, LiveAuctioneers, Superbid) | — | Não citadas; são só inspiração |
-| E6 Repositório **público** no GitHub (os dois, se separados) | [[geral-contexto]]: dois repositórios, ainda não criados | **Lacuna:** o contrato não fala em público nem em envio |
+| E6 Repositório **público** no GitHub (os dois, se separados) | [[geral-contexto]]: dois repositórios, criados em 2026-10-29 às 10:31 (conferir se estão públicos) | **Lacuna:** o contrato não fala em público nem em envio |
 | E6 Link do deploy no formulário | RNF-01 | Coberto pelo deploy |
 | E6 Onde e como usou IA, o que revisou ou ajustou | — | **Lacuna:** o contrato só cobre E1 a E5; não há registro planejado do uso de IA |
 

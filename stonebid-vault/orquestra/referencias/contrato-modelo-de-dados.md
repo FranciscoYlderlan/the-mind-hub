@@ -14,6 +14,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 7
 
 É a **lista de gavetas do arquivo** antes de comprar o móvel: decide o que guardar em cada uma sem pensar ainda no modelo do armário. Seção 7 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
 
+> [!warning] Prazo mudou em 2026-10-29
+> O prazo real passou de 4 dias para **24 horas** (a partir de 2026-10-29 09:06; entrega em 2026-10-30 09:00). Onde esta nota fala em 4 dias ou em "dia 3", vale o prazo novo; o texto do contrato segue como estava até a v0.3. Fato registrado em [[geral-contexto]].
+
 Aqui não há tabelas de banco nem código: só as "coisas" do sistema e o que cada uma precisa guardar.
 
 | Entidade | O que guarda | Pontos de atenção |
