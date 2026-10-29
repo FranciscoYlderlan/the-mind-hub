@@ -1,5 +1,5 @@
 ---
-aliases: [Requisitos não funcionais, RNF do StoneBid, Non-functional requirements, Qualidades do sistema]
+aliases: [Requisitos não funcionais, RNF do Stonebid, Non-functional requirements, Qualidades do sistema]
 tags: [estudos/programacao]
 tipo: referencia
 tema: requisitos
@@ -10,7 +10,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 6
 # 📜 Contrato: requisitos não funcionais (RNF)
 
 > [!tldr] Em uma linha
-> Como o StoneBid deve ser (no ar, consistente, resiliente, seguro, privado, testável), sempre com um jeito de medir.
+> Como o Stonebid deve ser (no ar, consistente, resiliente, seguro, privado, testável), sempre com um jeito de medir.
 
 É a **vistoria do carro**: não importa só que ele ande, mas que freie, não vaze óleo e passe na inspeção. Seção 6 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
 
@@ -19,7 +19,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 6
 
 | ID | Requisito | Categoria | Como verificar | Origem |
 |---|---|---|---|---|
-| RNF-01 | A aplicação está no ar em uma URL pública estável (HTTPS) durante a avaliação, e o README informa a URL. | Organizacional | Abrir a URL em janela anônima. | E1/E2 |
+| RNF-01 | A aplicação está no ar em uma URL pública estável (HTTPS) durante a avaliação, e o README informa a URL. | Organizacional | Abrir a URL em janela anônima. | E1 |
 | RNF-02 | Um script **reexecutável** cria 1 leiloeiro, 2 licitantes e ao menos 1 lote ao vivo com lances (mais um agendado e um encerrado, para demonstração). As credenciais estão no README. O lote ao vivo DEVE cobrir o período de avaliação (Q-11). | Organizacional | Rodar o script do zero e percorrer o fluxo. | E4 |
 | RNF-03 | O README explica passo a passo como configurar o banco e executar o sistema, lista os comportamentos inesperados e as limitações, e resume as decisões principais. | Organizacional | Uma pessoa de fora consegue rodar o projeto só com o README. | E4 |
 | RNF-04 | **Consistência financeira:** em qualquer momento o disponível é maior ou igual a zero e o comprometido é igual à soma dos lances em que o usuário lidera. Lances paralelos não quebram isso. | Produto (confiabilidade) | T-02, T-03 | E3 |

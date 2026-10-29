@@ -1,5 +1,5 @@
 ---
-aliases: [Decisões de arquitetura do contrato, AD do StoneBid, Hash encadeado, HMAC, Lances simultâneos, Auditoria de adulteração]
+aliases: [Decisões de arquitetura do contrato, AD do Stonebid, Hash encadeado, HMAC, Lances simultâneos, Auditoria de adulteração]
 tags: [estudos/programacao]
 tipo: referencia
 tema: arquitetura

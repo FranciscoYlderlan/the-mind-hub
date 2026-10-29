@@ -4,7 +4,7 @@ funcionalidade: geral
 status: aprovada
 criado: 2026-10-29
 substitui: 
-aliases: [Padrão de branches, Nome das branches, Branch naming, Git flow do StoneBid]
+aliases: [Padrão de branches, Nome das branches, Branch naming, Git flow do Stonebid]
 ---
 # ✅ Padrão de branches: `main`, `staging` e `tipo/ID-descricao-curta`
 

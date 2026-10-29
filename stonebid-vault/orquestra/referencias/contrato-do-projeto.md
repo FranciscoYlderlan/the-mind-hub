@@ -1,5 +1,5 @@
 ---
-aliases: [Contrato do projeto, Contrato do StoneBid, Especificação do StoneBid, Project contract]
+aliases: [Contrato do projeto, Contrato do Stonebid, Especificação do Stonebid, Project contract]
 tags: [estudos/programacao]
 tipo: referencia
 tema: requisitos
@@ -7,7 +7,7 @@ status: rascunho
 criado: 2026-10-29
 origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), fornecido pelo humano
 ---
-# 📜 Contrato do projeto StoneBid
+# 📜 Contrato do projeto Stonebid
 
 > [!tldr] Em uma linha
 > O acordo entre mim e a IA: o que construir, o que não construir, como decidir na dúvida e como trabalhar juntos.
@@ -104,7 +104,7 @@ Cito Sommerville (*Engenharia de Software*) e Pressman & Maxim (*Engenharia de S
 
 - SOMMERVILLE, Ian. *Engenharia de Software*. [Confira editora e edição no seu exemplar.]
 - PRESSMAN, Roger S.; MAXIM, Bruce R. *Engenharia de Software: Uma Abordagem Profissional*. [Confira editora e edição no seu exemplar.]
-- Enunciado do desafio (seções 01 a 05).
+- Enunciado do desafio (E1 a E5).
 
 **Roteiro de estudo.** Procure estes temas no sumário dos seus exemplares e leia na ordem em que o projeto os usa:
 

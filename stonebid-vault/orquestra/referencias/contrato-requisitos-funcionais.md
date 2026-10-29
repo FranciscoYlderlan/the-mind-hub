@@ -1,5 +1,5 @@
 ---
-aliases: [Requisitos funcionais, RF do StoneBid, Critérios de aceite, Functional requirements]
+aliases: [Requisitos funcionais, RF do Stonebid, Critérios de aceite, Functional requirements]
 tags: [estudos/programacao]
 tipo: referencia
 tema: requisitos
@@ -10,7 +10,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 4
 # 📜 Contrato: requisitos funcionais (RF)
 
 > [!tldr] Em uma linha
-> Cada serviço que o StoneBid oferece, com um critério de aceite que diz como provar que ficou pronto.
+> Cada serviço que o Stonebid oferece, com um critério de aceite que diz como provar que ficou pronto.
 
 É o **cardápio com a foto do prato**: diz o que sai da cozinha e como o prato deve chegar à mesa. Seção 4 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
 
@@ -21,7 +21,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 4
 
 | ID | Requisito | Critério de aceite | Origem |
 |---|---|---|---|
-| RF-01 | Cadastro e login por e-mail e senha. Cada conta tem exatamente **um** papel: LEILOEIRO ou LICITANTE. | Criar duas contas de papéis diferentes. O login persiste ao recarregar a página. A senha nunca é guardada em texto puro. | E1/E2, Prop. |
+| RF-01 | Cadastro e login por e-mail e senha. Cada conta tem exatamente **um** papel: LEILOEIRO ou LICITANTE. | Criar duas contas de papéis diferentes. O login persiste ao recarregar a página. A senha nunca é guardada em texto puro. | E1, Prop. |
 | RF-02 | O **servidor** DEVE bloquear ações fora do papel: leiloeiro não dá lance nem deposita; licitante não cria nem cancela lote; leiloeiro só gerencia os próprios lotes. | Chamar a API direto, sem usar a tela, com o papel errado retorna "proibido". Esconder o botão na tela não conta como proteção. | E1 |
 | RF-03 | Vitrine, sala do lote (só leitura), auditoria e comprovante DEVEM abrir sem login. Dar lance exige login. | Em janela anônima, as quatro páginas abrem. O botão de lance leva ao login. | Prop. (Q-01) |
 

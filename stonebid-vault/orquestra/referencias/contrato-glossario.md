@@ -1,5 +1,5 @@
 ---
-aliases: [Glossário do StoneBid, Vocabulário do leilão, Glossary, Termos do contrato]
+aliases: [Glossário do Stonebid, Vocabulário do leilão, Glossary, Termos do contrato]
 tags: [estudos/programacao]
 tipo: referencia
 tema: requisitos

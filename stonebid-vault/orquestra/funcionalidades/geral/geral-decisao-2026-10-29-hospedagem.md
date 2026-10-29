@@ -4,7 +4,7 @@ funcionalidade: geral
 status: aprovada
 criado: 2026-10-29
 substitui: 
-aliases: [Hospedagem do deploy, Onde o StoneBid roda, Deploy no GCP e na Vercel, Hosting decision]
+aliases: [Hospedagem do deploy, Onde o Stonebid roda, Deploy no GCP e na Vercel, Hosting decision]
 ---
 # ✅ Hospedagem: backend e banco no GCP, frontend na Vercel, CI/CD pelo GitHub
 
