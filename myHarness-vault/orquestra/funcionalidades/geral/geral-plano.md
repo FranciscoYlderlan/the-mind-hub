@@ -123,12 +123,12 @@ Só no projeto prático de software (S25 do Padrão de projeto de software (no V
 - **Frontend:** React + Vite + TypeScript, Tailwind + shadcn/ui, TanStack Query, Zustand, zod; lista virtualizada para a saída dos agentes. Sem rotas de URL no começo.
 - **Backend:** núcleo em Rust dentro do Tauri 2, em camadas (regras → casos de uso → integrações), com cada integração atrás de uma interface trocável (RNF-11). Agentes rodam como `claude -p` direto (S3), com permissão imposta em quatro camadas. S4 descartada pelo P1.
 - **Tecnologias e versões:** a mais recente estável no momento de criar o repositório, sem trava (S16); conferir que não é rc. Lista na tabela abaixo.
-- **Detalhe e protótipos:** [[geral-plano-arquitetura-e-stack]] (tela, núcleo, banco, S3 × S4) e [[geral-plano-arquitetura-e-stack-integracoes-e-testes]] (integrações, consumo S2, testes, pastas, protótipos P1 a P5).
+- **Detalhe e protótipos:** [[geral-plano-arquitetura-e-stack]] (tela, núcleo, banco, S3 × S4) e [[geral-plano-arquitetura-e-stack-integracoes-e-testes]] (integrações, consumo, testes, pastas) e [[geral-plano-arquitetura-e-stack-integracoes-e-testes-prototipos]] (protótipos).
 - **Ajustes do humano:** nenhum; aprovada em [[geral-decisao-2026-11-19-estrutura]] e [[geral-decisao-2026-11-19-stack]]
 
 
 ### 🔗 Conexões
 - Projeto: [[geral-contexto]]
-- Proposta de stack: [[geral-plano-arquitetura-e-stack]], [[geral-plano-arquitetura-e-stack-integracoes-e-testes]]
+- Proposta de stack: [[geral-plano-arquitetura-e-stack]], [[geral-plano-arquitetura-e-stack-integracoes-e-testes]], [[geral-plano-arquitetura-e-stack-integracoes-e-testes-prototipos]]
 - Mapa: [[moc-orquestra]]
 - Regras: [[manual-da-orquestra]]
