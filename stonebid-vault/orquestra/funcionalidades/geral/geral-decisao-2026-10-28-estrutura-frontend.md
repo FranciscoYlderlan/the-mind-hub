@@ -54,7 +54,7 @@ frontend/
     │   ├── feature1/
     │   │   ├── api/                 # Chamadas HTTP + queryOptions/mutations
     │   │   ├── components/          # feature1-form.tsx, feature1-list.tsx...
-    │   │   ├── hooks/               # use-feature1.ts, use-create-feature1.ts...
+    │   │   ├── hooks/               # useFeature1.ts, useCreateFeature1.ts...
     │   │   ├── schemas/             # Validações zod
     │   │   ├── types/
     │   │   └── index.ts             # API pública da feature
@@ -65,7 +65,7 @@ frontend/
     │   ├── layout/                  # Sidebar, Header, AppShell, AuthShell
     │   └── common/                  # DataTable, EmptyState, PageHeader, ConfirmDialog
     │
-    ├── hooks/                       # [shadcn] Hooks globais (use-mobile.ts, use-debounce.ts)
+    ├── hooks/                       # [shadcn] Hooks globais (use-mobile.ts da CLI, useDebounce.ts)
     │
     ├── lib/                         # [shadcn] Utilitários e config de bibliotecas
     │   ├── utils.ts                 # [shadcn] Função cn()
@@ -93,12 +93,12 @@ frontend/
   - **Árvore de rotas gerada:** o `routeTree.gen.ts` é escrito pelo plugin do TanStack Router no Vite. Sempre que o servidor de desenvolvimento inicia, ou quando um arquivo é criado, renomeado ou apagado em `routes/`, o plugin capta a mudança e regenera o arquivo. Rota nova = arquivo novo em `routes/`; nunca registrar rota editando o `.gen`.
   - **Estado:** dados do servidor no TanStack Query; estado de UI global no Zustand, só quando realmente necessário.
   - **Obrigatórios do shadcn:** `components.json`, `components/ui`, `lib/utils.ts` e `styles/globals.css`. A pasta `hooks/` é opcional, mas a CLI a usa por padrão.
-- **Alteração:** 2026-10-28: rotas e features de exemplo (`users/`, `orders/`, `auth/`) trocadas por nomes genéricos (`feature1/`, `feature2/`), para não induzir inferência sobre o domínio do problema. 2026-10-28: pasta `src/test/` retirada, porque o frontend não terá testes unitários nem de componente. 2026-10-28: pasta `.github/workflows/` acrescentada (`ci.yml` e `cd.yml`), pelo CI/CD de [[geral-decisao-2026-10-28-stack-frontend]]. 2026-10-29: explicado por que o `routeTree.gen.ts` não se edita (o plugin o regenera ao iniciar o servidor e a cada mudança em `routes/`) e que `components/ui/` só recebe componentes instalados pela CLI do shadcn (humano). 2026-10-29: regra de nomes do humano (inglês + kebab-case em arquivos e entidades, nos dois repositórios); na árvore, `App.tsx` virou `app.tsx`, `$feature1Id.tsx` virou `$id.tsx` (parâmetro de rota sempre `$id`, escolha do humano pela opção mais simples) e os exemplos de componentes e hooks passaram a mostrar o nome do arquivo. 2026-10-29: exceção dos hooks do React registrada nas Consequências, e o comentário de `hooks/` passou a mostrar nomes de arquivo (`use-debounce.ts` no lugar de `useDebounce`) (humano).
+- **Alteração:** 2026-10-28: rotas e features de exemplo (`users/`, `orders/`, `auth/`) trocadas por nomes genéricos (`feature1/`, `feature2/`), para não induzir inferência sobre o domínio do problema. 2026-10-28: pasta `src/test/` retirada, porque o frontend não terá testes unitários nem de componente. 2026-10-28: pasta `.github/workflows/` acrescentada (`ci.yml` e `cd.yml`), pelo CI/CD de [[geral-decisao-2026-10-28-stack-frontend]]. 2026-10-29: explicado por que o `routeTree.gen.ts` não se edita (o plugin o regenera ao iniciar o servidor e a cada mudança em `routes/`) e que `components/ui/` só recebe componentes instalados pela CLI do shadcn (humano). 2026-10-29: regra de nomes do humano (inglês + kebab-case em arquivos e entidades, nos dois repositórios); na árvore, `App.tsx` virou `app.tsx`, `$feature1Id.tsx` virou `$id.tsx` (parâmetro de rota sempre `$id`, escolha do humano pela opção mais simples) e os exemplos de componentes e hooks passaram a mostrar o nome do arquivo. 2026-10-29: exceção dos arquivos de hook registrada nas Consequências: todo arquivo de hook em camelCase com o nome do hook (`useDebounce.ts`, `useFeature1.ts`), menos o `use-mobile.ts` gerado pelo shadcn; árvore ajustada (humano).
 - **Motivo:** definição base do projeto informada pelo humano.
 - **Consequências:**
   - Proibido: lógica de negócio em `routes/`, import entre features, import de camada de baixo para cima, componente próprio em `components/ui/`, componente do shadcn escrito à mão, editar `routeTree.gen.ts` (qualquer edição manual é sobrescrita na próxima geração).
   - Proibido: arquivo ou pasta fora de inglês + kebab-case (inclui componentes: `bid-panel.tsx`, nunca `BidPanel.tsx`). Exceções: arquivos gerados ou exigidos por ferramenta (`routeTree.gen.ts`, `__root.tsx`, `components/ui/` do shadcn, `vite.config.ts`).
-  - Exceção de convenção, **hooks do React** (humano, 2026-10-29): o hook se chama `useAlgo`, em camelCase com prefixo `use`, porque o React reconhece um hook pelo prefixo (Rules of Hooks e lint `react-hooks`). O arquivo segue kebab-case com o mesmo prefixo: `use-debounce.ts` exporta `useDebounce`, como `use-mobile.ts` do shadcn. A exceção também está na Padronização do `CLAUDE.md`.
+  - Exceção de convenção, **arquivos de hook** (humano, 2026-10-29): o arquivo tem o mesmo nome do hook, em camelCase com prefixo `use`: `useDebounce.ts` exporta `useDebounce`, `useCreateFeature1.ts` exporta `useCreateFeature1`. Vale para **todo** arquivo de hook do projeto, global (`src/hooks/`) ou de feature (`features/<feature>/hooks/`). É a convenção do React: as Rules of Hooks e o lint `react-hooks` reconhecem um hook pelo prefixo `use`. Única exceção: `use-mobile.ts`, gerado pela CLI do shadcn e importado pelos componentes dela com esse nome. A exceção também está na Padronização do `CLAUDE.md`.
   - Identificadores dentro do código seguem a convenção do TypeScript: PascalCase para componentes, classes e entidades (`AuctionLot`, `BidPanel`) e camelCase para funções e variáveis (`placeBid`). O kebab-case vale só para nomes de arquivos e pastas (humano, 2026-10-29).
   - Parâmetro de rota no arquivo é sempre `$id.tsx`, lido como `params.id`.
   - Toda feature expõe só o `index.ts`; nada de importar arquivos internos de outra feature.
