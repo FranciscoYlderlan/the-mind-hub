@@ -14,7 +14,7 @@ aliases: [contexto do MyHarness, MyHarness context]
 ## Objetivo e motivação
 - Construir o MyHarness: app desktop (Tauri + Rust + React) que governa o trabalho de agentes do Claude CLI. Quatro fronteiras: o Obsidian lembra, o MyHarness governa, o Modelo executa e o Humano valida.
 - Motivo: tirar do cofre as regras de como os agentes trabalham (Manual da Orquestra (no Vault)) e torná-las código no núcleo, para que o agente não precise "lembrar" de obedecer.
-- Documento-fonte: especificação funcional de 2026-11-18 (30 RN, 34 RF, 14 RNF, 14 UC, 6 telas), original em `Anexos/harness-especificacao-funcional-2026-11-18.txt`; a transcrição com numeração própria vai para `docs/contrato/00-requisitos.md` do repositório.
+- Documento-fonte: especificação funcional de 2026-11-18 (30 RN, 34 RF, 14 RNF, 14 UC, 6 telas), original em `Anexos/harness-especificacao-funcional-2026-11-18.txt`; a transcrição com numeração própria mora em `Anexos/contrato/00-requisitos.md` deste cofre.
 
 ## Fatos que eu informei
 (o agente preserva sem reinterpretar; fato substituído sai daqui e fica no diário)
@@ -29,7 +29,7 @@ aliases: [contexto do MyHarness, MyHarness context]
 
 ## O que já foi feito
 - 2026-11-19: cofre criado com `cofre.py criar` ([[diario-2026-11-19]]).
-- 2026-11-19: esqueleto do repositório `my-harness` na máquina virtual do agente: ambiente WSL + Docker (`compose.yaml`) e rascunho do contrato em `docs/contrato/`, entregues ao humano por arquivo.
+- 2026-11-19: esqueleto do repositório `my-harness` na máquina virtual do agente: ambiente WSL + Docker (`compose.yaml`) e rascunho do contrato, entregues ao humano por arquivo; o contrato mora em `Anexos/contrato/` deste cofre desde 2026-11-19.
 
 ## Tempo disponível
 - [a confirmar]

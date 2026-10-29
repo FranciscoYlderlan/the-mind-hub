@@ -56,7 +56,7 @@ Primeira parte: [[geral-plano-arquitetura-e-stack]]. Resumo e aval: [[geral-plan
 
 ```
 my-harness/
-├── docs/contrato/            contrato funcional (Q01): 00-requisitos a 08-criterios-de-aceite, mudancas.md
+├── docs/contrato/            cópia do contrato (Q01), só na aceitação final; durante o projeto ele mora em Anexos/contrato/ do cofre
 ├── src/                      tela React (seção 1)
 ├── crates/
 │   └── core/                 regras e casos de uso, sem Tauri

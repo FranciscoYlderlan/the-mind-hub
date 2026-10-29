@@ -10,6 +10,7 @@ Formato fixo que todo subagente devolve ao orquestrador. Não é nota do cofre: 
 - **Prova:** comando rodado + saída resumida
 - **Critérios:** ✔/✘ cada um, com a prova (verificador)
 - **Achados:** bloqueante / deve corrigir / opcional (revisor)
+- **Mudança proposta no contrato:** arquivo, trecho atual, trecho novo e motivo (o orquestrador decide e aplica)
 - **Fora do escopo que notei:** arquivos ou mudanças sem relação com a tarefa
 - **Candidatos a nota:** bug | decisão | referência, uma linha cada
 - **Dúvidas para o humano:** 
