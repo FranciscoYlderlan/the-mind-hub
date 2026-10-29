@@ -15,6 +15,7 @@ aliases: [padroes do projeto, padronização]
 re:\b[Oo] Harness\b|\bpelo Harness\b|\bdo Harness\b => o MyHarness (geral-decisao-2026-11-19-grafia-do-nome)
 antigo: re:\*\*não tem acesso\*\* a essa pasta|que o agente não acessa|entrega os arquivos ao humano|A entrega ao humano é por arquivo => o agente escreve direto em Projetos\my-harness (geral-decisao-2026-11-19-acesso-ao-repositorio)
 antigo: re:O Agent SDK em Node \(S4\) é o plano B|\(S4\) fica como plano B|Plano B \(S4\) => S3 confirmada pelo P1; S4 fora do plano (geral-decisao-2026-11-19-agente-por-claude-p)
+antigo: re:só checagem em PR => checagem em PR e em push na main (geral-decisao-2026-11-19-gatilho-do-ci)
 limite-palavras: 2000
 ```
 
@@ -29,6 +30,6 @@ limite-palavras: 2000
 
 ### 🔗 Conexões
 - Índice: [[CLAUDE]]
-- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]], [[geral-decisao-2026-11-19-agente-por-claude-p]]
+- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]], [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-gatilho-do-ci]]
 - Mapa: [[moc-orquestra]]
 - Regras: [[manual-da-orquestra]]
