@@ -2,7 +2,7 @@
 
 Este é um cofre do Obsidian: uma pasta de notas Markdown. Ele é a **memória do projeto Stonebid**: regras de negócio, decisões, bugs e o que foi estudado para o projeto. Este arquivo é o índice: ele diz onde está cada coisa e quando consultar. Os detalhes moram nas notas.
 
-Nome do cofre no Obsidian: `stonebid-vault`. Repositórios de código: `stonebid-web` (frontend) e `stonebid-api` (backend); links e pasta local em "Repositórios e acesso", abaixo.
+Nome do cofre no Obsidian: `stonebid-vault`. Repositórios de código, links e pasta local: seção "Repositórios e acesso", abaixo.
 
 ## Seu papel
 
@@ -91,15 +91,26 @@ Regras completas: `orquestra/referencias/manual-da-orquestra.md`. Regras de escr
 
 Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma, **corrija primeiro a regra** (nesta seção, no bloco `padroes` ou na decisão que define o nome) e só depois as notas. O `cofre.py verificar` lê o bloco `padroes` e dá ERRO no que fugir dele.
 
-- **Nome do projeto:** uma grafia só, `Stonebid`, a do contrato e do [[contrato-glossario]]. Repositórios e pastas seguem em minúsculas (`stonebid-web`, `stonebid-api`, `stonebid-vault`).
-- **Numeração de fonte:** o enunciado é citado como **E1 a E6**, a numeração de [[enunciado-teste-tecnico]] (E1 O desafio, E2 Front-End, E3 Back-End, E4 Tecnologias e requisitos, E5 Opcionais, E6 Como enviar). A numeração "01 a 05" do contrato original vira E1 a E5. A origem de um requisito aponta só as seções onde ele está escrito, separadas por vírgula (o deploy obrigatório está só no E1).
-- **Nomes de arquivo e pasta:** kebab-case, sem acento, nas notas e no código. Exceção só vale se estiver escrita, com o motivo, na decisão que criou a regra e listada aqui. Sem isso, é erro.
+- **Nome do projeto:** uma grafia só, igual à do documento-fonte (contrato, glossário). Toda variante encontrada entra no bloco `padroes`.
+- **Numeração de fonte:** documento com seções próprias (enunciado, contrato) é citado pela numeração da nota que o transcreve no cofre. A numeração do original só aparece dentro da transcrição. A origem de um requisito aponta só as seções onde ele está escrito, separadas por vírgula.
+- **Nomes de arquivo e pasta:** kebab-case, sem acento, nas notas e no código. Exceção só vale se estiver escrita, com o motivo (convenção da linguagem ou exigência de ferramenta), na decisão que criou a regra e listada em "Regras deste projeto". Sem isso, é erro.
+- **Tamanho:** o limite de ~350 palavras do Manual do Cérebro **não vale** em cofre de projeto, mas há limite: o `limite-palavras` do bloco `padroes`, fixado pela maior nota registrada quando a regra nasceu. Os manuais e modelos copiados do `Vault` ficam fora da conta.
+- **Passou do limite:** divida a nota. A parte nova vira nota própria, com o nome da original + `-<assunto>` (em bug e diário, o assunto entra depois da data), o mesmo modelo e o mesmo frontmatter. Na original ficam 1 frase + `[[link]]` no lugar do trecho, e a nova aponta de volta nas Conexões.
+- **Blocos do projeto:** o que fica entre `<!-- projeto:... -->` e `<!-- /projeto:... -->` é deste projeto. O `cofre.py sincronizar` refaz o resto do arquivo a partir do modelo do `Vault` e guarda esses blocos como estão. Regra de projeto mora dentro de um bloco; fora dele, ela some na próxima sincronização.
+- **`[a preencher]`:** parte que o humano ainda não definiu. O agente não inventa o valor: pergunta ao humano ou anota a dúvida no "Onde parei" do diário. O `verificar` mostra cada `[a preencher]` como AVISO.
+
+### Regras deste projeto
+
+<!-- projeto:padronizacao -->
+- **Grafia do nome:** `Stonebid`, a do contrato e do [[contrato-glossario]]. Repositórios e pastas seguem em minúsculas (`stonebid-web`, `stonebid-api`, `stonebid-vault`).
+- **Documentos-fonte e numeração:** o enunciado é citado como **E1 a E6**, a numeração de [[enunciado-teste-tecnico]] (E1 O desafio, E2 Front-End, E3 Back-End, E4 Tecnologias e requisitos, E5 Opcionais, E6 Como enviar). A numeração "01 a 05" do contrato original vira E1 a E5. O deploy obrigatório está só no E1.
 - **Exceções registradas:**
   - **Arquivos de hook do React:** o arquivo tem o mesmo nome do hook, em camelCase com prefixo `use`: `useDebounce.ts` exporta `useDebounce`, `useCreateFeature1.ts` exporta `useCreateFeature1`. Vale para **todo** arquivo de hook do projeto, global (`src/hooks/`) ou de feature (`features/<feature>/hooks/`). É a convenção do React: as Rules of Hooks e o lint `react-hooks` reconhecem um hook pelo prefixo `use`. Única exceção: `use-mobile.ts`, gerado pela CLI do shadcn e importado pelos componentes dela com esse nome. Registro: [[geral-decisao-2026-10-28-estrutura-frontend]].
-  - **Gerados ou exigidos por ferramenta:** `routeTree.gen.ts`, `__root.tsx`, `components/ui/` do shadcn e `vite.config.ts`, na mesma decisão.
-- **Tamanho:** o limite de ~350 palavras do Manual do Cérebro **não vale** neste cofre, nem para as notas `contrato-*`, que copiam o contrato sem reinterpretar. O limite é o `limite-palavras` do bloco abaixo: 2073 palavras, o tamanho de [[contrato-do-projeto]], a maior nota registrada em 2026-10-29. Os manuais e modelos copiados do `Vault` ficam fora da conta.
-- **Passou do limite:** divida a nota. A parte nova vira nota própria, com o nome da original + `-<assunto>` (em bug e diário, o assunto entra depois da data), o mesmo modelo e o mesmo frontmatter. Na original ficam 1 frase + `[[link]]` no lugar do trecho, e a nova aponta de volta nas Conexões.
+  - **Gerados ou exigidos por ferramenta:** `routeTree.gen.ts`, `__root.tsx`, `components/ui/` do shadcn e `vite.config.ts` (frontend); `schema.prisma`, `Dockerfile` e `docker-compose.yml` (backend). Registro: [[geral-decisao-2026-10-28-estrutura-frontend]] e [[geral-decisao-2026-10-28-estrutura-backend]].
+- **Limite de tamanho:** 2073 palavras, o tamanho de [[contrato-do-projeto]], a maior nota registrada em 2026-10-29. Vale também para as notas `contrato-*`, que copiam o contrato sem reinterpretar.
+<!-- /projeto:padronizacao -->
 
+<!-- projeto:padroes -->
 ```padroes
 # termo fora do padrão => forma certa   ("re:" no início = expressão regular)
 StoneBid => Stonebid (grafia do contrato-glossario)
@@ -108,6 +119,7 @@ re:\bE[1-6]/E[1-6]\b => E1, E2 (vírgula, e só as seções onde o requisito est
 re:\buse-(?!mobile\.)[a-z0-9-]+\.tsx?\b => useAlgo.ts (arquivo de hook em camelCase; só use-mobile.ts do shadcn fica)
 limite-palavras: 2073
 ```
+<!-- /projeto:padroes -->
 
 ## Etapas vitais (obrigatório)
 
@@ -129,15 +141,18 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 
 ## Repositórios e acesso
 
+<!-- projeto:repositorios -->
 | O quê | Onde |
 |---|---|
 | Backend `stonebid-api` | https://github.com/FranciscoYlderlan/stonebid-api |
 | Frontend `stonebid-web` | https://github.com/FranciscoYlderlan/stonebid-web |
 | Pasta do projeto no computador | `C:\Users\Ylderlan\Documents\Projetos\stonebid` |
 
-- **Etapa de programação em `stonebid-api` ou `stonebid-web`: o acesso está autorizado pelo humano para aquela etapa** (pasta do projeto e repositório no GitHub). Peça o acesso à pasta ou anexe o repositório direto, sem perguntar antes se pode.
-- A autorização vale só para a etapa de programação em curso; fora dela (planejamento, cofre, pesquisa) o acesso aos repositórios segue a regra normal.
-- Apagar arquivos, forçar push ou mexer na branch principal fora do fluxo de CI/CD continua pedindo confirmação.
+- **Acesso na etapa de programação:** autorizado pelo humano para aquela etapa em `stonebid-api` ou `stonebid-web` (pasta do projeto e repositório no GitHub). Peça o acesso à pasta ou anexe o repositório direto, sem perguntar antes se pode.
+<!-- /projeto:repositorios -->
+
+- Fora da etapa de programação (planejamento, cofre, pesquisa), o acesso aos repositórios segue a regra normal: pedir antes.
+- Apagar arquivos, forçar push ou mexer na branch principal fora do fluxo de CI/CD sempre pede confirmação.
 
 ## Como buscar (obrigatório)
 
