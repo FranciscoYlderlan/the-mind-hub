@@ -16,19 +16,19 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 12
 
 ## 12. Tecnologias
 
-Cada escolha vira uma decisão registrada (o que, as alternativas, o porquê). Faltam duas, marcadas `[PENDENTE]`.
+Cada escolha vira uma decisão registrada (o que, as alternativas, o porquê). Faltam duas, marcadas `[PENDENTE]`. Nenhuma versão é travada: vale a citada ou mais recente (o sinal `+`).
 
 | Camada | Escolha | Decisão |
 |---|---|---|
-| Front-end | React 19.3 + Vite 8.3.4, TanStack Router e Query, Zustand, zod, shadcn/ui | [[geral-decisao-2026-10-28-stack-frontend]] |
-| Back-end | Fastify v5.12.7 (Node) | [[geral-decisao-2026-10-28-stack-backend]] |
-| Banco de dados | PostgreSQL latest, via Prisma v8 (relacional, atende o critério 2) | [[geral-decisao-2026-10-28-stack-backend]] |
+| Front-end | React 19.3+ e Vite 8.3.4+, TanStack Router e Query, Zustand, zod, shadcn/ui | [[geral-decisao-2026-10-28-stack-frontend]] |
+| Back-end | Fastify v5.12.7+ (Node) | [[geral-decisao-2026-10-28-stack-backend]] |
+| Banco de dados | PostgreSQL latest, via Prisma v8+ (relacional, atende o critério 2) | [[geral-decisao-2026-10-28-stack-backend]] |
 | Tempo real (AD-04) | `[PENDENTE]` | — |
 | Testes | Vitest no backend; Playwright no frontend, por outro agente | [[geral-decisao-2026-10-28-testes-frontend-playwright]] |
 | Contêineres | Docker + Compose | [[geral-decisao-2026-10-28-stack-backend]] |
 | Hospedagem do deploy | Backend e banco no GCP (Cloud Run + Cloud SQL); frontend na Vercel; CI/CD no GitHub Actions | [[geral-decisao-2026-10-29-hospedagem]] |
 | API pública de itens | `[PENDENTE]` (Q-13) | — |
-| Estilo e tema | Tailwind CSS v4.3 + shadcn/ui | [[geral-decisao-2026-10-28-stack-frontend]] |
+| Estilo e tema | Tailwind CSS v4.3+ e shadcn/ui | [[geral-decisao-2026-10-28-stack-frontend]] |
 | Organização dos repositórios | Dois repositórios: `stonebid-web` e `stonebid-api` | [[geral-contexto]] |
 
 **Critérios para decidir:**
