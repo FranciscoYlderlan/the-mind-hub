@@ -12,6 +12,8 @@ So usa a biblioteca padrao do Python. Rode da raiz do the-mind-hub:
 
 Dentro de um cofre de projeto: python orquestra/modelos/cofre.py verificar .
 'verificar' sai com codigo 1 se houver ERRO. Ninguem diz "pronto" com ERRO.
+'verificar' tambem da ERRO em estado substituido (linhas 'antigo:' do bloco padroes) e em aviso de
+prevalencia ('onde esta nota fala em X, vale Y') fora dos lugares de historico: uma versao so.
 """
 import argparse, datetime, re, sys
 from pathlib import Path
@@ -41,6 +43,15 @@ ESCOPO_CEREBRO = (
     "vale aqui: vale o `limite-palavras` do bloco `padroes` do `CLAUDE.md`.")
 BLOCO = re.compile(r"<!-- projeto:([a-z-]+) -->\n(.*?)<!-- /projeto:\1 -->", re.S)
 PADROES = re.compile(r"^```padroes\n(.*?)^```", re.S | re.M)
+# Lugares de historico: ali o estado antigo pode aparecer (cronologia). Fora deles, a nota diz so o estado atual.
+HIST_TITULO = re.compile(r"^(#{1,6}) .*(Histórico|Mudanças|Linha do tempo|O que já foi feito)", re.M)
+HIST_LINHA = re.compile(r"^\s*(-\s*)?(\*\*)?(origem|Origem|substitui)(\*\*)?:.*$", re.M)
+# Aviso de prevalencia: texto velho mantido com um aviso "onde diverge, vale o novo" por cima. Proibido fora do historico.
+PREVALENCIA = re.compile(r"(?i)onde (esta nota|elas?|a tabela abaixo|o texto abaixo) (fala|falam|diverge|divergem)|"
+                         r"segue como estava até|vale o prazo novo")
+PREVALENCIA_CALLOUT = re.compile(r"(?im)^>.*(o texto abaixo é da|passa a ler|diverge, vale|mudou em \d{4}-\d{2}-\d{2}|\[!\w+\] mudança)")
+# Na nota de decisao, Proposta, Alteracao e Motivo contam a diferenca em relacao ao que havia: sao historico.
+DEC_HIST = re.compile(r"^- \*\*(Proposta|Alteração|Motivo)\b.*?(?=^- \*\*|^#|\Z)", re.S | re.M)
 
 
 def hoje():
@@ -335,9 +346,9 @@ def lista(v):
 def padroes(claude_txt):
     """Bloco ```padroes do CLAUDE.md -> (regras [(regex, forma certa, como aparece)], limite de palavras ou None)."""
     m = PADROES.search(claude_txt or "")
-    regras, limite = [], None
+    regras, limite, antigos = [], None, []
     if not m:
-        return regras, limite, False
+        return regras, limite, False, antigos
     for linha in m.group(1).splitlines():
         linha = linha.strip()
         if not linha or linha.startswith("#"):
@@ -347,12 +358,44 @@ def padroes(claude_txt):
             limite = int(lm.group(1)); continue
         if "=>" not in linha:
             continue
+        destino = regras
+        if linha.startswith("antigo:"):
+            linha, destino = linha[len("antigo:"):].strip(), antigos
         errado, certo = (x.strip() for x in linha.split("=>", 1))
         if errado.startswith("re:"):
-            regras.append((re.compile(errado[3:]), certo, errado[3:]))
+            destino.append((re.compile(errado[3:]), certo, errado[3:]))
         else:
-            regras.append((re.compile(re.escape(errado)), certo, errado))
-    return regras, limite, True
+            destino.append((re.compile(re.escape(errado)), certo, errado))
+    return regras, limite, True, antigos
+
+
+def sem_historico(s):
+    """Tira do texto os lugares de historico: secoes 'Historico', 'Mudancas' e 'Linha do tempo' e linhas origem/substitui."""
+    s = HIST_LINHA.sub("", s)
+    saida, corte = [], None
+    for linha in s.splitlines():
+        h = re.match(r"^(#{1,6}) ", linha)
+        if h and corte is not None and len(h.group(1)) <= corte:
+            corte = None
+        if corte is None:
+            m = HIST_TITULO.match(linha)
+            if m:
+                corte = len(m.group(1))
+                continue
+            saida.append(linha)
+    return "\n".join(saida)
+
+
+def so_estado_atual(s, fm):
+    """Texto que precisa dizer so o estado atual: sem historico e, na decisao, sem Proposta/Alteracao/Motivo."""
+    if (fm or {}).get("tipo") == "decisao":
+        s = DEC_HIST.sub("", s)
+    return sem_codigo(sem_historico(s))
+
+
+def eh_historico(rel_, fm):
+    """Nota inteira de historico: diario, bug e decisao substituida."""
+    return rel_.startswith(("orquestra/diarios/", "orquestra/bugs/")) or (fm or {}).get("status") == "substituida"
 
 
 def palavras(s):
@@ -436,7 +479,7 @@ def verificar(cofre, vault=None):
     if claude.exists() and "## Etapas vitais" not in ler(claude):
         E("CLAUDE.md", "sem a seção 'Etapas vitais' (regenere com sincronizar)")
     claude_txt = ler(claude) if claude.exists() else ""
-    regras, limite, tem_bloco = padroes(claude_txt)
+    regras, limite, tem_bloco, antigos = padroes(claude_txt)
     eh_kit = lambda p: rel(p).startswith(("orquestra/modelos/", "Modelos/", "orquestra/referencias/manual-"))
     for p in mds:
         if eh_kit(p):
@@ -447,6 +490,16 @@ def verificar(cofre, vault=None):
             achados = rx.findall(alvo_txt)
             if achados:
                 E(r, f"{len(achados)}x fora do padrão '{como}': use {certo} (bloco padroes do CLAUDE.md)")
+        fm_p = frontmatter(texto[p])
+        if not eh_historico(r, fm_p):
+            atual = so_estado_atual(alvo_txt, fm_p)
+            for rx, certo, como in antigos:
+                achados = rx.findall(atual)
+                if achados:
+                    E(r, f"{len(achados)}x estado substituído '{como}': hoje vale {certo}. Reescreva no estado atual; "
+                         "a cronologia fica no diário (varredura de impacto, etapa B6)")
+            if PREVALENCIA.search(atual) or PREVALENCIA_CALLOUT.search(atual):
+                E(r, "aviso de prevalência ('onde esta nota fala em X, vale Y'): reescreva o trecho no estado atual")
         if projeto and limite and p != claude and palavras(texto[p]) > limite:
             E(r, f"{palavras(texto[p])} palavras (limite {limite}): divida em nota nova ligada por link (Padronização do CLAUDE.md)")
     if projeto:
