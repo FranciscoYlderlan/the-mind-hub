@@ -17,9 +17,8 @@ O Stonebid é uma casa de leilões online. O leiloeiro monta lotes a partir de i
 Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 
 ## Fatos que eu informei
-(o agente preserva sem reinterpretar)
-- Dois repositórios: `stonebid-web` (frontend) e `stonebid-api` (backend), ainda não criados no GitHub (**superado em 2026-10-29**, ver o item seguinte).
-- 2026-10-29: repositórios criados no GitHub: https://github.com/FranciscoYlderlan/stonebid-api e https://github.com/FranciscoYlderlan/stonebid-web. Pasta do projeto no computador: `C:\Users\Ylderlan\Documents\Projetos\stonebid`.
+(o agente preserva sem reinterpretar; fato substituído sai daqui e fica no diário)
+- Dois repositórios no GitHub, `stonebid-web` (frontend) e `stonebid-api` (backend): https://github.com/FranciscoYlderlan/stonebid-api e https://github.com/FranciscoYlderlan/stonebid-web. Pasta do projeto no computador: `C:\Users\Ylderlan\Documents\Projetos\stonebid`.
 - 2026-10-29: branches `main` (produção), `staging` e de trabalho `tipo/ID-descricao-curta` (ex.: `feat/RN-04-incremento-minimo`); boilerplate inicial direto na `main` → [[geral-decisao-2026-10-29-padrao-de-branches]].
 - 2026-10-29: configuração do GCP aprovada (São Paulo, Cloud Run com 1 instância mínima, Cloud SQL `db-f1-micro`, Workload Identity Federation, alerta de US$ 50, staging como segundo serviço) → [[geral-decisao-2026-10-29-hospedagem]].
 - 2026-10-29: Prisma com `@@map` em snake_case; testes E2E do backend em `test/e2e/` na raiz → [[geral-decisao-2026-10-28-estrutura-backend]].
@@ -36,9 +35,9 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: reuso de componentes é **padrão de todo o projeto**: compor antes de criar, sem copiar telas, extrair na segunda repetição; motivação: DRY, uma representação única de cada conhecimento; "reutilização de componentes bem arquitetados é princípio de clean code e de uma boa arquitetura" → [[geral-decisao-2026-10-28-criacao-de-componentes]].
 - 2026-10-29: páginas públicas do RF-03 no layout `_public/`; a sala do lote tem duas rotas (`/lots/:id` só para ver e `/bidding/:id` com lance) que compõem o mesmo componente; `/` é a vitrine → [[geral-decisao-2026-10-28-estrutura-frontend]].
 - Toda funcionalidade criada no frontend é testada com Playwright por uma **subthread de teste** (outro agente), que só testa e reporta bugs; sem testes unitários ou de componente no frontend → [[geral-decisao-2026-10-28-testes-frontend-playwright]].
-- Contrato do projeto v0.3 (2026-10-29; v0.2 de 2026-10-27 + mudanças M-01 a M-13, em [[contrato-do-projeto-mudancas]]), escrito por mim com a IA, com as perguntas Q-01 a Q-15 ainda em validação: requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
-- Do contrato (itens `[DECIDIDO]`): prazo real de **4 dias** (o enunciado fala em 7; **substituído em 2026-10-29**, ver o item seguinte); **todos os 5 opcionais** serão feitos; deploy obrigatório; desenvolvimento com IA permitido; sou júnior e aprender é objetivo do projeto → [[contrato-visao-escopo-e-papeis]].
-- 2026-10-29 (09:06): o prazo real passou de 4 dias para **24 horas** a partir de agora. Oficialmente estou no **terceiro dia**: nos três primeiros dias não avancei muito além dos requisitos e da arquitetura. Vou trabalhar sem pausa.
+- Contrato do projeto v0.3 (2026-10-29; histórico de mudanças em [[contrato-do-projeto-mudancas]]), escrito por mim com a IA, com as perguntas da seção 14 ainda em validação (a Q-09 já foi respondida): requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
+- Do contrato (itens `[DECIDIDO]`): **todos os 5 opcionais** serão feitos; deploy obrigatório; desenvolvimento com IA permitido; sou júnior e aprender é objetivo do projeto → [[contrato-visao-escopo-e-papeis]].
+- 2026-10-29 (09:06): prazo real de **24 horas** a partir de agora (o enunciado fala em 7 dias). Oficialmente estou no **terceiro dia**: nos três primeiros dias não avancei muito além dos requisitos e da arquitetura. Vou trabalhar sem pausa.
 - 2026-10-29 (12:28): aprovada a regra dos testes: o teste só sai do escopo junto com o requisito que prova; T-01 a T-09 e T-10a ficam sempre → [[geral-decisao-2026-10-29-testes-no-escopo]].
 - 2026-10-29 (13:22): aprovada a solução do comprovante e da auditoria: hash guardado no lance, cabeça da cadeia com selo no lote e comprovante como fotografia selada da liquidação → [[geral-decisao-2026-10-29-comprovante-e-hash]].
 - 2026-10-29 (13:31): aprovada a correção do cancelamento ao vivo, "vamos deixar os dois casos": lote ao vivo vai para CANCELADO sem lances; com lances, só com o `[OPC-2]` → [[geral-decisao-2026-10-29-cancelamento-ao-vivo]].
@@ -60,12 +59,13 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: divergência sobre o que o comprovante e o lance guardam resolvida (M-12); furo do truncamento sem selo corrigido na proposta da 8.1 ([[geral-decisao-2026-10-29-comprovante-e-hash]]).
 - 2026-10-29: tabela 5.1 corrigida para o cancelamento de lote ao vivo sem lances (M-13, [[geral-decisao-2026-10-29-cancelamento-ao-vivo]]).
 - 2026-10-29: rotas públicas do RF-03 (layout `_public/`) e reuso de componentes como padrão do projeto registrados nas decisões do frontend ([[diario-2026-10-29]]).
+- 2026-10-29: bug de processo corrigido: mudança de estado passa por varredura de impacto, e as notas `contrato-*` ficam só no texto vigente ([[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]).
 - 2026-10-29: pendências respondidas: branches, configuração do GCP, entrega, dial, motivação, `@@map`, testes E2E e mudança do contrato ([[diario-2026-10-29]]).
 
 ## Tempo disponível
-- **24 horas** a partir de 2026-10-29 09:06 (substitui os 4 dias do contrato). Entrega em **2026-10-30 09:00** (confirmado pelo humano).
+- **24 horas** a partir de 2026-10-29 09:06. Entrega em **2026-10-30 09:00** (confirmado pelo humano).
 - Ritmo: trabalho contínuo, sem pausa.
-- O plano de 4 dias de [[contrato-processo-e-plano]] não cabe mais; precisa ser refeito para 24 horas.
+- O plano com horários para as 24 horas ainda não foi feito: sai dos incrementos de [[contrato-processo-e-plano]], com a linha de corte aplicada.
 
 ## Dial e modelo de IA
 - Dial: medio
@@ -81,7 +81,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 ## Mapa
 - Roteiro: [[geral-plano]]
 - Decisões: [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
-- Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]]
+- Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]], [[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]
 - Enunciado: [[enunciado-teste-tecnico]]
 - Contrato: [[contrato-do-projeto]] (requisitos, regras, arquitetura proposta, plano e perguntas Q)
 - Referências: [[registro-de-componentes]], [[manual-da-orquestra]], [[manual-do-cerebro]]
@@ -90,7 +90,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 (separada dos fatos; marcar [a confirmar] quando for suposição)
 - As versões foram registradas como informadas, sem checagem contra os registros do npm.
 - Lances ao vivo (concorrência) e a verificação de adulteração do histórico passaram a constar como áreas sensíveis, com base no contrato; o contrato ainda está em validação ([[contrato-pontos-para-validar]]).
-- Os itens `[PROPOSTO]` do contrato (AD-01 a AD-10, RN-10, fora do escopo, plano de 4 dias) ainda não são decisões do cofre.
+- Os itens `[PROPOSTO]` do contrato (AD-01 a AD-10, RN-10, fora do escopo, incrementos do plano) ainda não são decisões do cofre.
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
