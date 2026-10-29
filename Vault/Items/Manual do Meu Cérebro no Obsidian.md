@@ -254,7 +254,7 @@ Parágrafo fluido (máx. 4 linhas) com UMA analogia do cotidiano e [[Links]] na 
 | Callout de passos | até 6 itens, 1 linha cada |
 | Resumo para o cérebro | exatamente 3 pontos |
 | Callouts por nota | até 4 |
-| Nota inteira | cabe em 1 a 2 telas. Passou de ~350 palavras: dividir em submemórias |
+| Nota inteira | cabe em 1 a 2 telas. Passou de ~350 palavras: dividir em submemórias. Em cofre de projeto vale o limite do `CLAUDE.md` do cofre ([[Manual da Orquestra]] §7) |
 
 **Mapa fixo de callouts** (sempre o mesmo visual para o mesmo papel):
 
@@ -437,6 +437,7 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - v3 (2026-10-27): todo cofre ganha um `CLAUDE.md` na raiz (seção 3).
 - v4 (2026-10-28): cofres de projeto passam a usar a estrutura `orquestra/` e as notas operacionais do [[Manual da Orquestra]] (seções 3 e 4); `status` ganha `arquivado`.
 - v5 (2026-10-28): checklist exige link de entrada e `cofre.py verificar`; aliases do Manual ajustados para 4 (seção 12).
+- v6 (2026-10-29): o limite de ~350 palavras não vale em cofre de projeto; lá vale o limite do `CLAUDE.md` do cofre (seção 6).
 
 ## 📚 Fontes
 - Links internos, blocos e embeds: https://obsidian.md/help/links
