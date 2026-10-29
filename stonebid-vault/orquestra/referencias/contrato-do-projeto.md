@@ -12,10 +12,10 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), fornecido pelo humano
 > [!tldr] Em uma linha
 > O acordo entre mim e a IA: o que construir, o que não construir, como decidir na dúvida e como trabalhar juntos.
 
-Funciona como a **planta de uma obra**: o pedreiro não decide onde vai a parede, consulta a planta. Este é o hub do contrato v0.2; cada seção mora numa nota própria, para o agente ler só o que a tarefa precisa. O texto foi copiado do documento original sem reinterpretar.
+Funciona como a **planta de uma obra**: o pedreiro não decide onde vai a parede, consulta a planta. Este é o hub do contrato (v0.3, atualizada em 2026-10-29 com o cenário atual); cada seção mora numa nota própria, para o agente ler só o que a tarefa precisa. O texto foi copiado do documento original sem reinterpretar.
 
-> [!warning] Prazo mudou em 2026-10-29
-> O prazo real passou de 4 dias para **24 horas** (a partir de 2026-10-29 09:06). Onde esta nota fala em 4 dias, vale o prazo novo; o texto do contrato segue como estava até a v0.3. Fato registrado em [[geral-contexto]].
+> [!warning] Cenário atual (v0.3, 2026-10-29)
+> As notas de seção guardam o texto da v0.2, copiado sem reinterpretar. Onde elas divergem da tabela "Mudanças da v0.3" abaixo, **vale a v0.3** (e as decisões que ela cita). O prazo real é de **24 horas**, não de 4 dias.
 
 ## 📋 Ficha
 
@@ -23,14 +23,41 @@ Funciona como a **planta de uma obra**: o pedreiro não decide onde vai a parede
 |---|---|
 | Projeto | **Stonebid** (*stone*, pedra que não se altera + *bid*, lance) |
 | Repositórios | `stonebid-web` (front-end) e `stonebid-api` (back-end) |
-| Versão | 0.2 (rascunho para validação) |
-| Data | 27/10/2026 |
-| Autor | [A PREENCHER] |
-| Prazo real | **4 dias** (o enunciado fala em 7; vale o prazo real) |
-| Entrega | [A PREENCHER: data e hora] |
-| Horas por dia | [A PREENCHER] |
-| Tecnologias | [A PREENCHER na seção 12] |
-| Status | Aguardando validação (veja a seção 14) |
+| Repositórios no GitHub | https://github.com/FranciscoYlderlan/stonebid-api · https://github.com/FranciscoYlderlan/stonebid-web |
+| Versão | 0.3 (v0.2 + mudanças aprovadas em 2026-10-29) |
+| Data | 29/10/2026 (v0.2: 27/10/2026) |
+| Autor | FranciscoYlderlan, com a IA |
+| Prazo real | **24 horas**, a partir de 2026-10-29 09:06 (substitui os 4 dias da v0.2; o enunciado fala em 7) |
+| Entrega | **2026-10-30 09:00** |
+| Horas por dia | Trabalho contínuo, sem pausa, nas 24 horas |
+| Tecnologias | Definidas: [[geral-decisao-2026-10-28-stack-frontend]] e [[geral-decisao-2026-10-28-stack-backend]]; comparação com a seção 12 em [[contrato-tecnologias]] |
+| Hospedagem | Backend e banco no GCP (Cloud Run + Cloud SQL, São Paulo), frontend na Vercel, CI/CD no GitHub Actions → [[geral-decisao-2026-10-29-hospedagem]] |
+| Status | Aguardando validação das perguntas Q-01 a Q-15 (seção 14) |
+
+## 🔄 Mudanças da v0.3 (2026-10-29)
+
+Entraram pelo protocolo de mudança da seção 13.4, com o aval do humano. Cada linha diz o que mudou em relação à v0.2 e onde está a decisão.
+
+| # | Mudança | Seções afetadas | Onde está |
+|---|---|---|---|
+| M-01 | Prazo de 4 dias → **24 horas**; entrega em 2026-10-30 09:00; trabalho contínuo. O plano de 4 dias precisa ser refeito com corte de escopo | 1, 2, 9, 11 | [[geral-contexto]] |
+| M-02 | Tecnologias definidas (a seção 12 deixa de ser `[PENDENTE]`) | 12 | [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[contrato-tecnologias]] |
+| M-03 | Organização de pastas: frontend por features; backend em Clean Architecture (`domain/`, `application/use-cases/`, `infra/`, `env/`), testes E2E em `test/e2e/`, Prisma com `@@map` em snake_case | 8 | [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]] |
+| M-04 | Nomes de arquivos, pastas e entidades em inglês e kebab-case nos dois repositórios; identificadores em PascalCase/camelCase | 8, 13 | [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]] |
+| M-05 | Hospedagem: GCP (Cloud Run com 1 instância mínima, Cloud SQL `db-f1-micro`, Workload Identity Federation, alerta de US$ 50) + Vercel; staging como segundo serviço no Cloud Run | 6, 8, 9 | [[geral-decisao-2026-10-29-hospedagem]] |
+| M-06 | CI/CD no GitHub Actions nos dois repositórios (`ci.yml` e `cd.yml`; deploy só depois do CI verde) | 8, 10, 13 | [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]] |
+| M-07 | **Camada MCP** no backend (`src/infra/mcp/`, uma tool por rota, ligada em local e staging, não em produção), entra no contrato enquanto estiver no projeto | 4, 8 | [[geral-decisao-2026-10-29-camada-mcp]] |
+| M-08 | **Teste do frontend com Playwright** feito por agentes de IA (subthread de teste), como instrução de teste e não como suíte no repositório; sem testes unitários e de componente no frontend | 10, 13 | [[geral-decisao-2026-10-28-testes-frontend-playwright]] |
+| M-09 | Branches: `main` (produção), `staging` e de trabalho `tipo/ID-descricao-curta` (ex.: `feat/RN-04-incremento-minimo`); boilerplate inicial direto na `main` | 11, 13 | [[geral-decisao-2026-10-29-padrao-de-branches]] |
+| M-10 | Componentes do frontend: registro consultado antes de criar, shadcn/ui só pela CLI | 13 | [[geral-decisao-2026-10-28-criacao-de-componentes]], [[registro-de-componentes]] |
+
+**Continua da v0.2 sem mudança:** visão, papéis, RF, RN, RNF, modelo de dados, riscos e testes T-01 a T-06; os **5 opcionais** seguem no escopo; deploy obrigatório.
+
+**Ainda em aberto na v0.3:**
+- Perguntas Q-01 a Q-15 de [[contrato-pontos-para-validar]], incluindo o tempo real (AD-04) e a API pública de itens.
+- Plano refeito para 24 horas (corte de escopo a partir de [[contrato-processo-e-plano]]).
+- Seção E6 do enunciado ("Como enviar": repositórios públicos e relato do uso de IA), que o contrato não cobre ([[enunciado-teste-tecnico]]).
+- Itens `[PROPOSTO]` da seção 8 (AD-01 a AD-10) que não viraram decisão.
 
 ## 🗺️ Onde está cada seção
 
@@ -89,6 +116,7 @@ Cito Sommerville (*Engenharia de Software*) e Pressman & Maxim (*Engenharia de S
 |---|---|---|
 | 0.1 | 26/10/2026 | Primeiro rascunho, para validação |
 | 0.2 | 27/10/2026 | Nome do projeto definido (Stonebid) e padrão de repositórios `stonebid-web` e `stonebid-api` |
+| 0.3 | 29/10/2026 | Prazo de 24 horas, tecnologias, pastas, nomes, hospedagem, CI/CD, camada MCP, Playwright por agentes, branches e componentes (M-01 a M-10, acima) |
 
 ## 16. Referências e roteiro de estudo
 
@@ -115,11 +143,11 @@ Cito Sommerville (*Engenharia de Software*) e Pressman & Maxim (*Engenharia de S
 
 ## 🤖 Interpretação do agente
 (separada do contrato; registrada em 2026-10-29)
-- O contrato está em **rascunho (v0.2, aguardando validação)**. Itens `[PROPOSTO]` e as perguntas Q-01 a Q-15 **não** viraram notas de decisão; isso só acontece com o meu aval, uma decisão por nota ([[manual-da-orquestra]]).
+- O contrato está em **rascunho (v0.3, aguardando validação)**: a v0.3 só atualizou este hub; as notas de seção seguem com o texto da v0.2. Itens `[PROPOSTO]` e as perguntas Q-01 a Q-15 **não** viraram notas de decisão; isso só acontece com o meu aval, uma decisão por nota ([[manual-da-orquestra]]).
 - Os itens `[DECIDIDO]` que vieram de mim foram copiados para "Fatos que eu informei" em [[geral-contexto]].
-- A seção 12 já foi em boa parte respondida pelas decisões de 2026-10-28 e 2026-10-29; a comparação está em [[contrato-tecnologias]]. O contrato ainda marca a seção como `[PENDENTE]` e pode ganhar uma v0.3.
-- A camada MCP ([[geral-decisao-2026-10-29-camada-mcp]]) e o teste do frontend só com Playwright ([[geral-decisao-2026-10-28-testes-frontend-playwright]]) não aparecem no contrato. Pelo protocolo da seção 13.4, entram como mudança do contrato. Resposta do humano (2026-10-29): "sim enquanto o mcp está no projeto e o playwright é instrução de teste para os agentes de IA". Leitura do agente: a camada MCP entra como mudança enquanto estiver no projeto; o Playwright entra como instrução de teste para os agentes de IA, não como suíte do repositório.
-- O enunciado original, fonte da verdade nº 1 pela seção 13.2, está em [[enunciado-teste-tecnico]] (com o PDF em `Anexos/`). Ele tem uma seção E6 "Como enviar" que o contrato não cobre.
+- A seção 12 foi respondida pelas decisões de 2026-10-28 e 2026-10-29 (M-02); a comparação está em [[contrato-tecnologias]].
+- A camada MCP ([[geral-decisao-2026-10-29-camada-mcp]]) e o teste do frontend só com Playwright ([[geral-decisao-2026-10-28-testes-frontend-playwright]]) não aparecem no contrato. Pelo protocolo da seção 13.4, entram como mudança do contrato (M-07 e M-08). Resposta do humano (2026-10-29): "sim enquanto o mcp está no projeto e o playwright é instrução de teste para os agentes de IA". Leitura do agente: a camada MCP entra como mudança enquanto estiver no projeto; o Playwright entra como instrução de teste para os agentes de IA, não como suíte do repositório.
+- O enunciado original, fonte da verdade nº 1 pela seção 13.2, está em [[enunciado-teste-tecnico]] (com o PDF em `Anexos/`). Ele tem uma seção E6 "Como enviar" que o contrato ainda não cobre.
 
 > [!tip] Quando abrir esta nota
 > Antes de qualquer tarefa de implementação: achar a seção do contrato que cobre o ID (RF, RN, RNF, AD) e seguir para a nota dela.
@@ -128,9 +156,11 @@ Cito Sommerville (*Engenharia de Software*) e Pressman & Maxim (*Engenharia de S
 * **Ponto 1:** o contrato diz o que construir e o que fica de fora; as regras estão em [[contrato-regras-de-negocio]].
 * **Ponto 2:** fonte da verdade, em ordem: enunciado → contrato → decisões → código ([[contrato-trabalho-com-a-ia]]).
 * **Ponto 3:** antes de codar, validar as perguntas de [[contrato-pontos-para-validar]].
+* **Ponto 4:** onde a nota de seção (v0.2) diverge da tabela de mudanças da v0.3, vale a v0.3.
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
 - Projeto: [[geral-contexto]], [[geral-plano]]
 - Fonte: [[enunciado-teste-tecnico]]
+- Decisões da v0.3: [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Seções: [[contrato-visao-escopo-e-papeis]], [[contrato-requisitos-funcionais]], [[contrato-regras-de-negocio]], [[contrato-requisitos-nao-funcionais]], [[contrato-modelo-de-dados]], [[contrato-arquitetura]], [[contrato-riscos]], [[contrato-testes]], [[contrato-processo-e-plano]], [[contrato-tecnologias]], [[contrato-trabalho-com-a-ia]], [[contrato-pontos-para-validar]], [[contrato-glossario]]

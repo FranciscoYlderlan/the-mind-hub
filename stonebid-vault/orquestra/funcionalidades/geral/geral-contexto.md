@@ -49,6 +49,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: contrato do projeto v0.2 registrado em `referencias/`, uma nota por seção, a partir de [[contrato-do-projeto]] ([[diario-2026-10-29]]).
 - 2026-10-29: hospedagem decidida (GCP + Vercel, CI/CD pelo GitHub) e propagada nas decisões de stack, na camada MCP e no contrato ([[geral-decisao-2026-10-29-hospedagem]]).
 - 2026-10-29: links dos repositórios, pasta local e regra de acesso nas etapas de programação registrados ([[diario-2026-10-29]]).
+- 2026-10-29: [[contrato-do-projeto]] atualizado para a v0.3 com o cenário atual (M-01 a M-10).
 - 2026-10-29: pendências respondidas: branches, configuração do GCP, entrega, dial, motivação, `@@map`, testes E2E e mudança do contrato ([[diario-2026-10-29]]).
 
 ## Tempo disponível
