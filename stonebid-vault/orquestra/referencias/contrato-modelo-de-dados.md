@@ -17,6 +17,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 7
 > [!warning] Prazo mudou em 2026-10-29
 > O prazo real passou de 4 dias para **24 horas** (a partir de 2026-10-29 09:06; entrega em 2026-10-30 09:00). Onde esta nota fala em 4 dias ou em "dia 3", vale o prazo novo; o texto do contrato segue como estava até a v0.3. Fato registrado em [[geral-contexto]].
 
+> [!warning] Mudança M-12 (2026-10-29)
+> O que **Lance**, **Lote** e **Comprovante** guardam mudou: o lance guarda também o próprio hash; o lote guarda a cabeça da cadeia com selo (`head_seq`, `head_hash`, `head_seal`) no lugar de "contagem e hash final"; o comprovante guarda `public_id`, lote, pseudônimo, valor, data, contagem, hash final e selo. Onde a tabela abaixo diverge, vale [[geral-decisao-2026-10-29-comprovante-e-hash]] ([[contrato-do-projeto-mudancas]]).
+
 Aqui não há tabelas de banco nem código: só as "coisas" do sistema e o que cada uma precisa guardar.
 
 | Entidade | O que guarda | Pontos de atenção |

@@ -12,6 +12,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 4
 > [!tldr] Em uma linha
 > Cada serviço que o Stonebid oferece, com um critério de aceite que diz como provar que ficou pronto.
 
+> [!warning] Mudança M-12 (2026-10-29)
+> RF-51: a **tela** do comprovante mostra tudo o que está aqui; o **registro** guarda só o que não se deriva (item e link da auditoria vêm do lote e da rota), mais a contagem, o hash final e um selo. Detalhe em [[geral-decisao-2026-10-29-comprovante-e-hash]] ([[contrato-do-projeto-mudancas]]).
+
 É o **cardápio com a foto do prato**: diz o que sai da cozinha e como o prato deve chegar à mesa. Seção 4 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
 
 > [!info] Por que isso importa

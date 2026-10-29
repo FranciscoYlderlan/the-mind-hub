@@ -17,6 +17,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 8
 > [!warning] Prazo mudou em 2026-10-29
 > O prazo real passou de 4 dias para **24 horas** (a partir de 2026-10-29 09:06; entrega em 2026-10-30 09:00). Onde esta nota fala em 4 dias, vale o prazo novo; o texto do contrato segue como estava até a v0.3. Fato registrado em [[geral-contexto]].
 
+> [!warning] Mudança M-12 (2026-10-29)
+> Na seção 8.1, o hash de cada lance passa a ser **guardado** e comparado com o recalculado, e a contagem e o hash final só valem **com selo** (cabeça do lote e comprovante). Sem o selo, apagar o último lance e reescrever o resumo passaria como ÍNTEGRO. A lista "O que a página de auditoria confere" atualizada está em [[geral-decisao-2026-10-29-comprovante-e-hash]] ([[contrato-do-projeto-mudancas]]).
+
 > [!info] Por que isso importa
 > Sommerville mostra que as decisões de arquitetura determinam o desempenho, a segurança e a manutenibilidade do sistema, e que cada decisão deve ser tomada comparando alternativas. Pressman apresenta os estilos arquiteturais e os conceitos de projeto (abstração, modularidade, separação de responsabilidades, ocultação de informação, baixo acoplamento e alta coesão). O princípio KISS ("mantenha simples"), citado por Pressman a partir de Hooker, vale em dobro com prazo de 4 dias. Anotar o porquê de cada decisão (o que, as alternativas, as consequências) também é prática de mercado conhecida como ADR.
 

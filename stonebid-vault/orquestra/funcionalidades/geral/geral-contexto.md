@@ -36,10 +36,11 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: reuso de componentes é **padrão de todo o projeto**: compor antes de criar, sem copiar telas, extrair na segunda repetição; motivação: DRY, uma representação única de cada conhecimento; "reutilização de componentes bem arquitetados é princípio de clean code e de uma boa arquitetura" → [[geral-decisao-2026-10-28-criacao-de-componentes]].
 - 2026-10-29: páginas públicas do RF-03 no layout `_public/`; a sala do lote tem duas rotas (`/lots/:id` só para ver e `/bidding/:id` com lance) que compõem o mesmo componente; `/` é a vitrine → [[geral-decisao-2026-10-28-estrutura-frontend]].
 - Toda funcionalidade criada no frontend é testada com Playwright por uma **subthread de teste** (outro agente), que só testa e reporta bugs; sem testes unitários ou de componente no frontend → [[geral-decisao-2026-10-28-testes-frontend-playwright]].
-- Contrato do projeto v0.3 (2026-10-29; v0.2 de 2026-10-27 + mudanças M-01 a M-11, em [[contrato-do-projeto-mudancas]]), escrito por mim com a IA, com as perguntas Q-01 a Q-15 ainda em validação: requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
+- Contrato do projeto v0.3 (2026-10-29; v0.2 de 2026-10-27 + mudanças M-01 a M-12, em [[contrato-do-projeto-mudancas]]), escrito por mim com a IA, com as perguntas Q-01 a Q-15 ainda em validação: requisitos, regras de negócio, arquitetura proposta, riscos, testes, plano e perguntas → [[contrato-do-projeto]].
 - Do contrato (itens `[DECIDIDO]`): prazo real de **4 dias** (o enunciado fala em 7; **substituído em 2026-10-29**, ver o item seguinte); **todos os 5 opcionais** serão feitos; deploy obrigatório; desenvolvimento com IA permitido; sou júnior e aprender é objetivo do projeto → [[contrato-visao-escopo-e-papeis]].
 - 2026-10-29 (09:06): o prazo real passou de 4 dias para **24 horas** a partir de agora. Oficialmente estou no **terceiro dia**: nos três primeiros dias não avancei muito além dos requisitos e da arquitetura. Vou trabalhar sem pausa.
 - 2026-10-29 (12:28): aprovada a regra dos testes: o teste só sai do escopo junto com o requisito que prova; T-01 a T-09 e T-10a ficam sempre → [[geral-decisao-2026-10-29-testes-no-escopo]].
+- 2026-10-29 (13:22): aprovada a solução do comprovante e da auditoria: hash guardado no lance, cabeça da cadeia com selo no lote e comprovante como fotografia selada da liquidação → [[geral-decisao-2026-10-29-comprovante-e-hash]].
 - Camada MCP no backend para expor as rotas e testar o fluxo pela Claude; sempre que uma feature e uma rota forem criadas, a MCP é atualizada → [[geral-decisao-2026-10-29-camada-mcp]].
 - 2026-10-29: hospedagem: backend e banco no **GCP**, frontend na **Vercel**, os dois repositórios no GitHub com CI/CD validando a integração. Custo zero: a aplicação fica no ar no máximo 7 dias, é avaliada em menos de 1 hora e depois é fechada → [[geral-decisao-2026-10-29-hospedagem]].
 
@@ -55,6 +56,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: links dos repositórios, pasta local e regra de acesso nas etapas de programação registrados ([[diario-2026-10-29]]).
 - 2026-10-29: [[contrato-do-projeto]] atualizado para a v0.3 com o cenário atual (M-01 a M-10).
 - 2026-10-29: ambiguidade dos testes T-01 a T-11 resolvida (M-11); tabela de mudanças dividida do hub para [[contrato-do-projeto-mudancas]] pelo limite de palavras.
+- 2026-10-29: divergência sobre o que o comprovante e o lance guardam resolvida (M-12); furo do truncamento sem selo corrigido na proposta da 8.1 ([[geral-decisao-2026-10-29-comprovante-e-hash]]).
 - 2026-10-29: rotas públicas do RF-03 (layout `_public/`) e reuso de componentes como padrão do projeto registrados nas decisões do frontend ([[diario-2026-10-29]]).
 - 2026-10-29: pendências respondidas: branches, configuração do GCP, entrega, dial, motivação, `@@map`, testes E2E e mudança do contrato ([[diario-2026-10-29]]).
 
@@ -69,14 +71,14 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 
 ## Áreas sensíveis
 (onde ler bugs e referências antes de mexer)
-- Lances, carteira, liquidação, cancelamento e auditoria: regras em [[contrato-regras-de-negocio]], técnica em [[contrato-arquitetura]] e testes em [[contrato-testes]] (o teste só sai junto com o requisito: [[geral-decisao-2026-10-29-testes-no-escopo]]).
+- Lances, carteira, liquidação, cancelamento e auditoria: regras em [[contrato-regras-de-negocio]], técnica em [[contrato-arquitetura]] (com a M-12: [[geral-decisao-2026-10-29-comprovante-e-hash]]) e testes em [[contrato-testes]] (o teste só sai junto com o requisito: [[geral-decisao-2026-10-29-testes-no-escopo]]).
 - Rotas do backend: criar, alterar ou remover rota mexe na camada MCP; ler [[geral-decisao-2026-10-29-camada-mcp]].
 - Componentes do frontend: ler [[registro-de-componentes]] e [[geral-decisao-2026-10-28-criacao-de-componentes]] antes de criar qualquer componente.
 - Busca no cofre (Obsidian CLI): se as ferramentas `obsidian_*` faltarem ou a CLI falhar, ler [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]] antes de buscar nos `.md`.
 
 ## Mapa
 - Roteiro: [[geral-plano]]
-- Decisões: [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
+- Decisões: [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]]
 - Enunciado: [[enunciado-teste-tecnico]]
 - Contrato: [[contrato-do-projeto]] (requisitos, regras, arquitetura proposta, plano e perguntas Q)
