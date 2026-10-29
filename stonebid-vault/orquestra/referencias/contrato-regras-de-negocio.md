@@ -12,7 +12,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 5
 > [!tldr] Em uma linha
 > As "leis" do leilão: estados do lote, quando um lance vale, saldo comprometido, anti-sniping, liquidação e histórico só de acréscimo.
 
-São as **regras do jogo de futebol**: o juiz (o domínio) aplica, ninguém negocia no meio da partida. Seção 5 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
+São as **regras do jogo de futebol**: o juiz (o domínio) aplica, ninguém negocia no meio da partida. Seção 5 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3).
 
 > [!info] Por que isso importa
 > Regras de negócio são as "leis" do domínio. Elas são a parte mais valiosa e mais frágil do sistema, e é onde a IA mais erra se a regra estiver vaga. Pressman recomenda que requisitos sejam elaborados e negociados até virarem uma especificação sem ambiguidade. Sommerville acrescenta a ideia de registrar o *porquê* de cada requisito. Por isso aqui cada regra é curta, numerada e testável.

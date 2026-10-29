@@ -1,5 +1,5 @@
 ---
-aliases: [Plano de 4 dias, Linha de corte, Definição de pronto, Checklist de entrega, Incrementos I0 a I5]
+aliases: [Plano de entrega, Linha de corte, Definição de pronto, Checklist de entrega, Incrementos I0 a I5]
 tags: [estudos/programacao]
 tipo: referencia
 tema: gestao
@@ -10,12 +10,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 11
 # 📜 Contrato: processo e plano
 
 > [!tldr] Em uma linha
-> Entrega incremental em 4 dias (I0 a I5), com o que cortar primeiro se o tempo apertar, a definição de pronto e o checklist final.
+> Entrega incremental (I0 a I5) no prazo de 24 horas, com o que cortar primeiro se o tempo apertar, a definição de pronto e o checklist final.
 
-É a **receita com a ordem dos passos**: cada etapa já sai pronta para comer, e se faltar tempo você sabe o que pular. Seção 11 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar. O plano é **provisório**; o roteiro oficial do cofre continua em [[geral-plano]].
-
-> [!warning] Prazo mudou em 2026-10-29
-> O plano de 4 dias abaixo está **desatualizado**: precisa ser refeito para 24 horas, com a linha de corte (11.4) já aplicada. O prazo real passou de 4 dias para **24 horas** (a partir de 2026-10-29 09:06). Onde esta nota fala em 4 dias, vale o prazo novo; o texto do contrato segue como estava até a v0.3. Fato registrado em [[geral-contexto]].
+É a **receita com a ordem dos passos**: cada etapa já sai pronta para comer, e se faltar tempo você sabe o que pular. Seção 11 do [[contrato-do-projeto|contrato]], no texto vigente (v0.3). O roteiro oficial do cofre continua em [[geral-plano]].
 
 ## 11.1 Modelo de processo `[PROPOSTO]`
 
@@ -32,39 +29,36 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 11
 | KISS (mantenha simples) | Monólito, sem microsserviços e sem recursos fora do escopo. |
 | Mantenha a visão | Este contrato é a visão. Mudanças só pelo protocolo da seção 13.4. |
 | O que você produz, outros consumirão | README e código claros: o avaliador, a IA e o você do futuro vão ler. |
-| Esteja aberto ao futuro | Decisões registradas, tokens de tema desde o dia 1 e adaptador para a API externa. |
+| Esteja aberto ao futuro | Decisões registradas, tokens de tema desde o I0 e adaptador para a API externa. |
 | Planeje para o reuso | O domínio isolado funciona com qualquer tela ou banco. |
 | Pense! | Pensar antes de pedir código à IA vale mais do que corrigir depois. |
 
-## 11.3 Plano provisório de 4 dias
+## 11.3 Plano de entrega
 
-As horas por dia ainda não estão definidas, então este plano é um rascunho. Se as horas forem menores que o necessário, aplica-se a linha de corte (11.4). O dia 4 deve reservar as últimas horas **só** para revisão e deploy final, sem nada novo.
+Prazo de **24 horas** a partir de 2026-10-29 09:06, entrega em 2026-10-30 09:00, com trabalho contínuo. O plano com horários **ainda não foi feito**: sai destes incrementos, com a linha de corte (11.4) aplicada, e é o próximo passo do [[geral-plano]]. As últimas horas ficam **só** para revisão e deploy final, sem nada novo.
 
-| Incremento | Dia | Entrega (fatia de ponta a ponta) | Requisitos | Pronto quando |
-|---|---|---|---|---|
-| I0 | 1 | **Esqueleto no ar:** repositório, banco, login com papéis, dados de teste, deploy, Docker Compose, tokens de tema, rotina de testes | RF-01 a RF-03, RNF-01, RNF-02, RNF-11, base de RNF-12 e RNF-13 | Aplicação "vazia" no ar com os 3 usuários de teste |
-| I1 | 1–2 | **Carteira e lotes:** depósito, busca na API, criação do lote com cópia do item, vitrine básica | RF-40 a RF-42, RF-20 a RF-22, RF-25, RF-10, RN-13, RN-16 a RN-18 | O leiloeiro cria um lote a partir da API e ele aparece na vitrine. O licitante deposita. |
-| I2 | 2 | **Lances:** validação, saldo comprometido, mensagens de recusa, registro com hash encadeado | RF-33, RF-70, RN-02 a RN-09, lado de escrita da RN-14 | T-01 a T-03 passando, incluindo concorrência |
-| I3 | 3 | **Ao vivo e fechamento:** sala em tempo real, anti-sniping, liquidação, comprovante, resultados | RF-30 a RF-32, RF-24, RF-50 a RF-52, RN-10, RN-11 | Um leilão completo, do início ao comprovante |
-| I4 | 3 | **Auditoria pública** | RF-60, RF-61, RN-14, RN-15 | T-06 detecta os 4 tipos de adulteração |
-| I5 | 4 | **Opcionais restantes e fechamento:** busca e filtros, cancelamento com estorno, polimento do tema, README e revisão final | RF-11, RF-23, RNF-13, RNF-03 | Checklist final 100% (11.6) |
+| Incremento | Entrega (fatia de ponta a ponta) | Requisitos | Pronto quando |
+|---|---|---|---|
+| I0 | **Esqueleto no ar:** repositório, banco, login com papéis, dados de teste, deploy, Docker Compose, tokens de tema, rotina de testes | RF-01 a RF-03, RNF-01, RNF-02, RNF-11, base de RNF-12 e RNF-13 | Aplicação "vazia" no ar com os 3 usuários de teste |
+| I1 | **Carteira e lotes:** depósito, busca na API, criação do lote com cópia do item, vitrine básica | RF-40 a RF-42, RF-20 a RF-22, RF-25, RF-10, RN-13, RN-16 a RN-18 | O leiloeiro cria um lote a partir da API e ele aparece na vitrine. O licitante deposita. |
+| I2 | **Lances:** validação, saldo comprometido, mensagens de recusa, registro com hash encadeado | RF-33, RF-70, RN-02 a RN-09, lado de escrita da RN-14 | T-01 a T-03 passando, incluindo concorrência |
+| I3 | **Ao vivo e fechamento:** sala em tempo real, anti-sniping, liquidação, comprovante, resultados | RF-30 a RF-32, RF-24, RF-50 a RF-52, RN-10, RN-11 | Um leilão completo, do início ao comprovante |
+| I4 | **Auditoria pública** | RF-60, RF-61, RN-14, RN-15 | T-06 detecta os 4 tipos de adulteração |
+| I5 | **Opcionais restantes e fechamento:** busca e filtros, cancelamento com estorno, polimento do tema, README e revisão final | RF-11, RF-23, RNF-13, RNF-03 | Checklist final 100% (11.6) |
 
-**Observação do plano:** a escrita do histórico com hash (I2) nasce junto com o primeiro lance. Colocar o hash no dia 3, sobre dados já gravados, custaria muito mais. O dia 3 é o mais carregado do plano; é o primeiro que vai precisar de ajuste quando soubermos suas horas por dia.
+**Observação do plano:** a escrita do histórico com hash (I2) nasce junto com o primeiro lance. Deixar o hash para depois, sobre dados já gravados, custaria muito mais. I3 e I4 são os incrementos mais carregados e os primeiros a ajustar no plano de 24 horas.
 
 ## 11.4 Linha de corte `[PROPOSTO]` (Q-12)
-
-> [!warning] v0.3 (M-11)
-> O texto abaixo é da v0.2. Desde 2026-10-29 vale [[geral-decisao-2026-10-29-testes-no-escopo]]: o teste só sai junto com o requisito que prova. Ficam sempre T-01 a T-09 e T-10a; T-10b sai com o OPC-2 e T-11 com a RN-18.
 
 Se o tempo apertar, corte nesta ordem (o primeiro da lista sai primeiro):
 
 | Ordem de corte | O que cortar | Por quê |
 |---|---|---|
 | 1º | Filtros avançados do OPC-1 (manter a busca simples por texto) | É o que menos mexe nas regras de negócio. |
-| 2º | Polimento do tema escuro (os tokens de tema ficam) | Os tokens do dia 1 já deixam 80% pronto. |
+| 2º | Polimento do tema escuro (os tokens de tema ficam) | Os tokens do I0 já deixam 80% pronto. |
 | 3º | Cancelamento com estorno (OPC-2) | Depende de regras da carteira, mas pode ficar para o fim. |
 | 4º | Docker Compose (OPC-3) | Ajuda o avaliador, mas o README pode cobrir a execução. |
-| Nunca por inteiro | Testes (OPC-4) | T-01 a T-06 fazem parte do núcleo e protegem dinheiro e auditoria. |
+| Nunca por conta própria | Testes (OPC-4) | O teste só sai junto com o requisito que prova: T-01 a T-09 e T-10a ficam sempre; T-10b sai com o OPC-2 e T-11 com a RN-18 ([[geral-decisao-2026-10-29-testes-no-escopo]]). |
 
 ## 11.5 Definição de pronto
 

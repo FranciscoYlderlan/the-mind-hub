@@ -12,7 +12,7 @@ origem: PDF "Teste técnico: Elite Dev na Verzel" (gerado em 2026-10-22), fornec
 > [!tldr] Em uma linha
 > O pedido original da Verzel: uma Casa de Leilões online com deploy obrigatório; é a fonte da verdade nº 1, acima do contrato.
 
-É o **edital do concurso**: o resto (contrato, decisões, código) é a minha resposta a ele, e onde houver conflito o edital vence. Transcrição fiel do PDF, seguida do mapa contra o [[contrato-do-projeto|contrato]] v0.2 e as decisões do cofre.
+É o **edital do concurso**: o resto (contrato, decisões, código) é a minha resposta a ele, e onde houver conflito o edital vence. Transcrição fiel do PDF, seguida do mapa contra o [[contrato-do-projeto|contrato]] e as decisões do cofre.
 
 Arquivo original: [[teste-tecnico-elite-dev-verzel.pdf]]
 
@@ -119,7 +119,7 @@ Envie pelo formulário `https://elitedev.verzel.com.br/?elite-dev-2026-2` preenc
 | E3 Privacidade | RN-15, AD-09, T-09 | Coberto |
 | E4 React / Node ou Python / banco | [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]] | Coberto (Vite + React, Fastify, PostgreSQL) |
 | E4 README com configuração do banco | RNF-03 | Coberto no papel |
-| E4 Prazo de 7 dias | Contrato: 4 dias; agora 24 horas ([[geral-contexto]]) | Coberto (prazo real menor) |
+| E4 Prazo de 7 dias | Prazo real de 24 horas ([[geral-contexto]]) | Coberto (prazo real menor) |
 | E4 Dados de teste | RNF-02, Q-11 | Coberto |
 | E4 Comportamentos inesperados no README | RNF-03, A-09 | Coberto |
 | E5 Opcionais (5) | RF-11, RF-23, RNF-11, RNF-12, RNF-13 | Coberto; o contrato faz todos, o que não cabe em 24 horas |

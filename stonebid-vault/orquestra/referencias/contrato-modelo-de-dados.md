@@ -12,26 +12,20 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 7
 > [!tldr] Em uma linha
 > As cinco "coisas" do sistema (usuário, lote, lance, movimento da carteira, comprovante) e o que cada uma guarda.
 
-É a **lista de gavetas do arquivo** antes de comprar o móvel: decide o que guardar em cada uma sem pensar ainda no modelo do armário. Seção 7 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
-
-> [!warning] Prazo mudou em 2026-10-29
-> O prazo real passou de 4 dias para **24 horas** (a partir de 2026-10-29 09:06; entrega em 2026-10-30 09:00). Onde esta nota fala em 4 dias ou em "dia 3", vale o prazo novo; o texto do contrato segue como estava até a v0.3. Fato registrado em [[geral-contexto]].
-
-> [!warning] Mudança M-12 (2026-10-29)
-> O que **Lance**, **Lote** e **Comprovante** guardam mudou: o lance guarda também o próprio hash; o lote guarda a cabeça da cadeia com selo (`head_seq`, `head_hash`, `head_seal`) no lugar de "contagem e hash final"; o comprovante guarda `public_id`, lote, pseudônimo, valor, data, contagem, hash final e selo. Onde a tabela abaixo diverge, vale [[geral-decisao-2026-10-29-comprovante-e-hash]] ([[contrato-do-projeto-mudancas]]).
+É a **lista de gavetas do arquivo** antes de comprar o móvel: decide o que guardar em cada uma sem pensar ainda no modelo do armário. Seção 7 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3).
 
 Aqui não há tabelas de banco nem código: só as "coisas" do sistema e o que cada uma precisa guardar.
 
 | Entidade | O que guarda | Pontos de atenção |
 |---|---|---|
 | Usuário | Nome, e-mail, hash da senha, papel | Um papel por conta. Nome e e-mail nunca aparecem em páginas públicas. |
-| Lote | Leiloeiro, **cópia do item** (título, imagem, atributos), lance inicial, incremento mínimo, início, fim original, fim atual, cancelamento, resultado, vencedor, valor final, contagem e hash final do histórico | A cópia do item dispensa a API externa. O fim atual muda com a prorrogação. |
-| Lance | Lote, número de ordem (1, 2, 3…), licitante, valor, instante (do servidor), hash do lance anterior, selo do lance | Só inserção. A numeração não pode ter buracos. |
+| Lote | Leiloeiro, **cópia do item** (título, imagem, atributos), lance inicial, incremento mínimo, início, fim original, fim atual, cancelamento, resultado, vencedor, valor final, **cabeça da cadeia** (número, hash e selo do último lance) | A cópia do item dispensa a API externa. O fim atual muda com a prorrogação. A cabeça muda a cada lance e congela na liquidação. |
+| Lance | Lote, número de ordem (1, 2, 3…), licitante, valor, instante (do servidor), hash do lance anterior, **hash do próprio lance**, selo do lance | Só inserção. A numeração não pode ter buracos. |
 | Movimento da carteira | Usuário, tipo (depósito, comprometimento, liberação, débito, crédito, estorno), valor, lote (se houver), instante, chave de idempotência | Nunca se edita um movimento. Um erro se corrige com um movimento novo. |
-| Comprovante | Identificador público aleatório, lote, resultado, hash final | Sem dados pessoais. |
+| Comprovante | Identificador público aleatório, lote, pseudônimo do vencedor, valor, data e hora da liquidação, contagem de lances, hash final e selo | Sem dados pessoais. Item e link da auditoria não se guardam: vêm do lote e da rota ([[geral-decisao-2026-10-29-comprovante-e-hash]]). |
 
 > [!info] Por que isso importa
-> Pressman e Sommerville ensinam a modelar antes de codificar (identificar as classes ou entidades do domínio e como se relacionam). Errar um modelo no papel custa minutos. Errar no código, no dia 3, custa o projeto. Um exemplo é o campo `fim atual`, separado do `fim original`: sem ele, a auditoria não consegue explicar uma prorrogação.
+> Pressman e Sommerville ensinam a modelar antes de codificar (identificar as classes ou entidades do domínio e como se relacionam). Errar um modelo no papel custa minutos. Errar no código, no meio da entrega, custa o projeto. Um exemplo é o campo `fim atual`, separado do `fim original`: sem ele, a auditoria não consegue explicar uma prorrogação.
 
 > [!tip] Quando abrir esta nota
 > Antes de escrever o schema do Prisma ou uma migração ([[geral-decisao-2026-10-28-stack-backend]]).

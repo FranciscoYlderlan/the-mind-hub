@@ -10,12 +10,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 14
 # 📜 Contrato: pontos para validar (Q)
 
 > [!tldr] Em uma linha
-> As seis lacunas do enunciado e as quinze perguntas (Q-01 a Q-15) que preciso responder antes de codar.
+> As seis lacunas do enunciado e as quinze perguntas (Q-01 a Q-15) para responder antes de codar; a Q-09 já foi respondida.
 
-> [!warning] Mudança M-12 (2026-10-29)
-> Q-09 respondida: a tela do comprovante mostra o que está na proposta; o registro guarda os campos de [[geral-decisao-2026-10-29-comprovante-e-hash]] ([[contrato-do-projeto-mudancas]]).
-
-É o **checklist do piloto antes da decolagem**: cada item conferido evita um problema no ar. Seção 14 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar. Cada resposta aprovada vira uma nota de decisão em `funcionalidades/geral/`.
+É o **checklist do piloto antes da decolagem**: cada item conferido evita um problema no ar. Seção 14 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3). Cada resposta aprovada vira uma nota de decisão em `funcionalidades/geral/`.
 
 Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de lacunas que preenchi com propostas. Cada um muda requisitos e testes se a resposta for outra.
 
@@ -29,7 +26,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 3. A frase do anti-sniping admite duas leituras (5.4).
 4. "Lote publicado com lances abertos" nos dados de teste: interpretei como lote ao vivo com lances já feitos.
 5. "Posição do usuário nos lances" pode significar só liderando ou superado, ou um ranking.
-6. O prazo é 7 dias no enunciado; na realidade eram 4 dias (v0.2) e, desde a v0.3, são **24 horas**, com entrega em 2026-10-30 09:00.
+6. O prazo é 7 dias no enunciado; o prazo real é de **24 horas**, com entrega em 2026-10-30 09:00.
 
 | ID | Pergunta | Proposta | Afeta |
 |---|---|---|---|
@@ -41,7 +38,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 | Q-06 | "Lance inicial" e "valor mínimo" são o mesmo campo? | Sim | RF-21, RN-03 |
 | Q-07 | Início no passado e duração mínima do lote? | Início não pode estar no passado. Duração mínima de 5 minutos, para o anti-sniping fazer sentido. | RF-21 |
 | Q-08 | "Posição do usuário nos lances" | Liderando ou superado, mais o maior lance dele. Sem ranking. | RF-30 |
-| Q-09 | O que o comprovante mostra? | Item, valor, data e hora, pseudônimo do vencedor, hash final e link da auditoria | RF-51 |
+| Q-09 | O que o comprovante mostra? | **Respondida:** a tela mostra item, valor, data e hora, pseudônimo do vencedor, hash final e link da auditoria; o registro guarda os campos de [[geral-decisao-2026-10-29-comprovante-e-hash]] | RF-51 |
 | Q-10 | Limites do depósito simulado? | Valor maior que 0, com teto configurável. Sem saque. | RF-41 |
 | Q-11 | Como garantir lote "ao vivo" nos dados de teste durante a avaliação? | Lote com fim distante, cobrindo o período de avaliação, e um comando de reset | RNF-02, R-10 |
 | Q-12 | Ordem de corte dos opcionais | A da seção 11.4 | Seção 11 |
@@ -52,13 +49,13 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 Resolvido na v0.3 ([[contrato-do-projeto]]): entrega em **2026-10-30 09:00** e trabalho contínuo, sem pausa.
 
 > [!warning] Situação em 2026-10-29
-> Nenhuma das perguntas Q-01 a Q-15 foi respondida no cofre ainda. Q-13 ainda depende da escolha da API; a parte de stack de Q-15 já foi respondida pelas decisões de stack ([[contrato-tecnologias]]), mas o nível de domínio não.
+> Só a Q-09 foi respondida ([[geral-decisao-2026-10-29-comprovante-e-hash]]); as outras quatorze seguem abertas. Q-13 ainda depende da escolha da API; a parte de stack de Q-15 já foi respondida pelas decisões de stack ([[contrato-tecnologias]]), mas o nível de domínio não.
 
 > [!tip] Quando abrir esta nota
 > Antes de começar a implementar e sempre que uma regra de [[contrato-regras-de-negocio]] citar um Q-xx.
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** quinze perguntas abertas; cada resposta aprovada vira uma nota `geral-decisao-*`.
+* **Ponto 1:** quatorze perguntas abertas (a Q-09 já foi respondida); cada resposta aprovada vira uma nota `geral-decisao-*`.
 * **Ponto 2:** as que mais mudam código: Q-03 (anti-sniping), Q-04 (instante do fim) e Q-05 (cancelamento com lances).
 * **Ponto 3:** data de entrega (2026-10-30 09:00) e ritmo (trabalho contínuo) já definidos na v0.3 ([[geral-contexto]]).
 

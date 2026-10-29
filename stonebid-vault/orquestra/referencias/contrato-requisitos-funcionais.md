@@ -12,10 +12,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 4
 > [!tldr] Em uma linha
 > Cada serviço que o Stonebid oferece, com um critério de aceite que diz como provar que ficou pronto.
 
-> [!warning] Mudança M-12 (2026-10-29)
-> RF-51: a **tela** do comprovante mostra tudo o que está aqui; o **registro** guarda só o que não se deriva (item e link da auditoria vêm do lote e da rota), mais a contagem, o hash final e um selo. Detalhe em [[geral-decisao-2026-10-29-comprovante-e-hash]] ([[contrato-do-projeto-mudancas]]).
-
-É o **cardápio com a foto do prato**: diz o que sai da cozinha e como o prato deve chegar à mesa. Seção 4 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
+É o **cardápio com a foto do prato**: diz o que sai da cozinha e como o prato deve chegar à mesa. Seção 4 do [[contrato-do-projeto|contrato]] no texto vigente (v0.3).
 
 > [!info] Por que isso importa
 > Um requisito funcional descreve um serviço que o sistema oferece. Sommerville lista qualidades de um bom requisito: ele deve ser verificável, sem ambiguidade, completo e consistente com os outros. Por isso cada RF abaixo tem um **critério de aceite**: uma forma concreta de testar se foi cumprido. Pressman chama essa etapa de validação dos requisitos. A coluna "Origem" mostra o que foi exigido pelo enunciado e o que foi inferido por este documento.
@@ -68,7 +65,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 4
 | ID | Requisito | Critério de aceite | Origem |
 |---|---|---|---|
 | RF-50 | Listar os lotes em que o usuário deu lance, com a situação: liderando, superado, arrematado, perdido ou cancelado. | Cada lote aparece na situação correta, inclusive depois do encerramento. | E2 |
-| RF-51 | Gerar o **comprovante de arremate** na liquidação: item (cópia dos dados), valor, data e hora, pseudônimo do vencedor, hash final do histórico e link para a auditoria. | O comprovante existe para todo lote arrematado e não contém nome nem e-mail. | E1, E2 |
+| RF-51 | Gerar o **comprovante de arremate** na liquidação. A tela mostra item (cópia dos dados), valor, data e hora, pseudônimo do vencedor, hash final do histórico e link para a auditoria. O registro guarda só o que não se deriva (item e link vêm do lote e da rota), mais a contagem, o hash final e um selo ([[geral-decisao-2026-10-29-comprovante-e-hash]]). | O comprovante existe para todo lote arrematado e não contém nome nem e-mail. | E1, E2 |
 | RF-52 | Link público para compartilhar o comprovante, com identificador aleatório e impossível de adivinhar. | O link abre sem login. Trocar um caractere do link leva a "não encontrado". | E1, E2 |
 
 ## 4.7 Auditoria pública

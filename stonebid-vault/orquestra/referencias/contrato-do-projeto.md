@@ -12,10 +12,10 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), fornecido pelo humano
 > [!tldr] Em uma linha
 > O acordo entre mim e a IA: o que construir, o que não construir, como decidir na dúvida e como trabalhar juntos.
 
-Funciona como a **planta de uma obra**: o pedreiro não decide onde vai a parede, consulta a planta. Este é o hub do contrato (v0.3, atualizada em 2026-10-29 com o cenário atual); cada seção mora numa nota própria, para o agente ler só o que a tarefa precisa. O texto foi copiado do documento original sem reinterpretar.
+Funciona como a **planta de uma obra**: o pedreiro não decide onde vai a parede, consulta a planta. Este é o hub do contrato, na versão vigente (v0.3, 2026-10-29); cada seção mora numa nota própria, para o agente ler só o que a tarefa precisa.
 
-> [!warning] Cenário atual (v0.3, 2026-10-29)
-> As notas de seção guardam o texto da v0.2, copiado sem reinterpretar. Onde elas divergem de [[contrato-do-projeto-mudancas]], **vale a v0.3** (e as decisões que ela cita). O prazo real é de **24 horas**, não de 4 dias.
+> [!note] Uma versão só
+> As notas de seção têm só o texto vigente (v0.3). O que mudou desde a v0.2, e por qual decisão, fica no histórico [[contrato-do-projeto-mudancas]]. Detalhe que pertence a uma decisão (stack, pastas, hospedagem, MCP, branches) mora na decisão, e o contrato aponta para ela.
 
 ## 📋 Ficha
 
@@ -27,12 +27,12 @@ Funciona como a **planta de uma obra**: o pedreiro não decide onde vai a parede
 | Versão | 0.3 (v0.2 + mudanças aprovadas em 2026-10-29) |
 | Data | 29/10/2026 (v0.2: 27/10/2026) |
 | Autor | FranciscoYlderlan, com a IA |
-| Prazo real | **24 horas**, a partir de 2026-10-29 09:06 (substitui os 4 dias da v0.2; o enunciado fala em 7) |
+| Prazo real | **24 horas**, a partir de 2026-10-29 09:06 (o enunciado fala em 7 dias) |
 | Entrega | **2026-10-30 09:00** |
 | Horas por dia | Trabalho contínuo, sem pausa, nas 24 horas |
 | Tecnologias | Definidas: [[geral-decisao-2026-10-28-stack-frontend]] e [[geral-decisao-2026-10-28-stack-backend]]; comparação com a seção 12 em [[contrato-tecnologias]] |
 | Hospedagem | Backend e banco no GCP (Cloud Run + Cloud SQL, São Paulo), frontend na Vercel, CI/CD no GitHub Actions → [[geral-decisao-2026-10-29-hospedagem]] |
-| Status | Aguardando validação das perguntas Q-01 a Q-15 (seção 14) |
+| Status | Aguardando validação das perguntas da seção 14 (a Q-09 já foi respondida) |
 
 ## 🔄 Mudanças da v0.3 (2026-10-29)
 
@@ -123,10 +123,10 @@ Cito Sommerville (*Engenharia de Software*) e Pressman & Maxim (*Engenharia de S
 
 ## 🤖 Interpretação do agente
 (separada do contrato; registrada em 2026-10-29)
-- O contrato está em **rascunho (v0.3, aguardando validação)**: a v0.3 só atualizou este hub; as notas de seção seguem com o texto da v0.2. Itens `[PROPOSTO]` e as perguntas Q-01 a Q-15 **não** viraram notas de decisão; isso só acontece com o meu aval, uma decisão por nota ([[manual-da-orquestra]]).
+- O contrato está em **rascunho (v0.3, aguardando validação)**; as notas de seção estão no texto da v0.3. Itens `[PROPOSTO]` e as perguntas abertas da seção 14 **não** viraram notas de decisão; isso só acontece com o meu aval, uma decisão por nota ([[manual-da-orquestra]]).
 - Os itens `[DECIDIDO]` que vieram de mim foram copiados para "Fatos que eu informei" em [[geral-contexto]].
 - A seção 12 foi respondida pelas decisões de 2026-10-28 e 2026-10-29 (M-02); a comparação está em [[contrato-tecnologias]].
-- A camada MCP ([[geral-decisao-2026-10-29-camada-mcp]]) e o teste do frontend só com Playwright ([[geral-decisao-2026-10-28-testes-frontend-playwright]]) não aparecem no contrato. Pelo protocolo da seção 13.4, entram como mudança do contrato (M-07 e M-08). Resposta do humano (2026-10-29): "sim enquanto o mcp está no projeto e o playwright é instrução de teste para os agentes de IA". Leitura do agente: a camada MCP entra como mudança enquanto estiver no projeto; o Playwright entra como instrução de teste para os agentes de IA, não como suíte do repositório.
+- A camada MCP ([[geral-decisao-2026-10-29-camada-mcp]]) e o teste do frontend só com Playwright ([[geral-decisao-2026-10-28-testes-frontend-playwright]]) entram no contrato pelo protocolo da seção 13.4 (M-07 e M-08); o detalhe mora nas decisões. Resposta do humano (2026-10-29): "sim enquanto o mcp está no projeto e o playwright é instrução de teste para os agentes de IA". Leitura do agente: a camada MCP entra como mudança enquanto estiver no projeto; o Playwright entra como instrução de teste para os agentes de IA, não como suíte do repositório.
 - O enunciado original, fonte da verdade nº 1 pela seção 13.2, está em [[enunciado-teste-tecnico]] (com o PDF em `Anexos/`). Ele tem uma seção E6 "Como enviar" que o contrato ainda não cobre.
 
 > [!tip] Quando abrir esta nota
@@ -136,7 +136,7 @@ Cito Sommerville (*Engenharia de Software*) e Pressman & Maxim (*Engenharia de S
 * **Ponto 1:** o contrato diz o que construir e o que fica de fora; as regras estão em [[contrato-regras-de-negocio]].
 * **Ponto 2:** fonte da verdade, em ordem: enunciado → contrato → decisões → código ([[contrato-trabalho-com-a-ia]]).
 * **Ponto 3:** antes de codar, validar as perguntas de [[contrato-pontos-para-validar]].
-* **Ponto 4:** onde a nota de seção (v0.2) diverge de [[contrato-do-projeto-mudancas]], vale a v0.3.
+* **Ponto 4:** as notas de seção dizem só o estado vigente; o que mudou desde a v0.2 está em [[contrato-do-projeto-mudancas]].
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]

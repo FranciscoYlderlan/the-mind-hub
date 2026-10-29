@@ -12,7 +12,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 15
 > [!tldr] Em uma linha
 > O significado de cada termo do domínio (arremate, liquidação, saldo comprometido, pseudônimo...) para humano e IA usarem a mesma palavra.
 
-É o **dicionário da família**: cada casa tem palavras próprias, e quem chega de fora precisa da lista. Seção 15 do [[contrato-do-projeto|contrato]] v0.2, copiada sem reinterpretar.
+É o **dicionário da família**: cada casa tem palavras próprias, e quem chega de fora precisa da lista. Seção 15 do [[contrato-do-projeto|contrato]], no texto vigente (v0.3).
 
 | Termo | Significado |
 |---|---|

@@ -10,9 +10,9 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27) + mudanças aprovadas em 
 # 📜 Contrato: mudanças da v0.3
 
 > [!tldr] Em uma linha
-> As mudanças aprovadas sobre o contrato v0.2 (M-01 a M-13): onde divergem das notas de seção, vale o que está aqui.
+> Histórico das mudanças aprovadas da v0.2 para a v0.3 (M-01 a M-13), cada uma com a decisão que a criou. O texto vigente está nas notas de seção.
 
-É o **aditivo do contrato de aluguel**: o contrato original continua valendo, e o aditivo diz só o que mudou e desde quando. Parte do hub [[contrato-do-projeto]], dividida dele quando passou do limite de palavras.
+É o **histórico de revisões** de um documento: diz o que mudou, quando e por quê; o texto em vigor fica no próprio documento. Parte do hub [[contrato-do-projeto]], dividida dele quando passou do limite de palavras.
 
 ## 🔄 Mudanças da v0.3 (2026-10-29)
 
@@ -43,10 +43,10 @@ Entraram pelo protocolo de mudança da seção 13.4, com o aval do humano. Cada 
 - Itens `[PROPOSTO]` da seção 8 (AD-01 a AD-10) que não viraram decisão.
 
 > [!tip] Quando abrir esta nota
-> Antes de seguir o texto de qualquer nota `contrato-*`: conferir se uma mudança M-xx o substitui.
+> Para saber por que um trecho do contrato mudou e qual decisão o criou.
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** onde a nota de seção (v0.2) diverge desta tabela, vale a tabela.
+* **Ponto 1:** esta nota é histórico; as notas de seção já estão na v0.3.
 * **Ponto 2:** cada mudança aponta para a nota de decisão que a criou.
 * **Ponto 3:** testes seguem o requisito que provam (M-11, [[geral-decisao-2026-10-29-testes-no-escopo]]).
 * **Ponto 4:** contagem e hash final só valem com selo; o comprovante é uma fotografia selada (M-12, [[geral-decisao-2026-10-29-comprovante-e-hash]]).
