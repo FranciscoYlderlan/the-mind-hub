@@ -28,6 +28,9 @@ origem: Manual do Meu Cérebro no Obsidian
 - [[Guia do cofre para IA]]: o `CLAUDE.md` que todo cofre tem para os agentes.
 - [[Registrar cofre no README]]: como colocar o cofre no mapa do repositório.
 
+## 🐞 Bugs de ambiente
+- [[Obsidian CLI via MCP não carrega]]: ferramentas `obsidian_*` ausentes na sessão; a config MCP certa é a que o botão "Editar configuração" abre.
+
 ## 🎼 Agentes em paralelo
 - [[Manual da Orquestra]]: orquestrador, subagentes, fluxo de uma sessão e a estrutura `orquestra/` dos cofres de projeto.
 
