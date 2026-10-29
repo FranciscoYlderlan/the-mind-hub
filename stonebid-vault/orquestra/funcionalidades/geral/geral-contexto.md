@@ -19,6 +19,8 @@ Motivação: [a confirmar]
 ## Fatos que eu informei
 (o agente preserva sem reinterpretar)
 - Dois repositórios: `stonebid-web` (frontend) e `stonebid-api` (backend), ainda não criados no GitHub.
+- 2026-10-29: repositórios criados no GitHub: https://github.com/FranciscoYlderlan/stonebid-api e https://github.com/FranciscoYlderlan/stonebid-web. Pasta do projeto no computador: `C:\Users\Ylderlan\Documents\Projetos\stonebid`.
+- 2026-10-29: sempre que for etapa de programação em algum dos repositórios, o acesso é permitido para essa etapa (regra em `CLAUDE.md`, seção "Repositórios e acesso").
 - Stack do frontend: React 19.3, Vite 8.3.4, Tailwind CSS v4.3, TanStack Router v1 (só rotas, não o framework), TanStack Query v5, Zustand latest (só UI global), zod 4.6, shadcn/ui (iniciado pelo guia oficial para Vite), Node 26.13.0, npm, ESLint + Prettier, Playwright, CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-frontend]].
 - Stack do backend: Fastify v5.12.7, Prisma v8 sobre PostgreSQL, zod 4.6, Node e PostgreSQL latest, Vitest v5.0.5 (sem Jest), ESLint + Prettier (sem Biome), Docker/Compose e CI/CD com GitHub Actions → [[geral-decisao-2026-10-28-stack-backend]].
 - Frontend organizado por features (`routes → features → components/hooks/lib`), com nomes genéricos (`feature1`, `feature2`) na estrutura para não induzir o domínio → [[geral-decisao-2026-10-28-estrutura-frontend]].
@@ -42,6 +44,7 @@ Motivação: [a confirmar]
 - 2026-10-29: enunciado do teste técnico guardado e mapeado contra o contrato ([[enunciado-teste-tecnico]]); regra de nomes em inglês + kebab-case nas decisões de estrutura.
 - 2026-10-29: contrato do projeto v0.2 registrado em `referencias/`, uma nota por seção, a partir de [[contrato-do-projeto]] ([[diario-2026-10-29]]).
 - 2026-10-29: hospedagem decidida (GCP + Vercel, CI/CD pelo GitHub) e propagada nas decisões de stack, na camada MCP e no contrato ([[geral-decisao-2026-10-29-hospedagem]]).
+- 2026-10-29: links dos repositórios, pasta local e regra de acesso nas etapas de programação registrados ([[diario-2026-10-29]]).
 
 ## Tempo disponível
 - **24 horas** a partir de 2026-10-29 09:06 (substitui os 4 dias do contrato). Entrega por volta de 2026-10-30 09:00 [a confirmar].

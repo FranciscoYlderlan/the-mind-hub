@@ -2,7 +2,7 @@
 
 Este é um cofre do Obsidian: uma pasta de notas Markdown. Ele é a **memória do projeto StoneBid**: regras de negócio, decisões, bugs e o que foi estudado para o projeto. Este arquivo é o índice: ele diz onde está cada coisa e quando consultar. Os detalhes moram nas notas.
 
-Nome do cofre no Obsidian: `stonebid-vault`. Repositório de código: `stonebid-web` (frontend) e `stonebid-api` (backend), links [a confirmar].
+Nome do cofre no Obsidian: `stonebid-vault`. Repositórios de código: `stonebid-web` (frontend) e `stonebid-api` (backend); links e pasta local em "Repositórios e acesso", abaixo.
 
 ## Seu papel
 
@@ -104,6 +104,18 @@ Modelos e manuais deste cofre não se editam aqui: o original fica no `Vault` e 
 ## Commits
 
 Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz dele, não aqui. Se for preciso commitar e a sessão só tiver acesso a esta pasta, **peça acesso à pasta `the-mind-hub`** e permissão para apagar nela (o git cria e remove arquivos `.lock`). Passos e formato: notas "Commitar no the-mind-hub" e "Padrão de commit" do cofre pessoal `Vault`. Antes do commit: `cofre.py verificar` com zero ERRO.
+
+## Repositórios e acesso
+
+| O quê | Onde |
+|---|---|
+| Backend `stonebid-api` | https://github.com/FranciscoYlderlan/stonebid-api |
+| Frontend `stonebid-web` | https://github.com/FranciscoYlderlan/stonebid-web |
+| Pasta do projeto no computador | `C:\Users\Ylderlan\Documents\Projetos\stonebid` |
+
+- **Etapa de programação em `stonebid-api` ou `stonebid-web`: o acesso está autorizado pelo humano para aquela etapa** (pasta do projeto e repositório no GitHub). Peça o acesso à pasta ou anexe o repositório direto, sem perguntar antes se pode.
+- A autorização vale só para a etapa de programação em curso; fora dela (planejamento, cofre, pesquisa) o acesso aos repositórios segue a regra normal.
+- Apagar arquivos, forçar push ou mexer na branch principal fora do fluxo de CI/CD continua pedindo confirmação.
 
 ## Como buscar (obrigatório)
 
