@@ -8,7 +8,7 @@ origem: Estudos "Modelo de Orquestra de IA" e "Arquitetura Orquestra de IA" (202
 ---
 
 > [!info] Cópia do Vault
-> Cópia de `Vault/Items/Manual da Orquestra.md`, versão v6. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
+> Cópia de `Vault/Items/Manual da Orquestra.md`, versão v7. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
 
 # 🎼 Manual da Orquestra
 
@@ -177,7 +177,8 @@ Lição de um bug que vale **fora** do projeto sobe para o `Vault` como nota de 
 - **Leitura de notas só pela Obsidian CLI** (MCP `obsidian_read` e `obsidian_search`). O shell serve para escrever e rodar o `cofre.py`.
 - Frontmatter operacional: `tipo` (contexto, plano, decisao, bug, diario), `status`, `criado`, `funcionalidade`; `aliases` opcional (em bug, use os sintomas); `origem` e `tags` opcionais. Extras: decisão tem `substitui`; contexto de funcionalidade tem `etapa`; `geral-contexto` tem `etapa-atual`. Notas de `referencias/` (`tipo: referencia`, com `tema`) seguem o frontmatter completo do Manual do Cérebro, com `tags`.
 - `status` por tipo: plano `proposta → aprovado → arquivado`; decisão `aprovada | substituida`; bug `resolvido`; contexto e etapa do roteiro `planejada → em-construcao → em-verificacao → concluida → arquivada`; diário `consolidada`; referência `rascunho → em-uso → consolidada`.
-- Fatos que eu informei ficam preservados. Interpretação do agente fica em seção separada.
+- Fatos que eu informei ficam preservados. Fato substituído sai da nota de estado e fica no diário. Interpretação do agente fica em seção separada.
+- **Uma versão só:** nota de estado (contexto, decisão vigente, plano, referência, MOC, `CLAUDE.md`) diz só como as coisas são agora. Mudou um estado: varredura de impacto (B2), reescrita de toda nota que o cita (B6) e linha `antigo:` no bloco `padroes`. Proibido o aviso de prevalência (`onde esta nota fala em X, vale Y`) por cima de texto velho. Cronologia só em diários, bugs, decisão `substituida`, seções "Histórico", "Mudanças", "Linha do tempo" e "O que já foi feito", e nos campos Proposta, Alteração e Motivo da decisão. O `cofre.py verificar` dá ERRO fora deles.
 - Tarefa **de agente** mora no plano. Tarefa **minha** vai para o TickTick.
 - O agente pede confirmação antes de apagar. Na dúvida, arquiva.
 
@@ -206,6 +207,7 @@ Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou 
 | Verificador tão fraco quanto o implementador | Sempre junto com testes, lint e tipos |
 | Cópias dos manuais divergem entre cofres | Cada cópia traz a versão e a data; ao mudar o original, atualizo as cópias |
 | Etapa pulada ao escrever no cofre (nota sem conexão, cópia com link quebrado) | Etapas vitais A e B + `cofre.py verificar` como portão |
+| Mudança gravada só na nota dona; as outras seguem com o estado antigo, às vezes com aviso "vale o novo" por cima | Varredura de impacto (B2), reescrita no estado atual (B6) e linha `antigo:` checada pelo `verificar` (B7) |
 | Despadronização corrigida só na nota (grafia, numeração, nome, tamanho) | Regra primeiro no `CLAUDE.md` (Padronização + bloco `padroes`); o `verificar` dá ERRO |
 | Ideias vindas de dois vídeos individuais | Validar no meu fluxo antes de virar regra |
 
@@ -259,12 +261,12 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 | # | Etapa | Prova de que aconteceu |
 |---|---|---|
 | B1 | Gatilho: qual linha da tabela "Alimentar" (§6) pede a escrita | — |
-| B2 | Buscar antes: a nota já existe? Atualizar em vez de duplicar | Busca feita |
+| B2 | Buscar antes e **varrer o impacto**: a nota já existe? Atualizar em vez de duplicar. Se a escrita muda um estado (fato, regra, valor, nome, decisão), buscar pela CLI o estado antigo (termo, sinônimos, inglês, números) e o tema, mais os backlinks da nota dona, e listar cada nota encontrada | Lista de notas da varredura |
 | B3 | Classificar: tipo → modelo → pasta → nome (§7). Pedir aval quando a regra exige | Aval, quando aplicável |
 | B4 | Escrever a partir do modelo, nunca do zero | Nota com o esqueleto do modelo |
 | B5 | Conectar nos dois sentidos: Conexões (saída) e hub ou MOC (entrada). Nota fora do mapa não existe | Link de entrada e 2+ de saída |
-| B6 | Propagar: etapa do roteiro concluída (status, data, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito" e diário), decisão substituída, histórico do manual. Mudou o original no Vault → `cofre.py sincronizar` em cada cofre de projeto | Notas afetadas atualizadas |
-| B7 | `cofre.py verificar` | **Zero ERRO**. Só então "pronto" |
+| B6 | Propagar: reescrever no estado atual cada nota da varredura (§7, "Uma versão só") e registrar o estado antigo como `antigo:` no bloco `padroes`; etapa do roteiro concluída (status, data, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito" e diário), decisão substituída, histórico do manual. Mudou o original no Vault → `cofre.py sincronizar` em cada cofre de projeto | Notas da varredura reescritas; termos varridos no diário |
+| B7 | `cofre.py verificar` (inclui estado antigo e aviso de prevalência fora do histórico) | **Zero ERRO**. Só então "pronto" |
 
 **C. Trocar de chat (passagem de turno)** (detalhe em "Passagem de turno", acima)
 
@@ -314,3 +316,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v4 (2026-10-28): passagem de turno (janela 40% a 50%, checada a cada ciclo), Etapas vitais C, cartão "Seu papel" no CLAUDE.md e cartões por papel no briefing.
 - v5 (2026-10-28): orçamento do orquestrador passa a ser 100 mil tokens na linha Messages do `/context` (substitui 40% a 50%); subagentes não contam na janela.
 - v6 (2026-10-29): Padronização no `CLAUDE.md` com bloco `padroes` checado pelo `verificar`; limite de tamanho próprio do cofre de projeto (substitui a isenção e os ~350 palavras); leitura de notas só pela CLI (seção 7). Origem: grafia do nome, numeração do enunciado, nome de hook e tamanho das notas fora do padrão no `stonebid-vault`, sem ERRO no `verificar`.
+- v7 (2026-10-29): varredura de impacto (B2), reescrita no estado atual (B6) e regra "Uma versão só" (§7); bloco `padroes` ganha linhas `antigo:`; o `verificar` dá ERRO em estado antigo ou aviso de prevalência fora do histórico. Origem: mais de 10 casos de nota com estado anterior depois de uma mudança (bug de processo registrado no `stonebid-vault`).

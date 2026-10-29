@@ -83,7 +83,7 @@ Regras completas: `orquestra/referencias/manual-da-orquestra.md`. Regras de escr
 - `[[wikilinks]]` sempre; nota sem link fica perdida.
 - Notas operacionais (contexto, plano, decisão, bug, diário) seguem o modelo próprio, sem analogia. Notas de `referencias/` e `MOCs/` seguem o Manual do Cérebro (`modelo-nota.md` ou `modelo-referencia.md`). Tamanho de qualquer nota: ver Padronização.
 - Frontmatter operacional: `tipo`, `status`, `criado`, `funcionalidade`; `aliases` opcional (em bug: os sintomas).
-- Fatos do humano preservados; interpretação do agente em seção separada; suposição marcada `[a confirmar]`.
+- Fatos do humano preservados (fato substituído sai da nota de estado e fica no diário); interpretação do agente em seção separada; suposição marcada `[a confirmar]`.
 - Tarefa de agente mora no plano; tarefa do humano vai para o TickTick.
 - Nunca edite `.obsidian/` sem pedido explícito.
 
@@ -96,6 +96,7 @@ Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma
 - **Nomes de arquivo e pasta:** kebab-case, sem acento, nas notas e no código. Exceção só vale se estiver escrita, com o motivo (convenção da linguagem ou exigência de ferramenta), na decisão que criou a regra e listada em "Regras deste projeto". Sem isso, é erro.
 - **Tamanho:** o limite de ~350 palavras do Manual do Cérebro **não vale** em cofre de projeto, mas há limite: o `limite-palavras` do bloco `padroes`, fixado pela maior nota registrada quando a regra nasceu. Os manuais e modelos copiados do `Vault` ficam fora da conta.
 - **Passou do limite:** divida a nota. A parte nova vira nota própria, com o nome da original + `-<assunto>` (em bug e diário, o assunto entra depois da data), o mesmo modelo e o mesmo frontmatter. Na original ficam 1 frase + `[[link]]` no lugar do trecho, e a nova aponta de volta nas Conexões.
+- **Uma versão só:** nota de estado (contexto, decisão vigente, plano, referência, MOC, este `CLAUDE.md`) diz só como as coisas são **agora**. Mudou um fato, regra, valor ou nome: reescreva o trecho em **toda** nota que o cita (varredura de impacto, Etapas vitais 2 e 6) e registre o estado antigo como linha `antigo:` no bloco `padroes`. É proibido manter o texto velho com aviso por cima (`onde esta nota fala em X, vale Y`). A cronologia mora só no histórico: diários, bugs, decisão `substituida`, seções "Histórico", "Mudanças", "Linha do tempo" e "O que já foi feito", linhas `origem:`/`substitui:` e os campos Proposta, Alteração e Motivo da decisão. O `verificar` dá ERRO em termo `antigo:` ou aviso de prevalência fora desses lugares.
 - **Blocos do projeto:** o que fica entre `<!-- projeto:... -->` e `<!-- /projeto:... -->` é deste projeto. O `cofre.py sincronizar` refaz o resto do arquivo a partir do modelo do `Vault` e guarda esses blocos como estão. Regra de projeto mora dentro de um bloco; fora dele, ela some na próxima sincronização.
 - **`[a preencher]`:** parte que o humano ainda não definiu. O agente não inventa o valor: pergunta ao humano ou anota a dúvida no "Onde parei" do diário. O `verificar` mostra cada `[a preencher]` como AVISO.
 
@@ -112,7 +113,7 @@ Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma
   - Decisão **ainda sem código**: mudança do humano entra na própria nota (corpo e Alteração) e ganha uma linha no diário.
   - Decisão **já implementada**: mudança que a contradiz vira nota nova com `substitui:`, e a antiga fica com `status: substituida`, intacta, descrevendo o que o código fez até ali.
   - Origem: o Alteração de [[geral-decisao-2026-10-29-camada-mcp]] guardava a api_key "só nas tools com autenticação", já desfeita pelo corpo da nota (2026-10-29).
-- **Limite de tamanho:** 2073 palavras, o tamanho de [[contrato-do-projeto]], a maior nota registrada em 2026-10-29. Vale também para as notas `contrato-*`, que copiam o contrato sem reinterpretar.
+- **Limite de tamanho:** 2073 palavras, o tamanho de [[contrato-do-projeto]], a maior nota registrada em 2026-10-29. Vale também para as notas `contrato-*`, que trazem só o texto vigente do contrato (o histórico de versões fica em [[contrato-do-projeto-mudancas]]).
 <!-- /projeto:padronizacao -->
 
 <!-- projeto:padroes -->
@@ -122,6 +123,16 @@ StoneBid => Stonebid (grafia do contrato-glossario)
 re:[Ss]e(ç|c)(ão|ões|ao|oes) 0[1-6]\b => E1 a E6 (numeração do enunciado-teste-tecnico)
 re:\bE[1-6]/E[1-6]\b => E1, E2 (vírgula, e só as seções onde o requisito está escrito)
 re:\buse-(?!mobile\.)[a-z0-9-]+\.tsx?\b => useAlgo.ts (arquivo de hook em camelCase; só use-mobile.ts do shadcn fica)
+# estado substituído (fora de diário, bug, decisão substituída e seções Histórico/Mudanças/Linha do tempo é ERRO):
+# antigo: termo do estado antigo => estado atual (nota dona)
+antigo: re:\b(4|quatro) dias\b => prazo de 24 horas a partir de 2026-10-29 09:06, entrega 2026-10-30 09:00 (geral-contexto)
+antigo: re:T-01 a T-06 => T-01 a T-09 e T-10a sempre; T-10b com o OPC-2; T-11 com a RN-18 (geral-decisao-2026-10-29-testes-no-escopo)
+antigo: re:(?i)só nas (tools|features) (com|que necessitam de) autenticação => api_key em toda conexão com o /mcp, em todos os ambientes (geral-decisao-2026-10-29-camada-mcp)
+antigo: re:(?i)restrição por IP => api_key para conectar ao /mcp (geral-decisao-2026-10-29-camada-mcp)
+antigo: re:(?i)copiad[ao]s? (do documento original )?sem reinterpretar => notas contrato-* com só o texto vigente (contrato-do-projeto)
+antigo: re:texto da v0\.2 => notas contrato-* no texto vigente, v0.3 (contrato-do-projeto)
+antigo: re:\bApp\.tsx\b => app.tsx (geral-decisao-2026-10-28-estrutura-frontend)
+antigo: re:\buseCases/ => use-cases/ (geral-decisao-2026-10-28-estrutura-backend)
 limite-palavras: 2073
 ```
 <!-- /projeto:padroes -->
@@ -131,11 +142,11 @@ limite-palavras: 2073
 Toda escrita neste cofre (criar, mudar, mover ou copiar nota) segue estas etapas. Pular uma é erro de processo. Tabela completa: [[manual-da-orquestra#🚦 Etapas vitais]].
 
 1. Gatilho: qual linha de "Alimentar" pede a escrita.
-2. Buscar antes: a nota existe? Atualize em vez de duplicar.
+2. Buscar antes e varrer o impacto: a nota existe? Atualize em vez de duplicar. Mudou um fato, regra, valor ou nome? Busque pela CLI o estado antigo (termo, sinônimos, inglês, números) e o tema, mais os backlinks da nota dona, e liste **toda** nota que aparecer.
 3. Classificar: tipo → modelo → pasta → nome. Aval do humano quando a regra exige.
 4. Escrever a partir de `orquestra/modelos/`, nunca do zero.
 5. Conectar nos dois sentidos: Conexões na nota e link de volta no hub (`<func>-contexto`) ou em `moc-orquestra`.
-6. Propagar: roteiro (etapa concluída, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito"), diário, decisão substituída.
+6. Propagar: reescreva no estado atual cada nota da varredura ("Uma versão só", em Padronização) e acrescente o estado antigo como `antigo:` no bloco `padroes`; roteiro (etapa concluída, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito"), diário (com os termos varridos e as notas tocadas), decisão substituída.
 7. Rodar `python orquestra/modelos/cofre.py verificar .` → **zero ERRO**. Só então "pronto".
 
 Modelos e manuais deste cofre não se editam aqui: o original fica no `Vault` e chega por `cofre.py sincronizar`.
