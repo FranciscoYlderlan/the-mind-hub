@@ -19,6 +19,7 @@ origem: manual-da-orquestra
 - [[CLAUDE]]: índice que os agentes leem primeiro.
 - [[geral-plano]]: roteiro — em que etapa o projeto está e as notas geradas em cada etapa.
 - [[geral-contexto]]: objetivo, motivação, dial e decisões que valem para o projeto todo.
+- Decisões de base: [[geral-decisao-2026-10-28-stack-frontend|stack do frontend]], [[geral-decisao-2026-10-28-stack-backend|stack do backend]], [[geral-decisao-2026-10-28-estrutura-frontend|pastas do frontend]], [[geral-decisao-2026-10-28-estrutura-backend|pastas do backend]], [[geral-decisao-2026-10-28-criacao-de-componentes|criação de componentes]], [[geral-decisao-2026-10-28-testes-frontend-playwright|teste Playwright por outro agente]].
 
 ## 🚧 Funcionalidades
 - (nenhuma ainda; uma linha por funcionalidade: `[[nome-da-func-contexto]]` + meia frase)
@@ -29,6 +30,7 @@ origem: manual-da-orquestra
 ## 📚 Regras e referências
 - [[manual-da-orquestra]]: estrutura, papéis, fluxo e gatilhos.
 - [[manual-do-cerebro]]: tom e esqueleto das notas de referência.
+- [[registro-de-componentes]]: o que já existe no frontend; consultar antes de criar componente.
 
 ## 🧩 Modelos
 - Notas operacionais: [[modelo-contexto]], [[modelo-plano]], [[modelo-decisao]], [[modelo-bug]], [[modelo-diario]]
