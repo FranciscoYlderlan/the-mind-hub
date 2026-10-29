@@ -30,14 +30,25 @@ Nome do cofre no Obsidian: `Vault`.
 - Tarefas não moram aqui: viram `→ TickTick`.
 - Não invente fatos; na dúvida, marque `[a confirmar]`.
 - Nunca edite `.obsidian/` sem pedido explícito.
+- **Uma versão só:** mudou um fato, regra ou decisão? Varra o impacto (busque o estado antigo pela CLI, com sinônimos) e reescreva no estado atual **toda** nota que o cita; nada de aviso "vale o novo" por cima de texto velho. O estado antigo vira linha `antigo:` no bloco `padroes` (abaixo), e o `verificar` dá ERRO se ele aparecer fora do histórico (seções "Histórico", diários, bugs).
 - Despadronização (grafia, numeração, nome, tamanho) se corrige **primeiro na regra**: no `Modelo de CLAUDE do cofre`, nos manuais ou no `cofre.py`. Só depois nas notas.
 
 ## Etapas vitais (obrigatório)
 
 - Criar cofre de projeto: siga `Items/Criar um novo cofre.md` (etapas A). Nunca monte à mão: use `Modelos/Orquestra/cofre.py criar`.
-- Escrever, mover ou copiar qualquer nota (aqui ou num cofre de projeto): siga `Items/Atualizar a memória.md` (etapas B).
+- Escrever, mover ou copiar qualquer nota (aqui ou num cofre de projeto): siga `Items/Atualizar a memória.md` (etapas B), com a varredura de impacto quando a escrita muda um estado.
 - Ninguém diz "pronto" sem rodar `python Modelos/Orquestra/cofre.py verificar .` com **zero ERRO**.
 - Mudou um manual ou modelo daqui? Rode `cofre.py sincronizar` em cada cofre de projeto.
+
+## Padrões deste cofre
+
+Lido pelo `cofre.py verificar`. Sintaxe: `termo => forma certa`; `antigo: termo => estado atual (nota dona)` dá ERRO só fora do histórico.
+
+```padroes
+# termo fora do padrão => forma certa   ("re:" no início = expressão regular)
+# antigo: termo do estado substituído => estado atual (nota dona)
+antigo: re:40% a 50% => orçamento de 100 mil tokens na linha Messages do /context (Manual da Orquestra)
+```
 
 ## Commits
 

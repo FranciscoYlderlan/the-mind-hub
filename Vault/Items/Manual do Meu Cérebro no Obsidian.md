@@ -421,6 +421,7 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - [ ] Contraste de ritmo: nenhum bloco igual colado em outro.
 - [ ] Resumo com exatamente 3 pontos.
 - [ ] 2+ links de saída **e** link de entrada (aparece num MOC ou hub). Saída sem entrada é nota órfã.
+- [ ] Mudei um fato, regra ou decisão? Fiz a **varredura de impacto** e reescrevi no estado atual toda nota que citava o antigo, sem aviso "vale o novo".
 - [ ] Segui [[Atualizar a memória]] e rodei `cofre.py verificar` com zero ERRO.
 - [ ] Nada de tarefa solta: ação vira `→ TickTick`.
 - [ ] Tom limpo: sem culpa, sem drama, sem clínico.
@@ -438,6 +439,7 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - v4 (2026-10-28): cofres de projeto passam a usar a estrutura `orquestra/` e as notas operacionais do [[Manual da Orquestra]] (seções 3 e 4); `status` ganha `arquivado`.
 - v5 (2026-10-28): checklist exige link de entrada e `cofre.py verificar`; aliases do Manual ajustados para 4 (seção 12).
 - v6 (2026-10-29): o limite de ~350 palavras não vale em cofre de projeto; lá vale o limite do `CLAUDE.md` do cofre (seção 6).
+- v7 (2026-10-29): checklist pede a varredura de impacto quando um fato, regra ou decisão muda (seção 12).
 
 ## 📚 Fontes
 - Links internos, blocos e embeds: https://obsidian.md/help/links
