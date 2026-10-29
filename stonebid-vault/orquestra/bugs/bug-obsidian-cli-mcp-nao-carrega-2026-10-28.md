@@ -40,6 +40,7 @@ aliases: [Ferramentas obsidian_ não aparecem, Nenhum servidor adicionado no Cla
 - 22:22: tela Desenvolvedor vazia.
 - 22:24: "Editar configuração" revela o caminho `Claude-Data`.
 - 22:26: `obsidian-cli` "Em execução" e ferramentas disponíveis na sessão.
+- 2026-10-29 08:2x: reapareceu só a causa secundária (Obsidian fechado): ferramentas `obsidian_*` presentes, erro "The CLI is unable to find Obsidian". Humano abriu o Obsidian e a CLI voltou às 08:38 ([[diario-2026-10-29]]).
 
 ## Pseudocódigo do problema
 ```
