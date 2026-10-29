@@ -23,13 +23,15 @@ aliases: [Tecnologias do backend, Stack do stonebid-api, Backend stack]
 | ESLint | latest | Lint |
 | Prettier | latest | Formatação |
 | Docker + Docker Compose | — | Dockerfile e Compose prontos para uso |
-| GitHub Actions | — | Workflows de teste e lint pré-configurados |
+| GitHub Actions | — | CI/CD integrado ao GitHub: lint, testes e build em todo push/PR; deploy automático depois do CI verde |
 
-- **Alteração:** 2026-10-28: Jest e Biome retirados. Testes só com Vitest; lint e formatação com ESLint + Prettier; banco PostgreSQL; Node e PostgreSQL na versão mais recente.
+- **Alteração:** 2026-10-28: Jest e Biome retirados. Testes só com Vitest; lint e formatação com ESLint + Prettier; banco PostgreSQL; Node e PostgreSQL na versão mais recente. 2026-10-28: GitHub Actions ampliado de CI (teste e lint) para CI/CD integrado ao GitHub, igual ao frontend.
 - **Motivo:** definição base do projeto informada pelo humano. Vitest no lugar de Jest, pela integração com TypeScript.
 - **Consequências:**
   - Todo dado que entra (body, params, query) e toda variável de ambiente é validado em tempo de execução com zod.
-  - CI no GitHub Actions roda teste e lint em todo push/PR.
+  - CI no GitHub Actions roda lint, testes (Vitest) e build em todo push/PR; PR com CI vermelho não entra.
+  - CD no GitHub Actions faz o deploy automático do `stonebid-api` quando o CI passa na branch principal. Destino do deploy depende da hospedagem, ainda não escolhida [a confirmar]; nome da branch [a confirmar].
+  - Segredos do deploy (banco, segredo do HMAC etc.) ficam nos *secrets* do GitHub, nunca no repositório.
   - A aplicação sobe em contêiner (Dockerfile + Compose), o que prepara o deploy exigido pelo projeto.
   - Estrutura de pastas e princípios: [[geral-decisao-2026-10-28-estrutura-backend]].
   - Proibido: Jest e Biome no `stonebid-api`.

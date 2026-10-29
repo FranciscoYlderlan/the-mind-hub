@@ -12,6 +12,14 @@ aliases: [Organização do backend, Pastas do stonebid-api, Clean Architecture d
 - **Decisão:** o `stonebid-api` segue Clean Architecture com estrutura orientada a domínio:
 
 ```
+.github/
+└── workflows/
+    ├── ci.yml        # ESLint, Prettier, Vitest e build em push/PR
+    └── cd.yml        # Deploy automático depois do CI verde na branch principal
+prisma/               # schema.prisma, migrations e seed
+Dockerfile
+docker-compose.yml    # API + PostgreSQL no ambiente local
+.env.example          # Modelo das variáveis de ambiente, sem valores reais
 src/
 ├── domain/           # Regras de negócio (Entities, interfaces de Repositories)
 ├── infra/            # Preocupações externas (frameworks, implementações de banco, HTTP)
@@ -30,13 +38,15 @@ src/
   - **Validação de schema:** todo dado de entrada e toda variável de ambiente é validado em tempo de execução com zod.
   - **Tratamento de erro funcional:** respostas de erro consistentes e gestão de erro centralizada.
   - **Ferramentas:** ESLint + Prettier para lint e formatação; Vitest no lugar de Jest (integração com TypeScript).
-- **Alteração:** 2026-10-28: Biome trocado por ESLint + Prettier, alinhado com [[geral-decisao-2026-10-28-stack-backend]].
+- **Alteração:** 2026-10-28: Biome trocado por ESLint + Prettier, alinhado com [[geral-decisao-2026-10-28-stack-backend]]. 2026-10-28: raiz do repositório acrescentada à árvore: `.github/workflows/` (`ci.yml` e `cd.yml`, pelo CI/CD), `prisma/`, `Dockerfile`, `docker-compose.yml` e `.env.example`.
 - **Motivo:** escalabilidade e manutenção, pela separação de responsabilidades (texto do humano).
 - **Consequências:**
   - `domain/` não importa nada de `infra/`, Fastify ou Prisma.
   - Controllers não falam com o Prisma direto: passam pelo repositório, montado nas `factories/`.
   - Env lido só por `env/`, nunca `process.env` solto no código.
   - Implementação concreta dos repositórios usa Prisma sobre PostgreSQL.
+  - CI e CD ficam em arquivos separados em `.github/workflows/`: o `cd.yml` só roda depois do CI verde na branch principal.
+  - Schema, migrations e seed do Prisma ficam em `prisma/`, fora do `src/`; o acesso ao banco no código continua só em `infra/repositories/`.
   - Stack e ferramentas: [[geral-decisao-2026-10-28-stack-backend]].
 - **Em aberto:**
   - A árvore não mostra onde ficam os casos de uso (use cases/services) nem os testes E2E [a confirmar].
