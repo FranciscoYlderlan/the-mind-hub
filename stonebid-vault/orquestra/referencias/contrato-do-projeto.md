@@ -118,7 +118,7 @@ Cito Sommerville (*Engenharia de Software*) e Pressman & Maxim (*Engenharia de S
 - O contrato está em **rascunho (v0.2, aguardando validação)**. Itens `[PROPOSTO]` e as perguntas Q-01 a Q-15 **não** viraram notas de decisão; isso só acontece com o meu aval, uma decisão por nota ([[manual-da-orquestra]]).
 - Os itens `[DECIDIDO]` que vieram de mim foram copiados para "Fatos que eu informei" em [[geral-contexto]].
 - A seção 12 já foi em boa parte respondida pelas decisões de 2026-10-28 e 2026-10-29; a comparação está em [[contrato-tecnologias]]. O contrato ainda marca a seção como `[PENDENTE]` e pode ganhar uma v0.3.
-- A camada MCP ([[geral-decisao-2026-10-29-camada-mcp]]) e o teste do frontend só com Playwright ([[geral-decisao-2026-10-28-testes-frontend-playwright]]) não aparecem no contrato. Pelo protocolo da seção 13.4, entrariam como mudança do contrato [a confirmar].
+- A camada MCP ([[geral-decisao-2026-10-29-camada-mcp]]) e o teste do frontend só com Playwright ([[geral-decisao-2026-10-28-testes-frontend-playwright]]) não aparecem no contrato. Pelo protocolo da seção 13.4, entram como mudança do contrato. Resposta do humano (2026-10-29): "sim enquanto o mcp está no projeto e o playwright é instrução de teste para os agentes de IA". Leitura do agente: a camada MCP entra como mudança enquanto estiver no projeto; o Playwright entra como instrução de teste para os agentes de IA, não como suíte do repositório.
 - O enunciado original, fonte da verdade nº 1 pela seção 13.2, está em [[enunciado-teste-tecnico]] (com o PDF em `Anexos/`). Ele tem uma seção E6 "Como enviar" que o contrato não cobre.
 
 > [!tip] Quando abrir esta nota
