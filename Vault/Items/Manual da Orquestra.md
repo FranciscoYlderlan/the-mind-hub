@@ -61,7 +61,7 @@ nome-do-cofre/
 │   ├── arquivos/                 funcionalidades finalizadas (a pasta inteira)
 │   └── bugs/                     bug-cache-expirando-cedo-2026-10-28.md
 ├── MOCs/                         moc-tema.md
-└── Anexos/                       imagens e PDFs
+└── Anexos/                       imagens e PDFs; no prático, contrato/ (contrato funcional)
 ```
 
 - `funcionalidades/geral/` guarda o contexto, as decisões que valem para o projeto todo (arquitetura, stack, nível do dial) e o **roteiro** (`geral-plano`), que no projeto prático de software também guarda a proposta de arquitetura e stack.
@@ -83,6 +83,7 @@ nome-do-cofre/
 | `referencias/` | Consulta e acervo | Eu. O agente sugere lacunas |
 | `modelos/` | Esqueletos | Eu. O agente copia |
 | `arquivos/` | Funcionalidades finalizadas | Orquestrador move, com minha confirmação |
+| `Anexos/contrato/` (prático) | [[Contrato funcional]] do projeto | Só o orquestrador, com meu aval; subagente propõe a mudança no relatório |
 
 Como uma decisão muda:
 
@@ -262,7 +263,7 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 | A2 | Perguntar ao humano: nome, objetivo, perfil (prático ou estudo), tempo, dial, os escopos de commit a acrescentar e o que o perfil pedir (prático: repositório e se será publicado ou só local). O que faltar vira `[a confirmar]` | Respostas registradas |
 | A3 | `cofre.py criar` com `--perfil` (no prático, `--publicado` e `--repo`); nunca montar à mão | Estrutura, kit, `CLAUDE.md`, moc, geral-contexto com o perfil, roteiro e diário de criação |
 | A4 | Preencher o geral-contexto com os fatos de A2 e propor as etapas do roteiro. Com meu aval: nota de decisão, roteiro preenchido e etapa 1 concluída | Decisão do roteiro + `cofre.py status` |
-| A5 | Aplicar o perfil e acrescentar os escopos de A2 ao bloco `projeto:escopos` (depois do nome da pasta e de `readme`). Prático: repositório, com o contrato copiado de `orquestra/modelos/contrato/` do cofre novo para `docs/contrato/` ([[Contrato funcional]]); em software, proposta de arquitetura e stack no `geral-plano`, a partir da [[Referência de arquitetura e stack]]; ver [[Manual da Orquestra - Perfil projeto prático]] | Escopos no `CLAUDE.md` e o que o perfil pede como prova (em software: decisões de estrutura e stack com aval, citando a proposta) |
+| A5 | Aplicar o perfil e acrescentar os escopos de A2 ao bloco `projeto:escopos` (depois do nome da pasta e de `readme`). Prático: repositório ligado pelo [[modelo-claude-do-repositorio]] e `Anexos/contrato/00-requisitos.md` preenchido do documento-fonte ([[Contrato funcional]]); em software, proposta de arquitetura e stack no `geral-plano`, a partir da [[Referência de arquitetura e stack]]; ver [[Manual da Orquestra - Perfil projeto prático]] | Escopos no `CLAUDE.md` e o que o perfil pede como prova (em software: decisões de estrutura e stack com aval, citando a proposta) |
 | A6 | `cofre.py verificar` | **Zero ERRO** |
 | A7 | Humano: abrir no Obsidian, pasta de modelos, README, commit | — |
 
@@ -308,7 +309,7 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 | [[modelo-briefing-subagente]] | O que o orquestrador envia a cada subagente, com os cartões de cada papel |
 | [[modelo-relatorio-subagente]] | O que cada subagente devolve |
 | [[modelo-claude-do-repositorio]] | Trecho que liga o repositório de código ao cofre (perfil prático) |
-| `contrato/` | Arquivos do [[Contrato funcional]] para `docs/contrato/` do repositório (perfil prático; Markdown puro, não são notas) |
+| `contrato/` | Arquivos do [[Contrato funcional]], que o `cofre.py criar` copia para `Anexos/contrato/` do cofre novo (perfil prático; Markdown puro, não são notas) |
 | [[modelo-roteiro-teste-humano]] | Fluxos de teste registrados por funcionalidade e roteiro final do humano (perfil prático) |
 | [[Modelo de CLAUDE do cofre]] | O `CLAUDE.md` do cofre de projeto |
 | [[Modelo de nota]] | Notas de `referencias/` e `MOCs/` (esqueleto do Manual do Cérebro) |
@@ -336,3 +337,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v10 (2026-11-16): Manual neutro; o que presume software (princípio 7, worktree, diff e revisor do §4, passos 5, 6 e 8 do §5, "código legado" do §8, riscos de worktree e testes do §9, A2 e A5) vai para o perfil projeto prático (P01 a P16); perfil estudo reservado; padrão de projeto de software (S01 a S25) e referência de arquitetura e stack; commit do cofre a cada registro concluído e na passagem de turno, com escopos em lista fechada (bloco `projeto:escopos`). Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
 - v11 (2026-11-16): A2 pergunta os escopos de commit e, no prático, publicado ou local; A3 com `--perfil`, `--publicado` e `--repo`; A5 acrescenta os escopos depois do nome da pasta e de `readme` e põe a proposta de arquitetura e stack no `geral-plano`; nota do `Vault` citada em cofre de projeto é texto "Nome (no Vault)" (§7). Origem: teste de criação de cofre de projeto em 2026-11-16.
 - v12 (2026-11-17): A5 copia o contrato funcional para `docs/contrato/` do repositório; modelos `contrato/` e `modelo-roteiro-teste-humano`. Origem: pacote "contrato funcional e validação" (Q01 a Q06 do perfil projeto prático).
+- v13 (2026-11-19): o contrato funcional mora em `Anexos/contrato/` do cofre do projeto (estrutura, §3 e A5), criado pelo `cofre.py criar` e alterado só pelo orquestrador; o repositório recebe a cópia só na aceitação final. Origem: decisão do humano em 2026-11-19.

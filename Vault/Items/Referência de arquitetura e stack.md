@@ -13,10 +13,10 @@ origem: Decisões de estrutura, stack, criação de componentes e testes do ston
 
 É a **planta-modelo da construtora**: o cliente não desenha a casa do nada; recebe uma planta testada e risca o que quer mudar. Regra que manda propor: S25 do [[Padrão de projeto de software]]; quando, no passo a passo de [[Criar um novo cofre]].
 
-Na raiz do repositório de código (com frontend e backend separados, no do backend) fica `docs/contrato/`, o [[Contrato funcional]] que frontend e backend seguem (Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil]]):
+Em `Anexos/contrato/` do cofre do projeto fica o [[Contrato funcional]] que frontend e backend seguem; o repositório de código só recebe a cópia em `docs/contrato/` na aceitação final (Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil]]):
 
 ```
-docs/contrato/   README.md (índice), 00-requisitos a 08-criterios-de-aceite, mudancas.md
+Anexos/contrato/   README.md (índice), 00-requisitos a 08-criterios-de-aceite, mudancas.md
 ```
 
 Versões: a mais recente estável no momento da proposta, sem trava (S16). Nada aqui é decisão: a proposta vai para a seção "Proposta de arquitetura e stack" do `geral-plano` do projeto novo e vira decisão só com o aval do humano. Dentro do cofre de projeto, esta nota é citada como texto "Referência de arquitetura e stack (no Vault)", nunca como wikilink.
@@ -34,7 +34,7 @@ Versões: a mais recente estável no momento da proposta, sem trava (S16). Nada 
 | Estado de UI global | Zustand | Só quando precisa; nunca guarda dado da API |
 | Validação | zod | Todo campo de entrada com schema tirado do ENT do contrato e mensagem por violação (S26); também search params e env |
 | Qualidade | ESLint + Prettier + checagem de tipos | No CI, em todo push e PR |
-| Teste | Verificador de fluxo principal e adversarial, agentes com Playwright | Ao final de cada funcionalidade, executam os AC de `docs/contrato/`; sem suíte de E2E de interface no repositório; quem implementou não testa |
+| Teste | Verificador de fluxo principal e adversarial, agentes com Playwright | Ao final de cada funcionalidade, executam os AC do contrato (`Anexos/contrato/` do cofre); sem suíte de E2E de interface no repositório; quem implementou não testa |
 
 ```
 src/
@@ -80,7 +80,7 @@ prisma/  test/e2e/  Dockerfile  docker-compose.yml  .env.example
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Partida pronta, não decisão: o humano ajusta e o aval vira as decisões de estrutura e stack do [[Manual da Orquestra - Perfil projeto prático|projeto]].
-* **Ponto 2:** Camadas com uma direção só, nos dois lados, validação com zod em toda borda e o contrato em `docs/contrato/` como fonte das regras da tela.
+* **Ponto 2:** Camadas com uma direção só, nos dois lados, validação com zod em toda borda e o contrato em `Anexos/contrato/` do cofre como fonte das regras da tela.
 * **Ponto 3:** Limite: foi tirada de um projeto web com prazo curto; projeto de outro tipo (mobile, CLI, dados) pede outra proposta.
 
 ### 🔗 Conexões

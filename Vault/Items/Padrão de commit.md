@@ -28,7 +28,7 @@ origem: Meu prompt de versionamento do projeto conciliador-extratos
 > [!note] Passo a passo
 > 1. Confiro se o commit tem **uma mudança só**. Ver [[Commit atômico]].
 > 2. Escolho o tipo e o emoji na [[Tipos e emojis de commit|tabela]].
-> 3. Escolho o escopo na **lista fechada** do projeto: o bloco `<!-- projeto:escopos -->` do `CLAUDE.md` do cofre ou do repositório. No cofre, a lista sempre começa com o nome da pasta do cofre e `readme` (commits no [[Commitar no the-mind-hub|the-mind-hub]]); a criação só acrescenta os escopos do projeto (área como `backend` e `frontend`, ID do requisito ou outro), que são os do repositório de código. A lista só muda com aval.
+> 3. Escolho o escopo na **lista fechada** do projeto: o bloco `<!-- projeto:escopos -->` do `CLAUDE.md` do cofre ou do repositório. No cofre, a lista sempre começa com o nome da pasta do cofre e `readme` (commits no [[Commitar no the-mind-hub|the-mind-hub]]); a criação só acrescenta os escopos do projeto (área como `backend` e `frontend`, ID do requisito ou outro), que são os do repositório de código; no projeto prático, sempre também `contrato`, o do commit que copia o contrato para `docs/contrato/` do repositório na aceitação final. A lista só muda com aval.
 > 4. Escrevo a descrição em inglês, no imperativo: `Add`, e não `Added`.
 > 5. Começo com maiúscula e termino sem ponto.
 

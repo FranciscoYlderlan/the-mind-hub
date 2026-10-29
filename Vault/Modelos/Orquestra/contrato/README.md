@@ -2,6 +2,11 @@
 
 Fonte de verdade do que o produto faz, para o frontend e para o backend. O backend implementa daqui as entidades (regra no domínio) e os erros (código próprio); o frontend implementa daqui os componentes, a navegação e a validação de cada campo. Tela nenhuma cria regra.
 
+## Onde mora e quem altera
+
+- Mora em `Anexos/contrato/` do cofre do projeto. Na aceitação final, depois do aceite do humano, o orquestrador o copia para `docs/contrato/` do repositório, num commit só, com escopo `contrato`.
+- Só o orquestrador altera o contrato, aqui e na cópia do repositório. Subagente lê e, se precisar de mudança, devolve no relatório o arquivo, o trecho atual, o trecho novo e o motivo.
+
 ## Arquivos
 
 | Arquivo | Bloco | IDs |
@@ -40,7 +45,7 @@ Toda funcionalidade preenche os blocos dela antes do código: ENT, UC com FA e F
 1. Alguém aponta o conflito ou a necessidade.
 2. A IA propõe o texto exato e o impacto em requisitos, critérios de aceite e plano.
 3. O humano aprova ou recusa.
-4. O bloco passa a dizer só o estado novo, e a mudança entra em `mudancas.md` (M-xx).
+4. O orquestrador reescreve o bloco no estado novo e registra a mudança em `mudancas.md` (M-xx).
 5. Só então o código muda.
 
 ## IDs

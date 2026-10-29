@@ -9,7 +9,7 @@ origem: Pacote "contrato funcional e validação" aprovado pelo humano em 2026-1
 # 📐 Contrato funcional
 
 > [!tldr] Em uma linha
-> O que o produto faz, escrito em 8 blocos com IDs em `docs/contrato/` do repositório, para a interface ter regra tão firme quanto o servidor.
+> O que o produto faz, escrito em 8 blocos com IDs em `Anexos/contrato/` do cofre do projeto, para a interface ter regra tão firme quanto o servidor.
 
 É o **manual de montagem do móvel**: cada peça só entra onde o desenho manda. Faltou peça? Corrige o desenho antes de improvisar com fita. A tela é a peça; o contrato é o desenho. Regras de uso no [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]] (Q01 a Q06); os blocos, um a um, em [[Contrato funcional - Os 8 blocos]].
 
@@ -38,17 +38,18 @@ O contrato funcional é a **contraparte de frontend** do que o backend já tinha
 > 6. Só então o código (e as telas, se houver).
 
 > [!warning] Regra da tela
-> Cada tela lista os CMP, UC e NAV que realiza e **não cria regra**. Regra que falta entra primeiro no contrato, pelos 5 passos do P01, com o item M-xx em `mudancas.md`. Validação vem do ENT; mensagem vem do ERR.
+> Cada tela lista os CMP, UC e NAV que realiza e **não cria regra**. Regra que falta entra primeiro no contrato, pelos 5 passos do P01, com o item M-xx em `Anexos/contrato/mudancas.md`. Validação vem do ENT; mensagem vem do ERR.
 
 ## 📍 Onde mora
 
-- No repositório de código, em `docs/contrato/`, com os requisitos RF, RNF e RN quando eles não estão em outro lugar do repositório.
-- Frontend e backend em repositórios separados: o contrato fica só no repositório do backend, e o `CLAUDE.md` do frontend aponta para ele, sem cópia. Decisão do humano (2026-11-17): "Frontend e backend em repositórios separados: onde fica `docs/contrato/`? ... deixar no repositório do backend, com o do frontend apontando para ele. Concordo".
-- Os modelos ficam no `Vault`, em `Modelos/Orquestra/contrato/`. O `cofre.py` os leva a `orquestra/modelos/contrato/` de todo cofre de projeto prático, e é de lá que o passo 4 de [[Criar um novo cofre]] os copia para `docs/contrato/` do repositório.
-- O cofre do projeto guarda as decisões e o diário, com link para lá. O [[modelo-claude-do-repositorio]] avisa os agentes que trabalham no código.
+- No cofre do projeto, em `Anexos/contrato/`: os 8 blocos, o `README.md` e o `mudancas.md`, em Markdown puro (não são notas: sem frontmatter nem Conexões), com os requisitos RF, RNF e RN no `00-requisitos.md`. Ali o contrato nasce e é editado durante todo o projeto, ao lado das decisões e do diário.
+- Os modelos ficam no `Vault`, em `Modelos/Orquestra/contrato/`. O `cofre.py criar` os copia para `Anexos/contrato/` de todo cofre de projeto prático; o `sincronizar` nunca sobrescreve o contrato de um cofre que já existe.
+- Só o orquestrador altera o contrato. Subagente que precisar de mudança devolve no relatório o arquivo, o trecho atual, o trecho novo e o motivo, e a mudança segue os 5 passos do P01.
+- Implementador, verificadores e adversarial leem o contrato pela Obsidian CLI (`obsidian read path="Anexos/contrato/03-casos-de-uso.md"`) ou, sem CLI, pelo arquivo, avisando no relatório. Frontend em repositório separado lê o mesmo contrato do cofre.
+- O repositório de código só recebe o contrato na aceitação final: depois do aceite do humano, o orquestrador copia `Anexos/contrato/` para `docs/contrato/`, num commit só, com escopo `contrato`, e nenhum subagente altera essa cópia. O [[modelo-claude-do-repositorio]] diz aos agentes que trabalham no código onde ler.
 
 > [!tip] Quando abrir esta nota
-> Ao ligar o repositório de um projeto prático novo, ao começar qualquer funcionalidade ou quando uma tela pedir uma regra que não está escrita.
+> Ao criar um cofre de projeto prático, ao começar qualquer funcionalidade ou quando uma tela pedir uma regra que não está escrita.
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** A tela segue o contrato como o servidor segue o domínio: a regra mora num lugar só.
@@ -62,3 +63,4 @@ O contrato funcional é a **contraparte de frontend** do que o backend já tinha
 
 ## 🕓 Histórico
 - v1 (2026-11-17): criação, com os 8 blocos, a ordem de preenchimento, a regra da tela e `docs/contrato/` no repositório.
+- v2 (2026-11-19): o contrato mora em `Anexos/contrato/` do cofre do projeto, criado pelo `cofre.py criar`; só o orquestrador o altera; o repositório recebe a cópia em `docs/contrato/` só na aceitação final.
