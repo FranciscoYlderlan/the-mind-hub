@@ -9,13 +9,24 @@ criado: 2026-11-19
 > [!tldr] Em uma linha
 > Proposta da IA (S25), aprovada em [[geral-decisao-2026-11-19-stack]]: a tela React só mostra e pede; o núcleo Rust decide tudo; cada agente é um `claude -p` aberto pelo núcleo com as permissões do papel.
 
-Resumo e campos de aval: seção "Proposta de arquitetura e stack" do [[geral-plano]]. Integrações, consumo, testes, pastas e protótipos: [[geral-plano-arquitetura-e-stack-integracoes-e-testes]].
+Roteiro: [[geral-plano]]. Integrações, consumo, testes, pastas e protótipos: [[geral-plano-arquitetura-e-stack-integracoes-e-testes]].
 
 > [!info] Como ler
 > Cada escolha diz **o quê**, **por quê** e **alternativa**. O que está marcado 🧪 **protótipo** só vira decisão depois de um teste curto (lista no fim). Já decidido na especificação: app desktop Tauri + Rust + React, SQLite local em modo WAL, memória nos `.md` do Obsidian lida pela Obsidian CLI. Projeto local (não publicado), uma pessoa, desenvolvido no WSL + Docker, com o app final rodando no Windows: S04 a S08 e S24 não se aplicam.
 
 **Ideia geral, numa frase:** a tela (React) só mostra e pede; o núcleo (Rust) decide tudo, inclusive o que cada agente pode fazer; cada agente é um processo do Claude CLI que o núcleo abre já "de mãos amarradas" para o seu papel.
 
+
+## Resumo e aval
+Só no projeto prático de software (S25 do Padrão de projeto de software (no Vault)); em outro projeto prático, apagar esta seção. Proposta da IA a partir da Referência de arquitetura e stack (no Vault), em linguagem leiga, no passo 4 de Criar um novo cofre (no Vault). Com o aval, cada escolha vira decisão em `funcionalidades/geral/` (`geral-decisao-AAAA-MM-DD-estrutura`, `geral-decisao-AAAA-MM-DD-stack`), com o link para esta seção no campo Proposta.
+
+**Ideia geral, numa frase:** a tela (React) só mostra e pede; o núcleo (Rust) decide tudo, inclusive o que cada agente pode fazer; cada agente é um processo do Claude CLI que o núcleo abre já "de mãos amarradas" para o seu papel.
+
+- **Frontend:** React + Vite + TypeScript, Tailwind + shadcn/ui, TanStack Query, Zustand, zod; lista virtualizada para a saída dos agentes. Sem rotas de URL no começo.
+- **Backend:** núcleo em Rust dentro do Tauri 2, em camadas (regras → casos de uso → integrações), com cada integração atrás de uma interface trocável (RNF-11). Agentes rodam como `claude -p` direto (S3), com permissão imposta em quatro camadas. S4 descartada pelo P1.
+- **Tecnologias e versões:** a mais recente estável no momento de criar o repositório, sem trava (S16); conferir que não é rc. Lista na tabela abaixo.
+- **Detalhe e protótipos:** [[geral-plano-arquitetura-e-stack]] (tela, núcleo, banco, S3 × S4) e [[geral-plano-arquitetura-e-stack-integracoes-e-testes]] (integrações, consumo, testes, pastas) e [[geral-plano-arquitetura-e-stack-integracoes-e-testes-prototipos]] (protótipos).
+- **Ajustes do humano:** nenhum; aprovada em [[geral-decisao-2026-11-19-estrutura]] e [[geral-decisao-2026-11-19-stack]]
 
 ### 1. 🖥️ Frontend (a tela)
 
@@ -99,6 +110,6 @@ Detalhes que completam:
 
 
 ### 🔗 Conexões
-- Resumo e aval: [[geral-plano]]
+- Roteiro: [[geral-plano]]
 - Continuação: [[geral-plano-arquitetura-e-stack-integracoes-e-testes]]
 - Projeto: [[geral-contexto]]
