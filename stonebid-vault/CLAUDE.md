@@ -107,6 +107,11 @@ Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma
 - **Exceções registradas:**
   - **Arquivos de hook do React:** o arquivo tem o mesmo nome do hook, em camelCase com prefixo `use`: `useDebounce.ts` exporta `useDebounce`, `useCreateFeature1.ts` exporta `useCreateFeature1`. Vale para **todo** arquivo de hook do projeto, global (`src/hooks/`) ou de feature (`features/<feature>/hooks/`). É a convenção do React: as Rules of Hooks e o lint `react-hooks` reconhecem um hook pelo prefixo `use`. Única exceção: `use-mobile.ts`, gerado pela CLI do shadcn e importado pelos componentes dela com esse nome. Registro: [[geral-decisao-2026-10-28-estrutura-frontend]].
   - **Gerados ou exigidos por ferramenta:** `routeTree.gen.ts`, `__root.tsx`, `components/ui/` do shadcn e `vite.config.ts` (frontend); `schema.prisma`, `Dockerfile` e `docker-compose.yml` (backend). Registro: [[geral-decisao-2026-10-28-estrutura-frontend]] e [[geral-decisao-2026-10-28-estrutura-backend]].
+- **Notas de decisão:**
+  - O campo **Alteração** mostra só o estado atual da diferença em relação à proposta da IA. A cada mudança ele é **reescrito**, nunca acrescentado no fim; a cronologia fica no diário do dia.
+  - Decisão **ainda sem código**: mudança do humano entra na própria nota (corpo e Alteração) e ganha uma linha no diário.
+  - Decisão **já implementada**: mudança que a contradiz vira nota nova com `substitui:`, e a antiga fica com `status: substituida`, intacta, descrevendo o que o código fez até ali.
+  - Origem: o Alteração de [[geral-decisao-2026-10-29-camada-mcp]] guardava a api_key "só nas tools com autenticação", já desfeita pelo corpo da nota (2026-10-29).
 - **Limite de tamanho:** 2073 palavras, o tamanho de [[contrato-do-projeto]], a maior nota registrada em 2026-10-29. Vale também para as notas `contrato-*`, que copiam o contrato sem reinterpretar.
 <!-- /projeto:padronizacao -->
 
