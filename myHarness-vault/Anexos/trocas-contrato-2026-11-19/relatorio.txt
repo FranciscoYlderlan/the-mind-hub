@@ -1,0 +1,20 @@
+Relatório do pesquisador (2026-11-19, sessão das 15h35): trocas no contrato
+Lido sem a Obsidian CLI (cópias no container); nenhum original alterado pelo subagente.
+144 trocas em 10 arquivos cobrem os 33 itens da Lista 1, as dúvidas 1 a 12 do grupo A e M-01.
+Novos: ERR-45 a ERR-49, ENT-26 PastaContexto; linhas M-01 a M-14 no mudancas.md.
+Prova (checar.py): 144/144 trocas; nenhuma citação a S1..S6, S10, S13 fora do mudancas.md;
+365 IDs citados, nenhum órfão; grafia "harness" só no título da fonte.
+Retoque do orquestrador: D1 reescrita no estado da decisão entidades-no-sqlite (M-03 cita 00 D1).
+
+Pontos [a confirmar] (vão ao humano junto do grupo B):
+1. A divisão da Lista 1 em 33 itens foi do pesquisador (o resumo não numera).
+2. D3 reescrita para "até o commit; o núcleo faz push e PR" (contradizia a decisão).
+3. Prompt de fábrica de Funcionalidade: contagem 44 [a confirmar]; contagens antigas divergem (dúvida 17 do grupo B).
+4. Unidade dos limites: caracteres (nome 1-80, faz 1-500).
+5. ERR-45 a ERR-49: códigos e estado propostos; mensagens [a confirmar]; ainda sem AC.
+6. ENT-14: tipo e valores de janela_status, semanal_status, excedente [a confirmar].
+7. ENT-26: caminho absoluto ou não [a confirmar].
+8. ENT-18: decisão diz "só o aval no SQLite", mas a tabela tem registrada_em.
+9. Papel pesquisa: modelo padrão e prompt [a confirmar] (ENT-08, RF-13, RN-07, RN-25); matriz sem coluna.
+10. Log chega ao chat por execucao.chat: inferência.
+11. Grafia corrigida também no RN-01 (00:76) e RF-29.

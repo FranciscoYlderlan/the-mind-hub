@@ -2,7 +2,9 @@
 
 As validações pertencem à entidade, não à tela: toda tela que mostra ou edita o campo herda as regras daqui. No backend, a entidade é o domínio; no frontend, o schema do campo sai desta tabela. Cada violação tem o seu erro, para a mensagem dizer o que está errado.
 
-Fonte: tabela "Entidades e onde moram" do documento-fonte (ENT-01 a ENT-16). As ENT-17 a ENT-25 não estão nessa tabela: aparecem só no campo "Dados" das RN e estão aqui para que toda RN tenha entidade [a confirmar]. Tipos, tamanhos e formatos que a fonte não dá ficam `[a confirmar]`. Campo marcado "(RN-xx)" é citado só pela regra e não está na tabela da fonte.
+Fonte: tabela "Entidades e onde moram" do documento-fonte (ENT-01 a ENT-16). As ENT-17 a ENT-26 não estão nessa tabela: as ENT-17 a ENT-25 aparecem no campo "Dados" das RN, e a ENT-26 guarda as pastas em contexto do RF-16; cada uma diz onde mora. Tipos, tamanhos e formatos que a fonte não dá ficam `[a confirmar]`. Campo marcado "(RN-xx)" é citado só pela regra e não está na tabela da fonte.
+
+Data e hora: todo campo do tipo "data e hora" é guardado no SQLite como texto ISO 8601 em UTC, com `Z` (ex.: `2026-11-19T18:20:00Z`), e mostrado na tela na hora local do Windows.
 
 ## ENT-01 Projeto
 
@@ -12,9 +14,9 @@ Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
-| nome | texto | [a confirmar] | sim [a confirmar] | livre | — | [a confirmar] |
-| repositorio | texto (caminho ou URL) [a confirmar] | — | [a confirmar] | [a confirmar] | — | [a confirmar] |
-| limite_contexto_padrao | inteiro (tokens) | > 0 [a confirmar] | sim | só algarismos | padrão 100 mil (S7) | [a confirmar] |
+| nome | texto | 1 a 80 caracteres | sim | livre | único entre os projetos | vazio, longo ou repetido: ERR-45 |
+| repositorio | caminho | — | [a confirmar] | caminho absoluto | pasta com `.git` | inválido: ERR-46 |
+| limite_contexto_padrao | inteiro (tokens) | 10 mil a 1 milhão | sim | só algarismos | padrão 100 mil (S7) | fora da faixa: ERR-47 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -32,7 +34,7 @@ Mora em: SQLite.
 | nome | texto | — | sim | nome do cofre no Obsidian | cofre que a Obsidian CLI enxerga | não responde: ERR-37 |
 | funcao | enumeração | — | sim | — | memoria, consulta | escrita em consulta: ERR-39 |
 | ativo | booleano | — | sim | — | sim, não | — |
-| status | enumeração | — | sim | — | conectado, desconectado [a confirmar] | — |
+| status | enumeração | — | sim | — | conectado, desconectado | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -50,11 +52,11 @@ Mora em: SQLite.
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | projeto | referência | — | sim | id de ENT-01 | — | — |
-| limite_tokens | inteiro | > 0 [a confirmar] | sim | só algarismos | padrão: o do projeto (100 mil, S7) | [a confirmar] |
+| limite_tokens | inteiro | 10 mil a 1 milhão | sim | só algarismos | padrão: o do projeto (100 mil, S7) | fora da faixa: ERR-47 |
 | tokens_usados | inteiro | ≥ 0 | sim | — | — | — |
 | chat_anterior | referência | — | não | id de ENT-03 | só chat encerrado por passagem | — |
-| status | enumeração | — | sim | — | ativo, pausado, encerrado, só leitura [a confirmar] | — |
-| adiamento_usado | booleano (RN-23) [a confirmar] | — | sim | — | — | segundo adiamento: [a confirmar] |
+| status | enumeração | — | sim | — | ativo, pausado, encerrado, só leitura | — |
+| adiamento_usado | booleano (RN-23) | — | sim | — | sim, não | segundo adiamento: ERR-48 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -66,9 +68,9 @@ Mora em: SQLite.
 | Estado | Entra quando | Pode ir para |
 |---|---|---|
 | ativo | "Novo chat", reabertura ou continuação | pausado, encerrado |
-| pausado | limite de uso do plano atingido (UC-02 FE-02) | ativo [a confirmar: ao reinício da janela] |
-| encerrado | passagem de turno concluída (UC-08) | (final; reabre só para leitura [a confirmar]) |
-| só leitura | cofre do projeto não encontrado ao reabrir (UC-12 FE-01) | ativo [a confirmar] |
+| pausado | limite de uso do plano atingido (UC-02 FE-02) | ativo, no reinício da janela (`resetsAt` do `rate_limit_event`) |
+| encerrado | passagem de turno concluída (UC-08) | (final; reabre só para leitura) |
+| só leitura | cofre do projeto não encontrado ao reabrir (UC-12 FE-01) | ativo, quando o cofre do projeto reaparece |
 
 ## ENT-04 Mensagem
 
@@ -79,9 +81,9 @@ Mora em: SQLite.
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | chat | referência | — | sim | id de ENT-03 | — | — |
-| autor | enumeração [a confirmar] | — | sim | — | Humano, orquestrador [a confirmar] | — |
-| texto | texto | [a confirmar] | sim | livre | segredos mascarados (RN-04) | — |
-| uso_tokens | inteiro | ≥ 0 | [a confirmar] | — | — | — |
+| autor | enumeração | — | sim | — | Humano, orquestrador, sistema | — |
+| texto | texto | sem limite próprio | sim | livre | segredos mascarados (RN-04) | vazio: o envio fica bloqueado |
+| uso_tokens | inteiro | ≥ 0 | sim quando autor = orquestrador | — | — | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -98,11 +100,11 @@ Mora em: SQLite + decisão no cofre.
 | chat | referência | — | sim | id de ENT-03 | — | — |
 | versao | inteiro | ≥ 1 | sim | — | sobe a cada "Pedir alteração" | — |
 | status | enumeração | — | sim | — | proposto, aprovado, recusado | despacho sem aval: ERR-09 |
-| aprovado_em | data e hora | — | só se aprovado | [a confirmar] | — | — |
+| aprovado_em | data e hora | — | só se aprovado | ISO 8601 UTC | — | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
-- Nenhum subagente inicia com o plano fora de `aprovado` (RN-05; violação: ERR-09), salvo pesquisa só de leitura [a confirmar, S10].
+- Nenhum subagente inicia com o plano fora de `aprovado` (RN-05; violação: ERR-09), salvo tarefa do papel pesquisa, que só lê (RN-05).
 - "Aprovar" só com as integrações exigidas pelo plano conectadas (RN-08; violação: ERR-06).
 
 ### Estados do ciclo de vida
@@ -121,17 +123,17 @@ Mora em: SQLite + plano no cofre.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
-| faz | texto | [a confirmar] | sim | livre | — | [a confirmar] |
-| toca_em | lista de caminhos | — | sim [a confirmar] | caminho relativo ao repositório | — | sobreposição com tarefa paralela: ERR-12 |
+| faz | texto | 1 a 500 caracteres | sim | livre | — | vazio ou longo: ERR-49 |
+| toca_em | lista de caminhos | — | sim no papel funcionalidade | caminho relativo ao repositório | — | sobreposição com tarefa paralela: ERR-12 |
 | depende_de | lista de referências | — | não | ids de ENT-06 | — | — |
 | paralelo | booleano | — | sim | — | sim, não | — |
-| pronto_quando | texto | — | sim | livre | — | — |
-| prova | texto | — | sim | comando ou evidência | — | — |
-| papel | referência | — | sim | id de ENT-15 | funcionalidade, teste, adversarial (pesquisa [a confirmar]) | — |
+| pronto_quando | texto | — | sim | livre | — | vazio: ERR-49 |
+| prova | texto | — | sim | comando ou evidência | — | vazio: ERR-49 |
+| papel | referência | — | sim | id de ENT-15 | funcionalidade, teste, adversarial, pesquisa | — |
 | modelo | texto | — | não | id de modelo da CLI | modelo disponível na CLI | sem modelo e sem padrão: ERR-11 |
 | voltas | inteiro | 0 a 2 | sim | — | — | 3ª reprovação: ERR-21 |
-| implementada_por (RN-09) | referência | — | [a confirmar] | id de ENT-07 | — | — |
-| testada_por (RN-09) | referência | — | [a confirmar] | id de ENT-07 | ≠ implementada_por | igual: ERR-19 |
+| implementada_por (RN-09) | referência | — | sim, preenchido no despacho da implementação | id de ENT-07 | — | — |
+| testada_por (RN-09) | referência | — | sim, preenchido no despacho do teste | id de ENT-07 | ≠ implementada_por | igual: ERR-19 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -148,14 +150,16 @@ Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
-| tarefa | referência | — | sim (salvo orquestrador [a confirmar]) | id de ENT-06 | — | — |
-| papel | referência | — | sim | id de ENT-15 | orquestrador, funcionalidade, teste, adversarial | ação fora do papel: ERR-13, ERR-14 |
+| chat | referência | — | sim | id de ENT-03 | — | — |
+| tarefa | referência | — | sim (não para o orquestrador) | id de ENT-06 | — | — |
+| papel | referência | — | sim | id de ENT-15 | orquestrador, funcionalidade, teste, adversarial, pesquisa | ação fora do papel: ERR-13, ERR-14 |
 | modelo | texto | — | sim | id de modelo da CLI | — | ERR-11 |
 | prompt_versao | inteiro | ≥ 1 | sim | — | versão vigente no início (RN-28) | sem prompt: ERR-36 |
 | worktree | caminho | — | sim para funcionalidade | caminho no disco | — | ausente: ERR-16 |
 | branch | texto | — | sim para funcionalidade | `tipo/ID-descricao` | — | ausente: ERR-16 |
 | status | enumeração | — | sim | — | na fila, rodando, concluido, falhou, interrompida | — |
-| comandos (RN-17) | lista | — | — | — | sem merge, push --force, push na principal | ERR-14 |
+| motivo_fila | enumeração | — | sim quando status = na fila | — | teto, toca_em, recurso | — |
+| comandos (RN-17) | lista | — | — | — | sem push, merge nem push --force | ERR-14 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -168,11 +172,11 @@ Mora em: SQLite.
 
 | Estado | Entra quando | Pode ir para |
 |---|---|---|
-| na fila | teto atingido (RN-13), espera de "toca em" (RN-14) ou de recurso (RN-15) [a confirmar: "aguardando recurso" é estado próprio?] | rodando |
+| na fila | teto atingido (RN-13), espera de "toca em" (RN-14) ou de recurso (RN-15), com o motivo em `motivo_fila` | rodando |
 | rodando | o processo inicia | concluido, falhou, interrompida |
 | concluido | o relatório chega (RF-11) | (final) |
 | falhou | o processo cai ou para de emitir eventos (RNF-07; ERR-17) | (final) |
-| interrompida | o app fecha durante a execução (RNF-08) | [a confirmar] |
+| interrompida | o app fecha durante a execução (RNF-08) | (final) |
 
 ## ENT-08 PromptPapel
 
@@ -200,12 +204,12 @@ Mora em: SQLite.
 | Fluxo | Prompt de papel | Palavras (segundo a fonte) |
 |---|---|---|
 | Orquestrador | Você é o orquestrador. Antes de responder, busque na memória pela Obsidian CLI. Divida o trabalho em tarefas pequenas, cada uma com o que toca, do que depende e quando está pronta. Proponha o plano e espere o aval antes de delegar. Registre relatórios e decisões aprovadas assim que chegam. Não implemente: delegue. | 54 |
-| Funcionalidade | Você implementa uma única tarefa, na sua worktree. Toque só nos arquivos da tarefa. Rode a prova antes de dizer que terminou e termine com push e PR. Devolva o relatório no formato pedido, com dúvidas e o que notou fora do escopo. | 45 |
+| Funcionalidade | Você implementa uma única tarefa, na sua worktree. Toque só nos arquivos da tarefa. Rode a prova antes de dizer que terminou e termine com o commit. Devolva o relatório no formato pedido, com dúvidas e o que notou fora do escopo. | 44 [a confirmar: texto de 2026-11-19, contado pela regra da fonte] |
 | Teste | Você testa uma funcionalidade que não construiu. Procure falhas; não confirme por confiança. Para cada critério, dê ✔ ou ✘ com a prova. Não corrija nada: cada falha vira bug com passos, esperado e obtido. | 38 |
 | Adversarial | Você usa esta aplicação pela primeira vez e não sabe como foi feita. Tente cumprir cada objetivo pela tela, como um usuário. Fluxo que não se completa é bug; fluxo que se completa com dificuldade é sugestão de UI/UX. Relate sempre com passos e captura. | 47 |
 | Passagem de turno | O chat chegou ao limite de contexto. Registre na memória o "Onde parei": próximo passo, threads abertas e dúvidas. Não comece trabalho novo. | 24 |
 
-Regra de contagem de palavras [a confirmar]: uma contagem por espaços dá 52, 43, 33, 43 e 23.
+Regra de contagem de palavras [a confirmar]: uma contagem por espaços dá 52, 42, 33, 43 e 23.
 
 ## ENT-09 Relatório
 
@@ -215,14 +219,14 @@ Mora em: SQLite + resumo no cofre.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
-| resultado | enumeração [a confirmar] | — | sim | — | concluído, falhou, bloqueado [a confirmar] | — |
+| resultado | enumeração | — | sim | — | concluído, falhou, bloqueado | — |
 | o_que_fez | texto | até 1,5 mil tokens no total (RNF-10) | sim | livre | — | — |
 | arquivos | lista de caminhos | — | não | — | — | — |
 | prova | texto | — | sim | — | — | — |
-| criterios | lista de ENT-24 | — | [a confirmar] | — | — | — |
+| criterios | lista de ENT-24 | — | sim no papel teste | — | — | — |
 | duvidas | lista de texto | — | não | — | — | — |
 | candidatos_a_nota | lista de texto | — | não | — | — | — |
-| registrado_em (RN-03) | data e hora | — | sim antes da próxima delegação | — | — | não registrado: ERR-15 |
+| registrado_em (RN-03) | data e hora | — | sim antes da próxima delegação | ISO 8601 UTC | — | não registrado: ERR-15 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -238,12 +242,12 @@ Mora em: SQLite + bug no cofre.
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | tipo | enumeração | — | sim | — | bug, sugestao | sem tipo: ERR-27 |
-| passos | texto | — | sim | lista numerada [a confirmar] | — | [a confirmar] |
+| passos | lista de texto | 1 passo ou mais | sim | lista numerada | — | [a confirmar] |
 | esperado | texto | — | sim | livre | — | — |
 | obtido | texto | — | sim | livre | — | — |
-| captura | arquivo | — | sim para adversarial [a confirmar] | imagem | — | indisponível: ERR-43 |
+| captura | arquivo | — | sim para adversarial | imagem | — | indisponível: ERR-43 |
 | decisao | enumeração | — | sim para sugestão ao fechar a rodada | — | corrigir, limite, opcional | faltando: ERR-28 |
-| status (RN-20) | enumeração [a confirmar] | — | sim | — | aberto, fechado [a confirmar] | — |
+| status (RN-20) | enumeração | — | sim | — | aberto, fechado | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -263,7 +267,7 @@ Mora em: SQLite.
 | caminho | caminho | — | sim | — | — | — |
 | cofre | referência | — | sim quando origem = cli | id de ENT-02 | — | sem origem: ERR-40 |
 | origem | enumeração | — | sim | — | cli, arquivo | leitura direta de nota sem autorização: ERR-18 |
-| hora | data e hora | — | sim | — | — | — |
+| hora | data e hora | — | sim | ISO 8601 UTC | — | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -280,19 +284,19 @@ Mora em: SQLite.
 |---|---|---|---|---|---|---|
 | execucao | referência | — | sim | id de ENT-07 | — | — |
 | comando | texto | — | sim | — | — | — |
-| inicio | data e hora | — | sim | — | — | — |
-| fim | data e hora | — | não (rodando) | — | ≥ inicio | — |
+| inicio | data e hora | — | sim | ISO 8601 UTC | — | — |
+| fim | data e hora | — | não (rodando) | ISO 8601 UTC | ≥ inicio | — |
 | codigo_saida | inteiro | — | não (rodando) | — | — | — |
 | saida_mascarada | texto | — | não | — | segredos como •••• (RN-04) | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
 - Nenhum segredo em texto puro (RN-04, RNF-05).
-- Toda ação relevante tem quem, o quê, quando e de qual chat (RNF-09) [a confirmar: o Log tem "chat"?].
+- Toda ação relevante tem quem, o quê, quando e de qual chat (RNF-09); o chat vem de `execucao.chat` (ENT-07).
 
 ## ENT-13 Integração
 
-Mora em: SQLite (status) + cofre de credenciais do SO.
+Mora em: SQLite (status) + Gerenciador de Credenciais do Windows (D12).
 
 ### Campos
 
@@ -302,7 +306,7 @@ Mora em: SQLite (status) + cofre de credenciais do SO.
 | status | enumeração | — | sim | — | conectado, desconectado, sem login, não instalado | ERR-01, ERR-05, ERR-06, ERR-07 |
 | conta | texto | — | não | — | — | — |
 | versao | texto | — | não | — | — | — |
-| credencial (RN-04) | segredo | — | só GitHub (S5) | — | só no cofre de credenciais do SO | — |
+| credencial (RN-04) | segredo | — | só GitHub: token do device flow (D10) | — | só no Gerenciador de Credenciais do Windows | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -319,7 +323,18 @@ Mora em: SQLite.
 |---|---|---|---|---|---|---|
 | semanal_pct | percentual | 0 a 100 | sim | — | — | indisponível: ERR-41 |
 | janela_pct | percentual | 0 a 100 | sim | — | — | indisponível: ERR-41 |
-| proximo_reinicio | data e hora | — | sim | — | janela de 4 h ou 5 h [a confirmar, S1] | — |
+| proximo_reinicio | data e hora | — | sim | ISO 8601 UTC | reinício da janela de 5 h (D7) | — |
+| semanal_reinicio | data e hora | — | sim | ISO 8601 UTC | reinício da semana de 7 dias (D7) | — |
+| lida_em | data e hora | — | sim | ISO 8601 UTC | hora da leitura | — |
+| origem | enumeração | — | sim | — | evento, estimado | — |
+| janela_status | enumeração | — | sim | — | [a confirmar: valores do `rate_limit_event`] | — |
+| semanal_status | enumeração | — | sim | — | [a confirmar: valores do `rate_limit_event`] | — |
+| excedente | [a confirmar: tipo] | — | não | — | [a confirmar] | — |
+
+### Invariantes (nunca violadas, em nenhum fluxo)
+
+- Guarda só a última leitura: cada leitura nova substitui a anterior (D7).
+- `origem = evento` quando vem do `rate_limit_event`; `origem = estimado` quando vem dos registros locais de sessão da CLI (D7).
 
 ## ENT-15 Papel
 
@@ -329,14 +344,15 @@ Mora em: código do núcleo.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
-| nome | enumeração | — | sim | — | orquestrador, funcionalidade, teste, adversarial (pesquisa [a confirmar]) | — |
+| nome | enumeração | — | sim | — | orquestrador, funcionalidade, teste, adversarial, pesquisa | — |
 | ferramentas_permitidas | lista | — | sim | — | fixa no núcleo (RN-27) | fora do papel: ERR-13, ERR-14 |
 | modelo_padrao | texto | — | sim | id de modelo da CLI | modelo disponível | indisponível: ERR-30 |
 | cartao_de_briefing | texto | até 3 mil tokens no briefing (RNF-10) [a confirmar] | sim | gerado (RF-29) | adversarial: só objetivo, endereço e acesso (RN-10) | ERR-23 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
-- Subagente não tem ferramenta de escrita no cofre (RN-01, RF-29).
+- Subagente não tem ferramenta de escrita em cofre algum nem no contrato (RN-01, RF-29).
+- Nenhum papel herda a configuração pessoal do Claude CLI do Humano; o processo roda com `--setting-sources ""` (D8, D9).
 - Padrões de fábrica restauráveis (UC-09 FA-01) [a confirmar: quais são os de fábrica].
 
 ## ENT-16 Recurso
@@ -354,44 +370,44 @@ Mora em: SQLite.
 
 - No máximo uma execução usa o recurso por vez (RN-15).
 
-## ENT-17 Escrita [a confirmar: fora da tabela da fonte]
+## ENT-17 Escrita
 
-Citada em RN-01 (Escrita.caminho) e RF-28 (nota, motivo, hora). Mora em: [a confirmar].
+Citada em RN-01 (Escrita.caminho) e RF-28 (nota, motivo, hora). Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | caminho | caminho | — | sim | — | dentro do cofre de memória | papel sem permissão: ERR-13; cofre de consulta: ERR-39 |
 | motivo | texto | — | sim | — | — | — |
-| hora | data e hora | — | sim | — | — | — |
+| hora | data e hora | — | sim | ISO 8601 UTC | — | — |
 
-## ENT-18 Decisão [a confirmar: fora da tabela da fonte]
+## ENT-18 Decisão
 
-Citada em RN-03 (registrada_em) e RN-06 (aval_id). Mora no cofre e [a confirmar] no SQLite.
+Citada em RN-03 (registrada_em) e RN-06 (aval_id). Mora no cofre, como nota; no SQLite fica só o aval.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | aval_id | referência | — | sim | id do aval do Humano | — | sem aval: ERR-10 |
-| registrada_em | data e hora | — | sim antes da próxima delegação | — | — | ERR-15 |
+| registrada_em | data e hora | — | sim antes da próxima delegação | ISO 8601 UTC | — | ERR-15 |
 
-## ENT-19 Briefing [a confirmar: fora da tabela da fonte]
+## ENT-19 Briefing
 
-Citado em RN-10 (Briefing.conteudo).
+Citado em RN-10 (Briefing.conteudo). Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | conteudo | texto | até 3 mil tokens (RNF-10) [a confirmar] | sim | — | adversarial: só objetivo, endereço, acesso de teste | ERR-23 |
 
-## ENT-20 Rodada [a confirmar: fora da tabela da fonte]
+## ENT-20 Rodada
 
-Citada em RN-11 (Rodada.status).
+Citada em RN-11 (Rodada.status). Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | status | enumeração | — | sim | — | [a confirmar: em andamento,] aprovada, falhou, aguardando decisão | ERR-24, ERR-26, ERR-28 |
 
-## ENT-21 Funcionalidade [a confirmar: fora da tabela da fonte]
+## ENT-21 Funcionalidade
 
-Citada em RN-11 e RN-20 (Funcionalidade.status).
+Citada em RN-11 e RN-20 (Funcionalidade.status). Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
@@ -401,36 +417,49 @@ Citada em RN-11 e RN-20 (Funcionalidade.status).
 
 - `concluida` só com todos os critérios ✔ e nenhum bug aberto (RN-20), salvo exceção do Humano com escopo fechado.
 
-## ENT-22 Configuração [a confirmar: fora da tabela da fonte]
+## ENT-22 Configuração
 
-Citada em RN-13.
+Citada em RN-13. Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | teto_escrita | inteiro | ≥ 1 [a confirmar] | sim | — | padrão 5 (S8) | — |
 
-## ENT-23 PR [a confirmar: fora da tabela da fonte]
+## ENT-23 PR
 
-Citado em RN-17 (PR.status).
+Citado em RN-17 (PR.status). Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | status | enumeração | — | sim | — | aberto, merged [a confirmar: outros] | merge por agente: ERR-14; conflito: ERR-31 |
 
-## ENT-24 Critério [a confirmar: fora da tabela da fonte]
+## ENT-24 Critério
 
-Citado em RN-18 (Critério.status, Critério.prova).
+Citado em RN-18 (Critério.status, Critério.prova). Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | status | enumeração | — | sim | — | ✔, ✘ ("sem prova"), "não verificado, presumido" | ✔ sem prova: ERR-20 |
 | prova | texto ou arquivo | — | sim para ✔ | saída de teste, captura, resposta | — | ERR-20 |
 
-## ENT-25 Diário [a confirmar: fora da tabela da fonte; mora no cofre]
+## ENT-25 Diário
 
-Citado em RN-24 (Diário.onde_parei).
+Citado em RN-24 (Diário.onde_parei). Mora só no cofre.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | onde_parei | texto | — | sim na passagem | próximo passo, threads abertas, dúvidas | "Próximo passo" obrigatório | ERR-29 |
 | adiamento | texto | — | não | — | um por chat (RN-23) | — |
+
+## ENT-26 PastaContexto
+
+Citada em RF-16 (pastas que o orquestrador e os subagentes podem acessar). Mora em: SQLite.
+
+| Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
+|---|---|---|---|---|---|---|
+| projeto | referência | — | sim | id de ENT-01 | — | — |
+| caminho | caminho | — | sim | caminho de pasta no disco [a confirmar: absoluto?] | pasta existente e com permissão | inacessível: ERR-32 |
+
+### Invariantes (nunca violadas, em nenhum fluxo)
+
+- A lista vale para as próximas execuções: pasta adicionada passa a ser acessível, pasta removida deixa de ser (UC-11 passo 3, FA-01).

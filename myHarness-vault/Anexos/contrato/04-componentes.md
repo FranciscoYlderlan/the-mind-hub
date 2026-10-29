@@ -19,13 +19,13 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 
 ## CMP-01 Consumo do plano (TEL-01, canto superior esquerdo)
 
-- **Papel:** mostrar o consumo semanal e o da janela de uso com reinício.
+- **Papel:** mostrar o consumo da janela de 5 h e o da semana de 7 dias (D7).
 - **Entradas:** RF-18 (ENT-14).
 - **Saídas:** nada.
-- **Eventos:** `passou-o-mouse` (mostra a hora do próximo reinício).
+- **Eventos:** `passou-o-mouse` (mostra a hora do próximo reinício de cada um e a hora da última leitura).
 - **Atende:** RF-18, RF-19 (necessidade do negócio, sem UC); UC-02 FE-02 [a confirmar].
 - **Valida:** — (só leitura de ENT-14).
-- **Regras:** fica visível em todas as telas. Janela de 4 h ou 5 h [a confirmar, S1].
+- **Regras:** fica visível em todas as telas. Mostra a última leitura, com a hora dela; valor estimado pelos registros locais aparece marcado "estimado" (D7).
 
 ### Estados obrigatórios
 
@@ -33,7 +33,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 |---|---|---|
 | vazio | sem dados ainda | nenhuma |
 | carregando | primeira leitura | nenhuma |
-| preenchido | dois percentuais (semanal e janela) | passar o mouse para ver o reinício |
+| preenchido | dois percentuais (janela e semanal), com a hora da última leitura e, se for o caso, "estimado" | passar o mouse para ver os reinícios |
 | erro | "consumo indisponível" (ERR-41) | nenhuma [a confirmar: tentar de novo?] |
 | sucesso | não se aplica | — |
 | desabilitado | Claude CLI desconectado | conectar pela TEL-02 [a confirmar] |
@@ -41,7 +41,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 ## CMP-02 Painel de contexto (TEL-01, topo, centro)
 
 - **Papel:** mostrar o que os agentes leem e as pastas em contexto.
-- **Entradas:** RF-14 (ENT-11), RF-16; resultados de RF-34.
+- **Entradas:** RF-14 (ENT-11), RF-16 (ENT-26); resultados de RF-34.
 - **Saídas:** pasta adicionada ou removida.
 - **Eventos:** `trocou-de-aba` (Lidos e usados, Obsidian usado, Em contexto), `adicionou-pasta`, `removeu-pasta`, `filtrou-por-agente`.
 - **Atende:** UC-11 (passos 1 a 3, FA-01, FE-01); UC-02 passo 2; UC-14 (resultados por cofre).
@@ -129,7 +129,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 - **Saídas:** prompt e modelo para RF-05.
 - **Eventos:** `digitou`, `enviou` (botão ou atalho, RNF-12), `escolheu-modelo` (abre TEL-04 [a confirmar: o seletor escolhe o modelo ou abre a TEL-04?]).
 - **Atende:** UC-02 passo 1, FE-01; RF-30; TEL-01 FE-01; UC-12 FE-01.
-- **Valida:** texto do prompt [a confirmar: tamanho máximo, vazio]; modelo (RN-07).
+- **Valida:** texto do prompt (`texto` de ENT-04: sem limite próprio; vazio bloqueia o envio); modelo (RN-07).
 - **Regras:** altura mínima de 1 linha, cresce até 8 linhas e depois rola [a confirmar]; RN-07, RN-08.
 
 ### Estados obrigatórios
@@ -150,7 +150,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 - **Saídas:** pedido de chat novo, novo limite.
 - **Eventos:** `clicou-novo-chat`, `trocou-limite`.
 - **Atende:** RF-07, RF-17, RF-19; UC-02 passo 3, FA-02; UC-08.
-- **Valida:** `limite_tokens` de ENT-03 [a confirmar: faixa].
+- **Valida:** `limite_tokens` de ENT-03 (10 mil a 1 milhão; violação: ERR-47).
 - **Regras:** RN-23; a partir de 80% a barra muda para alerta [a confirmar]. Posição do "Novo chat" [a confirmar, S9].
 
 ### Estados obrigatórios

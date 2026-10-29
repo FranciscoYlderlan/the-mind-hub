@@ -14,23 +14,23 @@ Nenhuma tela existe ainda. A coluna Tela traz a tela prevista na fonte (TEL-xx),
 | RF-04 | UC-01 | principal | CMP-03 | ENT-13 | ERR-05, ERR-06, ERR-07 | TEL-01 (prevista) | AC-91 |
 | RF-05 | UC-02 | principal, FE-01, FE-02 | CMP-04, CMP-06 | ENT-03, ENT-04 | ERR-05, ERR-08, ERR-42 | TEL-01 (prevista) | AC-06, AC-09, AC-10, AC-92, AC-122 |
 | RF-06 | UC-04 | principal | CMP-04 | ENT-07 | ERR-17 | TEL-01 (prevista) | AC-93 |
-| RF-07 | UC-02 | principal | CMP-07 | ENT-01, ENT-03 | — | TEL-01 (prevista) | AC-94 |
-| RF-08 | UC-03 | principal, FE-01 | CMP-10, CMP-12 | ENT-05, ENT-06 | ERR-09, ERR-12 | TEL-01, TEL-03 (previstas) | AC-07, AC-14, AC-95 |
+| RF-07 | UC-02 | principal | CMP-07 | ENT-01, ENT-03 | ERR-47 | TEL-01 (prevista) | AC-94 |
+| RF-08 | UC-03 | principal, FE-01 | CMP-10, CMP-12 | ENT-05, ENT-06 | ERR-09, ERR-12, ERR-49 | TEL-01, TEL-03 (previstas) | AC-07, AC-14, AC-95 |
 | RF-09 | UC-03 | principal, FA-01, FA-02, FE-02 | CMP-12, CMP-13 | ENT-05, ENT-06, ENT-18 | ERR-06, ERR-10, ERR-11 | TEL-03 (prevista) | AC-11, AC-12, AC-13, AC-15, AC-96, AC-130, AC-131, AC-132, AC-133 |
 | RF-10 | UC-04 | principal, FA-01, FE-02 | CMP-04, CMP-05 | ENT-06, ENT-07, ENT-15 | ERR-09, ERR-11, ERR-12, ERR-13, ERR-16, ERR-44 | TEL-01 (prevista) | AC-16, AC-17, AC-97 |
 | RF-11 | UC-04 | principal, FA-02, FE-01 | CMP-04, CMP-05, CMP-10 | ENT-09 | ERR-15, ERR-17 | TEL-01 (prevista) | AC-16, AC-18, AC-19, AC-98 |
 | RF-12 | UC-04 | principal, FA-01 | CMP-05 | ENT-07 | ERR-44 | TEL-01 (prevista) | AC-99, AC-123, AC-126 |
 | RF-13 | UC-09 | principal, FA-01, FE-01 | CMP-14 | ENT-15 | ERR-11, ERR-30 | TEL-04 (prevista) | AC-36, AC-37, AC-38, AC-100, AC-134, AC-135, AC-136 |
 | RF-14 | UC-11 | principal | CMP-02 | ENT-11 | ERR-18 | TEL-01 (prevista) | AC-101 |
-| RF-15 | UC-11 | principal | CMP-02 | ENT-11, ENT-02 | ERR-40 | TEL-01 (prevista) | AC-102 |
-| RF-16 | UC-11 | principal, FA-01, FE-01 | CMP-02 | [lacuna: nenhuma entidade guarda as pastas em contexto] | ERR-32 | TEL-01 (prevista) | AC-42, AC-43, AC-44, AC-103 |
+| RF-15 | UC-11 | principal | CMP-02 | ENT-11, ENT-02, ENT-26 | ERR-40 | TEL-01 (prevista) | AC-102 |
+| RF-16 | UC-11 | principal, FA-01, FE-01 | CMP-02 | ENT-26 | ERR-32 | TEL-01 (prevista) | AC-42, AC-43, AC-44, AC-103 |
 | RF-17 | UC-08 | principal | CMP-07 | ENT-03 | — | TEL-01 (prevista) | AC-104 |
 | RF-18 | — (necessidade do negócio) | — | CMP-01 | ENT-14 | ERR-41 | TEL-01 (prevista) | AC-105 |
 | RF-19 | — (necessidade do negócio) | — | CMP-01, CMP-07 | ENT-14, ENT-03 | ERR-41 | TEL-01 (prevista; visível em todas) | AC-106 |
-| RF-20 | UC-08 | principal, FA-01, FE-01, FE-02 | CMP-04, CMP-07 | ENT-03, ENT-25 | ERR-07, ERR-29 | TEL-01 (prevista) | AC-32, AC-33, AC-34, AC-35, AC-107, AC-124 |
+| RF-20 | UC-08 | principal, FA-01, FE-01, FE-02 | CMP-04, CMP-07 | ENT-03, ENT-25 | ERR-07, ERR-29, ERR-48 | TEL-01 (prevista) | AC-32, AC-33, AC-34, AC-35, AC-107, AC-124 |
 | RF-21 | — (necessidade do negócio) | — | CMP-08 | ENT-12 | — | TEL-01 (prevista) | AC-108 |
 | RF-22 | — (necessidade do negócio) | — | CMP-08 | ENT-12 | — | TEL-01 (prevista) | AC-109 |
-| RF-23 | UC-12 | principal, FA-01, FE-01 | CMP-09 | ENT-01, ENT-03 | ERR-33 | TEL-01 (prevista) | AC-45, AC-46, AC-47, AC-110 |
+| RF-23 | UC-12 | principal, FA-01, FE-01 | CMP-09 | ENT-01, ENT-03 | ERR-33, ERR-45, ERR-46, ERR-47 | TEL-01 (prevista) | AC-45, AC-46, AC-47, AC-110 |
 | RF-24 | UC-05 | principal, FA-01, FE-01, FE-02 | CMP-10, CMP-15 | ENT-06, ENT-10, ENT-21, ENT-24 | ERR-19, ERR-20, ERR-21, ERR-22 | TEL-01, TEL-05 (previstas) | AC-21, AC-22, AC-23, AC-24, AC-111 |
 | RF-25 | UC-06 | principal, FA-01, FE-01, FE-02 | CMP-10, CMP-15 | ENT-10, ENT-16, ENT-19, ENT-20 | ERR-23, ERR-24, ERR-25, ERR-26, ERR-27 | TEL-01, TEL-05 (previstas) | AC-25, AC-26, AC-27, AC-28, AC-112 |
 | RF-26 | UC-07 | principal, FA-01, FE-01 | CMP-15 | ENT-10 | ERR-28, ERR-43 | TEL-05 (prevista) | AC-29, AC-30, AC-31, AC-113, AC-137, AC-138, AC-139 |
@@ -69,7 +69,7 @@ Nenhuma tela existe ainda. A coluna Tela traz a tela prevista na fonte (TEL-xx),
 | RN-20 | UC-05, UC-07 | UC-05 principal | CMP-15 | ENT-10, ENT-21 | ERR-22 | TEL-05 (prevista) | AC-21, AC-77 |
 | RN-21 | UC-06, UC-07 | UC-06 principal (passo 3) | CMP-15 | ENT-10 | ERR-27 | TEL-05 (prevista) | AC-25, AC-78 |
 | RN-22 | UC-07 | principal, FE-01 | CMP-10, CMP-15 | ENT-10 | ERR-28 | TEL-05 (prevista) | AC-31, AC-79 |
-| RN-23 | UC-02, UC-08 | UC-02 FA-02; UC-08 principal, FA-01 | CMP-07 | ENT-03 | — (dispara a passagem) | TEL-01 (prevista) | AC-08, AC-33, AC-80 |
+| RN-23 | UC-02, UC-08 | UC-02 FA-02; UC-08 principal, FA-01 | CMP-07 | ENT-03 | ERR-48 (segundo adiamento); dispara a passagem | TEL-01 (prevista) | AC-08, AC-33, AC-80 |
 | RN-24 | UC-08 | FE-01 | CMP-04 | ENT-03, ENT-25 | ERR-29 | TEL-01 (prevista) | AC-34, AC-81 |
 | RN-25 | UC-02, UC-04, UC-13 | principal | — (backend) | ENT-07, ENT-08 | ERR-36 | — | AC-82 |
 | RN-26 | UC-13 | FE-01 | CMP-16 | ENT-08 | ERR-34 | TEL-06 (prevista) | AC-51, AC-83 |
