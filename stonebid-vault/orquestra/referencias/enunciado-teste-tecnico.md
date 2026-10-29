@@ -97,7 +97,7 @@ Envie pelo formulário `https://elitedev.verzel.com.br/?elite-dev-2026-2` preenc
 
 | Item do enunciado | Onde está no planejamento | Situação |
 |---|---|---|
-| E1 Deploy obrigatório | RNF-01, R-01 ([[contrato-requisitos-nao-funcionais]]) | Coberto no papel; **não iniciado**, hospedagem não escolhida |
+| E1 Deploy obrigatório | RNF-01, R-01 ([[contrato-requisitos-nao-funcionais]]) | Coberto no papel; **não iniciado**; hospedagem escolhida em 2026-10-29: GCP + Vercel ([[geral-decisao-2026-10-29-hospedagem]]) |
 | E1 API pública de itens | RN-13, AD-06, Q-13 ([[contrato-tecnologias]]) | Coberto; **API não escolhida** |
 | E1 Dois papéis | RF-01, RF-02, RN-06 | Coberto |
 | E1 Lote com lance inicial, incremento, início, fim | RF-21 | Coberto |

@@ -55,7 +55,7 @@ Você decide e preenche ao final da discussão, usando as versões mais recentes
 | Tempo real (AD-04) | Não decidido | — |
 | Testes | Vitest no backend; Playwright no frontend, por outro agente | [[geral-decisao-2026-10-28-testes-frontend-playwright]] |
 | Contêineres | Docker + Compose | [[geral-decisao-2026-10-28-stack-backend]] |
-| Hospedagem do deploy | Não decidida [a confirmar] | — |
+| Hospedagem do deploy | Backend e banco no GCP (Cloud Run + Cloud SQL); frontend na Vercel; CI/CD pelo GitHub (2026-10-29) | [[geral-decisao-2026-10-29-hospedagem]] |
 | API pública de itens | Não decidida (Q-13) | — |
 | Estilo e tema | Tailwind CSS v4.3 + shadcn/ui | [[geral-decisao-2026-10-28-stack-frontend]] |
 | Organização dos repositórios | Dois repositórios: `stonebid-web` e `stonebid-api` | [[geral-contexto]] |
@@ -64,11 +64,11 @@ Você decide e preenche ao final da discussão, usando as versões mais recentes
 > Ao escolher a hospedagem, o mecanismo de tempo real ou a API de itens: usar os critérios acima e registrar a escolha numa nota de decisão.
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** quase toda a stack já está decidida; faltam **tempo real, hospedagem e API de itens**.
+* **Ponto 1:** quase toda a stack já está decidida; faltam **tempo real e API de itens**; a hospedagem foi decidida em 2026-10-29 ([[geral-decisao-2026-10-29-hospedagem]]).
 * **Ponto 2:** tempo real e hospedagem se decidem juntos (critério 3 e risco R-05 de [[contrato-riscos]]).
 * **Ponto 3:** a API de itens deve dispensar chave e ter imagens estáveis.
 
 ### 🔗 Conexões
 - Mapa: [[contrato-do-projeto]] · [[moc-orquestra]]
-- Relacionadas: [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[contrato-arquitetura]]
+- Relacionadas: [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-29-hospedagem]], [[contrato-arquitetura]]
 - Próxima: [[contrato-trabalho-com-a-ia]]

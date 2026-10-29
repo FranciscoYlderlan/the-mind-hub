@@ -19,7 +19,7 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Objetivo:** listar as etapas gerais do projeto, da primeira à entrega.
 - **Pronto quando:** etapas aprovadas numa nota de decisão.
 - **Funcionalidades:** (nenhuma)
-- **Notas geradas:** [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[registro-de-componentes]], [[geral-decisao-2026-10-29-camada-mcp]], [[contrato-do-projeto]], [[enunciado-teste-tecnico]]
+- **Notas geradas:** [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[registro-de-componentes]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-29-hospedagem]], [[contrato-do-projeto]], [[enunciado-teste-tecnico]]
 - **Concluída em:** 
 
 ### 🔗 Conexões

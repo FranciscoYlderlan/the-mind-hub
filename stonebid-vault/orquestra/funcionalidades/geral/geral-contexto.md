@@ -32,6 +32,7 @@ Motivação: [a confirmar]
 - Do contrato (itens `[DECIDIDO]`): prazo real de **4 dias** (o enunciado fala em 7; **substituído em 2026-10-29**, ver o item seguinte); **todos os 5 opcionais** serão feitos; deploy obrigatório; desenvolvimento com IA permitido; sou júnior e aprender é objetivo do projeto → [[contrato-visao-escopo-e-papeis]].
 - 2026-10-29 (09:06): o prazo real passou de 4 dias para **24 horas** a partir de agora. Oficialmente estou no **terceiro dia**: nos três primeiros dias não avancei muito além dos requisitos e da arquitetura. Vou trabalhar sem pausa.
 - Camada MCP no backend para expor as rotas e testar o fluxo pela Claude; sempre que uma feature e uma rota forem criadas, a MCP é atualizada → [[geral-decisao-2026-10-29-camada-mcp]].
+- 2026-10-29: hospedagem: backend e banco no **GCP**, frontend na **Vercel**, os dois repositórios no GitHub com CI/CD validando a integração. Custo zero: a aplicação fica no ar no máximo 7 dias, é avaliada em menos de 1 hora e depois é fechada → [[geral-decisao-2026-10-29-hospedagem]].
 
 ## O que já foi feito
 - 2026-10-28: cofre montado com a estrutura `orquestra/` e alinhado ao processo das etapas vitais ([[diario-2026-10-28]]).
@@ -40,6 +41,7 @@ Motivação: [a confirmar]
 - 2026-10-29: camada MCP do backend registrada como decisão ([[diario-2026-10-29]]).
 - 2026-10-29: enunciado do teste técnico guardado e mapeado contra o contrato ([[enunciado-teste-tecnico]]); regra de nomes em inglês + kebab-case nas decisões de estrutura.
 - 2026-10-29: contrato do projeto v0.2 registrado em `referencias/`, uma nota por seção, a partir de [[contrato-do-projeto]] ([[diario-2026-10-29]]).
+- 2026-10-29: hospedagem decidida (GCP + Vercel, CI/CD pelo GitHub) e propagada nas decisões de stack, na camada MCP e no contrato ([[geral-decisao-2026-10-29-hospedagem]]).
 
 ## Tempo disponível
 - **24 horas** a partir de 2026-10-29 09:06 (substitui os 4 dias do contrato). Entrega por volta de 2026-10-30 09:00 [a confirmar].
@@ -59,7 +61,7 @@ Motivação: [a confirmar]
 
 ## Mapa
 - Roteiro: [[geral-plano]]
-- Decisões: [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
+- Decisões: [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]]
 - Enunciado: [[enunciado-teste-tecnico]]
 - Contrato: [[contrato-do-projeto]] (requisitos, regras, arquitetura proposta, plano e perguntas Q)

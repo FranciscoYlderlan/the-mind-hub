@@ -90,7 +90,7 @@ O lance atual é R$ 400 e o incremento mínimo é R$ 50. Ana e Bruno enviam R$ 5
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** auditoria por **hash encadeado + selo HMAC**, com o segredo fora do banco; o limite honesto vai para o README.
 * **Ponto 2:** lances do mesmo lote serializados numa transação; T-02 prova ([[contrato-testes]]).
-* **Ponto 3:** AD-04 (tempo real) segue `[PENDENTE]`; a escolha depende da hospedagem ([[contrato-tecnologias]]).
+* **Ponto 3:** AD-04 (tempo real) segue `[PENDENTE]`; a escolha dependia da hospedagem ([[contrato-tecnologias]]), já decidida: o Cloud Run aceita WebSocket e SSE ([[geral-decisao-2026-10-29-hospedagem]]).
 
 ### 🔗 Conexões
 - Mapa: [[contrato-do-projeto]] · [[moc-orquestra]]
