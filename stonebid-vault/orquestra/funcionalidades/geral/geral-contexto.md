@@ -2,7 +2,7 @@
 tipo: contexto
 funcionalidade: geral
 status: em-construcao
-etapa-atual: 1
+etapa-atual: 2
 criado: 2026-10-28
 aliases: [Contexto do Stonebid, Visão geral do projeto, Project overview]
 ---
@@ -41,6 +41,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29 (12:28): aprovada a regra dos testes: o teste só sai do escopo junto com o requisito que prova; T-01 a T-09 e T-10a ficam sempre → [[geral-decisao-2026-10-29-testes-no-escopo]].
 - 2026-10-29 (13:22): aprovada a solução do comprovante e da auditoria: hash guardado no lance, cabeça da cadeia com selo no lote e comprovante como fotografia selada da liquidação → [[geral-decisao-2026-10-29-comprovante-e-hash]].
 - 2026-10-29 (13:31): aprovada a correção do cancelamento ao vivo, "vamos deixar os dois casos": lote ao vivo vai para CANCELADO sem lances; com lances, só com o `[OPC-2]` → [[geral-decisao-2026-10-29-cancelamento-ao-vivo]].
+- 2026-10-29 (14:07): roteiro aprovado em 8 etapas, uma por incremento → [[geral-decisao-2026-10-29-roteiro]].
 - Camada MCP no backend para expor as rotas e testar o fluxo pela Claude; sempre que uma feature e uma rota forem criadas, a MCP é atualizada → [[geral-decisao-2026-10-29-camada-mcp]].
 - 2026-10-29: hospedagem: backend e banco no **GCP**, frontend na **Vercel**, os dois repositórios no GitHub com CI/CD validando a integração. Custo zero: a aplicação fica no ar no máximo 7 dias, é avaliada em menos de 1 hora e depois é fechada → [[geral-decisao-2026-10-29-hospedagem]].
 
@@ -61,6 +62,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: rotas públicas do RF-03 (layout `_public/`) e reuso de componentes como padrão do projeto registrados nas decisões do frontend ([[diario-2026-10-29]]).
 - 2026-10-29: bug de processo corrigido: mudança de estado passa por varredura de impacto, e as notas `contrato-*` ficam só no texto vigente ([[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]).
 - 2026-10-29: pendências respondidas: branches, configuração do GCP, entrega, dial, motivação, `@@map`, testes E2E e mudança do contrato ([[diario-2026-10-29]]).
+- 2026-10-29: roteiro aprovado ([[geral-decisao-2026-10-29-roteiro]]); etapa 2 (esqueleto no ar) em construção.
 
 ## Tempo disponível
 - **24 horas** a partir de 2026-10-29 09:06. Entrega em **2026-10-30 09:00** (confirmado pelo humano).
@@ -80,7 +82,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 
 ## Mapa
 - Roteiro: [[geral-plano]]
-- Decisões: [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
+- Decisões: [[geral-decisao-2026-10-29-roteiro]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]], [[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]
 - Enunciado: [[enunciado-teste-tecnico]]
 - Contrato: [[contrato-do-projeto]] (requisitos, regras, arquitetura proposta, plano e perguntas Q)
