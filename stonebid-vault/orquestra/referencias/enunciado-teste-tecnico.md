@@ -119,10 +119,10 @@ Envie pelo formulário `https://elitedev.verzel.com.br/?elite-dev-2026-2` preenc
 | E3 Privacidade | RN-15, AD-09, T-09 | Coberto |
 | E4 React / Node ou Python / banco | [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]] | Coberto (Vite + React, Fastify, PostgreSQL) |
 | E4 README com configuração do banco | RNF-03 | Coberto no papel |
-| E4 Prazo de 7 dias | Prazo real de 24 horas ([[geral-contexto]]) | Coberto (prazo real menor) |
+| E4 Prazo de 7 dias | Prazo real até 2026-10-30 16:00 ([[geral-contexto]]) | Coberto (prazo real menor) |
 | E4 Dados de teste | RNF-02, Q-11 | Coberto |
 | E4 Comportamentos inesperados no README | RNF-03, A-09 | Coberto |
-| E5 Opcionais (5) | RF-11, RF-23, RNF-11, RNF-12, RNF-13 | Coberto; o contrato faz todos, o que não cabe em 24 horas |
+| E5 Opcionais (5) | RF-11, RF-23, RNF-11, RNF-12, RNF-13 | Coberto; o contrato faz todos, o que aperta o prazo até 2026-10-30 16:00 |
 | E5 Não precisa fazer | Fora do escopo (1.4) | Parcial: recuperação de senha está lá; nota fiscal, revenda e app nativo não estão listados |
 | E1 Referências (Catawiki, LiveAuctioneers, Superbid) | — | Não citadas; são só inspiração |
 | E6 Repositório **público** no GitHub (os dois, se separados) | [[geral-contexto]]: dois repositórios, criados em 2026-10-29 às 10:31 (conferir se estão públicos) | **Lacuna:** o contrato não fala em público nem em envio |
@@ -133,7 +133,7 @@ Envie pelo formulário `https://elitedev.verzel.com.br/?elite-dev-2026-2` preenc
 (separada do enunciado; marcar [a confirmar] quando for suposição)
 - O contrato cobre **todos** os requisitos de E1 a E5. As lacunas estão em E6: repositório público e o relato do uso de IA. Os diários do cofre já registram boa parte desse uso e podem virar o relato.
 - O enunciado **não fala em live coding**. O que ele permite é usar IA, desde que o candidato conte onde, como e o que revisou.
-- O enunciado não pede: camada MCP ([[geral-decisao-2026-10-29-camada-mcp]]), ambiente de staging, teste de cada tela com Playwright por outro agente ([[geral-decisao-2026-10-28-testes-frontend-playwright]]) nem a tabela de rastreabilidade. Com 24 horas, esses itens disputam tempo com o deploy, que é obrigatório. Em 2026-10-29 decidi mantê-los: a primeira etapa é deixar o projeto no ar ([[geral-contexto]]).
+- O enunciado não pede: camada MCP ([[geral-decisao-2026-10-29-camada-mcp]]), ambiente de staging, teste de cada tela com Playwright por outro agente ([[geral-decisao-2026-10-28-testes-frontend-playwright]]) nem a tabela de rastreabilidade. Com o prazo até 2026-10-30 16:00, esses itens disputam tempo com o deploy, que é obrigatório. Em 2026-10-29 decidi mantê-los: a primeira etapa é deixar o projeto no ar ([[geral-contexto]]).
 - "Do jeito que faria no dia a dia de um time de desenvolvimento" sugere que a avaliação olha também o processo: commits pequenos, README e CI ([[contrato-trabalho-com-a-ia]]) [a confirmar].
 
 > [!tip] Quando abrir esta nota

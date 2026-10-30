@@ -28,7 +28,7 @@ aliases: [Cancelamento ao vivo, Cancelar lote ao vivo sem lances, Tabela 5.1 cor
   - O enunciado vence o contrato (seção 13.2 de [[contrato-trabalho-com-a-ia]]): o E2 pede cancelar lote "que ainda não recebeu lances", sem limitar o estado. O RF-22 e a RN-12 já diziam isso; só a tabela 5.1 divergia.
   - A célula da tabela trazia só a extensão do opcional e perdeu o caso base. O erro vem do contrato v0.2 (a nota copia a seção 5 sem reinterpretar).
   - Seguindo a tabela, um lote ao vivo sem lances não poderia ser cancelado, mas com lances poderia: o opcional permitiria mais que o requisito base.
-  - Com o prazo de 24 horas, o `[OPC-2]` é o item com mais chance de cair; o cancelamento sem lances precisa funcionar sem ele.
+  - Com o prazo até 2026-10-30 16:00, o `[OPC-2]` é o item com mais chance de cair; o cancelamento sem lances precisa funcionar sem ele.
 - **Consequências:**
   - Lote cancelado guarda `cancelado_em` e o motivo (obrigatório também sem lances) e congela a cabeça da cadeia, como na liquidação ([[geral-decisao-2026-10-29-comprovante-e-hash]]). Lote sem lances: cadeia vazia, auditoria ÍNTEGRO com "cancelado em…".
   - A sala ao vivo recebe o evento de cancelamento sem recarregar (RF-31), fecha o formulário de lance e mostra o aviso; o lote sai da seção "ao vivo" da vitrine (RF-10).

@@ -45,7 +45,7 @@ Entraram pelo protocolo de mudança da seção 13.4, com o aval do humano. Cada 
 
 **Ainda em aberto na v0.3:**
 - Perguntas Q-01 a Q-15 de [[contrato-pontos-para-validar]], incluindo o tempo real (AD-04) e a API pública de itens.
-- Plano refeito para 24 horas (corte de escopo a partir de [[contrato-processo-e-plano]]).
+- Plano com horários até a entrega, 2026-10-30 16:00 (corte de escopo a partir de [[contrato-processo-e-plano]]).
 - Seção E6 do enunciado ("Como enviar": repositórios públicos e relato do uso de IA), que o contrato não cobre ([[enunciado-teste-tecnico]]).
 - Itens `[PROPOSTO]` da seção 8 (AD-01 a AD-10) que não viraram decisão.
 

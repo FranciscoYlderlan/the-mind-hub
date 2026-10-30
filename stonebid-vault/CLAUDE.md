@@ -127,7 +127,8 @@ re:\bE[1-6]/E[1-6]\b => E1, E2 (vírgula, e só as seções onde o requisito est
 re:\buse-(?!mobile\.)[a-z0-9-]+\.tsx?\b => useAlgo.ts (arquivo de hook em camelCase; só use-mobile.ts do shadcn fica)
 # estado substituído (fora de diário, bug, decisão substituída e seções Histórico/Mudanças/Linha do tempo é ERRO):
 # antigo: termo do estado antigo => estado atual (nota dona)
-antigo: re:\b(4|quatro) dias\b => prazo de 24 horas a partir de 2026-10-29 09:06, entrega 2026-10-30 16:00 (geral-decisao-2026-10-30-prazo-16h)
+antigo: re:\b(4|quatro) dias\b => prazo de 2026-10-29 09:06 até a entrega, em 2026-10-30 16:00 (geral-decisao-2026-10-30-prazo-16h)
+antigo: re:\b24 horas\b => prazo de 2026-10-29 09:06 até a entrega, em 2026-10-30 16:00 (geral-decisao-2026-10-30-prazo-16h)
 antigo: re:T-01 a T-06 => T-01 a T-09 e T-10a sempre; T-10b com o OPC-2; T-11 com a RN-18 (geral-decisao-2026-10-29-testes-no-escopo)
 antigo: re:(?i)só nas (tools|features) (com|que necessitam de) autenticação => api_key em toda conexão com o /mcp, em todos os ambientes (geral-decisao-2026-10-29-camada-mcp)
 antigo: re:(?i)restrição por IP => api_key para conectar ao /mcp (geral-decisao-2026-10-29-camada-mcp)
