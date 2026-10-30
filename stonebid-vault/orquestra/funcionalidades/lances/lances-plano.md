@@ -91,11 +91,16 @@ Aval em 2026-10-30 08:4x, todos como propostos:
 - **Faz:** verificador no Chrome em staging (dois licitantes, exemplo da Ana, recusas na tela, comprometido e liberado na carteira, MCP); verificador de código lê o diff.
 - **Depende de:** T4
 - **Pronto quando:**
-  - [ ] relatórios sem bloqueante
+  - [x] relatórios sem bloqueante (Chrome; o verificador de código vai junto com o do I3)
 - **Prova:** relatórios
 
+- **Verificação:**
+  - Data: 2026-10-30 11:4x, staging (API `55b1400`, web `c366aef`), verificador no Chrome.
+  - Critérios ✔/✘: ✔ dois licitantes (comprometido do superado volta ao disponível na hora); ✔ exemplo da Ana adaptado (sem segundo lote barato; liquidação é do I3); ✔ recusas na tela com o texto da API (mínimo, saldo, já lidera; agendado e encerrado pela API; cancelado sem lote visível); ✔ duplo clique dá 1 POST, seq sem buraco; ✔ histórico público só com pseudônimo, login e volta; ✘ MCP sem caminho (a `MCP_API_KEY_STAGING` só no Secret Manager).
+  - Achados: leiloeiro vê "Dar lance" mudo (já na T3 de [[sala-ao-vivo-plano]], [[geral-decisao-2026-10-30-dar-lance-so-para-licitante]]); `/register` sem papel mostra erro do Zod em inglês (fora do I2); lote agendado esconde o botão sem explicar (opcional).
+
 ## Próxima tarefa e a seguinte
-T1 a T4 feitas (merge e staging em 2026-10-30 09:1x). T5: verificador no Chrome despachado em 2026-10-30 11:3x, em paralelo com o I3 ([[sala-ao-vivo-plano]]); o verificador de código do I2 fica junto com o do I3.
+T1 a T4 feitas (merge e staging em 2026-10-30 09:1x). T5 no Chrome aprovada em 2026-10-30 11:4x, sem bloqueante; o verificador de código do I2 fica junto com o do I3 ([[sala-ao-vivo-plano]]).
 
 ## Prioridades
 T2a é o caminho crítico (concorrência e hash). T3 pode encolher (sem "login e volta") se apertar.

@@ -20,7 +20,7 @@ Etapa 5 do [[geral-plano]]. Pela linha I3 de [[contrato-processo-e-plano]] (11.3
 - Comprovante e hash: [[geral-decisao-2026-10-29-comprovante-e-hash]]; testes do I3 (T-04, T-05, T-07, T-09): [[geral-decisao-2026-10-29-testes-no-escopo]].
 
 ## O que já foi feito
-- 2026-10-30 11:1x–11:2x: plano proposto e 9 pontos aprovados (sessão anterior; o plano e este contexto não chegaram a ser gravados e foram refeitos às 11:3x a partir das decisões). 11:3x: contrato da T1 fixado; quatro implementadores (API: liquidação e SSE; web: sala e arremates) despachados em paralelo.
+- 2026-10-30 11:1x–11:2x: plano proposto e 9 pontos aprovados (sessão anterior; o plano e este contexto não chegaram a ser gravados e foram refeitos às 11:3x a partir das decisões). 11:3x: contrato da T1 fixado; quatro implementadores (API: liquidação e SSE; web: sala e arremates) despachados em paralelo. 11:49–12:3x: merge dos PRs #12 e #13 da API (`staging` em `f756ac2`, lances de teste apagados e refeitos pelo seed) e do #15 do web; 12:30: merge do #16 e `staging` do web avançada (`728210a`). Falta a verificação no ar (T6).
 
 ## Tempo disponível
 Entrega em 2026-10-30 16:00 ([[geral-decisao-2026-10-30-prazo-16h]]); I4 e revisão vêm depois. Primeiro corte se apertar: o seed com lote liquidado.
