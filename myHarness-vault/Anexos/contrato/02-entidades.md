@@ -16,7 +16,7 @@ Mora em: SQLite.
 |---|---|---|---|---|---|---|
 | nome | texto | 1 a 80 caracteres | sim | livre | único entre os projetos | vazio, longo ou repetido: ERR-45 |
 | repositorio | caminho | — | [a confirmar] | caminho absoluto | pasta com `.git` | inválido: ERR-46 |
-| limite_contexto_padrao | inteiro (tokens) | recomendado: 10 mil a 1 milhão | sim | só algarismos | padrão 100 mil (S7) | fora da faixa recomendada: aviso ERR-47, valor salvo |
+| limite_contexto_padrao | inteiro (tokens) | mínimo 1; recomendado: 10 mil a 1 milhão | sim | só algarismos | padrão 100 mil (S7) | zero: ERR-52, nada salvo; fora da faixa recomendada: aviso ERR-47, valor salvo |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -52,7 +52,7 @@ Mora em: SQLite.
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | projeto | referência | — | sim | id de ENT-01 | — | — |
-| limite_tokens | inteiro | recomendado: 10 mil a 1 milhão | sim | só algarismos | padrão: o do projeto (100 mil, S7) | fora da faixa recomendada: aviso ERR-47, valor salvo; atingido: aviso ERR-48 |
+| limite_tokens | inteiro | mínimo 1; recomendado: 10 mil a 1 milhão | sim | só algarismos | padrão: o do projeto (100 mil, S7) | zero: ERR-52, nada salvo; fora da faixa recomendada: aviso ERR-47, valor salvo; atingido: aviso ERR-48 |
 | tokens_usados | inteiro | ≥ 0 | sim | — | — | — |
 | chat_anterior | referência | — | não | id de ENT-03 | só chat encerrado por passagem | — |
 | status | enumeração | — | sim | — | ativo, pausado, encerrado, só leitura | — |
@@ -60,7 +60,7 @@ Mora em: SQLite.
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
-- Ao atingir `limite_tokens`, o sistema avisa e recomenda a passagem de turno e um chat novo (RN-23; ERR-48); a passagem só começa quando o Humano aceita, e cada vez que ele segue no chat `continuacoes` sobe 1.
+- Ao atingir `limite_tokens`, o sistema avisa e recomenda a passagem de turno e um chat novo (RN-23; ERR-48), numa faixa fixa que não bloqueia e que volta a cada resposta acima do limite; a passagem só começa quando o Humano aceita, e cada vez que ele segue no chat `continuacoes` sobe 1.
 - Chat de continuação só existe depois do "Onde parei" com próximo passo gravado (RN-24; violação: ERR-29).
 
 ### Estados do ciclo de vida
@@ -98,22 +98,22 @@ Mora em: SQLite + decisão no cofre. Gravação dupla, com o mesmo conteúdo nos
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | chat | referência | — | sim | id de ENT-03 | — | — |
-| versao | inteiro | ≥ 1 | sim | — | sobe a cada "Pedir alteração" | — |
+| versao | inteiro | ≥ 1 | sim | — | sobe a cada plano novo do orquestrador: depois de "Pedir alteração" e depois de cada devolução (ERR-49) | — |
 | status | enumeração | — | sim | — | proposto, aprovado, recusado | despacho sem aval: ERR-09 |
 | aprovado_em | data e hora | — | só se aprovado | ISO 8601 UTC | — | — |
-| devolucoes | inteiro | 0 a 2 | sim | — | sobe 1 a cada devolução do plano ao orquestrador por tarefa incompleta | tarefa incompleta: ERR-49 |
+| devolucoes | inteiro | 0 a 2 | sim | — | sobe 1 a cada devolução do plano ao orquestrador por tarefa incompleta; não zera quando o plano ganha versão nova: soma por pedido, para o teto de 2 | tarefa incompleta: ERR-49 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
 - Nenhum subagente inicia com o plano fora de `aprovado` (RN-05; violação: ERR-09), salvo tarefa do papel pesquisa, que só lê (RN-05).
 - "Aprovar" só com as integrações exigidas pelo plano conectadas (RN-08; violação: ERR-06).
-- Plano com tarefa incompleta volta ao orquestrador até 2 vezes (`devolucoes`); na 3ª, chega ao Humano com as tarefas incompletas marcadas, e o Humano pede o preenchimento por "Pedir alteração" (ERR-49) [a confirmar: "Aprovar" fica bloqueado enquanto houver tarefa marcada?].
+- Plano com tarefa incompleta volta ao orquestrador até 2 vezes por pedido (`devolucoes`, que não zera quando o plano ganha versão nova; cada plano novo do orquestrador sobe a `versao`); na 3ª, chega ao Humano com as tarefas incompletas marcadas, e o Humano pede o preenchimento por "Pedir alteração" (ERR-49); "Aprovar" fica bloqueado enquanto houver tarefa marcada.
 
 ### Estados do ciclo de vida
 
 | Estado | Entra quando | Pode ir para |
 |---|---|---|
-| proposto | o orquestrador propõe (RF-08) ou chega versão nova após "Pedir alteração" | aprovado, recusado, proposto (versão nova) |
+| proposto | o orquestrador propõe (RF-08) ou chega versão nova após "Pedir alteração" ou após devolução (ERR-49) | aprovado, recusado, proposto (versão nova) |
 | aprovado | o Humano aprova (RF-09) | (final) |
 | recusado | o Humano recusa | (final) |
 
@@ -329,8 +329,8 @@ Mora em: SQLite.
 | semanal_reinicio | data e hora | — | sim | ISO 8601 UTC | reinício da semana de 7 dias (D7) | — |
 | lida_em | data e hora | — | sim | ISO 8601 UTC | hora da leitura | — |
 | origem | enumeração | — | sim | — | evento, estimado | — |
-| janela_status | enumeração | — | sim | — | `allowed`, `allowed_warning`, `rejected` (valores do campo `status` do `rate_limit_event`, a conferir no resultado do P2) e `desconhecido` | valor fora da lista: `desconhecido` e aviso ERR-50 |
-| semanal_status | enumeração | — | sim | — | `allowed`, `allowed_warning`, `rejected` (valores do campo `status` do `rate_limit_event`, a conferir no resultado do P2) e `desconhecido` | valor fora da lista: `desconhecido` e aviso ERR-50 |
+| janela_status | enumeração | — | sim | — | `allowed`, `allowed_warning`, `rejected` (valores do campo `status` do `rate_limit_event`; só `allowed` observado no P2; `rejected` apareceu só em `overageStatus`) e `desconhecido` | valor fora da lista: `desconhecido` e aviso ERR-50 |
+| semanal_status | enumeração | — | sim | — | `allowed`, `allowed_warning`, `rejected` (valores do campo `status` do `rate_limit_event`; só `allowed` observado no P2; `rejected` apareceu só em `overageStatus`) e `desconhecido` | valor fora da lista: `desconhecido` e aviso ERR-50 |
 | excedente | texto | — | não | — | o `overageStatus` do `rate_limit_event`; fora da tela por ora | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
@@ -452,7 +452,7 @@ Citado em RN-24 (Diário.onde_parei). Mora só no cofre.
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | onde_parei | texto | — | sim na passagem | próximo passo, threads abertas, dúvidas | "Próximo passo" obrigatório | ERR-29 |
-| continuacao | texto | uma linha por continuação | não | — | uma linha a cada vez que o Humano segue no chat depois do aviso de limite (RN-23) [a confirmar: o que a linha traz] | — |
+| continuacao | texto | uma linha por continuação | não | data e hora em UTC, número da continuação e `tokens_usados` do chat (ENT-03) naquele momento | uma linha a cada vez que o Humano segue no chat depois do aviso de limite (RN-23) | — |
 
 ## ENT-26 PastaContexto
 

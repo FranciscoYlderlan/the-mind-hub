@@ -2,7 +2,7 @@
 
 Um critério por fluxo (principal, alternativo e exceção), no formato dado / quando / então. Ao final de cada funcionalidade, o verificador de fluxo principal executa os AC dos fluxos principais e, depois, o adversarial executa os dos FA e FE: no backend pela API e, se a funcionalidade tem interface, também no frontend.
 
-No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Os textos vêm dos "Aceite" da fonte, salvo os escritos por mudança aprovada (`mudancas.md`). Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela; AC-144 e AC-145, por fluxo de UC criado depois, AC-146, por requisito acrescentado depois, e AC-147 e AC-148, por regra acrescentada depois (na tabela, junto do UC ou do requisito dele).
+No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Os textos vêm dos "Aceite" da fonte, salvo os escritos por mudança aprovada (`mudancas.md`). Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela; AC-144 e AC-145, por fluxo de UC criado depois, AC-146, por requisito acrescentado depois, AC-147 e AC-148, por regra acrescentada depois, e AC-149 a AC-152, por erro de campo que estava sem AC (na tabela, junto do UC ou do requisito dele).
 
 ## Por fluxo de caso de uso
 
@@ -23,8 +23,8 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 | AC-13 | UC-03 | FA-02 | um plano recusado | o Humano volta ao chat | nenhum subagente rodou |
 | AC-14 | UC-03 | FE-01 | duas tarefas sobre src/auth | o plano é aprovado | elas rodam em série (ERR-12) |
 | AC-15 | UC-03 | FE-02 | o GitHub desconectado | o Humano aprova | o app pede a conexão (ERR-06) |
-| AC-144 | UC-03 | FA-03 | um plano com uma tarefa sem `prova` e `devolucoes` = 0 | o orquestrador o propõe | o núcleo o devolve ao orquestrador com "Tarefa incompleta: preencha `faz` (até 500 caracteres), `pronto_quando` e `prova`." (ERR-49), `devolucoes` fica em 1 e nada chega ao Humano |
-| AC-145 | UC-03 | FA-04 | um plano com `devolucoes` = 2 e uma tarefa com `faz` de 501 caracteres | o orquestrador o propõe de novo | o plano chega ao Humano com essa tarefa marcada como incompleta (ERR-49) |
+| AC-144 | UC-03 | FA-03 | um plano com uma tarefa sem `prova` e `devolucoes` = 0 | o orquestrador o propõe | o núcleo o devolve ao orquestrador com "Tarefa incompleta: preencha `faz` (até 500 caracteres), `pronto_quando` e `prova`." (ERR-49), `devolucoes` fica em 1, o plano completado chega como `versao` 2 com `devolucoes` ainda em 1 e nada chega ao Humano |
+| AC-145 | UC-03 | FA-04 | um plano com `devolucoes` = 2 e uma tarefa com `faz` de 501 caracteres | o orquestrador o propõe de novo | o plano chega ao Humano com essa tarefa marcada como incompleta (ERR-49) e "Aprovar" bloqueado até o preenchimento |
 | AC-16 | UC-04 | principal | um plano com 2 tarefas paralelas | é aprovado | 2 abas aparecem e cada relatório chega ao cofre |
 | AC-17 | UC-04 | FA-01 | 6 implementadores | são despachados | o 6º fica na fila (ERR-44) |
 | AC-18 | UC-04 | FA-02 | um relatório com dúvida | chega | a dúvida aparece na caixa de aval |
@@ -42,7 +42,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 | AC-30 | UC-07 | FA-01 | um bug | a lista abre | ele já aparece como "corrigir" |
 | AC-31 | UC-07 | FE-01 | uma sugestão sem decisão | o Humano fecha | o app aponta qual falta (ERR-28) |
 | AC-32 | UC-08 | principal | o limite atingido e a recomendação de passagem aceita pelo Humano | o registro termina | um chat novo abre com o "Onde parei" |
-| AC-33 | UC-08 | FA-01 | um chat em que o Humano já seguiu uma vez depois do aviso de limite | o Humano escolhe seguir no chat de novo | o chat segue ativo, `continuacoes` fica em 2 e o diário contém as duas continuações |
+| AC-33 | UC-08 | FA-01 | um chat em que o Humano já seguiu uma vez depois do aviso de limite | o Humano escolhe seguir no chat de novo | o chat segue ativo, o aviso ERR-48 volta na resposta seguinte numa faixa fixa que não bloqueia, `continuacoes` fica em 2 e o diário contém as duas linhas de continuação, cada uma com a data e hora em UTC, o número da continuação (1 e 2) e os `tokens_usados` do chat (ENT-03) naquele momento |
 | AC-34 | UC-08 | FE-01 | o registro sem próximo passo | a passagem continua | o chat novo não abre (ERR-29) |
 | AC-35 | UC-08 | FE-02 | o Obsidian fechado | a passagem começa | ela espera a conexão (ERR-07) |
 | AC-36 | UC-09 | principal | o padrão do teste trocado | um teste é despachado | usa o novo |
@@ -116,6 +116,8 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 | AC-92 | UC-02 | requisito RF-05 | um chat aberto | o Humano envia um prompt | a resposta começa a aparecer antes de terminar |
 | AC-93 | UC-04 | requisito RF-06 | 3 subagentes despachados | o despacho termina | aparecem 3 abas novas com o papel de cada um |
 | AC-94 | UC-02 | requisito RF-07 | o limite padrão de 100 mil | o Humano clica em "Novo chat" | o chat abre com esse limite |
+| AC-151 | UC-02 | requisito RF-07 | um chat com limite de 100 mil | o Humano troca o limite para 5 mil | aparece "Fora da faixa recomendada: 10 mil a 1 milhão de tokens." (ERR-47) e o limite fica em 5 mil |
+| AC-152 | UC-02 | requisito RF-07 | um chat com limite de 100 mil | o Humano troca o limite para 0 | aparece "O limite precisa ter pelo menos 1 token." (ERR-52), nada é salvo e o limite segue em 100 mil; com 1, o valor é salvo com o aviso ERR-47 |
 | AC-95 | UC-03 | requisito RF-08 | um pedido grande | o orquestrador decide dividir | o plano aparece para aval e nada é despachado |
 | AC-96 | UC-03 | requisito RF-09 | um plano com 3 tarefas | o Humano troca o modelo de T2 e aprova | T2 é despachada com o modelo escolhido |
 | AC-97 | UC-04 | requisito RF-10 | um plano com T1 e T2 paralelas | é aprovado | as duas iniciam ao mesmo tempo |
@@ -133,6 +135,8 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 | AC-108 | — (necessidade do negócio) | requisito RF-21 | um npm test rodado por um subagente | termina | o log tem o comando, a duração e o código de saída |
 | AC-109 | — (necessidade do negócio) | requisito RF-22 | um log minimizado | o Humano o expande | vê a saída completa do comando |
 | AC-110 | UC-12 | requisito RF-23 | um chat fechado ontem | o Humano o seleciona no histórico | ele reabre com as mensagens |
+| AC-149 | UC-12 | requisito RF-23 | um projeto "Alfa" já salvo | o Humano tenta salvar um projeto novo com o nome vazio, com 81 caracteres e com "Alfa" | cada tentativa mostra a sua mensagem do ERR-45 ("Dê um nome ao projeto.", "O nome passa de 80 caracteres.", "Já existe um projeto com esse nome.") e nenhum projeto é salvo |
+| AC-150 | UC-12 | requisito RF-23 | uma pasta sem `.git` | o Humano a escolhe como repositório de um projeto novo e salva | aparece "Escolha a pasta de um repositório git (com `.git`)." (ERR-46) e o projeto não é salvo |
 | AC-111 | UC-05 | requisito RF-24 | uma funcionalidade entregue | o teste termina | cada critério tem ✔ ou ✘ com a prova |
 | AC-112 | UC-06 | requisito RF-25 | a rodada concluída | o adversarial termina | cada achado tem tipo, passos e evidência |
 | AC-113 | UC-07 | requisito RF-26 | uma sugestão | o Humano escolhe "corrigir" | o orquestrador recebe uma tarefa nova para o plano |
@@ -151,7 +155,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 |---|---|---|---|---|---|
 | AC-122 | UC-02 | TEL-01 principal | um projeto aberto | o Humano envia um prompt | a resposta e as leituras aparecem ao vivo |
 | AC-123 | UC-04 | TEL-01 FA-01 | 3 cartões | o Humano clica no 2º | a aba dele fica ativa |
-| AC-124 | UC-08 | TEL-01 FA-02 | a barra no limite | a resposta termina | aparece a recomendação de passar o turno (ERR-48); o chat de continuação só abre depois que o Humano aceita |
+| AC-124 | UC-08 | TEL-01 FA-02 | a barra no limite | a resposta termina | aparece, numa faixa fixa que não bloqueia o campo de prompt, a recomendação de passar o turno (ERR-48), com as ações "Passar o turno" e "Continuar neste chat"; o chat de continuação só abre depois que o Humano aceita |
 | AC-125 | UC-02 | TEL-01 FE-01 | o CLI caído | o Humano tenta enviar | o campo está desabilitado com a mensagem (ERR-05) |
 | AC-126 | UC-04 | TEL-01 FE-02 | um subagente que falha | a falha é detectada | o cartão fica em erro em até 5 s (ERR-17) |
 | AC-127 | UC-01 | TEL-02 principal | o GitHub desconectado | o OAuth conclui | o cartão mostra a conta |

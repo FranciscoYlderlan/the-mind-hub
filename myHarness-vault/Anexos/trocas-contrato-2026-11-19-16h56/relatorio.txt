@@ -1,0 +1,43 @@
+Relatório do pesquisador (2026-11-19, sessão das 16h56): trocas no contrato para os 8 pontos aprovados
+Lido pela Obsidian CLI (vault myHarness-vault); formato copiado de trocas-contrato-2026-11-19-16h (aplicar.py e checar.py;
+a pasta 16h35 não tem aplicar.py). Nenhum arquivo de Anexos/contrato/ foi alterado: o aplicar.py só rodou numa cópia fora do cofre.
+
+53 trocas (cada ponto inclui 1 linha no mudancas.md):
+ 1 (M-23) Aprovar bloqueado com tarefa marcada: 9 (ENT-05, UC-03 FA-04, CMP-13 regra e estado desabilitado, ERR-49, NAV-06, estado inicial de revisao-do-plano, AC-145)
+ 2 (M-24) ERR-49 voltar: 3 (célula Tratamento, definição de "voltar" nos Tratamentos)
+ 3 (M-25) aviso de limite volta, faixa fixa: 9 (ENT-03, UC-08 FA-01, CMP-07 regra e preenchido, ERR-48 condição e mensagem, AC-33, AC-124)
+ 4 (M-26) linha de continuação: 3 (ENT-25, AC-33)
+ 5 (M-27) rótulos: 4 (CMP-07 regra e preenchido, AC-124)
+ 6 (M-28) zero é erro, ERR-52, AC-149 a AC-152: 14 (ENT-01, ENT-03, CMP-07 valida e erro, ERR-47, ERR-52, 07 RF-07 e RF-23, 08 AC e introdução, README)
+ 7 (M-29) devolucoes soma por pedido: 8 (ENT-05 versao, devolucoes, invariante, estado proposto; UC-03 FA-03; ERR-49; AC-144)
+ 8 (M-30) status do P2: 3 (ENT-14 janela_status e semanal_status)
+IDs novos: ERR-52 (LIMITE_DE_CONTEXTO_ABAIXO_DO_MINIMO), AC-149 a AC-152, M-23 a M-30.
+
+Aplicar: python aplicar.py ../contrato trocas.json   |   Checar (sem gravar): python checar.py ../contrato trocas.json
+
+Saída do checar.py contra os arquivos atuais:
+1) Cada 'atual' único (53 trocas, aplicadas em memória na ordem)
+   OK: 53/53 únicas
+   por ponto (M): M-23: 9, M-24: 3, M-25: 9, M-26: 3, M-27: 4, M-28: 14, M-29: 8, M-30: 3
+2) IDs citados que não existem (depois das trocas)
+   OK: todo ID citado existe
+3) Citações UC-xx FA/FE-yy
+   OK: todo FA/FE citado existe no UC
+4) IDs novos sem colisão
+   novos: ['AC-149', 'AC-150', 'AC-151', 'AC-152', 'ERR-52']; M novos: M-23 a M-30; topo: ['M-30', 'M-29', 'M-28', 'M-27', 'M-26', 'M-25', 'M-24', 'M-23', 'M-22']
+   OK
+5) Órfãos novos (ERR/ENT/AC/RN/RF/UC/CMP)
+   antes: 0; depois: 0; novos: nenhum
+   AC novos fora de 07-rastreabilidade: nenhum
+6) Estado antigo dos 8 pontos fora de mudancas.md
+   OK: nenhum
+RESULTADO: OK
+
+Extra: aplicado numa cópia, o checar.py da pasta 16h também dá RESULTADO: OK (0 órfãos novos, todo AC na rastreabilidade).
+
+Ambíguo (para o orquestrador decidir antes de aplicar):
+ a) ERR-52: mensagem "O limite precisa ter pelo menos 1 token." e tratamento "voltar" foram escritos pelo pesquisador (o aval só diz "zero é erro").
+ b) "soma por pedido" (ponto 7): o contrato não define "pedido"; não diz se "Pedir alteração" do Humano abre pedido novo (zera) ou não.
+ c) "tokens na linha Messages" (ponto 4): termo do /context do Claude CLI; o contrato não tem campo com esse nome (ENT-03 tem tokens_usados).
+ d) AC-149 e AC-150 ficaram em UC-12 / RF-23 porque a rastreabilidade já punha ERR-45 e ERR-46 ali; não há UC de criar projeto.
+ e) O motivo pedido para as M ("pontos [a confirmar] do relatório...") põe 8 "[a confirmar]" novos no mudancas.md.
