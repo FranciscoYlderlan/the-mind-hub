@@ -147,11 +147,11 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 
 - **Papel:** mostrar os tokens usados contra o limite do chat e iniciar chat novo.
 - **Entradas:** RF-17 (ENT-03).
-- **Saídas:** pedido de chat novo, novo limite.
-- **Eventos:** `clicou-novo-chat`, `trocou-limite`.
-- **Atende:** RF-07, RF-17, RF-19; UC-02 passo 3, FA-02; UC-08.
-- **Valida:** `limite_tokens` de ENT-03 (10 mil a 1 milhão; violação: ERR-47).
-- **Regras:** RN-23; a partir de 80% a barra muda para alerta [a confirmar]. Posição do "Novo chat" [a confirmar, S9].
+- **Saídas:** pedido de chat novo, novo limite, aceite da passagem de turno ou continuação no chat.
+- **Eventos:** `clicou-novo-chat`, `trocou-limite`, `aceitou-passagem`, `continuou-no-chat`.
+- **Atende:** RF-07, RF-17, RF-19, RF-20; UC-02 passo 3, FA-02; UC-08 passos 1 e 2, FA-01.
+- **Valida:** `limite_tokens` de ENT-03 (fora de 10 mil a 1 milhão: aviso ERR-47, valor salvo).
+- **Regras:** RN-23: no limite, mostra o aviso ERR-48 com as ações de passar o turno e de continuar no chat [a confirmar: rótulos]; a passagem só começa quando o Humano aceita. A partir de 80% a barra muda para alerta [a confirmar]. Posição do "Novo chat" [a confirmar, S9].
 
 ### Estados obrigatórios
 
@@ -159,7 +159,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 |---|---|---|
 | vazio | 0% | novo chat, trocar limite |
 | carregando | não se aplica | — |
-| preenchido | percentual e tokens | novo chat, trocar limite |
+| preenchido | percentual e tokens; no limite, o aviso ERR-48; com limite fora da faixa, o aviso ERR-47 | novo chat, trocar limite; no aviso de limite, passar o turno ou continuar no chat |
 | erro | não se aplica | — |
 | sucesso | passagem concluída | — |
 | desabilitado | não se aplica | — |
@@ -254,8 +254,8 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 - **Entradas:** RF-08 (ENT-05, ENT-06).
 - **Saídas:** modelo por tarefa.
 - **Eventos:** `trocou-modelo`, `expandiu-detalhes`.
-- **Atende:** UC-03 passos 1 e 2, FE-01.
-- **Valida:** `modelo` e `toca_em` de ENT-06.
+- **Atende:** UC-03 passos 1 e 2, FA-04, FE-01.
+- **Valida:** `modelo` e `toca_em` de ENT-06; `faz`, `pronto_quando` e `prova` de ENT-06 (tarefa incompleta marcada: ERR-49).
 - **Regras:** RN-07, RN-14.
 
 ### Estados obrigatórios
@@ -265,7 +265,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 | vazio | não se aplica | — |
 | carregando | indicação de carga | nenhuma |
 | preenchido | tarefas do plano | trocar modelo, expandir |
-| erro | conflito de "toca em" destacado (ERR-12) | revisar |
+| erro | conflito de "toca em" (ERR-12) ou tarefa incompleta (ERR-49) destacados | revisar; pedir o preenchimento por "Pedir alteração" |
 | sucesso | não se aplica | — |
 | desabilitado | depois do aval | só ver |
 
@@ -275,9 +275,9 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 - **Entradas:** estado do plano (ENT-05).
 - **Saídas:** aprovar, pedir alteração (com comentário), recusar.
 - **Eventos:** `aprovar`, `pedir-alteracao`, `recusar`.
-- **Atende:** UC-03 passo 3, FA-01, FA-02, FE-02.
+- **Atende:** UC-03 passo 3, FA-01, FA-02, FA-04, FE-02.
 - **Valida:** comentário do pedido de alteração [a confirmar: obrigatório? tamanho?].
-- **Regras:** RN-05, RN-06, RN-08.
+- **Regras:** RN-05, RN-06, RN-08. Com tarefa incompleta marcada (ERR-49), o Humano pede o preenchimento por "Pedir alteração" [a confirmar: "Aprovar" fica bloqueado enquanto houver tarefa marcada?].
 
 ### Estados obrigatórios
 

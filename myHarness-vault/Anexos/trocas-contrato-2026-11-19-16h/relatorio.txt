@@ -1,0 +1,17 @@
+Relatório do pesquisador (2026-11-19, sessão das 16h18): trocas no contrato
+Lido sem a Obsidian CLI (cópias no container); nenhum original alterado pelo subagente.
+47 trocas do pesquisador + 3 do orquestrador (ERR-50, AC-146, invariante do ENT-14) = 50, aplicadas pelo orquestrador.
+Prova (checar.py): 50/50 trocas únicas; nenhum termo do adiamento fora do mudancas.md; nenhum ID inexistente; 0 órfãos.
+Novos: UC-03 FA-03 e FA-04, AC-144 a AC-146, ERR-50, campos ENT-03 continuacoes, ENT-05 devolucoes, ENT-25 continuacao; M-15 a M-20.
+ERR-48 reaproveitado como LIMITE_DO_CHAT_ATINGIDO (README diz que ID não se reaproveita: exceção registrada na M-18).
+gerar.py é do pesquisador e NÃO inclui as 3 trocas do orquestrador nem a M-20 com aval: trocas.json é a fonte.
+
+Pontos [a confirmar]:
+1. "Aprovar" bloqueado enquanto houver tarefa marcada (ENT-05, UC-03 FA-04, CMP-13).
+2. Tratamento do ERR-49: proposto "voltar".
+3. O aviso de limite volta a cada resposta acima do limite? (UC-08 FA-01)
+4. O que cada linha de continuacao traz no diário (ENT-25).
+5. Rótulos "passar o turno" e "continuar no chat" (CMP-07).
+6. ERR-47 como aviso deixa sem mínimo aceito (0 ou 1 token passa com aviso); sem AC para ERR-45 a ERR-47.
+7. devolucoes zera a cada versão nova do plano? A devolução sobe a versao?
+8. Valores allowed, allowed_warning, rejected a conferir no resultado-p2.txt.
