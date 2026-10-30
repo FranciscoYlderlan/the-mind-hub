@@ -18,7 +18,9 @@ A **porta da frente** da aplicação no ar, com as chaves penduradas ao lado. Se
 ## Autorização do humano
 - Humano, 2026-10-29 21:40: "como essa é uma aplicação de teste você pode fazer o login e acessar a plataforma como bem entender para testar e logar já que o projeto em si é de teste". O projeto é de **acesso livre**.
 - Vale para o orquestrador e para os subagentes, em produção e em staging.
-- **Limite do agente no navegador:** a ferramenta do agente só digita senha em ambiente local (`localhost`) ou em host de teste que o humano nomeie no pedido (ex.: staging). Na produção pelo navegador, o login fica com o humano; o agente testa a produção pela API ou pelos fluxos sem login, e o staging pela tool `entrar` da MCP (ela faz o login no servidor, sem digitar senha).
+- Humano, 2026-10-29 22:06: "Sempre no staging e em prod quem irá testar é o agente para agilizar os processos". **Quem testa no ar é sempre o agente**, em staging e em produção; o humano só entra onde o limite abaixo impede o agente.
+- Como testar no ar (Chrome, `fetch` no console e cliques; rede do container e do computador barrada): [[geral-decisao-2026-10-29-modo-de-implementacao]].
+- **Limite do agente no navegador:** a ferramenta do agente só digita senha em ambiente local (`localhost`) ou em host de teste que o humano nomeie no pedido (ex.: staging). Na produção pelo navegador, o login fica com o humano (dados fictícios não mudam isso: a regra olha o endereço, não os dados); o agente testa a produção pela API ou pelos fluxos sem login, e o staging pela tool `entrar` da MCP (ela faz o login no servidor, sem digitar senha).
 
 ## Endereços
 | Ambiente | Web | API |
@@ -54,5 +56,5 @@ Criados pelo seed (`prisma/seed.ts` do `stonebid-api`), iguais em todos os ambie
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
-- Relacionadas: [[esqueleto-contexto]], [[esqueleto-plano]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-29-hospedagem]]
+- Relacionadas: [[geral-decisao-2026-10-29-modo-de-implementacao]], [[esqueleto-contexto]], [[esqueleto-plano]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-29-hospedagem]]
 - Regras: [[manual-da-orquestra]]

@@ -31,6 +31,11 @@ criado: 2026-10-29
 - 21:58–22:00: humano fez o merge do PR #2; a IA avançou a `staging` do web (`2051ce0..bc2b035`). CD #7 (`main`) e CD #8 (`staging`) verdes; resumo do CD #8 com o alias `https://stonebid-web-staging.vercel.app`, que abre a tela de login no Chrome. Login no navegador não feito: aguarda o humano confirmar esse host para o agente.
 - 22:01: humano confirmou o host `stonebid-web-staging.vercel.app` para o agente. Login no Chrome com os 3 usuários: ✔ `leiloeiro` (papel Leiloeiro, cai na vitrine vazia), ✔ `licitante-1` e ✔ `licitante-2` (papel Licitante); `/account` mostra nome, e-mail e papel e a sessão sobrevive à navegação completa; "Sair" encerra e `/account` sem login vai para `/login?redirect=%2Faccount`. Primeiro login levou ~8 s (partida a frio do Cloud Run). Produção não testada no navegador.
 - Erro de processo (21:40): o `CLAUDE.md` e o diário do dia foram lidos com `cat` no início, antes da Obsidian CLI; o `obsidian_read` com `file=` falhou ("Command read not found") e com `path=` funcionou.
+- 22:06: humano definiu que os testes em staging e produção são sempre do agente. Em produção o agente conferiu no Chrome `/health` 200 e `/account` sem login indo para `/login?redirect=%2Faccount`; o login em produção ficou com o humano (a ferramenta só digita senha em `localhost` ou em host com marcador de teste no nome; dados fictícios não mudam isso). A IA ofereceu e depois retirou a ideia de um alias de teste apontando para a produção (seria contornar o limite).
+- 22:09: humano fez o login com os 3 usuários em produção: todos ok. **T3 concluída.** Registrado em [[esqueleto-plano]], [[esqueleto-contexto]] e [[acesso-de-teste]] (quem testa no ar; rede só pelo Chrome). Termos varridos: "pelo humano", "produção", "login em produção". Rede: `curl` do container e do shell do computador do humano dá 000 em `*.vercel.app` e `*.run.app`.
+- Erro de processo (22:06): `CLAUDE.md`, [[esqueleto-plano]], este diário e [[acesso-de-teste]] lidos com `cat` no início, antes da Obsidian CLI.
+- 22:11–22:13: o humano perguntou como a T3 tinha sido testada e implementada, já que a rede não alcança o ar. Resposta: tudo pelo caminho container → GitHub → Actions, mais o Chrome para consoles e testes. O humano pediu que isso virasse o padrão, descrito para os próximos agentes. Nova decisão [[geral-decisao-2026-10-29-modo-de-implementacao]], linkada no `CLAUDE.md` (bloco `projeto:repositorios`), em [[moc-orquestra]], [[acesso-de-teste]], [[esqueleto-contexto]] e [[esqueleto-plano]]. Termos varridos: "Chrome", "rede", "proxy". Também tocado: [[geral-contexto]] (fatos e mapa). Erro de processo: a linha do mapa de [[geral-contexto]] foi localizada com `grep`, e não pela CLI.
+- 22:10–22:15: **T4** feita pelo orquestrador no Chrome, com staging pela API e pela interface e produção sem senha. Sem bloqueante, e o resultado está na Verificação da T4 de [[esqueleto-plano]]. Ficou um usuário de teste novo em staging, `t4-ui-2210@stonebid.dev`, além do criado pelo `fetch`.
 
 ## Decisões tomadas
 - Nenhuma vigente (a do Railway foi desfeita às 15:43).
@@ -45,9 +50,9 @@ criado: 2026-10-29
 - Referências (bloqueios do container): proxy recusa `ui.shadcn.com` (contorno: registro local com `REGISTRY_URL`), `binaries.prisma.sh`, registries Docker, a API de Actions do GitHub e `*.run.app`; Prisma 7 bloqueia `migrate reset` quando roda por agente; terminal novo do Cloud Shell não herda o `gcloud auth login`.
 
 > [!tip] Onde parei
-> - **Próximo passo:** fechar a T3 de [[esqueleto-plano]]: alias do staging já no ar (`stonebid-web-staging.vercel.app`); login dos 3 usuários em produção (`https://stonebid-web.vercel.app/login`, pelo humano; no staging já passou, [[acesso-de-teste]]); testar `claude mcp add` na API de staging. Depois a T4 (verificador + Playwright no ar).
+> - **Próximo passo:** fechar a etapa 2 no [[geral-plano]] e começar a etapa 3 (I1). Pendências sem bloqueio: `claude mcp add` em staging, que precisa da `MCP_API_KEY_STAGING`, e `docker compose up` na máquina do humano.
 > - **Threads abertas:** nenhum PR aberto; nenhum subagente. Nenhum subagente em andamento. Código só no GitHub; a pasta local `stonebid` tem só `stonebid-infra`.
-> - **Dúvidas para o humano:** resultado do login dos 3 usuários em produção; aprovar os candidatos a decisão acima; Node fixo em 24 (LTS) ou 26 na imagem e no CI; validar `docker compose up` na máquina dele.
+> - **Dúvidas para o humano:** aprovar os candidatos a decisão acima; Node fixo em 24 (LTS) ou 26 na imagem e no CI; validar `docker compose up` na máquina dele.
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]

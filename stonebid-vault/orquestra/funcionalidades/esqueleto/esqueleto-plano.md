@@ -15,7 +15,7 @@ Etapa 2 do [[geral-plano]]: aplicação "vazia" no ar com os 3 usuários de test
 ## Decisões que este plano respeita
 - [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-backend]]
 - [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
-- [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-padrao-de-branches]]
+- [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-padrao-de-branches]]
 - [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-29-testes-no-escopo]]
 
 (Dial: médio, de [[geral-contexto]].)
@@ -63,9 +63,9 @@ Etapa 2 do [[geral-plano]]: aplicação "vazia" no ar com os 3 usuários de test
   - [ ] push na `main` com CI verde publica API e web; push na `staging` publica a API de staging com `MCP_ENABLED=true`
   - [ ] login com os 3 usuários de teste na URL pública (RNF-01, HTTPS)
 - **Prova:** abrir a URL da Vercel e entrar com `leiloeiro`; `claude mcp add` na URL de staging
-- **Verificação** (parcial, pelo orquestrador no Chrome; o verificador independente fica para a T4):
+- **Verificação** (pelo orquestrador no Chrome e pelo humano; o verificador independente fica para a T4):
   - Data: 2026-10-29
-  - Critérios ✔/✘ com a prova de cada um: ✔ push na `main` com CI verde publica a API (`stonebid-api-7idhzkkvpq-rj.a.run.app`, `/health` 200, `/mcp` 404) e o web (`stonebid-web.vercel.app`, `/login` abre, bundle aponta para a API, CORS aceito); ✔ push na `staging` publica a API de staging (`stonebid-api-staging-7idhzkkvpq-rj.a.run.app`, `/health` 200, `/mcp` 401 sem api_key); ✘ alias fixo do web de staging (passo `vercel alias set` falhou com "User not found"; correção no PR #1 do `stonebid-web`, CI verde, aguarda merge do humano); ✘ login com os 3 usuários na URL pública (pendente com o humano: senha em produção não é digitada pelo agente); ✘ `claude mcp add` em staging não testado.
+  - Critérios ✔/✘ com a prova de cada um: ✔ push na `main` com CI verde publica a API (`stonebid-api-7idhzkkvpq-rj.a.run.app`, `/health` 200, `/mcp` 404) e o web (`stonebid-web.vercel.app`, `/login` abre, bundle aponta para a API, CORS aceito); ✔ push na `staging` publica a API de staging (`/health` 200, `/mcp` 401 sem api_key) e o web de staging no alias fixo `stonebid-web-staging.vercel.app` (PR #2, API REST da Vercel); ✔ login com os 3 usuários no staging (agente no Chrome, 22:01) e em produção (humano, 22:09); em produção o agente conferiu `/health` 200 e `/account` sem login indo para `/login?redirect=%2Faccount` (22:07). O `claude mcp add` em staging passou para a T4.
   - Devolvido para correção: não
 
 ### T4: verificação no ar
@@ -76,13 +76,17 @@ Etapa 2 do [[geral-plano]]: aplicação "vazia" no ar com os 3 usuários de test
 - **Pronto quando:**
   - [ ] relatórios sem bloqueante
 - **Prova:** relatórios dos subagentes
-- **Verificação:**
-  - Data: 
+- **Verificação** (pelo orquestrador no Chrome, pelo [[geral-decisao-2026-10-29-modo-de-implementacao]]; não houve subagente porque nenhuma rede além do Chrome alcança os endereços no ar):
+  - Data: 2026-10-29
   - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+    - **API de staging** (`fetch` no console): ✔ `/health` 200. ✔ Cadastro 201 com `user` e `token`, sem senha nem hash na resposta. ✔ E-mail repetido dá 409. ✔ Corpo inválido dá 400 `VALIDATION_ERROR`, com os 4 campos. ✔ Login 200, e senha errada dá 401. ✔ `/auth/me` dá 200 com token, 401 sem token e 401 com token falso. ✔ Os 3 usuários do seed entram, com os papéis AUCTIONEER, BIDDER e BIDDER. ✔ Rota inexistente dá 404. ✔ `/mcp` sem api_key dá 401.
+    - **Web de staging** (cliques): ✔ a vitrine vazia abre sem login (RF-03). ✔ O cadastro pela tela como Leiloeiro entra direto e mostra o nome no cabeçalho (RF-01, RF-02). ✔ `/account` mostra nome, e-mail e papel. ✔ A sessão sobrevive à navegação completa (token em `localStorage`). ✔ "Sair", pela página e pelo menu, encerra a sessão. ✔ `/account` sem login vai para `/login?redirect=%2Faccount`. ✔ Um `?redirect` externo é ignorado e o login cai em `/`. ✔ Senha errada mostra "E-mail ou senha inválidos.".
+    - **Produção** (sem senha): ✔ `/health` 200. ✔ A vitrine, o `/login` e o `/register` abrem. ✔ O guard do `/account` funciona. ✔ O login dos 3 usuários foi feito pelo humano.
+    - ✘ **Não provados:** o `requireRole` ainda não protege nenhuma rota no ar (o 403 só tem teste unitário) e entra no I1. O `claude mcp add` com a api_key depende da `MCP_API_KEY_STAGING`. O `docker compose up` precisa ser validado na máquina do humano.
+  - Devolvido para correção: não
 
 ## Próxima tarefa e a seguinte
-T1 e T2 concluídas; T3 quase: alias do staging no ar desde 2026-10-29 22:00 (PR #2, API REST da Vercel); login dos 3 usuários ✔ no staging (2026-10-29 22:01, agente no Chrome); falta o login em produção, pelo humano, (endereços e usuários em [[acesso-de-teste]]; acesso livre para agentes). Depois, T4.
+T1 a T4 concluídas, sem bloqueante. Ficam de fora o `claude mcp add` em staging, que precisa da api_key, e o `docker compose up` na máquina do humano. Próximo: fechar a etapa 2 no [[geral-plano]] e começar a etapa 3 (I1).
 
 ## Prioridades
 Deploy cedo (R-05: testar o host real logo). Se apertar, T3 antes de qualquer polimento de T2.
