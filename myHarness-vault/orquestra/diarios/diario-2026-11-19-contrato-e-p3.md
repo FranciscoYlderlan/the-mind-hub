@@ -28,4 +28,5 @@ criado: 2026-11-19
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
 - Parte anterior do dia: [[diario-2026-11-19]]
+- Parte seguinte do dia: [[diario-2026-11-19-avisos-e-banco]]
 - Funcionalidades tocadas: [[geral-contexto]], [[geral-plano-arquitetura-e-stack-integracoes-e-testes-prototipos]]
