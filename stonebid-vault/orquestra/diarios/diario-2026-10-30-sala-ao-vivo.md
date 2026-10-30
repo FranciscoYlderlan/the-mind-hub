@@ -33,14 +33,7 @@ Parte de [[diario-2026-10-30]], depois de [[diario-2026-10-30-lances]].
 - As 9 do I3 em [[sala-ao-vivo-plano]] e as 3 do I2 em [[lances-contexto]].
 
 > [!tip] Onde parei
-> - **Próximo passo** (agente novo, entrega às **16:00**):
->   1. Anexar `stonebid-api` e `stonebid-web` com `access: "push"` e clonar ([[passo-a-passo-do-agente]], seção 2). `main` = `staging`: API `f756ac2`, web `9e68191`.
->   2. Conferir o CD de staging do web em `9e68191`: `gh api "repos/FranciscoYlderlan/stonebid-web/actions/runs?per_page=4"`.
->   3. Verificador no Chrome da T7 de [[sala-ao-vivo-plano]]: `/register` sem papel em português; logout tira o estado pessoal da sala; login pelo "Dar lance" mostra o próprio estado.
->   4. Abrir a etapa 6 (auditoria pública, I4: RF-60, RF-61, RN-14, RN-15, T-06) no [[geral-plano]]: contexto e plano da funcionalidade, rota `/lots/:id/audit` no web ([[geral-decisao-2026-10-30-caminho-da-auditoria]]), aval do humano nos pontos do plano. Depois, a etapa 8 (README e relato do uso de IA, E6) antes das 16:00.
-> - **Threads abertas:** nenhum subagente rodando; nada sem push.
-> - **Dúvidas para o humano:** opcionais da T6 sem tarefa ("Prorrogado +32 s" em vez de "+2 min", botão "Cancelar" visível em lote com lances, rótulo "Lance atual" em lote encerrado). Herdadas: "Request headers" do conector ([[geral-decisao-2026-10-29-camada-mcp]]), registro do uso de IA (E6), achados da T5m (cabeçalho "Entrar / Cadastrar" na falha não-401; e-mail sem `maxLength`).
-> - **Candidatos a nota:** os de [[sala-ao-vivo-plano]]; bug "`viewer` do lote sobrevive à troca de sessão" (cache sem a sessão na chave; corrigido no PR #18); regra "todo campo de formulário com zod leva a sua mensagem" (`z.enum` sem mensagem mostra inglês); porta do Playwright fixa em 4173 no `playwright.config.ts` (worktree precisa de config local).
+> - **Próximo passo:** o "Onde parei" vigente está em [[diario-2026-10-30-auditoria-publica]].
 
 ### 🔗 Conexões
 - Diário do dia: [[diario-2026-10-30]]
