@@ -86,14 +86,13 @@ Etapa 2 do [[geral-plano]]: aplicação "vazia" no ar com os 3 usuários de test
   - Devolvido para correção: não
 
 ## Próxima tarefa e a seguinte
-T1 a T4 concluídas, sem bloqueante. Ficam de fora o `claude mcp add` em staging, que precisa da api_key, e o `docker compose up` na máquina do humano. Próximo: fechar a etapa 2 no [[geral-plano]] e começar a etapa 3 (I1).
+T1 a T4 concluídas, sem bloqueante; etapa 2 concluída em 2026-10-29. Ficam de fora o `claude mcp add` em staging, que precisa da api_key, e o `docker compose up` na máquina do humano. A etapa seguinte está em [[carteira-e-lotes-plano]].
 
 ## Prioridades
 Deploy cedo (R-05: testar o host real logo). Se apertar, T3 antes de qualquer polimento de T2.
 
 ## Candidatos a registro
-- Sessão entre origens (Vercel ↔ Cloud Run): token JWT no cabeçalho `Authorization: Bearer`, no lugar de cookie `SameSite=None`; já implementado na T1 e T2, aguarda aval.
-- Prisma 7.10.1 no lugar da 8 (a 8 só existe em rc e é outro produto); TypeScript 6 no web; `next-themes` no lugar do Zustand para o tema; `vercel.json` com `git.deploymentEnabled: false`; alias fixo do staging na Vercel.
+- Registradas em 2026-10-29: [[geral-decisao-2026-10-29-sessao-jwt-no-cabecalho]], [[geral-decisao-2026-10-29-prisma-7]], [[geral-decisao-2026-10-29-typescript-6-no-web]], [[geral-decisao-2026-10-29-next-themes-para-o-tema]], [[geral-decisao-2026-10-29-vercel-sem-deploy-automatico]], [[geral-decisao-2026-10-29-alias-fixo-do-staging]].
 - Registro de componentes da T2 (lista em [[diario-2026-10-29-esqueleto]]).
 - Referência: bloqueios do proxy do container (`ui.shadcn.com`, `binaries.prisma.sh`, registries Docker) e o Prisma 7 que recusa `migrate reset` vindo de agente.
 - Referência (T3): o proxy do container também recusa a API de Actions do GitHub (secrets e variables) e os hosts `*.run.app`; secrets e variables foram cadastrados pelo site do GitHub no Chrome, e os testes da API no ar também pelo Chrome. Um terminal novo do Cloud Shell não herda o `gcloud auth login` do primeiro.

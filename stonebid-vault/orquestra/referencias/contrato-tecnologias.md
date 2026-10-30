@@ -10,24 +10,24 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 12
 # 📜 Contrato: tecnologias
 
 > [!tldr] Em uma linha
-> As escolhas de tecnologia do projeto, cada uma com a sua decisão, as duas que faltam e os critérios para decidir.
+> As escolhas de tecnologia do projeto, cada uma com a sua decisão, a que falta e os critérios para decidir.
 
 É a **lista de ferramentas da caixa**: o contrato diz o tipo de ferramenta, a decisão escolhe a marca. Seção 12 do [[contrato-do-projeto|contrato]], no texto vigente (v0.3): cada camada com a escolha e a decisão que a registrou.
 
 ## 12. Tecnologias
 
-Cada escolha vira uma decisão registrada (o que, as alternativas, o porquê). Faltam duas, marcadas `[PENDENTE]`. Nenhuma versão é travada: vale a citada ou mais recente (o sinal `+`).
+Cada escolha vira uma decisão registrada (o que, as alternativas, o porquê). Falta uma, marcada `[PENDENTE]`. Nenhuma versão é travada: vale a citada ou mais recente (o sinal `+`).
 
 | Camada | Escolha | Decisão |
 |---|---|---|
 | Front-end | React 19.3+ e Vite 8.3.4+, TanStack Router e Query, Zustand, zod, shadcn/ui | [[geral-decisao-2026-10-28-stack-frontend]] |
 | Back-end | Fastify v5.12.7+ (Node) | [[geral-decisao-2026-10-28-stack-backend]] |
-| Banco de dados | PostgreSQL latest, via Prisma v8+ (relacional, atende o critério 2) | [[geral-decisao-2026-10-28-stack-backend]] |
+| Banco de dados | PostgreSQL latest, via Prisma 7.10.1+ ([[geral-decisao-2026-10-29-prisma-7]]; relacional, atende o critério 2) | [[geral-decisao-2026-10-28-stack-backend]] |
 | Tempo real (AD-04) | `[PENDENTE]` | — |
 | Testes | Vitest no backend; Playwright no frontend, por outro agente | [[geral-decisao-2026-10-28-testes-frontend-playwright]] |
 | Contêineres | Docker + Compose | [[geral-decisao-2026-10-28-stack-backend]] |
 | Hospedagem do deploy | Backend e banco no GCP (Cloud Run + Cloud SQL); frontend na Vercel; CI/CD no GitHub Actions | [[geral-decisao-2026-10-29-hospedagem]] |
-| API pública de itens | `[PENDENTE]` (Q-13) | — |
+| API pública de itens | Art Institute of Chicago, sem chave (Q-13) | [[geral-decisao-2026-10-29-api-de-itens]] |
 | Estilo e tema | Tailwind CSS v4.3+ e shadcn/ui | [[geral-decisao-2026-10-28-stack-frontend]] |
 | Organização dos repositórios | Dois repositórios: `stonebid-web` e `stonebid-api` | [[geral-contexto]] |
 
@@ -49,7 +49,7 @@ Cada escolha vira uma decisão registrada (o que, as alternativas, o porquê). F
 > Ao escolher a hospedagem, o mecanismo de tempo real ou a API de itens: usar os critérios acima e registrar a escolha numa nota de decisão.
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** quase toda a stack já está decidida; faltam **tempo real e API de itens**; a hospedagem foi decidida em 2026-10-29 ([[geral-decisao-2026-10-29-hospedagem]]).
+* **Ponto 1:** quase toda a stack já está decidida; falta **tempo real**; a API de itens é a do Art Institute of Chicago ([[geral-decisao-2026-10-29-api-de-itens]]); a hospedagem foi decidida em 2026-10-29 ([[geral-decisao-2026-10-29-hospedagem]]).
 * **Ponto 2:** com a hospedagem decidida (Cloud Run aceita WebSocket e SSE), falta só escolher o tempo real (AD-04), conferindo o critério 3 e o risco R-05 de [[contrato-riscos]].
 * **Ponto 3:** a API de itens deve dispensar chave e ter imagens estáveis.
 

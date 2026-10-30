@@ -1,7 +1,7 @@
 ---
 tipo: contexto
 funcionalidade: esqueleto
-status: em-construcao
+status: concluida
 etapa: 2
 criado: 2026-10-29
 aliases: [Esqueleto no ar, I0, Boilerplate dos repositórios, Project skeleton]
@@ -30,6 +30,8 @@ Etapa 2 do [[geral-plano]] (I0 de [[contrato-processo-e-plano]]): RF-01 a RF-03,
 - 2026-10-29 (tarde): T3 quase concluída. GCP montado pelo `gcp-setup.sh` (Cloud SQL `stonebid-db` com os bancos `stonebid` e `stonebid_staging`, Artifact Registry, Secret Manager, contas de serviço, Workload Identity Federation) e alerta de orçamento de R$ 250. Vercel com o projeto `stonebid-web` (produção `stonebid-web.vercel.app`, proteção dos previews desligada). Secrets e variables cadastrados nos dois repositórios; branch `staging` criada nos dois. No ar: API `stonebid-api-7idhzkkvpq-rj.a.run.app`, API de staging `stonebid-api-staging-7idhzkkvpq-rj.a.run.app` e web de produção. Pendentes: PR #1 do `stonebid-web` (alias do staging) e o login dos 3 usuários na URL pública.
 - 2026-10-29 21:40: humano liberou o acesso à aplicação no ar para os agentes (projeto de teste, acesso livre); endereços e usuários em [[acesso-de-teste]].
 - 2026-10-29 22:09: T3 concluída: alias do staging no ar, login dos 3 usuários no staging (agente) e em produção (humano).
+- 2026-10-29 22:15: T4 concluída no Chrome, sem bloqueante ([[esqueleto-plano]]).
+- 2026-10-29 22:20: etapa 2 do [[geral-plano]] concluída. Ficam para depois, sem bloqueio: `claude mcp add` em staging (precisa da `MCP_API_KEY_STAGING`), `docker compose up` na máquina do humano e o 403 do `requireRole` no ar, que a etapa 3 prova ([[carteira-e-lotes-plano]]).
 
 ## Tempo disponível
 O do [[geral-contexto]]: entrega em 2026-10-30 09:00.
@@ -45,7 +47,7 @@ O do [[geral-contexto]]: entrega em 2026-10-30 09:00.
 
 ## Mapa
 - Plano: [[esqueleto-plano]]
-- Decisões: [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-camada-mcp]]
+- Decisões: [[geral-decisao-2026-10-29-sessao-jwt-no-cabecalho]], [[geral-decisao-2026-10-29-prisma-7]], [[geral-decisao-2026-10-29-typescript-6-no-web]], [[geral-decisao-2026-10-29-next-themes-para-o-tema]], [[geral-decisao-2026-10-29-vercel-sem-deploy-automatico]], [[geral-decisao-2026-10-29-alias-fixo-do-staging]], [[geral-decisao-2026-10-29-node-26]], [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-camada-mcp]]
 - Diário: [[diario-2026-10-29-esqueleto]]
 
 ## Interpretação do agente

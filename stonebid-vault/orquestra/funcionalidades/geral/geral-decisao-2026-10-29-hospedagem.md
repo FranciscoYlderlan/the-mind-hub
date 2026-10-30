@@ -42,7 +42,7 @@ aliases: [Hospedagem do deploy, Onde o Stonebid roda, Deploy no GCP e na Vercel,
 - O destino do CD deixa de estar em aberto nas decisões de stack: [[geral-decisao-2026-10-28-stack-backend]] (Cloud Run + Cloud SQL) e [[geral-decisao-2026-10-28-stack-frontend]] (Vercel).
 - Nenhum deploy manual: tudo que vai para o ar passa pelo CI verde no GitHub. Segredos do GCP e da Vercel ficam nos *secrets* do GitHub e no Secret Manager, nunca no repositório.
 - O tempo real (AD-04 de [[contrato-arquitetura]]) segue em aberto, mas o host não o bloqueia: o Cloud Run aceita WebSocket e Server-Sent Events. Testar no host real logo no primeiro deploy (risco R-05 de [[contrato-riscos]]), lembrando que o Cloud Run encerra conexões longas no tempo limite da requisição; o cliente deve reconectar.
-- O frontend na Vercel e a API no Cloud Run ficam em domínios diferentes: a sessão de login deve funcionar entre origens (cookie `SameSite=None; Secure` ou token no cabeçalho) [a confirmar na implementação].
+- O frontend na Vercel e a API no Cloud Run ficam em domínios diferentes: a sessão de login deve funcionar entre origens por token JWT no cabeçalho `Authorization` ([[geral-decisao-2026-10-29-sessao-jwt-no-cabecalho]]).
 - **Depois da avaliação:** excluir o projeto inteiro no GCP (derruba Cloud Run, Cloud SQL e imagens de uma vez) e o projeto na Vercel.
 - Trocar de hospedagem exige nova decisão.
 
