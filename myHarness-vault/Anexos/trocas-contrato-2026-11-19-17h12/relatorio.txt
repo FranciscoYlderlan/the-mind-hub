@@ -1,0 +1,46 @@
+Relatório do pesquisador (2026-11-19, sessão das 17h12): trocas no contrato para os 2 pontos aprovados
+Contrato lido pela Obsidian CLI (vault myHarness-vault). Exceção: o trecho de CMP-03 e CMP-11 em 04-componentes.md foi lido pelo shell (sed), por engano de processo.
+Nenhum arquivo de Anexos/contrato/ foi alterado; o aplicar.py só rodou numa cópia em /tmp (OK, 20 trocas).
+aplicar.py copiado sem mudança da pasta 16h56; checar.py adaptado (IDs novos ERR-53 e AC-153, M-31 e M-32 no topo, UC-01 FE-04 novo, AC-153 nas linhas RF-01 a RF-04, estado antigo, nenhum "[a confirmar" novo).
+
+20 trocas (cada ponto inclui 1 linha no mudancas.md):
+ 1 (M-31) ERR-53: 14 (ERR-53 em 05; UC-01 FE-04 em 03; ENT-13 status em 02; CMP-11 "Atende" e estado erro em 04;
+   07 linhas RF-01, RF-02, RF-03 e RF-04; AC-153 e introdução em 08; README ERR e AC; mudancas)
+ 2 (M-32) pedido e devolucoes: 6 (ENT-05 devolucoes e invariante; UC-03 gatilho e FA-01; ERR-49 estado final; mudancas)
+IDs novos: ERR-53 (INTEGRACAO_FALHA_INESPERADA), UC-01 FE-04, AC-153, M-31, M-32.
+
+Aplicar: python aplicar.py ../contrato trocas.json   |   Checar (sem gravar): python checar.py ../contrato trocas.json
+
+Saída do checar.py contra os arquivos atuais:
+1) Cada 'atual' único (20 trocas, aplicadas em memória na ordem)
+   OK: 20/20 únicas
+   por ponto (M): M-31: 14, M-32: 6
+2) IDs citados que não existem (depois das trocas)
+   OK: todo ID citado existe
+3) Citações UC-xx FA/FE-yy
+   OK: todo FA/FE citado existe no UC
+4) IDs novos sem colisão
+   novos: ['AC-153', 'ERR-53']; M novos: M-31 a M-32; topo: ['M-32', 'M-31', 'M-30']
+   UC-01 FE-04: novo, sem colisão
+   OK
+5) Órfãos novos (ERR/ENT/AC/RN/RF/UC/CMP)
+   antes: 0; depois: 0; novos: nenhum
+   AC novos fora de 07-rastreabilidade: nenhum
+   RF-01: OK
+   RF-02: OK
+   RF-03: OK
+   RF-04: OK
+6) Estado antigo dos 2 pontos fora de mudancas.md
+   OK: nenhum
+7) Marcas "[a confirmar" novas
+   antes: 96; depois: 96
+   OK: nenhuma nova
+RESULTADO: OK
+
+Ambíguo (para o orquestrador decidir antes de aplicar):
+ a) Mensagem do ERR-53 escrita pelo pesquisador: "Falha inesperada com <integração>: <motivo>. Tente de novo."
+ b) Condição do ERR-53 limitada a "fora das condições do ERR-01 a ERR-04", para duas condições não dividirem a mensagem.
+ c) "Desconectar" não é passo do UC-01: o FE-04 tem passo de origem "1 a 3, ou \"Desconectar\" (CMP-11)".
+ d) RF-04 também recebeu FE-04, ERR-53 e AC-153 (o UC-01 aparece nela); RN-04, RN-08 e RNF-05 citam o UC-01 mas não tratam falha de integração e ficaram iguais. CMP-03 "Atende" não recebeu FE-04 (não lista FE-02 hoje).
+ e) ENT-13 status ganhou ERR-53 na coluna de erro (pedido só dizia o estado final).
+ f) AC-153 usa só um exemplo (GitHub com a rede fora do ar); tempo esgotado e saída ilegível não têm AC próprio.

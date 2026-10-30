@@ -8,10 +8,10 @@ Nenhuma tela existe ainda. A coluna Tela traz a tela prevista na fonte (TEL-xx),
 
 | Requisito | UC | Fluxos | CMP | ENT | ERR | Tela (preencher depois) | Cenário de teste (AC-xx) |
 |---|---|---|---|---|---|---|---|
-| RF-01 | UC-01 | principal, FA-01, FE-01 | CMP-03, CMP-11 | ENT-13 | ERR-01, ERR-04 | TEL-01, TEL-02 (previstas) | AC-01, AC-02, AC-03, AC-88 |
-| RF-02 | UC-01 | principal, FE-03 | CMP-03, CMP-11 | ENT-13, ENT-02 | ERR-03 | TEL-01, TEL-02 (previstas) | AC-05, AC-89, AC-128 |
-| RF-03 | UC-01 | principal, FE-02 | CMP-03, CMP-11 | ENT-13 | ERR-02 | TEL-01, TEL-02 (previstas) | AC-01, AC-04, AC-90, AC-127, AC-129 |
-| RF-04 | UC-01 | principal | CMP-03 | ENT-13 | ERR-05, ERR-06, ERR-07 | TEL-01 (prevista) | AC-91 |
+| RF-01 | UC-01 | principal, FA-01, FE-01, FE-04 | CMP-03, CMP-11 | ENT-13 | ERR-01, ERR-04, ERR-53 | TEL-01, TEL-02 (previstas) | AC-01, AC-02, AC-03, AC-88, AC-153 |
+| RF-02 | UC-01 | principal, FE-03, FE-04 | CMP-03, CMP-11 | ENT-13, ENT-02 | ERR-03, ERR-53 | TEL-01, TEL-02 (previstas) | AC-05, AC-89, AC-128, AC-153 |
+| RF-03 | UC-01 | principal, FE-02, FE-04 | CMP-03, CMP-11 | ENT-13 | ERR-02, ERR-53 | TEL-01, TEL-02 (previstas) | AC-01, AC-04, AC-90, AC-127, AC-129, AC-153 |
+| RF-04 | UC-01 | principal, FE-04 | CMP-03 | ENT-13 | ERR-05, ERR-06, ERR-07, ERR-53 | TEL-01 (prevista) | AC-91, AC-153 |
 | RF-05 | UC-02 | principal, FE-01, FE-02 | CMP-04, CMP-06 | ENT-03, ENT-04 | ERR-05, ERR-08, ERR-42 | TEL-01 (prevista) | AC-06, AC-09, AC-10, AC-92, AC-122 |
 | RF-06 | UC-04 | principal | CMP-04 | ENT-07 | ERR-17 | TEL-01 (prevista) | AC-93 |
 | RF-07 | UC-02 | principal | CMP-07 | ENT-01, ENT-03 | ERR-47, ERR-52 | TEL-01 (prevista) | AC-94, AC-151, AC-152 |

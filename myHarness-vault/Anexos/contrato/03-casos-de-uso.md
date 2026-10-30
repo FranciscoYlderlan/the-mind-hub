@@ -33,6 +33,7 @@ Os IDs FA e FE são locais a cada UC, como na fonte (cite como "UC-03 FE-01"). O
 | FE-01 | 1 | ERR-01 | Claude CLI em `não instalado`, com o link de instalação |
 | FE-02 | 3 | ERR-02 | GitHub em `desconectado` |
 | FE-03 | 1 | ERR-03 | Obsidian CLI em `desconectado`, com a ação "Abrir Obsidian" |
+| FE-04 | 1 a 3, ou "Desconectar" (CMP-11) | ERR-53 | Integração em `desconectado`, com o motivo e a ação de conectar de novo |
 
 ## UC-02 Conversar com o orquestrador
 
@@ -69,7 +70,7 @@ Os IDs FA e FE são locais a cada UC, como na fonte (cite como "UC-03 FE-01"). O
 - **Ator:** ATR-01; ATR-02
 - **Objetivo:** decidir como o trabalho é dividido antes de qualquer subagente rodar.
 - **Requisitos:** RF-08, RF-09, RN-05, RN-06, RN-07, RN-08, RN-14
-- **Gatilho:** orquestrador propõe um plano.
+- **Gatilho:** orquestrador propõe um plano para um pedido do Humano.
 - **Pré-condições:** plano em `proposto`.
 - **Pós-condições:** sucesso, plano `aprovado` e decisões no cofre; falha, plano `proposto` ou `recusado`.
 - **Telas:** TEL-03
@@ -84,7 +85,7 @@ Os IDs FA e FE são locais a cada UC, como na fonte (cite como "UC-03 FE-01"). O
 
 | ID | Passo de origem | Variação | Volta ou termina |
 |---|---|---|---|
-| FA-01 | 3 | Humano pede alteração com comentário → orquestrador propõe plano novo | Volta ao passo 1 |
+| FA-01 | 3 | Humano pede alteração com comentário → orquestrador propõe plano novo no mesmo pedido, sem abrir pedido novo nem zerar `devolucoes` | Volta ao passo 1 |
 | FA-02 | 3 | Humano recusa → plano vira `recusado` | Termina |
 | FA-03 | 1 | Plano com tarefa incompleta e `devolucoes` abaixo de 2 → núcleo devolve o plano ao orquestrador (ERR-49) e soma 1 em `devolucoes`; o Humano não o vê | Volta ao passo 1 com o plano completado numa versão nova (`versao` + 1), sem zerar `devolucoes` |
 | FA-04 | 1 | Plano com tarefa incompleta pela 3ª vez (`devolucoes` = 2) → o plano chega ao Humano com as tarefas incompletas marcadas (ERR-49) e "Aprovar" bloqueado enquanto houver tarefa marcada; o Humano pede o preenchimento por "Pedir alteração" | Segue o FA-01 |

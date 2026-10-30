@@ -233,7 +233,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 - **Entradas:** RF-01 a RF-03 (ENT-13).
 - **Saídas:** pedido de conexão ou desconexão.
 - **Eventos:** `conectar`, `desconectar`, `testar-conexao`.
-- **Atende:** UC-01 (passos 1 a 3, FA-01, FE-01 a FE-03).
+- **Atende:** UC-01 (passos 1 a 3, FA-01, FE-01 a FE-04).
 - **Valida:** caminho do executável do Claude CLI (opcional, RF-01) [a confirmar].
 - **Regras:** RN-04, RN-08.
 
@@ -244,7 +244,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 | vazio | não se aplica | — |
 | carregando | login em andamento | nenhuma [a confirmar: cancelar?] |
 | preenchido | conta e versão | testar, desconectar |
-| erro | motivo da falha (ERR-01, ERR-02, ERR-03, ERR-04) | conectar de novo |
+| erro | motivo da falha (ERR-01, ERR-02, ERR-03, ERR-04, ERR-53) | conectar de novo |
 | sucesso | conectado | testar, desconectar |
 | desabilitado | "Desconectar" durante execução que depende da integração | testar |
 

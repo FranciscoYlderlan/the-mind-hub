@@ -1,0 +1,122 @@
+[
+  {
+    "arquivo": "05-erros.md",
+    "atual": "| nada salvo; o limite anterior continua |",
+    "novo": "| nada salvo; o limite anterior continua |\n| ERR-53 | `INTEGRACAO_FALHA_INESPERADA` | falha inesperada ao checar, conectar ou desconectar uma integração (tempo esgotado, saída que não dá para ler, erro de rede), fora das condições do ERR-01 a ERR-04 (UC-01 FE-04; ENT-13) | repetir | \"Falha inesperada com <integração>: <motivo>. Tente de novo.\" | integração em `desconectado` |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "03-casos-de-uso.md",
+    "atual": "| FE-03 | 1 | ERR-03 | Obsidian CLI em `desconectado`, com a ação \"Abrir Obsidian\" |",
+    "novo": "| FE-03 | 1 | ERR-03 | Obsidian CLI em `desconectado`, com a ação \"Abrir Obsidian\" |\n| FE-04 | 1 a 3, ou \"Desconectar\" (CMP-11) | ERR-53 | Integração em `desconectado`, com o motivo e a ação de conectar de novo |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "02-entidades.md",
+    "atual": "| ERR-01, ERR-05, ERR-06, ERR-07 |",
+    "novo": "| ERR-01, ERR-05, ERR-06, ERR-07, ERR-53 |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "04-componentes.md",
+    "atual": "FE-01 a FE-03)",
+    "novo": "FE-01 a FE-04)",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "04-componentes.md",
+    "atual": "(ERR-01, ERR-02, ERR-03, ERR-04)",
+    "novo": "(ERR-01, ERR-02, ERR-03, ERR-04, ERR-53)",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "07-rastreabilidade.md",
+    "atual": "| RF-01 | UC-01 | principal, FA-01, FE-01 | CMP-03, CMP-11 | ENT-13 | ERR-01, ERR-04 | TEL-01, TEL-02 (previstas) | AC-01, AC-02, AC-03, AC-88 |",
+    "novo": "| RF-01 | UC-01 | principal, FA-01, FE-01, FE-04 | CMP-03, CMP-11 | ENT-13 | ERR-01, ERR-04, ERR-53 | TEL-01, TEL-02 (previstas) | AC-01, AC-02, AC-03, AC-88, AC-153 |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "07-rastreabilidade.md",
+    "atual": "| RF-02 | UC-01 | principal, FE-03 | CMP-03, CMP-11 | ENT-13, ENT-02 | ERR-03 | TEL-01, TEL-02 (previstas) | AC-05, AC-89, AC-128 |",
+    "novo": "| RF-02 | UC-01 | principal, FE-03, FE-04 | CMP-03, CMP-11 | ENT-13, ENT-02 | ERR-03, ERR-53 | TEL-01, TEL-02 (previstas) | AC-05, AC-89, AC-128, AC-153 |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "07-rastreabilidade.md",
+    "atual": "| RF-03 | UC-01 | principal, FE-02 | CMP-03, CMP-11 | ENT-13 | ERR-02 | TEL-01, TEL-02 (previstas) | AC-01, AC-04, AC-90, AC-127, AC-129 |",
+    "novo": "| RF-03 | UC-01 | principal, FE-02, FE-04 | CMP-03, CMP-11 | ENT-13 | ERR-02, ERR-53 | TEL-01, TEL-02 (previstas) | AC-01, AC-04, AC-90, AC-127, AC-129, AC-153 |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "07-rastreabilidade.md",
+    "atual": "| RF-04 | UC-01 | principal | CMP-03 | ENT-13 | ERR-05, ERR-06, ERR-07 | TEL-01 (prevista) | AC-91 |",
+    "novo": "| RF-04 | UC-01 | principal, FE-04 | CMP-03 | ENT-13 | ERR-05, ERR-06, ERR-07, ERR-53 | TEL-01 (prevista) | AC-91, AC-153 |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "08-criterios-de-aceite.md",
+    "atual": "| aparece \"Abrir Obsidian\" (ERR-03) |",
+    "novo": "| aparece \"Abrir Obsidian\" (ERR-03) |\n| AC-153 | UC-01 | FE-04 | o GitHub conectado e a rede fora do ar | o status é checado | o GitHub fica em `desconectado` com \"Falha inesperada com GitHub: <motivo>. Tente de novo.\" (ERR-53) e a ação de conectar de novo; com a rede de volta, conectar de novo funciona |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "08-criterios-de-aceite.md",
+    "atual": "por regra acrescentada depois, e AC-149 a AC-152, por erro de campo que estava sem AC (na tabela",
+    "novo": "por regra acrescentada depois, AC-149 a AC-152, por erro de campo que estava sem AC, e AC-153, por fluxo de UC criado depois (na tabela",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "README.md",
+    "atual": "ERR-01 a ERR-52",
+    "novo": "ERR-01 a ERR-53",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "README.md",
+    "atual": "AC-01 a AC-152",
+    "novo": "AC-01 a AC-153",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "02-entidades.md",
+    "atual": "não zera quando o plano ganha versão nova: soma por pedido, para o teto de 2 |",
+    "novo": "soma por pedido (o pedido do Humano ao orquestrador que gerou o plano), para o teto de 2: não zera quando o plano ganha versão nova nem depois de \"Pedir alteração\", que não abre pedido novo; começa em 0 só num pedido novo do Humano |",
+    "motivo": "M-32: pedido e devolucoes"
+  },
+  {
+    "arquivo": "02-entidades.md",
+    "atual": "até 2 vezes por pedido (`devolucoes`, que não zera quando o plano ganha versão nova;",
+    "novo": "até 2 vezes por pedido, o pedido do Humano ao orquestrador que gerou o plano (`devolucoes`, que começa em 0 só num pedido novo do Humano e não zera quando o plano ganha versão nova nem depois de \"Pedir alteração\", que não abre pedido novo;",
+    "motivo": "M-32: pedido e devolucoes"
+  },
+  {
+    "arquivo": "03-casos-de-uso.md",
+    "atual": "**Gatilho:** orquestrador propõe um plano.",
+    "novo": "**Gatilho:** orquestrador propõe um plano para um pedido do Humano.",
+    "motivo": "M-32: pedido e devolucoes"
+  },
+  {
+    "arquivo": "03-casos-de-uso.md",
+    "atual": "Humano pede alteração com comentário → orquestrador propõe plano novo |",
+    "novo": "Humano pede alteração com comentário → orquestrador propõe plano novo no mesmo pedido, sem abrir pedido novo nem zerar `devolucoes` |",
+    "motivo": "M-32: pedido e devolucoes"
+  },
+  {
+    "arquivo": "05-erros.md",
+    "atual": "somada por pedido, sem zerar na versão nova)",
+    "novo": "somada por pedido do Humano, sem zerar na versão nova nem depois de \"Pedir alteração\")",
+    "motivo": "M-32: pedido e devolucoes"
+  },
+  {
+    "arquivo": "mudancas.md",
+    "atual": "| M-30 | 2026-11-19 |",
+    "novo": "| M-31 | 2026-11-19 | ERR-53 `INTEGRACAO_FALHA_INESPERADA` (novo): falha inesperada ao checar, conectar ou desconectar uma integração (tempo esgotado, saída que não dá para ler, erro de rede), com tratamento `repetir` e a integração em `desconectado`; entram UC-01 FE-04 e AC-153 | 02 (ENT-13), 03 (UC-01 FE-04), 04 (CMP-11), 05 (ERR-53), 07 (RF-01 a RF-04), 08 (introdução, AC-153), README | perguntas do orquestrador de 2026-11-19, sessão das 16h51 | aval do humano em 2026-11-19, sessão das 17h12 |\n| M-30 | 2026-11-19 |",
+    "motivo": "M-31: ERR-53 falha inesperada de integração"
+  },
+  {
+    "arquivo": "mudancas.md",
+    "atual": "| M-31 | 2026-11-19 | ERR-53 `INTEGRACAO_FALHA_INESPERADA` (novo): falha inesperada ao checar, conectar ou desconectar uma integração (tempo esgotado, saída que não dá para ler, erro de rede), com tratamento `repetir` e a integração em `desconectado`; entram UC-01 FE-04 e AC-153 | 02 (ENT-13), 03 (UC-01 FE-04), 04 (CMP-11), 05 (ERR-53), 07 (RF-01 a RF-04), 08 (introdução, AC-153), README | perguntas do orquestrador de 2026-11-19, sessão das 16h51 | aval do humano em 2026-11-19, sessão das 17h12 |",
+    "novo": "| M-32 | 2026-11-19 | \"Pedido\" é o pedido do Humano ao orquestrador que gerou o plano: \"Pedir alteração\" não abre pedido novo nem zera `devolucoes`, que começa em 0 só num pedido novo do Humano | 02 (ENT-05), 03 (UC-03 gatilho, FA-01), 05 (ERR-49) | perguntas do orquestrador de 2026-11-19, sessão das 16h51 | aval do humano em 2026-11-19, sessão das 17h12 |\n| M-31 | 2026-11-19 | ERR-53 `INTEGRACAO_FALHA_INESPERADA` (novo): falha inesperada ao checar, conectar ou desconectar uma integração (tempo esgotado, saída que não dá para ler, erro de rede), com tratamento `repetir` e a integração em `desconectado`; entram UC-01 FE-04 e AC-153 | 02 (ENT-13), 03 (UC-01 FE-04), 04 (CMP-11), 05 (ERR-53), 07 (RF-01 a RF-04), 08 (introdução, AC-153), README | perguntas do orquestrador de 2026-11-19, sessão das 16h51 | aval do humano em 2026-11-19, sessão das 17h12 |",
+    "motivo": "M-32: pedido e devolucoes"
+  }
+]
