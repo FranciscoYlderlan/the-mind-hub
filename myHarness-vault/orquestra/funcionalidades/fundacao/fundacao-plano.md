@@ -50,7 +50,7 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Critérios ✔/✘ com a prova de cada um: ✘ texto livre (8 de 69 casos adversariais vazam: `Bearer` com valor entre aspas ou após quebra de linha, `token=` e `--token` com quebra de linha, `Bearer:`/`bearer=`, XML e `=>`, token como usuário de URL; prefixo em maiúsculas); ✔ `Segredo` sem valor no `Debug` e no `Display`; ✔ campos da T1 como `TextoMascarado`; ✔ testes dos formatos cobertos; ✔ só `crates/core/`, sem dependência nova, commit `45b204f`. Excesso de máscara em prosa (`token: expirado há pouco tempo`).
   - Devolvido para correção: sim, 2026-11-19, para um implementador novo (vazamentos e excesso de máscara); corrigido em `4be7722`.
   - Segunda volta (2026-11-19): ✘ 73 de 83 casos passam; vazam senha com `&` fora de aspas e token antigo como usuário de URL com senha; excesso de máscara depois de `--token` com espaço e depois do esquema do `Authorization`; `api key` com espaço sem máscara. ✔ `Segredo` e `TextoMascarado`, testes dos vazamentos da primeira volta, escopo e commit.
-  - Terceira volta: aval do humano em 2026-11-19, sessão das 17h3x [a confirmar: hora exata], para um implementador novo, só nesses pontos.
+  - Terceira volta: aval do humano em 2026-11-19, sessão das 17h27, para um implementador novo, só nesses pontos.
 
 ### T3: montagem da chamada ao `claude -p`
 - **Faz:** monta os argumentos (modelo, ferramentas, pastas, instruções, saída em fluxo JSON) conforme [[geral-decisao-2026-11-19-agente-por-claude-p]].
