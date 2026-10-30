@@ -69,7 +69,7 @@ T5c, T5d e T5f a T5h estão verificadas no ar: [[carteira-e-lotes-plano-correcoe
 - **Depende de:** T5a, T5b, T5c e T5d (e T5f, se aprovada)
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] relatórios sem bloqueante
+  - [x] relatórios sem bloqueante (2026-10-30 08:2x)
 - **Prova:** relatórios
 - **Verificação:**
   - Data: 2026-10-30 07:2x–07:3x (Chrome, staging, API `e4397c9`, web `492ee4f`; código: API 108 testes, web 45 no Playwright, lint, tipos e build verdes)
@@ -78,7 +78,8 @@ T5c, T5d e T5f a T5h estão verificadas no ar: [[carteira-e-lotes-plano-correcoe
     - ✔ Código: centavos inteiros ponta a ponta; depósito duplo e corrida (5 simultâneos dão 1×201); teto na resposta; extrato e saldo; papéis, T-07, T-08, RN-19; API simulada igual aos controllers (sem teste de contrato automático).
     - ✘ B1 (bloqueante): `ZodError` cru em inglês nas telas que carregam dados (`error-state.tsx:27`, `item-search.tsx:67`, `__root.tsx:64`); a T5b só cobriu formulários.
     - ✘ Deve corrigir: "1,234" deposita R$ 1.234,00 sem aviso ("1,2,3" vira R$ 12,03; "0,001" vira R$ 1,00); API com mensagem em inglês em `POST /lots` sem corpo e em nome/senha longos no cadastro (o web não limita); RN-18: chave nova a cada envio, nova tentativa de rede pode depositar duas vezes (`deposit-form.tsx:46`).
-  - Devolvido para correção: sim, T5l (proposta). Staging: licitante-1 ganhou depósitos de R$ 12,34 e R$ 1.234,00 do teste.
+  - Devolvido para correção: sim, T5l. Staging: licitante-1 ganhou depósitos de R$ 12,34 e R$ 1.234,00 do teste.
+  - Repetição: 2026-10-30 08:1x–08:2x (Chrome, staging, API `4d0e021`, web `5489733`): ✔ depósito com duplo clique dá 1 POST, saldo, extrato e campo sem recarregar; ✔ busca "Rembrandt" com 12 miniaturas só pela API de staging; ✔ 3 selos "Em leilão" com link certo; ✔ console limpo. Sem bloqueante. Staging: licitante-1 ganhou depósitos de R$ 12,34, R$ 100,00, R$ 1,00 e R$ 2,00.
 
 ### T5l: erro cru no carregamento, valor ambíguo, RN-18 e alvo de toque
 - **Faz:** web: toda tela de carregamento com mensagem em português, nunca `error.message` de erro que não veio da API; chave do depósito mantida até sucesso ou troca do valor; campo de valor recusa formato ambíguo ("como 100,00"); limite de tamanho em nome e senha; botões do cabeçalho ("Alternar tema", "Carteira", menu do usuário e botões do leiloeiro) com alvo de toque de 40 × 40 px, sem rolagem horizontal a 305 e 320 px. API: mensagens em português no `POST /lots` sem corpo e nos `.max()` do cadastro.
@@ -87,10 +88,19 @@ T5c, T5d e T5f a T5h estão verificadas no ar: [[carteira-e-lotes-plano-correcoe
 - **Depende de:** nenhuma (aval do humano em 2026-10-30 07:5x, com o alvo de toque de 40 px dentro)
 - **Fluxo:** cada implementador abre o próprio PR assim que a sua tarefa termina, sem esperar o outro (humano, 2026-10-30 08:0x).
 - **Verificação no ar:** ao fim da implementação, depois do merge e do CD de staging, um subagente verificador no Chrome, diferente dos implementadores, testa as alterações em staging e repete a T5e; então fechar a etapa 3 (humano, 2026-10-30 08:0x).
-- **Andamento:** PR #12 do `stonebid-web` (67 testes no Playwright, lint, tipos e build) e PR #9 do `stonebid-api` (111 testes), CI verde; merge do humano em 2026-10-30 08:11; `staging` avançada (web `5489733`, API `4d0e021`). Verificador no Chrome despachado (T5l e repetição da T5e).
+- **Verificação:**
+  - Data: 2026-10-30 08:11 (merge: PR #12 do `stonebid-web`, `5489733`, 67 testes no Playwright; PR #9 do `stonebid-api`, `4d0e021`, 111 testes) e 08:1x–08:2x (Chrome, staging)
+  - Critérios ✔/✘ com a prova de cada um:
+    - ✔ B1: lote inexistente, JSON fora do formato, falha de rede e 502 com HTML dão mensagem em português na vitrine, no lote e na busca de itens; nenhum `ZodError` nem inglês.
+    - ✘ Tela de erro da raiz (`__root.tsx`) sem prova no ar: falha do `/auth/me` vira visitante, não erro; o código usa o mesmo `getLoadErrorMessage`.
+    - ✔ "1,234", "1,2,3" e "0,001" recusados com "Valor inválido. Use o formato 100,00." e sem POST; "12,34" e "100,00" com `amountCents` certo.
+    - ✔ RN-18: resposta perdida + nova tentativa reusa a chave (201, depois 200) e o saldo sobe uma vez; valor novo gera chave nova; duplo clique dá 1 POST.
+    - ✔ Nome (120) e senha (128) limitados no web e na API; `POST /lots` sem corpo e com `{}` em português.
+    - ✔ Cabeçalho de visitante, licitante e leiloeiro com 40 × 40 px (menu 42 × 40), sem rolagem a 305 e 320 px.
+  - Devolvido para correção: não. Opcionais: `/auth/me` com falha mostra visitante sem aviso; nome e senha sem `maxLength` (o erro só aparece ao enviar). Sem prova: limite no formulário de login.
 
 ## Próxima tarefa e a seguinte
-T5a a T5d e T5f a T5k verificadas no ar; T5e devolvida (B1). Agora: relatório do verificador no Chrome (T5l e T5e) e fechar a etapa 3; depois a etapa 4 (Lances). Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58).
+T5a a T5l verificadas no ar, sem bloqueante; etapa 3 concluída em 2026-10-30. Agora: depois a etapa 4 (Lances). Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58).
 
 ## Prioridades
 T5a primeiro: é o bloqueante e o I2 grava saldo em cima da carteira. T5c pode ficar para depois se apertar.

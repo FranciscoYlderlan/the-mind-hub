@@ -2,7 +2,7 @@
 tipo: contexto
 funcionalidade: geral
 status: em-construcao
-etapa-atual: 3
+etapa-atual: 4
 criado: 2026-10-28
 aliases: [Contexto do Stonebid, Visão geral do projeto, Project overview]
 ---
@@ -66,6 +66,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: roteiro aprovado ([[geral-decisao-2026-10-29-roteiro]]); etapa 2 (esqueleto no ar) em construção.
 - 2026-10-29: `stonebid-api` e `stonebid-web` montados e publicados na `main` com CI verde ([[esqueleto-contexto]]).
 - 2026-10-29 22:20: etapa 2 concluída (aplicação no ar com os 3 usuários de teste); etapa 3 (carteira e lotes) em construção ([[carteira-e-lotes-contexto]]).
+- 2026-10-30 08:2x: etapa 3 concluída (T5a a T5l verificadas no Chrome em staging, sem bloqueante); próxima é a etapa 4, Lances (I2).
 
 ## Tempo disponível
 - De 2026-10-29 09:06 até a entrega, em **2026-10-30 16:00**, estendida pelo humano em 2026-10-30 06:16 ([[geral-decisao-2026-10-30-prazo-16h]]).
