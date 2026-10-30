@@ -23,13 +23,7 @@ Parte de [[diario-2026-10-30]], depois de [[diario-2026-10-30-auditoria-publica]
 - [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]].
 
 > [!tip] Onde parei
-> - **Próximo passo** (retomada entre 16:30 e 16:40):
->   1. Conferir o merge do humano nos PRs #15 da API e #20 do web. Sem merge: pedir.
->   2. T8 de [[auditoria-publica-plano]]: `git fetch --depth 5 origin staging main` e `staging` avançada nos dois ([[passo-a-passo-do-agente]], seção 5); CD verde; verificador no Chrome (lotes da T5 seguem ÍNTEGRO; sala 404 sem "Ver auditoria") e verificador de código nos dois diffs.
->   3. Etapa 6 `concluida` no [[geral-plano]]; etapa 8 (README dos dois repositórios com as telas, incluindo `/lots/:id/audit`, e relato do uso de IA, E6). Pode rodar em paralelo com a T8.
-> - **Threads abertas:** nenhum subagente rodando; PRs #15 e #20 aguardando merge.
-> - **Dúvidas para o humano:** as herdadas de [[diario-2026-10-30-sala-ao-vivo]].
-> - **Candidatos a nota** (para [[passo-a-passo-do-agente]]): os herdados de [[diario-2026-10-30-auditoria-publica]]; push na `staging` de clone raso pede `git fetch --depth 5 origin staging main`; o CD por `workflow_run` aparece como `main` na REST; verificador de código precisa do repositório anexado; `prisma generate` e o setup de teste rodam offline com `PRISMA_SCHEMA_ENGINE_BINARY` num script falso, depois de migrations por `psql` e seed por `tsx`; Postgres próprio por worktree (`initdb` em `/var/lib/postgresql/<pasta>`, outra porta); `npm ci --ignore-scripts` pede `prisma generate` à mão; `playwright.config.ts` com porta fixa 4173 (sugestão: `process.env.PORT ?? 4173`); o que só existe com o lote carregado entra por slot do `LotRoom`.
+> - **Próximo passo:** o "Onde parei" vigente está em [[diario-2026-10-30-revisao-e-entrega]].
 
 ### 🔗 Conexões
 - Diário do dia: [[diario-2026-10-30]]

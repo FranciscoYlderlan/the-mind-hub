@@ -1,7 +1,7 @@
 ---
 tipo: contexto
 funcionalidade: auditoria-publica
-status: em-construcao
+status: concluida
 etapa: 6
 criado: 2026-10-30
 aliases: [Auditoria pública, I4, Auditoria do lote, Public audit]
@@ -21,10 +21,10 @@ Etapa 6 do [[geral-plano]]. Pela linha I4 de [[contrato-processo-e-plano]] (11.3
 - Base: [[geral-decisao-2026-10-29-comprovante-e-hash]] (o que a auditoria confere) e [[geral-decisao-2026-10-30-caminho-da-auditoria]] (rota no web).
 
 ## O que já foi feito
-- 2026-10-30 13:2x: plano aprovado; implementadores da API (T2) e do web (T3) despachados em paralelo. 13:25: merge do PR #14 da API e `staging` em `3901df8`. 13:3x: PR #19 do web em correção (import entre features). 14:0x: merge do #19 e `staging` do web em `972b7ae`. 14:5x: T5 no Chrome 5 de 5 ✔; revisão de código achou o resultado trocado sem detecção; correções T6 (API) e T7 (web) planejadas. 15:1x: T6 no PR #15 da API (`9f6b500`) e T7 no PR #20 do web (`9365f7e`), CI verde nos dois, aguardando merge.
+- 2026-10-30 13:2x: plano aprovado; implementadores da API (T2) e do web (T3) despachados em paralelo. 13:25: merge do PR #14 da API e `staging` em `3901df8`. 13:3x: PR #19 do web em correção (import entre features). 14:0x: merge do #19 e `staging` do web em `972b7ae`. 14:5x: T5 no Chrome 5 de 5 ✔; revisão de código achou o resultado trocado sem detecção; correções T6 (API) e T7 (web) planejadas. 15:1x: T6 no PR #15 da API (`9f6b500`) e T7 no PR #20 do web (`9365f7e`), CI verde nos dois. 15:19: merge dos dois. 17:0x: T8 verificada (código 8 de 8 e Chrome 5 de 5). 17:2x: T9 (PR #16 da API) e T10 (PR #21 do web), CI verde, aguardando merge.
 
 ## Tempo disponível
-Entrega em 2026-10-30 16:00 ([[geral-decisao-2026-10-30-prazo-16h]]); a T8 e a etapa 8 seguem depois do reset do crédito, entre 16:30 e 16:40, já fora desse horário (humano, 2026-10-30 15:21). Depois do I4 vem a revisão e entrega (etapa 8). Primeiro corte se apertar: a tool `lots_audit` e a conferência do extrato.
+Entrega em 2026-10-30 16:00 ([[geral-decisao-2026-10-30-prazo-16h]]). Etapa concluída em 2026-10-30; seguem a etapa 7 ([[opcionais-contexto]]) e a 8 ([[revisao-e-entrega-contexto]]).
 
 ## Dial e modelo de IA
 - Dial: o do [[geral-contexto]].

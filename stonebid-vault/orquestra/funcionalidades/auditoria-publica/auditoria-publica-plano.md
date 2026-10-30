@@ -96,8 +96,21 @@ Aval em 2026-10-30 13:2x, todos como propostos:
 - **Faz:** merge do humano em T6 e T7; `staging` avançada nos dois; CD de staging verde; verificador no Chrome (auditoria dos lotes da T5 segue ÍNTEGRO; sala 404 sem o link) e verificador de código nos dois diffs.
 - **Depende de:** T6, T7
 
+- **Verificação:**
+  - Data: 2026-10-30 17:0x. Merges às 15:19: API `bab9347`, web `40db2c4`. `staging` API `3901df8..bab9347`, web `972b7ae..40db2c4`; CD de staging verde.
+  - **Código:** 8 de 8 ✔ (resultado trocado, CREDIT, lance atual e líder com `seq: null`, `seq: null` nos dois motivos, T-06 e README, link só com sala carregada, sem import entre features, nada fora do escopo). 3 opcionais viraram T9 e T10.
+  - **Chrome, staging, deslogado:** 5 de 5 ✔. Ao vivo `5eed0000-0000-4000-8000-000000000001`, vendidos `12788892-5daf-4826-8f20-49f5b8921217` e `3dfae377-7e01-4adc-94e3-cdba78f674ad`, cancelado `3bb9f3d1-9472-4fc2-8f77-a45799d3182c`: 200, `INTACT`, `no-store`, ÍNTEGRO; sala 404 sem o link e sem chamada à auditoria; 320 px medido em iframe (a janela não redimensionou).
+
+### T9: comentário e ordem da conferência (API)
+- **Faz:** comentário de `receiptOk` no estado atual; teste que fixa a ordem (comprovante e lance atual adulterados dão `RECEIPT_MISMATCH`; extrato e líder dão `SETTLEMENT_MISMATCH`). Humano, 2026-10-30 17:04.
+- **Verificação:** PR #16 do `stonebid-api` (`f56c7d7`), CI verde, unidade 9 de 9. Números de item dos comentários alinhados ao README. Aguardando merge.
+
+### T10: "Ver auditoria" na sala de lance (web)
+- **Faz:** `auditSlot` em `src/routes/_app/bidding/$id.tsx`; Playwright do licitante e do 404.
+- **Verificação:** PR #21 do `stonebid-web` (`8b396dc`), CI verde, 129 testes Playwright. Aguardando merge.
+
 ## Próxima tarefa e a seguinte
-T1 a T7 feitas (PRs #15 da API e #20 do web, CI verde). Agora: T8, a partir do merge do humano; em seguida, a etapa 8 (README e relato do uso de IA, E6).
+T1 a T10 feitas; T9 e T10 aguardam merge e vão para a `staging` junto com a etapa 8 ([[revisao-e-entrega-plano]]).
 
 ## Prioridades
 T2 é o caminho crítico. Se apertar: corta a tool `lots_audit`, depois a conferência do extrato.

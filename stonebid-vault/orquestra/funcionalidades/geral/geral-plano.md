@@ -7,7 +7,7 @@ criado: 2026-10-28
 # 🧭 Roteiro — Stonebid
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **6. Auditoria pública (I4)** (em-construcao)
+> Etapa atual: **7. Opcionais (I5)** (em-construcao)
 
 > [!success] Aprovado
 > Etapas aprovadas em [[geral-decisao-2026-10-29-roteiro]]. Mudar a lista de etapas é uma nova decisão.
@@ -58,27 +58,27 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 2026-10-30
 
 ## 6. Auditoria pública (I4)
-- **Status:** em-construcao
+- **Status:** concluida
 - **Objetivo:** histórico sem login com veredito íntegro ou adulterado.
 - **Pronto quando:** T-06 detecta as adulterações.
 - **Funcionalidades:** [[auditoria-publica-contexto]]
-- **Notas geradas:** [[geral-decisao-2026-10-30-auditoria-publica]], [[geral-decisao-2026-10-30-adulterado-provado-no-ci]], [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]], [[diario-2026-10-30-auditoria-publica-correcoes]]
-- **Concluída em:** 
+- **Notas geradas:** [[geral-decisao-2026-10-30-auditoria-publica]], [[geral-decisao-2026-10-30-adulterado-provado-no-ci]], [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]], [[diario-2026-10-30-auditoria-publica-correcoes]], [[diario-2026-10-30-revisao-e-entrega]]
+- **Concluída em:** 2026-10-30
 
 ## 7. Opcionais (I5)
-- **Status:** planejada
+- **Status:** em-construcao
 - **Objetivo:** busca e filtros, cancelamento com estorno, tema escuro, Docker Compose.
 - **Pronto quando:** opcionais no ar, respeitando a linha de corte.
-- **Funcionalidades:** 
-- **Notas geradas:** 
+- **Funcionalidades:** [[opcionais-contexto]]
+- **Notas geradas:** [[geral-decisao-2026-10-30-estorno-no-cancelamento]], [[geral-decisao-2026-10-30-busca-na-vitrine]]
 - **Concluída em:** 
 
 ## 8. Revisão e entrega
-- **Status:** planejada
+- **Status:** em-construcao
 - **Objetivo:** README, relato do uso de IA (E6), checklist e envio.
 - **Pronto quando:** checklist 11.6 completo e entrega feita até 2026-10-30 16:00.
-- **Funcionalidades:** 
-- **Notas geradas:** 
+- **Funcionalidades:** [[revisao-e-entrega-contexto]]
+- **Notas geradas:** [[geral-decisao-2026-10-30-datas-dos-commits]], [[geral-decisao-2026-10-30-relato-de-uso-de-ia]], [[diario-2026-10-30-revisao-e-entrega]]
 - **Concluída em:** 
 
 ### 🔗 Conexões
