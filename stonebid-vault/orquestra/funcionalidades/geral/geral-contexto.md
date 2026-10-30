@@ -42,6 +42,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29 (13:22): aprovada a solução do comprovante e da auditoria: hash guardado no lance, cabeça da cadeia com selo no lote e comprovante como fotografia selada da liquidação → [[geral-decisao-2026-10-29-comprovante-e-hash]].
 - 2026-10-29 (13:31): aprovada a correção do cancelamento ao vivo, "vamos deixar os dois casos": lote ao vivo vai para CANCELADO sem lances; com lances, só com o `[OPC-2]` → [[geral-decisao-2026-10-29-cancelamento-ao-vivo]].
 - 2026-10-29 (14:07): roteiro aprovado em 8 etapas, uma por incremento → [[geral-decisao-2026-10-29-roteiro]].
+- 2026-10-29 (22:13): modo de implementação adotado como padrão (container → GitHub → Actions → GCP/Vercel; consoles e testes no ar pelo agente no Chrome) → [[geral-decisao-2026-10-29-modo-de-implementacao]].
 - Camada MCP no backend para expor as rotas e testar o fluxo pela Claude; sempre que uma feature e uma rota forem criadas, a MCP é atualizada → [[geral-decisao-2026-10-29-camada-mcp]].
 - 2026-10-29: hospedagem: backend e banco no **GCP**, frontend na **Vercel**, os dois repositórios no GitHub com CI/CD validando a integração. Custo zero: a aplicação fica no ar no máximo 7 dias, é avaliada em menos de 1 hora e depois é fechada → [[geral-decisao-2026-10-29-hospedagem]].
 
@@ -84,7 +85,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 ## Mapa
 - Roteiro: [[geral-plano]]
 - Funcionalidades: [[esqueleto-contexto]]
-- Decisões: [[geral-decisao-2026-10-29-roteiro]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
+- Decisões: [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-roteiro]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]], [[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]
 - Enunciado: [[enunciado-teste-tecnico]]
 - Contrato: [[contrato-do-projeto]] (requisitos, regras, arquitetura proposta, plano e perguntas Q)
