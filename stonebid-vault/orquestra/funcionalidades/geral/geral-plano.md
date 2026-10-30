@@ -7,7 +7,7 @@ criado: 2026-10-28
 # 🧭 Roteiro — Stonebid
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **4. Lances (I2)** (em-construcao)
+> Etapa atual: **6. Auditoria pública (I4)** (planejada)
 
 > [!success] Aprovado
 > Etapas aprovadas em [[geral-decisao-2026-10-29-roteiro]]. Mudar a lista de etapas é uma nova decisão.
@@ -42,20 +42,20 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 2026-10-30
 
 ## 4. Lances (I2)
-- **Status:** em-construcao
+- **Status:** concluida
 - **Objetivo:** validação do lance, saldo comprometido, recusas e hash encadeado.
 - **Pronto quando:** T-01 a T-03 passando.
 - **Funcionalidades:** [[lances-contexto]]
-- **Notas geradas:** 
-- **Concluída em:** 
+- **Notas geradas:** [[geral-decisao-2026-10-30-pseudonimo-por-hmac]], [[geral-decisao-2026-10-30-lance-atual-no-lote]], [[geral-decisao-2026-10-30-saldo-na-recusa-do-lance]], [[geral-decisao-2026-10-30-historico-de-lances-no-i2]], [[geral-decisao-2026-10-30-pseudonimo-com-6-digitos]], [[geral-decisao-2026-10-30-recarga-de-15s-ate-o-i3]], [[geral-decisao-2026-10-30-dar-lance-so-para-licitante]], [[diario-2026-10-30-lances]]
+- **Concluída em:** 2026-10-30
 
 ## 5. Sala ao vivo e liquidação (I3)
-- **Status:** em-construcao
+- **Status:** concluida
 - **Objetivo:** tempo real, anti-sniping, liquidação, comprovante e resultados.
 - **Pronto quando:** um leilão completo, do início ao comprovante.
 - **Funcionalidades:** [[sala-ao-vivo-contexto]]
-- **Notas geradas:** 
-- **Concluída em:** 
+- **Notas geradas:** [[geral-decisao-2026-10-30-tempo-real-por-sse]], [[geral-decisao-2026-10-30-disparo-da-liquidacao]], [[geral-decisao-2026-10-30-movimentos-da-liquidacao]], [[geral-decisao-2026-10-30-resultado-no-lote]], [[geral-decisao-2026-10-30-limite-do-anti-sniping]], [[geral-decisao-2026-10-30-viewer-no-lote]], [[geral-decisao-2026-10-30-rotas-publicas-do-i3]], [[geral-decisao-2026-10-30-seed-com-lote-liquidado]], [[geral-decisao-2026-10-30-motivo-do-cancelamento-gravado]], [[geral-decisao-2026-10-30-caminho-da-auditoria]], [[geral-decisao-2026-10-30-sala-publica-le-a-sessao]], [[geral-decisao-2026-10-30-lot-ended-no-cancelamento]], [[geral-decisao-2026-10-30-422-no-cancelamento]], [[geral-decisao-2026-10-30-concorrencia-do-cloud-run]], [[geral-decisao-2026-10-30-posicao-cancelado-inalcancavel]], [[diario-2026-10-30-sala-ao-vivo]]
+- **Concluída em:** 2026-10-30
 
 ## 6. Auditoria pública (I4)
 - **Status:** planejada

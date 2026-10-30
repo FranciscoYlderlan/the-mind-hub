@@ -1,7 +1,7 @@
 ---
 tipo: contexto
 funcionalidade: lances
-status: em-construcao
+status: concluida
 etapa: 4
 criado: 2026-10-30
 aliases: [Lances, I2, Bids]
@@ -24,6 +24,7 @@ Etapa 4 do [[geral-plano]]. Pela linha I2 de [[contrato-processo-e-plano]] (11.3
 
 ## O que já foi feito
 - 2026-10-30: pesquisa da etapa e plano proposto em [[lances-plano]]; aval dos 6 pontos (08:4x) e implementadores da API (T2a, T2b) e do web (T3) despachados. 09:1x: segredos criados pelo humano, merge dos PRs #10 e #11 da API e #14 do web, `staging` avançada (API `55b1400`, web `c366aef`); falta a verificação no ar (T5). 11:1x: humano aprovou [[geral-decisao-2026-10-30-pseudonimo-com-6-digitos]], [[geral-decisao-2026-10-30-dar-lance-so-para-licitante]] e [[geral-decisao-2026-10-30-recarga-de-15s-ate-o-i3]], implementadas no I3 ([[sala-ao-vivo-contexto]]); 11:4x: T5 aprovada no Chrome em staging, sem bloqueante; MCP sem prova no ar.
+- 2026-10-30 13:0x: diffs do I2 lidos pelo verificador de código da T6, sem bloqueante; etapa 4 concluída no [[geral-plano]].
 
 ## Tempo disponível
 Entrega em 2026-10-30 16:00 ([[geral-decisao-2026-10-30-prazo-16h]]); I3, I4 e a revisão vêm depois.
