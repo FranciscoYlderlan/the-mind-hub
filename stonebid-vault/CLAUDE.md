@@ -114,6 +114,7 @@ Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma
   - Decisão **já implementada**: mudança que a contradiz vira nota nova com `substitui:`, e a antiga fica com `status: substituida`, intacta, descrevendo o que o código fez até ali.
   - **Substituição parcial:** decisão já implementada em que só um ponto muda: nota nova só para esse ponto, com `substitui: [[antiga]] (só a linha de X)`. Na antiga, a linha do ponto é reescrita em 1 frase com link para a nota nova, e a antiga segue `aprovada`, porque o resto dela vale. Modelo: [[geral-decisao-2026-10-29-prisma-7]] e [[geral-decisao-2026-10-29-next-themes-para-o-tema]] (humano, 2026-10-29 23:01).
   - Origem: o Alteração de [[geral-decisao-2026-10-29-camada-mcp]] guardava a api_key "só nas tools com autenticação", já desfeita pelo corpo da nota (2026-10-29).
+- **Diário com partes:** o "Onde parei" vigente mora só na parte mais recente do dia (`diario-AAAA-MM-DD-<assunto>.md`); o diário principal (`diario-AAAA-MM-DD.md`) aponta para ela no próprio "Onde parei". "Último diário" no início de sessão é essa parte. Origem: o principal de 2026-10-29 ainda mandava para a etapa 2 com a etapa 3 em andamento (humano, 2026-10-29 23:20).
 - **Limite de tamanho:** 2073 palavras, o tamanho de [[contrato-do-projeto]], a maior nota registrada em 2026-10-29. Vale também para as notas `contrato-*`, que trazem só o texto vigente do contrato (o histórico de versões fica em [[contrato-do-projeto-mudancas]]).
 <!-- /projeto:padronizacao -->
 

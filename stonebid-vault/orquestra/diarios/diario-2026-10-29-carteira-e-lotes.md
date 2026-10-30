@@ -24,6 +24,7 @@ criado: 2026-10-29
 - 23:09: humano aprovou o job de CI do `docker compose up` (RNF-11), no PR `chore` do Node 26 da API. Perguntou por que trocar o botão do cadastro: explicado que o `SubmitButton` do `auth` duplica o comum de `components/common/`; às 23:10 o humano aprovou: o cadastro passa ao comum e o do `auth` é apagado, no PR `chore` do Node 26 do web.
 - 23:1x: subagente do rebase entregou o PR #2 do `stonebid-api` sem conflitos (HEAD `61044aa`, 59 testes, CI verde). Registrado na Verificação da T1 de [[carteira-e-lotes-plano]]. Humano mandou o `/context`: Messages 99,1 mil, no limite do orçamento; passagem de turno feita.
 - 23:16: humano fez o merge do PR #2 do `stonebid-api` e avisou que o web não tinha PR aberto: o PR #3 entrou às 23:04 em `7e158db`, antes do push da arrumação. Os dois commits foram reaplicados sobre a `main` no PR #4 do `stonebid-web` (CI verde). Humano pediu os commits do cofre.
+- 23:20: humano perguntou onde o próximo chat vê que segue para a T3 e a T4. O "Onde parei" de [[diario-2026-10-29]] ainda mandava para a etapa 2 e podia ser lido como "último diário": passou a apontar para esta parte, e as dúvidas dele vieram para cá. Regra nova no bloco `projeto:padronizacao` do `CLAUDE.md`.
 
 ## Decisões tomadas
 - [[geral-decisao-2026-10-29-api-de-itens]], [[geral-decisao-2026-10-29-imagem-do-lote-no-banco]], [[geral-decisao-2026-10-29-lance-inicial-e-valor-minimo]], [[geral-decisao-2026-10-29-inicio-e-duracao-do-lote]], [[geral-decisao-2026-10-29-limites-do-deposito]], [[geral-decisao-2026-10-29-edicao-de-lote-fora]]
@@ -39,7 +40,7 @@ criado: 2026-10-29
 > [!tip] Onde parei
 > - **Próximo passo:** merge do humano no PR #4 do `stonebid-web` (arrumação, CI verde); então T3 e T4 de [[carteira-e-lotes-plano]], e fechar a etapa 3 no [[geral-plano]].
 > - **Threads abertas:** nenhum subagente rodando. Depois da T3: PR `chore` na API (Node 26 e job do `docker compose up`) e no web (Node 26, cadastro com o `SubmitButton` comum, apagar o do `auth`); registro de componentes com os candidatos da T2 ([[carteira-e-lotes-plano]], Candidatos a registro).
-> - **Dúvidas para o humano:** nenhuma.
+> - **Dúvidas para o humano:** herdadas de [[diario-2026-10-29]], sem confirmação de que seguem abertas: se o "Request headers" aparece na conta para o conector do app ([[geral-decisao-2026-10-29-camada-mcp]]); tempo real (AD-04); como registrar o uso de IA para o formulário (E6).
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
