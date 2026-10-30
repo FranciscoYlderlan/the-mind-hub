@@ -50,10 +50,10 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 
 
 ## 5. Sala ao vivo e liquidação (I3)
-- **Status:** planejada
+- **Status:** em-construcao
 - **Objetivo:** tempo real, anti-sniping, liquidação, comprovante e resultados.
 - **Pronto quando:** um leilão completo, do início ao comprovante.
-- **Funcionalidades:** 
+- **Funcionalidades:** [[sala-ao-vivo-contexto]]
 - **Notas geradas:** 
 - **Concluída em:** 
 

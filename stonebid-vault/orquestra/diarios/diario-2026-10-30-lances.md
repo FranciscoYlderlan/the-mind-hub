@@ -40,6 +40,7 @@ Parte de [[diario-2026-10-30]], separada pelo limite de palavras.
 - Referência de ambiente (`PRISMA_SCHEMA_ENGINE_BINARY` falso) e regras de briefing (um verificador no Chrome por vez; pesquisa de UX medindo a linha do tempo) já estão em [[passo-a-passo-do-agente]].
 
 > [!tip] Onde parei
+> - O "Onde parei" vigente está em [[diario-2026-10-30-sala-ao-vivo]]. Estado em 09:13:
 > - **Próximo passo:** conferir que o CD de staging do web (`c366aef`) ficou verde e despachar a T5 de [[lances-plano]]: verificador no Chrome em staging (dois licitantes, exemplo da Ana, cada recusa na tela com o texto real da API, comprometido e liberado na carteira, histórico público sem dado pessoal, tools `bids_place`/`bids_list` pela MCP) e verificador de código (diff dos PRs #10, #11 e #14). Depois, fechar a etapa 4 e abrir a 5 (Sala ao vivo e liquidação, I3). Entrega às **16:00**.
 > - **Threads abertas:** nenhum subagente rodando. `main` = `staging`: API `55b1400`, web `c366aef`.
 > - **Dúvidas para o humano:** recarga de 15 s no lote e no histórico (T3); esconder "Dar lance" do leiloeiro; pseudônimo com 4 ou 6 dígitos (colisão ~1 em 65 mil; decidir antes de lances reais, porque entra no hash). Achados da T5m: cabeçalho mostra "Entrar / Cadastrar" na falha não-401; e-mail sem `maxLength`. Herdadas: "Request headers" do conector ([[geral-decisao-2026-10-29-camada-mcp]]), tempo real (AD-04) e registro do uso de IA (E6).
