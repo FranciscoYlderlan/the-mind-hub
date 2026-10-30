@@ -26,7 +26,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 3. A frase do anti-sniping admite duas leituras (5.4).
 4. "Lote publicado com lances abertos" nos dados de teste: interpretei como lote ao vivo com lances já feitos.
 5. "Posição do usuário nos lances" pode significar só liderando ou superado, ou um ranking.
-6. O prazo é 7 dias no enunciado; o prazo real é de **24 horas**, com entrega em 2026-10-30 09:00.
+6. O prazo é 7 dias no enunciado; o prazo real é de **24 horas**, com entrega em 2026-10-30 16:00.
 
 | ID | Pergunta | Proposta | Afeta |
 |---|---|---|---|
@@ -46,7 +46,7 @@ Antes de codar, valide estes pontos. Eles vêm de ambiguidades do enunciado e de
 | Q-14 | Edição de lote fica fora do escopo? | **Respondida:** sim ([[geral-decisao-2026-10-29-edicao-de-lote-fora]]) | Seção 1.4 |
 | Q-15 | Quanto você já domina de React, Node ou Python, e SQL? | (A resposta define o risco R-09) | Seção 12 |
 
-Resolvido na v0.3 ([[contrato-do-projeto]]): entrega em **2026-10-30 09:00** e trabalho contínuo, sem pausa.
+Resolvido na v0.3 ([[contrato-do-projeto]]): entrega em **2026-10-30 16:00** e trabalho contínuo, sem pausa.
 
 > [!warning] Situação em 2026-10-29
 > Respondidas: Q-09 ([[geral-decisao-2026-10-29-comprovante-e-hash]]) e Q-06, Q-07, Q-10, Q-13 e Q-14 (etapa 3, [[carteira-e-lotes-plano]]); as outras nove seguem abertas. A parte de stack de Q-15 já foi respondida pelas decisões de stack ([[contrato-tecnologias]]), mas o nível de domínio não.
@@ -57,7 +57,7 @@ Resolvido na v0.3 ([[contrato-do-projeto]]): entrega em **2026-10-30 09:00** e t
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** nove perguntas abertas (Q-06, Q-07, Q-09, Q-10, Q-13 e Q-14 já foram respondidas); cada resposta aprovada vira uma nota `geral-decisao-*`.
 * **Ponto 2:** as que mais mudam código: Q-03 (anti-sniping), Q-04 (instante do fim) e Q-05 (cancelamento com lances).
-* **Ponto 3:** data de entrega (2026-10-30 09:00) e ritmo (trabalho contínuo) já definidos na v0.3 ([[geral-contexto]]).
+* **Ponto 3:** data de entrega (2026-10-30 16:00) e ritmo (trabalho contínuo) já definidos na v0.3 ([[geral-contexto]]).
 
 ### 🔗 Conexões
 - Mapa: [[contrato-do-projeto]] · [[moc-orquestra]]

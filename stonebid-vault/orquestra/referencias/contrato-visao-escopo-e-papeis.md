@@ -22,7 +22,7 @@ O **Stonebid** é uma casa de leilões online. O leiloeiro monta lotes a partir 
 
 ### 1.2 Objetivos de sucesso
 
-1. Cumprir todos os requisitos base e os 5 opcionais no prazo de 24 horas (entrega em 2026-10-30 09:00).
+1. Cumprir todos os requisitos base e os 5 opcionais no prazo de 24 horas (entrega em 2026-10-30 16:00).
 2. Ter uma base sólida: nada de desmoronar nas etapas finais (deploy já no primeiro incremento, regras críticas testadas).
 3. Ter um projeto de portfólio explicável: decisões documentadas e README claro.
 4. Aprender: cada decisão tem um porquê e uma base teórica.
@@ -53,7 +53,7 @@ Tudo abaixo não foi pedido e custaria tempo que você não tem. Só entra se o 
 |---|---|
 | Por que (*Why*)? | Passar no teste técnico e construir um projeto de portfólio |
 | O que (*What*)? | Casa de leilões online com lances ao vivo, carteira, comprovante e auditoria |
-| Quando (*When*)? | 24 horas a partir de 2026-10-29 09:06. Entrega: **2026-10-30 09:00** |
+| Quando (*When*)? | 24 horas a partir de 2026-10-29 09:06. Entrega: **2026-10-30 16:00** |
 | Quem (*Who*)? | Você (decide e responde pelo projeto) e a IA (implementa e explica) |
 | Onde (*Where*)? | Repositório de código e aplicação em produção (URL no README) |
 | Como (*How*)? | Entrega incremental com testes nas regras críticas (seção 11) |
@@ -66,7 +66,7 @@ Tudo abaixo não foi pedido e custaria tempo que você não tem. Só entra se o 
 
 | Restrição | Valor | Status | Origem |
 |---|---|---|---|
-| Prazo | 24 horas a partir de 2026-10-29 09:06, entrega em 2026-10-30 09:00 (enunciado: 7 dias) | `[DECIDIDO]` | Você |
+| Prazo | 24 horas a partir de 2026-10-29 09:06, entrega em 2026-10-30 16:00 (enunciado: 7 dias) | `[DECIDIDO]` | Você |
 | Opcionais | Todos os 5 serão feitos | `[DECIDIDO]` | Você |
 | Deploy | Obrigatório | `[DECIDIDO]` | E1 (requisito "Deploy") |
 | Front-end | React, com ou sem framework | `[DECIDIDO]` | E4 |
@@ -99,7 +99,7 @@ Tudo abaixo não foi pedido e custaria tempo que você não tem. Só entra se o 
 > Quando surgir "e se a gente fizesse também...": conferir o fora do escopo antes e, se for entrar, seguir o protocolo de mudança em [[contrato-trabalho-com-a-ia]].
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** prazo real de **24 horas** (entrega em 2026-10-30 09:00), com os 5 opcionais; o corte de emergência está em [[contrato-processo-e-plano]].
+* **Ponto 1:** prazo real de **24 horas** (entrega em 2026-10-30 16:00), com os 5 opcionais; o corte de emergência está em [[contrato-processo-e-plano]].
 * **Ponto 2:** dois papéis no sistema (leiloeiro e licitante), mais o visitante sem login que audita.
 * **Ponto 3:** tudo fora do escopo só entra mudando o contrato.
 

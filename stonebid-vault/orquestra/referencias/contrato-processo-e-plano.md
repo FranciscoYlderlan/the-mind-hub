@@ -35,7 +35,7 @@ origem: Contrato do Projeto Stonebid v0.2 (2026-10-27), seção 11
 
 ## 11.3 Plano de entrega
 
-Prazo de **24 horas** a partir de 2026-10-29 09:06, entrega em 2026-10-30 09:00, com trabalho contínuo. O plano com horários **ainda não foi feito**: sai destes incrementos, com a linha de corte (11.4) aplicada, e é o próximo passo do [[geral-plano]]. As últimas horas ficam **só** para revisão e deploy final, sem nada novo.
+Prazo de **24 horas** a partir de 2026-10-29 09:06, entrega em 2026-10-30 16:00, com trabalho contínuo. O plano com horários **ainda não foi feito**: sai destes incrementos, com a linha de corte (11.4) aplicada, e é o próximo passo do [[geral-plano]]. As últimas horas ficam **só** para revisão e deploy final, sem nada novo.
 
 | Incremento | Entrega (fatia de ponta a ponta) | Requisitos | Pronto quando |
 |---|---|---|---|
