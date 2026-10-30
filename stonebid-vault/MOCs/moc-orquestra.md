@@ -36,6 +36,7 @@ origem: manual-da-orquestra
 - [[manual-do-cerebro]]: tom e esqueleto das notas de referência.
 - [[registro-de-componentes]]: o que já existe no frontend; consultar antes de criar componente.
 - [[acesso-de-teste]]: endereços no ar e usuários de teste (login livre para humano e agentes).
+- [[passo-a-passo-do-agente]]: comandos já provados para retomar o projeto: anexar os repositórios com escrita, push, PR pela REST, CI, `staging`, teste no Chrome e commit do cofre.
 
 ## 🧩 Modelos
 - Notas operacionais: [[modelo-contexto]], [[modelo-plano]], [[modelo-decisao]], [[modelo-bug]], [[modelo-diario]]

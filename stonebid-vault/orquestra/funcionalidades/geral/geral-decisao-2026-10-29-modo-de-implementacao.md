@@ -23,6 +23,7 @@ aliases: [Modo de implementação, Como implementar e publicar, Fluxo container 
 - Funcionalidade: [[geral-contexto]]
 - Plano: [[esqueleto-plano]]
 - Acesso e usuários: [[acesso-de-teste]]
+- Comandos e contornos do proxy: [[passo-a-passo-do-agente]]
 - Decisões ligadas: [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-camada-mcp]]
 - Projeto: [[geral-contexto]]
 - Regras: [[manual-da-orquestra]]
