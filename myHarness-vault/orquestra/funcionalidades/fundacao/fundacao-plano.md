@@ -38,12 +38,12 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Devolvido para correção: não
 
 ### T2: mascaramento de segredo
-- **Faz:** módulo que mascara token e segredo em texto (RN-04, RNF-05) e aplicação dele no texto livre da CLI que a T1 leva ao `Display` e ao `Debug` (`ObsidianFechado.mensagem_da_cli`, `LoginClaudeCliFalhou.motivo`).
+- **Faz:** módulo que mascara, em texto, só tokens com prefixo conhecido e o valor exato dos segredos que o núcleo guarda, sem adivinhar pelo formato ([[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]); aplicação dele no texto livre da CLI que a T1 leva ao `Display` e ao `Debug` (`ObsidianFechado.mensagem_da_cli`, `LoginClaudeCliFalhou.motivo`).
 - **Toca em:** `crates/core/`
 - **Depende de:** T1
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] nenhum formato de segredo do contrato sai em texto puro nos testes
+  - [ ] nenhum token com prefixo da RN-04 nem segredo guardado pelo núcleo sai em texto puro nos testes; texto sem esses segredos sai igual
 - **Prova:** `cargo test`
 - **Verificação:**
   - Data: 2026-11-19
@@ -54,7 +54,7 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Terceira volta (2026-11-20, commit `7c6f82e`): ✔ nenhum vazamento em 109 casos; ✔ testes, escopo e commit; ✘ excesso de máscara na mensagem padrão do clap (`--token <TOKEN>` lido como tag XML apaga o resto). Opcional: `Authorization: Digest` mascara `username=` e deixa o hash de `response` à vista.
   - Quarta volta: 2026-11-20, para um implementador novo, só nesses dois pontos.
   - Quarta volta (commit `c0e07eb`): ✔ dica do clap intacta; ✔ `Digest` mascarado até o fim da linha; ✘ regressão: tag XML sem fechamento na mesma linha deixou de mascarar (4 vazamentos que o `7c6f82e` cobria).
-  - Quinta volta: 2026-11-20, para um implementador novo: valor da tag lido além da quebra de linha; sem fechamento, só com cara de segredo.
+  - Quinta volta: interrompida em 2026-11-20 pela troca de abordagem ([[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]). A T2 é refeita na branch `feat/setup-mascaramento-por-prefixo`, a partir da T1 (`feafd97`); a branch `feat/setup-mascaramento-segredo` fica fora da PR.
 
 ### T3: montagem da chamada ao `claude -p`
 - **Faz:** monta os argumentos (modelo, ferramentas, pastas, instruções, saída em fluxo JSON) conforme [[geral-decisao-2026-11-19-agente-por-claude-p]].
@@ -111,5 +111,6 @@ Série T1 → T5; cada tarefa passa por um verificador antes da seguinte. Cada t
 - Funcionalidade: [[fundacao-contexto]]
 - Projeto: [[geral-contexto]]
 - Branches: [[geral-decisao-2026-11-19-branches-e-pr-unica]]
+- Mascaramento: [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]
 - Roteiro: [[geral-plano]]
 - Regras: [[manual-da-orquestra]]
