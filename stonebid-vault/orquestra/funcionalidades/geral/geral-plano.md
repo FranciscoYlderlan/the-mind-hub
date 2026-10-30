@@ -7,7 +7,7 @@ criado: 2026-10-28
 # 🧭 Roteiro — Stonebid
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **4. Lances (I2)** (planejada)
+> Etapa atual: **4. Lances (I2)** (em-construcao)
 
 > [!success] Aprovado
 > Etapas aprovadas em [[geral-decisao-2026-10-29-roteiro]]. Mudar a lista de etapas é uma nova decisão.
@@ -42,10 +42,10 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 2026-10-30
 
 ## 4. Lances (I2)
-- **Status:** planejada
+- **Status:** em-construcao
 - **Objetivo:** validação do lance, saldo comprometido, recusas e hash encadeado.
 - **Pronto quando:** T-01 a T-03 passando.
-- **Funcionalidades:** 
+- **Funcionalidades:** [[lances-contexto]]
 - **Notas geradas:** 
 - **Concluída em:** 
 
