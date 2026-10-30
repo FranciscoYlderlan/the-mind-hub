@@ -632,8 +632,8 @@ def main():
     c.add_argument("cofre"); c.add_argument("--projeto", required=True); c.add_argument("--para-que", required=True)
     c.add_argument("--repo", default="[a preencher]"); c.add_argument("--vault")
     s = sub.add_parser("sincronizar"); s.add_argument("cofre"); s.add_argument("--vault")
-    v = sub.add_parser("verificar"); v.add_argument("cofre"); v.add_argument("--vault")
-    st = sub.add_parser("status"); st.add_argument("cofre"); st.add_argument("--atualizar", action="store_true")
+    v = sub.add_parser("verificar"); v.add_argument("cofre", nargs="?", default="."); v.add_argument("--vault")
+    st = sub.add_parser("status"); st.add_argument("cofre", nargs="?", default="."); st.add_argument("--atualizar", action="store_true")
     a = ap.parse_args()
     if a.cmd == "criar":
         sys.exit(criar(a))
