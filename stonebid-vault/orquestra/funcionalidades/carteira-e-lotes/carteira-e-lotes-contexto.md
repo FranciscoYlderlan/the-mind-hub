@@ -28,9 +28,10 @@ Etapa 3 do [[geral-plano]] (I1 de [[contrato-processo-e-plano]]): RF-40 a RF-42,
 - 2026-10-29: etapa aberta; plano [[carteira-e-lotes-plano]] escrito como proposta; decisões da etapa aprovadas às 22:23.
 - 2026-10-29 22:45–22:55: T1a (carteira, PR #1 do `stonebid-api`), T1b (lotes, PR #2 do `stonebid-api`) e T2 (telas, PR #3 do `stonebid-web`) entregues por três subagentes em paralelo, todos com CI verde ([[carteira-e-lotes-plano]]).
 - 2026-10-29 23:05–23:20: merge do humano dos PRs #1 e #2 do `stonebid-api` e #3 e #4 do `stonebid-web`; `staging` atualizada, CD verde (T3).
-- 2026-10-29 23:30–23:40: verificação no ar (T4) em staging: busca, criação de lote, depósito idempotente e 403 provados; bloqueante no depósito pela tela e outros três achados, devolvidos como T5a a T5e em [[carteira-e-lotes-plano-correcoes]] ([[carteira-e-lotes-plano-correcoes-t5a-e-t5b]]).
+- 2026-10-29 23:30–23:40: verificação no ar (T4) em staging: busca, criação de lote, depósito idempotente e 403 provados; bloqueante no depósito pela tela e outros três achados, devolvidos como T5a a T5e em [[carteira-e-lotes-plano-correcoes]] ([[carteira-e-lotes-plano-correcoes-t5a-e-t5b]] · [[carteira-e-lotes-plano-correcoes-t5c-a-t5h]]).
 - 2026-10-29 23:47 – 2026-10-30 00:10: T5a (PR #3 do `stonebid-api`), T5b (PR #6), T5d (PR #5) e T5c (PR #4 do `stonebid-api` e #7 do `stonebid-web`) entregues por subagentes em paralelo e mergeadas pelo humano. T5a, T5b e T5d aprovadas por verificadores de código e por um verificador no Chrome em staging; T5c ainda sem a verificação no Chrome. Achados viraram a T5f (proposta).
-- 2026-10-30: T5c verificada no Chrome (miniaturas pela API, nada em `artic.edu`; centavos da T5a batem). Mergeados: T5f (#8 do web, `a3836fc`), T5g (#5 da API, `7246bf1`) e T5h (#6 da API, `ad06247`); staging igual à `main`. Em andamento: T5i (feedback ao criar lote) e T5j (RN-19 na API).
+- 2026-10-30: T5c verificada no Chrome (miniaturas pela API, nada em `artic.edu`; centavos da T5a batem). Mergeados: T5f (#8 do web, `a3836fc`), T5g (#5 da API, `7246bf1`) e T5h (#6 da API, `ad06247`); staging igual à `main`.
+- 2026-10-30 07:0x: verificadas no Chrome a T5h (IP do cliente no Cloud Logging), a T5i (feedback ao criar lote, #9 do web), a T5j (RN-19: #7 da API e #10 do web; selo "Vendido" sem prova no ar antes do I2) e a T5k (#8 da API, #11 do web). Staging: API `e4397c9`, web `492ee4f`. Falta a T5e.
 
 ## Tempo disponível
 O do [[geral-contexto]]: entrega em 2026-10-30 16:00.

@@ -25,96 +25,43 @@ Corrigir o que a T4 de [[carteira-e-lotes-plano]] achou em staging (2026-10-29 2
 
 T5a (resposta do depósito sem o teto) e T5b (erro cru no toast e API simulada) estão verificadas no ar: [[carteira-e-lotes-plano-correcoes-t5a-e-t5b]].
 
-### T5c: miniaturas da busca não carregam
-- **Achado:** as imagens IIIF da AIC (`www.artic.edu/iiif/2/...`) abrem no navegador com o desafio anti-robô da Cloudflare ("Um momento…"); o `<img>` falha e o `CoverImage` mostra o marcador em todos os resultados. A cópia feita pelo servidor na criação do lote funciona (JPEG de 272 KB, servido por `/lots/:id/image`).
-- **Faz:** rota da API que entrega a miniatura do item a partir de um identificador validado ([[geral-decisao-2026-10-29-miniatura-da-busca-pela-api]]); a busca do web usa essa URL no lugar do IIIF.
-- **Toca em:** `stonebid-api` (`src/infra/external/`, `src/infra/http/`, MCP) e/ou `stonebid-web` (`catalog-item-card.tsx`, `create-lot-dialog.tsx`).
-- **Depende de:** nenhuma
-- **Paralelo:** sim, com T5a, T5b e T5d
-- **Pronto quando:**
-  - [ ] a busca em staging mostra imagem (ou o que for aprovado) sem pedir ao navegador o IIIF da AIC
-- **Prova:** Chrome em staging
-- **Verificação:**
-  - Data: 2026-10-30 00:05 (merge) e 2026-10-30 06:2x (Chrome, staging)
-  - Critérios ✔/✘ com a prova de cada um:
-    - PR #4 do `stonebid-api` (merge `31c3682`): `GET /items/images/:imageId/thumbnail`, pública, id só UUID (sem SSRF), IIIF de 400 px, timeout, corte em 1 MB, `Cache-Control` de 7 dias; 68 testes e CI verdes.
-    - PR #7 do `stonebid-web` (merge `d70333f`): card e prévia usam a rota; `e2e/catalog-thumbnail.spec.ts` prova que nada vai a `artic.edu`; 29 testes e CI verdes.
-    - ✔ Chrome: buscas "monet" e "vaso ceramica", 24 de 24 miniaturas de `/items/images/<uuid>/thumbnail` (200, `image/jpeg`); prévia do "Novo lote" com imagem real; nenhuma requisição a `artic.edu`. Ids não UUID voltam 400 sem busca externa.
-  - Devolvido para correção: não
-  - Riscos anotados pelo implementador viraram a T5g e a T5h (aprovadas pelo humano).
-
-### T5d: sem caminho para o painel e a carteira
-- **Achado:** na vitrine e no cabeçalho não há link para `/auctioneer` nem para `/wallet`; o menu do usuário tem só "Minha conta" e "Sair". O menu lateral com "Painel do leiloeiro" ou "Carteira" só aparece dentro da área logada, aberta pela URL.
-- **Faz:** no `stonebid-web`, o menu do usuário (e o cabeçalho, se couber) leva ao painel quando o papel é LEILOEIRO e à carteira quando é LICITANTE.
-- **Toca em:** `stonebid-web`: componente do cabeçalho e menu do usuário, `e2e/`.
-- **Depende de:** nenhuma
-- **Paralelo:** sim, com T5a e T5b
-- **Pronto quando:**
-  - [ ] da vitrine, cada papel chega à sua área em um clique; Playwright cobre os dois papéis; CI verde
-- **Prova:** Playwright
-- **Verificação:**
-  - Data: 2026-10-30 00:03 (código) e 2026-10-30 00:05 (Chrome, staging)
-  - Critérios ✔/✘ com a prova de cada um:
-    - ✔ PR #5 do `stonebid-web` (merge `5c5c800`): atalho no cabeçalho e no menu do usuário em `session-actions.tsx`, a partir de `navItemsFor`; `e2e/role-shortcut.spec.ts`; CI verde.
-    - ✔ Verificador de código: 1 clique por papel a 375 e 1280 px; nenhum papel vê o atalho do outro; visitante sem atalho; nome acessível, foco por Tab e Enter; 20/20 testes.
-    - ✔ Chrome: licitante → `/wallet` e leiloeiro → `/auctioneer` em 1 clique; deslogado sem atalho. A janela não redimensionou, então a largura estreita ficou provada só no Playwright.
-  - Devolvido para correção: não. Achado: o cabeçalho passa da largura da tela no celular (2 px com o nome padrão a 375 px; até 118 px com nome longo a 320 px), virou a T5f.
-
-### T5f: cabeçalho no celular e origem da obra
-- **Achado:** (1) a 375 px o cabeçalho passa da largura da tela: o nome do usuário e o botão novo da T5d somam mais que a tela (2 px com o nome padrão; 63 px com nome longo a 375 px, 118 px a 320 px). Os testes só rodam na largura de desktop. (2) A API manda `attributes.placeOfOrigin`, mas o web lê `origin` (`lot-schemas.ts`, `item-attributes.tsx`), então a "Origem" da obra nunca aparece. Achados pelos verificadores da T5d e pelos implementadores da T5b e da T5c.
-- **Faz:** no `stonebid-web`, esconder o nome do usuário abaixo de `sm` e deixar o lado direito do cabeçalho encolher (`min-w-0`), com teste do Playwright a 320 e 375 px sem rolagem horizontal; o schema e a tela dos atributos leem `placeOfOrigin`, e a API simulada já usa esse nome.
-- **Toca em:** `stonebid-web`: cabeçalho e `session-actions.tsx`, `src/features/lots/` (schema e `item-attributes.tsx`), `e2e/`.
-- **Depende de:** nenhuma (aval do humano em 2026-10-30)
-- **Paralelo:** sim, com a verificação da T5c no Chrome
-- **Pronto quando:**
-  - [ ] a 320 e 375 px a página não rola na horizontal, com nome longo
-  - [ ] a "Origem" aparece no lote que tem `placeOfOrigin`; lint, Prettier, tipos, build e Playwright; CI verde
-- **Prova:** Playwright; Chrome em staging
-- **Verificação:**
-  - Data: 2026-10-30 06:2x (merge) e 06:4x (Chrome, staging)
-  - Critérios ✔/✘ com a prova de cada um:
-    - ✔ Chrome (iframe de 320 e 375 px; o `resize_window` não estreita): sem rolagem horizontal para leiloeiro, licitante e visitante; atalho e menu com nome acessível e 1 clique. Visitante a 320 px com folga zero ("Cadastrar" termina em 308 px): com barra de rolagem clássica sobram 2 px.
-    - ✔ "Origem" na página do lote e na busca, igual ao `placeOfOrigin` da API.
-    - PR #8 do `stonebid-web` (merge `a3836fc`): cabeçalho encolhe abaixo de `sm` (avatar sem nome; "Entrar" vira ícone), `placeOfOrigin` no schema e na tela; `e2e/mobile-header.spec.ts` e `e2e/item-origin.spec.ts`; 37 testes e CI verdes.
-  - Devolvido para correção: não
-
-### T5g: cache e limite da miniatura
-- **Achado:** risco da T5c: rota pública sem limite e sem cache no servidor.
-- **Faz:** cache LRU em memória e limite por IP só na rota ([[geral-decisao-2026-10-30-cache-e-limite-da-miniatura]]).
-- **Toca em:** `stonebid-api`: `src/infra/external/`, `src/app.ts`, `src/infra/http/`, `test/`.
-- **Verificação:**
-  - Data: 2026-10-30 06:2x (merge) e 06:4x (Chrome, staging)
-  - Critérios ✔/✘ com a prova de cada um:
-    - ✔ Chrome: miniaturas 200 sem `artic.edu`; cache no servidor (1º pedido ~580 ms, seguintes ~100 ms); rajada de 130: 120 com 200 e 429 a partir do 121º, corpo `TOO_MANY_REQUESTS`; `/health` 200 logo depois. `retry-after` sem prova pelo navegador (CORS não expõe o cabeçalho).
-    - PR #5 do `stonebid-api` (merge `7246bf1`): `thumbnail-cache.ts`, `@fastify/rate-limit` com `global: false`, erro `TOO_MANY_REQUESTS`; 80 testes e CI verdes.
-  - Devolvido para correção: não
-
-### T5h: IP real atrás do proxy do Cloud Run
-- **Achado:** sem `trustProxy`, todos os clientes de uma instância dividiam o mesmo balde.
-- **Faz:** `trustProxy` pela faixa `169.254.0.0/16` ([[geral-decisao-2026-10-30-cache-e-limite-da-miniatura]]).
-- **Verificação:**
-  - Data: 2026-10-30 06:33 (merge, PR #6 do `stonebid-api`, `ad06247`); 83 testes e CI verdes.
-  - Falta: no Cloud Logging, o IP do pedido deve ser o do cliente, não `169.254.x.x` `[a confirmar]`.
-  - Devolvido para correção: não
+T5c, T5d e T5f a T5h estão verificadas no ar: [[carteira-e-lotes-plano-correcoes-t5c-a-t5h]].
 
 ### T5i: feedback ao criar lote
 - **Achado:** o toast "Lote criado." some em ~4 s longe do olhar e o lote novo entra 4 a 5 telas abaixo, sem destaque; o título da seção fica atrás do cabeçalho fixo (pesquisa de UX no Chrome, 2026-10-30).
 - **Faz:** pacote A + B + C aprovado pelo humano: toast com título, início e ação "Ver lote" (~8 s); rolar até o card novo e realçar; `scroll-margin-top`; botão com "Criando lote…".
 - **Toca em:** `stonebid-web`: `src/features/lots/`, painel do leiloeiro, `e2e/`.
 - **Verificação:**
-  - Data: 2026-10-30 06:4x: PR #9 do `stonebid-web` mergeado (`c3811bb`, 39 testes); verificação no Chrome pendente
+  - Data: 2026-10-30 06:4x (merge, PR #9 do `stonebid-web`, `c3811bb`, 39 testes) e 07:0x (Chrome, staging)
+  - Critérios ✔/✘ com a prova de cada um:
+    - ✔ "Criando lote…" desabilitado durante o envio; duplo clique dá 1 POST.
+    - ✔ Toast com título, início e "Ver lote", 8,2 s na tela.
+    - ✔ Rola até o card novo, realça e foca. O título "Agendados" fica 4 px sob o cabeçalho, legível.
+    - ✔ "Ver lote" rola até o card certo no painel, sem abrir `/lots/:id`; o humano aprovou assim (07:05).
+  - Devolvido para correção: não. Acabamentos anotados, sem tarefa por ora (humano, 07:05): os 4 px do título; o foco volta ao elemento anterior depois do "Ver lote" `[a confirmar]`; com lance inicial e incremento vazios o envio não faz nada e não mostra erro.
 
 ### T5j: RN-19, obra única por lote
 - **Faz:** [[geral-decisao-2026-10-30-obra-unica-por-lote]]. API: regra no domínio, 409 ao criar, um lote só em pedidos simultâneos, situação da obra na busca. Web (depois da T5i e da API): selo "Em leilão"/"Vendido" com link e botão desabilitado.
 - **Verificação:**
-  - Data: 2026-10-30 06:5x: **PR #7 do `stonebid-api`** mergeado (`d4755fd`, 100 testes); verificação no ar pendente; web ainda não despachado.
+  - Data: 2026-10-30 06:5x (API, PR #7 do `stonebid-api`, `d4755fd`, 100 testes), 07:00 (web, PR #10 do `stonebid-web`, `492ee4f`, 43 testes) e 07:0x (Chrome, staging)
+  - Critérios ✔/✘ com a prova de cada um:
+    - ✔ API: busca com `auction` certo (SCHEDULED, LIVE quando começa, `null` sem lote); obra repetida dá 409 `ITEM_ALREADY_AUCTIONED` com `details`; 2 e 4 pedidos simultâneos dão um só 201.
+    - ✔ Web: selo "Em leilão" com link para o lote certo; "Criar lote" desabilitado com motivo visível em `aria-describedby`; corrida dá aviso em português no diálogo com "Ver o lote" e a busca recarrega; feedback da T5i intacto.
+    - ✘ Selo "Vendido" sem prova no ar: não há lote SOLD em staging antes do I2 (coberto no Playwright).
+  - O PR #10 tocou `src/lib/api-client.ts` (fora da lista) para guardar o `details` do erro no `ApiError`.
   - Trava por obra com `pg_advisory_xact_lock` (o estado do lote é calculado pelo relógio, então índice único parcial não serve); provada no repositório com janela forçada (sem a trava, o teste falha).
   - Contrato para o web: busca `items[].auction: null | { status: 'SCHEDULED' | 'LIVE' | 'SOLD', lotId }` (SCHEDULED/LIVE = "Em leilão", SOLD = "Vendido"); 409 `ITEM_ALREADY_AUCTIONED` com `details: { status, lotId }`. Banco fora: busca segue com `auction: null`.
   - Fora do escopo: `README.md` da API sem o 409 e o campo `auction`; no I2, o leitor real de lances precisa de `listLotIdsWithBids` (até lá todo lote encerrado libera a obra).
 
-### T5k: acabamentos achados na verificação (proposta)
+### T5k: acabamentos achados na verificação
 - **Achado:** mensagem do 429 mistura idiomas ("Tente de novo em 48 seconds"); `retry-after` fora do `Access-Control-Expose-Headers`; visitante a 320 px sem folga no cabeçalho.
-- **Depende de:** aval do humano
+- **Depende de:** nenhuma (aval do humano em 2026-10-30 06:53)
+- **Verificação:**
+  - Data: 2026-10-30 07:00 (merge: PR #8 do `stonebid-api`, `e4397c9`, 108 testes; PR #11 do `stonebid-web`, `b489008`, 41 testes) e 07:0x (Chrome, staging)
+  - Critérios ✔/✘ com a prova de cada um:
+    - ✔ Rajada de 140: 120 com 200 e 20 com 429 "Muitas requisições. Tente de novo em 60 segundos."; o JS lê `retry-after` e `x-ratelimit-*`; `/health` 200 depois.
+    - ✔ Visitante a 320 e 305 px sem rolagem horizontal; "Entrar" e "Cadastrar" só ícone, 40 × 40 px, com nome acessível; 12 px de folga. Leiloeiro sem rolagem. Licitante sem prova nova (o PR só mudou o visitante; verificado na T5f).
+  - Devolvido para correção: não. Achado: botões do leiloeiro e o "Alternar tema" com 32 px de altura, abaixo de 40 px.
 
 ### T5e: repetir a T4 e o verificador independente
 - **Faz:** depois do merge de T5a, T5b e T5d e do CD de staging, o orquestrador repete no Chrome o depósito com duplo clique (saldo, extrato e campo atualizam sem recarregar) e a busca; o verificador independente lê o diff e os testes de T1, T2 e T5 (parte da T4 ainda não feita).
@@ -125,12 +72,25 @@ T5a (resposta do depósito sem o teto) e T5b (erro cru no toast e API simulada) 
   - [ ] relatórios sem bloqueante
 - **Prova:** relatórios
 - **Verificação:**
-  - Data:
+  - Data: 2026-10-30 07:2x–07:3x (Chrome, staging, API `e4397c9`, web `492ee4f`; código: API 108 testes, web 45 no Playwright, lint, tipos e build verdes)
   - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+    - ✔ Chrome: duplo clique dá 1 `POST /wallet/deposits` (Resource Timing); saldo, extrato e campo sem recarregar; `amountCents` bate. Limites em português na tela e na API. Busca com miniaturas só pela API, selo "Em leilão" com link certo. Console limpo.
+    - ✔ Código: centavos inteiros ponta a ponta; depósito duplo e corrida (5 simultâneos dão 1×201); teto na resposta; extrato e saldo; papéis, T-07, T-08, RN-19; API simulada igual aos controllers (sem teste de contrato automático).
+    - ✘ B1 (bloqueante): `ZodError` cru em inglês nas telas que carregam dados (`error-state.tsx:27`, `item-search.tsx:67`, `__root.tsx:64`); a T5b só cobriu formulários.
+    - ✘ Deve corrigir: "1,234" deposita R$ 1.234,00 sem aviso ("1,2,3" vira R$ 12,03; "0,001" vira R$ 1,00); API com mensagem em inglês em `POST /lots` sem corpo e em nome/senha longos no cadastro (o web não limita); RN-18: chave nova a cada envio, nova tentativa de rede pode depositar duas vezes (`deposit-form.tsx:46`).
+  - Devolvido para correção: sim, T5l (proposta). Staging: licitante-1 ganhou depósitos de R$ 12,34 e R$ 1.234,00 do teste.
+
+### T5l: erro cru no carregamento, valor ambíguo, RN-18 e alvo de toque
+- **Faz:** web: toda tela de carregamento com mensagem em português, nunca `error.message` de erro que não veio da API; chave do depósito mantida até sucesso ou troca do valor; campo de valor recusa formato ambíguo ("como 100,00"); limite de tamanho em nome e senha; botões do cabeçalho ("Alternar tema", "Carteira", menu do usuário e botões do leiloeiro) com alvo de toque de 40 × 40 px, sem rolagem horizontal a 305 e 320 px. API: mensagens em português no `POST /lots` sem corpo e nos `.max()` do cadastro.
+- **Toca em:** `stonebid-web` (`error-state.tsx`, `item-search.tsx`, `__root.tsx`, carteira, auth, `e2e/`); `stonebid-api` (`lot-schemas.ts`, `auth-schemas.ts`, testes). Um implementador e um PR por repositório.
+- **Fora:** opcionais O1 a O4 (teto em `details`, mensagem do `externalId`, teto do `DEPOSIT_LIMIT_CENTS`).
+- **Depende de:** nenhuma (aval do humano em 2026-10-30 07:5x, com o alvo de toque de 40 px dentro)
+- **Fluxo:** cada implementador abre o próprio PR assim que a sua tarefa termina, sem esperar o outro (humano, 2026-10-30 08:0x).
+- **Verificação no ar:** ao fim da implementação, depois do merge e do CD de staging, um subagente verificador no Chrome, diferente dos implementadores, testa as alterações em staging e repete a T5e; então fechar a etapa 3 (humano, 2026-10-30 08:0x).
+- **Andamento:** implementado nas worktrees, prova verde: web `03742ca` (branch `fix/RF-40-erro-cru-no-carregamento`, 67 testes no Playwright, lint, tipos e build); API `65069ef` (branch `fix/RF-40-mensagens-em-portugues`, 111 testes). Push e PR esperam os repositórios reanexados à sessão (proxy deu 403).
 
 ## Próxima tarefa e a seguinte
-T5a e T5c verificadas no ar. Agora: registrar o relatório do verificador da T5f e da T5g no Chrome; conferir a T5h no Cloud Logging; merge da T5i e da RN-19 na API, depois o web da RN-19; então T5e e fechar a etapa 3. Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58).
+T5a a T5d e T5f a T5k verificadas no ar; T5e devolvida (B1). Agora: push e PR da T5l, merge, verificador no Chrome repete a T5e e fechar a etapa 3; depois a etapa 4 (Lances). Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58).
 
 ## Prioridades
 T5a primeiro: é o bloqueante e o I2 grava saldo em cima da carteira. T5c pode ficar para depois se apertar.
@@ -142,6 +102,7 @@ T5a primeiro: é o bloqueante e o I2 grava saldo em cima da carteira. T5c pode f
 ### 🔗 Conexões
 - Plano de origem: [[carteira-e-lotes-plano]] (T4)
 - T5a e T5b: [[carteira-e-lotes-plano-correcoes-t5a-e-t5b]]
+- T5c a T5h: [[carteira-e-lotes-plano-correcoes-t5c-a-t5h]]
 - Funcionalidade: [[carteira-e-lotes-contexto]]
 - Acesso: [[acesso-de-teste]]
 - Projeto: [[geral-contexto]]
