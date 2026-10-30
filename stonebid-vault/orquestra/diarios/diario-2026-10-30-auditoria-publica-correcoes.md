@@ -14,19 +14,22 @@ Parte de [[diario-2026-10-30]], depois de [[diario-2026-10-30-auditoria-publica]
 - 14:5x: Chrome: 5 de 5 ✔, sem bloqueante.
 - 14:54: humano escolheu: corrigir o bloqueante, `seq: null` na API, documentar a cadeia vazia e incluir os 4 opcionais: [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]] (substitui em parte [[geral-decisao-2026-10-30-auditoria-publica]], só a linha do que a auditoria confere). T6, T7 e T8 criadas em [[auditoria-publica-plano]].
 - Termos varridos: "O que confere", "RECEIPT_MISMATCH", "SETTLEMENT_MISMATCH", "NO_WINNER", "seq", "Onde parei". Tocadas: [[auditoria-publica-plano]], [[auditoria-publica-contexto]], [[geral-decisao-2026-10-30-auditoria-publica]], [[geral-plano]], [[geral-contexto]], [[diario-2026-10-30]], [[diario-2026-10-30-auditoria-publica]].
+- 15:02: sessão nova pelo "Onde parei". `stonebid-api` e `stonebid-web` anexados com `push` e clonados (`3901df8`, `972b7ae`); T6 e T7 despachadas em paralelo, uma worktree cada.
+- 15:1x: T6 no PR #15 da API (`9f6b500`, CI verde, 229 testes); lance atual e líder adulterados dão `HEAD_MISMATCH`. T7 no PR #20 do web (`9365f7e`, CI verde, 127 testes Playwright). Detalhes em [[auditoria-publica-plano]].
+- 15:21: humano: o limite de crédito da sessão acaba; reseta entre 16:30 e 16:40 e o trabalho segue dali, passando das 16:00, "nada grave".
+- Termos varridos: "T6", "T7", "16:00", "Onde parei". Tocadas: [[auditoria-publica-plano]], [[auditoria-publica-contexto]].
 
 ## Decisões tomadas
 - [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]].
 
 > [!tip] Onde parei
-> - **Próximo passo** (agente novo, entrega às **16:00**):
->   1. Anexar `stonebid-api` e `stonebid-web` com `access: "push"` e clonar ([[passo-a-passo-do-agente]], seção 2). `main` = `staging`: API `3901df8`, web `972b7ae`.
->   2. Despachar em paralelo T6 (API, `fix/RF-60-conferencia-da-auditoria`) e T7 (web, `fix/RF-60-link-da-auditoria`) de [[auditoria-publica-plano]], com o que está em [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]]. Tudo já decidido: não perguntar de novo ao humano.
->   3. T8: merge do humano, `staging` dos dois, CD verde, verificador no Chrome e de código.
->   4. Etapa 6 `concluida` no [[geral-plano]]; etapa 8 (README dos dois repositórios com as telas, incluindo `/lots/:id/audit`, e relato do uso de IA, E6) antes das 16:00. Se o tempo apertar, a etapa 8 vem antes da T8.
-> - **Threads abertas:** nenhum subagente rodando; nada sem registro.
-> - **Dúvidas para o humano:** as herdadas de [[diario-2026-10-30-sala-ao-vivo]] (opcionais da T6, "Request headers" do conector, registro do uso de IA, achados da T5m).
-> - **Candidatos a nota:** os herdados de [[diario-2026-10-30-auditoria-publica]]; passo a passo: push na `staging` de clone raso pede `git fetch --depth 5 origin staging main` antes; o CD por `workflow_run` aparece como `main` na REST (parear pelo horário com o CI); verificador de código precisa do repositório anexado na sessão para ler pela REST.
+> - **Próximo passo** (retomada entre 16:30 e 16:40):
+>   1. Conferir o merge do humano nos PRs #15 da API e #20 do web. Sem merge: pedir.
+>   2. T8 de [[auditoria-publica-plano]]: `git fetch --depth 5 origin staging main` e `staging` avançada nos dois ([[passo-a-passo-do-agente]], seção 5); CD verde; verificador no Chrome (lotes da T5 seguem ÍNTEGRO; sala 404 sem "Ver auditoria") e verificador de código nos dois diffs.
+>   3. Etapa 6 `concluida` no [[geral-plano]]; etapa 8 (README dos dois repositórios com as telas, incluindo `/lots/:id/audit`, e relato do uso de IA, E6). Pode rodar em paralelo com a T8.
+> - **Threads abertas:** nenhum subagente rodando; PRs #15 e #20 aguardando merge.
+> - **Dúvidas para o humano:** as herdadas de [[diario-2026-10-30-sala-ao-vivo]].
+> - **Candidatos a nota** (para [[passo-a-passo-do-agente]]): os herdados de [[diario-2026-10-30-auditoria-publica]]; push na `staging` de clone raso pede `git fetch --depth 5 origin staging main`; o CD por `workflow_run` aparece como `main` na REST; verificador de código precisa do repositório anexado; `prisma generate` e o setup de teste rodam offline com `PRISMA_SCHEMA_ENGINE_BINARY` num script falso, depois de migrations por `psql` e seed por `tsx`; Postgres próprio por worktree (`initdb` em `/var/lib/postgresql/<pasta>`, outra porta); `npm ci --ignore-scripts` pede `prisma generate` à mão; `playwright.config.ts` com porta fixa 4173 (sugestão: `process.env.PORT ?? 4173`); o que só existe com o lote carregado entra por slot do `LotRoom`.
 
 ### 🔗 Conexões
 - Diário do dia: [[diario-2026-10-30]]
