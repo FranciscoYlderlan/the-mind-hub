@@ -36,10 +36,10 @@ frontend/
     ├── routes/                      # TanStack Router (file-based), só a "cola"
     │   ├── __root.tsx               # Layout raiz, 404 e error boundary; sessão (401 = visitante, não erro)
     │   ├── _public/                 # Layout sem URL: acesso livre, com ou sem login (RF-03)
-    │   │   ├── route.tsx            # PublicShell; nunca lê sessão nem redireciona
+    │   │   ├── route.tsx            # PublicShell; nunca redireciona (só a sala do lote lê a sessão)
     │   │   ├── index.tsx            # /              vitrine
     │   │   ├── lots/$id.tsx         # /lots/:id      sala do lote, só para ver
-    │   │   ├── audits/$id.tsx       # /audits/:id    auditoria do lote
+    │   │   ├── lots/$id/audit       # /lots/:id/audit auditoria do lote
     │   │   └── receipts/$id.tsx     # /receipts/:id  comprovante (id = token aleatório)
     │   ├── _auth/                   # Layout sem URL: só para quem NÃO entrou
     │   │   ├── route.tsx            # Logado → volta para o ?redirect ou para /
@@ -89,9 +89,9 @@ frontend/
 - **Nomes (humano, 2026-10-29):** regra geral dos dois repositórios, `stonebid-web` e `stonebid-api`: nomes de arquivos e de entidades em **inglês** e **kebab-case** (ex.: `auction-lot.ts`, `place-bid.ts`, `bid-history.tsx`). Vale desde a criação do projeto.
 - **Como funciona:**
   - **Fluxo de uma tela:** a URL casa com um arquivo em `routes/`. Esse arquivo valida os search params, roda o `beforeLoad` (guard) e o `loader` (prefetch) e renderiza o componente de tela, que vem da feature. A feature busca os dados pelo hook que usa as **mesmas queryOptions do loader**, então o dado já está em cache quando o componente monta.
-  - **Três layouts sem URL, uma regra cada (2026-10-29):** `_public` abre para todos e nunca lê a sessão nem redireciona; `_auth` é só para quem não entrou; `_app` é só para quem entrou. As páginas do RF-03 (vitrine, sala só para ver, auditoria e comprovante) ficam em `_public`. Ação que exige login aponta para a rota protegida: o guard do `_app` manda para `/login?redirect=<url>` e, depois do login, a pessoa volta para onde estava.
+  - **Três layouts sem URL, uma regra cada (2026-10-29):** `_public` abre para todos e nunca redireciona; só a sala do lote lê a sessão já resolvida ([[geral-decisao-2026-10-30-sala-publica-le-a-sessao]]); `_auth` é só para quem não entrou; `_app` é só para quem entrou. As páginas do RF-03 (vitrine, sala só para ver, auditoria e comprovante) ficam em `_public`. Ação que exige login aponta para a rota protegida: o guard do `_app` manda para `/login?redirect=<url>` e, depois do login, a pessoa volta para onde estava.
   - **Mesma tela em dois níveis de acesso: duas rotas, um componente.** A feature expõe a tela com um espaço (slot) para a parte que muda, e cada rota passa o que cabe ali. A sala do lote: `/lots/$id` renderiza `<LotRoom id={id} bidSlot={<Button asChild><Link to="/bidding/$id" params={{ id }}>Dar lance</Link></Button>} />`; `/bidding/$id` renderiza `<LotRoom id={id} bidSlot={<BidPanel id={id} />} />`. O componente não sabe quem está vendo: sem `if (logado)` dentro dele e sem trecho copiado entre as telas.
-  - **Dado público e dado pessoal separados:** a página pública só usa consultas públicas; dados do usuário (posição nos lances, "você está ganhando") ficam em consultas próprias, usadas só na rota protegida, para não entrar no cache da página pública.
+  - **Dado público e dado pessoal:** a sala do lote recebe o `viewer` na própria consulta do lote, e o cache é descartado na troca de sessão ([[geral-decisao-2026-10-30-sala-publica-le-a-sessao]]); a auditoria fica em `/lots/:id/audit` ([[geral-decisao-2026-10-30-caminho-da-auditoria]]).
   - **Direção das dependências:** `routes → features → components / hooks / lib`. A camada de baixo nunca importa da de cima. Features não importam de outras features; o que for compartilhado sobe para `components/`, `hooks/` ou `lib/`.
   - **Responsabilidade de cada camada:**
     - `routes/`: define URL, guards, loaders e search params. Sem lógica de negócio e sem componentes próprios.
@@ -115,7 +115,7 @@ frontend/
   - `feature1/` e `feature2/` são **marcadores da estrutura**, não features do projeto. Agente não deduz domínio a partir deles: as features reais nascem cada uma com o próprio `<func>-contexto`.
   - CI e CD ficam em arquivos separados em `.github/workflows/`: o `cd.yml` só roda depois do CI verde na branch principal.
   - Toda feature criada passa pelo teste com Playwright de outro agente: [[geral-decisao-2026-10-28-testes-frontend-playwright]].
-  - `_public` nunca redireciona nem depende de sessão. `_app` não tem `index.tsx`: depois do login, o leiloeiro vai para o painel e o licitante volta ao `?redirect` (ou à vitrine).
+  - `_public` nunca redireciona; só a sala do lote lê a sessão ([[geral-decisao-2026-10-30-sala-publica-le-a-sessao]]). `_app` não tem `index.tsx`: depois do login, o leiloeiro vai para o painel e o licitante volta ao `?redirect` (ou à vitrine).
   - O `?redirect` do login aceita só caminho interno (zod, `/^\/(?!\/)/`), contra redirecionamento aberto (`//site-externo.com`).
   - `/bidding/$id` aceita só licitante; o leiloeiro é mandado para `/lots/$id`. A proteção real continua no servidor ([[contrato-requisitos-funcionais]], RF-02).
   - Proibido: duplicar uma tela para outro nível de acesso. A segunda versão compõe a mesma peça; a regra geral de reuso está em [[geral-decisao-2026-10-28-criacao-de-componentes]].
