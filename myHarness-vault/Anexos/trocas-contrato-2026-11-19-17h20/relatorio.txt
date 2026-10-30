@@ -1,0 +1,43 @@
+Relatório do pesquisador (2026-11-19, sessão das 17h20): trocas no contrato para os 2 pontos aprovados
+Contrato lido pela Obsidian CLI (vault myHarness-vault). Nenhum arquivo de Anexos/contrato/ foi alterado; o aplicar.py só rodou numa cópia em /tmp (OK, 9 trocas).
+aplicar.py copiado sem mudança da pasta 17h12; checar.py adaptado (AC-154 único ID novo, M-33 e M-34 no topo, AC-154 nas linhas RF-01, RF-02 e RN-04, AC-154 cita ERR-03, ERR-04 e RN-04, RN-04 com os formatos 1 vez, estado antigo, nenhum "[a confirmar" novo).
+
+9 trocas (cada ponto inclui 1 linha no mudancas.md):
+ 1 (M-33) RN-04: 2 (frase "Formatos reconhecidos: ..." entre o enunciado e a "Violação:" em 00; mudancas)
+ 2 (M-34) AC-154: 7 (AC-154 logo depois do AC-61 na tabela "Por regra de negócio" e introdução em 08; 07 linhas RF-01, RF-02 e RN-04; README AC-01 a AC-154; mudancas)
+IDs novos: AC-154, M-33, M-34.
+
+Aplicar: python aplicar.py ../contrato trocas.json   |   Checar (sem gravar): python checar.py ../contrato trocas.json
+
+Saída do checar.py contra os arquivos atuais:
+1) Cada 'atual' único (9 trocas, aplicadas em memória na ordem)
+   OK: 9/9 únicas
+   por ponto (M): M-33: 2, M-34: 7
+2) IDs citados que não existem (depois das trocas)
+   OK: todo ID citado existe
+3) Citações UC-xx FA/FE-yy
+   OK: todo FA/FE citado existe no UC
+4) IDs novos sem colisão
+   novos: ['AC-154']; M novos: M-33 a M-34; topo: ['M-34', 'M-33', 'M-32']
+   OK
+5) Órfãos novos (ERR/ENT/AC/RN/RF/UC/CMP)
+   antes: 0; depois: 0; novos: nenhum
+   AC novos fora de 07-rastreabilidade: nenhum
+   RF-01: OK
+   RF-02: OK
+   RN-04: OK
+   AC-154 cita ERR-03, ERR-04, RN-04 e ••••: OK
+   RN-04 com os formatos reconhecidos (1 vez): OK
+6) Estado antigo dos 2 pontos fora de mudancas.md
+   OK: nenhum
+7) Marcas "[a confirmar" novas
+   antes: 96; depois: 96
+   OK: nenhuma nova
+RESULTADO: OK
+
+Ambíguo (para o orquestrador decidir antes de aplicar):
+ a) RN-04 fala de gravar (cofre, logs, histórico); o AC-154 prova a mensagem mostrada na tela. A RN-04 não diz "tela"; se a tela também precisa mascarar, falta uma palavra na RN-04 (não incluída).
+ b) ERR-03 ("a mensagem da própria CLI") e ERR-04 ("o motivo da falha [a confirmar: texto]") não foram mudados para citar o mascaramento.
+ c) AC-154 na tabela "Por regra de negócio" (Fluxo "regra RN-04"); a introdução do 08 diz "AC-154, por regra ampliada depois".
+ d) RNF-05 (AC-61 parcial) e RF-03/RF-04 não receberam AC-154; o cruzamento RF ↔ RN não lista RN-04 em RF-02 e ficou igual.
+ e) "o token com prefixo some inteiro" foi mantido literal (o token inteiro vira ••••).

@@ -2,7 +2,7 @@
 
 Um critério por fluxo (principal, alternativo e exceção), no formato dado / quando / então. Ao final de cada funcionalidade, o verificador de fluxo principal executa os AC dos fluxos principais e, depois, o adversarial executa os dos FA e FE: no backend pela API e, se a funcionalidade tem interface, também no frontend.
 
-No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Os textos vêm dos "Aceite" da fonte, salvo os escritos por mudança aprovada (`mudancas.md`). Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela; AC-144 e AC-145, por fluxo de UC criado depois, AC-146, por requisito acrescentado depois, AC-147 e AC-148, por regra acrescentada depois, AC-149 a AC-152, por erro de campo que estava sem AC, e AC-153, por fluxo de UC criado depois (na tabela, junto do UC ou do requisito dele).
+No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Os textos vêm dos "Aceite" da fonte, salvo os escritos por mudança aprovada (`mudancas.md`). Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela; AC-144 e AC-145, por fluxo de UC criado depois, AC-146, por requisito acrescentado depois, AC-147 e AC-148, por regra acrescentada depois, AC-149 a AC-152, por erro de campo que estava sem AC, AC-153, por fluxo de UC criado depois, e AC-154, por regra ampliada depois (na tabela, junto do UC ou do requisito dele).
 
 ## Por fluxo de caso de uso
 
@@ -77,6 +77,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 | AC-59 | UC-02 | regra RN-02 | o Obsidian conectado | um agente pede uma nota | a leitura sai pela CLI e aparece na aba "Obsidian usado" |
 | AC-60 | UC-04 | regra RN-03 | um relatório recebido e ainda não registrado | o orquestrador tenta delegar | a delegação espera e o log mostra "aguardando registro" |
 | AC-61 | UC-01 | regra RN-04 | um log que contém um token do GitHub | ele é gravado | o token aparece como •••• |
+| AC-154 | UC-01 | regra RN-04 | uma mensagem de erro da CLI que traz um token do GitHub (`ghp_`), no ERR-03 ou no ERR-04 | a mensagem é mostrada | ela sai com o token como •••• |
 | AC-62 | UC-03 | regra RN-05 | um plano em proposto | nenhum aval foi dado | nenhum subagente inicia |
 | AC-63 | UC-03 | regra RN-06 | um ponto do plano sem aval | o orquestrador tenta registrar a decisão | a gravação é recusada |
 | AC-64 | UC-03, UC-09 | regra RN-07 | o padrão do papel teste = Sonnet | uma tarefa de teste não tem modelo escolhido | ela roda com Sonnet |
