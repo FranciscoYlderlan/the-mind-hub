@@ -53,6 +53,8 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Terceira volta: aval do humano em 2026-11-19, sessão das 17h27, para um implementador novo, só nesses pontos.
   - Terceira volta (2026-11-20, commit `7c6f82e`): ✔ nenhum vazamento em 109 casos; ✔ testes, escopo e commit; ✘ excesso de máscara na mensagem padrão do clap (`--token <TOKEN>` lido como tag XML apaga o resto). Opcional: `Authorization: Digest` mascara `username=` e deixa o hash de `response` à vista.
   - Quarta volta: 2026-11-20, para um implementador novo, só nesses dois pontos.
+  - Quarta volta (commit `c0e07eb`): ✔ dica do clap intacta; ✔ `Digest` mascarado até o fim da linha; ✘ regressão: tag XML sem fechamento na mesma linha deixou de mascarar (4 vazamentos que o `7c6f82e` cobria).
+  - Quinta volta: 2026-11-20, para um implementador novo: valor da tag lido além da quebra de linha; sem fechamento, só com cara de segredo.
 
 ### T3: montagem da chamada ao `claude -p`
 - **Faz:** monta os argumentos (modelo, ferramentas, pastas, instruções, saída em fluxo JSON) conforme [[geral-decisao-2026-11-19-agente-por-claude-p]].
