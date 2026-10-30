@@ -547,8 +547,8 @@ def verificar(cofre, vault=None):
                 for n in sorted(fdir.glob("*.md")):
                     if n == ctx:
                         continue
-                    if not re.fullmatch(rf"{re.escape(f)}-(plano|decisao-{DATA}-[a-z0-9-]+)\.md", n.name):
-                        E(rel(n), f"nome fora do padrão ({f}-plano.md ou {f}-decisao-AAAA-MM-DD-titulo.md)")
+                    if not re.fullmatch(rf"{re.escape(f)}-(plano(-[a-z0-9-]+)?|decisao-{DATA}-[a-z0-9-]+)\.md", n.name):
+                        E(rel(n), f"nome fora do padrão ({f}-plano.md, parte dividida {f}-plano-assunto.md, ou {f}-decisao-AAAA-MM-DD-titulo.md)")
                     if n.stem.lower() not in ctx_links:
                         E(rel(n), f"não está no mapa de {f}-contexto")
                 if ctx.stem.lower() not in moc_links:
