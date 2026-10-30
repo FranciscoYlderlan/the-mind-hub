@@ -56,6 +56,7 @@ Um item por condição. O catálogo separa dois tipos: **erro** (dado inválido:
 | ERR-48 | `LIMITE_DO_CHAT_ATINGIDO` | os tokens do chat atingem o `limite_tokens` (RN-23; ENT-03; UC-02 FA-02; UC-08 passo 1; CMP-07) | avisar | "Este chat passou do limite de <limite> tokens. Recomendado: passar o turno e abrir um chat novo." | chat segue `ativo` |
 | ERR-49 | `TAREFA_INCOMPLETA` | tarefa do plano com `faz` vazio ou acima de 500 caracteres, ou com `pronto_quando` ou `prova` vazios (ENT-05, ENT-06; UC-03 FA-03, FA-04) (agente) | voltar [a confirmar: a decisão não dá o tratamento] | "Tarefa incompleta: preencha `faz` (até 500 caracteres), `pronto_quando` e `prova`." | plano devolvido ao orquestrador (devolução <n> de 2); na 3ª, chega ao Humano com as tarefas marcadas |
 | ERR-50 | `STATUS_DE_CONSUMO_DESCONHECIDO` | `status` de janela do `rate_limit_event` fora da lista do ENT-14 (RF-18) | avisar | "A CLI mandou um status de consumo novo: <valor>. Avise para atualizarmos a lista." | status guardado como `desconhecido`; valor bruto e versão da CLI no Log (ENT-12) |
+| ERR-51 | `GRAVACAO_DIVERGENTE` | gravação de plano, tarefa, relatório, achado ou aval falha num dos lados, ou a conferência acha o SQLite e o cofre diferentes (RN-31) | bloquear | "Não deu para gravar no banco e no cofre ao mesmo tempo; nada foi gravado." | gravação desfeita nos dois lados; diferença da conferência registrada no Log (ENT-12) |
 
 ## Tratamentos
 
