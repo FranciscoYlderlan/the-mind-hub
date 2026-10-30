@@ -112,6 +112,7 @@ Despadronização é sintoma: a causa é uma regra que faltou aqui. Ao achar uma
   - O campo **Alteração** mostra só o estado atual da diferença em relação à proposta da IA. A cada mudança ele é **reescrito**, nunca acrescentado no fim; a cronologia fica no diário do dia.
   - Decisão **ainda sem código**: mudança do humano entra na própria nota (corpo e Alteração) e ganha uma linha no diário.
   - Decisão **já implementada**: mudança que a contradiz vira nota nova com `substitui:`, e a antiga fica com `status: substituida`, intacta, descrevendo o que o código fez até ali.
+  - **Substituição parcial:** decisão já implementada em que só um ponto muda: nota nova só para esse ponto, com `substitui: [[antiga]] (só a linha de X)`. Na antiga, a linha do ponto é reescrita em 1 frase com link para a nota nova, e a antiga segue `aprovada`, porque o resto dela vale. Modelo: [[geral-decisao-2026-10-29-prisma-7]] e [[geral-decisao-2026-10-29-next-themes-para-o-tema]] (humano, 2026-10-29 23:01).
   - Origem: o Alteração de [[geral-decisao-2026-10-29-camada-mcp]] guardava a api_key "só nas tools com autenticação", já desfeita pelo corpo da nota (2026-10-29).
 - **Limite de tamanho:** 2073 palavras, o tamanho de [[contrato-do-projeto]], a maior nota registrada em 2026-10-29. Vale também para as notas `contrato-*`, que trazem só o texto vigente do contrato (o histórico de versões fica em [[contrato-do-projeto-mudancas]]).
 <!-- /projeto:padronizacao -->
@@ -134,6 +135,9 @@ antigo: re:texto da v0\.2 => notas contrato-* no texto vigente, v0.3 (contrato-d
 antigo: re:\bApp\.tsx\b => app.tsx (geral-decisao-2026-10-28-estrutura-frontend)
 antigo: re:\buseCases/ => use-cases/ (geral-decisao-2026-10-28-estrutura-backend)
 antigo: re:\b(React 19\.3|Vite 8\.3\.4|Tailwind CSS v4\.3|Fastify v5\.12\.7|Prisma v8|Vitest v5\.0\.5|Node 26\.13\.0|zod 4\.6)\b(?!\+| ou mais recente) => versão citada ou mais recente, sem trava (geral-decisao-2026-10-28-stack-frontend e geral-decisao-2026-10-28-stack-backend)
+antigo: re:(?i)(só a Q-09 (já )?foi respondida|a Q-09 já foi respondida|quatorze perguntas abertas|API não escolhida) => Q-06, Q-07, Q-09, Q-10, Q-13 e Q-14 respondidas; API do Art Institute of Chicago (contrato-pontos-para-validar, geral-decisao-2026-10-29-api-de-itens)
+antigo: re:\bPrisma (v)?8\b => Prisma 7.10.1+ (geral-decisao-2026-10-29-prisma-7)
+antigo: re:(?i)Zustand[^|\n]{0,20}\btema\b|cookie `SameSite=None; Secure` ou token => tema no next-themes; sessão por JWT no cabeçalho (geral-decisao-2026-10-29-next-themes-para-o-tema, geral-decisao-2026-10-29-sessao-jwt-no-cabecalho)
 limite-palavras: 2073
 ```
 <!-- /projeto:padroes -->
