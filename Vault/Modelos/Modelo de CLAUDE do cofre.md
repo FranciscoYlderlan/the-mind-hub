@@ -133,7 +133,14 @@ Modelos e manuais deste cofre não se editam aqui: o original fica no `Vault` e 
 
 ## Commits
 
-Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz dele, não aqui. Se for preciso commitar e a sessão só tiver acesso a esta pasta, **peça acesso à pasta `the-mind-hub`** e permissão para apagar nela (o git cria e remove arquivos `.lock`). Passos e formato: notas "Commitar no the-mind-hub" e "Padrão de commit" do cofre pessoal `Vault`. Antes do commit: `cofre.py verificar` com zero ERRO.
+Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz dele, não aqui. Commit segue o padrão de trabalho do humano, o mesmo em todo projeto.
+
+- **Formato** ([[Padrão de commit]]): `{emoji} {tipo}(escopo): Descrição`, por exemplo `:page_facing_up: docs({{nome-da-pasta}}): Add ...`. Tipo por extenso e emoji da tabela de tipos; escopo sempre presente, entre parênteses; descrição em inglês, no imperativo, com maiúscula e sem ponto final. Uma mudança por commit. Commit só no nome do humano: sem `Co-Authored-By` nem link de sessão de IA, mesmo quando um agente commita.
+- **Passos** ([[Commitar no the-mind-hub]]):
+  1. Sessão só com a pasta deste cofre? **Peça acesso à pasta `the-mind-hub`** e permissão para apagar nela (o git cria e remove arquivos `.lock`).
+  2. `cofre.py verificar` com zero ERRO em cada cofre alterado.
+  3. Sessão sem identidade do git ("Author identity unknown"): o autor dos commits anteriores, passado só no comando (`git -c user.name=... -c user.email=... commit`). Nunca `git config`.
+  4. Commit da raiz do `the-mind-hub`, um assunto por commit; commit de cofre e do README são separados.
 
 ## Repositórios e acesso
 

@@ -27,7 +27,7 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 
 > [!note] Passo a passo
 > 1. Leio o [[Manual da Orquestra]] e pergunto ao humano: nome, objetivo em meia frase, repositório, tempo e dial. O que faltar vira `[a confirmar]`.
-> 2. Na raiz do `the-mind-hub`: `python Vault/Modelos/Orquestra/cofre.py criar nome-do-cofre --projeto "Nome" --para-que "meia frase" --repo LINK`. **Nunca monto à mão.**
+> 2. Na raiz do `the-mind-hub`: `python Vault/Modelos/Orquestra/cofre.py criar nome-do-cofre --projeto "Nome" --para-que "meia frase" --repo LINK`. **Nunca monto à mão.** O `CLAUDE.md` nasce com a seção `## Commits` ([[Padrão de commit]] e [[Commitar no the-mind-hub]]): obrigatória, sem ela o verificar dá ERRO.
 > 3. Preencho o `geral-contexto` com os fatos do passo 1, seguindo [[Atualizar a memória]].
 > 4. No repositório de código, colo o trecho do [[modelo-claude-do-repositorio]].
 > 5. Rodo `python Vault/Modelos/Orquestra/cofre.py verificar nome-do-cofre`. Só sigo com **zero ERRO**.
@@ -44,5 +44,5 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Manual da Orquestra]], [[Atualizar a memória]], [[Guia do cofre para IA]], [[Registrar cofre no README]]
+- Relacionadas: [[Manual da Orquestra]], [[Atualizar a memória]], [[Guia do cofre para IA]], [[Registrar cofre no README]], [[Commitar no the-mind-hub]]
 - Próxima: [[Registrar cofre no README]]
