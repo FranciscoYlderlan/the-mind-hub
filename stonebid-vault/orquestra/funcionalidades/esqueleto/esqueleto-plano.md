@@ -82,7 +82,7 @@ Etapa 2 do [[geral-plano]]: aplicação "vazia" no ar com os 3 usuários de test
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-T1 e T2 concluídas; T3 quase: faltam o merge do PR #1 do `stonebid-web` (e atualizar a `staging` depois dele) e o login dos 3 usuários na URL pública, feito pelo humano. Depois, T4.
+T1 e T2 concluídas; T3 quase: faltam o merge do PR #1 do `stonebid-web` (e atualizar a `staging` depois dele) e o login dos 3 usuários na URL pública (endereços e usuários em [[acesso-de-teste]]; acesso livre para agentes). Depois, T4.
 
 ## Prioridades
 Deploy cedo (R-05: testar o host real logo). Se apertar, T3 antes de qualquer polimento de T2.
@@ -98,5 +98,6 @@ Deploy cedo (R-05: testar o host real logo). Se apertar, T3 antes de qualquer po
 ### 🔗 Conexões
 - Funcionalidade: [[esqueleto-contexto]]
 - Roteiro: [[geral-plano]] (etapa 2)
+- Acesso: [[acesso-de-teste]]
 - Projeto: [[geral-contexto]]
 - Regras: [[manual-da-orquestra]]
