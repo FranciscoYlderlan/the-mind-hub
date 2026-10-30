@@ -18,8 +18,8 @@ Corrigir o que a T4 de [[carteira-e-lotes-plano]] achou em staging (2026-10-29 2
 
 (Dial: médio, de [[geral-contexto]].)
 
-### Pendente de aval antes da T5c (proposta da IA)
-- Como mostrar a miniatura na busca: rota da API que entrega a imagem do item (o servidor alcança o IIIF) ou só o título, sem imagem, até criar o lote.
+### Aval da T5c
+- Miniatura da busca por uma rota da API que entrega a imagem do item: [[geral-decisao-2026-10-29-miniatura-da-busca-pela-api]].
 
 ## Tarefas
 
@@ -34,9 +34,13 @@ Corrigir o que a T4 de [[carteira-e-lotes-plano]] achou em staging (2026-10-29 2
   - [ ] teste falha sem o campo; lint, Prettier, tipos, Vitest e build; CI verde
 - **Prova:** `npm run lint && npm run typecheck && npm test && npm run build`
 - **Verificação:**
-  - Data:
+  - Data: 2026-10-29 23:55 (código) e 2026-10-30 00:05 (Chrome, staging)
   - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+    - ✔ PR #3 do `stonebid-api` (merge `c7b06a3`): `toWalletDto` em `src/infra/http/presenters/wallet-presenter.ts`, usado pelo `GET /wallet` e pelo depósito; a `wallet_deposit` da MCP chama a mesma rota. CI e CD verdes.
+    - ✔ Verificador de código: lint, Prettier, tipos, build e 60/60 testes; com o `deposit-controller.ts` revertido, 4 testes caem; formato bate com o `walletSchema` e o `depositResponseSchema` do web.
+    - ✔ Verificador no Chrome (staging): depósito de R$ 10 com duplo clique gerou um só `POST /wallet/deposits` (201 com `depositLimitCents`), uma linha no extrato, saldo e extrato atualizados sem recarregar, campo limpo; recarregar bate.
+    - [a confirmar] o verificador anotou `totalCents: 526000` na resposta com o card em R$ 5.270,00 (provável erro de leitura do log; conferir a resposta contra o `GET /wallet` na próxima rodada no Chrome).
+  - Devolvido para correção: não
 
 ### T5b: erro cru no toast e API simulada fora do contrato
 - **Achado:** quando o `parse` da T5a falha, o `onError` do `deposit-form.tsx` mostra no toast a mensagem do `ZodError` como veio, e ninguém na verificação capturou o erro (visto pelo humano). O mesmo padrão `toast.error(error.message)` está em `login-form.tsx`, `register-form.tsx`, `create-lot-form.tsx` e `cancel-lot-button.tsx`. O Playwright passou porque `e2e/support/mock-api.ts` devolve um depósito com `depositLimitCents`, diferente da API real.
@@ -49,23 +53,29 @@ Corrigir o que a T4 de [[carteira-e-lotes-plano]] achou em staging (2026-10-29 2
   - [ ] API simulada igual à real nas rotas da etapa; lint, Prettier, tipos, build e Playwright; CI verde
 - **Prova:** `npm run lint && npm run typecheck && npm run build`; Playwright
 - **Verificação:**
-  - Data:
+  - Data: 2026-10-30 00:05 (Chrome, staging)
   - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+    - ✔ PR #6 do `stonebid-web` (merge `168ac5d`): `src/lib/mutation-error.ts` (`showMutationError`) nos cinco formulários; `e2e/support/mock-api.ts` conferido rota a rota com os controllers da API; `e2e/mutation-errors.spec.ts`; 28 testes do Playwright e CI verdes.
+    - ✔ Chrome: senha errada (401 `INVALID_CREDENTIALS`) e depósito acima do teto (400 `DEPOSIT_LIMIT_EXCEEDED`) mostram no toast o texto da API; resposta fora do formato, forçada no navegador, mostra "Algo deu errado. Tente de novo em instantes." e o `ZodError` fica só no console.
+  - Devolvido para correção: não. Achado fora do escopo virou a T5f (`placeOfOrigin`).
 
 ### T5c: miniaturas da busca não carregam
 - **Achado:** as imagens IIIF da AIC (`www.artic.edu/iiif/2/...`) abrem no navegador com o desafio anti-robô da Cloudflare ("Um momento…"); o `<img>` falha e o `CoverImage` mostra o marcador em todos os resultados. A cópia feita pelo servidor na criação do lote funciona (JPEG de 272 KB, servido por `/lots/:id/image`).
-- **Faz:** o que o humano aprovar no "Pendente de aval" acima.
+- **Faz:** rota da API que entrega a miniatura do item a partir de um identificador validado ([[geral-decisao-2026-10-29-miniatura-da-busca-pela-api]]); a busca do web usa essa URL no lugar do IIIF.
 - **Toca em:** `stonebid-api` (`src/infra/external/`, `src/infra/http/`, MCP) e/ou `stonebid-web` (`catalog-item-card.tsx`, `create-lot-dialog.tsx`).
-- **Depende de:** aval do humano
-- **Paralelo:** sim, depois do aval
+- **Depende de:** nenhuma
+- **Paralelo:** sim, com T5a, T5b e T5d
 - **Pronto quando:**
   - [ ] a busca em staging mostra imagem (ou o que for aprovado) sem pedir ao navegador o IIIF da AIC
 - **Prova:** Chrome em staging
 - **Verificação:**
-  - Data:
+  - Data: 2026-10-30 00:05 (merge); verificação no Chrome pendente
   - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+    - PR #4 do `stonebid-api` (merge `31c3682`): `GET /items/images/:imageId/thumbnail`, pública, id só UUID (sem SSRF), IIIF de 400 px, timeout, corte em 1 MB, `Cache-Control` de 7 dias; 68 testes e CI verdes.
+    - PR #7 do `stonebid-web` (merge `d70333f`): card e prévia usam a rota; `e2e/catalog-thumbnail.spec.ts` prova que nada vai a `artic.edu`; 29 testes e CI verdes.
+    - Falta: no Chrome, em staging, a busca do leiloeiro mostra as miniaturas e nenhuma requisição vai a `artic.edu`.
+  - Devolvido para correção: não
+  - Riscos anotados pelo implementador: rota pública sem limite de requisições e sem cache no servidor (cada pedido sem cache do navegador vai à AIC).
 
 ### T5d: sem caminho para o painel e a carteira
 - **Achado:** na vitrine e no cabeçalho não há link para `/auctioneer` nem para `/wallet`; o menu do usuário tem só "Minha conta" e "Sair". O menu lateral com "Painel do leiloeiro" ou "Carteira" só aparece dentro da área logada, aberta pela URL.
@@ -77,6 +87,24 @@ Corrigir o que a T4 de [[carteira-e-lotes-plano]] achou em staging (2026-10-29 2
   - [ ] da vitrine, cada papel chega à sua área em um clique; Playwright cobre os dois papéis; CI verde
 - **Prova:** Playwright
 - **Verificação:**
+  - Data: 2026-10-30 00:03 (código) e 2026-10-30 00:05 (Chrome, staging)
+  - Critérios ✔/✘ com a prova de cada um:
+    - ✔ PR #5 do `stonebid-web` (merge `5c5c800`): atalho no cabeçalho e no menu do usuário em `session-actions.tsx`, a partir de `navItemsFor`; `e2e/role-shortcut.spec.ts`; CI verde.
+    - ✔ Verificador de código: 1 clique por papel a 375 e 1280 px; nenhum papel vê o atalho do outro; visitante sem atalho; nome acessível, foco por Tab e Enter; 20/20 testes.
+    - ✔ Chrome: licitante → `/wallet` e leiloeiro → `/auctioneer` em 1 clique; deslogado sem atalho. A janela não redimensionou, então a largura estreita ficou provada só no Playwright.
+  - Devolvido para correção: não. Achado: o cabeçalho passa da largura da tela no celular (2 px com o nome padrão a 375 px; até 118 px com nome longo a 320 px), virou a T5f.
+
+### T5f: cabeçalho no celular e origem da obra
+- **Achado:** (1) a 375 px o cabeçalho passa da largura da tela: o nome do usuário e o botão novo da T5d somam mais que a tela (2 px com o nome padrão; 63 px com nome longo a 375 px, 118 px a 320 px). Os testes só rodam na largura de desktop. (2) A API manda `attributes.placeOfOrigin`, mas o web lê `origin` (`lot-schemas.ts`, `item-attributes.tsx`), então a "Origem" da obra nunca aparece. Achados pelos verificadores da T5d e pelos implementadores da T5b e da T5c.
+- **Faz:** no `stonebid-web`, esconder o nome do usuário abaixo de `sm` e deixar o lado direito do cabeçalho encolher (`min-w-0`), com teste do Playwright a 320 e 375 px sem rolagem horizontal; o schema e a tela dos atributos leem `placeOfOrigin`, e a API simulada já usa esse nome.
+- **Toca em:** `stonebid-web`: cabeçalho e `session-actions.tsx`, `src/features/lots/` (schema e `item-attributes.tsx`), `e2e/`.
+- **Depende de:** aval do humano
+- **Paralelo:** sim, com a verificação da T5c no Chrome
+- **Pronto quando:**
+  - [ ] a 320 e 375 px a página não rola na horizontal, com nome longo
+  - [ ] a "Origem" aparece no lote que tem `placeOfOrigin`; lint, Prettier, tipos, build e Playwright; CI verde
+- **Prova:** Playwright; Chrome em staging
+- **Verificação:**
   - Data:
   - Critérios ✔/✘ com a prova de cada um:
   - Devolvido para correção:
@@ -84,7 +112,7 @@ Corrigir o que a T4 de [[carteira-e-lotes-plano]] achou em staging (2026-10-29 2
 ### T5e: repetir a T4 e o verificador independente
 - **Faz:** depois do merge de T5a, T5b e T5d e do CD de staging, o orquestrador repete no Chrome o depósito com duplo clique (saldo, extrato e campo atualizam sem recarregar) e a busca; o verificador independente lê o diff e os testes de T1, T2 e T5 (parte da T4 ainda não feita).
 - **Toca em:** nada (só testa e reporta)
-- **Depende de:** T5a, T5b, T5d (e T5c, se aprovada)
+- **Depende de:** T5a, T5b, T5c e T5d (e T5f, se aprovada)
 - **Paralelo:** não
 - **Pronto quando:**
   - [ ] relatórios sem bloqueante
@@ -95,7 +123,7 @@ Corrigir o que a T4 de [[carteira-e-lotes-plano]] achou em staging (2026-10-29 2
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-T5a, T5b e T5d em paralelo, cada uma num subagente; aval da T5c com o humano; então T5e. Os PRs `chore` do Node 26 seguem em [[carteira-e-lotes-plano]] e podem andar em paralelo, sem tocar nos mesmos arquivos.
+T5a, T5b e T5d verificadas no ar. Agora: verificador novo no Chrome para a T5c em staging (com a conferência dos centavos da T5a) e aval da T5f; então T5e e fechar a etapa 3. Cada verificação no ar é feita por um subagente no Chrome, diferente do implementador (humano, 2026-10-29 23:58). Os PRs `chore` do Node 26 seguem em [[carteira-e-lotes-plano]] e podem andar em paralelo, sem tocar nos mesmos arquivos.
 
 ## Prioridades
 T5a primeiro: é o bloqueante e o I2 grava saldo em cima da carteira. T5c pode ficar para depois se apertar.

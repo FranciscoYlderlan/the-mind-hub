@@ -43,9 +43,7 @@ criado: 2026-10-29
 - Os da etapa 2, ainda sem aval (lista em [[diario-2026-10-29-esqueleto]]).
 
 > [!tip] Onde parei
-> - **Próximo passo:** despachar T5a (API, bloqueante), T5b e T5d (web) em paralelo, com os briefings tirados de [[carteira-e-lotes-plano-correcoes]]; pedir o aval da T5c; depois, T5e (repetir a T4 e rodar o verificador independente) e fechar a etapa 3 no [[geral-plano]].
-> - **Threads abertas:** nenhum subagente rodando. PRs `chore` do Node 26 na API (com o job do `docker compose up`) e no web (cadastro com o `SubmitButton` comum, apagar o do `auth`), em paralelo com a T5. Registro de componentes com os candidatos da T2 ([[carteira-e-lotes-plano]], Candidatos a registro).
-> - **Dúvidas para o humano:** miniatura da busca (T5c): rota da API que entrega a imagem ou busca sem imagem? Confirmar que o erro não captado era o toast do `ZodError` no depósito. Herdadas de [[diario-2026-10-29]]: "Request headers" do conector ([[geral-decisao-2026-10-29-camada-mcp]]), tempo real (AD-04) e registro do uso de IA (E6).
+> - Seguiu em [[diario-2026-10-30]], onde está o "Onde parei" vigente.
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
