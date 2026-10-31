@@ -1,7 +1,7 @@
 ---
 tipo: contexto
 funcionalidade: opcionais
-status: em-construcao
+status: concluida
 etapa: 7
 criado: 2026-10-30
 aliases: [Opcionais, I5, Busca e estorno, Optional features]
@@ -9,7 +9,7 @@ aliases: [Opcionais, I5, Busca e estorno, Optional features]
 # 🧭 Opcionais (I5)
 
 > [!tldr] Em uma linha
-> Os opcionais do E5 que faltam no ar: cancelamento de lote com lances e estorno do líder, e busca com filtro na vitrine, mais os ajustes do checklist de entrega.
+> Os opcionais do E5 da etapa 7: cancelamento de lote com lances e estorno do líder, no ar; a busca com filtro na vitrine ficou fora, por escolha do humano (2026-10-30 18:29).
 
 ## Objetivo e motivação
 Etapa 7 do [[geral-plano]]. O checklist 11.6 no Chrome (2026-10-30 17:3x) achou a vitrine sem busca e o cancelamento sem estorno (só lote sem lances).
@@ -19,7 +19,10 @@ Etapa 7 do [[geral-plano]]. O checklist 11.6 no Chrome (2026-10-30 17:3x) achou 
 - Aval da proposta (2026-10-30 17:4x): [[geral-decisao-2026-10-30-estorno-no-cancelamento]] e [[geral-decisao-2026-10-30-busca-na-vitrine]]; ordem: estorno antes da busca.
 
 ## O que já foi feito
-- 2026-10-30 17:4x: proposta do pesquisador e aval do humano; nenhum código ainda.
+- 2026-10-30 17:4x: proposta do pesquisador e aval do humano.
+- 2026-10-30 18:29: humano tirou a busca da etapa 7; só o estorno.
+- 2026-10-30 19:2x: estorno no ar (PR #20 da API e #26 do web), verificado no Chrome em staging ([[opcionais-plano]], B3).
+- 2026-10-31: teste final de aceitação: estorno ✔ (licitante líder recebe R$ 150 de volta, extrato com "Estorno", auditoria íntegra); busca ausente, como decidido ([[revisao-e-entrega-plano]], TF).
 
 ## Tempo disponível
 Depois da entrega das 16:00 ([[geral-decisao-2026-10-30-prazo-16h]]); o humano segue com refinamentos ([[revisao-e-entrega-contexto]]).

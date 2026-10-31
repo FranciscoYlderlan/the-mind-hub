@@ -1,8 +1,8 @@
 ---
 tipo: contexto
 funcionalidade: geral
-status: em-construcao
-etapa-atual: 7
+status: concluida
+etapa-atual: 8
 criado: 2026-10-28
 aliases: [Contexto do Stonebid, Visão geral do projeto, Project overview]
 ---
@@ -44,6 +44,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29 (14:07): roteiro aprovado em 8 etapas, uma por incremento → [[geral-decisao-2026-10-29-roteiro]].
 - 2026-10-29 (22:13): modo de implementação adotado como padrão (container → GitHub → Actions → GCP/Vercel; consoles e testes no ar pelo agente no Chrome) → [[geral-decisao-2026-10-29-modo-de-implementacao]].
 - Camada MCP no backend para expor as rotas e testar o fluxo pela Claude; sempre que uma feature e uma rota forem criadas, a MCP é atualizada → [[geral-decisao-2026-10-29-camada-mcp]].
+- 2026-10-31: projeto entregue para avaliação; todas as etapas finalizadas.
 - 2026-10-29: hospedagem: backend e banco no **GCP**, frontend na **Vercel**, os dois repositórios no GitHub com CI/CD validando a integração. Custo zero: a aplicação fica no ar no máximo 7 dias, é avaliada em menos de 1 hora e depois é fechada → [[geral-decisao-2026-10-29-hospedagem]].
 
 ## O que já foi feito
@@ -66,12 +67,14 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 - 2026-10-29: roteiro aprovado ([[geral-decisao-2026-10-29-roteiro]]); etapa 2 (esqueleto no ar) em construção.
 - 2026-10-29: `stonebid-api` e `stonebid-web` montados e publicados na `main` com CI verde ([[esqueleto-contexto]]).
 - 2026-10-29 22:20: etapa 2 concluída (aplicação no ar com os 3 usuários de teste); etapa 3 (carteira e lotes) em construção ([[carteira-e-lotes-contexto]]).
-- 2026-10-30 08:2x: etapa 3 concluída (T5a a T5l verificadas no Chrome em staging, sem bloqueante); próxima é a etapa 4, Lances (I2).
+- 2026-10-30 08:2x: etapa 3 concluída (T5a a T5l verificadas no Chrome em staging, sem bloqueante).
+- 2026-10-30: etapas 4 a 7 concluídas (lances, sala ao vivo e liquidação, auditoria pública, estorno no cancelamento; busca na vitrine fora); entrega e refinamentos até 19:2x ([[diario-2026-10-30]]).
+- 2026-10-31: etapa 8 concluída. Teste final de aceitação no ar: **nota 8,9 de 10**; todos os requisitos obrigatórios aceitos, menos a posição do usuário na sala (E2.3, parcial); regra de negócio condizente ([[revisao-e-entrega-plano]], TF; [[diario-2026-10-31]]).
 
 ## Tempo disponível
 - De 2026-10-29 09:06 até a entrega, em **2026-10-30 16:00**, estendida pelo humano em 2026-10-30 06:16 ([[geral-decisao-2026-10-30-prazo-16h]]).
 - Ritmo: trabalho contínuo, sem pausa.
-- O plano com horários até a entrega ainda não foi feito: sai dos incrementos de [[contrato-processo-e-plano]], com a linha de corte aplicada.
+- Entrega feita; o projeto está em avaliação.
 
 ## Dial e modelo de IA
 - Dial: medio
@@ -86,7 +89,7 @@ Motivação: teste técnico Elite Dev da Verzel e aprendizado.
 
 ## Mapa
 - Roteiro: [[geral-plano]]
-- Funcionalidades: [[carteira-e-lotes-contexto]], [[esqueleto-contexto]]
+- Funcionalidades: [[esqueleto-contexto]], [[carteira-e-lotes-contexto]], [[lances-contexto]], [[sala-ao-vivo-contexto]], [[auditoria-publica-contexto]], [[opcionais-contexto]], [[revisao-e-entrega-contexto]]
 - Decisões: [[geral-decisao-2026-10-30-estorno-no-cancelamento]], [[geral-decisao-2026-10-30-busca-na-vitrine]], [[geral-decisao-2026-10-30-datas-dos-commits]], [[geral-decisao-2026-10-30-relato-de-uso-de-ia]], [[geral-decisao-2026-10-30-auditoria-publica]], [[geral-decisao-2026-10-30-achados-da-t5-da-auditoria]], [[geral-decisao-2026-10-30-adulterado-provado-no-ci]], [[geral-decisao-2026-10-30-posicao-cancelado-inalcancavel]], [[geral-decisao-2026-10-30-caminho-da-auditoria]], [[geral-decisao-2026-10-30-sala-publica-le-a-sessao]], [[geral-decisao-2026-10-30-lot-ended-no-cancelamento]], [[geral-decisao-2026-10-30-422-no-cancelamento]], [[geral-decisao-2026-10-30-concorrencia-do-cloud-run]], [[geral-decisao-2026-10-30-pseudonimo-por-hmac]], [[geral-decisao-2026-10-30-lance-atual-no-lote]], [[geral-decisao-2026-10-30-saldo-na-recusa-do-lance]], [[geral-decisao-2026-10-30-historico-de-lances-no-i2]], [[geral-decisao-2026-10-30-pseudonimo-com-6-digitos]], [[geral-decisao-2026-10-30-recarga-de-15s-ate-o-i3]], [[geral-decisao-2026-10-30-dar-lance-so-para-licitante]], [[geral-decisao-2026-10-30-tempo-real-por-sse]], [[geral-decisao-2026-10-30-disparo-da-liquidacao]], [[geral-decisao-2026-10-30-movimentos-da-liquidacao]], [[geral-decisao-2026-10-30-resultado-no-lote]], [[geral-decisao-2026-10-30-limite-do-anti-sniping]], [[geral-decisao-2026-10-30-viewer-no-lote]], [[geral-decisao-2026-10-30-rotas-publicas-do-i3]], [[geral-decisao-2026-10-30-seed-com-lote-liquidado]], [[geral-decisao-2026-10-30-motivo-do-cancelamento-gravado]], [[geral-decisao-2026-10-30-prazo-16h]], [[geral-decisao-2026-10-30-obra-unica-por-lote]], [[geral-decisao-2026-10-30-cache-e-limite-da-miniatura]], [[geral-decisao-2026-10-29-sessao-jwt-no-cabecalho]], [[geral-decisao-2026-10-29-prisma-7]], [[geral-decisao-2026-10-29-typescript-6-no-web]], [[geral-decisao-2026-10-29-next-themes-para-o-tema]], [[geral-decisao-2026-10-29-vercel-sem-deploy-automatico]], [[geral-decisao-2026-10-29-alias-fixo-do-staging]], [[geral-decisao-2026-10-29-api-de-itens]], [[geral-decisao-2026-10-29-imagem-do-lote-no-banco]], [[geral-decisao-2026-10-29-lance-inicial-e-valor-minimo]], [[geral-decisao-2026-10-29-inicio-e-duracao-do-lote]], [[geral-decisao-2026-10-29-limites-do-deposito]], [[geral-decisao-2026-10-29-edicao-de-lote-fora]], [[geral-decisao-2026-10-29-seed-com-imagem-fixa]], [[geral-decisao-2026-10-29-seed-tambem-em-producao]], [[geral-decisao-2026-10-29-busca-so-em-dominio-publico]], [[geral-decisao-2026-10-29-codigo-do-teto-do-deposito]], [[geral-decisao-2026-10-29-sequencia-no-extrato]], [[geral-decisao-2026-10-29-miniatura-da-busca-pela-api]], [[geral-decisao-2026-10-29-node-26]], [[geral-decisao-2026-10-29-modo-de-implementacao]], [[geral-decisao-2026-10-29-roteiro]], [[geral-decisao-2026-10-29-cancelamento-ao-vivo]], [[geral-decisao-2026-10-29-comprovante-e-hash]], [[geral-decisao-2026-10-29-testes-no-escopo]], [[geral-decisao-2026-10-29-padrao-de-branches]], [[geral-decisao-2026-10-29-hospedagem]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-28-testes-frontend-playwright]], [[geral-decisao-2026-10-28-stack-frontend]], [[geral-decisao-2026-10-28-stack-backend]], [[geral-decisao-2026-10-28-estrutura-frontend]], [[geral-decisao-2026-10-28-estrutura-backend]], [[geral-decisao-2026-10-28-criacao-de-componentes]]
 - Bugs: [[bug-obsidian-cli-mcp-nao-carrega-2026-10-28]], [[bug-estado-anterior-preservado-apos-mudanca-2026-10-29]]
 - Enunciado: [[enunciado-teste-tecnico]]
