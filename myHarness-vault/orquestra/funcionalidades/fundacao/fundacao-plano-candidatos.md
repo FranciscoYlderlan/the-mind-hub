@@ -36,6 +36,12 @@ criado: 2026-11-20
 - Refazer tabela no sqlx: `-- no-transaction`, `PRAGMA foreign_keys=OFF`, `BEGIN`/`COMMIT` próprios e conferência do `pragma_foreign_key_check` antes do `COMMIT`.
 - O filtro de `comandos` olha só o subcomando logo após o programa (`git -C x push` passa); a barreira real é o portão (RN-27).
 
+## Ajuste da T5 (2026-11-23)
+- Propostas de contrato, aguardam o humano: ENT-24 Critério ganha `descricao` (texto do critério do "Pronto quando"); ENT-24 registra `passou`, `falhou` e `nao_verificado_presumido` como nomes ASCII de ✔, ✘ e "não verificado, presumido".
+- Enum da IPC sempre em ASCII snake_case; o texto do contrato com acento fica só na tela e no banco (ver o mapeamento acima).
+- Tipo sem comando nem evento precisa de `.typ::<T>()` no construtor para sair nos bindings.
+- ENT-17 Escrita sem DTO na IPC (nenhum comando a usa).
+
 ### 🔗 Conexões
 - Plano: [[fundacao-plano]]
 - Funcionalidade: [[fundacao-contexto]]
