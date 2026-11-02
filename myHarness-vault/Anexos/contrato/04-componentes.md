@@ -98,7 +98,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 | carregando | resposta chegando | rolar, trocar de aba |
 | preenchido | conversa e saídas | trocar de aba, rolar, fechar aba concluída |
 | erro | agente falhou, aba em destaque (ERR-17) | ver o último log |
-| sucesso | agente `concluido` | fechar a aba |
+| sucesso | agente `concluído` | fechar a aba |
 | desabilitado | chat encerrado por passagem | ir ao chat de continuação [a confirmar] |
 
 ## CMP-05 Progresso dos subagentes (TEL-01)
@@ -119,7 +119,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 | carregando | despachando | nenhuma |
 | preenchido | cartões com papel, tarefa, modelo, etapa, tokens | clicar num cartão, alternar visão |
 | erro | cartão falhou (ERR-17) | clicar para ver a aba |
-| sucesso | cartão `concluido` | clicar para ver a aba |
+| sucesso | cartão `concluído` | clicar para ver a aba |
 | desabilitado | não se aplica | — |
 
 ## CMP-06 Campo de prompt (TEL-01, abaixo do terminal)

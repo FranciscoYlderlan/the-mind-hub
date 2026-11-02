@@ -107,7 +107,7 @@ Mora em: SQLite + decisão no cofre. Gravação dupla, com o mesmo conteúdo nos
 
 - Nenhum subagente inicia com o plano fora de `aprovado` (RN-05; violação: ERR-09), salvo tarefa do papel pesquisa, que só lê (RN-05).
 - "Aprovar" só com as integrações exigidas pelo plano conectadas (RN-08; violação: ERR-06).
-- Plano com tarefa incompleta volta ao orquestrador até 2 vezes por pedido, o pedido do Humano ao orquestrador que gerou o plano (`devolucoes`, que começa em 0 só num pedido novo do Humano e não zera quando o plano ganha versão nova nem depois de "Pedir alteração", que não abre pedido novo; cada plano novo do orquestrador sobe a `versao`); na 3ª, chega ao Humano com as tarefas incompletas marcadas, e o Humano pede o preenchimento por "Pedir alteração" (ERR-49); "Aprovar" fica bloqueado enquanto houver tarefa marcada.
+- Plano com tarefa incompleta volta ao orquestrador até 2 vezes por pedido, o pedido do Humano ao orquestrador que gerou o plano (`devolucoes`, que começa em 0 só num pedido novo do Humano e não zera quando o plano ganha versão nova nem depois de "Pedir alteração", que não abre pedido novo; cada plano novo do orquestrador sobe a `versao`); na 3ª, chega ao Humano com as tarefas incompletas marcadas (gravadas com `incompleta` = sim, ENT-06), e o Humano pede o preenchimento por "Pedir alteração" (ERR-49); "Aprovar" fica bloqueado enquanto houver tarefa com `incompleta` = sim.
 
 ### Estados do ciclo de vida
 
@@ -125,12 +125,14 @@ Mora em: SQLite + plano no cofre. Gravação dupla, com o mesmo conteúdo nos do
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
-| faz | texto | 1 a 500 caracteres | sim | livre | — | vazio ou longo: ERR-49 |
+| plano | referência | — | sim | id de ENT-05 | — | — |
+| faz | texto | 1 a 500 caracteres; sem limite com `incompleta` = sim | sim; pode ficar vazio com `incompleta` = sim | livre | — | vazio ou longo, com `incompleta` = não: ERR-49 |
 | toca_em | lista de caminhos | — | sim no papel funcionalidade | caminho relativo ao repositório | — | sobreposição com tarefa paralela: ERR-12 |
 | depende_de | lista de referências | — | não | ids de ENT-06 | — | — |
 | paralelo | booleano | — | sim | — | sim, não | — |
-| pronto_quando | texto | — | sim | livre | — | vazio: ERR-49 |
-| prova | texto | — | sim | comando ou evidência | — | vazio: ERR-49 |
+| pronto_quando | texto | — | sim; pode ficar vazio com `incompleta` = sim | livre | — | vazio, com `incompleta` = não: ERR-49 |
+| prova | texto | — | sim; pode ficar vazio com `incompleta` = sim | comando ou evidência | — | vazio, com `incompleta` = não: ERR-49 |
+| incompleta | booleano | — | sim | — | sim, não; padrão não | — |
 | papel | referência | — | sim | id de ENT-15 | funcionalidade, teste, adversarial, pesquisa | — |
 | modelo | texto | — | não | id de modelo da CLI | modelo disponível na CLI | sem modelo e sem padrão: ERR-11 |
 | voltas | inteiro | 0 a 2 | sim | — | — | 3ª reprovação: ERR-21 |
@@ -143,6 +145,7 @@ Mora em: SQLite + plano no cofre. Gravação dupla, com o mesmo conteúdo nos do
 - `testada_por` ≠ `implementada_por` (RN-09; violação: ERR-19).
 - `voltas` ≤ 2; a 3ª reprovação sobe ao Humano (RN-19; violação: ERR-21).
 - Modelo efetivo = `modelo` ou, sem ele, `Papel.modelo_padrao` (RN-07; nenhum dos dois: ERR-11).
+- Com `incompleta` = não, `faz` tem de 1 a 500 caracteres e `pronto_quando` e `prova` são preenchidos (ERR-49); com `incompleta` = sim, os três podem ficar vazios e `faz` pode passar de 500 caracteres: é assim que a tarefa marcada na 3ª devolução do plano (ERR-49) é gravada.
 
 ## ENT-07 Execução
 
@@ -159,7 +162,7 @@ Mora em: SQLite.
 | prompt_versao | inteiro | ≥ 1 | sim | — | versão vigente no início (RN-28) | sem prompt: ERR-36 |
 | worktree | caminho | — | sim para funcionalidade | caminho no disco | — | ausente: ERR-16 |
 | branch | texto | — | sim para funcionalidade | `tipo/ID-descricao` | — | ausente: ERR-16 |
-| status | enumeração | — | sim | — | na fila, rodando, concluido, falhou, interrompida | — |
+| status | enumeração | — | sim | — | na fila, rodando, concluído, falhou, interrompida | — |
 | motivo_fila | enumeração | — | sim quando status = na fila | — | teto, toca_em, recurso | — |
 | comandos (RN-17) | lista | — | — | — | sem push, merge nem push --force | ERR-14 |
 
@@ -175,8 +178,8 @@ Mora em: SQLite.
 | Estado | Entra quando | Pode ir para |
 |---|---|---|
 | na fila | teto atingido (RN-13), espera de "toca em" (RN-14) ou de recurso (RN-15), com o motivo em `motivo_fila` | rodando |
-| rodando | o processo inicia | concluido, falhou, interrompida |
-| concluido | o relatório chega (RF-11) | (final) |
+| rodando | o processo inicia | concluído, falhou, interrompida |
+| concluído | o relatório chega (RF-11) | (final) |
 | falhou | o processo cai ou para de emitir eventos (RNF-07; ERR-17) | (final) |
 | interrompida | o app fecha durante a execução (RNF-08) | (final) |
 
@@ -221,11 +224,12 @@ Mora em: SQLite + resumo no cofre. Gravação dupla, com o mesmo conteúdo nos d
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
+| execucao | referência | — | sim | id de ENT-07 | — | — |
 | resultado | enumeração | — | sim | — | concluído, falhou, bloqueado | — |
 | o_que_fez | texto | até 1,5 mil tokens no total (RNF-10) | sim | livre | — | — |
 | arquivos | lista de caminhos | — | não | — | — | — |
 | prova | texto | — | sim | — | — | — |
-| criterios | lista de ENT-24 | — | sim no papel teste | — | — | — |
+| criterios | lista de ENT-24 | — | sim quando `execucao.papel` = teste | — | — | — |
 | duvidas | lista de texto | — | não | — | — | — |
 | candidatos_a_nota | lista de texto | — | não | — | — | — |
 | registrado_em (RN-03) | data e hora | — | sim antes da próxima delegação | ISO 8601 UTC | — | não registrado: ERR-15 |
@@ -243,11 +247,12 @@ Mora em: SQLite + bug no cofre. Gravação dupla, com o mesmo conteúdo nos dois
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
+| execucao | referência | — | sim | id de ENT-07 | — | — |
 | tipo | enumeração | — | sim | — | bug, sugestao | sem tipo: ERR-27 |
 | passos | lista de texto | 1 passo ou mais | sim | lista numerada | — | [a confirmar] |
 | esperado | texto | — | sim | livre | — | — |
 | obtido | texto | — | sim | livre | — | — |
-| captura | arquivo | — | sim para adversarial | imagem | — | indisponível: ERR-43 |
+| captura | arquivo | — | sim quando `execucao.papel` = adversarial | imagem | — | indisponível: ERR-43 |
 | decisao | enumeração | — | sim para sugestão ao fechar a rodada | — | corrigir, limite, opcional | faltando: ERR-28 |
 | status (RN-20) | enumeração | — | sim | — | aberto, fechado | — |
 
@@ -379,7 +384,8 @@ Citada em RN-01 (Escrita.caminho) e RF-28 (nota, motivo, hora). Mora em: SQLite.
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
-| caminho | caminho | — | sim | — | dentro do cofre de memória | papel sem permissão: ERR-13; cofre de consulta: ERR-39 |
+| cofre | referência | — | sim | id de ENT-02 | o cofre de memória do projeto (RN-29) | cofre de consulta: ERR-39 |
+| caminho | caminho | — | sim | — | dentro do `cofre` | papel sem permissão: ERR-13 |
 | motivo | texto | — | sim | — | — | — |
 | hora | data e hora | — | sim | ISO 8601 UTC | — | — |
 
