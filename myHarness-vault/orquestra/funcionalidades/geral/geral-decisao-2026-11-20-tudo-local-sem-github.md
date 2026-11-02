@@ -1,7 +1,7 @@
 ---
 tipo: decisao
 funcionalidade: geral
-status: aprovada
+status: substituida
 criado: 2026-11-20
 substitui: 
 ---

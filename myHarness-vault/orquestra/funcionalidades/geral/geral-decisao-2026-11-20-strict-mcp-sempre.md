@@ -7,7 +7,7 @@ substitui:
 ---
 # ✅ `--strict-mcp-config` em toda chamada ao `claude -p`
 
-- **Proposta (plano):** relatório do implementador da T3 do [[fundacao-plano]] (commit `4393810`): o `--strict-mcp-config` ia só quando o papel tinha `mcp_config`; o orquestrador sugeriu mandá-lo sempre.
+- **Proposta (plano):** relatório do implementador da T3 do [[fundacao-plano]] (commit `ca66c51`): o `--strict-mcp-config` ia só quando o papel tinha `mcp_config`; o orquestrador sugeriu mandá-lo sempre.
 - **Decisão:** toda chamada montada pelo núcleo leva `--strict-mcp-config`, com ou sem `--mcp-config`. Sem MCP do papel, o agente não carrega nenhum servidor MCP de projeto ou de usuário.
 - **Alteração:** um ponto de [[geral-decisao-2026-11-19-agente-por-claude-p]], que segue aprovada com a linha reescrita.
 - **Motivo:** aval do humano em 2026-11-20, sessão das 08h57 (resposta das 09h13): "Sempre mandar".
