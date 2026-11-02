@@ -25,6 +25,17 @@ criado: 2026-11-20
 - Ambiguidades do contrato que o esquema aceita hoje: `projeto.nome` único sem regra de caixa e espaços (NBSP e espaço de largura zero passam como não vazios); `toca_em` pode sair do repositório (`../fora`, `~/x`) e repetir item; sem unicidade em `integracao.tipo`, `(chat, versao)` do plano e `pasta_contexto (projeto, caminho)`; dependência em ciclo aceita; ciclo de vida sem trava no banco (aprovado volta a recusado, encerrado volta a ativo); `branch` frouxa, `worktree` relativa, `motivo_fila` com `rodando`; prompts de fábrica (ENT-08) sem dono definido; apagar o único cofre de memória é aceito (ERR-38 é do núcleo).
 - Emoji de commit: resolvido em 2026-11-23 ([[geral-decisao-2026-11-23-push-e-pr-no-github]]): mensagens reescritas pela tabela de Tipos e emojis de commit (no Vault), que ganhou o tipo `ci`.
 
+## Verificação da T5 (2026-11-23)
+- Formato de data entre camadas: o banco da T4 aceita 0 ou 3 casas de fração; o `DataHoraUtc` aceita de 1 a 9 e o zod, qualquer número. Normalizar ao ligar o núcleo ao banco [a confirmar onde].
+- Valores dos enums: o banco guarda o texto do contrato (`só leitura`, `na fila`, `não instalado`); a IPC usa ASCII (`so_leitura`, `na_fila`, `nao_instalado`). Falta definir onde fica o mapeamento.
+- O teste `bindings_estao_em_dia` precisa do Prettier em `node_modules`: o `cargo test` falha sem `pnpm install` antes (a CI já instala).
+
+## Correção da T4 (2026-11-23)
+- Propostas de contrato (`02-entidades`), aguardam o humano: ENT-07 `comandos` vira "comandos executados pelo agente; push, merge e push --force nunca entram (o núcleo os nega antes, ERR-14)"; ENT-09 `criterios` obrigatório quando o papel é teste vira regra do núcleo (o banco não consegue exigir linha filha).
+- Lição de SQLite (candidata ao Vault): `OR REPLACE` apaga a linha sem disparar trigger de `DELETE`; usar trigger `BEFORE INSERT` que confere cada chave única, inclusive índice único parcial.
+- Refazer tabela no sqlx: `-- no-transaction`, `PRAGMA foreign_keys=OFF`, `BEGIN`/`COMMIT` próprios e conferência do `pragma_foreign_key_check` antes do `COMMIT`.
+- O filtro de `comandos` olha só o subcomando logo após o programa (`git -C x push` passa); a barreira real é o portão (RN-27).
+
 ### 🔗 Conexões
 - Plano: [[fundacao-plano]]
 - Funcionalidade: [[fundacao-contexto]]
