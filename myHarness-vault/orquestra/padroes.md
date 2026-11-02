@@ -23,6 +23,7 @@ antigo: re:valores de chave token/senha/secret/api key => mascarar só prefixos 
 antigo: re:Entregar, em série|Série T1 → T5|tarefas-interface rodam em série => paralelo por padrão; série só com arquivo em comum, combinado, cadeia, recurso ou teto (geral-decisao-2026-11-20-paralelo-por-padrao)
 antigo: re:merge local na `main`|sem PR, e o merge|tudo segue local, sem PR|conta sem acesso; tudo local|Enquanto o GitHub não existe => push e PR no GitHub pelo orquestrador; o humano aprova a PR e faz o merge (geral-decisao-2026-11-23-push-e-pr-no-github)
 antigo: re:`concluido`(?! ×)|\bconcluido, falhou => concluído, com acento, em Execução e Relatório (contrato, M-38)
+antigo: re:PR única da G1|numa PR só|uma PR só da G1|feat/setup-g1-interfaces`, `pnpm check`, push => uma PR por tarefa, mergeada pelo humano na ordem indicada (geral-decisao-2026-11-23-uma-pr-por-tarefa)
 limite-palavras: 2000
 ```
 
@@ -37,6 +38,6 @@ limite-palavras: 2000
 
 ### 🔗 Conexões
 - Índice: [[CLAUDE]]
-- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]], [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-20-tudo-local-sem-github]], [[geral-decisao-2026-11-23-push-e-pr-no-github]]
+- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]], [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-20-tudo-local-sem-github]], [[geral-decisao-2026-11-23-push-e-pr-no-github]], [[geral-decisao-2026-11-23-uma-pr-por-tarefa]]
 - Mapa: [[moc-orquestra]]
 - Regras: [[manual-da-orquestra]]
