@@ -10,7 +10,7 @@ criado: 2026-11-19
 > Nada aqui é decisão. Decisões ficam nas notas `-decisao-` linkadas abaixo. Ordem e tarefas aprovadas pelo humano em 2026-11-19, sessão das 16h56.
 
 ## Objetivo desta rodada
-Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
+Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo sempre que o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]).
 
 ## Decisões que este plano respeita
 - [[geral-decisao-2026-11-19-stack]]
@@ -61,12 +61,13 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - **T2 concluída** na branch `feat/setup-mascaramento-por-prefixo`.
 
 ### T3: montagem da chamada ao `claude -p`
-- **Faz:** monta os argumentos (modelo, ferramentas, pastas, instruções, saída em fluxo JSON) conforme [[geral-decisao-2026-11-19-agente-por-claude-p]].
-- **Toca em:** `crates/core/`
+- **Faz:** monta os argumentos (modelo, ferramentas, pastas, instruções, saída em fluxo JSON) conforme [[geral-decisao-2026-11-19-agente-por-claude-p]]; cria o `tools/fake-claude` mínimo em Rust (membro do workspace), que devolve os argumentos recebidos e emite fluxo JSON (aval do humano em 2026-11-20, sessão das 08h57).
+- **Toca em:** `crates/core/`, `tools/fake-claude/`, `Cargo.toml` e `Cargo.lock` da raiz
 - **Depende de:** T2
-- **Paralelo:** não
+- **Paralelo:** sim, com T4
 - **Pronto quando:**
   - [ ] chamada montada é testada contra o `tools/fake-claude`
+  - [ ] `tools/fake-claude` devolve os argumentos recebidos e emite fluxo JSON
 - **Prova:** `cargo test`
 - **Verificação:**
   - Data: 
@@ -76,8 +77,8 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
 ### T4: esquema SQLite das entidades
 - **Faz:** migrações das entidades do `02-entidades`, com as trocas M-23 em diante (pontos 4 e 7).
 - **Toca em:** `src-tauri/migrations/`, `src-tauri/src/infra/db/`
-- **Depende de:** T3 e as trocas do contrato aplicadas
-- **Paralelo:** não
+- **Depende de:** as trocas do contrato aplicadas (já aplicadas)
+- **Paralelo:** sim, com T3 e T5 (arquivos sem cruzamento; o `sqlx` já está no `src-tauri/Cargo.toml`)
 - **Pronto quando:**
   - [ ] migração cria todas as entidades com as restrições do contrato
 - **Prova:** `cargo test`
@@ -89,8 +90,8 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
 ### T5: contrato IPC do Tauri
 - **Faz:** comandos e eventos entre a tela e o núcleo, com tipos gerados para o TypeScript.
 - **Toca em:** `src-tauri/src/commands/`, `src/lib/`
-- **Depende de:** T4
-- **Paralelo:** não
+- **Depende de:** T3, porque as duas tocam o `Cargo.toml` e o `Cargo.lock` da raiz (`tauri-specta`)
+- **Paralelo:** sim, com T4; o combinado entre as duas são os ENT do `02-entidades` (G1)
 - **Pronto quando:**
   - [ ] comandos e eventos tipados nos dois lados
 - **Prova:** `pnpm check`
@@ -100,10 +101,10 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-T3 (montagem da chamada ao `claude -p`, a partir da branch da T2) e T4.
+T3 (montagem da chamada ao `claude -p`) e T4 (esquema SQLite), em paralelo, ambas a partir da branch da T2; depois a T5.
 
 ## Prioridades
-Série T1 → T5; cada tarefa passa por um verificador antes da seguinte. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, numa PR única ([[geral-decisao-2026-11-19-branches-e-pr-unica]]).
+Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]): T3 e T4 juntas, T5 depois da T3; cada tarefa passa pelo seu verificador. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, numa PR única ([[geral-decisao-2026-11-19-branches-e-pr-unica]]).
 
 ## Candidatos a registro
 - Teste `mensagens_seguem_o_catalogo` não cobre ERR-04 a ERR-06 (observação do verificador da T1).
@@ -116,5 +117,6 @@ Série T1 → T5; cada tarefa passa por um verificador antes da seguinte. Cada t
 - Projeto: [[geral-contexto]]
 - Branches: [[geral-decisao-2026-11-19-branches-e-pr-unica]]
 - Mascaramento: [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]
+- Paralelo: [[geral-decisao-2026-11-20-paralelo-por-padrao]]
 - Roteiro: [[geral-plano]]
 - Regras: [[manual-da-orquestra]]
