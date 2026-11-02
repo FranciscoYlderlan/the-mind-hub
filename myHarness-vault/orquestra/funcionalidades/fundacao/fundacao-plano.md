@@ -55,6 +55,8 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Quarta volta: 2026-11-20, para um implementador novo, só nesses dois pontos.
   - Quarta volta (commit `c0e07eb`): ✔ dica do clap intacta; ✔ `Digest` mascarado até o fim da linha; ✘ regressão: tag XML sem fechamento na mesma linha deixou de mascarar (4 vazamentos que o `7c6f82e` cobria).
   - Quinta volta: interrompida em 2026-11-20 pela troca de abordagem ([[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]). A T2 é refeita na branch `feat/setup-mascaramento-por-prefixo`, a partir da T1 (`feafd97`); a branch `feat/setup-mascaramento-segredo` fica fora da PR.
+  - Refeita (commit `85dbb72`, 2026-11-20): ✔ valor guardado, sem heurística, prosa intacta, `Segredo` e `TextoMascarado`, escopo e commit; ✘ segredo guardado dentro de um token deixa o resto do token à vista. Lacuna: token depois de `%20` ou `%3D` não mascarado (fronteira). Opcional: prefixo nu (`ghs_`) mascarado.
+  - Devolvido para um implementador novo: trechos unidos numa passada só; prefixo sem exigir fronteira; prefixo só vira token com pelo menos 1 caractere depois.
 
 ### T3: montagem da chamada ao `claude -p`
 - **Faz:** monta os argumentos (modelo, ferramentas, pastas, instruções, saída em fluxo JSON) conforme [[geral-decisao-2026-11-19-agente-por-claude-p]].
