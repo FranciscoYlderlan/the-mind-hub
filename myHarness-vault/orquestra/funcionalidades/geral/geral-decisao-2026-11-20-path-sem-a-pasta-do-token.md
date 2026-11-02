@@ -7,7 +7,7 @@ substitui:
 ---
 # ✅ No `PATH`, sai só a pasta com token do GitHub
 
-- **Proposta (plano):** correção da T3 do [[fundacao-plano]] (commit `2e2bcfa`): a camada 4 tira do ambiente do agente toda variável cujo valor contém um token com prefixo do GitHub. O implementador apontou que isso também tira o `PATH` quando uma pasta tem um nome como `ghp_tools`.
+- **Proposta (plano):** correção da T3 do [[fundacao-plano]] (commit `682b679`): a camada 4 tira do ambiente do agente toda variável cujo valor contém um token com prefixo do GitHub. O implementador apontou que isso também tira o `PATH` quando uma pasta tem um nome como `ghp_tools`.
 - **Decisão:** no `PATH`, o núcleo tira só as pastas que contêm um token com prefixo do GitHub e mantém as outras. As demais variáveis seguem a regra da camada 4: o valor contém token, a variável sai inteira.
 - **Alteração:** um ponto da camada 4 de [[geral-decisao-2026-11-19-agente-por-claude-p]], que segue aprovada.
 - **Motivo:** resposta do humano em 2026-11-20, às 09h24: "Opção B" (tirar só a pasta e manter o resto, para o agente não parar).
