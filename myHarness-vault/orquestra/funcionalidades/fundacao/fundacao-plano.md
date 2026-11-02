@@ -66,8 +66,8 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
 - **Depende de:** T2
 - **Paralelo:** sim, com T4
 - **Pronto quando:**
-  - [ ] chamada montada é testada contra o `tools/fake-claude`
-  - [ ] `tools/fake-claude` devolve os argumentos recebidos e emite fluxo JSON
+  - [x] chamada montada é testada contra o `tools/fake-claude`
+  - [x] `tools/fake-claude` devolve os argumentos recebidos e emite fluxo JSON
 - **Prova:** `cargo test`
 - **Verificação:**
   - Data: 2026-11-20
@@ -76,7 +76,9 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Correção entregue (commit `1a0c889`): variável sai do ambiente se o valor contém token com prefixo do GitHub em qualquer posição (mesma varredura da máscara); portão recusado quando termina em `\` ou tem `\\` (`\` no meio aceito, por causa dos caminhos do Windows na CI); maiúsculas ignoradas na repetição e no conflito; `--strict-mcp-config` em toda chamada. 62 testes passando. 
   - Segunda verificação (commit `1a0c889`): ✔ as quatro falhas fechadas (token em qualquer posição e caixa; `\\` no fim, dobrado e UNC recusados; maiúsculas; `--strict-mcp-config` uma vez em toda chamada); ✔ critérios 1 a 5 e 7, sem regressão; ✘ `Debug` da `EspecificacaoExecucao` mostra caminhos sem máscara (`pastas_extras`, `portao`, `mcp_config`). Efeito da regra "contém": saem também `PWD`, `LS_COLORS`, `PS1` com prefixo e palavras como `weighs_more`.
   - Devolvido para um implementador novo: caminhos mascarados no `Debug` e [[geral-decisao-2026-11-20-path-sem-a-pasta-do-token]].
-  - Terceira volta (commit `0cff8ad`): caminhos mascarados no `Debug`; no `PATH` saem só as pastas com token (`split_paths`/`join_paths`; `PATH` todo sujo, ou com `"` no Windows, fica vazio mas presente); o fake mostra as pastas do `PATH` em `fake_args.path`. 63 testes no núcleo. Em terceira verificação.
+  - Terceira volta (commit `0cff8ad`): caminhos mascarados no `Debug`; no `PATH` saem só as pastas com token (`split_paths`/`join_paths`; `PATH` todo sujo, ou com `"` no Windows, fica vazio mas presente); o fake mostra as pastas do `PATH` em `fake_args.path`. 63 testes no núcleo.
+  - Terceira verificação (commit `0cff8ad`, 2026-11-20): ✔ nos 7 critérios e na regra do `PATH` no Linux (posição, caixa, nome `Path`, pastas vazias, `PATH` limpo intacto byte a byte, bytes não UTF-8, `PYTHONPATH` e afins saem inteiros); ✔ sem regressão; nenhum valor de ambiente além do `path` sai no fake. Não executado: o caso `"` no `PATH` do Windows e os testes `#[cfg(windows)]`; pela std, as aspas saem na separação e o comentário "o `PATH` fica vazio" em `execucao.rs` pode estar impreciso.
+  - **T3 concluída** na branch `feat/setup-chamada-claude-p`.
 
 ### T4: esquema SQLite das entidades
 - **Faz:** migrações das entidades do `02-entidades`, com as trocas M-23 em diante (pontos 4 e 7).
@@ -116,6 +118,7 @@ Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por
 - `a_partir_do_erro` leva ERR-05 a ERR-07 a desconectado mesmo vindo de sem login ou não instalado; sem efeito na T1, revisar na etapa 3.
 - Link de instalação do ERR-01: tela ou núcleo, decidir na etapa 3.
 - Para o `AgentRunner` (etapa 3): portão inexistente sai com 127, que a CLI não trata como bloqueio (a ferramenta roda sem o portão); passar `stdin` nulo (sem ele, a CLI espera 3 s); limite de cerca de 32 mil caracteres da linha de comando no Windows.
+- Rodar os testes da T3 no Windows (`cargo test` com `#[cfg(windows)]`) e conferir o caso `"` no `PATH`; ajustar o comentário de `execucao.rs` se preciso.
 - Regra "contém" da camada 4 tira variáveis legítimas além do `PATH` (`PWD`, `LS_COLORS`, `PS1`, palavras como `weighs_more`); revisar se o agente precisar delas.
 - Pontos do contrato levantados na T4, para o humano: ligações que faltam (`Tarefa.plano`, `Relatório.execucao`, `Achado.execucao`, `Escrita.cofre`); tarefa incompleta do ERR-49 sem forma de gravar; regras que dependem do papel fora do banco; `concluído` × `concluido` entre Relatório e Execução; ERR-51 diz "nada foi gravado" mesmo quando o desfazer do cofre falha; falta o campo que liga linha a nota (AC-148).
 - Lição de SQLite: CHECK com `=` passa quando a expressão dá NULL; usar `IS`.
