@@ -76,6 +76,7 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Correção entregue (commit `1a0c889`): variável sai do ambiente se o valor contém token com prefixo do GitHub em qualquer posição (mesma varredura da máscara); portão recusado quando termina em `\` ou tem `\\` (`\` no meio aceito, por causa dos caminhos do Windows na CI); maiúsculas ignoradas na repetição e no conflito; `--strict-mcp-config` em toda chamada. 62 testes passando. 
   - Segunda verificação (commit `1a0c889`): ✔ as quatro falhas fechadas (token em qualquer posição e caixa; `\\` no fim, dobrado e UNC recusados; maiúsculas; `--strict-mcp-config` uma vez em toda chamada); ✔ critérios 1 a 5 e 7, sem regressão; ✘ `Debug` da `EspecificacaoExecucao` mostra caminhos sem máscara (`pastas_extras`, `portao`, `mcp_config`). Efeito da regra "contém": saem também `PWD`, `LS_COLORS`, `PS1` com prefixo e palavras como `weighs_more`.
   - Devolvido para um implementador novo: caminhos mascarados no `Debug` e [[geral-decisao-2026-11-20-path-sem-a-pasta-do-token]].
+  - Terceira volta (commit `0cff8ad`): caminhos mascarados no `Debug`; no `PATH` saem só as pastas com token (`split_paths`/`join_paths`; `PATH` todo sujo, ou com `"` no Windows, fica vazio mas presente); o fake mostra as pastas do `PATH` em `fake_args.path`. 63 testes no núcleo. Em terceira verificação.
 
 ### T4: esquema SQLite das entidades
 - **Faz:** migrações das entidades do `02-entidades`, com as trocas M-23 em diante (pontos 4 e 7).
@@ -108,7 +109,7 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
 T3 (montagem da chamada ao `claude -p`) e T4 (esquema SQLite), em paralelo, ambas a partir da branch da T2; depois a T5.
 
 ## Prioridades
-Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]): T3 e T4 juntas, T5 depois da T3; cada tarefa passa pelo seu verificador. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, numa PR única ([[geral-decisao-2026-11-19-branches-e-pr-unica]]).
+Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]): T3 e T4 juntas, T5 depois da T3; cada tarefa passa pelo seu verificador. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, sem PR; o merge na `main` é local, com a confirmação do humano ([[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-20-tudo-local-sem-github]]).
 
 ## Candidatos a registro
 - Teste `mensagens_seguem_o_catalogo` não cobre ERR-04 a ERR-06 (observação do verificador da T1).
@@ -129,5 +130,6 @@ Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por
 - Paralelo: [[geral-decisao-2026-11-20-paralelo-por-padrao]]
 - MCP: [[geral-decisao-2026-11-20-strict-mcp-sempre]]
 - `PATH`: [[geral-decisao-2026-11-20-path-sem-a-pasta-do-token]]
+- Local: [[geral-decisao-2026-11-20-tudo-local-sem-github]]
 - Roteiro: [[geral-plano]]
 - Regras: [[manual-da-orquestra]]
