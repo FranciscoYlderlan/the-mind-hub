@@ -95,10 +95,10 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Segunda verificação (commit `f5ad5ce`, 2026-11-23): ✔ nos 10 itens: `Achado.execucao`; M-37 a M-39 nos dois lados; ERR-54 e catálogo de 54 iguais ao `05-erros` em Rust, TS e zod; `Relatorio` e `Criterio` nos bindings; zod de data sem divergência do Rust em 34 casos; `desconectar_integracao`; escopo; sem regressão. Mutações quebram o `tsc` ou o `bindings_estao_em_dia`.
   - A #2 foi mergeada (2026-11-23) com a versão `03e01ca`, sem a correção. Correção refeita sobre a `main` (`e118161`) como `e2b29c6` na branch `feat/setup-contrato-ipc-correcao`.
   - Conferência sobre a `main` (2026-11-23): ✔ mesmo patch do `f5ad5ce` (`range-diff` idêntico) e nada da T4 tocado; ✔ `pnpm check` EXIT 0; ✔ `pnpm bindings` sem diferença; ✔ DTOs batem com a `0003` (`Tarefa.plano` e `incompleta`, `Relatorio`, `Criterio`, ERR-54, `Achado.execucao`); ✘ DTO `Execucao` sem `comandos` (ENT-07, M-41), deixado de fora de propósito ("vai pelo Log, ENT-12") [a confirmar com o humano].
-  - **T5 concluída**; correção mergeada pelo humano na PR #7 (`ff1343f`, mesmo patch do `e2b29c6`). Fica uma dúvida para o humano: DTO `Execucao` sem `comandos` (M-41).
+  - **T5 concluída**; correção mergeada pelo humano na PR #7 (`ff1343f`, mesmo patch do `e2b29c6`). O DTO `Execucao` sem `comandos` (M-41) vira ajuste ([[geral-decisao-2026-11-23-comandos-na-tela-de-execucao]]).
 
 ## Próxima tarefa e a seguinte
-T1 a T5 concluídas e na `main` (`ff1343f`): G1 fechado. Próximo: conferir o "Pronto quando" da etapa 2 do [[geral-plano]] com o humano e, com o aval dele, preparar o contrato da etapa 3 (`integracoes`).
+T1 a T5 concluídas e na `main` (`ff1343f`): G1 fechado e etapa 2 concluída (aval do humano em 2026-11-23, 17h26). Os ajustes que saíram das respostas do humano (`comandos` no DTO `Execucao`, ERR-55 no `CodigoErro`, comentário do filtro de `comandos`, banco antigo apagado) entram como primeiras tarefas do plano da etapa 3.
 
 ## Prioridades
 Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]): T3 e T4 juntas, T5 depois da T3; cada tarefa passa pelo seu verificador. Cada tarefa na sua branch `feat/setup-...`; verificada, sobe na sua PR, com `pnpm check` local; o humano faz o merge por "Rebase and merge" na ordem #3 (feita), #4, #1, #2 ([[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-23-uma-pr-por-tarefa]]).

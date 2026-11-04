@@ -7,7 +7,7 @@ criado: 2026-11-19
 # 🧭 Roteiro — MyHarness
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **2. Fundação e protótipo das suposições** (em-construcao)
+> Etapa atual: **3. Integrações** (planejada)
 
 > [!warning] Proposta da IA até eu aprovar
 > As etapas nascem como proposta. Aprovadas, viram a nota `geral-decisao-AAAA-MM-DD-roteiro` e este plano passa a `status: aprovado`. Mudar a lista de etapas é uma nova decisão.
@@ -27,14 +27,14 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 - **Concluída em:** 2026-11-19
 
 ## 2. Fundação e protótipo das suposições
-- **Status:** em-construcao
+- **Status:** concluida
 - **Objetivo:** criar o repositório e o esqueleto Tauri + Rust + React + SQLite (WAL), preencher o contrato em `Anexos/contrato/` a partir da especificação e provar, num protótipo descartável, as suposições que decidem a arquitetura do backend: saída de `claude -p` em fluxo JSON com modelo, ferramentas, pastas e instruções por parâmetro (S3); CLI direta ou Claude Agent SDK num processo Node (S4); fonte legível por máquina do consumo semanal e da janela, com o plano B dos registros locais (S2); duração da janela, 4 h ou 5 h (S1); forma de login das três integrações (S5).
 - **Pronto quando:** `Anexos/contrato/` com `00-requisitos` preenchido do documento-fonte e rastreabilidade RF → UC → TEL; decisões de estrutura, stack, S3/S4 e fonte do consumo aprovadas em `funcionalidades/geral/`; app vazio compila e abre na máquina virtual do agente, com o SQLite criado; interfaces comuns definidas (G1): trait `Integracao` (RNF-11), esquema SQLite das entidades, contrato de comandos e eventos Tauri (IPC), módulo de mascaramento de segredo (RN-04) e módulo de "montagem da chamada" ao Claude CLI.
 - **Ciclo** (prático): sem funcionalidade de produto; protótipo de pesquisa com relatório e prova (saída real do `claude -p` e da fonte de consumo anexada), depois tarefas-interface (P12, G1).
 - **Funcionalidades:** [[fundacao-contexto]] (sem RF próprio; prepara RF-05, RF-10, RF-18, RF-29, RF-32)
 - **Paralelo:** os protótipos S2, S3/S4 e S5 são pesquisa, só leitura, sem teto (G11) e em paralelo; o esqueleto do repositório é uma cadeia com um agente só (G3); as tarefas-interface rodam em paralelo depois da decisão S3 × S4, em série só onde o "toca em" se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-20-strict-mcp-sempre]], [[geral-decisao-2026-11-20-path-sem-a-pasta-do-token]], [[geral-decisao-2026-11-23-push-e-pr-no-github]], [[geral-decisao-2026-11-20-github-falso]]).
-- **Notas geradas:** [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-fonte-do-consumo]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-identificador-do-app]], [[geral-decisao-2026-11-19-versao-inicial]], [[geral-decisao-2026-11-19-push-e-pr-pelo-nucleo]], [[geral-decisao-2026-11-19-entidades-no-sqlite]], [[geral-decisao-2026-11-19-papel-pesquisa]], [[geral-decisao-2026-11-19-data-e-hora-em-utc]], [[geral-decisao-2026-11-19-modo-simulado]], [[geral-decisao-2026-11-19-gravacao-dupla]], [[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[fundacao-contexto]], [[fundacao-plano]]
-- **Concluída em:** 
+- **Notas geradas:** [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-fonte-do-consumo]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-identificador-do-app]], [[geral-decisao-2026-11-19-versao-inicial]], [[geral-decisao-2026-11-19-push-e-pr-pelo-nucleo]], [[geral-decisao-2026-11-19-entidades-no-sqlite]], [[geral-decisao-2026-11-19-papel-pesquisa]], [[geral-decisao-2026-11-19-data-e-hora-em-utc]], [[geral-decisao-2026-11-19-modo-simulado]], [[geral-decisao-2026-11-19-gravacao-dupla]], [[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-20-strict-mcp-sempre]], [[geral-decisao-2026-11-20-path-sem-a-pasta-do-token]], [[geral-decisao-2026-11-20-github-falso]], [[geral-decisao-2026-11-23-push-e-pr-no-github]], [[geral-decisao-2026-11-23-uma-pr-por-tarefa]], [[geral-decisao-2026-11-23-github-real-na-etapa-3]], [[geral-decisao-2026-11-23-tauri-specta-rc]], [[geral-decisao-2026-11-23-comandos-na-tela-de-execucao]], [[geral-decisao-2026-11-23-falha-interna]], [[geral-decisao-2026-11-23-filtro-de-comandos-so-comentario]], [[geral-decisao-2026-11-23-banco-antigo-apagado]], [[fundacao-contexto]], [[fundacao-plano]], [[diario-2026-11-20]], [[diario-2026-11-23]]
+- **Concluída em:** 2026-11-23
 
 ## 3. Integrações
 - **Status:** planejada

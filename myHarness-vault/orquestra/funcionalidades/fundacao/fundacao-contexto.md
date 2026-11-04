@@ -1,7 +1,7 @@
 ---
 tipo: contexto
 funcionalidade: fundacao
-status: em-construcao
+status: concluida
 etapa: 2
 criado: 2026-11-19
 aliases: [Fundação, Interfaces comuns, G1]
@@ -21,7 +21,7 @@ Fechar o "Pronto quando" da etapa 2 do [[geral-plano]]: sem estas interfaces, as
 - 2026-11-19: plano T1 a T5 aprovado; T1 (trait `Integracao`) entregue e verificada.
 - 2026-11-20: T2 (mascaramento) refeita sem adivinhar, por prefixo conhecido e segredo guardado ([[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]), e verificada ([[diario-2026-11-20]]).
 - 2026-11-23: código no GitHub (`FranciscoYlderlan/MyHarness`), histórico com datas de 2026-09-21 a 2026-11-23; uma PR por tarefa, mergeada pelo humano ([[geral-decisao-2026-11-23-push-e-pr-no-github]], [[geral-decisao-2026-11-23-uma-pr-por-tarefa]], [[diario-2026-11-23]]).
-- 2026-11-23: T3 (chamada ao `claude -p`) concluída e mergeada (#4); T4 (esquema SQLite) corrigida, mergeada (#1 e #5) e verificada na `main` ([[fundacao-plano-esquema-sqlite]]); T5 (contrato IPC) mergeada (#2 e, com a correção, #7, `ff1343f`). Contrato com M-41 e M-42. G1 fechado: T1 a T5 na `main`.
+- 2026-11-23: T3 (chamada ao `claude -p`) concluída e mergeada (#4); T4 (esquema SQLite) corrigida, mergeada (#1 e #5) e verificada na `main` ([[fundacao-plano-esquema-sqlite]]); T5 (contrato IPC) mergeada (#2 e, com a correção, #7, `ff1343f`). Contrato com M-41 e M-42. G1 fechado: T1 a T5 na `main`. Fundação concluída com a etapa 2 (aval do humano às 17h26).
 
 ## Tempo disponível
 - Humano até as 18h de 2026-11-19.
