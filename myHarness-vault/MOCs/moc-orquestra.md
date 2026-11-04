@@ -22,6 +22,7 @@ origem: Manual da Orquestra
 
 ## 🚧 Funcionalidades
 - [[fundacao-contexto]]: interfaces comuns da etapa 2 (G1).
+- [[integracoes-contexto]]: Claude CLI, Obsidian CLI e GitHub (etapa 3, RF-01 a RF-04).
 
 ## 📦 Arquivadas
 - (nenhuma ainda)
