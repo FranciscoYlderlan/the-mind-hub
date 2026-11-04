@@ -15,6 +15,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 ## Decisões que este plano respeita
 - [[geral-decisao-2026-11-23-comandos-na-tela-de-execucao]], [[geral-decisao-2026-11-23-falha-interna]], [[geral-decisao-2026-11-23-filtro-de-comandos-so-comentario]], [[geral-decisao-2026-11-23-banco-antigo-apagado]] (T0a e T0b)
 - [[geral-decisao-2026-11-19-github-oauth-proprio]], [[geral-decisao-2026-11-23-github-real-na-etapa-3]], [[geral-decisao-2026-11-20-github-falso]] (T3)
+- [[geral-decisao-2026-11-24-erro-generico-por-fronteira]], [[geral-decisao-2026-11-24-servidor-mcp-do-obsidian]], [[geral-decisao-2026-11-24-desconectar-sem-logout]]
 - [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-strict-mcp-sempre]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-23-tauri-specta-rc]]
 
 ## Tarefas
@@ -29,6 +30,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] `pnpm check` passando
 - **Prova:** `pnpm check`; diff dos bindings
 - **Verificação:**
+  - Entregue em 2026-11-24: `1813855` (branch `feat/integracoes-ajuste-ipc`); `nucleo.rs` desfeito; `Criterio` já sem `descricao`; verificador despachado.
 
 ### T0b: comentário do filtro e banco antigo recriado
 - **Faz:** corrige o comentário do filtro de `comandos` na migração `0003` sem mudar o SQL; banco anterior à `0003` que não abre é apagado e recriado na abertura, sem quebrar o checksum do sqlx.
@@ -41,6 +43,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] `pnpm check` passando
 - **Prova:** `pnpm check`
 - **Verificação:**
+  - Entregue em 2026-11-24: `2f6001a` (branch `feat/integracoes-ajuste-banco`); verificador despachado.
 
 ### T1: Claude CLI (RF-01)
 - **Faz:** implementação da trait `Integracao` para o Claude CLI: acha o executável (caminho opcional), lê a versão, checa a autenticação e inicia o `/login` da CLI quando falta.
@@ -53,6 +56,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] AC-01, AC-02, AC-03, AC-88, AC-153, AC-154 cobertos por teste
 - **Prova:** `pnpm check`
 - **Verificação:**
+  - Entregue em 2026-11-24: `82223f2` (branch `feat/integracoes-claude-cli`), `claude --version`, `claude auth status --json` e `claude auth login`; `fake-claude` com modo cenário. ERR-53 sai como ERR-05 pelo trait (ponte provisória até a T4); `desconectar` sem logout da CLI [a confirmar]; verificação depois da T2b.
 
 ### T2: Obsidian CLI (RF-02)
 - **Faz:** implementação da trait para a Obsidian CLI: Obsidian aberto, servidor MCP respondendo, cofre acessível e número de notas indexadas.
@@ -64,11 +68,23 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] AC-05, AC-89, AC-128, AC-153, AC-154 cobertos por teste
 - **Prova:** `pnpm check`
 - **Verificação:**
+  - Entregue em 2026-11-24: `70b1457` (branch `feat/integracoes-obsidian-cli`), cliente MCP por HTTP (`OBSIDIAN_MCP_URL`) e servidor falso; ERR-53 só pela API do adaptador, não pelo trait; contagem de notas exige `obsidian_files` no servidor real [a preencher]; verificação aguarda as respostas do humano.
+
+### T2b: servidor MCP da Obsidian CLI com total de notas e HTTP
+- **Faz:** o `obsidian-cli-mcp.js` (no `Vault`, `Modelos/Orquestra/`) ganha uma ferramenta de listar arquivos com total e transporte HTTP local ([[geral-decisao-2026-11-24-servidor-mcp-do-obsidian]]); depois, `cofre.py sincronizar` nos cofres.
+- **Toca em:** `Vault/Modelos/Orquestra/obsidian-cli-mcp.js` (o orquestrador aplica; o implementador entrega a mudança no relatório)
+- **Depende de:** nenhuma
+- **Paralelo:** sim, com T3
+- **Pronto quando:**
+  - [ ] `obsidian_files` devolve o total de `.md` do cofre; o servidor atende por HTTP local e segue atendendo como hoje
+  - [ ] o cliente da T2 lê o número de notas do servidor real (AC-128)
+- **Prova:** chamada real pelo MCP ao `Vault` e ao `myHarness-vault`
+- **Verificação:**
 
 ### T3: GitHub por OAuth device flow (RF-03)
 - **Faz:** device flow com o app OAuth próprio (`client_id` do `.env`), token no cofre de credenciais do sistema (Gerenciador de Credenciais no Windows), status com conta e escopos; GitHub falso atrás do `GitHost` nos testes automáticos.
 - **Toca em:** `src-tauri/src/infra/github/`, `src-tauri/src/infra/secrets/`, `.env.example`, `src-tauri/Cargo.toml`
-- **Depende de:** `client_id` do app OAuth [a preencher]
+- **Depende de:** `client_id` do app OAuth: `Ov23li904l2z5LWigHyr` (humano, 2026-11-24)
 - **Paralelo:** sim, com T0a, T0b, T1 e T2
 - **Pronto quando:**
   - [ ] AC-01, AC-04, AC-90, AC-127, AC-129, AC-153 cobertos por teste contra o GitHub falso
@@ -76,14 +92,19 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] um teste manual contra o GitHub real, no repositório de testes `FranciscoYlderlan/myharness-teste`
 - **Prova:** `pnpm check`; busca automatizada pelo token (RNF-05)
 - **Verificação:**
+  - Despachada em 2026-11-24 07h45 (branch `feat/integracoes-github-oauth`).
 
 ### T4: núcleo liga as três integrações
 - **Faz:** o `Nucleo` provisório passa a usar T1, T2 e T3 em `listar`, `testar`, `conectar` e `desconectar`, com os eventos de instrução de conexão.
-- **Toca em:** `src-tauri/src/commands/nucleo.rs`, `src-tauri/src/lib.rs`
+- **Toca em:** `src-tauri/src/commands/nucleo.rs`, `src-tauri/src/commands/erro.rs`, `src-tauri/src/lib.rs`, `crates/core/src/domain/integracao.rs`, adaptadores de T1 e T2 (só o mapeamento do erro)
 - **Depende de:** T1, T2, T3
 - **Paralelo:** não
 - **Pronto quando:**
+  - [ ] "Desconectar" do Claude CLI só no MyHarness, sem logout ([[geral-decisao-2026-11-24-desconectar-sem-logout]])
+  - [ ] um teste só prova que qualquer falha não catalogada vira ERR-53 com o motivo mascarado no Log ([[geral-decisao-2026-11-24-erro-generico-por-fronteira]])
   - [ ] comandos IPC devolvem o estado real das três; RN-08 bloqueia ação sem integração
+  - [ ] variante de ERR-53 no `ErroIntegracao` (`crates/core`), para T1 e T2 devolverem a falha inesperada pelo trait
+  - [ ] `ErroIpc::Interno` e `MotivoInterno` retirados; o `nao_implementado()` usa ERR-55 ([[geral-decisao-2026-11-23-falha-interna]]); bindings regerados
   - [ ] `pnpm check` passando
 - **Prova:** `pnpm check`
 - **Verificação:**
