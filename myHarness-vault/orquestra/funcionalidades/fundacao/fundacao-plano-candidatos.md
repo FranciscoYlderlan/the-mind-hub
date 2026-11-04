@@ -19,6 +19,8 @@ criado: 2026-11-20
 - Pontos do contrato levantados na T5, para o humano: erro interno genérico fora do catálogo (proposta ERR `FALHA_INTERNA`; o ERR-54 já vai para o desfazer que falha, M-40); ENT-20 Rodada sem `id` nem `chat`; ENT-04 Mensagem sem data e hora; percentuais da ENT-14 como inteiros; nomes ASCII para ✔, ✘ e "não verificado, presumido" da ENT-24; CMP-12 sem marca de tarefa incompleta no DTO (resolvido pelo campo `incompleta` do M-39). IDs vão como texto no IPC; converter na fronteira se a T4 usar INTEGER. `src/dev/nucleo-simulado.ts` da decisão do modo simulado ainda não existe. Os bindings importam `@tauri-apps/api/mocks`: conferir no build. `cargo test` passa a exigir `pnpm install` (o gerador usa o Prettier do projeto).
 - Lição de SQLite: CHECK com `=` passa quando a expressão dá NULL; usar `IS`.
 - Escolhas da T3 a revisar na tarefa do `harness-gate`: `--tools` só com nomes internos; gancho sem o papel.
+- Ambiente: o container da nuvem traz `.gitconfig` global com `user.name Claude` e `commit.gpgsign true`; todo commit (orquestrador e subagentes) precisa de autor e committer do humano por variável de ambiente e `-c commit.gpgsign=false`, inclusive cherry-pick e rebase. Candidato a decisão e a lição no Vault.
+- Ambiente: verificação leva de 8 a 12 min por compilar do zero (pasta de compilação por verificador, container limpo a cada chat). Proposta: compilar uma vez no início da sessão e copiar a pasta pronta para cada verificador; verificador usa os testes do repositório com banco temporário; `sccache` opcional. Explicado ao humano em 2026-11-23, 17h20 (sem aval formal).
 - Ambiente: `cargo clippy --workspace` exige GTK e WebKitGTK (`libwebkit2gtk-4.1-dev`, `libgtk-3-dev`, `libayatana-appindicator3-dev`, `librsvg2-dev`).
 
 ## Verificação da T4 (2026-11-20)
@@ -31,10 +33,19 @@ criado: 2026-11-20
 - O teste `bindings_estao_em_dia` precisa do Prettier em `node_modules`: o `cargo test` falha sem `pnpm install` antes (a CI já instala).
 
 ## Correção da T4 (2026-11-23)
-- Propostas de contrato (`02-entidades`), aguardam o humano: ENT-07 `comandos` vira "comandos executados pelo agente; push, merge e push --force nunca entram (o núcleo os nega antes, ERR-14)"; ENT-09 `criterios` obrigatório quando o papel é teste vira regra do núcleo (o banco não consegue exigir linha filha).
+- Propostas de contrato aplicadas como M-41 (ENT-07 `comandos`: comandos executados pelo agente; push, merge e push --force nunca entram) e M-42 (ENT-09 `criterios` no papel teste como regra do núcleo).
 - Lição de SQLite (candidata ao Vault): `OR REPLACE` apaga a linha sem disparar trigger de `DELETE`; usar trigger `BEFORE INSERT` que confere cada chave única, inclusive índice único parcial.
 - Refazer tabela no sqlx: `-- no-transaction`, `PRAGMA foreign_keys=OFF`, `BEGIN`/`COMMIT` próprios e conferência do `pragma_foreign_key_check` antes do `COMMIT`.
 - O filtro de `comandos` olha só o subcomando logo após o programa (`git -C x push` passa); a barreira real é o portão (RN-27).
+
+## Segunda verificação da T4 (2026-11-23)
+- Filtro de `comandos` no banco é melhor esforço, ao contrário do comentário da `0003`: `git` com 9 ou mais espaços antes de `push`, `cd x&&git push`, `"git" push` e `git --no-pager push` passam (além do `git -C x push`); endurecer ou corrigir o comentário [a confirmar com o humano]. A barreira real é o portão (RN-27).
+- Mudar `execucao.papel` para `adversarial` depois de um achado sem captura é aceito.
+- `DELETE` e `INSERT` de uma execução sem filhos grava outra `prompt_versao`.
+- `INSERT OR REPLACE` em `tarefa` é aceito e zera `voltas`, `implementada_por` e `incompleta`.
+- `Display` do `HalfUndone` mostra o erro do desfazer sem máscara (RN-04 pede máscara no que é mostrado).
+- Banco da `0002` com linha em `tarefa`, `relatorio`, `achado` ou `escrita` não abre: saída (apagar ou avisar) [a confirmar com o humano].
+- Lição de SQLite (candidata ao Vault): `replace` encadeado n vezes junta no máximo 2^n espaços.
 
 ## Ajuste da T5 (2026-11-23)
 - Propostas de contrato, aguardam o humano: ENT-24 Critério ganha `descricao` (texto do critério do "Pronto quando"); ENT-24 registra `passou`, `falhou` e `nao_verificado_presumido` como nomes ASCII de ✔, ✘ e "não verificado, presumido".

@@ -73,15 +73,9 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
 - **Depende de:** as trocas do contrato aplicadas (já aplicadas)
 - **Paralelo:** sim, com T3 e T5 (arquivos sem cruzamento; o `sqlx` já está no `src-tauri/Cargo.toml`)
 - **Pronto quando:**
-  - [ ] migração cria todas as entidades com as restrições do contrato
+  - [x] migração cria todas as entidades com as restrições do contrato
 - **Prova:** `cargo test`
-- **Verificação:**
-  - Entregue (commit `cba8f60`, `feat/setup-esquema-sqlite`, 2026-11-20): `0002_contract_entities.sql` com 25 tabelas STRICT (ENT-15 Papel no código; ENT-25 Diário só no cofre), CHECK nomeados, datas com `IS strftime(...)`, triggers para listas JSON, `chat_anterior`, `prompt_versao` (RN-28) e versões de prompt (RF-31); `dual_write.rs` com `commit_with_vault` e ERR-51; 27 testes de banco.
-  - Data: 2026-11-20
-  - Critérios ✔/✘ com a prova de cada um: ✔ datas UTC com `Z` (fuso, `z`, 30/02, `24:00`, epoch recusados); ✔ gravação dupla (desfaz nos 4 caminhos, ERR-51); ✔ escopo; ✔ banco criado pela `0001` migra e reabre; ✘ `INSERT OR REPLACE` sobrescreve versão de prompt (RF-31) e `prompt_versao` (RN-28), porque o `REPLACE` não dispara o trigger de `DELETE`; ✘ ENT-07 sem a coluna `comandos` (RN-17); ✘ teste do CHECK `chat_chat_anterior_proprio` não o prova (o trigger dispara antes) e não há teste de `REPLACE`; ✘ (menor) emoji `:card_file_box:` fora da tabela de Tipos e emojis de commit (no Vault). Detalhe e ambiguidades: [[fundacao-plano-candidatos]].
-  - Mergeada na `main` (`00bd9a1`, PR #1) pelo humano em 2026-11-23, com os ✘ abertos; a correção sobe numa PR nova (aval do humano, 16h36).
-  - Devolvido para correção: sim, 2026-11-23, para um implementador novo, com o M-37 a M-40, na branch `feat/setup-esquema-sqlite-correcao`.
-  - Correção (2026-11-23, sem commit): migração nova `0003` (a `0002` já aplicada muda o checksum no sqlx), que refaz `tarefa`, `execucao`, `relatorio`, `achado` e `escrita` com as ligações do M-37, `concluído`, `incompleta` e `comandos`; triggers `BEFORE INSERT` fecham o `REPLACE`; ERR-54 no `dual_write.rs`, registrado no Log; 12 testes novos em `infra/db/tests.rs` (o CHECK `chat_chat_anterior_proprio` agora é provado). `fmt`, `clippy` e `cargo test --lib` passam; ✘ `pnpm check`: os testes antigos `src-tauri/tests/db_schema.rs` e `db_dual_write.rs`, fora do "Toca em", usam o esquema e a API antigos. Com o aval, o mesmo implementador atualizou os dois testes: commit `2b66b09`, `pnpm check` passando (banco: 12 + 21 + 6 + 1 testes), ENT-07 e ENT-09 aprovados (M-41 e M-42) sem contradição no esquema. Branch no GitHub, sem PR; aguarda verificador.
+- **Verificação:** duas verificações e uma correção, em [[fundacao-plano-esquema-sqlite]]. **T4 concluída** na `main` (`e118161`, PR #5).
 
 ### T5: contrato IPC do Tauri
 - **Faz:** comandos e eventos entre a tela e o núcleo, com tipos gerados para o TypeScript.
@@ -99,10 +93,12 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Devolvido para correção: sim, 2026-11-23, para um implementador novo, junto do ajuste ao M-37 a M-40, na branch da #2.
   - Correção e ajuste (commit `f5ad5ce`, 2026-11-23): `Achado.execucao`; `Tarefa.plano` e `incompleta`; DTOs `Relatorio` (ENT-09) e `Criterio` (ENT-24, `passou`, `falhou`, `nao_verificado_presumido`) só como tipos; ERR-54; `concluido` no fio em ASCII, ligado a "concluído" do contrato por comentário; zod de data com 1 a 9 casas; `desconectar_integracao` devolve `nao_implementado`. `pnpm check` e `pnpm bindings` sem diferença.
   - Segunda verificação (commit `f5ad5ce`, 2026-11-23): ✔ nos 10 itens: `Achado.execucao`; M-37 a M-39 nos dois lados; ERR-54 e catálogo de 54 iguais ao `05-erros` em Rust, TS e zod; `Relatorio` e `Criterio` nos bindings; zod de data sem divergência do Rust em 34 casos; `desconectar_integracao`; escopo; sem regressão. Mutações quebram o `tsc` ou o `bindings_estao_em_dia`.
-  - **T5 concluída** na branch da #2; o merge é do humano.
+  - A #2 foi mergeada (2026-11-23) com a versão `03e01ca`, sem a correção. Correção refeita sobre a `main` (`e118161`) como `e2b29c6` na branch `feat/setup-contrato-ipc-correcao`.
+  - Conferência sobre a `main` (2026-11-23): ✔ mesmo patch do `f5ad5ce` (`range-diff` idêntico) e nada da T4 tocado; ✔ `pnpm check` EXIT 0; ✔ `pnpm bindings` sem diferença; ✔ DTOs batem com a `0003` (`Tarefa.plano` e `incompleta`, `Relatorio`, `Criterio`, ERR-54, `Achado.execucao`); ✘ DTO `Execucao` sem `comandos` (ENT-07, M-41), deixado de fora de propósito ("vai pelo Log, ENT-12") [a confirmar com o humano].
+  - **T5 concluída**; correção mergeada pelo humano na PR #7 (`ff1343f`, mesmo patch do `e2b29c6`). Fica uma dúvida para o humano: DTO `Execucao` sem `comandos` (M-41).
 
 ## Próxima tarefa e a seguinte
-Em paralelo: verificador da T5 e correção da T4 (verificação e contrato M-37 a M-40); depois o ajuste da T5 ao contrato novo; cada tarefa verificada vai na sua PR.
+T1 a T5 concluídas e na `main` (`ff1343f`): G1 fechado. Próximo: conferir o "Pronto quando" da etapa 2 do [[geral-plano]] com o humano e, com o aval dele, preparar o contrato da etapa 3 (`integracoes`).
 
 ## Prioridades
 Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]): T3 e T4 juntas, T5 depois da T3; cada tarefa passa pelo seu verificador. Cada tarefa na sua branch `feat/setup-...`; verificada, sobe na sua PR, com `pnpm check` local; o humano faz o merge por "Rebase and merge" na ordem #3 (feita), #4, #1, #2 ([[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-23-uma-pr-por-tarefa]]).
@@ -114,6 +110,7 @@ Os candidatos levantados nas tarefas T1 a T5 (contrato, ambiente, `AgentRunner`)
 - Funcionalidade: [[fundacao-contexto]]
 - Candidatos: [[fundacao-plano-candidatos]]
 - Verificação da T2: [[fundacao-plano-mascaramento]]
+- Verificação da T4: [[fundacao-plano-esquema-sqlite]]
 - Projeto: [[geral-contexto]]
 - Branches: [[geral-decisao-2026-11-19-branches-e-pr-unica]]
 - Mascaramento: [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]
