@@ -78,6 +78,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Pronto quando:**
   - [ ] `obsidian_files` devolve o total de `.md` do cofre; o servidor atende por HTTP local e segue atendendo como hoje
   - [ ] o cliente da T2 lê o número de notas do servidor real (AC-128)
+  - [ ] nota no `Vault` explicando o servidor MCP da Obsidian CLI por inteiro (o que é, ferramentas, transportes, como instalar e ligar, como validar, ligação com o bug "Obsidian CLI via MCP não carrega"), escrita pelo orquestrador seguindo o Manual do Meu Cérebro no Obsidian (no Vault)
 - **Prova:** chamada real pelo MCP ao `Vault` e ao `myHarness-vault`
 - **Verificação:**
 
