@@ -60,6 +60,7 @@ Um item por condição. O catálogo separa dois tipos: **erro** (dado inválido:
 | ERR-52 | `LIMITE_DE_CONTEXTO_ABAIXO_DO_MINIMO` | limite de contexto do projeto ou do chat igual a zero; o mínimo aceito é 1 token (ENT-01, ENT-03; CMP-07) | voltar | "O limite precisa ter pelo menos 1 token." | nada salvo; o limite anterior continua |
 | ERR-53 | `INTEGRACAO_FALHA_INESPERADA` | falha inesperada ao checar, conectar ou desconectar uma integração (tempo esgotado, saída que não dá para ler, erro de rede), fora das condições do ERR-01 a ERR-04 (UC-01 FE-04; ENT-13) | repetir | "Falha inesperada com <integração>: <motivo>. Tente de novo." | integração em `desconectado` |
 | ERR-54 | `GRAVACAO_DESFEITA_PELA_METADE` | na gravação dupla, o commit do SQLite falha e o desfazer da nota já gravada no cofre também falha (RN-31) | bloquear | "A nota <nome> ficou no cofre, mas não no banco. Apague a nota ou grave de novo." | nota no cofre, nada no SQLite; o caso registrado no Log (ENT-12) |
+| ERR-55 | `FALHA_INTERNA` | falha inesperada no próprio núcleo, fora de todas as condições do ERR-01 ao ERR-54 (erro de programa, estado que não deveria existir) | repetir | "Algo deu errado no MyHarness: <motivo>. Tente de novo." | nada muda; o caso registrado no Log (ENT-12), com o motivo mascarado (RN-04) |
 
 ## Tratamentos
 
