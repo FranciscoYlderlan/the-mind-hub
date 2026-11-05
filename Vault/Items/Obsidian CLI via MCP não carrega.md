@@ -121,5 +121,5 @@ Entrada gravada no arquivo real (backup antes, JSON sem BOM):
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Guia do cofre para IA]], [[Atualizar a memória]], [[Modelo de CLAUDE do cofre]]
+- Relacionadas: [[Guia do cofre para IA]], [[Atualizar a memória]], [[Modelo de CLAUDE do cofre]], [[Servidor MCP da Obsidian CLI]], [[Ligar o servidor MCP da Obsidian CLI]]
 - Projeto onde aconteceu: stonebid, nota `bug-obsidian-cli-mcp-nao-carrega-2026-10-28` em `orquestra/bugs/` do `stonebid-vault`
