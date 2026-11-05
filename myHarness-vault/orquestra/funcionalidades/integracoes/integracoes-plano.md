@@ -26,11 +26,12 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma
 - **Paralelo:** sim, com T0b, T1, T2 e T3
 - **Pronto quando:**
-  - [ ] DTO `Execucao` com `comandos` igual ao ENT-07 e ERR-55 no catálogo de códigos, nos três lados (Rust, TS, zod)
-  - [ ] `pnpm check` passando
+  - [x] DTO `Execucao` com `comandos` igual ao ENT-07 e ERR-55 no catálogo de códigos, nos três lados (Rust, TS, zod)
+  - [x] `pnpm check` passando
 - **Prova:** `pnpm check`; diff dos bindings
 - **Verificação:**
-  - Entregue em 2026-11-24: `1813855` (branch `feat/integracoes-ajuste-ipc`); `nucleo.rs` desfeito; `Criterio` já sem `descricao`; verificador despachado.
+  - Entregue em 2026-11-24: `1813855` (branch `feat/integracoes-ajuste-ipc`); `nucleo.rs` desfeito; `Criterio` já sem `descricao`.
+  - 2026-11-24: ✔ nos 6 critérios (catálogo de 55 códigos igual em Rust, TS e zod; `pnpm check`; `pnpm bindings` sem diferença; só o "Toca em"). Opcionais: link de doc do Rust no comentário dos bindings; zod não confere `id` com `codigo` (já vinha da `main`). PR #8 aberta.
 
 ### T0b: comentário do filtro e banco antigo recriado
 - **Faz:** corrige o comentário do filtro de `comandos` na migração `0003` sem mudar o SQL; banco anterior à `0003` que não abre é apagado e recriado na abertura, sem quebrar o checksum do sqlx.
