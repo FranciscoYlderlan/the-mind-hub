@@ -25,6 +25,7 @@ Nenhuma PR da etapa 2 passou pelo `CI` no GitHub (Linux e Windows); só pelo `pn
 ## Linha do tempo técnica
 - 2026-11-23: push da `main` e das branches; PRs #1 a #7; 0 execuções.
 - 2026-11-24 07h45: pelo Chrome (Claude in Chrome), com o pedido do humano, o orquestrador abriu a aba Actions e clicou "Enable Actions on this repository"; o GitHub respondeu "Actions Enabled.".
+- 2026-11-24 07h58: primeira execução, na PR #8, falhou nos dois sistemas por erros que já estavam na `main` e nunca tinham passado pelo `CI`: no Linux, o clippy do Rust estável 1.100 (local 1.97) acusa `result_large_err` no `DualWriteError`; no Windows, `dead_code` num auxiliar de teste usado só fora do Windows (`path_filtrado`). Correção numa branch própria (Tci do [[integracoes-plano]]).
 
 ## Testes feitos
 - `gh api repos/.../actions/workflows`: `CI` `active`.
@@ -48,6 +49,7 @@ O próximo push de branch de tarefa abre uma execução do `CI` (`actions/runs` 
 No diário: a primeira execução do `CI` depois da correção e o resultado em Linux e Windows.
 
 ## O que aprendi
+- Com o `CI` desligado, os erros se acumulam sem ninguém ver: o `pnpm check` local não substitui o `CI`, porque roda outra versão do Rust e só o Linux.
 "Workflow ativo" e "Actions permitido" não bastam: o repositório tem um interruptor próprio, visível só na aba Actions. Zero execuções depois de um push é sinal para olhar lá primeiro.
 
 ### 🔗 Conexões
