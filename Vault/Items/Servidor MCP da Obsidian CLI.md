@@ -25,7 +25,7 @@ origem: T2b do integracoes-plano (myHarness-vault), 2026-11-24; arquivo Modelos/
 > - Só leitura: não há ferramenta de escrita.
 > - Precisa do Obsidian aberto; logo depois de abrir, `Command "read" not found` é carregamento.
 > - HTTP sem TLS e só local; [a confirmar] se o container alcança o `127.0.0.1` do Windows.
-> - [a confirmar] o formato real de `files ext=md total` na CLI de verdade.
+> - `files ext=md total` devolve só o número (75 no `Vault` em 2026-11-24, igual à contagem dos `.md` na pasta).
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** é a ponte entre a nuvem e a CLI do Windows; o bug clássico dela está em [[Obsidian CLI via MCP não carrega]].
