@@ -50,5 +50,5 @@ Os cenários são como **um circuito de treino de academia**: cada estação tra
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
-- Relacionadas: [[vaga-compliance-engineering]], [[instrucoes-do-coach-de-entrevista]], [[banco-mocado-contexto]]
+- Relacionadas: [[vaga-compliance-engineering]], [[instrucoes-do-coach-de-entrevista]], [[banco-mocado-contexto]], [[questoes-por-cenario]]
 - Próxima: [[pontos-delicados]]

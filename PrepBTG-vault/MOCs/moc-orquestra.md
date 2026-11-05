@@ -21,7 +21,7 @@ origem: Manual da Orquestra
 - [[geral-contexto]]: objetivo, motivação, dial e decisões que valem para o projeto todo.
 
 ## 🚧 Funcionalidades
-- [[banco-mocado-contexto]]: banco de dados mocado com dados simulados para treinar em Python ou SQL puro (etapa 2).
+- [[banco-mocado-contexto]]: banco de dados mocado com dados simulados para treinar em Python ou SQL puro (etapa 2). Plano de treino: [[banco-mocado-plano]].
 
 ## 📦 Arquivadas
 - (nenhuma ainda)
@@ -30,6 +30,7 @@ origem: Manual da Orquestra
 - [[processo-seletivo-btg]]: etapas, status e formato do estudo de caso.
 - [[vaga-compliance-engineering]]: descrição-base da vaga e requisitos.
 - [[cenarios-de-pratica]]: as 6 questões de treino (não são o teste real).
+- [[questoes-por-cenario]]: as 44 questões concretas de cada cenário, ligadas ao banco simulado.
 - [[pontos-delicados]]: AWS, TM Mentoring, mudança, salário e "JEV".
 - [[instrucoes-do-coach-de-entrevista]]: como a IA age no treino.
 

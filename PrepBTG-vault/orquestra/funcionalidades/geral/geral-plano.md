@@ -23,11 +23,11 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Concluída em:** 
 
 ## 2. Criar o banco mocado
-- **Status:** planejada
+- **Status:** em-verificacao
 - **Objetivo:** montar um ambiente com banco de dados mocado e dados simulados para treinar armazenar, tratar e gerar soluções em Python ou SQL puro. Foco declarado pelo humano em 2026-11-05.
-- **Pronto quando:** [a preencher: depende das instruções que o humano vai fornecer].
+- **Pronto quando:** o ambiente `mysql-estudos` sobe no WSL do humano e o `teste_conexao.py` lista as 9 tabelas (tarefa T0 de [[banco-mocado-plano]]).
 - **Funcionalidades:** [[banco-mocado-contexto]]
-- **Notas geradas:** (nenhuma ainda)
+- **Notas geradas:** [[questoes-por-cenario]], [[banco-mocado-plano]]
 - **Concluída em:** 
 
 ## 3. Treinar os cenários no banco mocado
