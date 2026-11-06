@@ -21,12 +21,12 @@ origem: Sessão de 2026-10-28: commit bloqueado porque a sessão só tinha acess
 > 3. Peço também permissão para apagar no `the-mind-hub`: o git cria e remove arquivos `.lock` a cada commit.
 > 4. Rodo `cofre.py verificar` nos cofres alterados: zero ERRO. Ver [[Atualizar a memória]].
 > 5. Confiro a identidade do git: `git log -3 --format='%an <%ae>'`. Se a sessão não tiver nome e e-mail configurados (erro "Author identity unknown"), uso o mesmo autor dos commits anteriores **só no comando**: `git -c user.name=franciscoylderlan -c user.email=ylderlan@nca.ufma.br commit ...`.
-> 6. Commito da raiz do `the-mind-hub`, um assunto por commit, com o escopo da lista fechada do `CLAUDE.md`: o nome da pasta do cofre para as notas, `readme` para o README da raiz. Toda lista de cofre começa com esses dois; os escopos acrescentados na criação (área, ID do requisito) são do repositório de código. Ver [[Commit atômico]].
+> 6. Commito da raiz do `the-mind-hub`, um assunto e **um cofre** por commit, com o escopo da lista fechada do `CLAUDE.md`: o nome da pasta do cofre para as notas, `readme` para o README da raiz. Toda lista de cofre começa com esses dois; os escopos acrescentados na criação (área, ID do requisito) são do repositório de código. Ver [[Commit atômico]].
 
 > [!warning] Armadilhas
 > - Sem a pasta raiz, o commit falha com "not a git repository".
 > - Sem permissão de apagar, o git deixa `.lock` para trás e os próximos comandos falham com "File exists".
-> - Commit de cofre e commit do README são separados.
+> - Um commit nunca junta cofres diferentes (por exemplo `Vault` e `myHarness-vault`), nem cofre e README: cada um tem o próprio commit, com o próprio escopo. Antes de commitar, `git diff --cached --stat` mostra uma pasta só.
 > - Sessão na nuvem (shell ligado ao computador) costuma rodar sem identidade do git e o commit falha com "Author identity unknown". Nunca rode `git config` (nem `--global`, nem no repositório) para resolver: passe `-c user.name=... -c user.email=...` no próprio comando, com o autor `franciscoylderlan <ylderlan@nca.ufma.br>`. Nunca invente autor nem use a identidade da sessão.
 
 > [!tip] Quando abrir esta nota
@@ -38,6 +38,7 @@ origem: Sessão de 2026-10-28: commit bloqueado porque a sessão só tinha acess
 * **Ponto 2:** Pasta do cofre basta para escrever; para commitar, precisa da raiz e de permissão de apagar.
 * **Ponto 3:** Erro comum: tentar commitar só com a pasta do cofre e concluir que "não tem git".
 * **Ponto 4:** Sem identidade do git na sessão, o autor é sempre `franciscoylderlan <ylderlan@nca.ufma.br>`, passado com `-c` só no commit, sem mexer na configuração.
+* **Ponto 5:** Um cofre por commit: mexeu no `Vault` e num cofre de projeto, são dois commits.
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
