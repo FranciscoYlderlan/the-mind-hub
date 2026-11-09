@@ -86,7 +86,7 @@ Detalhe: [[manual-da-orquestra#🚦 Etapas vitais]] (ler pela CLI). Modelos e ma
 
 - **Vale neste cofre e em todo repositório do projeto.** Formato: `{emoji} {tipo}(escopo): Descrição`, em inglês, imperativo; escopo só da lista abaixo; uma mudança por commit; só no nome do humano, sem `Co-Authored-By` nem link de sessão.
 - **Quando:** a cada registro concluído e na passagem de turno.
-- **Passos:** `.git` na raiz do `the-mind-hub` (peça a pasta e permissão para apagar); `verificar` zero ERRO; sem identidade, `git -c user.name=... -c user.email=...`, nunca `git config`; cofre e README em commits separados.
+- **Passos:** `.git` na raiz do `the-mind-hub` (peça a pasta e permissão para apagar); `verificar` zero ERRO; sem identidade, `git -c user.name=... -c user.email=...`, nunca `git config`; um cofre por commit (nunca dois cofres, nem cofre e README juntos).
 - Detalhe: Padrão de commit (no Vault) e Commitar no the-mind-hub (no Vault) (ler pela CLI).
 
 <!-- projeto:escopos -->
