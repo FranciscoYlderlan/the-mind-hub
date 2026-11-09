@@ -78,12 +78,12 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma
 - **Paralelo:** sim, com T3
 - **Pronto quando:**
-  - [ ] `obsidian_files` devolve o total de `.md` do cofre; o servidor atende por HTTP local e segue atendendo como hoje
-  - [ ] o cliente da T2 lê o número de notas do servidor real (AC-128)
-  - [ ] nota no `Vault` explicando o servidor MCP da Obsidian CLI por inteiro (o que é, ferramentas, transportes, como instalar e ligar, como validar, ligação com o bug "Obsidian CLI via MCP não carrega"), escrita pelo orquestrador seguindo o Manual do Meu Cérebro no Obsidian (no Vault)
+  - [x] `obsidian_files` devolve o total de `.md` do cofre; o servidor atende por HTTP local e segue atendendo como hoje
+  - [x] o cliente da T2 lê o número de notas do servidor real (AC-128)
+  - [x] nota no `Vault` explicando o servidor MCP da Obsidian CLI por inteiro (o que é, ferramentas, transportes, como instalar e ligar, como validar, ligação com o bug "Obsidian CLI via MCP não carrega"), escrita pelo orquestrador seguindo o Manual do Meu Cérebro no Obsidian (no Vault)
 - **Prova:** chamada real pelo MCP ao `Vault` e ao `myHarness-vault`
 - **Verificação:**
-  - 2026-11-24: entregue (1.1.0, `obsidian_files`, `--http` só em 127.0.0.1, porta 27180); provas com `obsidian` falso por stdio e HTTP e com o cliente da T2; aplicado no `Vault` pelo orquestrador. Notas no `Vault`: Servidor MCP da Obsidian CLI e Ligar o servidor MCP da Obsidian CLI (no Vault), ligadas no MOC Programação (no Vault). CLI real (humano, 08h11): `obsidian vault=Vault files ext=md total` devolve `75`, só o número, igual à contagem dos `.md` da pasta; formato que o cliente da T2 lê. Falta a chamada pelo servidor em `--http` no Windows.
+  - 2026-11-24: entregue (1.1.0, `obsidian_files`, `--http` só em 127.0.0.1, porta 27180); provas com `obsidian` falso por stdio e HTTP e com o cliente da T2; aplicado no `Vault` pelo orquestrador. Notas no `Vault`: Servidor MCP da Obsidian CLI e Ligar o servidor MCP da Obsidian CLI (no Vault), ligadas no MOC Programação (no Vault). CLI real (humano, 08h11): `obsidian vault=Vault files ext=md total` devolve `75`, só o número, igual à contagem dos `.md` da pasta; formato que o cliente da T2 lê. Pelo servidor em `--http` no Windows (08h14): `obsidian_files` devolve `"75"`. Do WSL e de contêiner com `--network host`, depois do WSL em `mirrored` (08h33): `HTTP/1.1 200` ([[geral-decisao-2026-11-24-wsl-em-mirrored]]). **T2b concluída.**
 
 ### T3: GitHub por OAuth device flow (RF-03)
 - **Faz:** device flow com o app OAuth próprio (`client_id` do `.env`), token no cofre de credenciais do sistema (Gerenciador de Credenciais no Windows), status com conta e escopos; GitHub falso atrás do `GitHost` nos testes automáticos.
@@ -118,6 +118,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] um teste só prova que qualquer falha não catalogada vira ERR-53 com o motivo mascarado no Log ([[geral-decisao-2026-11-24-erro-generico-por-fronteira]])
   - [ ] comandos IPC devolvem o estado real das três; RN-08 bloqueia ação sem integração
   - [ ] variante de ERR-53 no `ErroIntegracao` (`crates/core`), para T1 e T2 devolverem a falha inesperada pelo trait
+  - [ ] `compose.yaml` com o backend na rede do WSL e `OBSIDIAN_MCP_URL` no `.env.example` ([[geral-decisao-2026-11-24-wsl-em-mirrored]])
   - [ ] `ErroIpc::Interno` e `MotivoInterno` retirados; o `nao_implementado()` usa ERR-55 ([[geral-decisao-2026-11-23-falha-interna]]); bindings regerados
   - [ ] `pnpm check` passando
 - **Prova:** `pnpm check`
