@@ -68,6 +68,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 
 ## 6. Consumo, logs, histórico e passagem de turno
 - **Status:** planejada
+- **Herdado:** destino final do registro de ERR-53 e ERR-55 ([[geral-decisao-2026-11-24-falha-no-registro-do-nucleo]]).
 - **Objetivo:** mostrar o tempo todo o consumo do plano e do chat, registrar e exibir cada comando com segredo mascarado, guardar o histórico de projetos e chats e fazer a passagem de turno automática com "Onde parei" gravado antes do chat novo.
 - **Pronto quando:** AC de UC-08 e UC-12 e de RN-04, RN-23, RN-24 passando nos dois agentes; RNF-04 (2 s e 60 s) e RNF-08 (retomada sem perda) provados.
 - **Ciclo** (prático): contrato da funcionalidade → implementação → verificador de fluxo principal → adversarial → fluxos de teste registrados
