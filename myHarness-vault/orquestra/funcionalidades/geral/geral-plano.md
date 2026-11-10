@@ -48,6 +48,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 
 ## 4. Conversa com o orquestrador
 - **Status:** planejada
+- **Herdado:** a tela Configurações (TEL-06) nasce aqui com todo parâmetro como opção (descrição embaixo, faixa, padrão de fábrica, restaurar); prompt básico próprio para cada tipo, pesquisa incluído; modelo padrão por tipo e limites de tokens como opção ([[geral-decisao-2026-11-26-parametros-em-configuracoes]], [[geral-decisao-2026-11-26-prompt-basico-por-tipo]]).
 - **Objetivo:** abrir um chat do orquestrador, enviar prompt com modelo escolhido e prompt de papel anexado, e ver a resposta em tempo real na aba do orquestrador.
 - **Pronto quando:** AC de UC-02 (principal, FE-01, FE-02), UC-09, UC-13 e TEL-04 passando nos dois agentes; RNF-01 (200 ms) e RNF-13 (150 tokens) medidos.
 - **Ciclo** (prático): contrato da funcionalidade → implementação → verificador de fluxo principal → adversarial → fluxos de teste registrados
@@ -79,6 +80,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 
 ## 7. Plano de delegação e despacho de subagentes
 - **Status:** planejada
+- **Herdado:** agentes por tipo, simultâneos e por plano, com mínimo e máximo; devoluções do plano, tamanho do briefing e do relatório e tempo de queda como opções ([[geral-decisao-2026-11-26-agentes-por-tipo]], [[geral-decisao-2026-11-26-parametros-em-configuracoes]]).
 - **Objetivo:** receber do orquestrador o plano estruturado, segurá-lo até o aval, despachar um processo do Claude CLI por tarefa com briefing, modelo e ferramentas do papel, em worktree e branch próprias, até o push e o PR, e acompanhar cada subagente em abas e cartões.
 - **Pronto quando:** AC de UC-03, UC-04 e UC-10 e de RN-03, RN-05 a RN-08, RN-12 a RN-14, RN-16, RN-17, RN-27 passando nos dois agentes; suíte de tentativas proibidas por papel com 100% negadas (RNF-06); queda detectada em até 5 s (RNF-07); RNF-02, RNF-09 e RNF-10 medidos.
 - **Ciclo** (prático): contrato da funcionalidade → implementação → verificador de fluxo principal → adversarial → fluxos de teste registrados
@@ -89,6 +91,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 
 ## 8. Teste, adversarial e revisão de achados
 - **Status:** planejada
+- **Herdado:** voltas de teste como opção em Configurações ([[geral-decisao-2026-11-26-parametros-em-configuracoes]]).
 - **Objetivo:** despachar o subagente de teste (quem implementa não testa, ✔ só com prova, teto de 2 voltas) e o adversarial sem contexto pelo Claude in Chrome, e deixar o humano decidir cada achado.
 - **Pronto quando:** AC de UC-05, UC-06 e UC-07 e de RN-09 a RN-11, RN-15, RN-18 a RN-22 passando nos dois agentes; recurso exclusivo do navegador provado com dois adversariais (RN-15).
 - **Ciclo** (prático): contrato da funcionalidade → implementação → verificador de fluxo principal → adversarial → fluxos de teste registrados
