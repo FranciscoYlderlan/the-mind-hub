@@ -91,12 +91,14 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** `client_id` do app OAuth: `Ov23li904l2z5LWigHyr` (humano, 2026-11-24)
 - **Paralelo:** sim, com T0a, T0b, T1 e T2
 - **Pronto quando:**
-  - [ ] AC-01, AC-04, AC-90, AC-127, AC-129, AC-153 cobertos por teste contra o GitHub falso
-  - [ ] token nunca em texto puro em log, banco ou erro (RNF-05)
+  - [x] AC-01, AC-04, AC-90, AC-127, AC-129, AC-153 cobertos por teste contra o GitHub falso
+  - [x] token nunca em texto puro em log, banco ou erro (RNF-05)
   - [ ] um teste manual contra o GitHub real, no repositório de testes `FranciscoYlderlan/myharness-teste`
 - **Prova:** `pnpm check`; busca automatizada pelo token (RNF-05)
 - **Verificação:**
   - Despachada em 2026-11-24 07h45 (branch `feat/integracoes-github-oauth`).
+  - Entregue: `26105b1` (device flow, `keyring`, GitHub falso, 16 testes).
+  - 2026-11-24: ✔ nos 6 critérios, sem bloqueante (RNF-05 conferido; sem aws-lc/openssl). Para a T4: ERR-53 pela trait; corrida no desconectar (checar `cancelado` antes de gravar); máscara do `access_token` no corpo do erro. Opcional: `CofreDoSistema` sem teste (fica para o teste manual). **T3 concluída**; PR #10 aberta.
 
 ### Tci: CI verde na `main`
 - **Faz:** corrige o que o `CI` acusou na primeira execução (PR #8) e já estava na `main`: `clippy::result_large_err` no `DualWriteError` (Rust estável 1.100) e `dead_code` no `path_filtrado` no Windows.
@@ -119,6 +121,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] comandos IPC devolvem o estado real das três; RN-08 bloqueia ação sem integração
   - [ ] variante de ERR-53 no `ErroIntegracao` (`crates/core`), para T1 e T2 devolverem a falha inesperada pelo trait
   - [ ] `compose.yaml` com o backend na rede do WSL e `OBSIDIAN_MCP_URL` no `.env.example` ([[geral-decisao-2026-11-24-wsl-em-mirrored]])
+  - [ ] GitHub: checar `cancelado` antes de gravar o token e mascarar o `access_token` no corpo de erro (verificação da T3)
   - [ ] `ErroIpc::Interno` e `MotivoInterno` retirados; o `nao_implementado()` usa ERR-55 ([[geral-decisao-2026-11-23-falha-interna]]); bindings regerados
   - [ ] `pnpm check` passando
 - **Prova:** `pnpm check`
