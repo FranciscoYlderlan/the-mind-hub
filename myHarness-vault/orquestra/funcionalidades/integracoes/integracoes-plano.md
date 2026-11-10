@@ -46,6 +46,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Verificação:**
   - Entregue em 2026-11-24: `2f6001a` (branch `feat/integracoes-ajuste-banco`); verificador despachado.
   - 2026-11-24: ✔ nos 6 critérios, com um "deve corrigir": apagava o banco em qualquer falha de migração (sonda: checksum errado da `0002` apagou os dados). Restrição aprovada pelo humano; devolvida para um implementador novo. Opcional: teste do `DbError::Delete`.
+  - 2026-11-24 (segunda): ✔ nos 6 critérios (sondas de checksum, Dirty e banco travado). Opcionais: testes de Dirty e banco travado no repositório; apagar `-wal`/`-shm` antes do banco. **T0b concluída**; PR #11.
 
 ### T1: Claude CLI (RF-01)
 - **Faz:** implementação da trait `Integracao` para o Claude CLI: acha o executável (caminho opcional), lê a versão, checa a autenticação e inicia o `/login` da CLI quando falta.
@@ -59,6 +60,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Prova:** `pnpm check`
 - **Verificação:**
   - Entregue em 2026-11-24: `82223f2` (branch `feat/integracoes-claude-cli`), `claude --version`, `claude auth status --json` e `claude auth login`; `fake-claude` com modo cenário. ERR-53 sai como ERR-05 pelo trait (ponte provisória até a T4); `desconectar` sem logout da CLI [a confirmar]; verificação depois da T2b.
+  - 2026-11-24: ✘ bloqueante (neto órfão no tempo esgotado). Correção `56a5d96` (branch `feat/integracoes-claude-cli-correcao`): grupo de processos no Unix (`rustix`), `taskkill /T /F` no Windows (Job Object exige `unsafe`, proibido no workspace), `conta` mascarada; `cargo check` do Windows não roda no container. Segunda verificação junto da T4.
 
 ### T2: Obsidian CLI (RF-02)
 - **Faz:** implementação da trait para a Obsidian CLI: Obsidian aberto, servidor MCP respondendo, cofre acessível e número de notas indexadas.
@@ -71,6 +73,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Prova:** `pnpm check`
 - **Verificação:**
   - Entregue em 2026-11-24: `70b1457` (branch `feat/integracoes-obsidian-cli`), cliente MCP por HTTP (`OBSIDIAN_MCP_URL`) e servidor falso; ERR-53 só pela API do adaptador, não pelo trait; contagem de notas exige `obsidian_files` no servidor real [a preencher]; verificação aguarda as respostas do humano.
+  - 2026-11-24: ✔ nos 5 critérios, sem bloqueante; contra o servidor real 1.1.0, `notas_indexadas=Some(75)`. Deve corrigir (T4/T5): ERR-53 e número de notas pelo trait e pelo IPC. **T2 concluída**; PR #12.
 
 ### T2b: servidor MCP da Obsidian CLI com total de notas e HTTP
 - **Faz:** o `obsidian-cli-mcp.js` (no `Vault`, `Modelos/Orquestra/`) ganha uma ferramenta de listar arquivos com total e transporte HTTP local ([[geral-decisao-2026-11-24-servidor-mcp-do-obsidian]]); depois, `cofre.py sincronizar` nos cofres.
@@ -126,6 +129,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] `pnpm check` passando
 - **Prova:** `pnpm check`
 - **Verificação:**
+  - 2026-11-24: entregue `c0a2fb7` sobre merges de T0a, T2, T3 e T1; merge da correção da T1 em `dafcacb` (conflito no `Cargo.lock`, resolvido pelo orquestrador). ERR-53 no `ErroIntegracao`, `ServicoIntegracoes`, `ErroIpc::Interno` removido, máscara do núcleo com o token, `.env.example` e `compose.yaml` (`network_mode: host`). Pontos: registro do ERR-53 fora do Log (ENT-12 exige `execucao`); "desconectada" só em memória; `notas_indexadas` fora do DTO; variável `MYHARNESS_OBSIDIAN_COFRE` criada sem aval. Em verificação.
 
 ### T5: painel de status (RF-04, CMP-03, CMP-11)
 - **Faz:** indicadores no canto superior direito e a TEL-02 com a ação "Conectar" e as instruções (código do device flow, `/login`).
@@ -137,6 +141,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] AC de UC-01 e TEL-02 passando no verificador de fluxo principal e no adversarial, pela API e na tela
 - **Prova:** `pnpm check`; verificadores do fim da funcionalidade
 - **Verificação:**
+  - 2026-11-24: entregue `f3004ae` (branch `feat/integracoes-painel`, sobre a T0a): CMP-03, TEL-02 com CMP-11, instruções, mensagens do catálogo, núcleo simulado nos testes, 17 testes novos. Pontos: link do ERR-01 [a confirmar]; `obsidian://open` na janela real [a confirmar]; AC-128 depende do DTO. Em verificação.
 
 ## Próxima tarefa e a seguinte
 - Agora: T0a, T0b, T1 e T2 em paralelo; T3 assim que o `client_id` existir.
