@@ -40,7 +40,7 @@ Nome do cofre no Obsidian: `Vault`.
 - Criar cofre de projeto: siga `Items/Criar um novo cofre.md` (etapas A). Nunca monte à mão: use `Modelos/Orquestra/cofre.py criar`.
 - Escrever, mover ou copiar qualquer nota (aqui ou num cofre de projeto): siga `Items/Atualizar a memória.md` (etapas B), com a varredura de impacto quando a escrita muda um estado.
 - Ninguém diz "pronto" sem rodar `python Modelos/Orquestra/cofre.py verificar .` com **zero ERRO**.
-- Mudou um manual ou modelo daqui? Rode `cofre.py sincronizar` em cada cofre de projeto.
+- Mudou um manual ou modelo daqui? Rode `cofre.py sincronizar` só nos cofres de projeto ativos (hoje, o `myHarness-vault`). Os demais estão concluídos e não recebem mudanças.
 
 ## Padrões deste cofre
 
