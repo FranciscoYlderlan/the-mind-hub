@@ -8,7 +8,7 @@ origem: Pesquisa sobre Obsidian + meus documentos de rotina (Sistema TickTick e 
 ---
 
 > [!info] Cópia do Vault
-> Cópia de `Vault/Items/Manual do Meu Cérebro no Obsidian.md`, versão v8. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
+> Cópia de `Vault/Items/Manual do Meu Cérebro no Obsidian.md`, versão v7. O original manda: ao mudar lá, rode `cofre.py sincronizar`.
 >
 > **Escopo neste cofre:** vale para as notas de `referencias/` e `MOCs/` o perfil, o tom, o esqueleto, os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das notas (seção 3, item 3 da seção 10 e "Salva em Items/" do checklist) são substituídos pelo [[manual-da-orquestra]]: aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`). O limite de ~350 palavras (seção 6) também não vale aqui: vale o `limite-palavras` do bloco `padroes` do cofre (`orquestra/padroes.md`).
 
@@ -195,15 +195,6 @@ Status e tipo ficam em **propriedades**, não em tags, para não poluir a lista 
 | Humor leve, nunca sarcasmo sobre mim | Ironia que pode machucar |
 | 1 a 3 palavras em **negrito** por seção | Negrito em tudo, CAIXA ALTA |
 | Emoji como marcador visual (título e blocos) | Emoji decorativo em toda frase |
-
-> [!note] Regras de frase do ASD-STE100 (no Vault) (somam-se às de cima)
-> - Procedimento: até **20 palavras** por frase, uma instrução por frase, no imperativo.
-> - Descrição: até **25 palavras** por frase; parágrafo com até 6 frases e um tema só.
-> - Voz ativa; ação no verbo, não num substantivo ("Configure o cofre", não "Faça a configuração do cofre").
-> - Condição antes do comando, separada por vírgula; nota informa, nunca manda.
-> - Até 3 substantivos em sequência; texto complexo vira lista vertical; sem ponto e vírgula.
-> - Um termo por conceito: o mesmo nome para a mesma coisa em todo o cofre.
-> - Em inglês (mensagens de commit), vale a norma completa, com o dicionário: ver Padrão de commit (no Vault).
 
 **Vocabulário proibido** (tom): sombrio, abismo, tormento, diagnóstico, paciente, sintoma (em tom médico), "você precisa", "nunca mais".
 
@@ -438,7 +429,6 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - [ ] 2+ links de saída **e** link de entrada (aparece num MOC ou hub). Saída sem entrada é nota órfã.
 - [ ] Mudei um fato, regra ou decisão? Fiz a **varredura de impacto** e reescrevi no estado atual toda nota que citava o antigo, sem aviso "vale o novo".
 - [ ] Segui Atualizar a memória (no Vault) e rodei `cofre.py verificar` com zero ERRO.
-- [ ] Frases dentro do ASD-STE100 (no Vault): até 20 palavras em procedimento e 25 em descrição, voz ativa, uma instrução por frase, um termo por conceito.
 - [ ] Nada de tarefa solta: ação vira `→ TickTick`.
 - [ ] Tom limpo: sem culpa, sem drama, sem clínico.
 
@@ -446,7 +436,7 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 
 ## 🔗 Conexões
 - Mapa: [[moc-orquestra]]
-- Relacionadas: Tipos de Dia (no Vault), Cegueira temporal (no Vault), ASD-STE100 (no Vault)
+- Relacionadas: Tipos de Dia (no Vault), Cegueira temporal (no Vault)
 
 ## 🕓 Histórico
 - v1 (2026-10-26): criação, a partir da pesquisa e dos meus documentos de rotina.
@@ -456,7 +446,6 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - v5 (2026-10-28): checklist exige link de entrada e `cofre.py verificar`; aliases do Manual ajustados para 4 (seção 12).
 - v6 (2026-10-29): o limite de ~350 palavras não vale em cofre de projeto; lá vale o limite do `CLAUDE.md` do cofre (seção 6).
 - v7 (2026-10-29): checklist pede a varredura de impacto quando um fato, regra ou decisão muda (seção 12).
-- v8 (2026-11-26): regras de frase do ASD-STE100 (no Vault) somadas às de escrita, sem mudar as atuais (seção 5 e checklist).
 
 ## 📚 Fontes
 - Links internos, blocos e embeds: https://obsidian.md/help/links
@@ -468,5 +457,4 @@ origem: Meu sistema de produtividade no TickTick (protocolo Pomodoro personaliza
 - MOCs na prática (regra de ~6 links soltos): https://obsidian.rocks/quick-tip-quickly-organize-notes-in-obsidian/
 - Organização do cofre (links valem mais que pastas): https://aura-lab.siue.edu/intro-to-obsidian/08-organization.html
 - Obsidian e TDAH (relatos de usuários): https://forum.obsidian.md/t/trying-to-find-a-good-setup-for-adhd/12218, https://forum.obsidian.md/t/adhd-and-obsidian/89491, https://www.obsibrain.com/blog/obsidian-for-adhd, https://typeshare.co/marcuslyons/posts/how-i-use-obsidian-to-organize-my-thoughts-as-a-software-developer-with-adhd
-- ASD-STE100, Issue 9 (regras de frase): https://www.asd-ste100.org/ , https://simplified-english.co.uk/rules-ste9.html
 - Base do perfil: meus documentos "Sistema de Produtividade (TickTick)" e "A Ciência Por Trás do Seu Sistema".

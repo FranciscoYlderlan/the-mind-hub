@@ -54,7 +54,6 @@ Moram em `orquestra/funcionalidades/geral/`, uma decisão por nota (grafia, docu
 
 - Português brasileiro; arquivos e pastas em kebab-case, sem acento, com prefixo da funcionalidade; datas AAAA-MM-DD; `[[wikilinks]]` sempre; nota do `Vault` é citada como texto `Nome (no Vault)`, nunca como wikilink.
 - Nota operacional: modelo próprio, frontmatter `tipo`, `status`, `criado`, `funcionalidade`; `referencias/` e `MOCs/`: Manual do Cérebro.
-- Frases pelo ASD-STE100 (no Vault): até 20 palavras em procedimento e 25 em descrição, voz ativa, uma instrução por frase, um termo por conceito; em inglês (commits), a norma completa com o dicionário.
 - Fato do humano preservado; interpretação do agente separada; suposição `[a confirmar]`. Tarefa do humano vai para o TickTick. Nunca editar `.obsidian/` sem pedido.
 - Detalhe: [[manual-da-orquestra#7. 📏 Convenções do cofre de projeto]] (ler pela CLI).
 
@@ -85,7 +84,7 @@ Detalhe: [[manual-da-orquestra#🚦 Etapas vitais]] (ler pela CLI). Modelos e ma
 
 ## Commits
 
-- **Vale neste cofre e em todo repositório do projeto.** Formato: `{emoji} {tipo}(escopo): Descrição`, em inglês, imperativo, no ASD-STE100 com o dicionário; escopo só da lista abaixo; uma mudança por commit; só no nome do humano, sem `Co-Authored-By` nem link de sessão.
+- **Vale neste cofre e em todo repositório do projeto.** Formato: `{emoji} {tipo}(escopo): Descrição`, em inglês, imperativo; escopo só da lista abaixo; uma mudança por commit; só no nome do humano, sem `Co-Authored-By` nem link de sessão.
 - **Quando:** a cada registro concluído e na passagem de turno.
 - **Passos:** `.git` na raiz do `the-mind-hub` (peça a pasta e permissão para apagar); `verificar` zero ERRO; sem identidade, `git -c user.name=... -c user.email=...`, nunca `git config`; um cofre por commit (nunca dois cofres, nem cofre e README juntos).
 - Detalhe: Padrão de commit (no Vault) e Commitar no the-mind-hub (no Vault) (ler pela CLI).
