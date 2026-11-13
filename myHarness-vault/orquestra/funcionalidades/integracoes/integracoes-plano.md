@@ -37,9 +37,9 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma
 - **Paralelo:** sim, com T0a, T1, T2 e T3
 - **Pronto quando:**
-  - [ ] banco de antes da `0003` apagado e recriado só quando a `0003` para pelo NOT NULL, com teste; outra falha de migração (ex.: checksum errado da `0001` ou `0002`) volta como erro sem apagar, com teste
-  - [ ] banco já na `0003` abre sem erro de checksum, com teste
-  - [ ] `pnpm check` passando
+  - [x] banco de antes da `0003` apagado e recriado só quando a `0003` para pelo NOT NULL, com teste; outra falha de migração (ex.: checksum errado da `0001` ou `0002`) volta como erro sem apagar, com teste
+  - [x] banco já na `0003` abre sem erro de checksum, com teste
+  - [x] `pnpm check` passando
 - **Prova:** `pnpm check`
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T0b]].
 
@@ -49,9 +49,9 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma
 - **Paralelo:** sim, com T0a, T0b, T2 e T3
 - **Pronto quando:**
-  - [ ] status conectado, sem login e não instalado com versão, com testes sobre processo falso
-  - [ ] ERR-01, ERR-04 e ERR-53 conforme o catálogo; mensagem da CLI mascarada (AC-154)
-  - [ ] AC-01, AC-02, AC-03, AC-88, AC-153, AC-154 cobertos por teste
+  - [x] status conectado, sem login e não instalado com versão, com testes sobre processo falso
+  - [x] ERR-01, ERR-04 e ERR-53 conforme o catálogo; mensagem da CLI mascarada (AC-154)
+  - [x] AC-01, AC-02, AC-03, AC-88, AC-153, AC-154 cobertos por teste
 - **Prova:** `pnpm check`
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T1]].
 
@@ -61,8 +61,8 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma
 - **Paralelo:** sim, com T0a, T0b, T1 e T3
 - **Pronto quando:**
-  - [ ] status e número de notas; ERR-03 com a mensagem da CLI mascarada; ERR-53
-  - [ ] AC-05, AC-89, AC-128, AC-153, AC-154 cobertos por teste
+  - [x] status e número de notas; ERR-03 com a mensagem da CLI mascarada; ERR-53
+  - [x] AC-05, AC-89, AC-128, AC-153, AC-154 cobertos por teste
 - **Prova:** `pnpm check`
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T2]].
 
@@ -96,7 +96,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma
 - **Paralelo:** sim; as PRs de tarefa só passam no `CI` depois dela
 - **Pronto quando:**
-  - [ ] `CI` verde em Linux e Windows na PR dela
+  - [x] `CI` verde em Linux e Windows na PR dela
 - **Prova:** clippy estável com `-D warnings`; `pnpm check`; `CI` da PR
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#Tci]].
 
@@ -106,14 +106,14 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** T1, T2, T3
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] "Desconectar" do Claude CLI só no MyHarness, sem logout ([[geral-decisao-2026-11-24-desconectar-sem-logout]])
-  - [ ] um teste só prova que qualquer falha não catalogada vira ERR-53 com o motivo mascarado no Log ([[geral-decisao-2026-11-24-erro-generico-por-fronteira]])
-  - [ ] comandos IPC devolvem o estado real das três; RN-08 bloqueia ação sem integração
-  - [ ] variante de ERR-53 no `ErroIntegracao` (`crates/core`), para T1 e T2 devolverem a falha inesperada pelo trait
-  - [ ] `compose.yaml` com o backend na rede do WSL e `OBSIDIAN_MCP_URL` no `.env.example` ([[geral-decisao-2026-11-24-wsl-em-mirrored]])
-  - [ ] GitHub: checar `cancelado` antes de gravar o token e mascarar o `access_token` no corpo de erro (verificação da T3)
-  - [ ] `ErroIpc::Interno` e `MotivoInterno` retirados; o `nao_implementado()` usa ERR-55 ([[geral-decisao-2026-11-23-falha-interna]]); bindings regerados
-  - [ ] `pnpm check` passando
+  - [x] "Desconectar" do Claude CLI só no MyHarness, sem logout ([[geral-decisao-2026-11-24-desconectar-sem-logout]])
+  - [x] um teste só prova que qualquer falha não catalogada vira ERR-53 com o motivo mascarado no Log ([[geral-decisao-2026-11-24-erro-generico-por-fronteira]])
+  - [x] comandos IPC devolvem o estado real das três; RN-08 bloqueia ação sem integração
+  - [x] variante de ERR-53 no `ErroIntegracao` (`crates/core`), para T1 e T2 devolverem a falha inesperada pelo trait
+  - [x] `compose.yaml` com o backend na rede do WSL e `OBSIDIAN_MCP_URL` no `.env.example` ([[geral-decisao-2026-11-24-wsl-em-mirrored]])
+  - [x] GitHub: checar `cancelado` antes de gravar o token e mascarar o `access_token` no corpo de erro (verificação da T3)
+  - [x] `ErroIpc::Interno` e `MotivoInterno` retirados; o `nao_implementado()` usa ERR-55 ([[geral-decisao-2026-11-23-falha-interna]]); bindings regerados
+  - [x] `pnpm check` passando
 - **Prova:** `pnpm check`
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T4]].
 
@@ -140,8 +140,8 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T5]].
 
 ## Próxima tarefa e a seguinte
-- Agora: T0a, T0b, T1 e T2 em paralelo; T3 assim que o `client_id` existir.
-- Depois: T4 e T5; ao fim, verificador de fluxo principal e adversarial.
+- Agora: verificador de fluxo principal e, sem bug aberto, adversarial da `integracoes`, na API e na tela.
+- Depois: teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
 
 ## Prioridades
 - T0a e T0b fecham pendências herdadas e são pequenas; T3 é a mais sensível (token).
