@@ -197,7 +197,7 @@ Status e tipo ficam em **propriedades**, não em tags, para não poluir a lista 
 > - Condição antes do comando, separada por vírgula; nota informa, nunca manda.
 > - Até 3 substantivos em sequência; texto complexo vira lista vertical; sem ponto e vírgula.
 > - Um termo por conceito: o mesmo nome para a mesma coisa em todo o cofre.
-> - Em inglês (mensagens de commit), vale a norma completa, com o dicionário: ver [[Padrão de commit]].
+> - Em inglês (mensagens de commit), as mesmas regras, com palavras simples e sem conferir o dicionário palavra por palavra: ver [[Padrão de commit]].
 
 **Vocabulário proibido** (tom): sombrio, abismo, tormento, diagnóstico, paciente, sintoma (em tom médico), "você precisa", "nunca mais".
 

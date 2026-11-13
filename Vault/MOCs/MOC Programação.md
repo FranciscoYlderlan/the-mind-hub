@@ -16,7 +16,7 @@ origem: Manual do Meu Cérebro no Obsidian
 - [[Tipos e emojis de commit]]: a tabela de qual emoji usar em cada tipo.
 - [[Commit atômico]]: uma mudança por commit.
 - [[Commitar no the-mind-hub]]: o `.git` fica na raiz; sem acesso a ela, peço a pasta antes de commitar.
-- [[ASD-STE100]]: regras de frase de todo cofre e o inglês com dicionário das mensagens de commit.
+- [[ASD-STE100]]: regras de frase de todo cofre, também no inglês das mensagens de commit.
 
 ## 🚦 Etapas vitais (não pular)
 - [[Criar um novo cofre]]: etapas A, do pedido ao `cofre.py verificar` com zero ERRO.
