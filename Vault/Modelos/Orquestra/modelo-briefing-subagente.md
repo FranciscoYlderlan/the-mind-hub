@@ -13,7 +13,6 @@ O orquestrador copia o **bloco comum**, preenche e cola logo abaixo o **cartão 
 - **Não pode:** escrever no cofre; alterar o contrato, no cofre ou no repositório (mudança necessária vai no relatório); tocar fora da lista; dar como pronto sem rodar a prova; perguntar ao humano (mande a dúvida no relatório)
 - **Pronto quando:** copiado do plano
 - **Prova:** verificação objetiva (no projeto prático, o comando de teste, lint ou tipos)
-- **Ao terminar:** apague as pastas de build que você gerou (no prático, `target/` do Rust), para não acumular arquivos no disco; diga no relatório o que apagou
 - **Devolva:** no formato do relatório de subagente, em até ~1 tela
 ```
 
