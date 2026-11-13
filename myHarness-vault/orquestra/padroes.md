@@ -23,6 +23,7 @@ antigo: re:valores de chave token/senha/secret/api key => mascarar só prefixos 
 antigo: re:Entregar, em série|Série T1 → T5|tarefas-interface rodam em série => paralelo por padrão; série só com arquivo em comum, combinado, cadeia, recurso ou teto (geral-decisao-2026-11-20-paralelo-por-padrao)
 antigo: re:merge local na `main`|sem PR, e o merge|tudo segue local, sem PR|conta sem acesso; tudo local|Enquanto o GitHub não existe => push e PR no GitHub pelo orquestrador; o humano aprova a PR e faz o merge (geral-decisao-2026-11-23-push-e-pr-no-github)
 antigo: re:`concluido`(?! ×)|\bconcluido, falhou => concluído, com acento, em Execução e Relatório (contrato, M-38)
+antigo: re:norma completa,? com o dicionário|ASD-STE100 com o dicionário|fora do dicionário do STE => em inglês, regras do STE com bom senso, sem conferir o dicionário palavra por palavra (Padrão de commit, no Vault)
 antigo: re:PR única da G1|numa PR só|uma PR só da G1|feat/setup-g1-interfaces`, `pnpm check`, push => uma PR por tarefa, mergeada pelo humano na ordem indicada (geral-decisao-2026-11-23-uma-pr-por-tarefa)
 limite-palavras: 2000
 ```
