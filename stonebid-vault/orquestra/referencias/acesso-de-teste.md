@@ -10,7 +10,7 @@ origem: humano, 2026-10-29 21:40
 # 📚 Acesso de teste do Stonebid
 
 > [!tldr] Em uma linha
-> Onde entrar e com qual usuário: o Stonebid é uma aplicação de teste, de acesso livre, e qualquer agente pode entrar e usar a plataforma para testar.
+> O Stonebid está **offline desde 2026-11-13**: ficou no ar de 2026-10-29 a 2026-11-13, no período de testes. Os endereços abaixo não respondem mais; os usuários de teste continuam valendo no ambiente local.
 
 ## O que é
 A **porta da frente** da aplicação no ar, com as chaves penduradas ao lado. Serve para o humano entrar à mão nos testes de interface e para os agentes testarem sem pedir licença a cada vez.
@@ -23,6 +23,9 @@ A **porta da frente** da aplicação no ar, com as chaves penduradas ao lado. Se
 - **Limite do agente no navegador:** a ferramenta do agente só digita senha em ambiente local (`localhost`) ou em host de teste que o humano nomeie no pedido (ex.: staging). Na produção pelo navegador, o login fica com o humano (dados fictícios não mudam isso: a regra olha o endereço, não os dados); o agente testa a produção pela API ou pelos fluxos sem login, e o staging pela tool `entrar` da MCP (ela faz o login no servidor, sem digitar senha).
 
 ## Endereços
+> [!warning] Offline desde 2026-11-13
+> A conta de faturamento do GCP foi encerrada em 2026-11-13 (pedido do humano, para receber o reembolso do pré-pagamento), o que derrubou a API e o banco de produção e de staging. Os endereços da Vercel e do Cloud Run ficam aqui só como registro do período no ar (2026-10-29 a 2026-11-13). Só o ambiente local funciona ([[diario-2026-11-13]]).
+
 | Ambiente | Web | API |
 |---|---|---|
 | Produção | https://stonebid-web.vercel.app (login em `/login`) | https://stonebid-api-7idhzkkvpq-rj.a.run.app (`/health`) |
@@ -52,9 +55,9 @@ Criados pelo seed (`prisma/seed.ts` do `stonebid-api`), iguais em todos os ambie
 > `claude mcp add --transport http stonebid https://stonebid-api-staging-7idhzkkvpq-rj.a.run.app/mcp` com a api_key no cabeçalho; depois a tool `entrar` com `leiloeiro`, `licitante-1` ou `licitante-2` ([[geral-decisao-2026-10-29-camada-mcp]]).
 
 > [!warning] Só para teste
-> Nada real passa por aqui: o saldo é simulado e os dados podem ser apagados pelo seed. A aplicação fica no ar no máximo 7 dias ([[geral-decisao-2026-10-29-hospedagem]]).
+> Nada real passa por aqui: o saldo é simulado e os dados podem ser apagados pelo seed. A aplicação ficou no ar de 2026-10-29 a 2026-11-13 e está offline ([[geral-decisao-2026-10-29-hospedagem]], [[diario-2026-11-13]]).
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
-- Relacionadas: [[geral-decisao-2026-10-29-modo-de-implementacao]], [[esqueleto-contexto]], [[esqueleto-plano]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-29-hospedagem]]
+- Relacionadas: [[geral-decisao-2026-10-29-modo-de-implementacao]], [[esqueleto-contexto]], [[esqueleto-plano]], [[geral-decisao-2026-10-29-camada-mcp]], [[geral-decisao-2026-10-29-hospedagem]], [[diario-2026-11-13]]
 - Regras: [[manual-da-orquestra]]
