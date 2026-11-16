@@ -39,14 +39,15 @@ Moram em `orquestra/funcionalidades/geral/`, uma decisão por nota (grafia, docu
 ## Quem escreve
 
 - **Só o orquestrador escreve neste cofre**; subagente lê e devolve relatório (`orquestra/modelos/modelo-relatorio-subagente.md`).
-- **Plano é proposta; decisão só com aval do humano**, uma por nota. Decisão que contradiz outra: nota nova com `substitui:`, a antiga vira `substituida`.
+- **Plano é proposta; decisão só com aval do humano**, uma por nota.
+- **Decisão muda:** campo Alteração reescrito no estado atual (cronologia no diário); ainda não aplicada → muda na própria nota + 1 linha no diário; já aplicada → nota nova com `substitui:`, a antiga vira `substituida`; só um ponto muda → nota nova só dele, a antiga segue `aprovada` com a linha reescrita + link.
 - **Nunca apagar sem confirmação**; na dúvida, arquivar. Mover para `arquivos/` só com confirmação.
 - Detalhe: [[Manual da Orquestra#3. ✍️ Quem escreve o quê]] (ler pela CLI).
 
-## Consultar antes e alimentar no fim
+## Consultar antes e alimentar assim que chega
 
 - **Antes:** bug → `bugs/` por sintoma e decisões; mudança estrutural → decisões (contradizer só citando a nota); área sensível → contexto, `referencias/`, bugs; nota nova → `modelos/`; algo parecido → `arquivos/`.
-- **No fim:** bug não trivial → nota em `bugs/` (reapareceu: atualizar); decisão aprovada → nota de decisão + nota responsável; tarefa concluída → contexto e plano; etapa concluída → roteiro e `status --atualizar`; sessão relevante → diário; dúvidas → uma pergunta única ao humano. Bug trivial não vira nota.
+- **Assim que chega** (sem esperar o fim da sessão): relatório de subagente → registrar; bug não trivial → nota em `bugs/` (reapareceu: atualizar); decisão aprovada → nota de decisão + nota responsável; tarefa concluída → contexto e plano; etapa concluída → roteiro e `status --atualizar`; sessão relevante → diário; dúvidas → uma pergunta única ao humano. Bug trivial não vira nota.
 - Detalhe: [[Manual da Orquestra#6. 🔎 Quando consultar e quando alimentar]] (ler pela CLI).
 
 ## Convenções
