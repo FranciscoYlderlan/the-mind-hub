@@ -18,7 +18,7 @@ O **manual de bordo** do projeto: a decisão [[geral-decisao-2026-10-29-modo-de-
 ## 1. Início de sessão
 1. Ler o cofre **só pela Obsidian CLI** (ferramentas `obsidian_read`, `obsidian_search`, `obsidian_backlinks` do servidor `obsidian-cli`, com `vault="stonebid-vault"`). Nada de `cat`, `ls`, `find`, `grep` ou `Read` nas notas: o erro se repetiu em quatro sessões de 2026-10-30. O shell do computador só escreve notas e roda o `cofre.py`.
 2. `python orquestra/modelos/cofre.py status`, de dentro da pasta do cofre (sem argumento, o `status` e o `verificar` usam a pasta atual).
-3. O "Onde parei" da parte mais recente do diário (regra "Diário com partes" do [[CLAUDE]]).
+3. O "Onde parei" da parte mais recente do diário ([[geral-decisao-2026-11-16-diario-com-partes]]).
 
 ## 2. Repositórios
 - `stonebid-api` e `stonebid-web` só existem no GitHub (`FranciscoYlderlan/...`). Não há cópia local no computador; a pasta `C:\Users\Ylderlan\Documents\Projetos\stonebid` guarda só arquivos de passagem (ex.: patches).
@@ -51,7 +51,7 @@ O **manual de bordo** do projeto: a decisão [[geral-decisao-2026-10-29-modo-de-
 3. Conferir a saída: `<sha antigo>..<sha novo>  origin/main -> staging`. Anotar os dois sha no plano e no diário.
 4. O push na `staging` dispara o `cd.yml`, que publica a API de staging no Cloud Run e o web de staging no alias `stonebid-web-staging.vercel.app` ([[geral-decisao-2026-10-29-alias-fixo-do-staging]]). O agente nunca publica direto.
 5. Esperar o CD de staging e só então mandar o verificador no Chrome (seção 6).
-6. **Recusado como "non-fast-forward"?** A `staging` tem commit que a `main` não tem. Parar e avisar o humano. Nunca usar `--force` sem confirmação ([[CLAUDE]], "Repositórios e acesso").
+6. **Recusado como "non-fast-forward"?** A `staging` tem commit que a `main` não tem. Parar e avisar o humano. Nunca usar `--force` sem confirmação ([[geral-decisao-2026-11-16-repositorios-e-acesso]]).
 
 ### Por quê (fatos registrados)
 - **Avanço de ponteiro, não merge:** a decisão [[geral-decisao-2026-10-29-modo-de-implementacao]] manda a IA avançar a `staging` para a `main` depois do merge, "só como avanço de ponteiro". A `main` só recebe código por PR com CI verde e merge do humano ([[geral-decisao-2026-10-29-padrao-de-branches]]). A `staging` não tem PR nem trabalho próprio.
