@@ -25,6 +25,7 @@ Estado falso de desconectado depois de uma conexão certa; RN-08 bloquearia aç�
 
 ## Linha do tempo técnica
 - 2026-11-26 13h05: achado B1 do adversarial (deve corrigir).
+- 2026-11-26 13h10: o humano escolheu reaproveitar; contrato M-50.
 
 ## Pseudocódigo do problema
 `conectar(github)` ×2 → fluxo A e fluxo B; B conclui → `conectado`; A expira → grava `desconectado` + ERR-02 por cima.
@@ -39,7 +40,7 @@ Estado falso de desconectado depois de uma conexão certa; RN-08 bloquearia aç�
 [a preencher]
 
 ## Solução
-Aguarda o aval do humano: o núcleo recusa a segunda operação ou reaproveita a que está em andamento.
+O núcleo reaproveita a operação em andamento ([[geral-decisao-2026-11-26-conectar-repetido-reaproveita]]; contrato M-50, UC-01 FA-02, AC-157); aplicação na T7 do [[integracoes-plano]].
 
 ## Como validar que não voltou
 Teste no núcleo com dois `conectar` ao mesmo tempo para o GitHub e o Claude CLI; adversarial de novo (ataques 3, 4 e 8).

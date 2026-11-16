@@ -10,7 +10,8 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 |---|---|---|---|---|---|
 | AC-01 | UC-01 | principal | o GitHub desconectado | o OAuth conclui | o indicador fica verde com o nome da conta |
 | AC-02 | UC-01 | FA-01 | o Claude CLI logado | o painel abre | mostra a versão sem pedir login |
-| AC-03 | UC-01 | FE-01 | o Claude CLI ausente | o app abre | o indicador fica em erro com o link (ERR-01) |
+| AC-03 | UC-01 | FE-01 | o Claude CLI ausente | o app abre | o indicador fica em erro e o cartão da TEL-02 mostra o link (ERR-01) |
+| AC-157 | UC-01 | FA-02 | o device flow do GitHub ou o `/login` do Claude CLI em andamento | o Humano pede "Conectar" de novo na mesma integração (também depois de recarregar a tela) | o sistema mostra a mesma instrução, sem abrir outro fluxo, e o status final é o do fluxo em andamento |
 | AC-04 | UC-01 | FE-02 | o device flow do GitHub iniciado | o Humano recusa no GitHub (`access_denied`) ou o código expira (`expired_token`) | o status continua desconectado (ERR-02) |
 | AC-05 | UC-01 | FE-03 | o Obsidian fechado | o status é checado | aparece "Abrir Obsidian" (ERR-03) |
 | AC-153 | UC-01 | FE-04 | o GitHub conectado e a rede fora do ar | o status é checado | o GitHub fica em `desconectado` com "Falha inesperada com GitHub: <motivo>. Tente de novo." (ERR-53) e a ação de conectar de novo; com a rede de volta, conectar de novo funciona |
