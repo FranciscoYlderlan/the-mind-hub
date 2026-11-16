@@ -31,7 +31,9 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 > 3. Preencho o `geral-contexto` com os fatos do passo 1, seguindo [[Atualizar a memória]].
 > 4. No repositório de código, colo o trecho do [[modelo-claude-do-repositorio]].
 > 5. Rodo `python Vault/Modelos/Orquestra/cofre.py verificar nome-do-cofre`. Só sigo com **zero ERRO**.
-> 6. Abro o cofre no Obsidian, aponto Modelos para `orquestra/modelos` e registro no README. Ver [[Registrar cofre no README]].
+> 6. Abro o cofre no Obsidian (o nome no app é o da pasta), aponto Modelos para `orquestra/modelos` e **valido a CLI**: `obsidian_search` com `vault="nome-do-cofre"` devolve notas. Sem isso, nenhum agente consegue ler o cofre pela CLI; se falhar, ver [[Obsidian CLI via MCP não carrega]].
+> 7. Se o projeto tiver um projeto no claude.ai, colo no campo **Instruções** dele o bloco do [[modelo-instrucoes-do-projeto-claude]] (no cofre: `orquestra/modelos/`), com o nome do cofre. Sem isso, a sessão que entra pelo projeto lê a cópia dos documentos, que envelhece, e pula a CLI.
+> 8. Registro no README. Ver [[Registrar cofre no README]].
 
 > [!tip] Quando abrir esta nota
 > Quando eu começar um projeto novo e quiser um lugar para pensar sobre ele.
@@ -40,9 +42,9 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Só existem dois tipos de cofre: a minha vida (`Vault/`) e um por projeto.
 * **Ponto 2:** Conhecimento geral fica no `Vault/`. Conhecimento do projeto fica no cofre dele, na `orquestra/`, nunca nas 5 pastas do `Vault`.
-* **Ponto 3:** Erro comum: montar à mão ou pular o verificar. Foi assim que nasceram modelos sem conexões e cópias com links quebrados.
+* **Ponto 3:** Erro comum: montar à mão, pular o verificar ou deixar o projeto do claude.ai sem instruções. Foi assim que nasceram modelos sem conexões, cópias com links quebrados e sessões que leram a cópia velha em vez do cofre.
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Manual da Orquestra]], [[Atualizar a memória]], [[Guia do cofre para IA]], [[Registrar cofre no README]], [[Commitar no the-mind-hub]]
+- Relacionadas: [[Manual da Orquestra]], [[modelo-instrucoes-do-projeto-claude]], [[Atualizar a memória]], [[Guia do cofre para IA]], [[Registrar cofre no README]], [[Commitar no the-mind-hub]]
 - Próxima: [[Registrar cofre no README]]

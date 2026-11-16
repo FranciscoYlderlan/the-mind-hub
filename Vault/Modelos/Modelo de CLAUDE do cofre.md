@@ -4,6 +4,8 @@ Este é um cofre do Obsidian: uma pasta de notas Markdown. Ele é a **memória d
 
 Nome do cofre no Obsidian: `{{nome-da-pasta}}`. Repositórios de código, links e pasta local: seção "Repositórios e acesso", abaixo.
 
+> **Leitura: Obsidian CLI primeiro.** Antes de qualquer outra ferramenta (`cat`, `grep`, `find`, `Read`, busca de subagente, documentos do projeto do claude.ai), leia e busque este cofre pela Obsidian CLI, com `vault="{{nome-da-pasta}}"`. Ferramentas `obsidian_*` fora da lista podem estar só adiadas: carregue com `ToolSearch` antes de concluir que a CLI falhou. Regras, comandos e plano B: seção "Como buscar".
+
 ## Seu papel
 
 - **Se você é a sessão principal, você é o orquestrador.** Seu trabalho é ajudar o humano a gerir várias threads de agentes: ler o cofre, planejar, despachar subagentes, juntar os relatórios, falar com o humano e registrar no cofre. Não precisa que ninguém explique isso de novo.
@@ -162,6 +164,8 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 
 1. **Obsidian CLI: obrigatória** (usa o índice do app, então acha por aliases, tags e links). Precisa do Obsidian aberto.
    - Sessão na nuvem ligada ao computador: use as ferramentas do servidor MCP `obsidian-cli` (`obsidian_search`, `obsidian_read`, `obsidian_backlinks`, `obsidian_help`), com `vault="{{nome-da-pasta}}"`.
+   - **Ferramenta adiada não é CLI falhando.** Se as `obsidian_*` não estão na lista de ferramentas, carregue-as com `ToolSearch` (`select:mcp__remote-devices__obsidian-cli__obsidian_search,mcp__remote-devices__obsidian-cli__obsidian_read,mcp__remote-devices__obsidian-cli__obsidian_backlinks,mcp__remote-devices__obsidian-cli__obsidian_help`). Só se não vierem depois disso vale o passo 3.
+   - **Projeto do claude.ai não é o cofre.** Os documentos de um projeto do claude.ai (ferramenta `Projects`: `project_info`, `project_read`, `project_search`, `project_write`) são uma cópia que envelhece. Nunca leia nem escreva o cofre por eles. A fonte da verdade é a pasta no computador: ler pela CLI; escrever pelo shell (`device_bash`), com a pasta `the-mind-hub` conectada (`device_request_folder_access`). Para a sessão já entrar sabendo disso, as instruções do projeto do claude.ai recebem o bloco do [[modelo-instrucoes-do-projeto-claude]].
    - **Ler também é pela CLI.** Abrir ou buscar nota com `cat`, `grep`, `find`, `Read` ou outro comando de shell é erro de processo, mesmo com acesso à pasta. O shell serve só para **escrever** notas e rodar o `cofre.py`. A única exceção é o plano B do passo 3, sempre avisado.
    - Terminal no Windows:
      - Busca: `obsidian vault="{{nome-da-pasta}}" search query="termo" limit=10`

@@ -4,6 +4,8 @@ Este é um cofre do Obsidian: uma pasta de notas Markdown. Ele guarda **o que eu
 
 Nome do cofre no Obsidian: `Vault`.
 
+> **Leitura: Obsidian CLI primeiro.** Antes de qualquer outra ferramenta (`cat`, `grep`, `find`, `Read`, busca de subagente, documentos do projeto do claude.ai), leia e busque este cofre pela Obsidian CLI, com `vault="Vault"`. Ferramentas `obsidian_*` fora da lista podem estar só adiadas: carregue com `ToolSearch` antes de concluir que a CLI falhou. Regras, comandos e plano B: seção "Como buscar".
+
 ## Por onde começar
 
 1. `Items/Home.md`: porta de entrada; daqui se chega em tudo.
@@ -60,6 +62,8 @@ Os cofres moram dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 
 1. **Obsidian CLI: obrigatória** (usa o índice do app, então acha por aliases, tags e links). Precisa do Obsidian aberto.
    - Sessão na nuvem ligada ao computador: use as ferramentas do servidor MCP `obsidian-cli` (`obsidian_search`, `obsidian_read`, `obsidian_backlinks`, `obsidian_help`), com `vault="Vault"`.
+   - **Ferramenta adiada não é CLI falhando.** Se as `obsidian_*` não estão na lista de ferramentas, carregue-as com `ToolSearch` (`select:mcp__remote-devices__obsidian-cli__obsidian_search,mcp__remote-devices__obsidian-cli__obsidian_read,mcp__remote-devices__obsidian-cli__obsidian_backlinks,mcp__remote-devices__obsidian-cli__obsidian_help`). Só se não vierem depois disso vale o passo 3.
+   - **Projeto do claude.ai não é o cofre.** Os documentos de um projeto do claude.ai (ferramenta `Projects`: `project_info`, `project_read`, `project_search`, `project_write`) são uma cópia que envelhece. Nunca leia nem escreva o cofre por eles. A fonte da verdade é a pasta no computador: ler pela CLI; escrever pelo shell (`device_bash`), com a pasta `the-mind-hub` conectada (`device_request_folder_access`). Para a sessão já entrar sabendo disso, as instruções do projeto do claude.ai recebem o bloco do [[modelo-instrucoes-do-projeto-claude]].
    - **Ler também é pela CLI.** Abrir ou buscar nota com `cat`, `grep`, `find`, `Read` ou outro comando de shell é erro de processo, mesmo com acesso à pasta. O shell serve só para **escrever** notas e rodar o `cofre.py`. A única exceção é o plano B do passo 3, sempre avisado.
    - Terminal no Windows:
      - Busca: `obsidian vault="Vault" search query="termo" limit=10`
@@ -77,6 +81,8 @@ Os cofres moram dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
 ## Criar um cofre novo
 
 Cofre de projeto usa a estrutura `orquestra/` do `Items/Manual da Orquestra.md`. Siga `Items/Criar um novo cofre.md` (pastas, modelos, manuais, contexto geral, trecho para o repositório de código) e `Items/Guia do cofre para IA.md` (o `CLAUDE.md` do cofre novo, a partir de `Modelos/Modelo de CLAUDE do cofre.md`). O cofre novo nasce na raiz do repositório `the-mind-hub`, ao lado deste, e precisa ser registrado no `README.md` da raiz (`Items/Registrar cofre no README.md`).
+
+**Regra herdada por todo cofre novo: leitura pela Obsidian CLI.** O `cofre.py criar` gera o `CLAUDE.md` do cofre a partir do `Modelos/Modelo de CLAUDE do cofre.md`, que já traz o aviso "Obsidian CLI primeiro" e a seção "Como buscar" completa: CLI também para ler, ferramentas adiadas carregadas com `ToolSearch`, documentos do projeto do claude.ai proibidos como fonte ou destino, escrita pelo shell. O `cofre.py verificar` dá ERRO se algum desses trechos faltar, e o `cofre.py sincronizar` leva qualquer mudança do modelo aos cofres que já existem. Como o `CLAUDE.md` só é lido depois que a sessão já escolheu por onde ler, o passo 7 de `Items/Criar um novo cofre.md` cola o bloco do [[modelo-instrucoes-do-projeto-claude]] nas instruções do projeto do claude.ai. Mudar esta regra é mudar o modelo, nunca o `CLAUDE.md` de um cofre só.
 
 ## Se houver outros cofres conectados
 
