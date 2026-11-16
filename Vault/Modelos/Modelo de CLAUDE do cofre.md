@@ -52,7 +52,7 @@ Moram em `orquestra/funcionalidades/geral/`, uma decisão por nota (grafia, docu
 
 ## Convenções
 
-- Português brasileiro; arquivos e pastas em kebab-case, sem acento, com prefixo da funcionalidade; datas AAAA-MM-DD; `[[wikilinks]]` sempre.
+- Português brasileiro; arquivos e pastas em kebab-case, sem acento, com prefixo da funcionalidade; datas AAAA-MM-DD; `[[wikilinks]]` sempre; nota do `Vault` é citada como texto `Nome (no Vault)`, nunca como wikilink.
 - Nota operacional: modelo próprio, frontmatter `tipo`, `status`, `criado`, `funcionalidade`; `referencias/` e `MOCs/`: Manual do Cérebro.
 - Fato do humano preservado; interpretação do agente separada; suposição `[a confirmar]`. Tarefa do humano vai para o TickTick. Nunca editar `.obsidian/` sem pedido.
 - Detalhe: [[Manual da Orquestra#7. 📏 Convenções do cofre de projeto]] (ler pela CLI).
@@ -90,7 +90,7 @@ Detalhe: [[Manual da Orquestra#🚦 Etapas vitais]] (ler pela CLI). Modelos e ma
 - Detalhe: [[Padrão de commit]] e [[Commitar no the-mind-hub]] (ler pela CLI).
 
 <!-- projeto:escopos -->
-- **Escopos deste cofre** (lista fechada, escolhida na criação): `{{nome-da-pasta}}`.
+- **Escopos deste cofre** (lista fechada; muda só com aval): `{{nome-da-pasta}}` (notas deste cofre), `readme` (README da raiz do `the-mind-hub`, commit separado).
 <!-- /projeto:escopos -->
 
 ## Acesso e ações irreversíveis

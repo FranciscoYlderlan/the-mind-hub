@@ -13,7 +13,7 @@ origem: Decisões de estrutura, stack, criação de componentes e testes do ston
 
 É a **planta-modelo da construtora**: o cliente não desenha a casa do nada; recebe uma planta testada e risca o que quer mudar. Regra que manda propor: S25 do [[Padrão de projeto de software]]; quando, no passo a passo de [[Criar um novo cofre]].
 
-Versões: a mais recente estável no momento da proposta, sem trava (S16). Nada aqui é decisão: vira decisão do projeto novo só com o aval do humano.
+Versões: a mais recente estável no momento da proposta, sem trava (S16). Nada aqui é decisão: a proposta vai para a seção "Proposta de arquitetura e stack" do `geral-plano` do projeto novo e vira decisão só com o aval do humano. Dentro do cofre de projeto, esta nota é citada como texto "Referência de arquitetura e stack (no Vault)", nunca como wikilink.
 
 ---
 
