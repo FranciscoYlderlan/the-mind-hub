@@ -98,9 +98,10 @@ G1 interface antes do paralelo; G2 partir para paralelizar; G3 cadeia fica com u
 - Termos varridos: "projeto:padronizacao", "Regras deste projeto", "Repositórios e acesso", "bloco padroes", "Padronização do CLAUDE", "CLAUDE.md" (em `funcionalidades/` e `referencias/`), "2073", "texto vigente". Tocadas: [[geral-contexto]] (fato do acesso e mapa de decisões), [[moc-orquestra]], [[geral-decisao-2026-10-28-estrutura-frontend]] (linha da exceção de hook), [[passo-a-passo-do-agente]] (diário com partes e `--force`), `CLAUDE.md`, [[padroes]]; kit atualizado pelo `sincronizar` (`cofre.py`, [[manual-do-cerebro]]). Diários, bugs e "O que já foi feito" ficaram como histórico.
 
 > [!tip] Onde parei
-> - **Próximo passo:** este chat continua (humano, 09:32: sem passagem de turno) e escreve o pacote no `Vault` em lotes, seguindo as Etapas vitais B e mostrando cada lote ao humano antes do commit: (1) modelo de CLAUDE enxuto, que aponta para `funcionalidades/geral/` pela CLI, `padroes` em nota própria e teto no `cofre.py verificar`; (2) núcleo neutro e paralelismo (G1 a G11) no Manual da Orquestra; (3) perfil prático e lugar do perfil estudo; (4) padrão de software e commits (os dois modelos de CLAUDE); (5) notas de lição técnica; (6) `cofre.py sincronizar` nos cofres de projeto. Lacuna achada: o `verificar` cobra "Próximo passo" no diário principal, não na parte mais recente (N04): ajustar no lote 1.
-> - **Threads abertas:** implementador do lote 1 na worktree `$HOME/wt-lote1`, branch `vault/lote-1-claude-enxuto` (despachado 09:4x). O merge só depois do aval do humano. Migração dos blocos deste cofre na worktree `$HOME/wt-migra`, branch `stonebid/migra-blocos` (sobre o lote 1): relatório entregue, merge depois do lote 1 e com aval do humano.
-> - **Dúvidas para o humano:** nenhuma. O `PrepBTG-vault` é de estudo e fica fora do lote 6 por ora (humano, 09:32).
+> - **Feito:** lote 1 (modelo de CLAUDE como índice, teto de 2500 palavras, `padroes` em `orquestra/padroes.md`, limite de 2000 em cofre novo, N04 no `verificar`, Guia do cofre para IA) e a migração dos blocos deste cofre para seis decisões `geral-decisao-2026-11-16-*` e para [[padroes]]. Manual da Orquestra atualizado (v8) e sincronizado aqui. Merge na `main` com aval do humano (09:54: "atualize e realize os commits e depois pode mergear").
+> - **Próximo passo:** lote 2: núcleo neutro e paralelismo (G1 a G11) no Manual da Orquestra, com as regras do núcleo (N01 a N21) e o ajuste em "Atualizar a memória"; depois os lotes 3 a 6.
+> - **Threads abertas:** nenhuma.
+> - **Dúvidas para o humano:** nenhuma.
 
 ### 🔗 Conexões
 - Diário do dia: [[diario-2026-11-16]]
