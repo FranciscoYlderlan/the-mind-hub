@@ -35,6 +35,15 @@ origem: Manual do Meu Cérebro no Obsidian
 - [[API simulada conferida contra a API real]]: mock segue o presenter da API; erro que não veio da API não vai cru para a tela.
 - [[Imagem de terceiro com anti-robô passa pelo servidor]]: rota própria com id validado, cache e limite.
 - [[Teste de corrida com janela forçada]]: a prova de uma trava é o teste falhar sem ela.
+- [[Tarefa agendada idempotente com disparo na leitura]]: agendador e leitura disparam; idempotência garante uma vez só.
+- [[Tempo real por SSE com recarga de reserva]]: evento depois do COMMIT, polling de reserva e limite de concorrência.
+- [[Histórico à prova de adulteração com hash encadeado]]: hash do anterior, selo com etiqueta e cabeça selada.
+- [[Auditoria confere os dados derivados]]: comprovante, extrato e colunas de cópia conferidos contra a cadeia.
+- [[Regra de concorrência decidida dentro da trava]]: estado lido sob a trava, sequência global e fronteira exata.
+- [[Dinheiro em centavos num livro de movimentos]]: fórmula do saldo, entrada ambígua recusada e chave de idempotência.
+- [[Sessão entre domínios com JWT no cabeçalho]]: login opcional sem 401, cache pessoal e redirect só interno.
+- [[Busca e cache em rota pública]]: filtro em rota nova, `LIKE` escapado e falha fora do cache.
+- [[API externa escolhida por versão, licença e chave]]: versão estável, licença do uso real e API sem chave.
 
 ## 🎼 Agentes em paralelo
 - [[Manual da Orquestra]]: orquestrador, subagentes, fluxo de uma sessão e a estrutura `orquestra/` dos cofres de projeto.
