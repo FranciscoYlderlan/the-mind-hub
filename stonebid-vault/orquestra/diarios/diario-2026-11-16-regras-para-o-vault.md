@@ -99,12 +99,10 @@ G1 interface antes do paralelo; G2 partir para paralelizar; G3 cadeia fica com u
 - Termos varridos: "projeto:padronizacao", "Regras deste projeto", "Repositórios e acesso", "bloco padroes", "Padronização do CLAUDE", "CLAUDE.md" (em `funcionalidades/` e `referencias/`), "2073", "texto vigente". Tocadas: [[geral-contexto]] (fato do acesso e mapa de decisões), [[moc-orquestra]], [[geral-decisao-2026-10-28-estrutura-frontend]] (linha da exceção de hook), [[passo-a-passo-do-agente]] (diário com partes e `--force`), `CLAUDE.md`, [[padroes]]; kit atualizado pelo `sincronizar` (`cofre.py`, [[manual-do-cerebro]]). Diários, bugs e "O que já foi feito" ficaram como histórico.
 
 > [!tip] Onde parei
-> - **Feito:** lote 1 (modelo de CLAUDE como índice, teto de 2500 palavras, `padroes` em `orquestra/padroes.md`, limite de 2000 em cofre novo, N04 no `verificar`, Guia do cofre para IA) e a migração dos blocos deste cofre para seis decisões `geral-decisao-2026-11-16-*` e para [[padroes]]. Manual da Orquestra atualizado (v8) e sincronizado aqui. Merge na `main` com aval do humano (09:54: "atualize e realize os commits e depois pode mergear").
-> - **Próximo passo:** lote 2: núcleo neutro e paralelismo (G1 a G11) no Manual da Orquestra, com as regras do núcleo (N01 a N21) e o ajuste em "Atualizar a memória"; depois os lotes 3 a 6.
-> - **Threads abertas:** nenhuma.
-> - **Dúvidas para o humano:** nenhuma.
+> - Seguiu na parte [[diario-2026-11-16-lote-2]], onde está o "Onde parei" vigente.
 
 ### 🔗 Conexões
 - Diário do dia: [[diario-2026-11-16]]
+- Parte seguinte: [[diario-2026-11-16-lote-2]]
 - Mapa: [[moc-orquestra]]
 - Projeto: [[geral-contexto]]
