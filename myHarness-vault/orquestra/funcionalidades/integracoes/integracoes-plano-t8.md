@@ -12,8 +12,8 @@ criado: 2026-11-26
 - **Depende de:** T7 (parte da branch dela)
 - **Paralelo:** não (move os arquivos que as outras tarefas tocam)
 - **Pronto quando:**
-  - [ ] `cargo test -p my-harness-core -p my-harness-app` roda num container sem GTK e sem WebKit, com todos os testes que hoje estão em `src-tauri` (menos os que precisam do Tauri)
-  - [ ] `pnpm check:rapido` no hook pre-push; `pnpm check` completo passando; comportamento e bindings sem mudança
+  - [x] `cargo test -p my-harness-core -p my-harness-app` roda num container sem GTK e sem WebKit, com todos os testes que hoje estão em `src-tauri` (menos os que precisam do Tauri)
+  - [x] `pnpm check:rapido` no hook pre-push; `pnpm check` completo passando; comportamento e bindings sem mudança
 - **Prova:** `pnpm check`; `check:rapido` num container sem as bibliotecas do GTK, com o tempo medido
 - **Verificação:** histórico em [[integracoes-plano-verificacoes-t6-t7#T8]].
 

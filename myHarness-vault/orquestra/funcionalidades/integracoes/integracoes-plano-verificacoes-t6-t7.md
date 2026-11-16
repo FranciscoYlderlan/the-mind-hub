@@ -18,6 +18,7 @@ criado: 2026-11-24
 
 ## T8
 - 2026-11-26: tarefa criada por aval do humano (13h56), depois da T7; despachada às 14h10 sobre a branch da T7.
+- 2026-11-26 14h20 (implementador, `refactor/setup-nucleo-sem-tauri`; `02ae45a` move o núcleo e a infra para `crates/app`, pacote `my-harness-app`, e `a413da2` põe o `pnpm check:rapido` no hook pre-push; os dois com push): o `Canal<T>` substitui o `tauri::ipc::Channel` no núcleo; as migrações foram para `crates/app/migrations/`; 145 testes em `crates/app`, sem Tauri na árvore (`cargo tree`); bindings regerados iguais. Tempos: `check:rapido` frio sem GTK, 2 min 04 s; quente, 22 s; `pnpm check` completo, 53 s. Fora do escopo: notas com os caminhos antigos (`src-tauri/src/infra`, `src-tauri/migrations`, `src-tauri/src/commands/{nucleo,integracoes,dto,erro}.rs`, `src-tauri/tests/db_*.rs`) a reescrever, com `antigo:` no [[padroes]]. Dúvida: migrações em `crates/app/migrations/`. `target/` em `/home/claude/t8/target`. Falta o verificador.
 
 ### 🔗 Conexões
 - Parte anterior: [[integracoes-plano-verificacoes]]
