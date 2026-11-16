@@ -152,7 +152,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T6]].
 
 ## Próxima tarefa e a seguinte
-- Agora: adversarial da `integracoes`, na API e na tela (o verificador de fluxo principal passou sem bug em 2026-11-26).
+- Agora: aval do humano para a correção do B1 ([[bug-conectar-repetido-abre-segundo-fluxo-2026-11-26]]) e para o texto do AC-03; depois, implementador novo e os validadores de novo (fluxo principal e os dois adversariais, [[geral-decisao-2026-11-26-adversarial-em-dois]]).
 - Depois: T6 (`dev:simulado`), num chat novo; então o teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
 
 ## Prioridades

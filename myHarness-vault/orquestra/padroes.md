@@ -25,6 +25,7 @@ antigo: re:merge local na `main`|sem PR, e o merge|tudo segue local, sem PR|cont
 antigo: re:`concluido`(?! ×)|\bconcluido, falhou => concluído, com acento, em Execução e Relatório (contrato, M-38)
 antigo: re:norma completa,? com o dicionário|ASD-STE100 com o dicionário|fora do dicionário do STE => em inglês, regras do STE com bom senso, sem conferir o dicionário palavra por palavra (Padrão de commit, no Vault)
 antigo: re:PR única da G1|numa PR só|uma PR só da G1|feat/setup-g1-interfaces`, `pnpm check`, push => uma PR por tarefa, mergeada pelo humano na ordem indicada (geral-decisao-2026-11-23-uma-pr-por-tarefa)
+antigo: re:apagado ao fim da tarefa \(\[\[ => na validação, o target/ compartilhado é apagado só no fim da funcionalidade (geral-decisao-2026-11-26-build-reaproveitado-na-validacao)
 limite-palavras: 2000
 ```
 
