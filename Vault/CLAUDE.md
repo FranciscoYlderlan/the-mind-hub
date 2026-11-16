@@ -51,6 +51,7 @@ Lido pelo `cofre.py verificar`. Sintaxe: `termo => forma certa`; `antigo: termo 
 # antigo: termo do estado substituído => estado atual (nota dona)
 antigo: re:40% a 50% => orçamento de 100 mil tokens na linha Messages do /context (Manual da Orquestra)
 antigo: re:bloco `padroes` do `CLAUDE.md`|Padronização \+ bloco `padroes`|2073 palavras no `stonebid-vault` => regra de projeto em decisão de funcionalidades/geral/ e padroes em orquestra/padroes.md; CLAUDE.md é índice (Manual da Orquestra)
+antigo: re:Estudo não ganha cofre|Feedback determinístico \(testes|cada um na sua git worktree|Constrói \*\*uma\*\* tarefa, na própria worktree => Manual neutro; o lado de software (worktree, diff, testes) e o estudo com plano em perfis (Manual da Orquestra - Perfil projeto prático, Criar um novo cofre)
 antigo: re:Registrar no fim, não no meio|Orquestrador, no fim da sessão|Alimentar \(no fim do trabalho\)|escreve no cofre, no fim do trabalho|alimentar no fim => registrar relatório e decisão aprovada assim que chegam (Manual da Orquestra, princípio 8)
 ```
 

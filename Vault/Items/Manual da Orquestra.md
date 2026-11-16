@@ -27,14 +27,14 @@ O resultado de um agente depende menos do modelo e mais do que existe em volta d
 | 4 | Quem cria nunca testa. Funcionalidades diferentes, agentes diferentes |
 | 5 | Tarefas independentes rodam em paralelo; tarefas que tocam nos mesmos arquivos rodam em série. Regras G1 a G11 (interface antes, integração com aval, teto de 5 que escrevem): [[Manual da Orquestra - Agentes em paralelo]] |
 | 6 | Contexto é finito: cada agente recebe só o que a tarefa precisa e sabe onde buscar o resto |
-| 7 | Feedback determinístico (testes, lint, tipos, CI) vale mais que o julgamento do agente |
+| 7 | Prova objetiva (o que dá para checar sem opinião) vale mais que o julgamento do agente. No projeto prático: testes, lint, tipos e CI ([[Manual da Orquestra - Perfil projeto prático]]) |
 | 8 | Registrar assim que chega: relatório de subagente e decisão aprovada entram no cofre na hora, sem esperar o fim da sessão. Atualizar a nota existente em vez de duplicar |
 | 9 | **Só o orquestrador escreve no cofre.** Subagentes leem e devolvem relatório |
 | 10 | Eu decido em dois pontos fixos: aprovar o plano e revisar o que é crítico |
 
 Diagnóstico quando o agente erra (antes de culpar o modelo): faltou **instrução** clara? Faltou **contexto** ou havia nota velha enviesando? Faltou **ferramenta** para testar e um critério de pronto? Faltou **memória** no cofre? A resposta vira ajuste no cofre (princípio 1).
 
-O resto do núcleo comum, que vale em cofre de projeto prático e de estudo (fontes, conduta da IA, pedido, entrega, riscos, convenções), está em [[Manual da Orquestra - Núcleo comum]].
+O resto do núcleo comum, que vale em cofre de projeto prático e de estudo (fontes, conduta da IA, pedido, entrega, riscos, convenções), está em [[Manual da Orquestra - Núcleo comum]]. O que vale só para um tipo de cofre mora no perfil dele: [[Manual da Orquestra - Perfil projeto prático]] ou [[Manual da Orquestra - Perfil estudo]].
 
 ---
 
@@ -102,12 +102,12 @@ Papel é função, não agente fixo: um agente genérico assume o papel carregan
 | Papel | Faz | Lê | Devolve |
 |---|---|---|---|
 | **Orquestrador** (sessão principal) | Lê o cofre, planeja, despacha, junta, fala comigo, registra | CLAUDE.md, contexto, decisões, plano | Escreve no cofre |
-| Pesquisador | Explora código, notas e internet | O que o briefing apontar | Relatório |
-| Implementador | Constrói **uma** tarefa, na própria worktree | Tarefa do plano + decisões linkadas | Relatório + código |
-| Verificador | Prova que a tarefa cumpre os critérios | Critérios + diff | Relatório com prova de cada critério |
-| Revisor | Segurança, requisitos, testes, arquitetura, regressão/alucinação, performance | Código e decisões | Achados: bloqueante, deve corrigir, opcional |
+| Pesquisador | Explora notas, fontes, internet (e o código, no prático) | O que o briefing apontar | Relatório |
+| Implementador | Produz **uma** tarefa, no próprio espaço isolado | Tarefa do plano + decisões linkadas | Relatório + o que produziu |
+| Verificador | Prova que a tarefa cumpre os critérios | Critérios + tudo o que mudou | Relatório com prova de cada critério |
+| Revisor | Uma especialidade por revisor (requisitos, alucinação e as do perfil) | O que foi produzido e as decisões | Achados: bloqueante, deve corrigir, opcional |
 
-Regras de separação: o implementador de uma tarefa nunca é o verificador dela; o orquestrador não implementa, para manter o contexto limpo.
+Regras de separação: o implementador de uma tarefa nunca é o verificador dela; o orquestrador não implementa, para manter o contexto limpo. No projeto prático, espaço isolado é a git worktree, "o que mudou" é o diff e o revisor tem especialidades de código: [[Manual da Orquestra - Perfil projeto prático]].
 
 ---
 
@@ -118,17 +118,18 @@ Regras de separação: o implementador de uma tarefa nunca é o verificador dela
 2. PESQUISAR   pesquisadores em paralelo, só leitura, relatório de ~1 tela
 3. PLANEJAR    orquestrador escreve o plano (tarefas com "toca em", "depende de", "pronto quando")
 4. DECIDIR     eu aprovo ou altero → uma nota de decisão por item
-5. IMPLEMENTAR um implementador por tarefa ∥, cada um na sua git worktree, contexto zerado
-6. VERIFICAR   verificador novo por tarefa + testes e lint
+5. IMPLEMENTAR um implementador por tarefa ∥, cada um no seu espaço isolado, contexto zerado
+6. VERIFICAR   verificador novo por tarefa + prova objetiva
                ✘ falhou → implementador novo corrige (máx. 2 voltas; na 3ª, o problema sobe para mim)
 7. REVISAR     revisores em paralelo → eu reviso só o crítico (negócio e arquitetura)
 8. JUNTAR      cada agente entrega a sua parte; a integração só com meu aval, na ordem que eu decidir;
-               depois, a suíte inteira no conjunto
+               depois, a verificação do conjunto
 9. REGISTRAR   cada relatório já foi registrado ao chegar; aqui: verificação no plano, bugs, contexto, diário, commit do cofre
                + uma pergunta única: "estes candidatos viram nota?"
 10. VERIFICAR  cofre.py verificar → zero ERRO (Etapas vitais B). Antes disso, nada está pronto
 ```
 
+- **No projeto prático** (worktree no passo 5, testes e lint no 6, merge e suíte inteira no 8): [[Manual da Orquestra - Perfil projeto prático]].
 - **O plano é a ponte.** Ele e as decisões precisam bastar para um implementador que não viu a pesquisa. Se faltar algo, é lacuna de contexto (princípio 1).
 - **Relatório curto e em formato fixo** (`modelos/modelo-relatorio-subagente.md`). Cinco textões enchem o contexto do orquestrador.
 - **Dúvidas sobem nos relatórios.** Subagente não pergunta para mim; marca como "dúvida" ou "candidato a nota".
@@ -193,13 +194,13 @@ Lição de um bug que vale **fora** do projeto sobe para o `Vault` como nota de 
 
 ## 8. 🎚️ Dial de estrutura
 
-Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou o modelo de IA? Reavaliar o dial.
+Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou o modelo de IA? Reavaliar o dial. No projeto prático, "material" é o código: [[Manual da Orquestra - Perfil projeto prático]].
 
 | Nível | Quando | Plano | Tradeoff |
 |---|---|---|---|
-| alto | Modelo fraco ou barato, código legado | Tarefas pequenas, cada uma com critério e teste de prova | Mais lento e mais tokens, mais seguro |
+| alto | Modelo fraco ou barato, material legado ou confuso | Tarefas pequenas, cada uma com critério e teste de prova | Mais lento e mais tokens, mais seguro |
 | medio | Maioria dos casos | Plano único com critérios de aceite | Equilíbrio |
-| baixo | Modelo forte, código bem estruturado | Plano enxuto, implementador livre, verificação forte no fim | Mais rápido, depende do checklist |
+| baixo | Modelo forte, material bem estruturado | Plano enxuto, implementador livre, verificação forte no fim | Mais rápido, depende do checklist |
 
 ---
 
@@ -209,9 +210,9 @@ Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou 
 |---|---|
 | Nota velha enviesa o agente | Atualizar em vez de duplicar; decisão substituída é marcada |
 | Excesso de notas vira ruído | Gatilhos de consulta, CLAUDE.md enxuto, regra do bug trivial |
-| Agentes paralelos colidem | Só o orquestrador escreve no cofre; worktree por implementador; "toca em" no plano; regras de [[Manual da Orquestra - Agentes em paralelo]] |
+| Agentes paralelos colidem | Só o orquestrador escreve no cofre; espaço isolado por implementador (prático: worktree); "toca em" no plano; regras de [[Manual da Orquestra - Agentes em paralelo]] |
 | Proposta registrada como decisão | Nota de decisão só nasce depois do meu aval |
-| Verificador tão fraco quanto o implementador | Sempre junto com testes, lint e tipos |
+| Verificador tão fraco quanto o implementador | Sempre junto com prova objetiva (prático: testes, lint e tipos) |
 | Cópias dos manuais divergem entre cofres | Cada cópia traz a versão e a data; ao mudar o original, atualizo as cópias |
 | Etapa pulada ao escrever no cofre (nota sem conexão, cópia com link quebrado) | Etapas vitais A e B + `cofre.py verificar` como portão |
 | Mudança gravada só na nota dona; as outras seguem com o estado antigo, às vezes com aviso "vale o novo" por cima | Varredura de impacto (B2), reescrita no estado atual (B6) e linha `antigo:` checada pelo `verificar` (B7) |
@@ -258,10 +259,10 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 | # | Etapa | Prova de que aconteceu |
 |---|---|---|
 | A1 | Ler: `CLAUDE.md` do Vault → este manual → Criar um novo cofre | — |
-| A2 | Perguntar ao humano: nome, objetivo, repositório, tempo, dial. O que faltar vira `[a confirmar]` | Respostas registradas |
+| A2 | Perguntar ao humano: nome, objetivo, perfil (prático ou estudo), tempo, dial e o que o perfil pedir. O que faltar vira `[a confirmar]` | Respostas registradas |
 | A3 | `cofre.py criar` (nunca montar à mão) | Estrutura, kit, `CLAUDE.md`, moc, geral-contexto, roteiro e diário de criação |
 | A4 | Preencher o geral-contexto com os fatos de A2 e propor as etapas do roteiro. Com meu aval: nota de decisão, roteiro preenchido e etapa 1 concluída | Decisão do roteiro + `cofre.py status` |
-| A5 | Ligar o repositório de código ([[modelo-claude-do-repositorio]]) | Trecho no `CLAUDE.md` do repositório |
+| A5 | Aplicar o perfil: os passos que ele pede na criação (prático: repositório; ver [[Manual da Orquestra - Perfil projeto prático]]) | O que o perfil pede como prova |
 | A6 | `cofre.py verificar` | **Zero ERRO** |
 | A7 | Humano: abrir no Obsidian, pasta de modelos, README, commit | — |
 
@@ -306,7 +307,7 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 | [[modelo-moc-orquestra]] | Mapa do cofre de projeto (`MOCs/moc-orquestra.md`) |
 | [[modelo-briefing-subagente]] | O que o orquestrador envia a cada subagente, com os cartões de cada papel |
 | [[modelo-relatorio-subagente]] | O que cada subagente devolve |
-| [[modelo-claude-do-repositorio]] | Trecho que liga o repositório de código ao cofre |
+| [[modelo-claude-do-repositorio]] | Trecho que liga o repositório de código ao cofre (perfil prático) |
 | [[Modelo de CLAUDE do cofre]] | O `CLAUDE.md` do cofre de projeto |
 | [[Modelo de nota]] | Notas de `referencias/` e `MOCs/` (esqueleto do Manual do Cérebro) |
 | `cofre.py` | Ferramenta (não é nota): `criar`, `sincronizar` e `verificar` cofres |
@@ -316,6 +317,7 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 ## 🔗 Conexões
 - Mapa: [[MOC Programação]]
 - Partes deste manual: [[Manual da Orquestra - Núcleo comum]], [[Manual da Orquestra - Agentes em paralelo]]
+- Perfis: [[Manual da Orquestra - Perfil projeto prático]], [[Manual da Orquestra - Perfil estudo]]
 - Relacionadas: [[Manual do Meu Cérebro no Obsidian]], [[Criar um novo cofre]], [[Atualizar a memória]], [[Guia do cofre para IA]]
 - Mapa do cofre de projeto: [[modelo-moc-orquestra]]
 
@@ -329,3 +331,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v7 (2026-10-29): varredura de impacto (B2), reescrita no estado atual (B6) e regra "Uma versão só" (§7); bloco `padroes` ganha linhas `antigo:`; o `verificar` dá ERRO em estado antigo ou aviso de prevalência fora do histórico. Origem: mais de 10 casos de nota com estado anterior depois de uma mudança (bug de processo registrado no `stonebid-vault`).
 - v8 (2026-11-16): `CLAUDE.md` vira índice, com teto de 2500 palavras no `verificar`; regra de projeto vira decisão em `funcionalidades/geral/`, buscada pela CLI; bloco `padroes` em `orquestra/padroes.md`; `limite-palavras` de 2000 em cofre novo. Origem: o `CLAUDE.md` do `stonebid-vault` chegou a 3318 palavras lidas a cada execução.
 - v9 (2026-11-16): núcleo comum neutro (N01 a N21) e agentes em paralelo (G1 a G11), com N05 a N21 e G1 a G11 em notas próprias; princípio 8 passa a registrar assim que chega; alteração e substituição parcial de decisão (§3), diário com partes (§7), passagem por limite de uso e commit do cofre a cada ciclo; integração só com meu aval. Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
+- v10 (2026-11-16): Manual neutro; o que presume software (princípio 7, worktree, diff e revisor do §4, passos 5, 6 e 8 do §5, "código legado" do §8, riscos de worktree e testes do §9, A2 e A5) vai para o perfil projeto prático (P01 a P16); perfil estudo reservado. Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.

@@ -9,10 +9,10 @@ O orquestrador copia o **bloco comum**, preenche e cola logo abaixo o **cartão 
 - **Tarefa:** T? — nome-da-func-plano, seção T?
 - **Leia antes:** lista curta de notas e arquivos; nada além disso
 - **Pode tocar em:** (só implementador) arquivos e áreas do "Toca em" do plano
-- **Trabalhe em:** worktree `nome` (só implementador)
+- **Trabalhe em:** espaço isolado `nome` (só implementador; no projeto prático, a git worktree)
 - **Não pode:** escrever no cofre; tocar fora da lista; dar como pronto sem rodar a prova; perguntar ao humano (mande a dúvida no relatório)
 - **Pronto quando:** copiado do plano
-- **Prova:** comando
+- **Prova:** verificação objetiva (no projeto prático, o comando de teste, lint ou tipos)
 - **Devolva:** no formato do relatório de subagente, em até ~1 tela
 ```
 
@@ -29,7 +29,7 @@ O orquestrador copia o **bloco comum**, preenche e cola logo abaixo o **cartão 
 ```markdown
 ### Implementador
 - Missão: entregar UMA tarefa do plano, nada além dela.
-- Faça: trabalhe só na sua worktree e nos arquivos do "Toca em"; rode a prova; liste os arquivos tocados.
+- Faça: trabalhe só no seu espaço isolado e no que o "Toca em" lista; rode a prova; liste o que tocou.
 - Não faça: mudar o escopo; consertar coisas fora da tarefa (anote em "Fora do escopo"); dar como pronto sem a prova rodando.
 - Devolva: o que mudou, a saída da prova e os candidatos a nota.
 ```
@@ -37,13 +37,13 @@ O orquestrador copia o **bloco comum**, preenche e cola logo abaixo o **cartão 
 ```markdown
 ### Verificador
 - Missão: provar que a tarefa cumpre os critérios. Procure falhas; não confirme por confiança.
-- Faça: rode testes, lint e tipos; cheque cada critério com uma prova; leia o diff inteiro atrás de mudanças fora do escopo.
-- Não faça: corrigir o código; aceitar "deve funcionar".
+- Faça: rode as provas objetivas; cheque cada critério com uma prova; leia tudo o que mudou (no prático, o diff inteiro) atrás de mudança fora do escopo.
+- Não faça: corrigir o que verifica; aceitar "deve funcionar".
 - Devolva: ✔/✘ por critério, com a prova de cada um.
 ```
 
 ```markdown
-### Revisor (especialidade: segurança | requisitos | testes | arquitetura | regressão e alucinação | performance)
+### Revisor (especialidade: requisitos | regressão e alucinação | as do perfil; no prático, também segurança | testes | arquitetura | performance)
 - Missão: achar problemas da sua especialidade, e só dela.
 - Faça: classifique cada achado em bloqueante, deve corrigir ou opcional, com arquivo:linha e a evidência.
 - Não faça: corrigir; opinar fora da especialidade; inflar a lista com achados fracos.
@@ -53,4 +53,4 @@ O orquestrador copia o **bloco comum**, preenche e cola logo abaixo o **cartão 
 ### 🔗 Conexões
 - Resposta esperada: [[modelo-relatorio-subagente]]
 - De onde vem a tarefa: [[modelo-plano]]
-- Regras: [[Manual da Orquestra]]
+- Regras: [[Manual da Orquestra]]; lado concreto no projeto prático: [[Manual da Orquestra - Perfil projeto prático]]
