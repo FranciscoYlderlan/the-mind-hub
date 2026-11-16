@@ -23,7 +23,7 @@ Nome do cofre no Obsidian: `stonebid-vault`.
 
 1. Registrar o que a sessão produziu (Etapas vitais).
 2. Diário de hoje com "Onde parei": **próximo passo**, threads abertas, dúvidas.
-3. `cofre.py status --atualizar` e `verificar` com zero ERRO.
+3. `cofre.py status --atualizar`, `verificar` com zero ERRO e commit do cofre.
 4. Avisar: "pode abrir um chat novo".
 
 Detalhe: [[manual-da-orquestra#🔄 Passagem de turno]] (ler pela CLI).
@@ -39,14 +39,15 @@ Moram em `orquestra/funcionalidades/geral/`, uma decisão por nota (grafia, docu
 ## Quem escreve
 
 - **Só o orquestrador escreve neste cofre**; subagente lê e devolve relatório (`orquestra/modelos/modelo-relatorio-subagente.md`).
-- **Plano é proposta; decisão só com aval do humano**, uma por nota. Decisão que contradiz outra: nota nova com `substitui:`, a antiga vira `substituida`.
+- **Plano é proposta; decisão só com aval do humano**, uma por nota.
+- **Decisão muda:** campo Alteração reescrito no estado atual (cronologia no diário); ainda não aplicada → muda na própria nota + 1 linha no diário; já aplicada → nota nova com `substitui:`, a antiga vira `substituida`; só um ponto muda → nota nova só dele, a antiga segue `aprovada` com a linha reescrita + link.
 - **Nunca apagar sem confirmação**; na dúvida, arquivar. Mover para `arquivos/` só com confirmação.
 - Detalhe: [[manual-da-orquestra#3. ✍️ Quem escreve o quê]] (ler pela CLI).
 
-## Consultar antes e alimentar no fim
+## Consultar antes e alimentar assim que chega
 
 - **Antes:** bug → `bugs/` por sintoma e decisões; mudança estrutural → decisões (contradizer só citando a nota); área sensível → contexto, `referencias/`, bugs; nota nova → `modelos/`; algo parecido → `arquivos/`.
-- **No fim:** bug não trivial → nota em `bugs/` (reapareceu: atualizar); decisão aprovada → nota de decisão + nota responsável; tarefa concluída → contexto e plano; etapa concluída → roteiro e `status --atualizar`; sessão relevante → diário; dúvidas → uma pergunta única ao humano. Bug trivial não vira nota.
+- **Assim que chega** (sem esperar o fim da sessão): relatório de subagente → registrar; bug não trivial → nota em `bugs/` (reapareceu: atualizar); decisão aprovada → nota de decisão + nota responsável; tarefa concluída → contexto e plano; etapa concluída → roteiro e `status --atualizar`; sessão relevante → diário; dúvidas → uma pergunta única ao humano. Bug trivial não vira nota.
 - Detalhe: [[manual-da-orquestra#6. 🔎 Quando consultar e quando alimentar]] (ler pela CLI).
 
 ## Convenções
@@ -83,14 +84,19 @@ Detalhe: [[manual-da-orquestra#🚦 Etapas vitais]] (ler pela CLI). Modelos e ma
 
 ## Commits
 
-- **Formato:** `{emoji} {tipo}(stonebid-vault): Descrição`, em inglês, imperativo; uma mudança por commit; só no nome do humano, sem `Co-Authored-By` nem link de sessão.
+- **Vale neste cofre e em todo repositório do projeto.** Formato: `{emoji} {tipo}(escopo): Descrição`, em inglês, imperativo; escopo só da lista abaixo; uma mudança por commit; só no nome do humano, sem `Co-Authored-By` nem link de sessão.
+- **Quando:** a cada registro concluído e na passagem de turno.
 - **Passos:** `.git` na raiz do `the-mind-hub` (peça a pasta e permissão para apagar); `verificar` zero ERRO; sem identidade, `git -c user.name=... -c user.email=...`, nunca `git config`; cofre e README em commits separados.
 - Detalhe: Padrão de commit (no Vault) e Commitar no the-mind-hub (no Vault) (ler pela CLI).
 
-## Repositórios e acesso
+<!-- projeto:escopos -->
+- **Escopos deste cofre** (lista fechada, escolhida na criação): `stonebid-vault`.
+<!-- /projeto:escopos -->
 
-- Onde ficam e o que o agente pode sem perguntar: decisão em `funcionalidades/geral/` (busque "repositório"). Sem decisão, pedir antes.
-- Apagar arquivos, forçar push ou mexer na branch principal fora do CI/CD: sempre pedir confirmação.
+## Acesso e ações irreversíveis
+
+- Onde fica cada coisa e o que o agente pode sem perguntar: decisão em `funcionalidades/geral/` (busque "acesso" e "repositório"). Sem decisão, pedir antes.
+- Apagar ou sobrescrever o que não se recupera: sempre pedir confirmação. No projeto prático (repositório, `--force`, branch principal): Manual da Orquestra - Perfil projeto prático (no Vault) (ler pela CLI).
 
 ## Como buscar (obrigatório)
 
