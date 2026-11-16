@@ -15,6 +15,9 @@ criado: 2026-11-26
 - 13h55: verificador leve da T6 (cerca de 5 min, sem compilar Rust): ✔ nos três critérios; **T6 concluída**, PR #15 aberta (detalhe em [[integracoes-plano-verificacoes]]).
 - 13h56: respostas do humano: o orquestrador propõe um MVP para o prazo; T8 (núcleo e infra num crate sem Tauri e hook pre-push leve) depois do merge da T7; Opus em todos os subagentes.
 - 14h05: relatório da T7: 5 commits com push na `fix/integracoes-conectar-repetido`, `pnpm check` completo passando (detalhe em [[integracoes-plano-verificacoes]]). Com o GTK instalado e o `sccache` quente, o check completo levou 22 s a 53 s: o gargalo é o container frio. Verificador da T7 despachado no modo leve, com o `target/` da T7.
+- 13h53: o humano recusou o MVP: todas as funcionalidades até o prazo, com as etapas 4 e 7 completas ([[geral-contexto]], Tempo disponível). O contrato já cobre os 14 UC e os 157 AC.
+- 14h10: T8 no [[integracoes-plano]] e despachada sobre a branch da T7, para destravar o paralelismo no Rust.
+- 14h12: verificador da T7 sem bloqueante (cerca de 3 min); **T7 concluída**, PR #16 (detalhe em [[integracoes-plano-verificacoes-t6-t7]]). Ordem de merge: #15, depois #16.
 
 ## Decisões tomadas
 - [[geral-decisao-2026-11-26-teste-leve-na-tarefa]], [[geral-decisao-2026-11-26-validacao-em-modo-dev]], [[geral-decisao-2026-11-26-target-unico-por-chat]]
