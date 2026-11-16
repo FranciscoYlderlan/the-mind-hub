@@ -174,6 +174,7 @@ Este cofre mora dentro do repositório `the-mind-hub`, e o `.git` fica na raiz d
      - Lista completa de comandos: `obsidian help`
 2. Tente sinônimos e termos em inglês antes de concluir que não existe nota.
 3. **CLI falhou** (ferramentas `obsidian_*` ausentes, comando não encontrado, "The CLI is unable to find Obsidian"): **não troque de caminho em silêncio**.
+   - **Obsidian recém-aberto:** `Command "read" not found` (ou outro comando) logo depois de abrir o app não é falha da CLI: ele ainda está carregando. Espere alguns segundos e repita a mesma chamada antes do resto deste passo.
    - **Reporte** ao humano o que falhou, com a mensagem de erro.
    - **Analise** com a nota [[Obsidian CLI via MCP não carrega]] e com os bugs de `orquestra/bugs/` deste cofre (busque por "obsidian cli"): causa conhecida, correção e como validar. A causa é outra? Registre o bug novo. É a mesma e voltou? Atualize a nota.
    - Só se o humano não puder corrigir agora: busque nos `.md` desta pasta, incluindo `aliases` do frontmatter, e **avise** que a busca foi feita sem a CLI.
