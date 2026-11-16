@@ -38,7 +38,7 @@ Vale para cofre de projeto prático e de estudo. Cada regra traz um exemplo "em 
 - **G4 Pesquisa adiantada:** enquanto uns constroem, pesquisadores já levantam o que a próxima tarefa vai precisar.
   - Em software: documentação da biblioteca da etapa seguinte.
   - Em estudo: fontes do próximo tema.
-- **G9 Registrar e commitar durante:** o orquestrador registra cada relatório assim que chega e commita o cofre a cada ciclo, sem esperar todos terminarem (N12 e N15 no [[Manual da Orquestra]]).
+- **G9 Registrar e commitar durante:** o orquestrador registra cada relatório assim que chega e commita o cofre a cada registro concluído, sem esperar todos terminarem (N12 e N15 no [[Manual da Orquestra]]).
 - **G10 Retomar do histórico:** agente interrompido não recomeça do zero; o próximo retoma do que ficou registrado (relatório, diário, commits).
   - Em software: log da branch e último relatório.
   - Em estudo: notas já escritas e "Onde parei" do diário.

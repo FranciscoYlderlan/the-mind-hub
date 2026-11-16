@@ -23,7 +23,7 @@ Nome do cofre no Obsidian: `{{nome-da-pasta}}`.
 
 1. Registrar o que a sessão produziu (Etapas vitais).
 2. Diário de hoje com "Onde parei": **próximo passo**, threads abertas, dúvidas.
-3. `cofre.py status --atualizar` e `verificar` com zero ERRO.
+3. `cofre.py status --atualizar`, `verificar` com zero ERRO e commit do cofre.
 4. Avisar: "pode abrir um chat novo".
 
 Detalhe: [[Manual da Orquestra#🔄 Passagem de turno]] (ler pela CLI).
@@ -84,9 +84,14 @@ Detalhe: [[Manual da Orquestra#🚦 Etapas vitais]] (ler pela CLI). Modelos e ma
 
 ## Commits
 
-- **Formato:** `{emoji} {tipo}({{nome-da-pasta}}): Descrição`, em inglês, imperativo; uma mudança por commit; só no nome do humano, sem `Co-Authored-By` nem link de sessão.
+- **Vale neste cofre e em todo repositório do projeto.** Formato: `{emoji} {tipo}(escopo): Descrição`, em inglês, imperativo; escopo só da lista abaixo; uma mudança por commit; só no nome do humano, sem `Co-Authored-By` nem link de sessão.
+- **Quando:** a cada registro concluído e na passagem de turno.
 - **Passos:** `.git` na raiz do `the-mind-hub` (peça a pasta e permissão para apagar); `verificar` zero ERRO; sem identidade, `git -c user.name=... -c user.email=...`, nunca `git config`; cofre e README em commits separados.
 - Detalhe: [[Padrão de commit]] e [[Commitar no the-mind-hub]] (ler pela CLI).
+
+<!-- projeto:escopos -->
+- **Escopos deste cofre** (lista fechada, escolhida na criação): `{{nome-da-pasta}}`.
+<!-- /projeto:escopos -->
 
 ## Acesso e ações irreversíveis
 
