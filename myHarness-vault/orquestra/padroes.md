@@ -26,6 +26,7 @@ antigo: re:`concluido`(?! ×)|\bconcluido, falhou => concluído, com acento, em 
 antigo: re:norma completa,? com o dicionário|ASD-STE100 com o dicionário|fora do dicionário do STE => em inglês, regras do STE com bom senso, sem conferir o dicionário palavra por palavra (Padrão de commit, no Vault)
 antigo: re:PR única da G1|numa PR só|uma PR só da G1|feat/setup-g1-interfaces`, `pnpm check`, push => uma PR por tarefa, mergeada pelo humano na ordem indicada (geral-decisao-2026-11-23-uma-pr-por-tarefa)
 antigo: re:apagado ao fim da tarefa \(\[\[ => na validação, o target/ compartilhado é apagado só no fim da funcionalidade (geral-decisao-2026-11-26-build-reaproveitado-na-validacao)
+antigo: re:segue valendo para implementadores|implementador apaga o `target/` ao fim da tarefa => um target/ por chat, apagado no fim da funcionalidade (geral-decisao-2026-11-26-target-unico-por-chat)
 limite-palavras: 2000
 ```
 
@@ -40,6 +41,6 @@ limite-palavras: 2000
 
 ### 🔗 Conexões
 - Índice: [[CLAUDE]]
-- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]], [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-20-tudo-local-sem-github]], [[geral-decisao-2026-11-23-push-e-pr-no-github]], [[geral-decisao-2026-11-23-uma-pr-por-tarefa]]
+- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]], [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-20-tudo-local-sem-github]], [[geral-decisao-2026-11-23-push-e-pr-no-github]], [[geral-decisao-2026-11-23-uma-pr-por-tarefa]], [[geral-decisao-2026-11-26-target-unico-por-chat]]
 - Mapa: [[moc-orquestra]]
 - Regras: [[manual-da-orquestra]]

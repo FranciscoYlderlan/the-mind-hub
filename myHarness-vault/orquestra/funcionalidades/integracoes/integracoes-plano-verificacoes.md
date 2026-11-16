@@ -51,10 +51,10 @@ Parte do [[integracoes-plano]] (dividida pelo limite de palavras): o que cada ve
 - 2026-11-26 09h20 (segunda verificação, `83f1ead`): ✔ nos critérios; diff só em `src/features/integracoes/`; sondas: `listar` atrasado durante `conectar` mantém o código, operação iniciada depois do pedido vence o `listar` velho (contador `vez`), `mudou` sem operação mantém o `erro` de `listar` (M-46). Opcionais: `andamento !== null` em `provedor-de-integracoes.tsx:134` repete a checagem de `vez`; ERR-55 sem motivo no cartão. **T4b concluída**; PR #14 (T5 + T4b).
 
 ## T6
-- 2026-11-26: tarefa criada por decisão do humano (12h39); começa num chat novo, depois do adversarial.
+- Histórico em [[integracoes-plano-verificacoes-t6-t7#T6]].
 
 ## T7
-- 2026-11-26: tarefa criada por decisão do humano (13h10); começa num chat novo, em paralelo com a T6.
+- Histórico em [[integracoes-plano-verificacoes-t6-t7#T7]].
 
 ## Merge da `main` nas PRs (2026-11-26)
 - 08h50: merge `--no-ff` da `main` (`e26e145`), sem conflito, `pnpm check` e push com o hook: #8 `e770492`, #10 `c507afa`, #11 `56c83cb`, #12 `25b09d3`, #13 `20d1762`. `CI` Linux verde nas 5; Windows verde em #8, #10 e #11; #12 e #13 falham nos 2 testes do MCP ([[bug-teste-mcp-tempo-esgotado-no-windows-2026-11-26]]). Mensagem do merge: `:package: chore(<escopo>)`; merge não tem tipo na tabela e fica com o que aparecer (Tipos e emojis de commit, no Vault). Nesta sessão o `gh` só funciona por REST (`gh api`).
@@ -66,6 +66,7 @@ Parte do [[integracoes-plano]] (dividida pelo limite de palavras): o que cada ve
 - T5 (`f3004ae`): sem bloqueante; deve corrigir: textos de erro fora do catálogo (sufixo do ERR-02 e textos de reserva), conta ausente no CMP-03 (AC-01), `checar` passando por cima de `desconectar`, falta de guarda em conectar, desconectar e repetir, e base na T0a em vez da T4 (usa `ErroIpc` `interno`, removido). Tudo para a T4b.
 
 ### 🔗 Conexões
+- Continuação: [[integracoes-plano-verificacoes-t6-t7]]
 - Plano: [[integracoes-plano]]
 - Funcionalidade: [[integracoes-contexto]]
 - Projeto: [[geral-contexto]]
