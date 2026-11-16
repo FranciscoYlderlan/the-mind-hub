@@ -19,7 +19,8 @@ CLAUDE.md e secao "Como buscar" completa, com vault="<nome da pasta>".
 O bloco ```padroes do cofre de projeto mora em orquestra/padroes.md (gerado pelo 'criar'); se o arquivo nao existe
 (cofre antigo), vale o bloco do CLAUDE.md. No cofre pessoal (Vault), o bloco fica no CLAUDE.md.
 O CLAUDE.md e indice, nao manual: 'verificar' da ERRO se o Modelo de CLAUDE do cofre passar de 2500 palavras e se o
-CLAUDE.md de um cofre passar de 2500. Cofre no formato antigo (com blocos <!-- projeto: --> no CLAUDE.md) recebe AVISO
+CLAUDE.md de um cofre passar de 2500. O unico bloco do modelo e <!-- projeto:escopos --> (escopos de commit, lista
+fechada), cobrado na secao Commits. Cofre no formato antigo (com outros blocos <!-- projeto: --> no CLAUDE.md) recebe AVISO
 em vez de ERRO, ate migrar as regras para decisoes em orquestra/funcionalidades/geral/.
 Diario com partes: o "Onde parei" vigente mora na parte mais recente do dia (diario-AAAA-MM-DD-assunto.md), e o
 diario principal aponta para ela no proprio "Onde parei"; 'verificar' cobra o "Proximo passo" nessa parte.
@@ -59,6 +60,7 @@ ESCOPO_CEREBRO = (
     "notas (seção 3, item 3 da seção 10 e \"Salva em Items/\" do checklist) são substituídos pelo [[Manual da Orquestra]]: "
     "aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`). O limite de ~350 palavras (seção 6) também não "
     "vale aqui: vale o `limite-palavras` do bloco `padroes` do cofre (`orquestra/padroes.md`).")
+BLOCOS_DO_MODELO = {"escopos"}  # blocos de projeto que o modelo atual tem; os outros sao formato antigo
 BLOCO = re.compile(r"<!-- projeto:([a-z-]+) -->\n(.*?)<!-- /projeto:\1 -->", re.S)
 PADROES = re.compile(r"^```padroes\n(.*?)^```", re.S | re.M)
 # Lugares de historico: ali o estado antigo pode aparecer (cronologia). Fora deles, a nota diz so o estado atual.
@@ -173,11 +175,11 @@ def kit(vault):
 
 def preservar(novo, atual):
     """Copia os blocos <!-- projeto:x --> do CLAUDE.md atual para o novo. Devolve (texto, blocos que faltam no atual).
-    O modelo atual nao tem blocos (regra de projeto vira decisao em geral/). Cofre antigo que ainda os tem nao perde
+    O modelo atual so tem o bloco 'escopos' (regra de projeto vira decisao em geral/); se faltar, entra o do modelo. Cofre antigo que ainda os tem nao perde
     nada: os blocos sem lugar no modelo vao, como estao, para a secao final 'Blocos do projeto (formato antigo)'."""
     velhos = dict(BLOCO.findall(atual))
     no_modelo = [n for n, _ in BLOCO.findall(novo)]
-    faltam = [n for n in no_modelo if n not in velhos]
+    faltam = [n for n in no_modelo if n not in velhos and n not in BLOCOS_DO_MODELO]  # bloco novo do modelo entra com o padrao
     texto = BLOCO.sub(lambda m: f"<!-- projeto:{m.group(1)} -->\n{velhos.get(m.group(1), m.group(2))}<!-- /projeto:{m.group(1)} -->", novo)
     sobra = [(n, c) for n, c in BLOCO.findall(atual) if n not in no_modelo]
     if sobra:
@@ -480,8 +482,11 @@ def secao_commits(claude_txt):
     m = re.search(r"^## Commits[ \t]*\n(.*?)(?=^## |\Z)", claude_txt or "", re.S | re.M)
     if not m:
         return ["sem a seção '## Commits' (copie do Modelo de CLAUDE do cofre)"]
-    return [f"seção 'Commits' sem link ou menção a '{n}' (copie do Modelo de CLAUDE do cofre)"
-            for n in COMMIT_NOTAS if n.lower() not in m.group(1).lower()]
+    faltas = [f"seção 'Commits' sem link ou menção a '{n}' (copie do Modelo de CLAUDE do cofre)"
+              for n in COMMIT_NOTAS if n.lower() not in m.group(1).lower()]
+    if "<!-- projeto:escopos -->" not in m.group(1):
+        faltas.append("seção 'Commits' sem o bloco <!-- projeto:escopos --> com a lista fechada de escopos (rode o sincronizar)")
+    return faltas
 
 
 def secao_busca(claude_txt, nome):
@@ -590,7 +595,7 @@ def verificar(cofre, vault=None):
     fonte_p = pnota if (projeto and pnota.exists()) else claude
     nome_p = rel(fonte_p) if fonte_p.exists() else "CLAUDE.md"
     regras, limite, tem_bloco, antigos = padroes(ler(fonte_p) if fonte_p.exists() else "")
-    formato_antigo = "<!-- projeto:" in claude_txt
+    formato_antigo = any(n not in BLOCOS_DO_MODELO for n, _ in BLOCO.findall(claude_txt))
     # Teto do indice: CLAUDE.md e indice, nao manual (regras de projeto viram decisao em funcionalidades/geral/).
     modelo_claude = cofre / "Modelos" / "Modelo de CLAUDE do cofre.md"
     if modelo_claude.exists() and palavras(texto[modelo_claude]) > TETO_MODELO_CLAUDE:
