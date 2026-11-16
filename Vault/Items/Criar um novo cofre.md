@@ -29,7 +29,7 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 > 1. Leio o [[Manual da Orquestra]] e pergunto ao humano: nome, objetivo em meia frase, perfil (prático ou estudo), tempo, dial e o que o perfil pedir (no prático, o repositório). O que faltar vira `[a confirmar]`.
 > 2. Na raiz do `the-mind-hub`: `python Vault/Modelos/Orquestra/cofre.py criar nome-do-cofre --projeto "Nome" --para-que "meia frase"` (no prático, com `--repo LINK`). **Nunca monto à mão.** O `CLAUDE.md` nasce com a seção `## Commits` ([[Padrão de commit]] e [[Commitar no the-mind-hub]]): obrigatória, sem ela o verificar dá ERRO. Nascem também `orquestra/padroes.md` (bloco `padroes`, `limite-palavras: 2000`) e, no `geral-contexto`, o repositório como fato, quando houver; onde fica e o acesso viram decisão em `funcionalidades/geral/`.
 > 3. Preencho o `geral-contexto` com os fatos do passo 1, seguindo [[Atualizar a memória]].
-> 4. Aplico o perfil. No [[Manual da Orquestra - Perfil projeto prático|projeto prático]], colo no repositório de código o trecho do [[modelo-claude-do-repositorio]].
+> 4. Aplico o perfil. No [[Manual da Orquestra - Perfil projeto prático|projeto prático]], colo no repositório de código o trecho do [[modelo-claude-do-repositorio]]. Se for software, **proponho a arquitetura (frontend e backend) e as tecnologias** a partir da [[Referência de arquitetura e stack]], em linguagem leiga; o humano ajusta, e o aval vira as decisões de estrutura e stack em `funcionalidades/geral/` (S25 do [[Padrão de projeto de software]]: "para que eu posso propor sugestões de mudança em cima delas e não precisar partir do absoluto 0").
 > 5. Rodo `python Vault/Modelos/Orquestra/cofre.py verificar nome-do-cofre`. Só sigo com **zero ERRO**.
 > 6. Abro o cofre no Obsidian (o nome no app é o da pasta), aponto Modelos para `orquestra/modelos` e **valido a CLI**: `obsidian_search` com `vault="nome-do-cofre"` devolve notas. Sem isso, nenhum agente consegue ler o cofre pela CLI; se falhar, ver [[Obsidian CLI via MCP não carrega]].
 > 7. Se o projeto tiver um projeto no claude.ai, colo no campo **Instruções** dele o bloco do [[modelo-instrucoes-do-projeto-claude]] (no cofre: `orquestra/modelos/`), com o nome do cofre. Sem isso, a sessão que entra pelo projeto lê a cópia dos documentos, que envelhece, e pula a CLI.
@@ -46,5 +46,5 @@ Funciona como **uma franquia**. Toda loja nova abre com a mesma planta e o mesmo
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Manual da Orquestra]], [[modelo-instrucoes-do-projeto-claude]], [[Atualizar a memória]], [[Guia do cofre para IA]], [[Registrar cofre no README]], [[Commitar no the-mind-hub]]
+- Relacionadas: [[Manual da Orquestra]], [[Referência de arquitetura e stack]], [[modelo-instrucoes-do-projeto-claude]], [[Atualizar a memória]], [[Guia do cofre para IA]], [[Registrar cofre no README]], [[Commitar no the-mind-hub]]
 - Próxima: [[Registrar cofre no README]]

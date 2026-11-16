@@ -58,6 +58,7 @@ As regras N01 a N04, N12, N14 e N15 moram no próprio Manual, na seção que mud
 | N14 e N15 (passagem por limite de uso; commit a cada ciclo) | [[Manual da Orquestra#🔄 Passagem de turno]] |
 | G1 a G11 (agentes em paralelo) | [[Manual da Orquestra - Agentes em paralelo]] |
 | P01 a P16 (só projeto prático) | [[Manual da Orquestra - Perfil projeto prático]] |
+| S01 a S25 (só projeto de software) | [[Padrão de projeto de software]] |
 | Etapas de escrita no cofre | [[Atualizar a memória]] |
 
 ## 🔗 Conexões
