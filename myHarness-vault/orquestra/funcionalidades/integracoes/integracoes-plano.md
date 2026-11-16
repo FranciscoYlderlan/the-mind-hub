@@ -139,9 +139,21 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Prova:** `pnpm check`; verificadores do fim da funcionalidade
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T5]].
 
+### T6: modo simulado de volta (`dev:simulado`)
+- **Faz:** `src/dev/nucleo-simulado.ts` e o script `dev:simulado` no `package.json`, como a [[geral-decisao-2026-11-19-modo-simulado]] manda: a tela roda no navegador (Vite, porta 1420) com o núcleo simulado das integrações, sem Claude CLI, sem GitHub e sem harness externo; só no modo de desenvolvimento, fora do app instalado. Os testes do vitest e o modo simulado usam o mesmo núcleo simulado.
+- **Toca em:** `src/dev/`, `src/lib/ipc/` (só o núcleo simulado), `package.json`, `vite.config.*` se precisar
+- **Depende de:** relatório do adversarial da `integracoes`
+- **Paralelo:** não
+- **Pronto quando:**
+  - [ ] `pnpm dev:simulado` abre a TEL-02 no navegador com as três integrações simuladas e o fluxo de conectar
+  - [ ] o build do app instalado não inclui o núcleo simulado
+  - [ ] `pnpm check` passando
+- **Prova:** `pnpm check`; `pnpm dev:simulado` com o Playwright abrindo a TEL-02; busca do núcleo simulado no build de produção
+- **Verificação:** histórico em [[integracoes-plano-verificacoes#T6]].
+
 ## Próxima tarefa e a seguinte
 - Agora: adversarial da `integracoes`, na API e na tela (o verificador de fluxo principal passou sem bug em 2026-11-26).
-- Depois: teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
+- Depois: T6 (`dev:simulado`), num chat novo; então o teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
 
 ## Prioridades
 - T0a e T0b fecham pendências herdadas e são pequenas; T3 é a mais sensível (token).
