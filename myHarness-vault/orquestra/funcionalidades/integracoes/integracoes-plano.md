@@ -134,13 +134,13 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** T0a, T4
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] AC-91 e AC-153 na tela
+  - [x] AC-91 e AC-153 na tela
   - [ ] AC de UC-01 e TEL-02 passando no verificador de fluxo principal e no adversarial, pela API e na tela
 - **Prova:** `pnpm check`; verificadores do fim da funcionalidade
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T5]].
 
 ## Próxima tarefa e a seguinte
-- Agora: verificador de fluxo principal e, sem bug aberto, adversarial da `integracoes`, na API e na tela.
+- Agora: adversarial da `integracoes`, na API e na tela (o verificador de fluxo principal passou sem bug em 2026-11-26).
 - Depois: teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
 
 ## Prioridades
