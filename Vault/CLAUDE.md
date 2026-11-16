@@ -50,6 +50,7 @@ Lido pelo `cofre.py verificar`. Sintaxe: `termo => forma certa`; `antigo: termo 
 # termo fora do padrão => forma certa   ("re:" no início = expressão regular)
 # antigo: termo do estado substituído => estado atual (nota dona)
 antigo: re:40% a 50% => orçamento de 100 mil tokens na linha Messages do /context (Manual da Orquestra)
+antigo: re:bloco `padroes` do `CLAUDE.md`|Padronização \+ bloco `padroes`|2073 palavras no `stonebid-vault` => regra de projeto em decisão de funcionalidades/geral/ e padroes em orquestra/padroes.md; CLAUDE.md é índice (Manual da Orquestra)
 ```
 
 ## Commits

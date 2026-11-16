@@ -168,8 +168,8 @@ Lição de um bug que vale **fora** do projeto sobe para o `Vault` como nota de 
 - Datas **AAAA-MM-DD** em nome de arquivo e frontmatter.
 - Links com `[[wikilinks]]`. Nota sem link fica perdida.
 - **Notas operacionais** (contexto, plano, decisão, bug, diário) usam o modelo próprio e ficam isentas de analogia e resumo de 3 pontos. Notas de `referencias/` seguem o Manual do Cérebro.
-- **Tamanho:** o limite de ~350 palavras do Manual do Cérebro não vale em cofre de projeto, nem em `referencias/`. Vale o `limite-palavras` do bloco `padroes` do `CLAUDE.md`, fixado pela maior nota registrada quando a regra nasceu (2073 palavras no `stonebid-vault`). Passou do limite: a parte nova vira nota própria (nome da original + `-<assunto>`), ligada nos dois sentidos.
-- **Padronização:** grafia única do nome do projeto, fonte citada pela numeração da nota que a transcreve, exceção de nome só se estiver registrada em decisão. Tudo isso fica no `CLAUDE.md` (seção Padronização e bloco `padroes`), e o `cofre.py verificar` checa.
+- **Tamanho:** o limite de ~350 palavras do Manual do Cérebro não vale em cofre de projeto, nem em `referencias/`. Vale o `limite-palavras` do bloco `padroes` em `orquestra/padroes.md`: 2000 palavras em cofre novo; cofre que nasceu antes dessa regra mantém o valor que já tinha. Passou do limite: a parte nova vira nota própria (nome da original + `-<assunto>`), ligada nos dois sentidos.
+- **Padronização:** grafia única do nome do projeto, fonte citada pela numeração da nota que a transcreve, exceção de nome só se estiver registrada em decisão. A regra de cada projeto vira decisão em `funcionalidades/geral/`; o termo fora do padrão entra no bloco `padroes` de `orquestra/padroes.md`; o `CLAUDE.md` só aponta para os dois. O `cofre.py verificar` checa.
 - **Leitura de notas só pela Obsidian CLI** (MCP `obsidian_read` e `obsidian_search`). O shell serve para escrever e rodar o `cofre.py`.
 - Frontmatter operacional: `tipo` (contexto, plano, decisao, bug, diario), `status`, `criado`, `funcionalidade`; `aliases` opcional (em bug, use os sintomas); `origem` e `tags` opcionais. Extras: decisão tem `substitui`; contexto de funcionalidade tem `etapa`; `geral-contexto` tem `etapa-atual`. Notas de `referencias/` (`tipo: referencia`, com `tema`) seguem o frontmatter completo do Manual do Cérebro, com `tags`.
 - `status` por tipo: plano `proposta → aprovado → arquivado`; decisão `aprovada | substituida`; bug `resolvido`; contexto e etapa do roteiro `planejada → em-construcao → em-verificacao → concluida → arquivada`; diário `consolidada`; referência `rascunho → em-uso → consolidada`.
@@ -204,7 +204,7 @@ Registrado no `geral-contexto` (pode ser sobrescrito por funcionalidade). Mudou 
 | Cópias dos manuais divergem entre cofres | Cada cópia traz a versão e a data; ao mudar o original, atualizo as cópias |
 | Etapa pulada ao escrever no cofre (nota sem conexão, cópia com link quebrado) | Etapas vitais A e B + `cofre.py verificar` como portão |
 | Mudança gravada só na nota dona; as outras seguem com o estado antigo, às vezes com aviso "vale o novo" por cima | Varredura de impacto (B2), reescrita no estado atual (B6) e linha `antigo:` checada pelo `verificar` (B7) |
-| Despadronização corrigida só na nota (grafia, numeração, nome, tamanho) | Regra primeiro no `CLAUDE.md` (Padronização + bloco `padroes`); o `verificar` dá ERRO |
+| Despadronização corrigida só na nota (grafia, numeração, nome, tamanho) | Regra primeiro: decisão em `funcionalidades/geral/` e termo no `orquestra/padroes.md`; o `verificar` dá ERRO |
 | Ideias vindas de dois vídeos individuais | Validar no meu fluxo antes de virar regra |
 
 ---
@@ -313,3 +313,4 @@ Ficam em `Vault/Modelos/Orquestra/`. Nos cofres de projeto, o `cofre.py` mantém
 - v5 (2026-10-28): orçamento do orquestrador passa a ser 100 mil tokens na linha Messages do `/context` (substitui 40% a 50%); subagentes não contam na janela.
 - v6 (2026-10-29): Padronização no `CLAUDE.md` com bloco `padroes` checado pelo `verificar`; limite de tamanho próprio do cofre de projeto (substitui a isenção e os ~350 palavras); leitura de notas só pela CLI (seção 7). Origem: grafia do nome, numeração do enunciado, nome de hook e tamanho das notas fora do padrão no `stonebid-vault`, sem ERRO no `verificar`.
 - v7 (2026-10-29): varredura de impacto (B2), reescrita no estado atual (B6) e regra "Uma versão só" (§7); bloco `padroes` ganha linhas `antigo:`; o `verificar` dá ERRO em estado antigo ou aviso de prevalência fora do histórico. Origem: mais de 10 casos de nota com estado anterior depois de uma mudança (bug de processo registrado no `stonebid-vault`).
+- v8 (2026-11-16): `CLAUDE.md` vira índice, com teto de 2500 palavras no `verificar`; regra de projeto vira decisão em `funcionalidades/geral/`, buscada pela CLI; bloco `padroes` em `orquestra/padroes.md`; `limite-palavras` de 2000 em cofre novo. Origem: o `CLAUDE.md` do `stonebid-vault` chegou a 3318 palavras lidas a cada execução.
