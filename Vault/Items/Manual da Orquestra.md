@@ -28,7 +28,7 @@ O resultado de um agente depende menos do modelo e mais do que existe em volta d
 | 5 | Tarefas independentes rodam em paralelo; tarefas que tocam nos mesmos arquivos rodam em série |
 | 6 | Contexto é finito: cada agente recebe só o que a tarefa precisa e sabe onde buscar o resto |
 | 7 | Feedback determinístico (testes, lint, tipos, CI) vale mais que o julgamento do agente |
-| 8 | Registrar no fim, não no meio. Atualizar a nota existente em vez de duplicar |
+| 8 | Registrar assim que chega: relatório de subagente e decisão aprovada entram no cofre na hora, sem esperar o fim da sessão. Atualizar a nota existente em vez de duplicar |
 | 9 | **Só o orquestrador escreve no cofre.** Subagentes leem e devolvem relatório |
 | 10 | Eu decido em dois pontos fixos: aprovar o plano e revisar o que é crítico |
 
@@ -71,7 +71,7 @@ nome-do-cofre/
 
 | Nota | Natureza | Quem escreve |
 |---|---|---|
-| `<func>-contexto.md` | Hub da funcionalidade: objetivo, feito, tempo, links | Orquestrador, no fim da sessão |
+| `<func>-contexto.md` | Hub da funcionalidade: objetivo, feito, tempo, links | Orquestrador, assim que uma tarefa conclui |
 | `<func>-plano.md` | Proposta da IA: tarefas, prioridades, verificação | Orquestrador |
 | `geral-plano.md` (roteiro) | Etapas do projeto, status e notas geradas em cada uma | Orquestrador; a lista de etapas só muda com decisão minha |
 | `<func>-decisao-<data>-<titulo>.md` | Uma decisão minha por nota | Orquestrador, **só depois do meu aval** |
@@ -82,7 +82,14 @@ nome-do-cofre/
 | `modelos/` | Esqueletos | Eu. O agente copia |
 | `arquivos/` | Funcionalidades finalizadas | Orquestrador move, com minha confirmação |
 
-Decisão que contradiz outra: nasce uma nota nova com `substitui: [[nota antiga]]`, e a antiga ganha `status: substituida`. Nada é apagado.
+Como uma decisão muda:
+
+- **Alteração no estado atual:** o campo Alteração mostra só a diferença atual em relação à proposta da IA. A cada mudança ele é reescrito, nunca acrescentado; a cronologia fica no diário do dia.
+- **Decisão ainda não aplicada** (nada foi construído ou estudado em cima dela): a mudança entra na própria nota e ganha 1 linha no diário.
+- **Decisão já aplicada:** a mudança que a contradiz nasce como nota nova com `substitui: [[nota antiga]]`; a antiga ganha `status: substituida` e fica intacta, como histórico.
+- **Substituição parcial:** numa decisão já aplicada em que só um ponto muda, a nota nova trata só desse ponto (`substitui: [[nota antiga]] (só a linha de X)`). Na antiga, a linha é reescrita em 1 frase com link para a nova, e ela segue `aprovada`, porque o resto vale.
+
+Nada é apagado.
 
 ---
 
@@ -113,8 +120,9 @@ Regras de separação: o implementador de uma tarefa nunca é o verificador dela
 6. VERIFICAR   verificador novo por tarefa + testes e lint
                ✘ falhou → implementador novo corrige (máx. 2 voltas; na 3ª, o problema sobe para mim)
 7. REVISAR     revisores em paralelo → eu reviso só o crítico (negócio e arquitetura)
-8. JUNTAR      orquestrador junta as worktrees uma a uma e roda a suíte inteira
-9. REGISTRAR   verificação no plano, bugs, contexto, diário
+8. JUNTAR      cada agente entrega a sua parte; a integração só com meu aval, na ordem que eu decidir;
+               depois, a suíte inteira no conjunto
+9. REGISTRAR   cada relatório já foi registrado ao chegar; aqui: verificação no plano, bugs, contexto, diário, commit do cofre
                + uma pergunta única: "estes candidatos viram nota?"
 10. VERIFICAR  cofre.py verificar → zero ERRO (Etapas vitais B). Antes disso, nada está pronto
 ```
@@ -140,7 +148,7 @@ Regras de separação: o implementador de uma tarefa nunca é o verificador dela
 | Antes de refazer algo parecido | `arquivos/` |
 | Eu pergunto sobre uma data | `diarios/` |
 
-**Alimentar (no fim do trabalho)**
+**Alimentar (assim que chega)**
 
 | Gatilho | Ação |
 |---|---|
@@ -173,6 +181,7 @@ Lição de um bug que vale **fora** do projeto sobe para o `Vault` como nota de 
 - **Leitura de notas só pela Obsidian CLI** (MCP `obsidian_read` e `obsidian_search`). O shell serve para escrever e rodar o `cofre.py`.
 - Frontmatter operacional: `tipo` (contexto, plano, decisao, bug, diario), `status`, `criado`, `funcionalidade`; `aliases` opcional (em bug, use os sintomas); `origem` e `tags` opcionais. Extras: decisão tem `substitui`; contexto de funcionalidade tem `etapa`; `geral-contexto` tem `etapa-atual`. Notas de `referencias/` (`tipo: referencia`, com `tema`) seguem o frontmatter completo do Manual do Cérebro, com `tags`.
 - `status` por tipo: plano `proposta → aprovado → arquivado`; decisão `aprovada | substituida`; bug `resolvido`; contexto e etapa do roteiro `planejada → em-construcao → em-verificacao → concluida → arquivada`; diário `consolidada`; referência `rascunho → em-uso → consolidada`.
+- **Diário com partes:** dia com mais de uma sessão pode ter partes (`diario-AAAA-MM-DD-<assunto>.md`). O "Onde parei" vigente mora só na parte mais recente, e o diário principal do dia aponta para ela; "último diário", no início de sessão, é essa parte. O `cofre.py verificar` checa.
 - Fatos que eu informei ficam preservados. Fato substituído sai da nota de estado e fica no diário. Interpretação do agente fica em seção separada.
 - **Uma versão só:** nota de estado (contexto, decisão vigente, plano, referência, MOC, `CLAUDE.md`) diz só como as coisas são agora. Mudou um estado: varredura de impacto (B2), reescrita de toda nota que o cita (B6) e linha `antigo:` no bloco `padroes`. Proibido o aviso de prevalência (`onde esta nota fala em X, vale Y`) por cima de texto velho. Cronologia só em diários, bugs, decisão `substituida`, seções "Histórico", "Mudanças", "Linha do tempo" e "O que já foi feito", e nos campos Proposta, Alteração e Motivo da decisão. O `cofre.py verificar` dá ERRO fora deles.
 - Tarefa **de agente** mora no plano. Tarefa **minha** vai para o TickTick.
@@ -215,8 +224,10 @@ O orquestrador trabalha com um **orçamento de 100 mil tokens de conversa**: a l
 
 - **Quem é quem:** o cartão "Seu papel" no `CLAUDE.md` do cofre diz que a sessão principal é o orquestrador, e que quem recebeu briefing com "Papel:" é subagente. Ninguém precisa explicar o papel de novo.
 - **Quando checar:** ao fim de cada ciclo de tarefa (pesquisa → plano → implementação → verificação → registro), o orquestrador pede ao humano o `/context` e confere a linha Messages.
+- **Limite de uso:** também há passagem de turno quando o limite de uso ou o crédito do plano está perto do fim. Adiar a passagem é decisão registrada no diário.
+- **Commit a cada ciclo:** o cofre é commitado ao fim de cada ciclo, para que qualquer escrita possa ser desfeita com `git restore`.
 - **Antes de fechar o chat:** registrar (B), diário com "Onde parei" (próximo passo, threads abertas, dúvidas), `cofre.py status --atualizar`, `cofre.py verificar` com zero ERRO e avisar o humano.
-- **Chat novo:** `cofre.py status` → "Onde parei" do último diário → ordem de leitura. O `verificar` acusa um último diário sem "Próximo passo".
+- **Chat novo:** `cofre.py status` → "Onde parei" do último diário (dia com partes: a parte mais recente) → ordem de leitura. O `verificar` acusa um último diário sem "Próximo passo".
 - **Medir a janela:** o orquestrador não mede a própria janela com precisão. No app do Claude, o humano digita `/context` (não há barra fixa). No Claude Code no terminal, também dá para usar `/statusline` com a porcentagem sempre visível.
 - **Subagentes não contam** na janela do orquestrador: cada um tem a própria. Entram só o briefing enviado e o relatório recebido, por isso o relatório é curto. Subagentes consomem, sim, o limite de uso do plano.
 
@@ -256,22 +267,22 @@ Valem para qualquer agente, inclusive a sessão principal. **Pular etapa é erro
 
 | # | Etapa | Prova de que aconteceu |
 |---|---|---|
-| B1 | Gatilho: qual linha da tabela "Alimentar" (§6) pede a escrita | — |
+| B1 | Gatilho: qual linha da tabela "Alimentar" (§6) pede a escrita. Relatório e decisão aprovada são registrados assim que chegam | — |
 | B2 | Buscar antes e **varrer o impacto**: a nota já existe? Atualizar em vez de duplicar. Se a escrita muda um estado (fato, regra, valor, nome, decisão), buscar pela CLI o estado antigo (termo, sinônimos, inglês, números) e o tema, mais os backlinks da nota dona, e listar cada nota encontrada | Lista de notas da varredura |
 | B3 | Classificar: tipo → modelo → pasta → nome (§7). Pedir aval quando a regra exige | Aval, quando aplicável |
 | B4 | Escrever a partir do modelo, nunca do zero | Nota com o esqueleto do modelo |
 | B5 | Conectar nos dois sentidos: Conexões (saída) e hub ou MOC (entrada). Nota fora do mapa não existe | Link de entrada e 2+ de saída |
-| B6 | Propagar: reescrever no estado atual cada nota da varredura (§7, "Uma versão só") e registrar o estado antigo como `antigo:` no bloco `padroes`; etapa do roteiro concluída (status, data, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito" e diário), decisão substituída, histórico do manual. Mudou o original no Vault → `cofre.py sincronizar` em cada cofre de projeto | Notas da varredura reescritas; termos varridos no diário |
-| B7 | `cofre.py verificar` (inclui estado antigo e aviso de prevalência fora do histórico) | **Zero ERRO**. Só então "pronto" |
+| B6 | Propagar: reescrever no estado atual cada nota da varredura (§7, "Uma versão só") e registrar o estado antigo como `antigo:` no bloco `padroes`; etapa do roteiro concluída (status, data, notas geradas, `cofre.py status --atualizar`), contexto ("o que já foi feito" e diário), decisão alterada no estado atual ou substituída (§3), histórico do manual. Mudou o original no Vault → `cofre.py sincronizar` em cada cofre de projeto | Notas da varredura reescritas; termos varridos no diário |
+| B7 | `cofre.py verificar` (inclui estado antigo e aviso de prevalência fora do histórico); com zero ERRO, commit do cofre ao fim do ciclo | **Zero ERRO** e commit. Só então "pronto" |
 
 **C. Trocar de chat (passagem de turno)** (detalhe em "Passagem de turno", acima)
 
 | # | Etapa | Prova de que aconteceu |
 |---|---|---|
-| C1 | Fim de ciclo de tarefa: humano roda `/context`; troca quando Messages ≥ 100 mil tokens | Valor de Messages |
+| C1 | Fim de ciclo de tarefa: humano roda `/context`; troca quando Messages ≥ 100 mil tokens ou quando o limite de uso está perto do fim | Valor de Messages; adiamento no diário |
 | C2 | Registrar o que a sessão produziu (B1 a B6) | Notas atualizadas |
-| C3 | Diário de hoje com "Onde parei": próximo passo, threads abertas, dúvidas | "Próximo passo" preenchido |
-| C4 | `cofre.py status --atualizar` e `cofre.py verificar` | **Zero ERRO** |
+| C3 | Diário de hoje com "Onde parei" (dia com partes: na parte mais recente): próximo passo, threads abertas, dúvidas | "Próximo passo" preenchido |
+| C4 | `cofre.py status --atualizar`, `cofre.py verificar` e commit do cofre | **Zero ERRO** e commit |
 | C5 | Avisar o humano que pode abrir um chat novo | — |
 | C6 | Chat novo: `cofre.py status` → "Onde parei" → ordem de leitura | — |
 
