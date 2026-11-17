@@ -57,8 +57,8 @@ As regras N01 a N04, N12, N14 e N15 moram no próprio Manual, na seção que mud
 | N12 (registrar assim que chega) | [[Manual da Orquestra#1. 🎯 Tese e princípios]], princípio 8 |
 | N14 e N15 (passagem por limite de uso; commit a cada registro concluído) | [[Manual da Orquestra#🔄 Passagem de turno]] |
 | G1 a G11 (agentes em paralelo) | [[Manual da Orquestra - Agentes em paralelo]] |
-| P01 a P16 (só projeto prático) | [[Manual da Orquestra - Perfil projeto prático]] |
-| S01 a S25 (só projeto de software) | [[Padrão de projeto de software]] |
+| P01 a P16 e Q01 a Q06 (só projeto prático) | [[Manual da Orquestra - Perfil projeto prático]] |
+| S01 a S27 (só projeto de software) | [[Padrão de projeto de software]] |
 | Etapas de escrita no cofre | [[Atualizar a memória]] |
 
 ## 🔗 Conexões
@@ -69,3 +69,4 @@ As regras N01 a N04, N12, N14 e N15 moram no próprio Manual, na seção que mud
 
 ## 🕓 Histórico
 - v1 (2026-11-16): criação, com N05 a N11, N13 e N16 a N21, em forma neutra (prático e estudo).
+- v2 (2026-11-17): a tabela de onde mora cada regra inclui Q01 a Q06 do perfil projeto prático e S26 e S27.
