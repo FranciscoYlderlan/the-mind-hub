@@ -50,6 +50,14 @@ Moram em `orquestra/funcionalidades/geral/`, uma decisão por nota (grafia, docu
 - **Assim que chega** (sem esperar o fim da sessão): relatório de subagente → registrar; bug não trivial → nota em `bugs/` (reapareceu: atualizar); decisão aprovada → nota de decisão + nota responsável; tarefa concluída → contexto e plano; etapa concluída → roteiro e `status --atualizar`; sessão relevante → diário; dúvidas → uma pergunta única ao humano. Bug trivial não vira nota.
 - Detalhe: [[manual-da-orquestra#6. 🔎 Quando consultar e quando alimentar]] (ler pela CLI).
 
+## Validar cada funcionalidade (perfil prático)
+
+- **Contrato antes do código:** toda funcionalidade começa preenchendo os blocos dela em `docs/contrato/` do repositório (ENT, UC com FA e FE, ERR, AC; com interface, também CMP e NAV; modelos em `orquestra/modelos/contrato/`); tela não cria regra.
+- **Ao final de cada funcionalidade:** despache o verificador de fluxo principal (AC dos fluxos principais) e, sem bug aberto, o adversarial (AC dos FA e FE e a lista fixa de ataques), no backend pela API ou camada MCP e, com interface, no frontend pelo Playwright, com os cartões do `modelo-briefing-subagente`. Bug volta para um implementador novo; corrigido, os dois rodam de novo. Pronto = AC dos UC passando nos dois.
+- **Passou nos dois:** registre os fluxos de teste dela em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]); na primeira vez, a nota nasce ligada no [[geral-contexto]], nos dois sentidos. Nada vai ao humano nessa hora.
+- **Etapa final:** monte desse registro o roteiro do humano, sucinto (descoberta + poucos fluxos que cobrem o máximo de AC), e entregue antes da aceitação final.
+- Detalhe: Manual da Orquestra - Perfil projeto prático (no Vault) (Q01 a Q06) e Contrato funcional (no Vault) (ler pela CLI).
+
 ## Convenções
 
 - Português brasileiro; arquivos e pastas em kebab-case, sem acento, com prefixo da funcionalidade; datas AAAA-MM-DD; `[[wikilinks]]` sempre; nota do `Vault` é citada como texto `Nome (no Vault)`, nunca como wikilink.
