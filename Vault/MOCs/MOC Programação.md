@@ -52,6 +52,7 @@ origem: Manual do Meu Cérebro no Obsidian
 - [[Manual da Orquestra - Perfil projeto prático]]: P01 a P16 (contrato, fatias, verificação, aceitação) e o lado concreto das regras neutras (worktree, diff, testes).
 - [[Manual da Orquestra - Perfil estudo]]: lugar reservado para as regras do futuro agente de estudo.
 - [[Padrão de projeto de software]]: S01 a S25 (branches, deploy, código, versões, testes); S04 a S08 só com deploy.
+- [[Contrato funcional]]: os 8 blocos em `docs/contrato/` do repositório, para a interface ter regra como o servidor; detalhe em [[Contrato funcional - Os 8 blocos]].
 - [[Referência de arquitetura e stack]]: a arquitetura e as tecnologias de partida que o agente propõe ao criar um cofre de software.
 
 ## 📚 Conceitos por trás
