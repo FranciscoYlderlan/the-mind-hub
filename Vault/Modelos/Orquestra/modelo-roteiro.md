@@ -35,7 +35,8 @@ No projeto prático, cada etapa segue, para cada funcionalidade dela, o ciclo co
 
 ## 3. Roteiro do humano e aceitação final
 - **Status:** planejada
-- **Objetivo:** (prático) com todas as funcionalidades passando nos dois agentes, entregar ao humano o roteiro final, sucinto e didático (descoberta + poucos fluxos que cobrem o máximo de AC), e fazer a aceitação final.
+- **Posição:** (prático) sempre a última; etapa nova entra antes dela, e a numeração segue 1..N. O `cofre.py criar` já a põe no roteiro do cofre novo.
+- **Objetivo:** com todas as funcionalidades passando nos dois agentes, entregar ao humano o roteiro final, sucinto e didático (descoberta + poucos fluxos que cobrem o máximo de AC), e fazer a aceitação final.
 - **Pronto quando:** roteiro testado pelo humano, achados decididos como opções e aceitação final registrada.
 - **Funcionalidades:** (nenhuma)
 - **Notas geradas:** `geral-plano-teste-humano`

@@ -331,7 +331,12 @@ def diario_criacao(vault, d, nome, pratico=True):
 def roteiro_inicial(vault, d, projeto, pratico=True):
     s = converter(ler(vault / "Modelos/Orquestra/modelo-roteiro.md"))
     s = preencher(s, [("{{date}}", d), ("# 🧭 Roteiro do projeto", f"# 🧭 Roteiro — {projeto}")], "modelo-roteiro")
-    s = re.sub(r"^## 2\. Nome da etapa\n.*?(?=^## \D|^### 🔗 Conexões)", "", s, flags=re.S | re.M)
+    s = re.sub(r"^## 2\. Nome da etapa\n.*?(?=^## |^### 🔗 Conexões)", "", s, flags=re.S | re.M)
+    if pratico:  # a etapa final (roteiro do humano, Q06) fica sempre por ultimo: com so a etapa 1, ela e a 2
+        s = preencher(s, [("## 3. Roteiro do humano e aceitação final", "## 2. Roteiro do humano e aceitação final")], "modelo-roteiro")
+    else:  # estudo: sem roteiro do humano nem ciclo de validacao (so existem no projeto pratico)
+        s = re.sub(r"^## 3\. Roteiro do humano.*?(?=^## |^### 🔗 Conexões)", "", s, flags=re.S | re.M)
+        s = re.sub(r"^No projeto prático, cada etapa.*\n\n", "", s, flags=re.M)
     if not pratico:  # proposta de arquitetura (S25) so existe no projeto pratico de software
         s = re.sub(r"^## Proposta de arquitetura e stack\n.*?(?=^## |^### 🔗 Conexões)", "", s, flags=re.S | re.M)
     return s
