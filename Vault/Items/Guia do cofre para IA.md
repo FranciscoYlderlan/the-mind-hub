@@ -18,7 +18,7 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 > [!note] Passo a passo
 > 1. O `cofre.py criar` gera o `CLAUDE.md` a partir do [[Modelo de CLAUDE do cofre]], já com pasta, projeto, objetivo e o bloco de escopos (nome da pasta e `readme`), e gera `orquestra/padroes.md` com o bloco `padroes` (`limite-palavras: 2000`).
 > 2. Mudou o modelo? `cofre.py sincronizar` regenera o `CLAUDE.md` de cada cofre de projeto, preservando projeto e objetivo.
-> 3. O mesmo comando recopia modelos e manuais, convertendo os links (kebab-case, mapa `moc-orquestra`, outras notas do `Vault` viram "(no Vault)").
+> 3. O mesmo comando recopia modelos e manuais, convertendo os links (kebab-case, mapa `moc-orquestra`, outras notas do `Vault` viram "(no Vault)"). No perfil prático, leva também a pasta `contrato/` para `orquestra/modelos/contrato/`, sem converter: são os arquivos do [[Contrato funcional]] para `docs/contrato/` do repositório, não notas, e o `verificar` não os lê. O perfil vem da linha `- Perfil:` do `geral-contexto`; sem ela, conta como prático.
 > 4. Confiro que o arquivo cita **só o próprio cofre**. Cofres vizinhos entram apenas pela regra de fronteira.
 > 5. Fecho com `cofre.py verificar`: zero ERRO.
 
@@ -42,5 +42,5 @@ origem: Configuração do the-mind-hub para projetos do Claude Code
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Criar um novo cofre]], [[Atualizar a memória]], [[Manual da Orquestra]]
+- Relacionadas: [[Criar um novo cofre]], [[Atualizar a memória]], [[Manual da Orquestra]], [[Contrato funcional]]
 - Próxima: [[Registrar cofre no README]]
