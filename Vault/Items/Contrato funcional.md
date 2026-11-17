@@ -43,6 +43,7 @@ O contrato funcional é a **contraparte de frontend** do que o backend já tinha
 ## 📍 Onde mora
 
 - No repositório de código, em `docs/contrato/`, com os requisitos RF, RNF e RN quando eles não estão em outro lugar do repositório.
+- Frontend e backend em repositórios separados: o contrato fica só no repositório do backend, e o `CLAUDE.md` do frontend aponta para ele, sem cópia. Decisão do humano (2026-11-17): "Frontend e backend em repositórios separados: onde fica `docs/contrato/`? ... deixar no repositório do backend, com o do frontend apontando para ele. Concordo".
 - Os modelos ficam no `Vault`, em `Modelos/Orquestra/contrato/`. O `cofre.py` os leva a `orquestra/modelos/contrato/` de todo cofre de projeto prático, e é de lá que o passo 4 de [[Criar um novo cofre]] os copia para `docs/contrato/` do repositório.
 - O cofre do projeto guarda as decisões e o diário, com link para lá. O [[modelo-claude-do-repositorio]] avisa os agentes que trabalham no código.
 

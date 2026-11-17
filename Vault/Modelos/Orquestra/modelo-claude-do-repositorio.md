@@ -15,6 +15,7 @@ A memória deste projeto é o cofre Obsidian `{{nome-do-cofre}}`, em `{{caminho-
 
 ## Contrato
 
+- Frontend em repositório separado do backend: o contrato mora só em `docs/contrato/` do repositório do backend (`{{caminho-ou-link-do-backend}}`); neste repositório, todo `docs/contrato/` abaixo se lê lá, sem cópia. Repositório único ou do backend: apague esta linha.
 - `docs/contrato/` é a fonte de verdade do que o produto faz: requisitos, atores (ATR), entidades (ENT), casos de uso (UC), componentes (CMP), erros (ERR), navegação (NAV) e critérios de aceite (AC). Ordem e regras em `docs/contrato/README.md`.
 - Tela não cria regra: cada tela realiza CMP, UC e NAV do contrato. Regra que falta entra primeiro no contrato, com aval do humano e item em `docs/contrato/mudancas.md`.
 - Campo de entrada: schema zod tirado do ENT (tipo, tamanho, formato, valores, teto), uma mensagem por violação (a do ERR) e o campo impede o impossível (S26 da nota `Padrão de projeto de software` do cofre `Vault`).

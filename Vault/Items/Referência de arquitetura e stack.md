@@ -13,7 +13,7 @@ origem: Decisões de estrutura, stack, criação de componentes e testes do ston
 
 É a **planta-modelo da construtora**: o cliente não desenha a casa do nada; recebe uma planta testada e risca o que quer mudar. Regra que manda propor: S25 do [[Padrão de projeto de software]]; quando, no passo a passo de [[Criar um novo cofre]].
 
-Na raiz do repositório de código fica `docs/contrato/`, o [[Contrato funcional]] que frontend e backend seguem (Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil]]):
+Na raiz do repositório de código (com frontend e backend separados, no do backend) fica `docs/contrato/`, o [[Contrato funcional]] que frontend e backend seguem (Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil]]):
 
 ```
 docs/contrato/   README.md (índice), 00-requisitos a 08-criterios-de-aceite, mudancas.md
