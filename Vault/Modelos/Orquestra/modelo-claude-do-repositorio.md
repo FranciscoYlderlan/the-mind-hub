@@ -35,5 +35,5 @@ A memória deste projeto é o cofre Obsidian `{{nome-do-cofre}}`, em `{{caminho-
 - Lado do cofre: o `CLAUDE.md` do cofre, gerado de `Modelo de CLAUDE do cofre`
 - Formato dos subagentes: [[modelo-briefing-subagente]], [[modelo-relatorio-subagente]]
 - Regras: [[Manual da Orquestra]] e [[Manual da Orquestra - Perfil projeto prático]]
-- Contrato que o bloco cita: [[Contrato funcional]] (modelos em `Modelos/Orquestra/contrato/`)
+- Contrato que o bloco cita: [[Contrato funcional]] (modelos no `Vault` em `Modelos/Orquestra/contrato/`; no cofre de projeto, em `orquestra/modelos/contrato/`)
 - Commits: [[Padrão de commit]]

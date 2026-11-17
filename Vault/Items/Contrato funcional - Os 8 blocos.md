@@ -11,7 +11,7 @@ origem: Pacote "contrato funcional e validação" aprovado pelo humano em 2026-1
 > [!tldr] Em uma linha
 > O que cada bloco do [[Contrato funcional]] guarda, com o ID dele e o arquivo de `docs/contrato/` onde mora.
 
-É a **ficha técnica de uma receita**: ingredientes com medida, modo de preparo em passos, o que fazer se a massa desandar e como saber que ficou pronto. Os modelos prontos, com um exemplo curto por bloco, estão em `Modelos/Orquestra/contrato/`; a regra que os usa é a Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]].
+É a **ficha técnica de uma receita**: ingredientes com medida, modo de preparo em passos, o que fazer se a massa desandar e como saber que ficou pronto. Os modelos prontos, com um exemplo curto por bloco, estão no `Vault` em `Modelos/Orquestra/contrato/` (no cofre de projeto prático, em `orquestra/modelos/contrato/`); a regra que os usa é a Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]].
 
 ---
 
