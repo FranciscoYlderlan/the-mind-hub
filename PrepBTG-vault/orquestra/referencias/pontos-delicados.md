@@ -19,7 +19,7 @@ Preparar esses pontos é como **ensaiar a curva de uma estrada que já conheço*
 | # | Ponto | O que preciso registrar | Detalhes |
 |---|---|---|---|
 | 1 | AWS | O que já usei, o que não usei e como eu aprenderia o resto. A [[vaga-compliance-engineering]] cita Lambda, API Gateway, ECS, SQS, S3, RDS e DynamoDB | [a preencher] |
-| 2 | Saída da TM Mentoring | O que aconteceu e o que aprendi, em fatos | [a preencher] |
+| 2 | Saída da TM Mentoring | O que aconteceu e o que aprendi, em fatos | 2 dos 4 produtos foram descontinuados por questão de mercado, e a equipe diminuiu; o Tarcísio e eu queríamos continuar, e a carta mostra isso ([[roteiro-conversa-com-o-head]]) |
 | 3 | Mudança para São Paulo | Prazo, disponibilidade e o modelo híbrido (4 dias presenciais na descrição-base) | [a preencher] |
 | 4 | Pretensão salarial | Faixa e justificativa | [a preencher] |
 | 5 | Sigla "JEV" no currículo | O que significa e como explico em uma frase | [a preencher] |

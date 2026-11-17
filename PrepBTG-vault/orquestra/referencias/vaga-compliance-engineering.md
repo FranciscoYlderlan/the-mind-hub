@@ -41,7 +41,7 @@ A descrição de vaga é como **a planta de uma casa vista de longe**: mostra os
 > [!info] Leitura do agente (não é do texto da vaga) [a confirmar]
 > | O que a vaga pede | Onde treinar |
 > |---|---|
-> | Dados, Python e SQL | banco mocado: [[banco-mocado-contexto]] |
+> | Dados, Python e SQL | banco mocado: [[banco-mocado-contexto]]; como o time trabalha: [[relato-do-colega-do-time]] |
 > | Controles, alertas e governança | cenários 1 e 2 de [[cenarios-de-pratica]] |
 > | GenAI, RAG e agentes | cenário 4 |
 > | AWS | cenário 6 e [[pontos-delicados]] |
@@ -56,5 +56,5 @@ A descrição de vaga é como **a planta de uma casa vista de longe**: mostra os
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
-- Relacionadas: [[processo-seletivo-btg]], [[cenarios-de-pratica]], [[banco-mocado-contexto]]
+- Relacionadas: [[processo-seletivo-btg]], [[cenarios-de-pratica]], [[banco-mocado-contexto]], [[relato-do-colega-do-time]]
 - Próxima: [[cenarios-de-pratica]]
