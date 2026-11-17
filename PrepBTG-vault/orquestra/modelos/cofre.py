@@ -5,7 +5,9 @@
 Cria, sincroniza e verifica cofres Obsidian seguindo o Manual da Orquestra.
 So usa a biblioteca padrao do Python. Rode da raiz do the-mind-hub:
 
-  python Vault/Modelos/Orquestra/cofre.py criar <cofre> --projeto "Nome" --para-que "meia frase" [--repo LINK]
+  python Vault/Modelos/Orquestra/cofre.py criar <cofre> --projeto "Nome" --para-que "meia frase"
+        [--perfil pratico|estudo] [--publicado sim|nao] [--repo LINK]
+        (--perfil padrao: pratico; --publicado e --repo so no pratico, padrao [a preencher]: o 'verificar' avisa)
   python Vault/Modelos/Orquestra/cofre.py sincronizar <cofre>
   python Vault/Modelos/Orquestra/cofre.py verificar <cofre>      (vale para o Vault e para cofres de projeto)
   python Vault/Modelos/Orquestra/cofre.py status <cofre> [--atualizar]   (roteiro: onde o projeto esta)
@@ -16,6 +18,17 @@ Dentro de um cofre de projeto: python orquestra/modelos/cofre.py verificar .
 prevalencia ('onde esta nota fala em X, vale Y') fora dos lugares de historico: uma versao so.
 'verificar' tambem cobra a leitura pela Obsidian CLI em todo cofre: aviso "Obsidian CLI primeiro" no topo do
 CLAUDE.md e secao "Como buscar" completa, com vault="<nome da pasta>".
+O bloco ```padroes do cofre de projeto mora em orquestra/padroes.md (gerado pelo 'criar'); se o arquivo nao existe
+(cofre antigo), vale o bloco do CLAUDE.md. No cofre pessoal (Vault), o bloco fica no CLAUDE.md.
+O CLAUDE.md e indice, nao manual: 'verificar' da ERRO se o Modelo de CLAUDE do cofre passar de 2500 palavras e se o
+CLAUDE.md de um cofre passar de 2500. O unico bloco do modelo e <!-- projeto:escopos --> (escopos de commit, lista
+fechada), cobrado na secao Commits: 'verificar' da ERRO se o bloco faltar ou estiver sem nenhum escopo. Cofre no formato antigo (com outros blocos <!-- projeto: --> no CLAUDE.md) recebe AVISO
+em vez de ERRO, ate migrar as regras para decisoes em orquestra/funcionalidades/geral/.
+Modelos do repositorio: Vault/Modelos/Orquestra/contrato/ (contrato funcional, copiado para docs/contrato/ do repositorio de
+codigo) vai no kit para orquestra/modelos/contrato/ so no perfil pratico (o perfil vem da linha '- Perfil:' do geral-contexto,
+tambem no 'sincronizar' e no 'verificar'), como a secao "Validar cada funcionalidade" do CLAUDE.md; e Markdown puro, sem frontmatter nem Conexoes, e o 'verificar' nao o le.
+Diario com partes: o "Onde parei" vigente mora na parte mais recente do dia (diario-AAAA-MM-DD-assunto.md), e o
+diario principal aponta para ela no proprio "Onde parei"; 'verificar' cobra o "Proximo passo" nessa parte.
 """
 import argparse, datetime, re, sys
 from pathlib import Path
@@ -31,7 +44,13 @@ MAP = {"Manual do Meu Cérebro no Obsidian": "manual-do-cerebro", "Manual da Orq
        "MOC Tema": "moc-orquestra"}
 PH_PREFIX = ("nome-da-", "bug-titulo", "Nota ", "nome-da-imagem", "nota-antiga")
 PH = {"Link", "Links", "MOC Tema"}
-SO_NO_PROJETO = {"geral-contexto", "geral-plano", "moc-orquestra", "CLAUDE"}
+SO_NO_PROJETO = {"geral-contexto", "geral-plano", "moc-orquestra", "CLAUDE", "padroes"}
+LIMITE_PADRAO = 2000          # limite-palavras de cofre novo
+TETO_MODELO_CLAUDE = 2500     # palavras do Modelo de CLAUDE do cofre (teto, nao meta)
+TETO_CLAUDE = 2500            # palavras do CLAUDE.md de cada cofre (formato novo; antigo: AVISO)
+PADROES_NOTA = "orquestra/padroes.md"
+# Modelos de arquivos do repositorio de codigo (nao sao notas): copiados no kit, ignorados pelo verificar.
+MODELOS_DO_REPO = ("Modelos/Orquestra/contrato/", "orquestra/modelos/contrato/")
 ESTADOS = ["planejada", "em-construcao", "em-verificacao", "concluida", "arquivada"]
 CODE = re.compile(r"(````.*?````|```.*?```|`[^`\n]*`)", re.S)
 LINK = re.compile(r"!?\[\[([^\]]*)\]\]")
@@ -47,7 +66,8 @@ ESCOPO_CEREBRO = (
     "os links e os tipos (seções 1, 2, 5, 6, 7 e 8), e a taxonomia de tags. Pastas, nomes de arquivo e destino das "
     "notas (seção 3, item 3 da seção 10 e \"Salva em Items/\" do checklist) são substituídos pelo [[Manual da Orquestra]]: "
     "aqui não existe `Items/`, e arquivos são kebab-case (`moc-tema.md`). O limite de ~350 palavras (seção 6) também não "
-    "vale aqui: vale o `limite-palavras` do bloco `padroes` do `CLAUDE.md`.")
+    "vale aqui: vale o `limite-palavras` do bloco `padroes` do cofre (`orquestra/padroes.md`).")
+BLOCOS_DO_MODELO = {"escopos"}  # blocos de projeto que o modelo atual tem; os outros sao formato antigo
 BLOCO = re.compile(r"<!-- projeto:([a-z-]+) -->\n(.*?)<!-- /projeto:\1 -->", re.S)
 PADROES = re.compile(r"^```padroes\n(.*?)^```", re.S | re.M)
 # Lugares de historico: ali o estado antigo pode aparecer (cronologia). Fora deles, a nota diz so o estado atual.
@@ -147,13 +167,21 @@ def copia_manual(vault, nome, extra=""):
     return converter(s[:fim] + "\n" + h + "\n\n" + s[fim:])
 
 
-def kit(vault):
+def perfil_estudo(cofre):
+    """Cofre de estudo? Lido da linha '- Perfil: estudo' do geral-contexto (escrita pelo criar); sem ela, conta como pratico."""
+    g = Path(cofre) / "orquestra/funcionalidades/geral/geral-contexto.md"
+    return g.exists() and re.search(r"^- Perfil: estudo\b", ler(g), re.M) is not None
+
+
+def kit(vault, pratico=True):
     k = {}
     for f in sorted((vault / "Modelos" / "Orquestra").iterdir()):
         if f.suffix == ".md":
             k["modelos/" + f.name] = converter(ler(f))
         elif f.name == "cofre.py":
             k["modelos/cofre.py"] = ler(f)
+    for f in sorted((vault / "Modelos" / "Orquestra" / "contrato").glob("*.md")) if pratico else []:
+        k["modelos/contrato/" + f.name] = ler(f)  # Markdown puro do repositorio (so no pratico): copia sem converter
     k["modelos/modelo-nota.md"] = converter(ler(vault / "Modelos" / "Modelo de nota.md"))
     k["referencias/manual-da-orquestra.md"] = copia_manual(vault, "Manual da Orquestra.md")
     k["referencias/manual-do-cerebro.md"] = copia_manual(vault, "Manual do Meu Cérebro no Obsidian.md", ESCOPO_CEREBRO)
@@ -161,16 +189,28 @@ def kit(vault):
 
 
 def preservar(novo, atual):
-    """Copia os blocos <!-- projeto:x --> do CLAUDE.md atual para o novo. Devolve (texto, blocos que faltam no atual)."""
+    """Copia os blocos <!-- projeto:x --> do CLAUDE.md atual para o novo. Devolve (texto, blocos que faltam no atual).
+    O modelo atual so tem o bloco 'escopos' (regra de projeto vira decisao em geral/); se faltar, entra o do modelo. Cofre antigo que ainda os tem nao perde
+    nada: os blocos sem lugar no modelo vao, como estao, para a secao final 'Blocos do projeto (formato antigo)'."""
     velhos = dict(BLOCO.findall(atual))
-    faltam = [n for n, _ in BLOCO.findall(novo) if n not in velhos]
-    return BLOCO.sub(lambda m: f"<!-- projeto:{m.group(1)} -->\n{velhos.get(m.group(1), m.group(2))}<!-- /projeto:{m.group(1)} -->", novo), faltam
+    no_modelo = [n for n, _ in BLOCO.findall(novo)]
+    faltam = [n for n in no_modelo if n not in velhos and n not in BLOCOS_DO_MODELO]  # bloco novo do modelo entra com o padrao
+    texto = BLOCO.sub(lambda m: f"<!-- projeto:{m.group(1)} -->\n{velhos.get(m.group(1), m.group(2))}<!-- /projeto:{m.group(1)} -->", novo)
+    sobra = [(n, c) for n, c in BLOCO.findall(atual) if n not in no_modelo]
+    if sobra:
+        texto = texto.rstrip("\n") + ("\n\n## Blocos do projeto (formato antigo)\n\n"
+                 "Regras deste projeto ainda no formato antigo. Migrar cada uma para decisão em `orquestra/funcionalidades/geral/` "
+                 "e o bloco `padroes` para `orquestra/padroes.md`; o `cofre.py sincronizar` preserva estes blocos até lá.\n\n"
+                 + "\n".join(f"<!-- projeto:{n} -->\n{c}<!-- /projeto:{n} -->\n" for n, c in sobra))
+    return texto, faltam
 
 
-def claude_md(vault, pasta, projeto, para, repo):
+def claude_md(vault, pasta, projeto, para, pratico=True):
     t = ler(vault / "Modelos" / "Modelo de CLAUDE do cofre.md")
     t = preencher(t, [("{{nome-da-pasta}}", pasta), ("{{projeto}}", projeto),
-                      ("{{para quê, em meia frase}}", para), ("{{link ou caminho}}", repo)], "Modelo de CLAUDE do cofre")
+                      ("{{para quê, em meia frase}}", para)], "Modelo de CLAUDE do cofre")
+    if not pratico:  # validacao por funcionalidade (Q01 a Q06) so existe no projeto pratico
+        t = re.sub(r"^## Validar cada funcionalidade \(perfil prático\)\n.*?(?=^## )", "", t, flags=re.S | re.M)
     return converter(t)
 
 
@@ -184,14 +224,18 @@ def criar(a):
         extras = [p.name for p in dest.iterdir() if p.name not in {".obsidian", "Bem-vindo.md", ".git", ".gitkeep"}]
         if extras:
             sys.exit(f"ERRO: {dest} ja tem conteudo {extras}. Para atualizar um cofre existente use: sincronizar")
+    pratico = a.perfil == "pratico"
+    if not pratico and (a.publicado or a.repo):
+        sys.exit("ERRO: --publicado e --repo so valem no perfil pratico (estudo nao tem repositorio nem publicacao).")
     d = hoje()
     for p in PASTAS:
         (dest / "orquestra" / p).mkdir(parents=True, exist_ok=True)
     for p in ("MOCs", "Anexos"):
         (dest / p).mkdir(parents=True, exist_ok=True)
-    for rel, txt in kit(vault).items():
+    for rel, txt in kit(vault, pratico).items():
         escrever(dest / "orquestra" / rel, txt)
-    escrever(dest / "CLAUDE.md", claude_md(vault, dest.name, a.projeto, a.para_que, a.repo))
+    escrever(dest / "CLAUDE.md", claude_md(vault, dest.name, a.projeto, a.para_que, pratico))
+    escrever(dest / PADROES_NOTA, padroes_inicial(d, a.projeto))
 
     m = converter(ler(vault / "Modelos/Orquestra/modelo-moc-orquestra.md"))
     m = preencher(m, [("{{date}}", d), ("# 🗺️ Mapa da Orquestra", f"# 🗺️ Mapa da Orquestra — {a.projeto}"),
@@ -205,6 +249,9 @@ def criar(a):
                       ("status: planejada\netapa: \n", "status: em-construcao\netapa-atual: 1\n"),
                       ("# 🧭 {{title}}", f"# 🧭 {a.projeto} — contexto geral"),
                       ("> O que esta funcionalidade é e por que existe.", f"> {a.para_que}"),
+                      ("(o agente preserva sem reinterpretar; fato substituído sai daqui e fica no diário)",
+                       "(o agente preserva sem reinterpretar; fato substituído sai daqui e fica no diário)\n"
+                       + fatos_perfil(a)),
                       ("- Dial: alto | medio | baixo (padrão: o do [[geral-contexto]])", "- Dial: [a confirmar] alto | medio | baixo"),
                       ("- AAAA-MM-DD: ", f"- {d}: cofre criado com `cofre.py criar` ([[diario-{d}]])."),
                       ("- Plano: [[nome-da-func-plano]]", "- Roteiro: [[geral-plano]]"),
@@ -213,9 +260,9 @@ def criar(a):
                       ("- Referências: [[nome-da-referencia]]", "- Referências: [[manual-da-orquestra]], [[manual-do-cerebro]]"),
                       ("- Projeto: [[geral-contexto]]\n", "")], "modelo-contexto")
     escrever(dest / "orquestra/funcionalidades/geral/geral-contexto.md", c)
-    escrever(dest / "orquestra/funcionalidades/geral/geral-plano.md", roteiro_inicial(vault, d, a.projeto))
+    escrever(dest / "orquestra/funcionalidades/geral/geral-plano.md", roteiro_inicial(vault, d, a.projeto, pratico))
 
-    escrever(dest / f"orquestra/diarios/diario-{d}.md", diario_criacao(vault, d, dest.name))
+    escrever(dest / f"orquestra/diarios/diario-{d}.md", diario_criacao(vault, d, dest.name, pratico))
     for p in ("orquestra/entradas", "orquestra/arquivos", "orquestra/bugs", "Anexos"):
         if not any((dest / p).iterdir()):
             (dest / p / ".gitkeep").touch()
@@ -225,24 +272,83 @@ def criar(a):
     return verificar(dest, vault)
 
 
-def diario_criacao(vault, d, nome):
+def fatos_perfil(a):
+    """Linhas de 'Fatos que eu informei' do geral-contexto que dependem do perfil (A2 do Manual da Orquestra)."""
+    if a.perfil == "estudo":
+        return "- Perfil: estudo (Manual da Orquestra - Perfil estudo (no Vault)). Sem repositório de código e sem publicação."
+    pub = {"sim": "publicado (vale o bloco \"só com deploy\" do Padrão de projeto de software (no Vault), se for software)",
+           "nao": "só local, em WSL ou Docker (sem o bloco \"só com deploy\")"}.get(a.publicado, "[a preencher] publicado ou só local")
+    return ("- Perfil: prático (Manual da Orquestra - Perfil projeto prático (no Vault)).\n"
+            f"- Publicação: {pub}.\n"
+            f"- Repositório de código: {a.repo or '[a preencher]'}. Onde fica e o que o agente pode sem perguntar vira decisão em `funcionalidades/geral/`.")
+
+
+def padroes_inicial(d, projeto):
+    """orquestra/padroes.md: o bloco ```padroes lido pelo verificar. Regra do projeto mora em decisao de geral/."""
+    return f"""---
+tipo: padroes
+status: em-uso
+criado: {d}
+aliases: [padroes do projeto, padronização]
+---
+# 📏 Padrões — {projeto}
+
+> [!tldr] Em uma linha
+> O bloco abaixo é lido pelo `cofre.py verificar`: termo fora do padrão, estado substituído (`antigo:`) e limite de palavras por nota dão ERRO.
+
+```padroes
+# termo fora do padrão => forma certa   ("re:" no início = expressão regular)
+# antigo: termo do estado substituído => estado atual (nota dona)   (ERRO só fora do histórico)
+limite-palavras: {LIMITE_PADRAO}
+```
+
+## Como usar
+- Cada linha cita a nota dona: a decisão em `orquestra/funcionalidades/geral/` que fixou a regra.
+- Despadronização achada: primeiro a regra (decisão + linha aqui), depois as notas.
+- Mudou um estado: o antigo entra como linha `antigo:` (varredura de impacto, etapas B2 e B6).
+
+## A definir (cada item vira decisão em `geral/`)
+- Grafia do nome `{projeto}` e o documento-fonte dela. [a preencher]
+- Documentos-fonte com seções próprias e como são citados. [a preencher]
+- Exceções de nome de arquivo, com o motivo. [a preencher]
+
+### 🔗 Conexões
+- Índice: [[CLAUDE]]
+- Mapa: [[moc-orquestra]]
+- Regras: [[manual-da-orquestra]]
+"""
+
+
+def diario_criacao(vault, d, nome, pratico=True):
     s = converter(ler(vault / "Modelos/Orquestra/modelo-diario.md"))
     return preencher(s, [
         ("{{date}}", d), ("# 📓 {{title}}", f"# 📓 Diário {d}"),
         ("## O que foi feito\n(só fatos)", f"## O que foi feito\n- Cofre `{nome}` criado com `cofre.py criar`: estrutura `orquestra/`, kit de modelos, manuais, `CLAUDE.md`, [[moc-orquestra]], [[geral-contexto]] e o roteiro [[geral-plano]]."),
         ("- [[nome-da-func-decisao-AAAA-MM-DD-titulo]]", "- (nenhuma)"), ("- [[bug-titulo-AAAA-MM-DD]]", "- (nenhum)"),
         ("## Candidatos que não viraram nota\n(e por quê)", "## Candidatos que não viraram nota\n- (nenhum)"),
-        ("> - **Próximo passo:** ", "> - **Próximo passo:** etapa 1 do [[geral-plano]]: preencher o [[geral-contexto]] (objetivo, motivação, tempo, dial), propor as etapas do roteiro e colar o trecho do modelo-claude-do-repositorio no repositório de código."),
+        ("> - **Próximo passo:** ", "> - **Próximo passo:** etapa 1 do [[geral-plano]]: preencher o [[geral-contexto]] (objetivo, motivação, tempo, dial), "
+         "propor as etapas do roteiro (com aval: decisão do roteiro e etapa 1 concluída) e acrescentar os escopos de commit ao bloco do `CLAUDE.md`"
+         + (("; colar o trecho do modelo-claude-do-repositorio no repositório de código, copiar `orquestra/modelos/contrato/` para "
+             "`docs/contrato/` do repositório e preencher o `00-requisitos.md` a partir do documento-fonte e, se for software, propor "
+             "a arquitetura e a stack na seção \"Proposta de arquitetura e stack\" do [[geral-plano]].") if pratico else ".")),
         ("(subagentes em andamento ou relatórios ainda não registrados)", "nenhuma"),
         ("> - **Dúvidas para o humano:** ", "> - **Dúvidas para o humano:** as pendências [a confirmar] do geral-contexto."),
         ("- Funcionalidades tocadas: [[nome-da-func-contexto]]", "- Funcionalidades tocadas: [[geral-contexto]]"),
         ("- Projeto: [[geral-contexto]]\n", "")], "modelo-diario")
 
 
-def roteiro_inicial(vault, d, projeto):
+def roteiro_inicial(vault, d, projeto, pratico=True):
     s = converter(ler(vault / "Modelos/Orquestra/modelo-roteiro.md"))
     s = preencher(s, [("{{date}}", d), ("# 🧭 Roteiro do projeto", f"# 🧭 Roteiro — {projeto}")], "modelo-roteiro")
-    return re.sub(r"## 2\. Nome da etapa\n.*?(?=### 🔗 Conexões)", "", s, flags=re.S)
+    s = re.sub(r"^## 2\. Nome da etapa\n.*?(?=^## |^### 🔗 Conexões)", "", s, flags=re.S | re.M)
+    if pratico:  # a etapa final (roteiro do humano, Q06) fica sempre por ultimo: com so a etapa 1, ela e a 2
+        s = preencher(s, [("## 3. Roteiro do humano e aceitação final", "## 2. Roteiro do humano e aceitação final")], "modelo-roteiro")
+    else:  # estudo: sem roteiro do humano nem ciclo de validacao (so existem no projeto pratico)
+        s = re.sub(r"^## 3\. Roteiro do humano.*?(?=^## |^### 🔗 Conexões)", "", s, flags=re.S | re.M)
+        s = re.sub(r"^No projeto prático, cada etapa.*\n\n", "", s, flags=re.M)
+    if not pratico:  # proposta de arquitetura (S25) so existe no projeto pratico de software
+        s = re.sub(r"^## Proposta de arquitetura e stack\n.*?(?=^## |^### 🔗 Conexões)", "", s, flags=re.S | re.M)
+    return s
 
 
 # ---------------------------------------------------------------- roteiro e status
@@ -308,7 +414,8 @@ def sincronizar(a):
     vault = achar_vault(a.vault, cofre)
     if not vault:
         sys.exit("ERRO: Vault nao encontrado. Use --vault CAMINHO.")
-    for rel, txt in kit(vault).items():
+    pratico = not perfil_estudo(cofre)
+    for rel, txt in kit(vault, pratico).items():
         dst = cofre / "orquestra" / rel
         if not dst.exists() or ler(dst) != txt:
             escrever(dst, txt)
@@ -317,7 +424,10 @@ def sincronizar(a):
     m1 = re.search(r'^# Cofre "[^"]+" — (.+?) \(guia para agentes\)', atual, re.M)
     m2 = re.search(r"\*\*memória do projeto .+?\*\*: (.+?)\. Este arquivo", atual)
     if m1 and m2:
-        novo, faltam = preservar(claude_md(vault, cofre.resolve().name, m1.group(1), m2.group(1), "[a preencher]"), atual)
+        novo, faltam = preservar(claude_md(vault, cofre.resolve().name, m1.group(1), m2.group(1), pratico), atual)
+        if not (cofre / PADROES_NOTA).exists():
+            # Cofre antigo: o bloco padroes ainda mora no CLAUDE.md; sem orquestra/padroes.md o link ficaria quebrado.
+            novo = novo.replace("[[padroes]]", "`padroes` (bloco no fim deste arquivo, formato antigo)")
         if faltam:
             print(f"AVISO  CLAUDE.md sem os blocos de projeto {faltam}: nao regenerei (perderia o que e do projeto); "
                   "marque o trecho com <!-- projeto:nome --> ... <!-- /projeto:nome --> e rode de novo")
@@ -353,7 +463,7 @@ def lista(v):
 
 
 def padroes(claude_txt):
-    """Bloco ```padroes do CLAUDE.md -> (regras [(regex, forma certa, como aparece)], limite de palavras ou None)."""
+    """Bloco ```padroes (de orquestra/padroes.md ou do CLAUDE.md) -> (regras, limite, tem bloco, antigos)."""
     m = PADROES.search(claude_txt or "")
     regras, limite, antigos = [], None, []
     if not m:
@@ -411,13 +521,30 @@ def palavras(s):
     return len(s.split())
 
 
+def escopos(claude_txt):
+    """Escopos do bloco <!-- projeto:escopos --> (texto entre crases fora do rotulo em negrito e fora de parenteses), ou None sem bloco."""
+    m = re.search(r"<!-- projeto:escopos -->\n(.*?)<!-- /projeto:escopos -->", claude_txt or "", re.S)
+    if not m:
+        return None
+    corpo = re.sub(r"\*\*.*?\*\*", "", m.group(1))
+    while re.search(r"\([^()]*\)", corpo):  # explicacao entre parenteses nao e escopo
+        corpo = re.sub(r"\([^()]*\)", "", corpo)
+    return [e for e in re.findall(r"`([^`\n]+)`", corpo) if "[a preencher]" not in e]
+
+
 def secao_commits(claude_txt):
     """Seção '## Commits' do CLAUDE.md -> lista de faltas (vazia = ok). Commit é padrão de trabalho do humano em todo cofre."""
     m = re.search(r"^## Commits[ \t]*\n(.*?)(?=^## |\Z)", claude_txt or "", re.S | re.M)
     if not m:
         return ["sem a seção '## Commits' (copie do Modelo de CLAUDE do cofre)"]
-    return [f"seção 'Commits' sem link ou menção a '{n}' (copie do Modelo de CLAUDE do cofre)"
-            for n in COMMIT_NOTAS if n.lower() not in m.group(1).lower()]
+    faltas = [f"seção 'Commits' sem link ou menção a '{n}' (copie do Modelo de CLAUDE do cofre)"
+              for n in COMMIT_NOTAS if n.lower() not in m.group(1).lower()]
+    if "<!-- projeto:escopos -->" not in m.group(1):
+        faltas.append("seção 'Commits' sem o bloco <!-- projeto:escopos --> com a lista fechada de escopos (rode o sincronizar)")
+    elif not escopos(claude_txt):
+        faltas.append("bloco <!-- projeto:escopos --> sem nenhum escopo: a lista começa com o nome da pasta do cofre e `readme` "
+                      "(cada escopo entre crases; ver Criar um novo cofre, passo 4)")
+    return faltas
 
 
 def secao_busca(claude_txt, nome):
@@ -448,7 +575,7 @@ def verificar(cofre, vault=None):
     projeto = (cofre / "orquestra").is_dir()
     rel = lambda p: p.relative_to(cofre).as_posix()
     oculto = lambda p: any(x.startswith(".") for x in p.relative_to(cofre).parts)
-    mds = [p for p in cofre.rglob("*.md") if not oculto(p)]
+    mds = [p for p in cofre.rglob("*.md") if not oculto(p) and not rel(p).startswith(MODELOS_DO_REPO)]
     todos = {p.stem.lower() for p in mds} | {p.name.lower() for p in cofre.rglob("*") if p.is_file() and not oculto(p)}
     texto = {p: ler(p) for p in mds}
     saida = {p: links(texto[p]) for p in mds}
@@ -522,17 +649,37 @@ def verificar(cofre, vault=None):
             E("CLAUDE.md", falta)
         for falta in secao_busca(claude_txt, cofre.name):
             E("CLAUDE.md", falta)
-    regras, limite, tem_bloco, antigos = padroes(claude_txt)
+        esc = escopos(claude_txt) or []
+        if projeto and esc and [x for x in (cofre.name, "readme") if x not in esc]:
+            E("CLAUDE.md", f"escopos {esc}: a lista do cofre começa com `{cofre.name}` e `readme`, que não saem "
+                           "(ver Criar um novo cofre, passo 4)")
+    pnota = cofre / PADROES_NOTA
+    fonte_p = pnota if (projeto and pnota.exists()) else claude
+    nome_p = rel(fonte_p) if fonte_p.exists() else "CLAUDE.md"
+    regras, limite, tem_bloco, antigos = padroes(ler(fonte_p) if fonte_p.exists() else "")
+    formato_antigo = any(n not in BLOCOS_DO_MODELO for n, _ in BLOCO.findall(claude_txt))
+    # Teto do indice: CLAUDE.md e indice, nao manual (regras de projeto viram decisao em funcionalidades/geral/).
+    modelo_claude = cofre / "Modelos" / "Modelo de CLAUDE do cofre.md"
+    if modelo_claude.exists() and palavras(texto[modelo_claude]) > TETO_MODELO_CLAUDE:
+        E(rel(modelo_claude), f"{palavras(texto[modelo_claude])} palavras (teto {TETO_MODELO_CLAUDE}): o CLAUDE.md é índice; "
+                              "leve o detalhe para o manual ou nota e deixe 1 linha + link")
+    if claude.exists() and palavras(claude_txt) > TETO_CLAUDE:
+        msg = (f"{palavras(claude_txt)} palavras (teto {TETO_CLAUDE}): o CLAUDE.md é índice; regra de projeto vira decisão em "
+               "orquestra/funcionalidades/geral/")
+        if formato_antigo:
+            A("CLAUDE.md", msg + " (formato antigo, com blocos <!-- projeto: -->: AVISO até migrar)")
+        else:
+            E("CLAUDE.md", msg)
     eh_kit = lambda p: rel(p).startswith(("orquestra/modelos/", "Modelos/", "orquestra/referencias/manual-"))
     for p in mds:
         if eh_kit(p):
             continue
         r = rel(p)
-        alvo_txt = PADROES.sub("", texto[p]) if p == claude else texto[p]
+        alvo_txt = PADROES.sub("", texto[p]) if p in (claude, fonte_p) else texto[p]
         for rx, certo, como in regras:
             achados = rx.findall(alvo_txt)
             if achados:
-                E(r, f"{len(achados)}x fora do padrão '{como}': use {certo} (bloco padroes do CLAUDE.md)")
+                E(r, f"{len(achados)}x fora do padrão '{como}': use {certo} (bloco padroes de {nome_p})")
         fm_p = frontmatter(texto[p])
         if not eh_historico(r, fm_p):
             atual = so_estado_atual(alvo_txt, fm_p)
@@ -544,15 +691,19 @@ def verificar(cofre, vault=None):
             if PREVALENCIA.search(atual) or PREVALENCIA_CALLOUT.search(atual):
                 E(r, "aviso de prevalência ('onde esta nota fala em X, vale Y'): reescreva o trecho no estado atual")
         if projeto and limite and p != claude and palavras(texto[p]) > limite:
-            E(r, f"{palavras(texto[p])} palavras (limite {limite}): divida em nota nova ligada por link (Padronização do CLAUDE.md)")
+            E(r, f"{palavras(texto[p])} palavras (limite {limite}): divida em nota nova ligada por link (limite-palavras de {nome_p})")
     if projeto:
         if "## Padronização" not in claude_txt:
             E("CLAUDE.md", "sem a seção 'Padronização' (copie do Modelo de CLAUDE do cofre)")
         if not tem_bloco or not limite:
-            E("CLAUDE.md", "sem bloco ```padroes com 'limite-palavras: N'")
-        for nome in ("padronizacao", "padroes", "repositorios"):
-            if f"<!-- projeto:{nome} -->" not in claude_txt:
-                E("CLAUDE.md", f"sem o bloco de projeto '{nome}' (o sincronizar não consegue preservar o que é do projeto)")
+            E(nome_p, f"sem bloco ```padroes com 'limite-palavras: N' (cofre novo: {PADROES_NOTA}, gerado pelo criar)")
+        if formato_antigo:
+            # Cofre antigo: as regras ainda moram em blocos do CLAUDE.md; sem eles o sincronizar perderia o que e do projeto.
+            for nome in ("padronizacao", "padroes", "repositorios"):
+                if nome == "padroes" and pnota.exists():
+                    continue
+                if f"<!-- projeto:{nome} -->" not in claude_txt:
+                    E("CLAUDE.md", f"sem o bloco de projeto '{nome}' (formato antigo: o sincronizar não consegue preservar o que é do projeto)")
     if projeto:
         o = cofre / "orquestra"
         moc0 = cofre / "MOCs/moc-orquestra.md"
@@ -561,8 +712,22 @@ def verificar(cofre, vault=None):
         diarios = sorted(d for d in (o / "diarios").glob("diario-*.md") if re.fullmatch(rf"diario-{DATA}\.md", d.name)) if (o / "diarios").is_dir() else []
         if not diarios:
             E("orquestra/diarios", "nenhum diário: falta ao menos o diário de criação (etapa A3)")
-        elif not re.search(r"\*\*Próximo passo:\*\* *\S", ler(diarios[-1])):
-            E(rel(diarios[-1]), "último diário sem 'Próximo passo' no Onde parei (passagem de turno, etapa C3)")
+        else:
+            ultimo = diarios[-1]
+            partes = sorted(o.joinpath("diarios").glob(ultimo.stem + "-*.md"))
+            vigente = ultimo
+            if partes:
+                # Diario com partes: o principal aponta, no proprio Onde parei, para a parte vigente (a mais recente).
+                op = re.search(r"Onde parei.*?(?=^#|\Z)", texto.get(ultimo, ""), re.S | re.M)
+                ligadas = [x for x in partes if x.stem.lower() in {t.lower() for t in links(op.group(0) if op else "")}]
+                if not ligadas:
+                    E(rel(ultimo), "diário com partes: o 'Onde parei' do principal não aponta para a parte vigente "
+                                   f"({', '.join(x.name for x in partes)})")
+                else:
+                    vigente = max(ligadas, key=lambda x: x.stat().st_mtime)
+            if not re.search(r"\*\*Próximo passo:\*\* *\S", texto.get(vigente, "")):
+                E(rel(vigente), "último diário sem 'Próximo passo' no Onde parei (passagem de turno, etapa C3; "
+                                "com partes, vale a parte para onde o principal aponta)")
         for pz in PASTAS:
             if not (o / pz).is_dir():
                 E("orquestra/" + pz, "pasta obrigatória ausente")
@@ -648,7 +813,7 @@ def verificar(cofre, vault=None):
                     E(rel(pc), f"funcionalidade fora da lista 'Funcionalidades' da etapa {et} no roteiro")
         vault = vault or achar_vault(None, cofre)
         if vault:
-            for relk, txt in kit(vault).items():
+            for relk, txt in kit(vault, not perfil_estudo(cofre)).items():
                 dst = o / relk
                 if not dst.exists():
                     E("orquestra/" + relk, "falta no kit: rode sincronizar")
@@ -673,7 +838,8 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("criar")
     c.add_argument("cofre"); c.add_argument("--projeto", required=True); c.add_argument("--para-que", required=True)
-    c.add_argument("--repo", default="[a preencher]"); c.add_argument("--vault")
+    c.add_argument("--perfil", choices=("pratico", "estudo"), default="pratico")
+    c.add_argument("--publicado", choices=("sim", "nao")); c.add_argument("--repo"); c.add_argument("--vault")
     s = sub.add_parser("sincronizar"); s.add_argument("cofre"); s.add_argument("--vault")
     v = sub.add_parser("verificar"); v.add_argument("cofre", nargs="?", default="."); v.add_argument("--vault")
     st = sub.add_parser("status"); st.add_argument("cofre", nargs="?", default="."); st.add_argument("--atualizar", action="store_true")

@@ -15,6 +15,7 @@ aliases: []
 Chegar bem preparado ao estudo de caso do BTG Pactual: treinar a linha de raciocínio em cenários de Compliance e praticar solução em dados (Python ou SQL puro) num banco mocado. Motivação: o estudo de caso foi aprovado e a etapa atual é a conversa com o head do time ([[processo-seletivo-btg]]).
 
 ## Fatos que eu informei
+- Perfil: estudo (Manual da Orquestra - Perfil estudo (no Vault)). Fala do humano (2026-11-17): "PrepVault é do tipo estudo".
 - Candidato à vaga de **Analista de Compliance Engineering** no BTG Pactual. A descrição que enviei é uma base da mesma modalidade, não a vaga exata ([[vaga-compliance-engineering]]).
 - A primeira entrevista foi em 2026-11-03, das 10h30 às 11h (Brasília), com Vitória Palhares. Foi o primeiro contato com a empresa.
 - O BTG me forneceu um podcast sobre o banco como material de preparo ([[cultura-btg-podcast]]).
