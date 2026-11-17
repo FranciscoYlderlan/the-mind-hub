@@ -44,6 +44,7 @@ origem: Manual do Meu Cérebro no Obsidian
 - [[Sessão entre domínios com JWT no cabeçalho]]: login opcional sem 401, cache pessoal e redirect só interno.
 - [[Busca e cache em rota pública]]: filtro em rota nova, `LIKE` escapado e falha fora do cache.
 - [[API externa escolhida por versão, licença e chave]]: versão estável, licença do uso real e API sem chave.
+- [[Contrato só do backend deixa a interface sem regra]]: sem contrato do lado da tela, cada tela inventa a sua regra.
 
 ## 🎼 Agentes em paralelo
 - [[Manual da Orquestra]]: orquestrador, subagentes, fluxo de uma sessão e a estrutura `orquestra/` dos cofres de projeto.
