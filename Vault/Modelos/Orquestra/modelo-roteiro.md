@@ -14,7 +14,7 @@ criado: {{date}}
 
 Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada → em-construcao → em-verificacao → concluida → arquivada`. Etapa concluída tem data e links para as notas geradas nela. A linha "Etapa atual" acima é sincronizada por `cofre.py status --atualizar`.
 
-No projeto prático, cada etapa segue, para cada funcionalidade dela, o ciclo contrato da funcionalidade em `docs/contrato/` → implementação → verificador de fluxo principal → adversarial, e termina com os fluxos de teste dela registrados em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]). A última etapa entrega ao humano o roteiro final, montado desse registro, antes da aceitação final.
+No projeto prático, cada etapa segue, para cada funcionalidade dela, o ciclo contrato da funcionalidade em `docs/contrato/` → implementação → verificador de fluxo principal → adversarial, e termina com os fluxos de teste dela registrados em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]). A última etapa é a aceitação final: verificadores e avaliador primeiro, depois o roteiro final ao humano, montado desse registro e passando por todas as funcionalidades; o aceite dele fecha o projeto.
 
 ## 1. Definir o roteiro do projeto
 - **Status:** em-construcao
@@ -36,8 +36,8 @@ No projeto prático, cada etapa segue, para cada funcionalidade dela, o ciclo co
 ## 3. Roteiro do humano e aceitação final
 - **Status:** planejada
 - **Posição:** (prático) sempre a última; etapa nova entra antes dela, e a numeração segue 1..N. O `cofre.py criar` já a põe no roteiro do cofre novo.
-- **Objetivo:** com todas as funcionalidades passando nos dois agentes, entregar ao humano o roteiro final, sucinto e didático (descoberta + poucos fluxos que cobrem o máximo de AC), e fazer a aceitação final.
-- **Pronto quando:** roteiro testado pelo humano, achados decididos como opções e aceitação final registrada.
+- **Objetivo:** com todas as funcionalidades passando nos dois agentes, fazer a aceitação final: verificadores e avaliador independente primeiro; depois, o roteiro final ao humano, curto e didático, passando por todas as funcionalidades. O aceite do humano fecha a etapa.
+- **Pronto quando:** toda funcionalidade coberta no roteiro, roteiro testado pelo humano, achados decididos como opções e aceite do humano registrado.
 - **Funcionalidades:** (nenhuma)
 - **Notas geradas:** `geral-plano-teste-humano`
 - **Concluída em:** 
