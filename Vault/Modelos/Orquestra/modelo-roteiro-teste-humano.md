@@ -12,7 +12,7 @@ criado: {{date}}
 > [!warning] Quem escreve e quando
 > - **A cada funcionalidade** que passou no verificador de fluxo principal e no adversarial: o orquestrador acrescenta a seção dela em "Fluxos registrados". Nada é entregue ao humano nessa hora.
 > - **Na etapa final**, com todas as funcionalidades passando nos dois agentes: o orquestrador monta o "Roteiro final" a partir dos fluxos registrados e o entrega ao humano, antes da aceitação final (Q06 e P07 do [[Manual da Orquestra - Perfil projeto prático]]).
-> - Nota única do projeto: `funcionalidades/geral/geral-plano-teste-humano.md`, ligada no [[geral-contexto]] e no [[geral-plano]]. Passou do limite de palavras: a seção de uma funcionalidade vira `geral-plano-teste-humano-<funcionalidade>.md`, com link nos dois sentidos.
+> - Nota única do projeto: `funcionalidades/geral/geral-plano-teste-humano.md`. Nasce com a primeira funcionalidade que passa nos dois agentes, já ligada nos dois sentidos: o [[geral-contexto]] ganha o link para ela nas Conexões, e ela aponta de volta nas Conexões abaixo; a última etapa do [[geral-plano]] também a cita. Passou do limite de palavras: a seção de uma funcionalidade vira `geral-plano-teste-humano-<funcionalidade>.md`, com link nos dois sentidos.
 
 Fala do humano (2026-11-17): "o objetivo é eu conseguir testar o máximo de coisa possível em poucos fluxos ... mas no obsidian esses fluxos são registrados para caso eu quero realizar um teste a qualquer momento".
 
