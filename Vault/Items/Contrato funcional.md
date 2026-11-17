@@ -33,9 +33,9 @@ O contrato funcional é a **contraparte de frontend** do que o backend já tinha
 > 1. Atores (ATR) e entidades (ENT), depois dos requisitos RF, RNF e RN.
 > 2. Casos de uso (UC) com os três tipos de fluxo: principal, alternativo (FA) e exceção (FE).
 > 3. Erros (ERR), alimentados pelos FE.
-> 4. Componentes (CMP) e, depois, navegação (NAV).
+> 4. Só com interface: componentes (CMP) e, depois, navegação (NAV).
 > 5. Rastreabilidade e critérios de aceite (AC).
-> 6. Só então as telas.
+> 6. Só então o código (e as telas, se houver).
 
 > [!warning] Regra da tela
 > Cada tela lista os CMP, UC e NAV que realiza e **não cria regra**. Regra que falta entra primeiro no contrato, pelos 5 passos do P01, com o item M-xx em `mudancas.md`. Validação vem do ENT; mensagem vem do ERR.
@@ -47,7 +47,7 @@ O contrato funcional é a **contraparte de frontend** do que o backend já tinha
 - O cofre do projeto guarda as decisões e o diário, com link para lá. O [[modelo-claude-do-repositorio]] avisa os agentes que trabalham no código.
 
 > [!tip] Quando abrir esta nota
-> Ao ligar o repositório de um projeto prático novo, ao começar uma funcionalidade com interface ou quando uma tela pedir uma regra que não está escrita.
+> Ao ligar o repositório de um projeto prático novo, ao começar qualquer funcionalidade ou quando uma tela pedir uma regra que não está escrita.
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** A tela segue o contrato como o servidor segue o domínio: a regra mora num lugar só.

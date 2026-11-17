@@ -1,6 +1,6 @@
 # Componentes lógicos (CMP)
 
-Descreve o papel do componente, não a aparência. A tela escolhe o visual; o comportamento vem daqui.
+Só para funcionalidade com interface. Descreve o papel do componente, não a aparência. A tela escolhe o visual; o comportamento vem daqui.
 
 ## CMP-01 Formulário de reserva
 

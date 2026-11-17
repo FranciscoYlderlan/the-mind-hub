@@ -22,12 +22,12 @@ Fonte de verdade do que o produto faz, para o frontend e para o backend. O backe
 1. Requisitos (00), atores (01) e entidades (02).
 2. Casos de uso, com os três tipos de fluxo: principal, alternativo (FA) e exceção (FE) (03).
 3. Erros (05), alimentados pelos fluxos de exceção.
-4. Componentes (04).
-5. Navegação (06).
+4. Componentes (04), só com interface.
+5. Navegação (06), só com interface.
 6. Rastreabilidade (07) e critérios de aceite (08).
-7. Só então as telas.
+7. Só então o código (e as telas, se houver).
 
-Cada funcionalidade com interface preenche os blocos dela antes da primeira tela.
+Toda funcionalidade preenche os blocos dela antes do código: ENT, UC com FA e FE, ERR e AC. Com interface, também CMP, NAV e a coluna Tela da rastreabilidade, antes da primeira tela.
 
 ## Regra da tela
 
@@ -47,4 +47,4 @@ Cada funcionalidade com interface preenche os blocos dela antes da primeira tela
 
 - Um ID nunca é reaproveitado. Item removido sai do bloco; o M-xx registra a remoção.
 - O código cita um ID só se ele existir aqui.
-- Os agentes de verificação executam os AC ao final de cada funcionalidade: os dos fluxos principais primeiro, depois os dos FA e FE.
+- Os agentes de verificação executam os AC ao final de cada funcionalidade, pela API e, com interface, na tela: os dos fluxos principais primeiro, depois os dos FA e FE.
