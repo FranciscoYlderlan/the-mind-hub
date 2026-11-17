@@ -23,7 +23,7 @@ origem: Pacote "contrato funcional e validação" aprovado pelo humano em 2026-1
 | 4 | Componentes lógicos (CMP-xx) | `04-componentes.md` | Papel (não aparência), entradas e saídas, eventos, estados obrigatórios e regras |
 | 5 | Catálogo de erros (ERR-xx) | `05-erros.md` | Código, condição de disparo, tratamento, mensagem ao usuário e estado final |
 | 6 | Estados e navegação (NAV-xx) | `06-navegacao.md` | Origem + evento + condição → destino, com estados lógicos |
-| 7 | Mapa de rastreabilidade | `07-rastreabilidade.md` | Requisito, UC, fluxos, CMP, ENT, ERR, tela (depois) e critério de aceite |
+| 7 | Mapa de rastreabilidade | `07-rastreabilidade.md` | Requisito, UC, fluxos, CMP, ENT, ERR, tela (depois) e cenário de teste (o AC-xx que prova a linha) |
 | 8 | Critérios de aceite (AC-xx) | `08-criterios-de-aceite.md` | Um dado/quando/então por fluxo |
 
 Toda funcionalidade preenche ENT, UC (com FA e FE), ERR e AC; CMP, NAV e a coluna Tela só entram quando ela tem interface. Mais dois arquivos: `00-requisitos.md` (RF, RNF e RN do documento-fonte) e `mudancas.md` (itens M-xx). O `README.md` é o índice.
