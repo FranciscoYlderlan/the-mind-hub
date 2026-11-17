@@ -14,6 +14,8 @@ criado: {{date}}
 
 Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada → em-construcao → em-verificacao → concluida → arquivada`. Etapa concluída tem data e links para as notas geradas nela. A linha "Etapa atual" acima é sincronizada por `cofre.py status --atualizar`.
 
+No projeto prático, cada etapa com interface segue o ciclo contrato da funcionalidade em `docs/contrato/` → implementação → verificador de fluxo principal → adversarial, e termina com os fluxos de teste dela registrados em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]). A última etapa entrega ao humano o roteiro final, montado desse registro, antes da aceitação final.
+
 ## 1. Definir o roteiro do projeto
 - **Status:** em-construcao
 - **Objetivo:** listar as etapas gerais do projeto, da primeira à entrega.
@@ -26,8 +28,17 @@ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada �
 - **Status:** planejada
 - **Objetivo:** 
 - **Pronto quando:** 
+- **Ciclo** (prático, funcionalidade com interface): contrato da funcionalidade → implementação → verificador de fluxo principal → adversarial → fluxos de teste registrados
 - **Funcionalidades:** [[nome-da-func-contexto]]
 - **Notas geradas:** [[nome-da-func-decisao-AAAA-MM-DD-titulo]], [[bug-titulo-AAAA-MM-DD]]
+- **Concluída em:** 
+
+## 3. Roteiro do humano e aceitação final
+- **Status:** planejada
+- **Objetivo:** (prático) com todas as funcionalidades passando nos dois agentes, entregar ao humano o roteiro final, sucinto e didático (descoberta + poucos fluxos que cobrem o máximo de AC), e fazer a aceitação final.
+- **Pronto quando:** roteiro testado pelo humano, achados decididos como opções e aceitação final registrada.
+- **Funcionalidades:** (nenhuma)
+- **Notas geradas:** `geral-plano-teste-humano`
 - **Concluída em:** 
 
 ## Proposta de arquitetura e stack

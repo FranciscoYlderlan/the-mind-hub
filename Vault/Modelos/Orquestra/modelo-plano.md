@@ -25,6 +25,7 @@ criado: {{date}}
 - **Paralelo:** sim, com T2 | não
 - **Pronto quando:**
   - [ ] critério verificável
+  - [ ] (prático, funcionalidade com interface) AC-xx dos UC passando no verificador de fluxo principal e no adversarial
 - **Prova:** comando de teste/lint ou comportamento a observar
 - **Verificação** (o orquestrador registra a partir do relatório do verificador):
   - Data: 
