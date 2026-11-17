@@ -13,6 +13,12 @@ origem: Decisões de estrutura, stack, criação de componentes e testes do ston
 
 É a **planta-modelo da construtora**: o cliente não desenha a casa do nada; recebe uma planta testada e risca o que quer mudar. Regra que manda propor: S25 do [[Padrão de projeto de software]]; quando, no passo a passo de [[Criar um novo cofre]].
 
+Na raiz do repositório de código fica `docs/contrato/`, o [[Contrato funcional]] que frontend e backend seguem (Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil]]):
+
+```
+docs/contrato/   README.md (índice), 00-requisitos a 08-criterios-de-aceite, mudancas.md
+```
+
 Versões: a mais recente estável no momento da proposta, sem trava (S16). Nada aqui é decisão: a proposta vai para a seção "Proposta de arquitetura e stack" do `geral-plano` do projeto novo e vira decisão só com o aval do humano. Dentro do cofre de projeto, esta nota é citada como texto "Referência de arquitetura e stack (no Vault)", nunca como wikilink.
 
 ---
@@ -26,9 +32,9 @@ Versões: a mais recente estável no momento da proposta, sem trava (S16). Nada 
 | Rotas | TanStack Router (file-based) | Só a gestão de rotas, sem framework full-stack |
 | Dados do servidor | TanStack Query | O loader da rota e o hook da tela usam as mesmas `queryOptions` |
 | Estado de UI global | Zustand | Só quando precisa; nunca guarda dado da API |
-| Validação | zod | Formulários, search params e env |
+| Validação | zod | Todo campo de entrada com schema tirado do ENT do contrato e mensagem por violação (S26); também search params e env |
 | Qualidade | ESLint + Prettier + checagem de tipos | No CI, em todo push e PR |
-| Teste | Playwright, por um agente verificador | Quem implementou não testa |
+| Teste | Verificador de fluxo principal e adversarial, agentes com Playwright | Ao final de cada funcionalidade, executam os AC de `docs/contrato/`; sem suíte de E2E de interface no repositório; quem implementou não testa |
 
 ```
 src/
@@ -50,7 +56,7 @@ src/
 | Runtime e framework | Node + Fastify + TypeScript | |
 | Banco e ORM | PostgreSQL + Prisma | Models em PascalCase, tabelas e colunas em snake_case por `@map` |
 | Validação | zod | Toda entrada e toda variável de ambiente |
-| Teste | Vitest | Unitário e E2E (`test/e2e/`, fora do `src/`) |
+| Teste | Vitest | Unitário e E2E (`test/e2e/`, fora do `src/`); ao final de cada funcionalidade, os mesmos dois agentes executam os AC pela API (HTTP ou camada MCP, S23) |
 | Qualidade | ESLint + Prettier | |
 | Ambiente | Docker + Docker Compose | API e banco locais |
 | CI/CD | GitHub Actions | `ci.yml` e `cd.yml` separados (S04, só com deploy) |
@@ -74,9 +80,9 @@ prisma/  test/e2e/  Dockerfile  docker-compose.yml  .env.example
 
 ### 🛠️ Resumo direto para o cérebro
 * **Ponto 1:** Partida pronta, não decisão: o humano ajusta e o aval vira as decisões de estrutura e stack do [[Manual da Orquestra - Perfil projeto prático|projeto]].
-* **Ponto 2:** Camadas com uma direção só, nos dois lados, e validação com zod em toda borda.
+* **Ponto 2:** Camadas com uma direção só, nos dois lados, validação com zod em toda borda e o contrato em `docs/contrato/` como fonte das regras da tela.
 * **Ponto 3:** Limite: foi tirada de um projeto web com prazo curto; projeto de outro tipo (mobile, CLI, dados) pede outra proposta.
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
-- Relacionadas: [[Padrão de projeto de software]], [[Criar um novo cofre]], [[Manual da Orquestra - Perfil projeto prático]]
+- Relacionadas: [[Padrão de projeto de software]], [[Criar um novo cofre]], [[Manual da Orquestra - Perfil projeto prático]], [[Contrato funcional]]
