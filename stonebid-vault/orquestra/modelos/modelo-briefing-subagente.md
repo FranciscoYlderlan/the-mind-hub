@@ -74,6 +74,8 @@ O orquestrador copia o **bloco comum**, preenche e cola logo abaixo o **cartão 
   6. Duplo clique.
   7. Abrir a tela direto pela URL, com o perfil certo e com o errado, e conferir o estado inicial (menus, botões).
   8. Voltar ou recarregar no meio do fluxo.
+  Tempo de resposta e cliques perdidos (o tempo pela API e na tela; os cliques, só na tela):
+  9. Classifique cada ação pelo contexto da funcionalidade (use o RNF de desempenho do `00-requisitos`, se houver): rápida (resposta quase instantânea) ou longa (pode demorar, mas mostra carregando e não trava). Meça o tempo de cada uma. Repita cliques e digitação enquanto a tela se atualiza (com tempo real ou recarga automática, force atualizações durante a ação; clique direto, sem a espera automática do Playwright mascarar o defeito) e conte as ações registradas contra as feitas. No bug, diga a causa observada: tempo de resposta (demorou além do esperado para o tipo) ou atualização de tela (o controle foi recriado, perdeu foco, valor ou clique).
 - Não faça: deixar suíte no repositório; corrigir; parar no primeiro achado.
 - Devolva: ✔/✘ por AC e por ataque, com a evidência; cada ✘ como bug com passos, esperado e obtido (P15), citando o ENT, ERR ou NAV violado.
 ```
