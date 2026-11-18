@@ -39,11 +39,11 @@ Fechar a etapa 3 do [[geral-plano]]: AC de UC-01 e TEL-02 (principal, FA-01, FE-
 
 ## Mapa
 - Plano: [[integracoes-plano]], [[integracoes-plano-verificacoes]], [[integracoes-plano-verificacoes-t6-t7]], [[integracoes-plano-t8]]
-- Decisões: [[geral-decisao-2026-11-23-github-real-na-etapa-3]], [[geral-decisao-2026-11-19-github-oauth-proprio]], [[geral-decisao-2026-11-23-falha-interna]], [[geral-decisao-2026-11-23-banco-antigo-apagado]], [[geral-decisao-2026-11-23-filtro-de-comandos-so-comentario]], [[geral-decisao-2026-11-23-comandos-na-tela-de-execucao]], [[geral-decisao-2026-11-24-erro-generico-por-fronteira]], [[geral-decisao-2026-11-24-servidor-mcp-do-obsidian]], [[geral-decisao-2026-11-24-desconectar-sem-logout]], [[geral-decisao-2026-11-24-escopo-repo-no-github]], [[geral-decisao-2026-11-24-cofre-da-integracao-por-variavel]], [[geral-decisao-2026-11-24-estado-da-integracao-com-notas-e-erro]], [[geral-decisao-2026-11-24-falha-no-registro-do-nucleo]]
+- Decisões: [[geral-decisao-2026-11-23-github-real-na-etapa-3]], [[geral-decisao-2026-11-19-github-oauth-proprio]], [[geral-decisao-2026-11-23-falha-interna]], [[geral-decisao-2026-11-23-banco-antigo-apagado]], [[geral-decisao-2026-11-23-filtro-de-comandos-so-comentario]], [[geral-decisao-2026-11-23-comandos-na-tela-de-execucao]], [[geral-decisao-2026-11-24-erro-generico-por-fronteira]], [[geral-decisao-2026-11-24-servidor-mcp-do-obsidian]], [[geral-decisao-2026-11-24-desconectar-sem-logout]], [[geral-decisao-2026-11-24-escopo-repo-no-github]], [[geral-decisao-2026-11-24-cofre-da-integracao-por-variavel]], [[geral-decisao-2026-11-24-estado-da-integracao-com-notas-e-erro]], [[geral-decisao-2026-11-24-falha-no-registro-do-nucleo]], [[geral-decisao-2026-11-26-nucleo-em-crate-sem-tauri]]
 - Interfaces herdadas: [[fundacao-contexto]]
 
 ## Interpretação do agente
-- O código parte de módulos vazios em `src-tauri/src/infra/{claude,obsidian,github,secrets}` e do `Nucleo` provisório em `commands/nucleo.rs`, que devolve as três integrações como `desconectado` [a confirmar no plano].
+- Desde a T8, o `Nucleo` e os adaptadores das três integrações moram em `crates/app` (`my-harness-app`), sem Tauri: `src/nucleo.rs`, `src/integracoes.rs` e `src/infra/{claude,obsidian,github,secrets,mcp}`; o `src-tauri` só registra os comandos ([[geral-decisao-2026-11-26-nucleo-em-crate-sem-tauri]]).
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
