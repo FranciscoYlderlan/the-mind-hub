@@ -52,7 +52,8 @@ Moram em `orquestra/funcionalidades/geral/`, uma decisão por nota (grafia, docu
 
 ## Validar cada funcionalidade (perfil prático)
 
-- **Contrato antes do código:** toda funcionalidade começa preenchendo os blocos dela em `docs/contrato/` do repositório (ENT, UC com FA e FE, ERR, AC; com interface, também CMP e NAV; modelos em `orquestra/modelos/contrato/`); tela não cria regra.
+- **Contrato antes do código:** toda funcionalidade começa preenchendo os blocos dela em `Anexos/contrato/` deste cofre (ENT, UC com FA e FE, ERR, AC; com interface, também CMP e NAV); tela não cria regra.
+- **Só o orquestrador altera o contrato:** subagente lê pela CLI (`obsidian read path="Anexos/contrato/03-casos-de-uso.md"`; sem CLI, pelo arquivo, avisando) e devolve a mudança proposta no relatório (arquivo, trecho atual, trecho novo, motivo). O repositório só recebe a cópia em `docs/contrato/` na etapa final, depois do aceite do humano, num commit só, com escopo `contrato`.
 - **Ao final de cada funcionalidade:** despache o verificador de fluxo principal (AC dos fluxos principais) e, sem bug aberto, o adversarial (AC dos FA e FE e a lista fixa de ataques), no backend pela API ou camada MCP e, com interface, no frontend pelo Playwright, com os cartões do `modelo-briefing-subagente`. Bug volta para um implementador novo; corrigido, os dois rodam de novo. Pronto = AC dos UC passando nos dois.
 - **Passou nos dois:** registre os fluxos de teste dela em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]); na primeira vez, a nota nasce ligada no [[geral-contexto]], nos dois sentidos. Nada vai ao humano nessa hora.
 - **Etapa final:** monte desse registro o roteiro do humano, curto e didático, passando por todas as funcionalidades (tabela funcionalidade → tarefa ou fluxo, sem lacuna); entregue depois dos verificadores e do avaliador da aceitação final: o aceite do humano é a palavra final.
@@ -98,7 +99,7 @@ Detalhe: [[manual-da-orquestra#🚦 Etapas vitais]] (ler pela CLI). Modelos e ma
 - Detalhe: Padrão de commit (no Vault) e Commitar no the-mind-hub (no Vault) (ler pela CLI).
 
 <!-- projeto:escopos -->
-- **Escopos deste cofre** (lista fechada; muda só com aval): `myHarness-vault` (notas deste cofre), `readme` (README da raiz do `the-mind-hub`, commit separado); IDs de requisito do contrato: `RF-01` a `RF-34` (um requisito por commit); `setup` (código sem RF próprio: estrutura inicial, CI).
+- **Escopos deste cofre** (lista fechada; muda só com aval): `myHarness-vault` (notas deste cofre), `readme` (README da raiz do `the-mind-hub`, commit separado); IDs de requisito do contrato: `RF-01` a `RF-34` (um requisito por commit); `setup` (código sem RF próprio: estrutura inicial, CI); `contrato` (cópia de `Anexos/contrato/` para `docs/contrato/` na aceitação final).
 <!-- /projeto:escopos -->
 
 ## Acesso e ações irreversíveis

@@ -10,13 +10,13 @@ A. 00-requisitos: (1) apagar S1–S6 da tabela de suposições; (2) acrescentar 
   D11 adversarial pelo claude -p --chrome, disponível com --strict-mcp-config.
   D12 app nativo para Windows; RNF medidos no Windows 11; Gerenciador de Credenciais do Windows.
   D13 grafia MyHarness; identificador dev.myharness.app (%APPDATA%\dev.myharness.app).
-  D14 só o orquestrador altera docs/contrato/ e notas; subagente propõe no relatório.
+  D14 só o orquestrador altera Anexos/contrato/ e notas; subagente propõe no relatório.
   (3) README:14 "D1 a D14 e S7 a S15".
-B. Requisitos: RF-01 (/login), RF-02 (MCP), RF-03 (device flow, código em github.com/login/device), RF-10 (claude -p), RF-18 (5 h, 7 dias, rate_limit_event, origem e hora da leitura), RNF-04 (comparar com /usage, tolerância [a preencher]), RNF-05 (pasta %APPDATA%\dev.myharness.app), RNF-06 (sem config pessoal; negar escrita em cofre e docs/contrato/), RN-01 (contrato incluído; nenhum subagente escreve em cofre algum nem no contrato), grafia "harness" → "MyHarness" em 00:44, 72, 118; 01:9, 26–28; README:5.
-C. Atores: ATR-06 (/login, authentication_failed), ATR-07 (MCP), ATR-08 (OAuth próprio, device flow), ATR-09 (--chrome, --strict-mcp-config); ATR-01 a ATR-05 e matriz com a linha "Alterar docs/contrato/": Humano sim (fora do MyHarness), orquestrador sim, demais não.
+B. Requisitos: RF-01 (/login), RF-02 (MCP), RF-03 (device flow, código em github.com/login/device), RF-10 (claude -p), RF-18 (5 h, 7 dias, rate_limit_event, origem e hora da leitura), RNF-04 (comparar com /usage, tolerância [a preencher]), RNF-05 (pasta %APPDATA%\dev.myharness.app), RNF-06 (sem config pessoal; negar escrita em cofre e Anexos/contrato/), RN-01 (contrato incluído; nenhum subagente escreve em cofre algum nem no contrato), grafia "harness" → "MyHarness" em 00:44, 72, 118; 01:9, 26–28; README:5.
+C. Atores: ATR-06 (/login, authentication_failed), ATR-07 (MCP), ATR-08 (OAuth próprio, device flow), ATR-09 (--chrome, --strict-mcp-config); ATR-01 a ATR-05 e matriz com a linha "Alterar Anexos/contrato/": Humano sim (fora do MyHarness), orquestrador sim, demais não.
 D. Entidades: ENT-13 (Gerenciador de Credenciais; token do device flow); ENT-14 Consumo ganha semanal_reinicio, lida_em, origem (evento|estimado), janela_status, semanal_status, excedente; guarda só a última leitura; ENT-15 sem escrita em cofre nem contrato, sem configuração pessoal.
 E. UC-01 passo 2 (login da CLI, device flow, teste MCP); UC-04 FE-02 e ERR-13 (cofre ou contrato); CMP-01 (5 h e 7 dias, última leitura com hora, "estimado"); ERR-02 (device flow cancelado, access_denied, expired_token).
-F. AC-04 e AC-129 (device flow recusado/expirado, não "navegador fecha"); AC-58 (orquestra/ e docs/contrato/); AC-116; 08:5 (API = camada de comandos; tela no navegador com núcleo simulado e tauri-driver); README:8 (mesmo repositório my-harness).
+F. AC-04 e AC-129 (device flow recusado/expirado, não "navegador fecha"); AC-58 (orquestra/ e Anexos/contrato/); AC-116; 08:5 (API = camada de comandos; tela no navegador com núcleo simulado e tauri-driver); README:8 (mesmo repositório my-harness).
 mudancas.md: M-01 rascunho aprovado; M-02 decisões de 2026-11-19 aplicadas (lista completa no relatório original).
 
 LISTA 2 — Dúvidas do humano (recomendação entre colchetes)

@@ -15,11 +15,13 @@ A memória deste projeto é o cofre Obsidian `{{nome-do-cofre}}`, em `{{caminho-
 
 ## Contrato
 
-- Frontend em repositório separado do backend: o contrato mora só em `docs/contrato/` do repositório do backend (`{{caminho-ou-link-do-backend}}`); neste repositório, todo `docs/contrato/` abaixo se lê lá, sem cópia. Repositório único ou do backend: apague esta linha.
-- `docs/contrato/` é a fonte de verdade do que o produto faz: requisitos, atores (ATR), entidades (ENT), casos de uso (UC), componentes (CMP), erros (ERR), navegação (NAV) e critérios de aceite (AC). Ordem e regras em `docs/contrato/README.md`.
-- Tela não cria regra: cada tela realiza CMP, UC e NAV do contrato. Regra que falta entra primeiro no contrato, com aval do humano e item em `docs/contrato/mudancas.md`.
+- O contrato mora no cofre, em `{{caminho-do-cofre}}/Anexos/contrato/`: é a fonte de verdade do que o produto faz, para backend e frontend (mesmo em repositório separado): requisitos, atores (ATR), entidades (ENT), casos de uso (UC), componentes (CMP), erros (ERR), navegação (NAV) e critérios de aceite (AC). Ordem e regras no `README.md` de lá.
+- Leia o contrato pela Obsidian CLI (`obsidian read path="Anexos/contrato/03-casos-de-uso.md"`, com `vault="{{nome-do-cofre}}"`); sem CLI, pelo arquivo, avisando no relatório.
+- Só o orquestrador altera o contrato. Subagente que precisar de mudança devolve no relatório o arquivo, o trecho atual, o trecho novo e o motivo.
+- Este repositório não tem `docs/contrato/` durante o projeto: na aceitação final, depois do aceite do humano, o orquestrador copia `Anexos/contrato/` para `docs/contrato/`, num commit só, com escopo `contrato`. Nenhum subagente altera essa cópia.
+- Tela não cria regra: cada tela realiza CMP, UC e NAV do contrato. Regra que falta entra primeiro no contrato, com aval do humano e item em `Anexos/contrato/mudancas.md`.
 - Campo de entrada: schema zod tirado do ENT (tipo, tamanho, formato, valores, teto), uma mensagem por violação (a do ERR) e o campo impede o impossível (S26 da nota `Padrão de projeto de software` do cofre `Vault`).
-- Comentário curto e pontual: só o porquê que o código não mostra; ID citado só se existir em `docs/contrato/` (S27).
+- Comentário curto e pontual: só o porquê que o código não mostra; ID citado só se existir no contrato (S27).
 - Toda funcionalidade tem contrato (ENT, UC com FA e FE, ERR, AC); com interface, também CMP e NAV. Ao final de cada uma, o orquestrador roda o verificador de fluxo principal e depois o adversarial: eles executam os AC pela API e, com interface, na tela. Nenhuma suíte de E2E de interface fica no repositório.
 
 ## Commits
@@ -36,5 +38,5 @@ A memória deste projeto é o cofre Obsidian `{{nome-do-cofre}}`, em `{{caminho-
 - Lado do cofre: o `CLAUDE.md` do cofre, gerado de `Modelo de CLAUDE do cofre`
 - Formato dos subagentes: [[modelo-briefing-subagente]], [[modelo-relatorio-subagente]]
 - Regras: [[manual-da-orquestra]] e Manual da Orquestra - Perfil projeto prático (no Vault)
-- Contrato que o bloco cita: Contrato funcional (no Vault) (modelos no `Vault` em `Modelos/Orquestra/contrato/`; no cofre de projeto, em `orquestra/modelos/contrato/`)
+- Contrato que o bloco cita: Contrato funcional (no Vault) (modelos no `Vault` em `Modelos/Orquestra/contrato/`; no cofre de projeto, o contrato em uso em `Anexos/contrato/`)
 - Commits: Padrão de commit (no Vault)
