@@ -98,7 +98,7 @@ Detalhe: [[manual-da-orquestra#🚦 Etapas vitais]] (ler pela CLI). Modelos e ma
 - Detalhe: Padrão de commit (no Vault) e Commitar no the-mind-hub (no Vault) (ler pela CLI).
 
 <!-- projeto:escopos -->
-- **Escopos deste cofre** (lista fechada; muda só com aval): `myHarness-vault` (notas deste cofre), `readme` (README da raiz do `the-mind-hub`, commit separado); IDs de requisito do contrato: `RF-01` a `RF-34` (um requisito por commit); escopo para código sem RF próprio (estrutura inicial, CI) [a confirmar].
+- **Escopos deste cofre** (lista fechada; muda só com aval): `myHarness-vault` (notas deste cofre), `readme` (README da raiz do `the-mind-hub`, commit separado); IDs de requisito do contrato: `RF-01` a `RF-34` (um requisito por commit); `setup` (código sem RF próprio: estrutura inicial, CI).
 <!-- /projeto:escopos -->
 
 ## Acesso e ações irreversíveis

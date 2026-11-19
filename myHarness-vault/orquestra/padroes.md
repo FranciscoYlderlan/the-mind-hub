@@ -13,6 +13,7 @@ aliases: [padroes do projeto, padronização]
 # termo fora do padrão => forma certa   ("re:" no início = expressão regular)
 # antigo: termo do estado substituído => estado atual (nota dona)   (ERRO só fora do histórico)
 re:\b[Oo] Harness\b|\bpelo Harness\b|\bdo Harness\b => o MyHarness (geral-decisao-2026-11-19-grafia-do-nome)
+antigo: re:\*\*não tem acesso\*\* a essa pasta|que o agente não acessa|entrega os arquivos ao humano|A entrega ao humano é por arquivo => o agente escreve direto em Projetos\my-harness (geral-decisao-2026-11-19-acesso-ao-repositorio)
 limite-palavras: 2000
 ```
 
@@ -27,6 +28,6 @@ limite-palavras: 2000
 
 ### 🔗 Conexões
 - Índice: [[CLAUDE]]
-- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]]
+- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]]
 - Mapa: [[moc-orquestra]]
 - Regras: [[manual-da-orquestra]]
