@@ -1,0 +1,56 @@
+[
+  {
+    "arquivo": "00-requisitos.md",
+    "atual": "Tokens de OAuth, chaves e senhas nunca são gravados no cofre, nos logs nem no histórico. Violação:",
+    "novo": "Tokens de OAuth, chaves e senhas nunca são gravados no cofre, nos logs nem no histórico. Formatos reconhecidos: tokens do GitHub (`ghp_`, `gho_`, `ghu_`, `ghs_`, `ghr_`, `github_pat_`), chaves `sk-ant-`, cabeçalho `Authorization`/`Bearer`, valores de chave token/senha/secret/api key (inclusive `--token`), senha em URL e chave privada PEM; o token com prefixo some inteiro e, em chave ou cabeçalho, só o valor vira ••••. Violação:",
+    "motivo": "M-33: RN-04 formatos reconhecidos"
+  },
+  {
+    "arquivo": "mudancas.md",
+    "atual": "| M-32 | 2026-11-19 |",
+    "novo": "| M-33 | 2026-11-19 | RN-04 ganha os formatos reconhecidos: tokens do GitHub (`ghp_`, `gho_`, `ghu_`, `ghs_`, `ghr_`, `github_pat_`), chaves `sk-ant-`, cabeçalho `Authorization`/`Bearer`, valores de chave token/senha/secret/api key (inclusive `--token`), senha em URL e chave privada PEM; o token com prefixo some inteiro e, em chave ou cabeçalho, só o valor vira •••• | 00 (RN-04) | proposta do implementador da T2 do fundacao-plano, sessão das 16h51 | aval do humano em 2026-11-19, sessão das 17h20 |\n| M-32 | 2026-11-19 |",
+    "motivo": "M-33: RN-04 formatos reconhecidos"
+  },
+  {
+    "arquivo": "08-criterios-de-aceite.md",
+    "atual": "| AC-61 | UC-01 | regra RN-04 | um log que contém um token do GitHub | ele é gravado | o token aparece como •••• |",
+    "novo": "| AC-61 | UC-01 | regra RN-04 | um log que contém um token do GitHub | ele é gravado | o token aparece como •••• |\n| AC-154 | UC-01 | regra RN-04 | uma mensagem de erro da CLI que traz um token do GitHub (`ghp_`), no ERR-03 ou no ERR-04 | a mensagem é mostrada | ela sai com o token como •••• |",
+    "motivo": "M-34: AC-154 mensagem da CLI mascarada"
+  },
+  {
+    "arquivo": "08-criterios-de-aceite.md",
+    "atual": "AC-149 a AC-152, por erro de campo que estava sem AC, e AC-153, por fluxo de UC criado depois (na tabela",
+    "novo": "AC-149 a AC-152, por erro de campo que estava sem AC, AC-153, por fluxo de UC criado depois, e AC-154, por regra ampliada depois (na tabela",
+    "motivo": "M-34: AC-154 mensagem da CLI mascarada"
+  },
+  {
+    "arquivo": "07-rastreabilidade.md",
+    "atual": "AC-01, AC-02, AC-03, AC-88, AC-153 |",
+    "novo": "AC-01, AC-02, AC-03, AC-88, AC-153, AC-154 |",
+    "motivo": "M-34: AC-154 mensagem da CLI mascarada"
+  },
+  {
+    "arquivo": "07-rastreabilidade.md",
+    "atual": "AC-05, AC-89, AC-128, AC-153 |",
+    "novo": "AC-05, AC-89, AC-128, AC-153, AC-154 |",
+    "motivo": "M-34: AC-154 mensagem da CLI mascarada"
+  },
+  {
+    "arquivo": "07-rastreabilidade.md",
+    "atual": "| — (mascarar) | TEL-01, TEL-02 (previstas) | AC-61 |",
+    "novo": "| — (mascarar) | TEL-01, TEL-02 (previstas) | AC-61, AC-154 |",
+    "motivo": "M-34: AC-154 mensagem da CLI mascarada"
+  },
+  {
+    "arquivo": "README.md",
+    "atual": "AC-01 a AC-153",
+    "novo": "AC-01 a AC-154",
+    "motivo": "M-34: AC-154 mensagem da CLI mascarada"
+  },
+  {
+    "arquivo": "mudancas.md",
+    "atual": "| M-33 | 2026-11-19 | RN-04 ganha os formatos reconhecidos: tokens do GitHub (`ghp_`, `gho_`, `ghu_`, `ghs_`, `ghr_`, `github_pat_`), chaves `sk-ant-`, cabeçalho `Authorization`/`Bearer`, valores de chave token/senha/secret/api key (inclusive `--token`), senha em URL e chave privada PEM; o token com prefixo some inteiro e, em chave ou cabeçalho, só o valor vira •••• | 00 (RN-04) | proposta do implementador da T2 do fundacao-plano, sessão das 16h51 | aval do humano em 2026-11-19, sessão das 17h20 |",
+    "novo": "| M-34 | 2026-11-19 | AC-154 (novo): a mensagem de erro da CLI mostrada no ERR-03 e no ERR-04 que traz um token sai com o token como ••••; ligado às linhas RF-01, RF-02 e RN-04 da rastreabilidade | 07 (RF-01, RF-02, RN-04), 08 (introdução, AC-154), README | proposta do implementador da T2 do fundacao-plano, sessão das 16h51 | aval do humano em 2026-11-19, sessão das 17h20 |\n| M-33 | 2026-11-19 | RN-04 ganha os formatos reconhecidos: tokens do GitHub (`ghp_`, `gho_`, `ghu_`, `ghs_`, `ghr_`, `github_pat_`), chaves `sk-ant-`, cabeçalho `Authorization`/`Bearer`, valores de chave token/senha/secret/api key (inclusive `--token`), senha em URL e chave privada PEM; o token com prefixo some inteiro e, em chave ou cabeçalho, só o valor vira •••• | 00 (RN-04) | proposta do implementador da T2 do fundacao-plano, sessão das 16h51 | aval do humano em 2026-11-19, sessão das 17h20 |",
+    "motivo": "M-34: AC-154 mensagem da CLI mascarada"
+  }
+]

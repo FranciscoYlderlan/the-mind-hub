@@ -8,8 +8,8 @@ Nenhuma tela existe ainda. A coluna Tela traz a tela prevista na fonte (TEL-xx),
 
 | Requisito | UC | Fluxos | CMP | ENT | ERR | Tela (preencher depois) | Cenário de teste (AC-xx) |
 |---|---|---|---|---|---|---|---|
-| RF-01 | UC-01 | principal, FA-01, FE-01, FE-04 | CMP-03, CMP-11 | ENT-13 | ERR-01, ERR-04, ERR-53 | TEL-01, TEL-02 (previstas) | AC-01, AC-02, AC-03, AC-88, AC-153 |
-| RF-02 | UC-01 | principal, FE-03, FE-04 | CMP-03, CMP-11 | ENT-13, ENT-02 | ERR-03, ERR-53 | TEL-01, TEL-02 (previstas) | AC-05, AC-89, AC-128, AC-153 |
+| RF-01 | UC-01 | principal, FA-01, FE-01, FE-04 | CMP-03, CMP-11 | ENT-13 | ERR-01, ERR-04, ERR-53 | TEL-01, TEL-02 (previstas) | AC-01, AC-02, AC-03, AC-88, AC-153, AC-154 |
+| RF-02 | UC-01 | principal, FE-03, FE-04 | CMP-03, CMP-11 | ENT-13, ENT-02 | ERR-03, ERR-53 | TEL-01, TEL-02 (previstas) | AC-05, AC-89, AC-128, AC-153, AC-154 |
 | RF-03 | UC-01 | principal, FE-02, FE-04 | CMP-03, CMP-11 | ENT-13 | ERR-02, ERR-53 | TEL-01, TEL-02 (previstas) | AC-01, AC-04, AC-90, AC-127, AC-129, AC-153 |
 | RF-04 | UC-01 | principal, FE-04 | CMP-03 | ENT-13 | ERR-05, ERR-06, ERR-07, ERR-53 | TEL-01 (prevista) | AC-91, AC-153 |
 | RF-05 | UC-02 | principal, FE-01, FE-02 | CMP-04, CMP-06 | ENT-03, ENT-04 | ERR-05, ERR-08, ERR-42 | TEL-01 (prevista) | AC-06, AC-09, AC-10, AC-92, AC-122 |
@@ -50,7 +50,7 @@ Nenhuma tela existe ainda. A coluna Tela traz a tela prevista na fonte (TEL-xx),
 | RN-01 | UC-04 | FE-02 | CMP-08 | ENT-07, ENT-17 | ERR-13 | TEL-01 (prevista) | AC-58, AC-116 |
 | RN-02 | UC-02, UC-11, UC-12, UC-14 | UC-02 passo 2; UC-11 principal | CMP-02 | ENT-11, ENT-13 | ERR-18 | TEL-01 (prevista) | AC-59 |
 | RN-03 | UC-04 | principal (passo 4) | CMP-08 | ENT-09, ENT-18 | ERR-15 | TEL-01 (prevista) | AC-60 |
-| RN-04 | UC-01 | principal | CMP-08, CMP-11 | ENT-04, ENT-12, ENT-13 | — (mascarar) | TEL-01, TEL-02 (previstas) | AC-61 |
+| RN-04 | UC-01 | principal | CMP-08, CMP-11 | ENT-04, ENT-12, ENT-13 | — (mascarar) | TEL-01, TEL-02 (previstas) | AC-61, AC-154 |
 | RN-05 | UC-03 | principal | CMP-10, CMP-13 | ENT-05 | ERR-09 | TEL-03 (prevista) | AC-11, AC-62 |
 | RN-06 | UC-03 | principal | CMP-13 | ENT-18 | ERR-10 | TEL-03 (prevista) | AC-63 |
 | RN-07 | UC-02, UC-03, UC-09 | principal | CMP-06, CMP-12, CMP-14 | ENT-06, ENT-15 | ERR-11 | TEL-01, TEL-03, TEL-04 (previstas) | AC-64 |
