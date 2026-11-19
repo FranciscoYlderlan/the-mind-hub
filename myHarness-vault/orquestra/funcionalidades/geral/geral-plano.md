@@ -33,7 +33,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 - **Ciclo** (prático): sem funcionalidade de produto; protótipo de pesquisa com relatório e prova (saída real do `claude -p` e da fonte de consumo anexada), depois tarefas-interface (P12, G1).
 - **Funcionalidades:** `fundacao` (sem RF próprio; prepara RF-05, RF-10, RF-18, RF-29, RF-32)
 - **Paralelo:** os protótipos S2, S3/S4 e S5 são pesquisa, só leitura, sem teto (G11) e em paralelo; o esqueleto do repositório é uma cadeia com um agente só (G3); as tarefas-interface rodam em série depois da decisão S3 × S4.
-- **Notas geradas:** [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-fonte-do-consumo]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-identificador-do-app]], [[geral-decisao-2026-11-19-versao-inicial]]
+- **Notas geradas:** [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-fonte-do-consumo]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-identificador-do-app]], [[geral-decisao-2026-11-19-versao-inicial]], [[geral-decisao-2026-11-19-push-e-pr-pelo-nucleo]], [[geral-decisao-2026-11-19-entidades-no-sqlite]], [[geral-decisao-2026-11-19-papel-pesquisa]], [[geral-decisao-2026-11-19-data-e-hora-em-utc]]
 - **Concluída em:** 
 
 ## 3. Integrações
@@ -116,16 +116,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 - **Concluída em:** 
 
 ## Proposta de arquitetura e stack
-Só no projeto prático de software (S25 do Padrão de projeto de software (no Vault)); em outro projeto prático, apagar esta seção. Proposta da IA a partir da Referência de arquitetura e stack (no Vault), em linguagem leiga, no passo 4 de Criar um novo cofre (no Vault). Com o aval, cada escolha vira decisão em `funcionalidades/geral/` (`geral-decisao-AAAA-MM-DD-estrutura`, `geral-decisao-AAAA-MM-DD-stack`), com o link para esta seção no campo Proposta.
-
-**Ideia geral, numa frase:** a tela (React) só mostra e pede; o núcleo (Rust) decide tudo, inclusive o que cada agente pode fazer; cada agente é um processo do Claude CLI que o núcleo abre já "de mãos amarradas" para o seu papel.
-
-- **Frontend:** React + Vite + TypeScript, Tailwind + shadcn/ui, TanStack Query, Zustand, zod; lista virtualizada para a saída dos agentes. Sem rotas de URL no começo.
-- **Backend:** núcleo em Rust dentro do Tauri 2, em camadas (regras → casos de uso → integrações), com cada integração atrás de uma interface trocável (RNF-11). Agentes rodam como `claude -p` direto (S3), com permissão imposta em quatro camadas. S4 descartada pelo P1.
-- **Tecnologias e versões:** a mais recente estável no momento de criar o repositório, sem trava (S16); conferir que não é rc. Lista na tabela abaixo.
-- **Detalhe e protótipos:** [[geral-plano-arquitetura-e-stack]] (tela, núcleo, banco, S3 × S4) e [[geral-plano-arquitetura-e-stack-integracoes-e-testes]] (integrações, consumo, testes, pastas) e [[geral-plano-arquitetura-e-stack-integracoes-e-testes-prototipos]] (protótipos).
-- **Ajustes do humano:** nenhum; aprovada em [[geral-decisao-2026-11-19-estrutura]] e [[geral-decisao-2026-11-19-stack]]
-
+Aprovada em [[geral-decisao-2026-11-19-estrutura]] e [[geral-decisao-2026-11-19-stack]]; resumo e detalhe em [[geral-plano-arquitetura-e-stack]].
 
 ### 🔗 Conexões
 - Projeto: [[geral-contexto]]
