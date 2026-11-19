@@ -7,7 +7,7 @@ substitui:
 ---
 # ✅ Cada agente roda como `claude -p` direto (S3)
 
-- **Proposta (plano):** [[geral-plano-arquitetura-e-stack]], seção 4 (S3 × S4); prova na seção 10 de [[geral-plano-arquitetura-e-stack-integracoes-e-testes]] (P1).
+- **Proposta (plano):** [[geral-plano-arquitetura-e-stack]], seção 4 (S3 × S4); prova em [[geral-plano-arquitetura-e-stack-integracoes-e-testes-prototipos]] (P1).
 - **Decisão:** S3 confirmada: o `AgentRunner` abre cada agente como `claude -p` direto, com as quatro camadas de permissão (ferramentas por papel, `dontAsk` com lista de permitidos, `harness-gate` no gancho `PreToolUse` carregado por `--settings`, ambiente sem token do GitHub) e `--setting-sources ""`. O Agent SDK em Node (S4) sai do plano.
 - **Alteração:** ponto S3 × S4 de [[geral-decisao-2026-11-19-stack]], que segue aprovada com a linha reescrita.
 - **Motivo:** P1 em 2026-11-19, no Windows: 8 de 8 tentativas barradas pela camada esperada, efeitos no disco conferidos, gancho com mediana de 8,6 ms (56 ms com a partida do Node), nenhuma configuração pessoal carregada. Aval do humano em 2026-11-19.
