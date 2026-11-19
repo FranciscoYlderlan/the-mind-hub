@@ -12,6 +12,7 @@ Qual memória abrir para cada projeto:
 |---|---|---|---|
 | `Vault/` | Minha vida | Quem eu sou, como eu funciono, meus estudos e padrões que valem para todos os projetos | Rotina, perfil, estudos, padrão de commit |
 | `stonebid-vault/` | StoneBid | Regras de negócio, decisões e estudos do projeto | Antes de trabalhar no StoneBid |
+| `myHarness-vault/` | MyHarness | Roteiro, decisões, diários e bugs do app desktop que governa agentes do Claude CLI | Antes de trabalhar no MyHarness ou no repositório `my-harness` |
 
 > Regra: cofre novo só para **projeto novo**. Estudo não ganha cofre: estudo geral fica no `Vault/`, e estudo de um projeto fica no cofre dele.
 
