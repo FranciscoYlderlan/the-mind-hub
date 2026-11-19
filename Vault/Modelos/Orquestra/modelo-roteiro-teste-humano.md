@@ -18,7 +18,7 @@ Falas do humano (2026-11-17): "no obsidian esses fluxos são registrados para ca
 
 ## Fluxos registrados
 
-Uma seção por funcionalidade, na ordem em que passaram. Passos didáticos e sucintos: faça → clique em → esperado, cada um ligado ao AC de `docs/contrato/08-criterios-de-aceite.md` que ele prova.
+Uma seção por funcionalidade, na ordem em que passaram. Passos didáticos e sucintos: faça → clique em → esperado, cada um ligado ao AC de `Anexos/contrato/08-criterios-de-aceite.md` que ele prova.
 
 ### nome-da-funcionalidade (AAAA-MM-DD)
 - **Contexto:** [[nome-da-func-contexto]] · **UC:** UC-01 · **Acesso:** nota de acesso de teste (P08), nunca a senha aqui
