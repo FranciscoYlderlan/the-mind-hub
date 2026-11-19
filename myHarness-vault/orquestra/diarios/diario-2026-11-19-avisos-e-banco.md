@@ -1,6 +1,6 @@
 ---
 tipo: diario
-status: em-andamento
+status: consolidada
 criado: 2026-11-19
 ---
 # 📓 Diário 2026-11-19 — erros × avisos e revisão do banco
@@ -26,6 +26,7 @@ criado: 2026-11-19
 > - **Ambiente:** pedir `Projetos\my-harness` e `Projetos\the-mind-hub` com permissão de apagar (git).
 > - **Threads abertas:** 8 pontos `[a confirmar]` do relatório das 16h18; grupo B (dúvidas 13 a 30); 11 dúvidas da especificação; GitHub ainda inexistente.
 > - **Dúvidas para o humano:** os 8 pontos acima.
+> - **Tempo do humano hoje:** até as 18h. Passagem de turno às 16h51 (118,4 mil tokens na linha Messages; orçamento: 100 mil).
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
