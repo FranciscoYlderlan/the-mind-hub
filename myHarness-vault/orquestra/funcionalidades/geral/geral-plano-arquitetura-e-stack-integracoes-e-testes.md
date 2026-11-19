@@ -29,11 +29,11 @@ Primeira parte: [[geral-plano-arquitetura-e-stack]]. Resumo e aval: [[geral-plan
 
 | Fonte | O que dá | Situação |
 |---|---|---|
-| **Evento `rate_limit_event` no JSON do `claude -p`** | Situação da janela de 5 h e da semanal: % usado (`utilization`), hora do reinício (`resetsAt`), por janela | **Recomendada.** Chega de graça em toda execução que já roda. Documentação oficial do campo ainda é pobre: 🧪 confirmar (P2) |
+| **Evento `rate_limit_event` no JSON do `claude -p`** | Situação da janela de 5 h e da semanal: % usado (`utilization`), hora do reinício (`resetsAt`), por janela | **Escolhida** ([[geral-decisao-2026-11-19-fonte-do-consumo]]). Chega de graça em toda execução; o P2 confirmou os campos |
 | Barra de status (statusline) do Claude Code | JSON com `rate_limits.five_hour` e `rate_limits.seven_day` (% e reinício) | Só existe em sessão interativa; o harness usa `-p`. Serve para conferir |
 | Registros locais de sessão da CLI | Tokens por mensagem | Plano B da especificação: estimar, sem o % oficial |
 
-**Recomendação para S2:** ler o `rate_limit_event` de todas as execuções e guardar a última leitura no SQLite (Consumo). Sem agente rodando, o CMP-01 mostra a última leitura com a hora dela. Se o evento não trouxer o % (ex.: login por chave de API), cair para o plano B e marcar "estimado". O consumo **do chat** (RF-17) sai do campo `usage` de cada resposta, que é confiável. 🧪 Protótipo P2: comparar 20 leituras com o `/usage` (RNF-04).
+**S2 decidida** ([[geral-decisao-2026-11-19-fonte-do-consumo]]): ler o `rate_limit_event` de todas as execuções e guardar a última leitura no SQLite (Consumo). Sem agente rodando, o CMP-01 mostra a última leitura com a hora dela. Se o evento não trouxer o % (ex.: login por chave de API), cair para o plano B e marcar "estimado". O consumo **do chat** (RF-17) sai do campo `usage` de cada resposta, que é confiável. O P2 comparou 20 leituras com o `/usage` (RNF-04): batem.
 
 ### 7. 🧪 Testes e ferramentas
 
@@ -111,4 +111,5 @@ Respostas às dúvidas do preparo: no Windows o agente usa a ferramenta `PowerSh
 ### 🔗 Conexões
 - Primeira parte: [[geral-plano-arquitetura-e-stack]]
 - Resumo e aval: [[geral-plano]]
+- Decisões dos protótipos: [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-fonte-do-consumo]]
 - Projeto: [[geral-contexto]]
