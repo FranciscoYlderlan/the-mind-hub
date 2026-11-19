@@ -101,13 +101,13 @@ Mora em: SQLite + decisão no cofre. Gravação dupla, com o mesmo conteúdo nos
 | versao | inteiro | ≥ 1 | sim | — | sobe a cada plano novo do orquestrador: depois de "Pedir alteração" e depois de cada devolução (ERR-49) | — |
 | status | enumeração | — | sim | — | proposto, aprovado, recusado | despacho sem aval: ERR-09 |
 | aprovado_em | data e hora | — | só se aprovado | ISO 8601 UTC | — | — |
-| devolucoes | inteiro | 0 a 2 | sim | — | sobe 1 a cada devolução do plano ao orquestrador por tarefa incompleta; não zera quando o plano ganha versão nova: soma por pedido, para o teto de 2 | tarefa incompleta: ERR-49 |
+| devolucoes | inteiro | 0 a 2 | sim | — | sobe 1 a cada devolução do plano ao orquestrador por tarefa incompleta; soma por pedido (o pedido do Humano ao orquestrador que gerou o plano), para o teto de 2: não zera quando o plano ganha versão nova nem depois de "Pedir alteração", que não abre pedido novo; começa em 0 só num pedido novo do Humano | tarefa incompleta: ERR-49 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
 - Nenhum subagente inicia com o plano fora de `aprovado` (RN-05; violação: ERR-09), salvo tarefa do papel pesquisa, que só lê (RN-05).
 - "Aprovar" só com as integrações exigidas pelo plano conectadas (RN-08; violação: ERR-06).
-- Plano com tarefa incompleta volta ao orquestrador até 2 vezes por pedido (`devolucoes`, que não zera quando o plano ganha versão nova; cada plano novo do orquestrador sobe a `versao`); na 3ª, chega ao Humano com as tarefas incompletas marcadas, e o Humano pede o preenchimento por "Pedir alteração" (ERR-49); "Aprovar" fica bloqueado enquanto houver tarefa marcada.
+- Plano com tarefa incompleta volta ao orquestrador até 2 vezes por pedido, o pedido do Humano ao orquestrador que gerou o plano (`devolucoes`, que começa em 0 só num pedido novo do Humano e não zera quando o plano ganha versão nova nem depois de "Pedir alteração", que não abre pedido novo; cada plano novo do orquestrador sobe a `versao`); na 3ª, chega ao Humano com as tarefas incompletas marcadas, e o Humano pede o preenchimento por "Pedir alteração" (ERR-49); "Aprovar" fica bloqueado enquanto houver tarefa marcada.
 
 ### Estados do ciclo de vida
 
@@ -305,7 +305,7 @@ Mora em: SQLite (status) + Gerenciador de Credenciais do Windows (D12).
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
 | tipo | enumeração | — | sim | — | Claude CLI, Obsidian CLI, GitHub | — |
-| status | enumeração | — | sim | — | conectado, desconectado, sem login, não instalado | ERR-01, ERR-05, ERR-06, ERR-07 |
+| status | enumeração | — | sim | — | conectado, desconectado, sem login, não instalado | ERR-01, ERR-05, ERR-06, ERR-07, ERR-53 |
 | conta | texto | — | não | — | — | — |
 | versao | texto | — | não | — | — | — |
 | credencial (RN-04) | segredo | — | só GitHub: token do device flow (D10) | — | só no Gerenciador de Credenciais do Windows | — |

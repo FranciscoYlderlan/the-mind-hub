@@ -2,7 +2,7 @@
 
 Um critério por fluxo (principal, alternativo e exceção), no formato dado / quando / então. Ao final de cada funcionalidade, o verificador de fluxo principal executa os AC dos fluxos principais e, depois, o adversarial executa os dos FA e FE: no backend pela API e, se a funcionalidade tem interface, também no frontend.
 
-No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Os textos vêm dos "Aceite" da fonte, salvo os escritos por mudança aprovada (`mudancas.md`). Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela; AC-144 e AC-145, por fluxo de UC criado depois, AC-146, por requisito acrescentado depois, AC-147 e AC-148, por regra acrescentada depois, e AC-149 a AC-152, por erro de campo que estava sem AC (na tabela, junto do UC ou do requisito dele).
+No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Os textos vêm dos "Aceite" da fonte, salvo os escritos por mudança aprovada (`mudancas.md`). Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela; AC-144 e AC-145, por fluxo de UC criado depois, AC-146, por requisito acrescentado depois, AC-147 e AC-148, por regra acrescentada depois, AC-149 a AC-152, por erro de campo que estava sem AC, e AC-153, por fluxo de UC criado depois (na tabela, junto do UC ou do requisito dele).
 
 ## Por fluxo de caso de uso
 
@@ -13,6 +13,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 | AC-03 | UC-01 | FE-01 | o Claude CLI ausente | o app abre | o indicador fica em erro com o link (ERR-01) |
 | AC-04 | UC-01 | FE-02 | o device flow do GitHub iniciado | o Humano recusa no GitHub (`access_denied`) ou o código expira (`expired_token`) | o status continua desconectado (ERR-02) |
 | AC-05 | UC-01 | FE-03 | o Obsidian fechado | o status é checado | aparece "Abrir Obsidian" (ERR-03) |
+| AC-153 | UC-01 | FE-04 | o GitHub conectado e a rede fora do ar | o status é checado | o GitHub fica em `desconectado` com "Falha inesperada com GitHub: <motivo>. Tente de novo." (ERR-53) e a ação de conectar de novo; com a rede de volta, conectar de novo funciona |
 | AC-06 | UC-02 | principal | um chat aberto | o Humano envia | a resposta aparece em tempo real |
 | AC-07 | UC-02 | FA-01 | um pedido com 3 partes | o orquestrador decide dividir | aparece o plano para aval |
 | AC-08 | UC-02 | FA-02 | o chat no limite | a resposta termina | aparece o aviso com a recomendação de passar o turno e abrir um chat novo (ERR-48), e o chat segue ativo |

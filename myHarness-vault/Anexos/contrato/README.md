@@ -16,10 +16,10 @@ Fonte de verdade do que o produto faz, para o frontend e para o backend. O backe
 | `02-entidades.md` | Modelo de dados e invariantes | ENT-01 a ENT-26 |
 | `03-casos-de-uso.md` | Casos de uso e fluxos | UC-01 a UC-14, FA-xx, FE-xx |
 | `04-componentes.md` | Telas previstas e componentes lógicos | TEL-01 a TEL-06, CMP-01 a CMP-17 |
-| `05-erros.md` | Catálogo de erros e avisos | ERR-01 a ERR-52 |
+| `05-erros.md` | Catálogo de erros e avisos | ERR-01 a ERR-53 |
 | `06-navegacao.md` | Estados e navegação | NAV-01 a NAV-23 |
 | `07-rastreabilidade.md` | Mapa de rastreabilidade | (cruza os IDs) |
-| `08-criterios-de-aceite.md` | Critérios de aceite | AC-01 a AC-152 |
+| `08-criterios-de-aceite.md` | Critérios de aceite | AC-01 a AC-153 |
 | `mudancas.md` | Mudanças aprovadas | M-xx |
 
 ## Ordem de preenchimento
