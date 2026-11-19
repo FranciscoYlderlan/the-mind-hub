@@ -22,7 +22,7 @@ App desktop de um só usuário (D4): não há URL nem login. A coluna Tela traz 
 | NAV-14 | revisao-de-achados | fechou | — | area-de-trabalho, com a rodada `aguardando decisão` se faltar decisão [a confirmar] | TEL-01 (prevista) |
 | NAV-15 | area-de-trabalho | clicou no botão Configurações | — | configuracoes | TEL-06 (prevista; posição do botão [a confirmar, S15]) |
 | NAV-16 | configuracoes | fechou | — | area-de-trabalho | TEL-01 (prevista) |
-| NAV-17 | area-de-trabalho (chat ativo) | o chat atingiu o limite ou o Humano pediu a passagem (UC-08) | "Onde parei" com próximo passo gravado (RN-24) | area-de-trabalho, no chat de continuação | TEL-01 (prevista) |
+| NAV-17 | area-de-trabalho (chat ativo) | o Humano aceitou a recomendação de passagem dada no limite (RN-23) ou pediu a passagem (UC-08) | "Onde parei" com próximo passo gravado (RN-24) | area-de-trabalho, no chat de continuação | TEL-01 (prevista) |
 | NAV-18 | area-de-trabalho | clicou em "Novo chat" (CMP-07) | — | area-de-trabalho, num chat vazio com o limite padrão | TEL-01 (prevista) |
 | NAV-19 | historico | selecionou um chat (UC-12 passo 2) | o cofre do projeto existe | area-de-trabalho, com o chat reaberto | TEL-01 (prevista) |
 | NAV-20 | historico | selecionou um chat encerrado por passagem | — | area-de-trabalho, com a oferta de ir ao chat de continuação | TEL-01 (prevista) |

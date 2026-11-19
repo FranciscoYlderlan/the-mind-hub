@@ -1,8 +1,8 @@
-# Catálogo de erros (ERR)
+# Catálogo de erros e avisos (ERR)
 
-Um erro por condição. O código do ERR é o código de erro que o servidor devolve; o frontend mostra a mensagem daqui. Fluxo de exceção (FE) só referencia um ERR. Duas condições diferentes nunca dividem a mesma mensagem.
+Um item por condição. O catálogo separa dois tipos: **erro** (dado inválido: nada é salvo) e **aviso** (limite de boa prática: o sistema sinaliza e recomenda, e o Humano decide; tratamento `avisar`). O código do ERR é o código que o servidor devolve; o frontend mostra a mensagem daqui. Fluxo de exceção (FE) só referencia um ERR. Duas condições diferentes nunca dividem a mesma mensagem.
 
-"Servidor" é o núcleo Rust. Os códigos, derivados das RN, dos FE e dos campos das entidades, estão aprovados pelo Humano. Mensagem entre aspas é texto da fonte; `<x>` é valor preenchido em tempo de execução; mensagem sem texto na fonte fica `[a confirmar]`. Erros que só o agente recebe (sem tela) estão marcados "(agente)".
+"Servidor" é o núcleo Rust. Os códigos, derivados das RN, dos FE e dos campos das entidades, estão aprovados pelo Humano. Mensagem entre aspas é texto da fonte ou aprovado pelo Humano (`mudancas.md`); `<x>` é valor preenchido em tempo de execução; mensagem sem texto na fonte fica `[a confirmar]`. Erros que só o agente recebe (sem tela) estão marcados "(agente)".
 
 | ID | Código no servidor | Condição de disparo | Tratamento | Mensagem ao usuário | Estado final |
 |---|---|---|---|---|---|
@@ -50,11 +50,12 @@ Um erro por condição. O código do ERR é o código de erro que o servidor dev
 | ERR-42 | `FALHA_NO_ENVIO` | o envio do prompt falha por motivo diferente de ERR-05 e ERR-08 (CMP-06) [a confirmar: quais causas] | repetir | [a confirmar] | texto preservado no campo |
 | ERR-43 | `CAPTURA_INDISPONIVEL` | a captura de um achado não abre (CMP-15) | repetir | [a confirmar] | achado sem a imagem; decisão segue possível |
 | ERR-44 | `TETO_DE_ESCRITA_ATINGIDO` | 6º subagente que escreve código com 5 rodando (RN-13; UC-04 FA-01) | aguardar | contador "x de 5 que escrevem" e a tarefa na fila (CMP-05) | execução `na fila` |
-| ERR-45 | `PROJETO_NOME_INVALIDO` | nome do projeto vazio, com mais de 80 caracteres ou igual ao de outro projeto (ENT-01) | voltar | [a confirmar] | projeto não salvo |
-| ERR-46 | `REPOSITORIO_INVALIDO` | repositório do projeto que não é caminho absoluto de uma pasta com `.git` (ENT-01) | voltar | [a confirmar] | projeto não salvo |
-| ERR-47 | `LIMITE_DE_CONTEXTO_FORA_DA_FAIXA` | limite de contexto do projeto ou do chat fora de 10 mil a 1 milhão de tokens (ENT-01, ENT-03; CMP-07) | voltar | [a confirmar] | limite anterior mantido |
-| ERR-48 | `ADIAMENTO_JA_USADO` | segundo pedido de adiamento da passagem de turno no mesmo chat (RN-23; ENT-03) | bloquear | [a confirmar] | a passagem de turno segue |
-| ERR-49 | `TAREFA_INCOMPLETA` | tarefa do plano com `faz` vazio ou acima de 500 caracteres, ou com `pronto_quando` ou `prova` vazios (ENT-06) (agente) | bloquear | [a confirmar] | [a confirmar] |
+| ERR-45 | `PROJETO_NOME_INVALIDO` | nome do projeto vazio, com mais de 80 caracteres ou igual ao de outro projeto (ENT-01) | voltar | vazio: "Dê um nome ao projeto."; longo: "O nome passa de 80 caracteres."; repetido: "Já existe um projeto com esse nome." | projeto não salvo |
+| ERR-46 | `REPOSITORIO_INVALIDO` | repositório do projeto que não é caminho absoluto de uma pasta com `.git` (ENT-01) | voltar | "Escolha a pasta de um repositório git (com `.git`)." | projeto não salvo |
+| ERR-47 | `LIMITE_DE_CONTEXTO_FORA_DA_FAIXA` | limite de contexto do projeto ou do chat fora da faixa recomendada de 10 mil a 1 milhão de tokens (ENT-01, ENT-03; CMP-07) | avisar | "Fora da faixa recomendada: 10 mil a 1 milhão de tokens." | valor novo salvo |
+| ERR-48 | `LIMITE_DO_CHAT_ATINGIDO` | os tokens do chat atingem o `limite_tokens` (RN-23; ENT-03; UC-02 FA-02; UC-08 passo 1; CMP-07) | avisar | "Este chat passou do limite de <limite> tokens. Recomendado: passar o turno e abrir um chat novo." | chat segue `ativo` |
+| ERR-49 | `TAREFA_INCOMPLETA` | tarefa do plano com `faz` vazio ou acima de 500 caracteres, ou com `pronto_quando` ou `prova` vazios (ENT-05, ENT-06; UC-03 FA-03, FA-04) (agente) | voltar [a confirmar: a decisão não dá o tratamento] | "Tarefa incompleta: preencha `faz` (até 500 caracteres), `pronto_quando` e `prova`." | plano devolvido ao orquestrador (devolução <n> de 2); na 3ª, chega ao Humano com as tarefas marcadas |
+| ERR-50 | `STATUS_DE_CONSUMO_DESCONHECIDO` | `status` de janela do `rate_limit_event` fora da lista do ENT-14 (RF-18) | avisar | "A CLI mandou um status de consumo novo: <valor>. Avise para atualizarmos a lista." | status guardado como `desconhecido`; valor bruto e versão da CLI no Log (ENT-12) |
 
 ## Tratamentos
 
@@ -62,3 +63,4 @@ Um erro por condição. O código do ERR é o código de erro que o servidor dev
 - **voltar:** o usuário corrige e reenvia.
 - **bloquear:** não segue até corrigir; quando der, o próprio campo impede o valor (ex.: só aceita algarismos).
 - **aguardar:** a ação fica em espera e segue sozinha quando a condição some (vaga no teto, recurso livre, registro feito, integração conectada).
+- **avisar:** aviso, não erro: um limite de boa prática foi passado; o sistema sinaliza e recomenda, o valor é salvo ou a ação segue, e o Humano decide (limite fora da faixa recomendada, chat acima do limite).

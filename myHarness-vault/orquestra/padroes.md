@@ -17,6 +17,7 @@ antigo: re:\*\*não tem acesso\*\* a essa pasta|que o agente não acessa|entrega
 antigo: re:O Agent SDK em Node \(S4\) é o plano B|\(S4\) fica como plano B|Plano B \(S4\) => S3 confirmada pelo P1; S4 fora do plano (geral-decisao-2026-11-19-agente-por-claude-p)
 antigo: re:só checagem em PR => checagem em PR e em push na main (geral-decisao-2026-11-19-gatilho-do-ci)
 antigo: re:contrato da funcionalidade em `docs/contrato/`|preencher o contrato em `docs/contrato/`|`docs/contrato/` com `00-requisitos`|vai para `docs/contrato/00-requisitos.md` => contrato em Anexos/contrato/ do cofre; docs/contrato/ só na aceitação final (geral-decisao-2026-11-19-subagente-nao-altera-contrato)
+antigo: re:ADIAMENTO_JA_USADO|adiamento_usado|segundo adiamento => limite do chat é aviso ERR-48 LIMITE_DO_CHAT_ATINGIDO; o Humano segue quantas vezes quiser (contrato, M-18)
 limite-palavras: 2000
 ```
 

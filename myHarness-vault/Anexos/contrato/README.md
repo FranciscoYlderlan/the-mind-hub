@@ -16,10 +16,10 @@ Fonte de verdade do que o produto faz, para o frontend e para o backend. O backe
 | `02-entidades.md` | Modelo de dados e invariantes | ENT-01 a ENT-26 |
 | `03-casos-de-uso.md` | Casos de uso e fluxos | UC-01 a UC-14, FA-xx, FE-xx |
 | `04-componentes.md` | Telas previstas e componentes lógicos | TEL-01 a TEL-06, CMP-01 a CMP-17 |
-| `05-erros.md` | Catálogo de erros | ERR-01 a ERR-49 |
+| `05-erros.md` | Catálogo de erros e avisos | ERR-01 a ERR-50 |
 | `06-navegacao.md` | Estados e navegação | NAV-01 a NAV-23 |
 | `07-rastreabilidade.md` | Mapa de rastreabilidade | (cruza os IDs) |
-| `08-criterios-de-aceite.md` | Critérios de aceite | AC-01 a AC-143 |
+| `08-criterios-de-aceite.md` | Critérios de aceite | AC-01 a AC-146 |
 | `mudancas.md` | Mudanças aprovadas | M-xx |
 
 ## Ordem de preenchimento
@@ -38,7 +38,7 @@ Toda funcionalidade preenche os blocos dela antes do código: ENT, UC com FA e F
 
 - Cada tela lista os CMP, UC e NAV que realiza e não cria regra.
 - Regra que falta entra primeiro aqui (ver "Como mudar") e só depois na tela.
-- Validação de campo vem do ENT: o schema da entidade é a fonte. Mensagem de erro vem do ERR: uma por condição.
+- Validação de campo vem do ENT: o schema da entidade é a fonte. Mensagem de erro ou de aviso vem do ERR: uma por condição.
 
 ## Como mudar
 
