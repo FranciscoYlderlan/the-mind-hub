@@ -18,3 +18,4 @@ substitui:
 - Plano: [[geral-plano]]
 - Regras: [[manual-da-orquestra]]
 - Origem: [[diario-2026-11-19]]
+- Gravação nos dois lados: [[geral-decisao-2026-11-19-gravacao-dupla]]
