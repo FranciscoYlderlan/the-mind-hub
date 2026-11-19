@@ -2,21 +2,21 @@
 
 Fonte de verdade do que o produto faz, para o frontend e para o backend. O backend implementa daqui as entidades (regra no domínio) e os erros (código próprio); o frontend implementa daqui os componentes, a navegação e a validação de cada campo. Tela nenhuma cria regra.
 
-- **Produto:** MyHarness (Harness), aplicação desktop Tauri + Rust + React que governa agentes do Claude CLI, usa o cofre Obsidian só como memória e deixa o humano como validador final.
+- **Produto:** MyHarness, aplicação desktop Tauri + Rust + React que governa agentes do Claude CLI, usa o cofre Obsidian só como memória e deixa o humano como validador final.
 - **Documento-fonte:** "Harness — especificação funcional", 18 de nov. de 2026 (D5 e D6 de 2026-11-19).
-- **Estado:** rascunho de 2026-11-19, ainda sem aval do humano. Pontos sem fonte estão marcados `[a confirmar]`.
-- **Backend e frontend:** "servidor" e "API" nestes blocos são o núcleo Rust (Tauri) e a camada de comandos dele; o frontend é a interface React, no mesmo repositório [a confirmar].
+- **Estado:** aprovado pelo Humano em 2026-11-19; as mudanças estão em `mudancas.md`. Pontos sem fonte seguem marcados `[a confirmar]`.
+- **Backend e frontend:** "servidor" e "API" nestes blocos são o núcleo Rust (Tauri) e a camada de comandos dele; o frontend é a interface React, no mesmo repositório `my-harness`.
 
 ## Arquivos
 
 | Arquivo | Bloco | IDs |
 |---|---|---|
-| `00-requisitos.md` | Requisitos do documento-fonte, decisões D1 a D6 e suposições S1 a S15 | RF-01 a RF-34, RNF-01 a RNF-14, RN-01 a RN-30 |
+| `00-requisitos.md` | Requisitos do documento-fonte, decisões D1 a D14 e suposições S7 a S9, S11, S12, S14 e S15 | RF-01 a RF-34, RNF-01 a RNF-14, RN-01 a RN-30 |
 | `01-atores.md` | Atores e perfis | ATR-01 a ATR-09 |
-| `02-entidades.md` | Modelo de dados e invariantes | ENT-01 a ENT-25 |
+| `02-entidades.md` | Modelo de dados e invariantes | ENT-01 a ENT-26 |
 | `03-casos-de-uso.md` | Casos de uso e fluxos | UC-01 a UC-14, FA-xx, FE-xx |
 | `04-componentes.md` | Telas previstas e componentes lógicos | TEL-01 a TEL-06, CMP-01 a CMP-17 |
-| `05-erros.md` | Catálogo de erros | ERR-01 a ERR-44 |
+| `05-erros.md` | Catálogo de erros | ERR-01 a ERR-49 |
 | `06-navegacao.md` | Estados e navegação | NAV-01 a NAV-23 |
 | `07-rastreabilidade.md` | Mapa de rastreabilidade | (cruza os IDs) |
 | `08-criterios-de-aceite.md` | Critérios de aceite | AC-01 a AC-143 |

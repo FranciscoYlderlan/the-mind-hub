@@ -2,12 +2,12 @@
 
 Um erro por condição. O código do ERR é o código de erro que o servidor devolve; o frontend mostra a mensagem daqui. Fluxo de exceção (FE) só referencia um ERR. Duas condições diferentes nunca dividem a mesma mensagem.
 
-"Servidor" é o núcleo Rust. Os códigos são proposta deste rascunho, derivados das RN e dos FE [a confirmar]. Mensagem entre aspas é texto da fonte; `<x>` é valor preenchido em tempo de execução; mensagem sem texto na fonte fica `[a confirmar]`. Erros que só o agente recebe (sem tela) estão marcados "(agente)".
+"Servidor" é o núcleo Rust. Os códigos, derivados das RN, dos FE e dos campos das entidades, estão aprovados pelo Humano. Mensagem entre aspas é texto da fonte; `<x>` é valor preenchido em tempo de execução; mensagem sem texto na fonte fica `[a confirmar]`. Erros que só o agente recebe (sem tela) estão marcados "(agente)".
 
 | ID | Código no servidor | Condição de disparo | Tratamento | Mensagem ao usuário | Estado final |
 |---|---|---|---|---|---|
 | ERR-01 | `CLAUDE_CLI_NAO_INSTALADO` | o executável do Claude CLI não é encontrado (UC-01 FE-01) | bloquear | "Claude CLI não encontrado", com o link de instalação | integração em `não instalado` |
-| ERR-02 | `GITHUB_OAUTH_NAO_CONCLUIDO` | o OAuth do GitHub é cancelado ou recusado (UC-01 FE-02) | voltar | "Conexão com o GitHub não concluída" | GitHub `desconectado` |
+| ERR-02 | `GITHUB_OAUTH_NAO_CONCLUIDO` | o device flow do GitHub é cancelado, recusado (`access_denied`) ou expira (`expired_token`) (UC-01 FE-02) | voltar | "Conexão com o GitHub não concluída" | GitHub `desconectado` |
 | ERR-03 | `OBSIDIAN_FECHADO` | o Obsidian está fechado ao checar o status (UC-01 FE-03, RF-02) | voltar | a mensagem da própria CLI, com a ação "Abrir Obsidian" | Obsidian CLI `desconectado` |
 | ERR-04 | `LOGIN_CLAUDE_CLI_FALHOU` | o login do Claude CLI falha (TEL-02 FE-01) [a confirmar: separar do ERR-02?] | repetir | o motivo da falha [a confirmar: texto] | integração em `sem login` |
 | ERR-05 | `CLAUDE_CLI_DESCONECTADO` | ação que depende do Claude CLI com ele desconectado (RN-08; UC-02 FE-01; TEL-01 FE-01) | bloquear | "Conecte o Claude CLI para enviar" [a confirmar: TEL-01 usa "Claude CLI desconectado"] | nada enviado; texto mantido no campo |
@@ -18,8 +18,8 @@ Um erro por condição. O código do ERR é o código de erro que o servidor dev
 | ERR-10 | `DECISAO_SEM_AVAL` | gravação de decisão para ponto do plano sem aval (RN-06) (agente) | bloquear | [a confirmar] | nota de decisão não gravada |
 | ERR-11 | `MODELO_NAO_DEFINIDO` | tarefa sem modelo e papel sem padrão (RN-07) | bloquear | [a confirmar: pede a escolha do modelo] | despacho bloqueado |
 | ERR-12 | `TAREFAS_TOCAM_MESMOS_ARQUIVOS` | duas tarefas paralelas com "toca em" sobreposto (RN-14; UC-03 FE-01) | aguardar | "<T1> e <T2> tocam <caminho>: rodarão em série" | ordem ajustada para série |
-| ERR-13 | `ESCRITA_NEGADA_PAPEL` | processo que não é o orquestrador tenta escrever no cofre (RN-01, RN-27; UC-04 FE-02) (agente) | bloquear | log: "escrita negada: papel sem permissão" | escrita recusada; log de violação; execução continua |
-| ERR-14 | `COMANDO_GIT_NEGADO` | agente tenta merge, push --force ou push na branch principal (RN-17; UC-04 FE-02) (agente) | bloquear | log com a negação [a confirmar: texto] | comando negado; execução continua |
+| ERR-13 | `ESCRITA_NEGADA_PAPEL` | processo que não é o orquestrador tenta escrever em cofre ou no contrato (`Anexos/contrato/`, `docs/contrato/`) (RN-01, RN-27; UC-04 FE-02) (agente) | bloquear | log: "escrita negada: papel sem permissão" | escrita recusada; log de violação; execução continua |
+| ERR-14 | `COMANDO_GIT_NEGADO` | agente tenta push, merge ou push --force (RN-17; UC-04 FE-02) (agente) | bloquear | log com a negação [a confirmar: texto] | comando negado; execução continua |
 | ERR-15 | `AGUARDANDO_REGISTRO` | delegação com relatório ou decisão ainda não registrados (RN-03) (agente) | aguardar | log: "aguardando registro" | delegação espera o registro |
 | ERR-16 | `WORKTREE_AUSENTE` | despacho de funcionalidade sem worktree e branch próprias (RN-16) (agente) | bloquear | [a confirmar] | despacho bloqueado |
 | ERR-17 | `SUBAGENTE_CAIU` | processo de agente encerra com erro ou para de emitir eventos (UC-04 FE-01; RNF-07; TEL-01 FE-02) | voltar | [a confirmar: texto]; aba e cartão em erro com o último log | execução `falhou` |
@@ -50,10 +50,15 @@ Um erro por condição. O código do ERR é o código de erro que o servidor dev
 | ERR-42 | `FALHA_NO_ENVIO` | o envio do prompt falha por motivo diferente de ERR-05 e ERR-08 (CMP-06) [a confirmar: quais causas] | repetir | [a confirmar] | texto preservado no campo |
 | ERR-43 | `CAPTURA_INDISPONIVEL` | a captura de um achado não abre (CMP-15) | repetir | [a confirmar] | achado sem a imagem; decisão segue possível |
 | ERR-44 | `TETO_DE_ESCRITA_ATINGIDO` | 6º subagente que escreve código com 5 rodando (RN-13; UC-04 FA-01) | aguardar | contador "x de 5 que escrevem" e a tarefa na fila (CMP-05) | execução `na fila` |
+| ERR-45 | `PROJETO_NOME_INVALIDO` | nome do projeto vazio, com mais de 80 caracteres ou igual ao de outro projeto (ENT-01) | voltar | [a confirmar] | projeto não salvo |
+| ERR-46 | `REPOSITORIO_INVALIDO` | repositório do projeto que não é caminho absoluto de uma pasta com `.git` (ENT-01) | voltar | [a confirmar] | projeto não salvo |
+| ERR-47 | `LIMITE_DE_CONTEXTO_FORA_DA_FAIXA` | limite de contexto do projeto ou do chat fora de 10 mil a 1 milhão de tokens (ENT-01, ENT-03; CMP-07) | voltar | [a confirmar] | limite anterior mantido |
+| ERR-48 | `ADIAMENTO_JA_USADO` | segundo pedido de adiamento da passagem de turno no mesmo chat (RN-23; ENT-03) | bloquear | [a confirmar] | a passagem de turno segue |
+| ERR-49 | `TAREFA_INCOMPLETA` | tarefa do plano com `faz` vazio ou acima de 500 caracteres, ou com `pronto_quando` ou `prova` vazios (ENT-06) (agente) | bloquear | [a confirmar] | [a confirmar] |
 
 ## Tratamentos
 
 - **repetir:** falha passageira (rede, servidor ocupado); o usuário pode tentar de novo.
 - **voltar:** o usuário corrige e reenvia.
 - **bloquear:** não segue até corrigir; quando der, o próprio campo impede o valor (ex.: só aceita algarismos).
-- **aguardar** [a confirmar: tratamento novo, não está no modelo]: a ação fica em espera e segue sozinha quando a condição some (vaga no teto, recurso livre, registro feito, integração conectada).
+- **aguardar:** a ação fica em espera e segue sozinha quando a condição some (vaga no teto, recurso livre, registro feito, integração conectada).

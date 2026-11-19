@@ -2,7 +2,7 @@
 
 Um critério por fluxo (principal, alternativo e exceção), no formato dado / quando / então. Ao final de cada funcionalidade, o verificador de fluxo principal executa os AC dos fluxos principais e, depois, o adversarial executa os dos FA e FE: no backend pela API e, se a funcionalidade tem interface, também no frontend.
 
-No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri) [a confirmar: como o verificador chama o backend sem a tela]. Todos os textos vêm dos "Aceite" da fonte. Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela.
+No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Todos os textos vêm dos "Aceite" da fonte. Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela.
 
 ## Por fluxo de caso de uso
 
@@ -11,7 +11,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri) [a confirmar
 | AC-01 | UC-01 | principal | o GitHub desconectado | o OAuth conclui | o indicador fica verde com o nome da conta |
 | AC-02 | UC-01 | FA-01 | o Claude CLI logado | o painel abre | mostra a versão sem pedir login |
 | AC-03 | UC-01 | FE-01 | o Claude CLI ausente | o app abre | o indicador fica em erro com o link (ERR-01) |
-| AC-04 | UC-01 | FE-02 | o OAuth cancelado | o navegador fecha | o status continua desconectado (ERR-02) |
+| AC-04 | UC-01 | FE-02 | o device flow do GitHub iniciado | o Humano recusa no GitHub (`access_denied`) ou o código expira (`expired_token`) | o status continua desconectado (ERR-02) |
 | AC-05 | UC-01 | FE-03 | o Obsidian fechado | o status é checado | aparece "Abrir Obsidian" (ERR-03) |
 | AC-06 | UC-02 | principal | um chat aberto | o Humano envia | a resposta aparece em tempo real |
 | AC-07 | UC-02 | FA-01 | um pedido com 3 partes | o orquestrador decide dividir | aparece o plano para aval |
@@ -70,7 +70,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri) [a confirmar
 
 | ID | UC | Fluxo | Dado | Quando | Então |
 |---|---|---|---|---|---|
-| AC-58 | UC-04 | regra RN-01 | um subagente de funcionalidade em execução | ele tenta escrever em orquestra/ | a escrita é bloqueada e o log mostra "escrita negada: papel sem permissão" |
+| AC-58 | UC-04 | regra RN-01 | um subagente de funcionalidade em execução | ele tenta escrever em orquestra/ ou em Anexos/contrato/ | a escrita é bloqueada e o log mostra "escrita negada: papel sem permissão" |
 | AC-59 | UC-02 | regra RN-02 | o Obsidian conectado | um agente pede uma nota | a leitura sai pela CLI e aparece na aba "Obsidian usado" |
 | AC-60 | UC-04 | regra RN-03 | um relatório recebido e ainda não registrado | o orquestrador tenta delegar | a delegação espera e o log mostra "aguardando registro" |
 | AC-61 | UC-01 | regra RN-04 | um log que contém um token do GitHub | ele é gravado | o token aparece como •••• |
@@ -131,9 +131,9 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri) [a confirmar
 | AC-111 | UC-05 | requisito RF-24 | uma funcionalidade entregue | o teste termina | cada critério tem ✔ ou ✘ com a prova |
 | AC-112 | UC-06 | requisito RF-25 | a rodada concluída | o adversarial termina | cada achado tem tipo, passos e evidência |
 | AC-113 | UC-07 | requisito RF-26 | uma sugestão | o Humano escolhe "corrigir" | o orquestrador recebe uma tarefa nova para o plano |
-| AC-114 | UC-10 | requisito RF-27 | uma tarefa concluída | o subagente termina | existe um PR aberto da branch dela |
+| AC-114 | UC-10 | requisito RF-27 | uma tarefa concluída com commit na worktree | o subagente termina | o núcleo faz o push e existe um PR aberto da branch dela, sem token do GitHub na execução do subagente |
 | AC-115 | UC-04 | requisito RF-28 | um relatório recebido | o orquestrador registra | a nota aparece no cofre e no log |
-| AC-116 | — (necessidade do negócio) | requisito RF-29 | a regra RN-01 ativa | um subagente é despachado | a ferramenta de escrita no cofre não está entre as dele |
+| AC-116 | — (necessidade do negócio) | requisito RF-29 | a regra RN-01 ativa | um subagente é despachado | nenhuma ferramenta de escrita em cofre ou no contrato está entre as dele, e ele não herda a configuração pessoal do Claude CLI |
 | AC-117 | UC-02 | requisito RF-30 | um texto de 10 linhas | o Humano digita | o campo cresce até a altura máxima e depois rola |
 | AC-118 | UC-13 | requisito RF-31 | o prompt de Teste na versão 2 | o Humano edita e salva | surge a versão 3 e a 2 fica no histórico |
 | AC-119 | — (necessidade do negócio) | requisito RF-32 | o prompt de Funcionalidade na versão 4 | um implementador é despachado | o log da execução mostra "prompt de papel v4" |
@@ -151,7 +151,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri) [a confirmar
 | AC-126 | UC-04 | TEL-01 FE-02 | um subagente que falha | a falha é detectada | o cartão fica em erro em até 5 s (ERR-17) |
 | AC-127 | UC-01 | TEL-02 principal | o GitHub desconectado | o OAuth conclui | o cartão mostra a conta |
 | AC-128 | UC-01 | TEL-02 FA-01 | o Obsidian aberto | o Humano testa | aparece o número de notas indexadas |
-| AC-129 | UC-01 | TEL-02 FE-01 | o OAuth recusado | o navegador fecha | o cartão mostra o motivo (ERR-02) |
+| AC-129 | UC-01 | TEL-02 FE-01 | o device flow recusado ou expirado | o núcleo recebe `access_denied` ou `expired_token` | o cartão mostra o motivo (ERR-02) |
 | AC-130 | UC-03 | TEL-03 principal | um plano | é aprovado | as tarefas iniciam com os modelos escolhidos |
 | AC-131 | UC-03 | TEL-03 FA-01 | um comentário | é enviado | chega a versão 2 do plano |
 | AC-132 | UC-03 | TEL-03 FA-02 | um plano recusado | a tela fecha | nenhum subagente iniciou |

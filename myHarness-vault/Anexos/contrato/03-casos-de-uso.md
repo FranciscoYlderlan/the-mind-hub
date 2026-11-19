@@ -17,7 +17,7 @@ Os IDs FA e FE são locais a cada UC, como na fonte (cite como "UC-03 FE-01"). O
 ### Fluxo principal
 
 1. Humano abre o painel de integrações → sistema mostra o status das três.
-2. Humano clica em "Conectar" numa integração → sistema abre o login ou o OAuth.
+2. Humano clica em "Conectar" numa integração → sistema inicia o `/login` do Claude CLI, o device flow do GitHub (mostra o código a digitar em github.com/login/device) ou o teste do servidor MCP da Obsidian CLI (D10).
 3. Humano conclui o login → sistema valida e mostra `conectado`.
 
 ### Fluxos alternativos (FA)
@@ -108,7 +108,7 @@ Os IDs FA e FE são locais a cada UC, como na fonte (cite como "UC-03 FE-01"). O
 
 1. Sistema cria worktree e branch por tarefa e inicia um subagente por tarefa, até o teto.
 2. Sistema mostra cada subagente numa aba e num cartão de progresso.
-3. Subagente termina, faz push e devolve o relatório.
+3. Subagente termina com o commit na worktree e devolve o relatório; o núcleo faz o push e abre o PR (RF-27).
 4. Orquestrador registra o relatório no cofre e manda a tarefa para teste (UC-05).
 
 ### Fluxos alternativos (FA)
@@ -123,7 +123,7 @@ Os IDs FA e FE são locais a cada UC, como na fonte (cite como "UC-03 FE-01"). O
 | ID | Passo de origem | Erro | Estado final |
 |---|---|---|---|
 | FE-01 | 3 | ERR-17 | Execução `falhou` com o último log; o orquestrador decide refazer com subagente novo |
-| FE-02 | 3 | ERR-13 (escrita no cofre) ou ERR-14 (merge) | Ação negada, log de violação; a execução continua |
+| FE-02 | 3 | ERR-13 (escrita em cofre ou no contrato) ou ERR-14 (push ou merge) | Ação negada, log de violação; a execução continua |
 
 ## UC-05 Testar funcionalidade
 
