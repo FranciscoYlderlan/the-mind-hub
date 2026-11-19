@@ -11,15 +11,15 @@ Fonte de verdade do que o produto faz, para o frontend e para o backend. O backe
 
 | Arquivo | Bloco | IDs |
 |---|---|---|
-| `00-requisitos.md` | Requisitos do documento-fonte, decisões D1 a D14 e suposições S7 a S9, S11, S12, S14 e S15 | RF-01 a RF-34, RNF-01 a RNF-14, RN-01 a RN-30 |
+| `00-requisitos.md` | Requisitos do documento-fonte, decisões D1 a D14 e suposições S7 a S9, S11, S12, S14 e S15 | RF-01 a RF-34, RNF-01 a RNF-14, RN-01 a RN-31 |
 | `01-atores.md` | Atores e perfis | ATR-01 a ATR-09 |
 | `02-entidades.md` | Modelo de dados e invariantes | ENT-01 a ENT-26 |
 | `03-casos-de-uso.md` | Casos de uso e fluxos | UC-01 a UC-14, FA-xx, FE-xx |
 | `04-componentes.md` | Telas previstas e componentes lógicos | TEL-01 a TEL-06, CMP-01 a CMP-17 |
-| `05-erros.md` | Catálogo de erros e avisos | ERR-01 a ERR-50 |
+| `05-erros.md` | Catálogo de erros e avisos | ERR-01 a ERR-51 |
 | `06-navegacao.md` | Estados e navegação | NAV-01 a NAV-23 |
 | `07-rastreabilidade.md` | Mapa de rastreabilidade | (cruza os IDs) |
-| `08-criterios-de-aceite.md` | Critérios de aceite | AC-01 a AC-146 |
+| `08-criterios-de-aceite.md` | Critérios de aceite | AC-01 a AC-148 |
 | `mudancas.md` | Mudanças aprovadas | M-xx |
 
 ## Ordem de preenchimento

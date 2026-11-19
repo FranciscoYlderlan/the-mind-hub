@@ -1,0 +1,86 @@
+[
+ {
+  "arquivo": "00-requisitos.md",
+  "atual": "| RN-30 | Toda nota devolvida por uma busca ou leitura pela Obsidian CLI vem com o nome do cofre de onde saiu. Violação: resultado sem origem não é entregue ao agente (ERR-40). Sem exceção. | ENT-11, ENT-02 | Seção 1 · Várias memórias; condição |",
+  "novo": "| RN-30 | Toda nota devolvida por uma busca ou leitura pela Obsidian CLI vem com o nome do cofre de onde saiu. Violação: resultado sem origem não é entregue ao agente (ERR-40). Sem exceção. | ENT-11, ENT-02 | Seção 1 · Várias memórias; condição |\n| RN-31 | O que mora no SQLite e no cofre (plano, tarefa, relatório, achado e o aval da decisão) é gravado nos dois na mesma operação do núcleo, com o mesmo conteúdo, e uma conferência compara os dois lados [a confirmar: quando roda, além do teste]. Violação: se um lado falha, o outro é desfeito e nada é gravado; diferença achada na conferência vai ao Log (ERR-51). Sem exceção. | ENT-05, ENT-06, ENT-09, ENT-10, ENT-18, ENT-12 | Decisão do Humano (M-21) · Memória; condição |",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "README.md",
+  "atual": "RN-01 a RN-30 |",
+  "novo": "RN-01 a RN-31 |",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "README.md",
+  "atual": "ERR-01 a ERR-50",
+  "novo": "ERR-01 a ERR-51",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "README.md",
+  "atual": "AC-01 a AC-146",
+  "novo": "AC-01 a AC-148",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "02-entidades.md",
+  "atual": "Mora em: SQLite + decisão no cofre.",
+  "novo": "Mora em: SQLite + decisão no cofre. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "02-entidades.md",
+  "atual": "Mora em: SQLite + plano no cofre.",
+  "novo": "Mora em: SQLite + plano no cofre. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "02-entidades.md",
+  "atual": "Mora em: SQLite + resumo no cofre.",
+  "novo": "Mora em: SQLite + resumo no cofre. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "02-entidades.md",
+  "atual": "Mora em: SQLite + bug no cofre.",
+  "novo": "Mora em: SQLite + bug no cofre. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "02-entidades.md",
+  "atual": "no SQLite fica só o aval.",
+  "novo": "no SQLite fica só o aval. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "07-rastreabilidade.md",
+  "atual": "| RN-30 | UC-11, UC-14 | principal | CMP-02 | ENT-02, ENT-11 | ERR-40 | TEL-01 (prevista) | AC-53, AC-87 |",
+  "novo": "| RN-30 | UC-11, UC-14 | principal | CMP-02 | ENT-02, ENT-11 | ERR-40 | TEL-01 (prevista) | AC-53, AC-87 |\n| RN-31 | — (decisão do Humano) | — | — (backend) | ENT-05, ENT-06, ENT-09, ENT-10, ENT-18, ENT-12 | ERR-51 | — | AC-147, AC-148 |",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "08-criterios-de-aceite.md",
+  "atual": "| AC-87 | UC-11, UC-14 | regra RN-30 | uma busca que acha notas em dois cofres | o resultado volta | cada nota traz o nome do cofre e a aba \"Obsidian usado\" agrupa por cofre |",
+  "novo": "| AC-87 | UC-11, UC-14 | regra RN-30 | uma busca que acha notas em dois cofres | o resultado volta | cada nota traz o nome do cofre e a aba \"Obsidian usado\" agrupa por cofre |\n| AC-147 | — (decisão do Humano) | regra RN-31 | o cofre de memória sem permissão de escrita | o núcleo grava uma tarefa | nada fica gravado no SQLite nem no cofre e aparece o ERR-51 |\n| AC-148 | — (decisão do Humano) | regra RN-31 | uma tarefa, um relatório e um achado gravados | a conferência compara o SQLite com as notas | todos os campos batem; uma diferença forçada vai ao Log com o ERR-51 |",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "08-criterios-de-aceite.md",
+  "atual": "e AC-146, por requisito acrescentado depois",
+  "novo": "AC-146, por requisito acrescentado depois, e AC-147 e AC-148, por regra acrescentada depois",
+  "motivo": "M-21: gravação dupla"
+ },
+ {
+  "arquivo": "05-erros.md",
+  "atual": "| ERR-50 | `STATUS_DE_CONSUMO_DESCONHECIDO` | `status` de janela do `rate_limit_event` fora da lista do ENT-14 (RF-18) | avisar | \"A CLI mandou um status de consumo novo: <valor>. Avise para atualizarmos a lista.\" | status guardado como `desconhecido`; valor bruto e versão da CLI no Log (ENT-12) |",
+  "novo": "| ERR-50 | `STATUS_DE_CONSUMO_DESCONHECIDO` | `status` de janela do `rate_limit_event` fora da lista do ENT-14 (RF-18) | avisar | \"A CLI mandou um status de consumo novo: <valor>. Avise para atualizarmos a lista.\" | status guardado como `desconhecido`; valor bruto e versão da CLI no Log (ENT-12) |\n| ERR-51 | `GRAVACAO_DIVERGENTE` | gravação de plano, tarefa, relatório, achado ou aval falha num dos lados, ou a conferência acha o SQLite e o cofre diferentes (RN-31) | bloquear | \"Não deu para gravar no banco e no cofre ao mesmo tempo; nada foi gravado.\" | gravação desfeita nos dois lados; diferença da conferência registrada no Log (ENT-12) |",
+  "motivo": "M-21"
+ },
+ {
+  "arquivo": "mudancas.md",
+  "atual": "|---|---|---|---|---|---|\n| M-20 |",
+  "novo": "|---|---|---|---|---|---|\n| M-21 | 2026-11-19 | Gravação dupla: plano, tarefa, relatório, achado e o aval da decisão continuam no SQLite e no cofre (modelo de dados mantido) e passam a ser gravados nos dois na mesma operação do núcleo, com o mesmo conteúdo; falha num lado desfaz o outro; uma conferência compara os dois lados; entram RN-31, ERR-51, AC-147 e AC-148 | 00 (RN-31), 02 (ENT-05, ENT-06, ENT-09, ENT-10, ENT-18), 05 (ERR-51), 07 (RN-31), 08 (introdução, AC-147, AC-148), README | revisão do modelo de dados pedida pelo humano, 2026-11-19, sessão das 16h35 | aval do humano em 2026-11-19, sessão das 16h35 |\n| M-20 |",
+  "motivo": "M-21"
+ }
+]

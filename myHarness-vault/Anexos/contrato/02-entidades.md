@@ -91,7 +91,7 @@ Mora em: SQLite.
 
 ## ENT-05 PlanoDelegação
 
-Mora em: SQLite + decisão no cofre.
+Mora em: SQLite + decisão no cofre. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).
 
 ### Campos
 
@@ -119,7 +119,7 @@ Mora em: SQLite + decisão no cofre.
 
 ## ENT-06 Tarefa
 
-Mora em: SQLite + plano no cofre.
+Mora em: SQLite + plano no cofre. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).
 
 ### Campos
 
@@ -215,7 +215,7 @@ Regra de contagem de palavras [a confirmar]: uma contagem por espaços dá 52, 4
 
 ## ENT-09 Relatório
 
-Mora em: SQLite + resumo no cofre.
+Mora em: SQLite + resumo no cofre. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).
 
 ### Campos
 
@@ -237,7 +237,7 @@ Mora em: SQLite + resumo no cofre.
 
 ## ENT-10 Achado
 
-Mora em: SQLite + bug no cofre.
+Mora em: SQLite + bug no cofre. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).
 
 ### Campos
 
@@ -385,7 +385,7 @@ Citada em RN-01 (Escrita.caminho) e RF-28 (nota, motivo, hora). Mora em: SQLite.
 
 ## ENT-18 Decisão
 
-Citada em RN-03 (registrada_em) e RN-06 (aval_id). Mora no cofre, como nota; no SQLite fica só o aval.
+Citada em RN-03 (registrada_em) e RN-06 (aval_id). Mora no cofre, como nota; no SQLite fica só o aval. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|
