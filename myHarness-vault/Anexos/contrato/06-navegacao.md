@@ -11,7 +11,7 @@ App desktop de um só usuário (D4): não há URL nem login. A coluna Tela traz 
 | NAV-03 | area-de-trabalho | clicou no indicador de integrações (CMP-03) | — | integracoes | TEL-02 (prevista) |
 | NAV-04 | integracoes | fechou o painel | — | area-de-trabalho, com o CMP-03 atualizado | TEL-01 (prevista) |
 | NAV-05 | area-de-trabalho | clicou em "Revisar" no CMP-10 | há plano em `proposto` | revisao-do-plano | TEL-03 (prevista) |
-| NAV-06 | revisao-do-plano | clicou em "Aprovar" (UC-03 passo 3) | integrações exigidas conectadas (RN-08) | area-de-trabalho, com o despacho começando | TEL-01 (prevista) |
+| NAV-06 | revisao-do-plano | clicou em "Aprovar" (UC-03 passo 3) | integrações exigidas conectadas (RN-08) e nenhuma tarefa marcada como incompleta (ERR-49) | area-de-trabalho, com o despacho começando | TEL-01 (prevista) |
 | NAV-07 | revisao-do-plano | clicou em "Pedir alteração" com comentário (UC-03 FA-01) | — | revisao-do-plano, com a versão nova do plano | TEL-03 (prevista) |
 | NAV-08 | revisao-do-plano | clicou em "Recusar" (UC-03 FA-02) | — | area-de-trabalho | TEL-01 (prevista) |
 | NAV-09 | revisao-do-plano | clicou no link da mensagem de ERR-06 | integração exigida desconectada | integracoes | TEL-02 (prevista) |
@@ -39,7 +39,7 @@ Sem URL: o "estado inicial" é o que cada estado mostra ao ser aberto, sem cliqu
 | area-de-trabalho | CMP-01 (consumo), CMP-02 (contexto), CMP-03 (integrações), CMP-04 só com a aba do orquestrador, CMP-06 no estado `vazio`, CMP-07, CMP-08 e CMP-09; CMP-10 oculto sem pendência |
 | historico | CMP-09 com projetos e chats e a cadeia de passagens, ou "nenhum chat salvo" |
 | integracoes | um CMP-11 por integração, já com o status checado |
-| revisao-do-plano | CMP-12 com as tarefas do plano em `proposto` e CMP-13; "Aprovar" desabilitado se faltar integração |
+| revisao-do-plano | CMP-12 com as tarefas do plano em `proposto` e CMP-13; "Aprovar" desabilitado se faltar integração ou houver tarefa marcada como incompleta (ERR-49) |
 | gestao-de-modelos | CMP-14 com os modelos lidos da CLI e o padrão de cada papel; "Salvar" desabilitado |
 | revisao-de-achados | CMP-15 com os achados da rodada; bugs já em "corrigir" |
 | configuracoes | CMP-16 com o fluxo [a confirmar: qual fluxo vem primeiro] e CMP-17 com os cofres do projeto |
