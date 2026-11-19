@@ -1,0 +1,523 @@
+diff -ru '--exclude=__pycache__' /home/claude/vault-copia/CLAUDE.md /tmp/hub/Vault/CLAUDE.md
+--- /home/claude/vault-copia/CLAUDE.md	2026-11-17 07:53:25.000000000 -0300
++++ /tmp/hub/Vault/CLAUDE.md	2026-11-19 15:17:08.447609504 -0300
+@@ -55,11 +55,13 @@
+ antigo: re:Não há regra geral: a lista é escolhida na criação => lista de escopos do cofre começa com o nome da pasta e readme; a criação só acrescenta (Padrão de commit)
+ antigo: re:commitado ao fim de cada ciclo|commito o cofre \(a cada ciclo|commita o cofre a cada ciclo|Defino o escopo: a pasta ou área real => commit do cofre a cada registro concluído e na passagem de turno; escopo da lista fechada do bloco projeto:escopos (Padrão de commit)
+ antigo: re:Registrar no fim, não no meio|Orquestrador, no fim da sessão|Alimentar \(no fim do trabalho\)|escreve no cofre, no fim do trabalho|alimentar no fim => registrar relatório e decisão aprovada assim que chegam (Manual da Orquestra, princípio 8)
+-antigo: re:mora num hub com uma nota por seção vigente|nota .-mudancas. com os itens M-xx => contrato funcional e itens M-xx em docs/contrato/ do repositório de código; o cofre guarda decisões e diário (Manual da Orquestra - Perfil projeto prático, P01 e Q01)
++antigo: re:mora num hub com uma nota por seção vigente|nota .-mudancas. com os itens M-xx => contrato funcional e itens M-xx em Anexos/contrato/ do cofre do projeto, ao lado das decisões e do diário (Manual da Orquestra - Perfil projeto prático, P01 e Q01)
+ antigo: re:Playwright, por um agente verificador => verificador de fluxo principal e adversarial, agentes ao final de cada funcionalidade, sem suíte de E2E de interface no repositório (Manual da Orquestra - Perfil projeto prático, Q04 e Q05)
+ antigo: re:Formulários, search params e env => todo campo de entrada com schema zod tirado do ENT do contrato e mensagem por violação (Padrão de projeto de software, S26)
+ antigo: re:S01 a S25 \((branches|só projeto)|S01 a S24;|P01 a P16 \(só projeto prático\) => P01 a P16 e Q01 a Q06; S01 a S27 (Manual da Orquestra - Perfil projeto prático, Padrão de projeto de software)
+ antigo: re:poucos fluxos que cobrem o máximo|depois do roteiro do humano \(Q06\): verificadores => roteiro curto e didático que passa por todas as funcionalidades; o aceite do humano fecha a aceitação final (Manual da Orquestra - Perfil projeto prático, Q06 e P07)
++antigo: re:Contrato funcional no repositório|contrato fica só no repositório|repositório do backend|só no do backend|No repositório de código, em|de lá ao repositório na criação|com o contrato copiado de|do cofre novo \(original no|Na raiz do repositório de código \(com frontend|Ao ligar o repositório de um projeto prático => contrato funcional em Anexos/contrato/ do cofre do projeto, criado pelo cofre.py criar; frontend e backend leem o mesmo contrato do cofre (Manual da Orquestra - Perfil projeto prático, Q01)
++antigo: re:(IDs|moram|mora|blocos) em\s+do repositório|(copia|copio)\s+para\s+do repositório \(|os copia para\s+do repositório|\[\[Contrato funcional\]\] para\s+do repositório|\[\[Contrato funcional\]\] em\s+\(Q01\)|executam os AC de\s*;|ENT-xx de\s+\(|existir em\s*\.|contrato em\s+como fonte => contrato em Anexos/contrato/ do cofre, alterado só pelo orquestrador; docs/contrato/ do repositório só recebe a cópia na aceitação final, depois do aceite do humano (Manual da Orquestra - Perfil projeto prático, Q01 e P07)
+ ```
+ 
+ ## Commits
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Contrato funcional - Os 8 blocos.md" "/tmp/hub/Vault/Items/Contrato funcional - Os 8 blocos.md"
+--- "/home/claude/vault-copia/Items/Contrato funcional - Os 8 blocos.md"	2026-11-17 07:36:17.000000000 -0300
++++ "/tmp/hub/Vault/Items/Contrato funcional - Os 8 blocos.md"	2026-11-19 12:45:00.806290839 -0300
+@@ -9,9 +9,9 @@
+ # 🧱 Contrato funcional: os 8 blocos
+ 
+ > [!tldr] Em uma linha
+-> O que cada bloco do [[Contrato funcional]] guarda, com o ID dele e o arquivo de `docs/contrato/` onde mora.
++> O que cada bloco do [[Contrato funcional]] guarda, com o ID dele e o arquivo de `Anexos/contrato/` onde mora.
+ 
+-É a **ficha técnica de uma receita**: ingredientes com medida, modo de preparo em passos, o que fazer se a massa desandar e como saber que ficou pronto. Os modelos prontos, com um exemplo curto por bloco, estão no `Vault` em `Modelos/Orquestra/contrato/` (no cofre de projeto prático, em `orquestra/modelos/contrato/`); a regra que os usa é a Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]].
++É a **ficha técnica de uma receita**: ingredientes com medida, modo de preparo em passos, o que fazer se a massa desandar e como saber que ficou pronto. Os modelos prontos, com um exemplo curto por bloco, estão no `Vault` em `Modelos/Orquestra/contrato/` (no cofre de projeto prático, o contrato em uso fica em `Anexos/contrato/`); a regra que os usa é a Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]].
+ 
+ ---
+ 
+@@ -56,3 +56,4 @@
+ 
+ ## 🕓 Histórico
+ - v1 (2026-11-17): criação, separada do [[Contrato funcional]] pelo tamanho.
++- v2 (2026-11-19): os arquivos moram em `Anexos/contrato/` do cofre do projeto.
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Contrato funcional.md" "/tmp/hub/Vault/Items/Contrato funcional.md"
+--- "/home/claude/vault-copia/Items/Contrato funcional.md"	2026-11-17 07:50:41.000000000 -0300
++++ "/tmp/hub/Vault/Items/Contrato funcional.md"	2026-11-19 12:45:00.805819919 -0300
+@@ -9,7 +9,7 @@
+ # 📐 Contrato funcional
+ 
+ > [!tldr] Em uma linha
+-> O que o produto faz, escrito em 8 blocos com IDs em `docs/contrato/` do repositório, para a interface ter regra tão firme quanto o servidor.
++> O que o produto faz, escrito em 8 blocos com IDs em `Anexos/contrato/` do cofre do projeto, para a interface ter regra tão firme quanto o servidor.
+ 
+ É o **manual de montagem do móvel**: cada peça só entra onde o desenho manda. Faltou peça? Corrige o desenho antes de improvisar com fita. A tela é a peça; o contrato é o desenho. Regras de uso no [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]] (Q01 a Q06); os blocos, um a um, em [[Contrato funcional - Os 8 blocos]].
+ 
+@@ -38,17 +38,18 @@
+ > 6. Só então o código (e as telas, se houver).
+ 
+ > [!warning] Regra da tela
+-> Cada tela lista os CMP, UC e NAV que realiza e **não cria regra**. Regra que falta entra primeiro no contrato, pelos 5 passos do P01, com o item M-xx em `mudancas.md`. Validação vem do ENT; mensagem vem do ERR.
++> Cada tela lista os CMP, UC e NAV que realiza e **não cria regra**. Regra que falta entra primeiro no contrato, pelos 5 passos do P01, com o item M-xx em `Anexos/contrato/mudancas.md`. Validação vem do ENT; mensagem vem do ERR.
+ 
+ ## 📍 Onde mora
+ 
+-- No repositório de código, em `docs/contrato/`, com os requisitos RF, RNF e RN quando eles não estão em outro lugar do repositório.
+-- Frontend e backend em repositórios separados: o contrato fica só no repositório do backend, e o `CLAUDE.md` do frontend aponta para ele, sem cópia. Decisão do humano (2026-11-17): "Frontend e backend em repositórios separados: onde fica `docs/contrato/`? ... deixar no repositório do backend, com o do frontend apontando para ele. Concordo".
+-- Os modelos ficam no `Vault`, em `Modelos/Orquestra/contrato/`. O `cofre.py` os leva a `orquestra/modelos/contrato/` de todo cofre de projeto prático, e é de lá que o passo 4 de [[Criar um novo cofre]] os copia para `docs/contrato/` do repositório.
+-- O cofre do projeto guarda as decisões e o diário, com link para lá. O [[modelo-claude-do-repositorio]] avisa os agentes que trabalham no código.
++- No cofre do projeto, em `Anexos/contrato/`: os 8 blocos, o `README.md` e o `mudancas.md`, em Markdown puro (não são notas: sem frontmatter nem Conexões), com os requisitos RF, RNF e RN no `00-requisitos.md`. Ali o contrato nasce e é editado durante todo o projeto, ao lado das decisões e do diário.
++- Os modelos ficam no `Vault`, em `Modelos/Orquestra/contrato/`. O `cofre.py criar` os copia para `Anexos/contrato/` de todo cofre de projeto prático; o `sincronizar` nunca sobrescreve o contrato de um cofre que já existe.
++- Só o orquestrador altera o contrato. Subagente que precisar de mudança devolve no relatório o arquivo, o trecho atual, o trecho novo e o motivo, e a mudança segue os 5 passos do P01.
++- Implementador, verificadores e adversarial leem o contrato pela Obsidian CLI (`obsidian read path="Anexos/contrato/03-casos-de-uso.md"`) ou, sem CLI, pelo arquivo, avisando no relatório. Frontend em repositório separado lê o mesmo contrato do cofre.
++- O repositório de código só recebe o contrato na aceitação final: depois do aceite do humano, o orquestrador copia `Anexos/contrato/` para `docs/contrato/`, num commit só, e nenhum subagente altera essa cópia. O [[modelo-claude-do-repositorio]] diz aos agentes que trabalham no código onde ler.
+ 
+ > [!tip] Quando abrir esta nota
+-> Ao ligar o repositório de um projeto prático novo, ao começar qualquer funcionalidade ou quando uma tela pedir uma regra que não está escrita.
++> Ao criar um cofre de projeto prático, ao começar qualquer funcionalidade ou quando uma tela pedir uma regra que não está escrita.
+ 
+ ### 🛠️ Resumo direto para o cérebro
+ * **Ponto 1:** A tela segue o contrato como o servidor segue o domínio: a regra mora num lugar só.
+@@ -62,3 +63,4 @@
+ 
+ ## 🕓 Histórico
+ - v1 (2026-11-17): criação, com os 8 blocos, a ordem de preenchimento, a regra da tela e `docs/contrato/` no repositório.
++- v2 (2026-11-19): o contrato mora em `Anexos/contrato/` do cofre do projeto, criado pelo `cofre.py criar`; só o orquestrador o altera; o repositório recebe a cópia em `docs/contrato/` só na aceitação final.
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Contrato s\303\263 do backend deixa a interface sem regra.md" "/tmp/hub/Vault/Items/Contrato s\303\263 do backend deixa a interface sem regra.md"
+--- "/home/claude/vault-copia/Items/Contrato s\303\263 do backend deixa a interface sem regra.md"	2026-11-17 07:53:25.000000000 -0300
++++ "/tmp/hub/Vault/Items/Contrato s\303\263 do backend deixa a interface sem regra.md"	2026-11-19 12:45:00.810204194 -0300
+@@ -16,7 +16,7 @@
+ > [!note] Como funciona
+ > 1. **Sintoma:** servidor impecável e interface fraca: ação principal difícil de achar, campo de valor aceitando letras, a mesma mensagem para erros diferentes, menu que só aparece depois de um clique, clique perdido durante a atualização automática, comentários longos citando códigos de uma especificação que não está no repositório.
+ > 2. **Causa:** o contrato descrevia só o backend; a tela não tinha de onde tirar campos, erros, estados e navegação. Fala do humano: "acredito que caiu nesse erro pois o frontend não havia nenhuma documentação ou contrato do lado do frontend apenas do backend".
+-> 3. **O que fazer:** [[Contrato funcional]] em `docs/contrato/` (Q01), tela que não cria regra (Q02), contrato antes do código (Q03), verificador de fluxo principal (Q04), adversarial (Q05) e roteiro do humano no fim (Q06), do [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]].
++> 3. **O que fazer:** [[Contrato funcional]] em `Anexos/contrato/` do cofre, alterado só pelo orquestrador (Q01), tela que não cria regra (Q02), contrato antes do código (Q03), verificador de fluxo principal (Q04), adversarial (Q05) e roteiro do humano no fim (Q06), do [[Manual da Orquestra - Perfil projeto prático|perfil projeto prático]].
+ > 4. **No código:** campo com schema tirado do ENT e mensagem por violação (S26); comentário curto e pontual (S27), do [[Padrão de projeto de software]].
+ 
+ > [!tip] Quando abrir esta nota
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Criar um novo cofre.md" "/tmp/hub/Vault/Items/Criar um novo cofre.md"
+--- "/home/claude/vault-copia/Items/Criar um novo cofre.md"	2026-11-17 07:50:42.000000000 -0300
++++ "/tmp/hub/Vault/Items/Criar um novo cofre.md"	2026-11-19 12:45:00.808695858 -0300
+@@ -27,9 +27,9 @@
+ 
+ > [!note] Passo a passo
+ > 1. Leio o [[Manual da Orquestra]] e pergunto ao humano: nome, objetivo em meia frase, perfil (prático ou estudo), tempo, dial, os **escopos de commit** a acrescentar (lista fechada: área, ID do requisito ou outro; ver [[Padrão de commit]]) e o que o perfil pedir (no prático, o repositório e se o projeto será publicado ou só local, em WSL ou Docker). O que faltar vira `[a confirmar]`.
+-> 2. Na raiz do `the-mind-hub`: `python Vault/Modelos/Orquestra/cofre.py criar nome-do-cofre --projeto "Nome" --para-que "meia frase" --perfil pratico|estudo` (padrão: `pratico`). No prático, também `--publicado sim|nao` e `--repo LINK`; o que o humano não respondeu fica `[a preencher]` e o verificar avisa. No estudo, `--publicado` e `--repo` dão erro. **Nunca monto à mão.** O `CLAUDE.md` nasce com a seção `## Commits` ([[Padrão de commit]] e [[Commitar no the-mind-hub]]) e o bloco de escopos já com o nome da pasta e `readme`: sem a seção, sem o bloco ou com o bloco vazio, o verificar dá ERRO. Nascem também `orquestra/padroes.md` (bloco `padroes`, `limite-palavras: 2000`) e, no `geral-contexto`, o perfil como fato (no prático, também publicado ou local e o repositório); onde fica o repositório e o acesso viram decisão em `funcionalidades/geral/`.
++> 2. Na raiz do `the-mind-hub`: `python Vault/Modelos/Orquestra/cofre.py criar nome-do-cofre --projeto "Nome" --para-que "meia frase" --perfil pratico|estudo` (padrão: `pratico`). No prático, também `--publicado sim|nao` e `--repo LINK`; o que o humano não respondeu fica `[a preencher]` e o verificar avisa. No estudo, `--publicado` e `--repo` dão erro. **Nunca monto à mão.** O `CLAUDE.md` nasce com a seção `## Commits` ([[Padrão de commit]] e [[Commitar no the-mind-hub]]) e o bloco de escopos já com o nome da pasta e `readme`: sem a seção, sem o bloco ou com o bloco vazio, o verificar dá ERRO. Nascem também `orquestra/padroes.md` (bloco `padroes`, `limite-palavras: 2000`), no prático o [[Contrato funcional]] em `Anexos/contrato/` e, no `geral-contexto`, o perfil como fato (no prático, também publicado ou local e o repositório); onde fica o repositório e o acesso viram decisão em `funcionalidades/geral/`.
+ > 3. Preencho o `geral-contexto` com os fatos do passo 1, seguindo [[Atualizar a memória]], e **proponho as etapas do roteiro** no `geral-plano`. Com o aval do humano: nota `geral-decisao-AAAA-MM-DD-roteiro`, roteiro com as etapas aprovadas (`status: aprovado`), etapa 1 `concluida` com a data e a decisão em Notas geradas, e `cofre.py status --atualizar` (A4 do [[Manual da Orquestra]]).
+-> 4. Aplico o perfil e **acrescento** os escopos do passo 1 ao bloco `projeto:escopos` do `CLAUDE.md`, depois do nome da pasta e de `readme`, que estão em todo cofre e não saem. No [[Manual da Orquestra - Perfil projeto prático|projeto prático]], colo no repositório de código o trecho do [[modelo-claude-do-repositorio]], com os escopos acrescentados (o nome da pasta e `readme` são do `the-mind-hub`), copio `orquestra/modelos/contrato/` para `docs/contrato/` do repositório (com frontend e backend separados, só no do backend; o trecho colado no frontend aponta para lá) e preencho o `00-requisitos.md` a partir do documento-fonte ([[Contrato funcional]], Q01); no roteiro, toda funcionalidade começa preenchendo os blocos dela (Q03), termina com o verificador de fluxo principal, o adversarial e os fluxos de teste registrados, e a última etapa entrega o roteiro do humano (Q06). Se for software, o [[Padrão de projeto de software]] passa a valer (S01 a S27; o bloco "só com deploy", S04 a S08 e S24, só se o projeto for publicado). Também **proponho a arquitetura (frontend e backend) e as tecnologias** a partir da [[Referência de arquitetura e stack]], em linguagem leiga, na seção "Proposta de arquitetura e stack" do `geral-plano`; o humano ajusta, e o aval vira as decisões de estrutura e stack em `funcionalidades/geral/`, que citam essa seção no campo Proposta (S25 do [[Padrão de projeto de software]]: "para que eu posso propor sugestões de mudança em cima delas e não precisar partir do absoluto 0"). Nota do `Vault` citada dentro do cofre de projeto (a Referência, o Padrão, os perfis) é escrita como texto "Nome (no Vault)", nunca como wikilink: lá ela não existe e o link ficaria quebrado.
++> 4. Aplico o perfil e **acrescento** os escopos do passo 1 ao bloco `projeto:escopos` do `CLAUDE.md`, depois do nome da pasta e de `readme`, que estão em todo cofre e não saem. No [[Manual da Orquestra - Perfil projeto prático|projeto prático]], colo no repositório de código o trecho do [[modelo-claude-do-repositorio]], com os escopos acrescentados (o nome da pasta e `readme` são do `the-mind-hub`) e preencho o `Anexos/contrato/00-requisitos.md` do cofre a partir do documento-fonte ([[Contrato funcional]], Q01: o repositório só recebe o contrato na aceitação final); no roteiro, toda funcionalidade começa preenchendo os blocos dela (Q03), termina com o verificador de fluxo principal, o adversarial e os fluxos de teste registrados, e a última etapa entrega o roteiro do humano (Q06) e, depois do aceite, copia o contrato para `docs/contrato/` do repositório. Se for software, o [[Padrão de projeto de software]] passa a valer (S01 a S27; o bloco "só com deploy", S04 a S08 e S24, só se o projeto for publicado). Também **proponho a arquitetura (frontend e backend) e as tecnologias** a partir da [[Referência de arquitetura e stack]], em linguagem leiga, na seção "Proposta de arquitetura e stack" do `geral-plano`; o humano ajusta, e o aval vira as decisões de estrutura e stack em `funcionalidades/geral/`, que citam essa seção no campo Proposta (S25 do [[Padrão de projeto de software]]: "para que eu posso propor sugestões de mudança em cima delas e não precisar partir do absoluto 0"). Nota do `Vault` citada dentro do cofre de projeto (a Referência, o Padrão, os perfis) é escrita como texto "Nome (no Vault)", nunca como wikilink: lá ela não existe e o link ficaria quebrado.
+ > 5. Rodo `python Vault/Modelos/Orquestra/cofre.py verificar nome-do-cofre`. Só sigo com **zero ERRO**.
+ > 6. Abro o cofre no Obsidian (o nome no app é o da pasta), aponto Modelos para `orquestra/modelos` e **valido a CLI**: `obsidian_search` com `vault="nome-do-cofre"` devolve notas. Sem isso, nenhum agente consegue ler o cofre pela CLI; se falhar, ver [[Obsidian CLI via MCP não carrega]].
+ > 7. Se o projeto tiver um projeto no claude.ai, colo no campo **Instruções** dele o bloco do [[modelo-instrucoes-do-projeto-claude]] (no cofre: `orquestra/modelos/`), com o nome do cofre. Sem isso, a sessão que entra pelo projeto lê a cópia dos documentos, que envelhece, e pula a CLI.
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Guia do cofre para IA.md" "/tmp/hub/Vault/Items/Guia do cofre para IA.md"
+--- "/home/claude/vault-copia/Items/Guia do cofre para IA.md"	2026-11-17 07:50:42.000000000 -0300
++++ "/tmp/hub/Vault/Items/Guia do cofre para IA.md"	2026-11-19 12:45:00.808914992 -0300
+@@ -18,7 +18,7 @@
+ > [!note] Passo a passo
+ > 1. O `cofre.py criar` gera o `CLAUDE.md` a partir do [[Modelo de CLAUDE do cofre]], já com pasta, projeto, objetivo e o bloco de escopos (nome da pasta e `readme`), e gera `orquestra/padroes.md` com o bloco `padroes` (`limite-palavras: 2000`).
+ > 2. Mudou o modelo? `cofre.py sincronizar` regenera o `CLAUDE.md` de cada cofre de projeto, preservando projeto e objetivo.
+-> 3. O mesmo comando recopia modelos e manuais, convertendo os links (kebab-case, mapa `moc-orquestra`, outras notas do `Vault` viram "(no Vault)"). No perfil prático, leva também a pasta `contrato/` para `orquestra/modelos/contrato/`, sem converter: são os arquivos do [[Contrato funcional]] para `docs/contrato/` do repositório, não notas, e o `verificar` não os lê. O perfil vem da linha `- Perfil:` do `geral-contexto`; sem ela, conta como prático.
++> 3. O mesmo comando recopia modelos e manuais, convertendo os links (kebab-case, mapa `moc-orquestra`, outras notas do `Vault` viram "(no Vault)"). O [[Contrato funcional]] fica de fora: no perfil prático, o `criar` copia a pasta `contrato/` uma vez para `Anexos/contrato/`, sem converter (não são notas, e o `verificar` não os lê), e o `sincronizar` nunca a sobrescreve, porque ali ela é o contrato do projeto. O perfil vem da linha `- Perfil:` do `geral-contexto`; sem ela, conta como prático.
+ > 4. Confiro que o arquivo cita **só o próprio cofre**. Cofres vizinhos entram apenas pela regra de fronteira.
+ > 5. Fecho com `cofre.py verificar`: zero ERRO.
+ 
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Manual da Orquestra - Perfil projeto pr\303\241tico.md" "/tmp/hub/Vault/Items/Manual da Orquestra - Perfil projeto pr\303\241tico.md"
+--- "/home/claude/vault-copia/Items/Manual da Orquestra - Perfil projeto pr\303\241tico.md"	2026-11-17 07:58:56.000000000 -0300
++++ "/tmp/hub/Vault/Items/Manual da Orquestra - Perfil projeto pr\303\241tico.md"	2026-11-19 12:45:00.804938227 -0300
+@@ -17,7 +17,7 @@
+ 
+ ## 1. 📜 Contrato e roteiro
+ 
+-- **P01 Contrato versionado:** o que foi combinado com o humano mora em `docs/contrato/` do repositório de código (Q01), com as mudanças aprovadas em `docs/contrato/mudancas.md` (itens M-xx); o cofre guarda as decisões e o diário, com link para lá. Mudança de escopo segue 5 passos: (1) alguém aponta o conflito ou a necessidade; (2) a IA propõe o texto exato e o impacto em requisitos, critérios de aceite e plano; (3) o humano aprova ou recusa; (4) o bloco do contrato passa a dizer o estado novo e o M-xx entra em `mudancas.md`; (5) só então o produto muda.
++- **P01 Contrato versionado:** o que foi combinado com o humano mora em `Anexos/contrato/` do cofre do projeto (Q01), com as mudanças aprovadas em `Anexos/contrato/mudancas.md` (itens M-xx), ao lado das decisões e do diário. Mudança de escopo segue 5 passos: (1) alguém aponta o conflito ou a necessidade; (2) a IA propõe o texto exato e o impacto em requisitos, critérios de aceite e plano; (3) o humano aprova ou recusa; (4) o orquestrador reescreve o bloco do contrato no estado novo e registra o M-xx em `mudancas.md`; (5) só então o produto muda.
+ - **P02 Etapa = fatia de ponta a ponta:** cada etapa do roteiro atravessa o produto inteiro, liga-se aos IDs dos requisitos que atende e vai para o ar.
+ - **P13 Teste e requisito saem juntos:** um teste só sai do escopo junto com o requisito que ele prova.
+ - **P14 Definição de pronto global:** uma lista única, valendo para toda tarefa, além do "pronto quando" de cada uma. Toda funcionalidade só fica pronta com os AC dos UC dela passando no verificador de fluxo principal e no adversarial (Q03 a Q05).
+@@ -30,7 +30,7 @@
+ - **P06 Achados vão ao humano como opções:** corrigir, registrar como limite ou deixar como opcional.
+ - **P15 Bug com passos, esperado e obtido.** O verificador não corrige.
+ - **P16 Dados de teste** criados em ambiente compartilhado ficam listados na Verificação.
+-- **P07 Aceitação final** contra o documento-fonte, fechada pelo humano: verificadores por área e um avaliador independente (nota de 0 a 10) vêm antes e informam; depois vem o roteiro do humano (Q06), e o aceite dele é a palavra final. O encerramento registra o período no ar e o estado final.
++- **P07 Aceitação final** contra o documento-fonte, fechada pelo humano: verificadores por área e um avaliador independente (nota de 0 a 10) vêm antes e informam; depois vem o roteiro do humano (Q06), e o aceite dele é a palavra final. Com o aceite, o orquestrador copia `Anexos/contrato/` para `docs/contrato/` do repositório, num commit só (Q01). O encerramento registra o período no ar e o estado final.
+ 
+ ## 3. 🤖 Agentes e acesso
+ 
+@@ -53,16 +53,16 @@
+ | §5 passo 8 (juntar) | Merge das branches só com aval do humano; depois, a suíte inteira |
+ | §8 Dial | `alto` para código legado; `baixo` para código bem estruturado |
+ | §9 Riscos | Worktree por implementador evita colisão; verificador sempre junto com testes, lint e tipos; interface sem regra escrita: contrato funcional e os dois agentes (Q01 a Q05) |
+-| A2 e A5 de [[Criar um novo cofre]] | Perguntar o repositório e se o projeto será publicado ou só local (`--publicado` do `cofre.py criar`); ligar o repositório com o [[modelo-claude-do-repositorio]] e copiar `orquestra/modelos/contrato/` do cofre novo (original no `Vault`: `Modelos/Orquestra/contrato/`) para `docs/contrato/`, com o `00-requisitos` preenchido do documento-fonte (Q01); em software, propor arquitetura e stack no `geral-plano` (S25) |
++| A2 e A5 de [[Criar um novo cofre]] | Perguntar o repositório e se o projeto será publicado ou só local (`--publicado` do `cofre.py criar`); ligar o repositório com o [[modelo-claude-do-repositorio]] e preencher, a partir do documento-fonte, o `Anexos/contrato/00-requisitos.md` que o `cofre.py criar` pôs no cofre novo (Q01); em software, propor arquitetura e stack no `geral-plano` (S25) |
+ | "Acesso" do [[Modelo de CLAUDE do cofre]] | Onde ficam os repositórios vira decisão em `funcionalidades/geral/`; apagar arquivos, forçar push ou mexer na branch principal fora do CI/CD: sempre com confirmação |
+-| [[modelo-briefing-subagente]] | "Trabalhe em" = worktree; "Prova" = comando de teste, lint ou tipos; cartões do verificador de fluxo principal e do adversarial (Q04 e Q05) |
++| [[modelo-briefing-subagente]] | "Trabalhe em" = worktree; "Prova" = comando de teste, lint ou tipos; cartões do verificador de fluxo principal e do adversarial (Q04 e Q05); todo subagente lê o contrato no cofre e não o altera (Q01) |
+ 
+ ## 5. 🧾 Contrato funcional e validação
+ 
+ O backend já tinha regra no domínio (S14), erro com código (S15) e estado inválido provado no CI (S22). Estas regras dão o mesmo a toda funcionalidade, inclusive à interface: ENT é o domínio que toda tela herda, ERR é o código de erro do servidor e AC é a prova. Fala do humano (2026-11-17): "Refinar o vault responsável por criar vault's para que os próximos vaults já venham com a estrutura pre definida para garantir a consistencia do frontend ... assim como é feito hoje nas regras de negócio no backend que foi pontuado como bem feito".
+ 
+-- **Q01 Contrato funcional no repositório:** os 8 blocos do [[Contrato funcional]] moram em `docs/contrato/` do repositório de código, junto com RF, RNF e RN quando eles não estão em outro lugar do repositório. Com frontend e backend em repositórios separados, ficam só no do backend, e o do frontend aponta para lá (decisão do humano, 2026-11-17: "Frontend e backend em repositórios separados: onde fica `docs/contrato/`? ... deixar no repositório do backend, com o do frontend apontando para ele. Concordo"). Os modelos (no `Vault`, `Modelos/Orquestra/contrato/`) chegam ao cofre de projeto em `orquestra/modelos/contrato/` pelo `cofre.py`, e de lá ao repositório na criação ([[Criar um novo cofre]], passo 4).
+-- **Q02 Tela não cria regra:** cada tela lista os CMP, UC e NAV que realiza. Regra que falta entra primeiro no contrato, pelos 5 passos do P01; validação de campo vem do ENT (S26).
++- **Q01 Contrato funcional no cofre:** os 8 blocos do [[Contrato funcional]], o `README.md` e o `mudancas.md` moram em `Anexos/contrato/` do cofre do projeto, em Markdown puro (não são notas: sem frontmatter), com RF, RNF e RN no `00-requisitos.md`. O `cofre.py criar` os cria a partir de `Modelos/Orquestra/contrato/` do `Vault` ([[Criar um novo cofre]], passo 2), e ali eles são editados durante todo o projeto. Durante o projeto, o repositório de código não tem `docs/contrato/`: na aceitação final, depois do aceite do humano, o orquestrador copia `Anexos/contrato/` para `docs/contrato/` do repositório, num commit só (P07). **Só o orquestrador altera o contrato**, no cofre e na cópia do repositório. Subagente que precisar de mudança devolve no relatório o arquivo, o trecho atual, o trecho novo e o motivo, e a mudança segue os 5 passos do P01. No cofre, onde subagente já não escreve, essa regra se sustenta sozinha. Implementador, verificadores e adversarial leem o contrato pela Obsidian CLI (`obsidian read path="Anexos/contrato/03-casos-de-uso.md"`) ou, sem CLI, pelo arquivo, avisando no relatório. Com frontend e backend em repositórios separados, os dois leem o mesmo contrato do cofre (decisão do humano, 2026-11-19).
++- **Q02 Tela não cria regra:** cada tela lista os CMP, UC e NAV que realiza. Regra que falta entra primeiro no contrato (`Anexos/contrato/`), pelos 5 passos do P01, com o item M-xx em `mudancas.md`; validação de campo vem do ENT (S26).
+ - **Q03 Contrato antes do código:** toda funcionalidade começa preenchendo os blocos dela: ENT, UC com FA e FE, ERR e AC. Com interface, também CMP, NAV e a coluna Tela da rastreabilidade, antes da primeira tela. O "pronto quando" de toda funcionalidade é "AC dos UC passando nos dois agentes" (Q04 e Q05).
+ - **Q04 Verificador de fluxo principal:** roda ao final de toda funcionalidade e executa os AC dos fluxos principais dos UC dela: no backend pela API (HTTP ou a camada MCP, S23) e, se ela tem interface, também no frontend (Playwright). Não deixa suíte no repositório e não corrige; bug no formato do P15. Fala do humano: "Ele é um agente que roda sempre ao final de uma funcionalidade no frontend backend".
+ - **Q05 Adversarial:** roda ao final de toda funcionalidade, depois do Q04 sem bug aberto, pela API e, com interface, também na tela. Executa os AC dos FA e FE e a lista fixa de ataques do cartão no [[modelo-briefing-subagente]]: pela API e na tela, valores fora do ENT, perfil errado, requisição repetida, ação durante a atualização (se houver tempo real) e mensagem igual para erros diferentes; só com interface, os ataques de tela (duplo clique, URL direta e estado inicial, voltar ou recarregar); e tempo de resposta e cliques perdidos: cada ação classificada pelo contexto como rápida ou longa (RNF de desempenho, se houver), tempo medido, cliques e digitação repetidos durante a atualização da tela e contados, e o bug diz se a causa foi tempo de resposta ou atualização de tela. Falas do humano (2026-11-17): "Agente responsável por avaliar tempo de resposta, baseado no contexto da funcionalidade (processos longos são demorados, processos rápidos exigem resposta quase instantânea, se foi erro de tempo de resposta ou de refresh de tela)" e "o de teste de cliques perdidos entrará no adversarial". Não corrige; bug no formato do P15. Bug achado volta para um implementador novo, e os dois agentes rodam de novo.
+@@ -77,3 +77,4 @@
+ - v1 (2026-11-16): criação, com P01 a P16 e os trechos do Manual que presumiam software (princípio 7, §4, §5 passos 5, 6 e 8, §8, §9, A2, A5, acesso do modelo de CLAUDE, briefing).
+ - v2 (2026-11-16): A2 e A5 perguntam se o projeto será publicado ou só local (`--publicado` do `cofre.py criar`) e põem a proposta de arquitetura e stack no `geral-plano`.
+ - v3 (2026-11-17): §5 com Q01 a Q06 (contrato funcional em `docs/contrato/` do repositório, tela sem regra, contrato antes da tela, verificador de fluxo principal, adversarial, fluxos registrados e roteiro do humano no fim); P01 com o contrato e os M-xx no repositório; P14 e P07 com os dois agentes e o roteiro; §4 com os agentes, a cópia do contrato e os cartões.
++- v4 (2026-11-19): Q01 com o contrato funcional em `Anexos/contrato/` do cofre do projeto (criado pelo `cofre.py criar`, alterado só pelo orquestrador, lido pelos subagentes pela CLI) e copiado para `docs/contrato/` do repositório só na aceitação final, depois do aceite do humano; P01, P07, Q02 e §4 no mesmo estado. Origem: decisão do humano em 2026-11-19.
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Manual da Orquestra.md" "/tmp/hub/Vault/Items/Manual da Orquestra.md"
+--- "/home/claude/vault-copia/Items/Manual da Orquestra.md"	2026-11-17 07:36:18.000000000 -0300
++++ "/tmp/hub/Vault/Items/Manual da Orquestra.md"	2026-11-19 12:45:00.808074706 -0300
+@@ -61,7 +61,7 @@
+ │   ├── arquivos/                 funcionalidades finalizadas (a pasta inteira)
+ │   └── bugs/                     bug-cache-expirando-cedo-2026-10-28.md
+ ├── MOCs/                         moc-tema.md
+-└── Anexos/                       imagens e PDFs
++└── Anexos/                       imagens e PDFs; no prático, contrato/ (contrato funcional)
+ ```
+ 
+ - `funcionalidades/geral/` guarda o contexto, as decisões que valem para o projeto todo (arquitetura, stack, nível do dial) e o **roteiro** (`geral-plano`), que no projeto prático de software também guarda a proposta de arquitetura e stack.
+@@ -83,6 +83,7 @@
+ | `referencias/` | Consulta e acervo | Eu. O agente sugere lacunas |
+ | `modelos/` | Esqueletos | Eu. O agente copia |
+ | `arquivos/` | Funcionalidades finalizadas | Orquestrador move, com minha confirmação |
++| `Anexos/contrato/` (prático) | [[Contrato funcional]] do projeto | Só o orquestrador, com meu aval; subagente propõe a mudança no relatório |
+ 
+ Como uma decisão muda:
+ 
+@@ -262,7 +263,7 @@
+ | A2 | Perguntar ao humano: nome, objetivo, perfil (prático ou estudo), tempo, dial, os escopos de commit a acrescentar e o que o perfil pedir (prático: repositório e se será publicado ou só local). O que faltar vira `[a confirmar]` | Respostas registradas |
+ | A3 | `cofre.py criar` com `--perfil` (no prático, `--publicado` e `--repo`); nunca montar à mão | Estrutura, kit, `CLAUDE.md`, moc, geral-contexto com o perfil, roteiro e diário de criação |
+ | A4 | Preencher o geral-contexto com os fatos de A2 e propor as etapas do roteiro. Com meu aval: nota de decisão, roteiro preenchido e etapa 1 concluída | Decisão do roteiro + `cofre.py status` |
+-| A5 | Aplicar o perfil e acrescentar os escopos de A2 ao bloco `projeto:escopos` (depois do nome da pasta e de `readme`). Prático: repositório, com o contrato copiado de `orquestra/modelos/contrato/` do cofre novo para `docs/contrato/` ([[Contrato funcional]]); em software, proposta de arquitetura e stack no `geral-plano`, a partir da [[Referência de arquitetura e stack]]; ver [[Manual da Orquestra - Perfil projeto prático]] | Escopos no `CLAUDE.md` e o que o perfil pede como prova (em software: decisões de estrutura e stack com aval, citando a proposta) |
++| A5 | Aplicar o perfil e acrescentar os escopos de A2 ao bloco `projeto:escopos` (depois do nome da pasta e de `readme`). Prático: repositório ligado pelo [[modelo-claude-do-repositorio]] e `Anexos/contrato/00-requisitos.md` preenchido do documento-fonte ([[Contrato funcional]]); em software, proposta de arquitetura e stack no `geral-plano`, a partir da [[Referência de arquitetura e stack]]; ver [[Manual da Orquestra - Perfil projeto prático]] | Escopos no `CLAUDE.md` e o que o perfil pede como prova (em software: decisões de estrutura e stack com aval, citando a proposta) |
+ | A6 | `cofre.py verificar` | **Zero ERRO** |
+ | A7 | Humano: abrir no Obsidian, pasta de modelos, README, commit | — |
+ 
+@@ -308,7 +309,7 @@
+ | [[modelo-briefing-subagente]] | O que o orquestrador envia a cada subagente, com os cartões de cada papel |
+ | [[modelo-relatorio-subagente]] | O que cada subagente devolve |
+ | [[modelo-claude-do-repositorio]] | Trecho que liga o repositório de código ao cofre (perfil prático) |
+-| `contrato/` | Arquivos do [[Contrato funcional]] para `docs/contrato/` do repositório (perfil prático; Markdown puro, não são notas) |
++| `contrato/` | Arquivos do [[Contrato funcional]], que o `cofre.py criar` copia para `Anexos/contrato/` do cofre novo (perfil prático; Markdown puro, não são notas) |
+ | [[modelo-roteiro-teste-humano]] | Fluxos de teste registrados por funcionalidade e roteiro final do humano (perfil prático) |
+ | [[Modelo de CLAUDE do cofre]] | O `CLAUDE.md` do cofre de projeto |
+ | [[Modelo de nota]] | Notas de `referencias/` e `MOCs/` (esqueleto do Manual do Cérebro) |
+@@ -336,3 +337,4 @@
+ - v10 (2026-11-16): Manual neutro; o que presume software (princípio 7, worktree, diff e revisor do §4, passos 5, 6 e 8 do §5, "código legado" do §8, riscos de worktree e testes do §9, A2 e A5) vai para o perfil projeto prático (P01 a P16); perfil estudo reservado; padrão de projeto de software (S01 a S25) e referência de arquitetura e stack; commit do cofre a cada registro concluído e na passagem de turno, com escopos em lista fechada (bloco `projeto:escopos`). Origem: pacote de regras aprovado em 2026-11-16 a partir de um cofre de projeto.
+ - v11 (2026-11-16): A2 pergunta os escopos de commit e, no prático, publicado ou local; A3 com `--perfil`, `--publicado` e `--repo`; A5 acrescenta os escopos depois do nome da pasta e de `readme` e põe a proposta de arquitetura e stack no `geral-plano`; nota do `Vault` citada em cofre de projeto é texto "Nome (no Vault)" (§7). Origem: teste de criação de cofre de projeto em 2026-11-16.
+ - v12 (2026-11-17): A5 copia o contrato funcional para `docs/contrato/` do repositório; modelos `contrato/` e `modelo-roteiro-teste-humano`. Origem: pacote "contrato funcional e validação" (Q01 a Q06 do perfil projeto prático).
++- v13 (2026-11-19): o contrato funcional mora em `Anexos/contrato/` do cofre do projeto (estrutura, §3 e A5), criado pelo `cofre.py criar` e alterado só pelo orquestrador; o repositório recebe a cópia só na aceitação final. Origem: decisão do humano em 2026-11-19.
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Padr\303\243o de projeto de software.md" "/tmp/hub/Vault/Items/Padr\303\243o de projeto de software.md"
+--- "/home/claude/vault-copia/Items/Padr\303\243o de projeto de software.md"	2026-11-17 07:36:18.000000000 -0300
++++ "/tmp/hub/Vault/Items/Padr\303\243o de projeto de software.md"	2026-11-19 12:45:00.809997604 -0300
+@@ -44,8 +44,8 @@
+ - **S14 Regra de negócio no domínio;** autorização, validação e dinheiro sempre no servidor.
+ - **S15 Erro com código próprio** e `details` acionável; o teste confere o código, não a mensagem.
+ - **S23 Camada MCP para agentes testarem:** uma tool por rota, desligada em produção, chave obrigatória.
+-- **S26 Campo de entrada nasce do contrato:** todo campo de entrada do frontend tem schema zod tirado do ENT-xx de `docs/contrato/` (tipo, tamanho, formato, valores permitidos, teto), uma mensagem diferente para cada violação (a do ERR-xx) e impede o impossível (ex.: campo de valor só aceita número). O schema da entidade é a fonte; a tela não inventa regra (Q02 do [[Manual da Orquestra - Perfil projeto prático|perfil]], [[Contrato funcional]]). É o par de frontend do S14.
+-- **S27 Comentário curto e pontual:** só o porquê que o código não mostra, em poucas linhas, sem repetir o código. ID citado só se existir em `docs/contrato/`. Fala do humano (2026-11-17): "comentários devem ser menos extensos e mais pontuais".
++- **S26 Campo de entrada nasce do contrato:** todo campo de entrada do frontend tem schema zod tirado do ENT-xx do contrato (`Anexos/contrato/02-entidades.md` do cofre do projeto) (tipo, tamanho, formato, valores permitidos, teto), uma mensagem diferente para cada violação (a do ERR-xx) e impede o impossível (ex.: campo de valor só aceita número). O schema da entidade é a fonte; a tela não inventa regra (Q02 do [[Manual da Orquestra - Perfil projeto prático|perfil]], [[Contrato funcional]]). É o par de frontend do S14.
++- **S27 Comentário curto e pontual:** só o porquê que o código não mostra, em poucas linhas, sem repetir o código. ID citado só se existir no contrato (`Anexos/contrato/` do cofre do projeto). Fala do humano (2026-11-17): "comentários devem ser menos extensos e mais pontuais".
+ 
+ ## 4. 📦 Versões e dependências
+ 
+@@ -72,3 +72,4 @@
+ - v1 (2026-11-16): criação, com S01 a S25.
+ - v2 (2026-11-16): S25 diz onde a proposta mora (`geral-plano` do cofre novo), que as decisões a citam e que nota do `Vault` é citada lá como texto "Nome (no Vault)".
+ - v3 (2026-11-17): S26 (campo de entrada com schema tirado do ENT do contrato e mensagem por violação) e S27 (comentário curto e pontual).
++- v4 (2026-11-19): S26 e S27 apontam para o contrato em `Anexos/contrato/` do cofre do projeto.
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Items/Refer\303\252ncia de arquitetura e stack.md" "/tmp/hub/Vault/Items/Refer\303\252ncia de arquitetura e stack.md"
+--- "/home/claude/vault-copia/Items/Refer\303\252ncia de arquitetura e stack.md"	2026-11-17 07:50:42.000000000 -0300
++++ "/tmp/hub/Vault/Items/Refer\303\252ncia de arquitetura e stack.md"	2026-11-19 12:45:00.809548517 -0300
+@@ -13,10 +13,10 @@
+ 
+ É a **planta-modelo da construtora**: o cliente não desenha a casa do nada; recebe uma planta testada e risca o que quer mudar. Regra que manda propor: S25 do [[Padrão de projeto de software]]; quando, no passo a passo de [[Criar um novo cofre]].
+ 
+-Na raiz do repositório de código (com frontend e backend separados, no do backend) fica `docs/contrato/`, o [[Contrato funcional]] que frontend e backend seguem (Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil]]):
++Em `Anexos/contrato/` do cofre do projeto fica o [[Contrato funcional]] que frontend e backend seguem; o repositório de código só recebe a cópia em `docs/contrato/` na aceitação final (Q01 do [[Manual da Orquestra - Perfil projeto prático|perfil]]):
+ 
+ ```
+-docs/contrato/   README.md (índice), 00-requisitos a 08-criterios-de-aceite, mudancas.md
++Anexos/contrato/   README.md (índice), 00-requisitos a 08-criterios-de-aceite, mudancas.md
+ ```
+ 
+ Versões: a mais recente estável no momento da proposta, sem trava (S16). Nada aqui é decisão: a proposta vai para a seção "Proposta de arquitetura e stack" do `geral-plano` do projeto novo e vira decisão só com o aval do humano. Dentro do cofre de projeto, esta nota é citada como texto "Referência de arquitetura e stack (no Vault)", nunca como wikilink.
+@@ -34,7 +34,7 @@
+ | Estado de UI global | Zustand | Só quando precisa; nunca guarda dado da API |
+ | Validação | zod | Todo campo de entrada com schema tirado do ENT do contrato e mensagem por violação (S26); também search params e env |
+ | Qualidade | ESLint + Prettier + checagem de tipos | No CI, em todo push e PR |
+-| Teste | Verificador de fluxo principal e adversarial, agentes com Playwright | Ao final de cada funcionalidade, executam os AC de `docs/contrato/`; sem suíte de E2E de interface no repositório; quem implementou não testa |
++| Teste | Verificador de fluxo principal e adversarial, agentes com Playwright | Ao final de cada funcionalidade, executam os AC do contrato (`Anexos/contrato/` do cofre); sem suíte de E2E de interface no repositório; quem implementou não testa |
+ 
+ ```
+ src/
+@@ -80,7 +80,7 @@
+ 
+ ### 🛠️ Resumo direto para o cérebro
+ * **Ponto 1:** Partida pronta, não decisão: o humano ajusta e o aval vira as decisões de estrutura e stack do [[Manual da Orquestra - Perfil projeto prático|projeto]].
+-* **Ponto 2:** Camadas com uma direção só, nos dois lados, validação com zod em toda borda e o contrato em `docs/contrato/` como fonte das regras da tela.
++* **Ponto 2:** Camadas com uma direção só, nos dois lados, validação com zod em toda borda e o contrato em `Anexos/contrato/` do cofre como fonte das regras da tela.
+ * **Ponto 3:** Limite: foi tirada de um projeto web com prazo curto; projeto de outro tipo (mobile, CLI, dados) pede outra proposta.
+ 
+ ### 🔗 Conexões
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/MOCs/MOC Programa\303\247\303\243o.md" "/tmp/hub/Vault/MOCs/MOC Programa\303\247\303\243o.md"
+--- "/home/claude/vault-copia/MOCs/MOC Programa\303\247\303\243o.md"	2026-11-17 07:36:18.000000000 -0300
++++ "/tmp/hub/Vault/MOCs/MOC Programa\303\247\303\243o.md"	2026-11-19 12:45:00.810389773 -0300
+@@ -53,7 +53,7 @@
+ - [[Manual da Orquestra - Perfil projeto prático]]: P01 a P16 (contrato, fatias, verificação, aceitação), Q01 a Q06 (contrato funcional e validação por agentes) e o lado concreto das regras neutras (worktree, diff, testes).
+ - [[Manual da Orquestra - Perfil estudo]]: lugar reservado para as regras do futuro agente de estudo.
+ - [[Padrão de projeto de software]]: S01 a S27 (branches, deploy, código, versões, testes, campos e comentários); S04 a S08 só com deploy.
+-- [[Contrato funcional]]: os 8 blocos em `docs/contrato/` do repositório, para a interface ter regra como o servidor; detalhe em [[Contrato funcional - Os 8 blocos]].
++- [[Contrato funcional]]: os 8 blocos em `Anexos/contrato/` do cofre do projeto, para a interface ter regra como o servidor; detalhe em [[Contrato funcional - Os 8 blocos]].
+ - [[Referência de arquitetura e stack]]: a arquitetura e as tecnologias de partida que o agente propõe ao criar um cofre de software.
+ 
+ ## 📚 Conceitos por trás
+diff -ru '--exclude=__pycache__' "/home/claude/vault-copia/Modelos/Modelo de CLAUDE do cofre.md" "/tmp/hub/Vault/Modelos/Modelo de CLAUDE do cofre.md"
+--- "/home/claude/vault-copia/Modelos/Modelo de CLAUDE do cofre.md"	2026-11-17 07:53:25.000000000 -0300
++++ "/tmp/hub/Vault/Modelos/Modelo de CLAUDE do cofre.md"	2026-11-19 12:45:00.810587529 -0300
+@@ -52,7 +52,8 @@
+ 
+ ## Validar cada funcionalidade (perfil prático)
+ 
+-- **Contrato antes do código:** toda funcionalidade começa preenchendo os blocos dela em `docs/contrato/` do repositório (ENT, UC com FA e FE, ERR, AC; com interface, também CMP e NAV; modelos em `orquestra/modelos/contrato/`); tela não cria regra.
++- **Contrato antes do código:** toda funcionalidade começa preenchendo os blocos dela em `Anexos/contrato/` deste cofre (ENT, UC com FA e FE, ERR, AC; com interface, também CMP e NAV); tela não cria regra.
++- **Só o orquestrador altera o contrato:** subagente lê pela CLI (`obsidian read path="Anexos/contrato/03-casos-de-uso.md"`; sem CLI, pelo arquivo, avisando) e devolve a mudança proposta no relatório (arquivo, trecho atual, trecho novo, motivo). O repositório só recebe a cópia em `docs/contrato/` na etapa final, depois do aceite do humano, num commit só.
+ - **Ao final de cada funcionalidade:** despache o verificador de fluxo principal (AC dos fluxos principais) e, sem bug aberto, o adversarial (AC dos FA e FE e a lista fixa de ataques), no backend pela API ou camada MCP e, com interface, no frontend pelo Playwright, com os cartões do `modelo-briefing-subagente`. Bug volta para um implementador novo; corrigido, os dois rodam de novo. Pronto = AC dos UC passando nos dois.
+ - **Passou nos dois:** registre os fluxos de teste dela em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]); na primeira vez, a nota nasce ligada no [[geral-contexto]], nos dois sentidos. Nada vai ao humano nessa hora.
+ - **Etapa final:** monte desse registro o roteiro do humano, curto e didático, passando por todas as funcionalidades (tabela funcionalidade → tarefa ou fluxo, sem lacuna); entregue depois dos verificadores e do avaliador da aceitação final: o aceite do humano é a palavra final.
+diff -ru '--exclude=__pycache__' /home/claude/vault-copia/Modelos/Orquestra/cofre.py /tmp/hub/Vault/Modelos/Orquestra/cofre.py
+--- /home/claude/vault-copia/Modelos/Orquestra/cofre.py	2026-11-17 07:36:18.000000000 -0300
++++ /tmp/hub/Vault/Modelos/Orquestra/cofre.py	2026-11-19 15:16:03.508911801 -0300
+@@ -24,9 +24,10 @@
+ CLAUDE.md de um cofre passar de 2500. O unico bloco do modelo e <!-- projeto:escopos --> (escopos de commit, lista
+ fechada), cobrado na secao Commits: 'verificar' da ERRO se o bloco faltar ou estiver sem nenhum escopo. Cofre no formato antigo (com outros blocos <!-- projeto: --> no CLAUDE.md) recebe AVISO
+ em vez de ERRO, ate migrar as regras para decisoes em orquestra/funcionalidades/geral/.
+-Modelos do repositorio: Vault/Modelos/Orquestra/contrato/ (contrato funcional, copiado para docs/contrato/ do repositorio de
+-codigo) vai no kit para orquestra/modelos/contrato/ so no perfil pratico (o perfil vem da linha '- Perfil:' do geral-contexto,
+-tambem no 'sincronizar' e no 'verificar'), como a secao "Validar cada funcionalidade" do CLAUDE.md; e Markdown puro, sem frontmatter nem Conexoes, e o 'verificar' nao o le.
++Contrato funcional: Vault/Modelos/Orquestra/contrato/ e copiado pelo 'criar' para Anexos/contrato/ do cofre novo, so no perfil
++pratico (o perfil vem da linha '- Perfil:' do geral-contexto, tambem no 'verificar'). Ali ele e editado durante o projeto, so pelo
++orquestrador; o 'sincronizar' nunca o sobrescreve. E Markdown puro, sem frontmatter nem Conexoes, e o 'verificar' nao o le como
++nota, mas da ERRO se um cofre pratico nao tiver Anexos/contrato/00-requisitos.md.
+ Diario com partes: o "Onde parei" vigente mora na parte mais recente do dia (diario-AAAA-MM-DD-assunto.md), e o
+ diario principal aponta para ela no proprio "Onde parei"; 'verificar' cobra o "Proximo passo" nessa parte.
+ """
+@@ -49,8 +50,11 @@
+ TETO_MODELO_CLAUDE = 2500     # palavras do Modelo de CLAUDE do cofre (teto, nao meta)
+ TETO_CLAUDE = 2500            # palavras do CLAUDE.md de cada cofre (formato novo; antigo: AVISO)
+ PADROES_NOTA = "orquestra/padroes.md"
+-# Modelos de arquivos do repositorio de codigo (nao sao notas): copiados no kit, ignorados pelo verificar.
+-MODELOS_DO_REPO = ("Modelos/Orquestra/contrato/", "orquestra/modelos/contrato/")
++# Contrato funcional (Markdown puro, nao sao notas): modelo no Vault, contrato do projeto em Anexos/contrato/.
++# orquestra/modelos/contrato/ e o lugar antigo (cofre de antes de 2026-11-19): ignorado como nota, com AVISO para migrar.
++CONTRATO = "Anexos/contrato/"
++CONTRATO_ANTIGO = "orquestra/modelos/contrato/"
++NAO_NOTAS = ("Modelos/Orquestra/contrato/", CONTRATO, CONTRATO_ANTIGO)
+ ESTADOS = ["planejada", "em-construcao", "em-verificacao", "concluida", "arquivada"]
+ CODE = re.compile(r"(````.*?````|```.*?```|`[^`\n]*`)", re.S)
+ LINK = re.compile(r"!?\[\[([^\]]*)\]\]")
+@@ -173,6 +177,11 @@
+     return g.exists() and re.search(r"^- Perfil: estudo\b", ler(g), re.M) is not None
+ 
+ 
++def contrato_modelo(vault):
++    """Arquivos do contrato funcional (nome -> texto), copiados sem converter para Anexos/contrato/ pelo criar."""
++    return {f.name: ler(f) for f in sorted((vault / "Modelos" / "Orquestra" / "contrato").glob("*.md"))}
++
++
+ def kit(vault, pratico=True):
+     k = {}
+     for f in sorted((vault / "Modelos" / "Orquestra").iterdir()):
+@@ -180,8 +189,6 @@
+             k["modelos/" + f.name] = converter(ler(f))
+         elif f.name == "cofre.py":
+             k["modelos/cofre.py"] = ler(f)
+-    for f in sorted((vault / "Modelos" / "Orquestra" / "contrato").glob("*.md")) if pratico else []:
+-        k["modelos/contrato/" + f.name] = ler(f)  # Markdown puro do repositorio (so no pratico): copia sem converter
+     k["modelos/modelo-nota.md"] = converter(ler(vault / "Modelos" / "Modelo de nota.md"))
+     k["referencias/manual-da-orquestra.md"] = copia_manual(vault, "Manual da Orquestra.md")
+     k["referencias/manual-do-cerebro.md"] = copia_manual(vault, "Manual do Meu Cérebro no Obsidian.md", ESCOPO_CEREBRO)
+@@ -236,6 +243,9 @@
+         escrever(dest / "orquestra" / rel, txt)
+     escrever(dest / "CLAUDE.md", claude_md(vault, dest.name, a.projeto, a.para_que, pratico))
+     escrever(dest / PADROES_NOTA, padroes_inicial(d, a.projeto))
++    if pratico:  # contrato do projeto: nasce aqui e so o orquestrador o altera (Q01); o sincronizar nao o toca
++        for nome, txt in contrato_modelo(vault).items():
++            escrever(dest / CONTRATO / nome, txt)
+ 
+     m = converter(ler(vault / "Modelos/Orquestra/modelo-moc-orquestra.md"))
+     m = preencher(m, [("{{date}}", d), ("# 🗺️ Mapa da Orquestra", f"# 🗺️ Mapa da Orquestra — {a.projeto}"),
+@@ -328,8 +338,8 @@
+         ("## Candidatos que não viraram nota\n(e por quê)", "## Candidatos que não viraram nota\n- (nenhum)"),
+         ("> - **Próximo passo:** ", "> - **Próximo passo:** etapa 1 do [[geral-plano]]: preencher o [[geral-contexto]] (objetivo, motivação, tempo, dial), "
+          "propor as etapas do roteiro (com aval: decisão do roteiro e etapa 1 concluída) e acrescentar os escopos de commit ao bloco do `CLAUDE.md`"
+-         + (("; colar o trecho do modelo-claude-do-repositorio no repositório de código, copiar `orquestra/modelos/contrato/` para "
+-             "`docs/contrato/` do repositório e preencher o `00-requisitos.md` a partir do documento-fonte e, se for software, propor "
++         + (("; colar o trecho do modelo-claude-do-repositorio no repositório de código, preencher o "
++             "`Anexos/contrato/00-requisitos.md` a partir do documento-fonte e, se for software, propor "
+              "a arquitetura e a stack na seção \"Proposta de arquitetura e stack\" do [[geral-plano]].") if pratico else ".")),
+         ("(subagentes em andamento ou relatórios ainda não registrados)", "nenhuma"),
+         ("> - **Dúvidas para o humano:** ", "> - **Dúvidas para o humano:** as pendências [a confirmar] do geral-contexto."),
+@@ -575,7 +585,7 @@
+     projeto = (cofre / "orquestra").is_dir()
+     rel = lambda p: p.relative_to(cofre).as_posix()
+     oculto = lambda p: any(x.startswith(".") for x in p.relative_to(cofre).parts)
+-    mds = [p for p in cofre.rglob("*.md") if not oculto(p) and not rel(p).startswith(MODELOS_DO_REPO)]
++    mds = [p for p in cofre.rglob("*.md") if not oculto(p) and not rel(p).startswith(NAO_NOTAS)]
+     todos = {p.stem.lower() for p in mds} | {p.name.lower() for p in cofre.rglob("*") if p.is_file() and not oculto(p)}
+     texto = {p: ler(p) for p in mds}
+     saida = {p: links(texto[p]) for p in mds}
+@@ -812,6 +822,16 @@
+                 elif st not in por_etapa[int(et)]:
+                     E(rel(pc), f"funcionalidade fora da lista 'Funcionalidades' da etapa {et} no roteiro")
+         vault = vault or achar_vault(None, cofre)
++        if not perfil_estudo(cofre):
++            exigidos = list(contrato_modelo(vault)) if vault else ["00-requisitos.md"]
++            faltam = [n for n in exigidos if not (cofre / CONTRATO / n).exists()]
++            if faltam:
++                E(CONTRATO.rstrip("/"), f"perfil prático sem o contrato funcional completo (faltam {', '.join(faltam)}): "
++                  "copie Vault/Modelos/Orquestra/contrato/ para Anexos/contrato/ (cofre novo: o criar já copia; "
++                  "contrato em uso em outro lugar: mova para cá, com confirmação)")
++            if (cofre / CONTRATO_ANTIGO).is_dir():
++                A(CONTRATO_ANTIGO.rstrip("/"), "lugar antigo do contrato: o contrato do projeto mora em Anexos/contrato/; "
++                  "mova ou arquive esta pasta, com confirmação do humano")
+         if vault:
+             for relk, txt in kit(vault, not perfil_estudo(cofre)).items():
+                 dst = o / relk
+diff -ru '--exclude=__pycache__' /home/claude/vault-copia/Modelos/Orquestra/contrato/README.md /tmp/hub/Vault/Modelos/Orquestra/contrato/README.md
+--- /home/claude/vault-copia/Modelos/Orquestra/contrato/README.md	2026-11-17 07:36:18.000000000 -0300
++++ /tmp/hub/Vault/Modelos/Orquestra/contrato/README.md	2026-11-19 12:45:00.812972896 -0300
+@@ -2,6 +2,11 @@
+ 
+ Fonte de verdade do que o produto faz, para o frontend e para o backend. O backend implementa daqui as entidades (regra no domínio) e os erros (código próprio); o frontend implementa daqui os componentes, a navegação e a validação de cada campo. Tela nenhuma cria regra.
+ 
++## Onde mora e quem altera
++
++- Mora em `Anexos/contrato/` do cofre do projeto. Na aceitação final, depois do aceite do humano, o orquestrador o copia para `docs/contrato/` do repositório, num commit só.
++- Só o orquestrador altera o contrato, aqui e na cópia do repositório. Subagente lê e, se precisar de mudança, devolve no relatório o arquivo, o trecho atual, o trecho novo e o motivo.
++
+ ## Arquivos
+ 
+ | Arquivo | Bloco | IDs |
+@@ -40,7 +45,7 @@
+ 1. Alguém aponta o conflito ou a necessidade.
+ 2. A IA propõe o texto exato e o impacto em requisitos, critérios de aceite e plano.
+ 3. O humano aprova ou recusa.
+-4. O bloco passa a dizer só o estado novo, e a mudança entra em `mudancas.md` (M-xx).
++4. O orquestrador reescreve o bloco no estado novo e registra a mudança em `mudancas.md` (M-xx).
+ 5. Só então o código muda.
+ 
+ ## IDs
+diff -ru '--exclude=__pycache__' /home/claude/vault-copia/Modelos/Orquestra/modelo-briefing-subagente.md /tmp/hub/Vault/Modelos/Orquestra/modelo-briefing-subagente.md
+--- /home/claude/vault-copia/Modelos/Orquestra/modelo-briefing-subagente.md	2026-11-17 07:58:56.000000000 -0300
++++ /tmp/hub/Vault/Modelos/Orquestra/modelo-briefing-subagente.md	2026-11-19 12:45:00.811583005 -0300
+@@ -10,7 +10,7 @@
+ - **Leia antes:** lista curta de notas e arquivos; nada além disso
+ - **Pode tocar em:** (só implementador) arquivos e áreas do "Toca em" do plano
+ - **Trabalhe em:** espaço isolado `nome` (só implementador; no projeto prático, a git worktree)
+-- **Não pode:** escrever no cofre; tocar fora da lista; dar como pronto sem rodar a prova; perguntar ao humano (mande a dúvida no relatório)
++- **Não pode:** escrever no cofre; alterar o contrato, no cofre ou no repositório (mudança necessária vai no relatório); tocar fora da lista; dar como pronto sem rodar a prova; perguntar ao humano (mande a dúvida no relatório)
+ - **Pronto quando:** copiado do plano
+ - **Prova:** verificação objetiva (no projeto prático, o comando de teste, lint ou tipos)
+ - **Devolva:** no formato do relatório de subagente, em até ~1 tela
+@@ -29,8 +29,9 @@
+ ```markdown
+ ### Implementador
+ - Missão: entregar UMA tarefa do plano, nada além dela.
++- Leia: no projeto prático, os blocos do contrato da funcionalidade em `Anexos/contrato/` do cofre, pela CLI (sem CLI, pelo arquivo, avisando no relatório).
+ - Faça: trabalhe só no seu espaço isolado e no que o "Toca em" lista; rode a prova; liste o que tocou.
+-- Não faça: mudar o escopo; consertar coisas fora da tarefa (anote em "Fora do escopo"); dar como pronto sem a prova rodando.
++- Não faça: alterar o contrato (proponha no relatório: arquivo, trecho atual, trecho novo, motivo); mudar o escopo; consertar coisas fora da tarefa (anote em "Fora do escopo"); dar como pronto sem a prova rodando.
+ - Devolva: o que mudou, a saída da prova e os candidatos a nota.
+ ```
+ 
+@@ -53,7 +54,7 @@
+ ```markdown
+ ### Verificador de fluxo principal (perfil prático: ao final de toda funcionalidade)
+ - Missão: provar que os fluxos principais dos UC da funcionalidade funcionam de ponta a ponta, no backend e, se ela tem interface, também no frontend.
+-- Leia: em `docs/contrato/` do repositório, os UC da funcionalidade e os AC dos fluxos principais; a nota de acesso de teste.
++- Leia: em `Anexos/contrato/` do cofre, pela CLI (`obsidian read path="Anexos/contrato/03-casos-de-uso.md"`; sem CLI, pelo arquivo, avisando no relatório), os UC da funcionalidade e os AC dos fluxos principais; a nota de acesso de teste.
+ - Faça: execute cada AC de fluxo principal no backend (HTTP ou a camada MCP, S23) e, com interface, no frontend (Playwright, como um usuário: clique, digite, espere); guarde a evidência (print, resposta).
+ - Não faça: deixar suíte ou arquivo de teste no repositório (script só fora dele); corrigir; aceitar "deve funcionar"; testar FA ou FE (é do adversarial).
+ - Devolva: ✔/✘ por AC, com a evidência; cada ✘ como bug com passos, esperado (o "então" do AC) e obtido (P15).
+@@ -62,7 +63,7 @@
+ ```markdown
+ ### Adversarial (perfil prático: ao final de toda funcionalidade, só depois do verificador de fluxo principal sem bug aberto)
+ - Missão: quebrar a funcionalidade pelo que o contrato proíbe: pela API sempre e, se ela tem interface, também na tela.
+-- Leia: em `docs/contrato/`, os UC (FA e FE), os ENT dos campos tocados, o catálogo de erros, a navegação e os AC dos FA e FE.
++- Leia: em `Anexos/contrato/` do cofre, pela CLI (sem CLI, pelo arquivo, avisando no relatório), os UC (FA e FE), os ENT dos campos tocados, o catálogo de erros, a navegação e os AC dos FA e FE.
+ - Faça: execute os AC dos FA e FE e esta lista fixa de ataques, sem pular nenhum que se aplique.
+   Pela API e, com interface, também na tela:
+   1. Valores fora de cada restrição de campo do ENT: letras em número, abaixo e acima dos limites, vazio, formato errado.
+diff -ru '--exclude=__pycache__' /home/claude/vault-copia/Modelos/Orquestra/modelo-claude-do-repositorio.md /tmp/hub/Vault/Modelos/Orquestra/modelo-claude-do-repositorio.md
+--- /home/claude/vault-copia/Modelos/Orquestra/modelo-claude-do-repositorio.md	2026-11-17 07:50:42.000000000 -0300
++++ /tmp/hub/Vault/Modelos/Orquestra/modelo-claude-do-repositorio.md	2026-11-19 12:45:00.811002810 -0300
+@@ -15,11 +15,13 @@
+ 
+ ## Contrato
+ 
+-- Frontend em repositório separado do backend: o contrato mora só em `docs/contrato/` do repositório do backend (`{{caminho-ou-link-do-backend}}`); neste repositório, todo `docs/contrato/` abaixo se lê lá, sem cópia. Repositório único ou do backend: apague esta linha.
+-- `docs/contrato/` é a fonte de verdade do que o produto faz: requisitos, atores (ATR), entidades (ENT), casos de uso (UC), componentes (CMP), erros (ERR), navegação (NAV) e critérios de aceite (AC). Ordem e regras em `docs/contrato/README.md`.
+-- Tela não cria regra: cada tela realiza CMP, UC e NAV do contrato. Regra que falta entra primeiro no contrato, com aval do humano e item em `docs/contrato/mudancas.md`.
++- O contrato mora no cofre, em `{{caminho-do-cofre}}/Anexos/contrato/`: é a fonte de verdade do que o produto faz, para backend e frontend (mesmo em repositório separado): requisitos, atores (ATR), entidades (ENT), casos de uso (UC), componentes (CMP), erros (ERR), navegação (NAV) e critérios de aceite (AC). Ordem e regras no `README.md` de lá.
++- Leia o contrato pela Obsidian CLI (`obsidian read path="Anexos/contrato/03-casos-de-uso.md"`, com `vault="{{nome-do-cofre}}"`); sem CLI, pelo arquivo, avisando no relatório.
++- Só o orquestrador altera o contrato. Subagente que precisar de mudança devolve no relatório o arquivo, o trecho atual, o trecho novo e o motivo.
++- Este repositório não tem `docs/contrato/` durante o projeto: na aceitação final, depois do aceite do humano, o orquestrador copia `Anexos/contrato/` para `docs/contrato/`, num commit só. Nenhum subagente altera essa cópia.
++- Tela não cria regra: cada tela realiza CMP, UC e NAV do contrato. Regra que falta entra primeiro no contrato, com aval do humano e item em `Anexos/contrato/mudancas.md`.
+ - Campo de entrada: schema zod tirado do ENT (tipo, tamanho, formato, valores, teto), uma mensagem por violação (a do ERR) e o campo impede o impossível (S26 da nota `Padrão de projeto de software` do cofre `Vault`).
+-- Comentário curto e pontual: só o porquê que o código não mostra; ID citado só se existir em `docs/contrato/` (S27).
++- Comentário curto e pontual: só o porquê que o código não mostra; ID citado só se existir no contrato (S27).
+ - Toda funcionalidade tem contrato (ENT, UC com FA e FE, ERR, AC); com interface, também CMP e NAV. Ao final de cada uma, o orquestrador roda o verificador de fluxo principal e depois o adversarial: eles executam os AC pela API e, com interface, na tela. Nenhuma suíte de E2E de interface fica no repositório.
+ 
+ ## Commits
+@@ -36,5 +38,5 @@
+ - Lado do cofre: o `CLAUDE.md` do cofre, gerado de `Modelo de CLAUDE do cofre`
+ - Formato dos subagentes: [[modelo-briefing-subagente]], [[modelo-relatorio-subagente]]
+ - Regras: [[Manual da Orquestra]] e [[Manual da Orquestra - Perfil projeto prático]]
+-- Contrato que o bloco cita: [[Contrato funcional]] (modelos no `Vault` em `Modelos/Orquestra/contrato/`; no cofre de projeto, em `orquestra/modelos/contrato/`)
++- Contrato que o bloco cita: [[Contrato funcional]] (modelos no `Vault` em `Modelos/Orquestra/contrato/`; no cofre de projeto, o contrato em uso em `Anexos/contrato/`)
+ - Commits: [[Padrão de commit]]
+diff -ru '--exclude=__pycache__' /home/claude/vault-copia/Modelos/Orquestra/modelo-relatorio-subagente.md /tmp/hub/Vault/Modelos/Orquestra/modelo-relatorio-subagente.md
+--- /home/claude/vault-copia/Modelos/Orquestra/modelo-relatorio-subagente.md	2026-10-28 11:50:53.000000000 -0300
++++ /tmp/hub/Vault/Modelos/Orquestra/modelo-relatorio-subagente.md	2026-11-19 12:45:00.811759620 -0300
+@@ -10,6 +10,7 @@
+ - **Prova:** comando rodado + saída resumida
+ - **Critérios:** ✔/✘ cada um, com a prova (verificador)
+ - **Achados:** bloqueante / deve corrigir / opcional (revisor)
++- **Mudança proposta no contrato:** arquivo, trecho atual, trecho novo e motivo (o orquestrador decide e aplica)
+ - **Fora do escopo que notei:** arquivos ou mudanças sem relação com a tarefa
+ - **Candidatos a nota:** bug | decisão | referência, uma linha cada
+ - **Dúvidas para o humano:** 
+diff -ru '--exclude=__pycache__' /home/claude/vault-copia/Modelos/Orquestra/modelo-roteiro-teste-humano.md /tmp/hub/Vault/Modelos/Orquestra/modelo-roteiro-teste-humano.md
+--- /home/claude/vault-copia/Modelos/Orquestra/modelo-roteiro-teste-humano.md	2026-11-17 07:53:25.000000000 -0300
++++ /tmp/hub/Vault/Modelos/Orquestra/modelo-roteiro-teste-humano.md	2026-11-19 12:45:00.812318798 -0300
+@@ -18,7 +18,7 @@
+ 
+ ## Fluxos registrados
+ 
+-Uma seção por funcionalidade, na ordem em que passaram. Passos didáticos e sucintos: faça → clique em → esperado, cada um ligado ao AC de `docs/contrato/08-criterios-de-aceite.md` que ele prova.
++Uma seção por funcionalidade, na ordem em que passaram. Passos didáticos e sucintos: faça → clique em → esperado, cada um ligado ao AC de `Anexos/contrato/08-criterios-de-aceite.md` que ele prova.
+ 
+ ### nome-da-funcionalidade (AAAA-MM-DD)
+ - **Contexto:** [[nome-da-func-contexto]] · **UC:** UC-01 · **Acesso:** nota de acesso de teste (P08), nunca a senha aqui
+diff -ru '--exclude=__pycache__' /home/claude/vault-copia/Modelos/Orquestra/modelo-roteiro.md /tmp/hub/Vault/Modelos/Orquestra/modelo-roteiro.md
+--- /home/claude/vault-copia/Modelos/Orquestra/modelo-roteiro.md	2026-11-17 07:53:25.000000000 -0300
++++ /tmp/hub/Vault/Modelos/Orquestra/modelo-roteiro.md	2026-11-19 12:45:00.812154800 -0300
+@@ -14,7 +14,7 @@
+ 
+ Uma seção por etapa, na ordem em que o projeto acontece. Status: `planejada → em-construcao → em-verificacao → concluida → arquivada`. Etapa concluída tem data e links para as notas geradas nela. A linha "Etapa atual" acima é sincronizada por `cofre.py status --atualizar`.
+ 
+-No projeto prático, cada etapa segue, para cada funcionalidade dela, o ciclo contrato da funcionalidade em `docs/contrato/` → implementação → verificador de fluxo principal → adversarial, e termina com os fluxos de teste dela registrados em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]). A última etapa é a aceitação final: verificadores e avaliador primeiro, depois o roteiro final ao humano, montado desse registro e passando por todas as funcionalidades; o aceite dele fecha o projeto.
++No projeto prático, cada etapa segue, para cada funcionalidade dela, o ciclo contrato da funcionalidade em `Anexos/contrato/` → implementação → verificador de fluxo principal → adversarial, e termina com os fluxos de teste dela registrados em `geral-plano-teste-humano` ([[modelo-roteiro-teste-humano]]). A última etapa é a aceitação final: verificadores e avaliador primeiro, depois o roteiro final ao humano, montado desse registro e passando por todas as funcionalidades; o aceite dele fecha o projeto, e então o orquestrador copia `Anexos/contrato/` para `docs/contrato/` do repositório, num commit só.
+ 
+ ## 1. Definir o roteiro do projeto
+ - **Status:** em-construcao
+@@ -37,7 +37,7 @@
+ - **Status:** planejada
+ - **Posição:** (prático) sempre a última; etapa nova entra antes dela, e a numeração segue 1..N. O `cofre.py criar` já a põe no roteiro do cofre novo.
+ - **Objetivo:** com todas as funcionalidades passando nos dois agentes, fazer a aceitação final: verificadores e avaliador independente primeiro; depois, o roteiro final ao humano, curto e didático, passando por todas as funcionalidades. O aceite do humano fecha a etapa.
+-- **Pronto quando:** toda funcionalidade coberta no roteiro, roteiro testado pelo humano, achados decididos como opções e aceite do humano registrado.
++- **Pronto quando:** toda funcionalidade coberta no roteiro, roteiro testado pelo humano, achados decididos como opções, aceite do humano registrado e, depois dele, `Anexos/contrato/` copiado para `docs/contrato/` do repositório, num commit só.
+ - **Funcionalidades:** (nenhuma)
+ - **Notas geradas:** `geral-plano-teste-humano`
+ - **Concluída em:** 
