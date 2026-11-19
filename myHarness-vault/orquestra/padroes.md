@@ -18,6 +18,7 @@ antigo: re:O Agent SDK em Node \(S4\) é o plano B|\(S4\) fica como plano B|Plan
 antigo: re:só checagem em PR => checagem em PR e em push na main (geral-decisao-2026-11-19-gatilho-do-ci)
 antigo: re:contrato da funcionalidade em `docs/contrato/`|preencher o contrato em `docs/contrato/`|`docs/contrato/` com `00-requisitos`|vai para `docs/contrato/00-requisitos.md` => contrato em Anexos/contrato/ do cofre; docs/contrato/ só na aceitação final (geral-decisao-2026-11-19-subagente-nao-altera-contrato)
 antigo: re:ADIAMENTO_JA_USADO|adiamento_usado|segundo adiamento => limite do chat é aviso ERR-48 LIMITE_DO_CHAT_ATINGIDO; o Humano segue quantas vezes quiser (contrato, M-18)
+antigo: re:com só o aval guardado no SQLite|no SQLite fica só o aval => aval e registrada_em no SQLite (geral-decisao-2026-11-19-gravacao-dupla)
 limite-palavras: 2000
 ```
 

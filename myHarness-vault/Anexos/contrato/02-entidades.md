@@ -385,7 +385,7 @@ Citada em RN-01 (Escrita.caminho) e RF-28 (nota, motivo, hora). Mora em: SQLite.
 
 ## ENT-18 Decisão
 
-Citada em RN-03 (registrada_em) e RN-06 (aval_id). Mora no cofre, como nota; no SQLite fica só o aval. Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).
+Citada em RN-03 (registrada_em) e RN-06 (aval_id). Mora no cofre, como nota; no SQLite ficam o aval e a hora do registro (`registrada_em`). Gravação dupla, com o mesmo conteúdo nos dois lados (RN-31; falha: ERR-51).
 
 | Campo | Tipo | Tamanho ou faixa | Obrigatório | Formato | Valores permitidos | Erro por violação |
 |---|---|---|---|---|---|---|

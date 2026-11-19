@@ -103,13 +103,13 @@ Todas vêm do método da Orquestra e passam a viver no núcleo do MyHarness. Em 
 | RN-28 | Uma execução usa, do começo ao fim, a versão do prompt de papel vigente quando começou; a versão nova só vale para execuções novas. Sem violação nem exceção. | ENT-08, ENT-07 | Seção 1 · Prompts de papel; condição |
 | RN-29 | Cada projeto tem exatamente um cofre de memória, o único em que o orquestrador grava; os outros cofres ligados são só de consulta. Violação: escrita num cofre de consulta é bloqueada (ERR-39). Sem exceção. | ENT-02 | Seção 1 · Várias memórias; restrição |
 | RN-30 | Toda nota devolvida por uma busca ou leitura pela Obsidian CLI vem com o nome do cofre de onde saiu. Violação: resultado sem origem não é entregue ao agente (ERR-40). Sem exceção. | ENT-11, ENT-02 | Seção 1 · Várias memórias; condição |
-| RN-31 | O que mora no SQLite e no cofre (plano, tarefa, relatório, achado e o aval da decisão) é gravado nos dois na mesma operação do núcleo, com o mesmo conteúdo, e uma conferência compara os dois lados [a confirmar: quando roda, além do teste]. Violação: se um lado falha, o outro é desfeito e nada é gravado; diferença achada na conferência vai ao Log (ERR-51). Sem exceção. | ENT-05, ENT-06, ENT-09, ENT-10, ENT-18, ENT-12 | Decisão do Humano (M-21) · Memória; condição |
+| RN-31 | O que mora no SQLite e no cofre (plano, tarefa, relatório, achado e o aval da decisão) é gravado nos dois na mesma operação do núcleo, com o mesmo conteúdo, e uma conferência compara os dois lados, só no teste (AC-148). Violação: se um lado falha, o outro é desfeito e nada é gravado; diferença achada na conferência vai ao Log (ERR-51). Sem exceção. | ENT-05, ENT-06, ENT-09, ENT-10, ENT-18, ENT-12 | Decisão do Humano (M-21) · Memória; condição |
 
 ## Decisões do humano
 
 | ID | Pergunta | Decisão | Data |
 |---|---|---|---|
-| D1 | Onde mora a memória do projeto | Nos .md do cofre, lidos pela Obsidian CLI e escritos só pelo orquestrador. O app guarda num SQLite local o estado de trabalho (projetos, chats, execuções, logs, consumo e as demais entidades de `02-entidades.md`); decisões e diários moram só no cofre, com o aval da decisão no SQLite | 2026-11-18 |
+| D1 | Onde mora a memória do projeto | Nos .md do cofre, lidos pela Obsidian CLI e escritos só pelo orquestrador. O app guarda num SQLite local o estado de trabalho (projetos, chats, execuções, logs, consumo e as demais entidades de `02-entidades.md`); decisões e diários moram só no cofre, com o aval da decisão e a hora do registro no SQLite | 2026-11-18 |
 | D2 | Papel do adversarial | Falha de fluxo é bug e bloqueia a conclusão; problema de UI/UX é sugestão e o Humano decide | 2026-11-18 |
 | D3 | Até onde o subagente vai no GitHub | Worktree e branch próprias, até o commit; o núcleo faz o push e abre o PR (RF-27), e o merge é do Humano | 2026-11-19 |
 | D4 | Quem usa | Uma pessoa, no próprio computador; sem login no app, as permissões são entre papéis | 2026-11-18 |
