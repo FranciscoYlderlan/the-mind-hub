@@ -1,0 +1,954 @@
+Harness — especificação funcional
+18 de nov. de 2026 · @Ylderlan
+Aplicação desktop (Tauri + Rust + React) que governa o trabalho de agentes do Claude CLI, usa o cofre Obsidian só como memória e deixa o humano como validador final.
+Fronteiras
+A aplicação separa quatro responsabilidades: o Obsidian lembra, o Harness governa, o Modelo executa e o Humano valida. A regra de como os agentes trabalham sai do cofre e passa a ser código no núcleo do harness.
+O núcleo Rust é quem impõe as regras: ele monta o briefing de cada papel, decide quais ferramentas e pastas cada processo recebe e segura o despacho até o aval. O agente não precisa "lembrar" de obedecer.
+Entidades e onde moram
+Entidade
+Mora em
+Campos principais
+Projeto
+SQLite
+nome, repositório, limite de contexto padrão
+Cofre
+SQLite
+projeto, nome no Obsidian, função (memoria, consulta), ativo, status
+Chat
+SQLite
+projeto, limite_tokens, tokens_usados, chat_anterior, status
+Mensagem
+SQLite
+chat, autor, texto, uso de tokens
+PlanoDelegação
+SQLite + decisão no cofre
+chat, versão, status (proposto, aprovado, recusado), aprovado_em
+Tarefa
+SQLite + plano no cofre
+faz, toca_em, depende_de, paralelo, pronto_quando, prova, papel, modelo, voltas
+Execução
+SQLite
+tarefa, papel, modelo, prompt_versao, worktree, branch, status (na fila, rodando, concluido, falhou, interrompida)
+PromptPapel
+SQLite
+fluxo, texto, versão, palavras, tokens, vigente
+Relatório
+SQLite + resumo no cofre
+resultado, o que fez, arquivos, prova, critérios, dúvidas, candidatos a nota
+Achado
+SQLite + bug no cofre
+tipo (bug, sugestao), passos, esperado, obtido, captura, decisão
+Leitura
+SQLite
+execução, caminho, cofre, origem (cli, arquivo), hora
+Log
+SQLite
+execução, comando, início, fim, código de saída, saída mascarada
+Integração
+SQLite (status) + cofre de credenciais do SO
+tipo, status, conta, versão
+Consumo
+SQLite
+semanal %, janela %, próximo reinício
+Papel
+Código do núcleo
+nome, ferramentas permitidas, modelo padrão, cartão de briefing
+Recurso
+SQLite
+nome, em_uso_por
+1. Regras de negócio
+São 30 regras de governança. Todas vêm do método da Orquestra e agora passam a viver no núcleo do harness, não no cofre. Em todas, a origem é decisão do negócio e o responsável por alterar ou validar é o Humano, dono do harness. Na linha de cabeçalho vai só a categoria.
+Memória
+RN-01 · Só o orquestrador escreve na memória · permissão
+• Enunciado: apenas o orquestrador grava, altera ou move notas no cofre do projeto.
+• Aplica-se: a toda escrita no cofre, em qualquer chat.
+• Violação: bloqueia; a escrita de subagente é recusada e vira log de violação.
+• Exceções: o Humano escreve direto no Obsidian, fora do harness.
+• Dados: Execução.papel, Escrita.caminho.
+• Usada por: RF-10, RF-28; UC-04.
+• Aceite: dado um subagente de funcionalidade em execução, quando ele tenta escrever em orquestra/, então a escrita é bloqueada e o log mostra "escrita negada: papel sem permissão".
+RN-02 · Leitura do cofre só pela Obsidian CLI · restrição
+• Enunciado: todo agente lê e busca notas do cofre pela Obsidian CLI, nunca lendo os arquivos .md direto.
+• Aplica-se: a toda leitura de nota do cofre.
+• Violação: bloqueia a leitura direta e registra aviso.
+• Exceções: com a integração Obsidian desconectada e o Humano autorizando, a leitura direta é permitida e marcada como "sem CLI".
+• Dados: Leitura.origem (cli, arquivo), Integração.status.
+• Usada por: RF-02, RF-14; UC-02.
+• Aceite: dado o Obsidian conectado, quando um agente pede uma nota, então a leitura sai pela CLI e aparece na aba "Obsidian usado".
+RN-03 · Registro assim que chega · prazo
+• Enunciado: relatório de subagente e decisão aprovada são gravados no cofre antes de o orquestrador despachar a próxima tarefa.
+• Aplica-se: ao receber relatório ou aval.
+• Violação: a próxima delegação fica bloqueada até o registro.
+• Exceções: nenhuma.
+• Dados: Relatório.registrado_em, Decisão.registrada_em.
+• Usada por: RF-11, RF-28; UC-04.
+• Aceite: dado um relatório recebido e ainda não registrado, quando o orquestrador tenta delegar, então a delegação espera e o log mostra "aguardando registro".
+RN-04 · Segredo nunca vai à memória · restrição
+• Enunciado: tokens de OAuth, chaves e senhas nunca são gravados no cofre, nos logs nem no histórico.
+• Aplica-se: a toda gravação de texto feita pelo harness.
+• Violação: o trecho é mascarado antes de gravar.
+• Exceções: nenhuma.
+• Dados: Integração.credencial, Log.texto, Mensagem.texto.
+• Usada por: RF-01, RF-03, RF-21; UC-01.
+• Aceite: dado um log que contém um token do GitHub, quando ele é gravado, então o token aparece como ••••.
+Decisão e delegação
+RN-05 · Delegação exige aval do humano · permissão
+• Enunciado: o orquestrador só despacha subagentes depois que o Humano aprova o plano de delegação.
+• Aplica-se: a todo plano com uma ou mais tarefas para subagentes.
+• Violação: bloqueia o despacho.
+• Exceções: subagente só de leitura (pesquisa) [A CONFIRMAR].
+• Dados: PlanoDelegação.status, PlanoDelegação.aprovado_em.
+• Usada por: RF-08, RF-09, RF-10; UC-03.
+• Aceite: dado um plano em proposto, quando nenhum aval foi dado, então nenhum subagente inicia.
+RN-06 · Plano é proposta, decisão é do humano · restrição
+• Enunciado: um item do plano só vira decisão registrada quando o Humano o aprova.
+• Aplica-se: a todo ponto do plano marcado "para o aval".
+• Violação: bloqueia a criação da nota de decisão.
+• Exceções: nenhuma.
+• Dados: Decisão.aval_id.
+• Usada por: RF-09, RF-28; UC-03.
+• Aceite: dado um ponto do plano sem aval, quando o orquestrador tenta registrar a decisão, então a gravação é recusada.
+RN-07 · Modelo definido por execução · condição
+• Enunciado: toda execução de agente roda com um modelo definido: o escolhido para a tarefa ou, sem escolha, o padrão do papel.
+• Aplica-se: ao despachar orquestrador ou subagente.
+• Violação: sem modelo e sem padrão, o despacho é bloqueado e pede escolha.
+• Exceções: nenhuma.
+• Dados: Tarefa.modelo, Papel.modelo_padrao.
+• Usada por: RF-09, RF-13; UC-03, UC-09.
+• Aceite: dado o padrão do papel teste = Sonnet, quando uma tarefa de teste não tem modelo escolhido, então ela roda com Sonnet.
+RN-08 · Integração conectada antes da ação · condição
+• Enunciado: uma ação que depende de Claude CLI, Obsidian CLI ou GitHub só executa com a integração conectada.
+• Aplica-se: a cada ação com dependência de integração.
+• Violação: bloqueia e aponta qual integração falta.
+• Exceções: RN-02, exceção autorizada.
+• Dados: Integração.status.
+• Usada por: RF-01 a RF-04, RF-10; UC-01.
+• Aceite: dado o GitHub desconectado, quando um plano com PR é aprovado, então o despacho para e pede "conectar GitHub".
+Papéis e separação
+RN-09 · Quem implementa não testa · restrição
+• Enunciado: a execução que testa uma funcionalidade é sempre diferente da que a implementou.
+• Aplica-se: a toda tarefa de teste.
+• Violação: bloqueia a atribuição.
+• Exceções: nenhuma.
+• Dados: Execução.id, Tarefa.implementada_por, Tarefa.testada_por.
+• Usada por: RF-24; UC-05.
+• Aceite: dada a funcionalidade F feita pela execução E1, quando o teste de F é despachado, então ele roda numa execução nova E2.
+RN-10 · Adversarial sem contexto · restrição
+• Enunciado: o agente adversarial recebe só o objetivo da tarefa, o endereço da aplicação e o acesso de teste.
+• Aplica-se: a toda execução adversarial.
+• Violação: o briefing com conversa, plano, código ou notas é recusado.
+• Exceções: nenhuma.
+• Dados: Briefing.conteudo, Execução.papel.
+• Usada por: RF-25; UC-06.
+• Aceite: dado um briefing adversarial que cita o plano, quando o despacho valida, então ele é recusado.
+RN-11 · Adversarial só após todas as funcionalidades · condição
+• Enunciado: o adversarial só roda quando todas as funcionalidades da rodada estão concluídas nos testes.
+• Aplica-se: ao fim de uma rodada de funcionalidades.
+• Violação: bloqueia o despacho adversarial.
+• Exceções: o Humano pode pedir uma rodada adversarial avulsa [A CONFIRMAR].
+• Dados: Rodada.status, Funcionalidade.status.
+• Usada por: RF-25; UC-06.
+• Aceite: dada uma funcionalidade ainda em teste, quando a rodada adversarial é pedida, então ela fica bloqueada.
+RN-12 · Subagente não pergunta ao humano · restrição
+• Enunciado: dúvida de subagente sobe no relatório; só o orquestrador fala com o Humano.
+• Aplica-se: a todo subagente.
+• Violação: a pergunta direta é convertida em dúvida do relatório.
+• Exceções: nenhuma.
+• Dados: Relatório.duvidas.
+• Usada por: RF-11; UC-04.
+• Aceite: dado um subagente com dúvida, quando ele termina, então a dúvida aparece no relatório e na caixa de aval do Humano.
+Paralelismo
+RN-13 · Teto de agentes que escrevem · limite
+• Enunciado: no máximo 5 subagentes que escrevem código rodam ao mesmo tempo.
+• Aplica-se: ao despacho de subagentes de funcionalidade.
+• Violação: o excedente entra em fila.
+• Exceções: subagentes só de leitura e de teste não contam.
+• Dados: Configuração.teto_escrita (padrão 5) [A CONFIRMAR].
+• Usada por: RF-10; UC-04.
+• Aceite: dados 5 implementadores rodando, quando um 6º é despachado, então ele fica na fila.
+RN-14 · Mesmos arquivos, em série · restrição
+• Enunciado: tarefas cujo "toca em" se sobrepõe nunca rodam ao mesmo tempo.
+• Aplica-se: ao montar e ao despachar o plano.
+• Violação: a segunda tarefa espera a primeira.
+• Exceções: nenhuma.
+• Dados: Tarefa.toca_em, Tarefa.depende_de.
+• Usada por: RF-08, RF-10; UC-03.
+• Aceite: dadas T1 e T2 que tocam src/auth, quando o plano é despachado, então T2 só inicia após T1.
+RN-15 · Recurso exclusivo, um por vez · restrição
+• Enunciado: um recurso exclusivo (navegador do Claude in Chrome, banco de teste) atende um agente por vez.
+• Aplica-se: a execuções de teste e adversariais.
+• Violação: a execução espera o recurso.
+• Exceções: nenhuma.
+• Dados: Recurso.em_uso_por.
+• Usada por: RF-24, RF-25; UC-06.
+• Aceite: dado o navegador em uso pelo adversarial A1, quando A2 o pede, então A2 fica aguardando recurso.
+RN-16 · Espaço isolado por implementador · restrição
+• Enunciado: cada subagente de funcionalidade trabalha na própria worktree e branch tipo/ID-descricao.
+• Aplica-se: a todo despacho de funcionalidade.
+• Violação: bloqueia o despacho sem worktree.
+• Exceções: nenhuma.
+• Dados: Execução.worktree, Execução.branch.
+• Usada por: RF-27; UC-04.
+• Aceite: dados dois implementadores, quando os dois iniciam, então cada um tem worktree e branch próprias.
+RN-17 · Merge é do humano · permissão
+• Enunciado: o subagente termina no push e no PR aberto; o merge é sempre feito pelo Humano.
+• Aplica-se: a toda entrega com código.
+• Violação: bloqueia comandos de merge, push --force e push na branch principal.
+• Exceções: nenhuma.
+• Dados: PR.status, Execução.comandos.
+• Usada por: RF-27; UC-10.
+• Aceite: dado um subagente com PR aberto, quando ele tenta git merge na main, então o comando é negado.
+Verificação
+RN-18 · Critério sem prova é ✘ · restrição
+• Enunciado: um critério só é ✔ com prova objetiva anexada (saída de teste, captura, resposta).
+• Aplica-se: a todo relatório de teste.
+• Violação: o critério fica ✘ "sem prova".
+• Exceções: o Humano dispensa a prova; o registro diz "não verificado, presumido".
+• Dados: Critério.status, Critério.prova.
+• Usada por: RF-24; UC-05.
+• Aceite: dado um critério marcado ✔ sem prova, quando o relatório chega, então ele é gravado como ✘ "sem prova".
+RN-19 · Teto de voltas de correção · limite
+• Enunciado: uma tarefa reprovada volta no máximo 2 vezes a um implementador novo; na 3ª reprovação, sobe ao Humano.
+• Aplica-se: a reprovações no teste.
+• Violação: a 3ª volta é bloqueada e vira item na caixa de aval.
+• Exceções: nenhuma.
+• Dados: Tarefa.voltas.
+• Usada por: RF-24; UC-05.
+• Aceite: dada uma tarefa com 2 voltas, quando ela reprova de novo, então nenhum implementador é despachado e o Humano recebe o caso.
+RN-20 · Conclusão de funcionalidade · condição
+• Enunciado: uma funcionalidade só fica concluída com todos os critérios ✔ e nenhum bug aberto.
+• Aplica-se: à mudança de status para concluida.
+• Violação: bloqueia a mudança.
+• Exceções: exceção registrada pelo Humano, com escopo fechado.
+• Dados: Funcionalidade.status, Achado.tipo, Achado.status.
+• Usada por: RF-24, RF-26; UC-05, UC-07.
+• Aceite: dada uma funcionalidade com um bug aberto, quando o orquestrador tenta concluir, então o status continua em-verificacao.
+RN-21 · Classificação do achado adversarial · condição
+• Enunciado: achado adversarial em que o fluxo não se completa é bug; achado em que o fluxo se completa com dificuldade é sugestão de UI/UX.
+• Aplica-se: a cada achado adversarial.
+• Violação: achado sem tipo não é aceito no relatório.
+• Exceções: nenhuma.
+• Dados: Achado.tipo (bug, sugestao).
+• Usada por: RF-25, RF-26; UC-06.
+• Aceite: dado que o adversarial não consegue salvar o formulário, quando relata, então o achado é gravado como bug.
+RN-22 · Sugestão pede decisão do humano · condição
+• Enunciado: toda sugestão de UI/UX recebe do Humano uma de três decisões: corrigir, registrar como limite ou deixar como opcional.
+• Aplica-se: ao fechar uma rodada adversarial.
+• Violação: a rodada fica aguardando decisão.
+• Exceções: nenhuma.
+• Dados: Achado.decisao.
+• Usada por: RF-26; UC-07.
+• Aceite: dadas 3 sugestões sem decisão, quando o Humano tenta fechar a rodada, então o app pede as 3 decisões.
+Contexto e consumo
+RN-23 · Limite de contexto por chat · limite
+• Enunciado: cada chat tem um limite de tokens de conversa; o padrão vale para todo chat novo.
+• Aplica-se: a todo chat do orquestrador.
+• Violação: ao atingir o limite, dispara a passagem de turno (RN-24).
+• Exceções: o Humano pode adiar uma vez por chat; o adiamento vai ao diário.
+• Dados: Chat.limite_tokens (padrão 100 mil [A CONFIRMAR]), Chat.tokens_usados.
+• Usada por: RF-17, RF-20; UC-08.
+• Aceite: dado um chat com limite de 100 mil tokens, quando ele chega a 100 mil, então a passagem de turno começa.
+RN-24 · Passagem de turno registra antes de trocar · condição
+• Enunciado: um chat novo de continuação só abre depois que o orquestrador grava no cofre o "Onde parei" com próximo passo.
+• Aplica-se: a toda passagem de turno.
+• Violação: bloqueia a abertura do chat novo.
+• Exceções: nenhuma.
+• Dados: Diário.onde_parei, Chat.chat_anterior.
+• Usada por: RF-20; UC-08.
+• Aceite: dado um diário sem "Próximo passo", quando a passagem tenta abrir o chat novo, então ele não abre.
+Prompts de papel
+RN-25 · Prompt de papel antes de toda instrução · condição
+• Enunciado: toda chamada à LLM leva, antes da instrução, o prompt de papel do fluxo que a fez.
+• Aplica-se: a todo envio de orquestrador, subagente e passagem de turno.
+• Violação: chamada sem prompt de papel é bloqueada.
+• Exceções: nenhuma.
+• Dados: PromptPapel.fluxo, PromptPapel.versao, Execução.prompt_versao.
+• Usada por: RF-32; UC-02, UC-04.
+• Aceite: dado um despacho de teste, quando a chamada sai, então o início dela é o prompt de papel "Teste" vigente.
+RN-26 · Prompt de papel curto · limite
+• Enunciado: um prompt de papel tem no máximo 80 palavras [A CONFIRMAR].
+• Aplica-se: ao salvar um prompt de papel.
+• Violação: bloqueia o salvamento e mostra quantas palavras passaram.
+• Exceções: nenhuma.
+• Dados: PromptPapel.texto, PromptPapel.palavras.
+• Usada por: RF-31; UC-13.
+• Aceite: dado um prompt com 95 palavras, quando o Humano salva, então o app recusa e mostra "15 palavras acima do limite".
+RN-27 · Prompt de papel não muda permissão · restrição
+• Enunciado: o prompt de papel descreve responsabilidades; ferramentas, pastas e permissões de cada papel vêm só do núcleo.
+• Aplica-se: a toda execução.
+• Violação: texto do prompt que peça algo proibido ao papel não tem efeito; o núcleo continua negando.
+• Exceções: nenhuma.
+• Dados: Papel.ferramentas, PromptPapel.texto.
+• Usada por: RF-29, RF-32; UC-13.
+• Aceite: dado o prompt de Funcionalidade editado para "pode escrever no cofre", quando o subagente tenta escrever, então a escrita continua negada.
+RN-28 · Versão do prompt fixa por execução · condição
+• Enunciado: uma execução usa, do começo ao fim, a versão do prompt de papel vigente quando começou.
+• Aplica-se: ao salvar um prompt com execuções em andamento.
+• Violação: não se aplica; a versão nova só vale para execuções novas.
+• Exceções: nenhuma.
+• Dados: PromptPapel.versao, Execução.prompt_versao.
+• Usada por: RF-31, RF-32; UC-13.
+• Aceite: dado um teste rodando com a versão 3, quando o Humano salva a versão 4, então esse teste termina com a 3 e o próximo usa a 4.
+Várias memórias
+RN-29 · Um cofre de memória por projeto · restrição
+• Enunciado: cada projeto tem exatamente um cofre de memória, o único em que o orquestrador grava; os outros cofres ligados ao projeto são só de consulta.
+• Aplica-se: a toda escrita no cofre e a todo cofre ligado.
+• Violação: escrita num cofre de consulta é bloqueada.
+• Exceções: nenhuma.
+• Dados: Cofre.funcao (memoria, consulta), Cofre.projeto.
+• Usada por: RF-28, RF-33; UC-14.
+• Aceite: dado o cofre Vault ligado como consulta, quando o orquestrador tenta gravar nele, então a escrita é negada.
+RN-30 · Nota devolvida cita o cofre de origem · condição
+• Enunciado: toda nota devolvida por uma busca em vários cofres vem com o nome do cofre de onde saiu.
+• Aplica-se: a toda busca e leitura pela Obsidian CLI.
+• Violação: resultado sem origem não é entregue ao agente.
+• Exceções: nenhuma.
+• Dados: Leitura.cofre, Cofre.nome.
+• Usada por: RF-34, RF-15; UC-11, UC-14.
+• Aceite: dada uma busca que acha notas em dois cofres, quando o resultado volta, então cada nota traz o nome do cofre e a aba "Obsidian usado" agrupa por cofre.
+2. Requisitos funcionais
+São 34 requisitos. "Backend" é o núcleo em Rust (Tauri), que conversa com as CLIs e o GitHub; "frontend" é a interface em React. Cada requisito só cita as RN; nenhum redefine regra.
+Integrações
+RF-01 · Conectar o Claude CLI · backend
+• Descrição: o sistema deve detectar o Claude CLI instalado, verificar a autenticação e iniciar o login quando faltar.
+• Origem: UC-01. Entradas: caminho do executável (opcional). Saídas: status (conectado, sem login, não instalado), versão.
+• RN: RN-04, RN-08. Prioridade: essencial. Dependência: RF-04.
+• Aceite: dado o CLI instalado e sem login, quando o app abre, então o status é sem login e o login pode ser iniciado.
+RF-02 · Conectar a Obsidian CLI e o cofre · backend
+• Descrição: o sistema deve verificar se o Obsidian está aberto, se a CLI responde e se o cofre do projeto está acessível.
+• Origem: UC-01. Entradas: nome do cofre. Saídas: status, número de notas indexadas.
+• RN: RN-02, RN-08. Prioridade: essencial. Dependência: RF-04.
+• Aceite: dado o Obsidian fechado, quando o status é checado, então aparece desconectado com a mensagem da CLI.
+RF-03 · Autenticar o GitHub por OAuth · backend
+• Descrição: o sistema deve autenticar no GitHub por OAuth e guardar o token no cofre de credenciais do sistema operacional.
+• Origem: UC-01. Entradas: consentimento no navegador. Saídas: status, conta, escopos.
+• RN: RN-04, RN-08. Prioridade: essencial. Dependência: RF-04.
+• Aceite: dado o OAuth concluído, quando o status é checado, então aparece conectado com o nome da conta.
+RF-04 · Exibir o status das integrações · frontend
+• Descrição: o sistema deve mostrar no canto superior direito o status das três integrações e permitir conectar cada uma.
+• Origem: UC-01. Entradas: status de RF-01 a RF-03. Saídas: indicadores e ação "conectar".
+• RN: RN-08. Prioridade: essencial. Dependência: RF-01, RF-02, RF-03.
+• Aceite: dado o GitHub desconectado, quando o painel é aberto, então o GitHub aparece em estado de erro com o botão "Conectar".
+Chat e orquestrador
+RF-05 · Conversar com o orquestrador · backend
+• Descrição: o sistema deve enviar o prompt ao orquestrador e transmitir a resposta em tempo real.
+• Origem: UC-02. Entradas: texto, chat_id, modelo do orquestrador. Saídas: eventos de resposta, uso de tokens.
+• RN: RN-07, RN-08. Prioridade: essencial. Dependência: RF-30.
+• Aceite: dado um chat aberto, quando o Humano envia um prompt, então a resposta começa a aparecer antes de terminar.
+RF-06 · Abas por agente no terminal · frontend
+• Descrição: o sistema deve mostrar uma aba para o orquestrador e uma aba por subagente, agrupadas por papel (funcionalidade, teste, adversarial).
+• Origem: UC-04. Entradas: execuções ativas. Saídas: abas com saída de cada agente.
+• RN: RN-09, RN-10. Prioridade: essencial. Dependência: RF-11.
+• Aceite: dados 3 subagentes despachados, quando o despacho termina, então aparecem 3 abas novas com o papel de cada um.
+RF-07 · Iniciar novo chat · ambos
+• Descrição: o sistema deve abrir um chat novo do orquestrador, com o limite de contexto padrão, ligado ao projeto atual.
+• Origem: UC-02. Entradas: projeto, limite (opcional). Saídas: chat novo vazio.
+• RN: RN-23. Prioridade: essencial. Dependência: RF-23.
+• Aceite: dado o limite padrão de 100 mil, quando o Humano clica em "Novo chat", então o chat abre com esse limite.
+RF-08 · Propor o plano de delegação · backend
+• Descrição: o sistema deve receber do orquestrador um plano estruturado de tarefas (faz, toca em, depende de, paralelo, pronto quando, prova, papel) e segurá-lo até o aval.
+• Origem: UC-03. Entradas: saída estruturada do orquestrador. Saídas: PlanoDelegação em proposto.
+• RN: RN-05, RN-14. Prioridade: essencial. Dependência: RF-09.
+• Aceite: dado um pedido grande, quando o orquestrador decide dividir, então o plano aparece para aval e nada é despachado.
+RF-09 · Revisar e aprovar o plano · frontend
+• Descrição: o sistema deve mostrar o plano, permitir trocar o modelo de cada tarefa, aprovar, alterar ou recusar.
+• Origem: UC-03. Entradas: PlanoDelegação. Saídas: aval, modelos por tarefa, pedido de alteração.
+• RN: RN-05, RN-06, RN-07. Prioridade: essencial. Dependência: RF-08.
+• Aceite: dado um plano com 3 tarefas, quando o Humano troca o modelo de T2 e aprova, então T2 é despachada com o modelo escolhido.
+RF-10 · Despachar subagentes · backend
+• Descrição: o sistema deve iniciar um processo do Claude CLI por tarefa aprovada, com o briefing do papel, o modelo e as ferramentas permitidas ao papel.
+• Origem: UC-04. Entradas: plano aprovado. Saídas: execuções em rodando ou na fila.
+• RN: RN-01, RN-05, RN-08, RN-13, RN-14, RN-16. Prioridade: essencial. Dependência: RF-06, RF-12.
+• Aceite: dado um plano com T1 e T2 paralelas, quando aprovado, então as duas iniciam ao mesmo tempo.
+RF-11 · Receber progresso e relatório · backend
+• Descrição: o sistema deve acompanhar os eventos de cada subagente e, ao fim, ler o relatório no formato fixo e entregá-lo ao orquestrador.
+• Origem: UC-04. Entradas: eventos do processo. Saídas: progresso, Relatório.
+• RN: RN-03, RN-12. Prioridade: essencial. Dependência: RF-12.
+• Aceite: dado um subagente que termina, quando o relatório chega, então o orquestrador o recebe e a aba mostra concluído.
+RF-12 · Painel de progresso dos subagentes · frontend
+• Descrição: o sistema deve mostrar lado a lado o progresso de cada subagente e permitir trocar de tela entre eles.
+• Origem: UC-04. Entradas: progresso de RF-11. Saídas: cartões com papel, tarefa, modelo, etapa, tokens.
+• RN: RN-13. Prioridade: importante. Dependência: RF-11.
+• Aceite: dados 4 subagentes rodando, quando o Humano abre o painel, então vê 4 cartões atualizando.
+RF-13 · Gerir modelos · ambos
+• Descrição: o sistema deve manter a lista de modelos disponíveis e o modelo padrão de cada papel (orquestrador, funcionalidade, teste, adversarial).
+• Origem: UC-09. Entradas: escolhas do Humano. Saídas: padrões salvos.
+• RN: RN-07. Prioridade: importante. Dependência: RF-09.
+• Aceite: dado o padrão do teste trocado para Haiku, quando um teste é despachado sem escolha, então roda com Haiku.
+RF-30 · Campo de prompt · frontend
+• Descrição: o sistema deve oferecer um campo de texto que cresce com o conteúdo, botão de enviar e seletor de modelo do orquestrador.
+• Origem: UC-02. Entradas: texto, modelo. Saídas: prompt enviado a RF-05.
+• RN: RN-07. Prioridade: essencial. Dependência: RF-05.
+• Aceite: dado um texto de 10 linhas, quando o Humano digita, então o campo cresce até a altura máxima e depois rola.
+Contexto
+RF-14 · Registrar o que foi lido · backend
+• Descrição: o sistema deve registrar cada pasta e arquivo lidos ou usados por agente, separando as leituras pela Obsidian CLI.
+• Origem: UC-11. Entradas: eventos de ferramenta das execuções. Saídas: Leitura (caminho, origem, agente, hora).
+• RN: RN-02. Prioridade: essencial. Dependência: RF-15.
+• Aceite: dado um agente que lê src/app.ts, quando a leitura acontece, então ela aparece na aba "Lidos e usados".
+RF-15 · Painel de contexto · frontend
+• Descrição: o sistema deve mostrar, no topo central, três abas: pastas lidas ou usadas, pastas do Obsidian usadas e pastas em contexto.
+• Origem: UC-11. Entradas: RF-14, RF-16. Saídas: listas por aba.
+• RN: RN-02. Prioridade: essencial. Dependência: RF-14, RF-16.
+• Aceite: dada uma busca no cofre, quando ela termina, então a aba "Obsidian usado" lista as notas devolvidas.
+RF-16 · Adicionar e remover pasta de contexto · ambos
+• Descrição: o sistema deve permitir adicionar e remover pastas que o orquestrador e os subagentes podem acessar.
+• Origem: UC-11. Entradas: caminho da pasta. Saídas: lista de contexto atualizada.
+• RN: nenhuma. Prioridade: importante. Dependência: RF-15.
+• Aceite: dada uma pasta adicionada, quando o próximo agente inicia, então ele tem acesso a ela.
+Consumo
+RF-17 · Medir o consumo do chat · backend
+• Descrição: o sistema deve somar os tokens de conversa de cada chat e compará-los com o limite do chat.
+• Origem: UC-08. Entradas: uso de tokens dos eventos. Saídas: tokens usados, % do limite.
+• RN: RN-23. Prioridade: essencial. Dependência: RF-19.
+• Aceite: dado um chat com limite de 100 mil e 50 mil usados, quando a barra é lida, então mostra 50%.
+RF-18 · Medir o consumo do plano · backend
+• Descrição: o sistema deve obter o consumo semanal e o da janela de uso com reinício periódico, com a hora do próximo reinício.
+• Origem: necessidade do negócio. Entradas: dados de uso do Claude CLI [A CONFIRMAR: fonte]. Saídas: % semanal, % da janela, hora do reinício.
+• RN: nenhuma. Prioridade: essencial. Dependência: RF-19.
+• Aceite: dado o uso da janela em 70%, quando o painel atualiza, então mostra 70% e a hora do reinício.
+RF-19 · Exibir o consumo · frontend
+• Descrição: o sistema deve mostrar o tempo todo, no canto superior esquerdo, o consumo semanal e o da janela, e, sob o prompt, a barra de progresso do chat.
+• Origem: necessidade do negócio. Entradas: RF-17, RF-18. Saídas: indicadores.
+• RN: RN-23. Prioridade: essencial. Dependência: RF-17, RF-18.
+• Aceite: dado qualquer tela aberta, quando o Humano olha o canto superior esquerdo, então vê os dois consumos.
+RF-20 · Passagem de turno automática · backend
+• Descrição: o sistema deve, ao atingir o limite do chat, pedir ao orquestrador o registro do "Onde parei" e abrir um chat novo de continuação ligado ao anterior.
+• Origem: UC-08. Entradas: RF-17. Saídas: diário gravado, chat novo.
+• RN: RN-23, RN-24. Prioridade: essencial. Dependência: RF-07, RF-28.
+• Aceite: dado um chat que atinge o limite, quando o registro termina, então um chat novo abre já com o "Onde parei" como primeira leitura.
+Logs e histórico
+RF-21 · Registrar logs por comando · backend
+• Descrição: o sistema deve registrar cada comando e ferramenta executados por agente, com início, fim, resultado e saída.
+• Origem: necessidade do negócio. Entradas: eventos das execuções. Saídas: Log.
+• RN: RN-04. Prioridade: essencial. Dependência: RF-22.
+• Aceite: dado um npm test rodado por um subagente, quando termina, então o log tem o comando, a duração e o código de saída.
+RF-22 · Painel de logs · frontend
+• Descrição: o sistema deve mostrar no canto inferior esquerdo os logs em tempo real, um por linha minimizada, com a saída completa ao expandir.
+• Origem: necessidade do negócio. Entradas: RF-21. Saídas: lista de logs.
+• RN: RN-04. Prioridade: importante. Dependência: RF-21.
+• Aceite: dado um log minimizado, quando o Humano o expande, então vê a saída completa do comando.
+RF-23 · Histórico de chats e projetos · ambos
+• Descrição: o sistema deve guardar e listar, no canto inferior direito, os projetos e os chats de cada um, com a cadeia de passagens de turno.
+• Origem: UC-12. Entradas: chats e projetos. Saídas: lista filtrável, reabertura.
+• RN: nenhuma. Prioridade: importante. Dependência: RF-07.
+• Aceite: dado um chat fechado ontem, quando o Humano o seleciona no histórico, então ele reabre com as mensagens.
+Teste e entrega
+RF-24 · Executar o subagente de teste · backend
+• Descrição: o sistema deve despachar um subagente de teste para cada funcionalidade entregue, com os critérios e a prova, e gravar ✔/✘ por critério.
+• Origem: UC-05. Entradas: funcionalidade entregue, critérios. Saídas: resultado por critério, bugs.
+• RN: RN-09, RN-15, RN-18, RN-19, RN-20. Prioridade: essencial. Dependência: RF-26.
+• Aceite: dada uma funcionalidade entregue, quando o teste termina, então cada critério tem ✔ ou ✘ com a prova.
+RF-25 · Executar o agente adversarial · backend
+• Descrição: o sistema deve despachar o adversarial, sem contexto, para cumprir tarefas na aplicação pelo Claude in Chrome e relatar bugs e sugestões de UI/UX.
+• Origem: UC-06. Entradas: objetivos de tarefa, endereço, acesso de teste. Saídas: Achados tipados.
+• RN: RN-10, RN-11, RN-15, RN-21. Prioridade: essencial. Dependência: RF-26.
+• Aceite: dada a rodada concluída, quando o adversarial termina, então cada achado tem tipo, passos e evidência.
+RF-26 · Revisar achados · frontend
+• Descrição: o sistema deve listar bugs e sugestões com evidência e permitir ao Humano decidir corrigir, registrar como limite ou deixar opcional.
+• Origem: UC-07. Entradas: Achados. Saídas: decisões por achado.
+• RN: RN-20, RN-21, RN-22. Prioridade: essencial. Dependência: RF-24, RF-25.
+• Aceite: dada uma sugestão, quando o Humano escolhe "corrigir", então o orquestrador recebe uma tarefa nova para o plano.
+RF-27 · Worktree, branch e PR · backend
+• Descrição: o sistema deve criar uma worktree e uma branch por subagente de funcionalidade e, ao fim, fazer push e abrir o PR no GitHub.
+• Origem: UC-10. Entradas: repositório, tarefa. Saídas: caminho da worktree, branch, link do PR.
+• RN: RN-08, RN-16, RN-17. Prioridade: essencial. Dependência: RF-03.
+• Aceite: dada uma tarefa concluída, quando o subagente termina, então existe um PR aberto da branch dela.
+Memória e governança
+RF-28 · Gravar na memória pelo orquestrador · backend
+• Descrição: o sistema deve permitir escrita no cofre só ao processo do orquestrador e registrar cada escrita (nota, motivo, hora).
+• Origem: UC-04. Entradas: pedido de escrita. Saídas: nota gravada, log.
+• RN: RN-01, RN-03, RN-04, RN-06. Prioridade: essencial. Dependência: RF-02.
+• Aceite: dado um relatório recebido, quando o orquestrador registra, então a nota aparece no cofre e no log.
+RF-29 · Compilar as regras em instruções · backend
+• Descrição: o sistema deve gerar, a partir das regras do harness, o CLAUDE.md do orquestrador e o briefing de cada papel, com as ferramentas permitidas a cada um.
+• Origem: necessidade do negócio (governança no harness, não no cofre). Entradas: regras ativas, papel. Saídas: instruções e lista de ferramentas por papel.
+• RN: RN-01, RN-02, RN-10, RN-12. Prioridade: essencial. Dependência: RF-10.
+• Aceite: dada a regra RN-01 ativa, quando um subagente é despachado, então a ferramenta de escrita no cofre não está entre as dele.
+Configurações
+RF-31 · Gerir prompts de papel · ambos
+• Descrição: o sistema deve permitir ver, editar, salvar como versão nova e restaurar o prompt de papel de cada fluxo (orquestrador, funcionalidade, teste, adversarial, passagem de turno).
+• Origem: UC-13. Entradas: fluxo, texto. Saídas: versão nova, contagem de palavras, histórico de versões.
+• RN: RN-26, RN-27, RN-28. Prioridade: essencial. Dependência: RF-32.
+• Aceite: dado o prompt de Teste na versão 2, quando o Humano edita e salva, então surge a versão 3 e a 2 fica no histórico.
+RF-32 · Anexar o prompt de papel em cada chamada · backend
+• Descrição: o sistema deve colocar o prompt de papel vigente do fluxo antes de cada instrução enviada à LLM e gravar qual versão foi usada.
+• Origem: necessidade do negócio. Entradas: fluxo, versão vigente. Saídas: chamada com o prompt no início; Execução.prompt_versao.
+• RN: RN-25, RN-27, RN-28. Prioridade: essencial. Dependência: RF-31.
+• Aceite: dado o prompt de Funcionalidade na versão 4, quando um implementador é despachado, então o log da execução mostra "prompt de papel v4".
+RF-33 · Ligar vários cofres ao projeto · ambos
+• Descrição: o sistema deve permitir ligar ao projeto um cofre de memória e quantos cofres de consulta o Humano quiser, e ativar ou desativar cada um.
+• Origem: UC-14. Entradas: nome do cofre, função (memoria, consulta). Saídas: lista de cofres do projeto com status.
+• RN: RN-08, RN-29. Prioridade: essencial. Dependência: RF-02.
+• Aceite: dado o projeto com o cofre de memória, quando o Humano liga o Vault como consulta, então ele aparece na lista como consulta e ativo.
+RF-34 · Buscar em vários cofres · backend
+• Descrição: o sistema deve repetir a busca e a leitura da Obsidian CLI em cada cofre ativo do projeto e juntar os resultados com o cofre de origem.
+• Origem: UC-14. Entradas: termo, cofres ativos. Saídas: notas com cofre de origem.
+• RN: RN-02, RN-30. Prioridade: essencial. Dependência: RF-15, RF-33.
+• Aceite: dados dois cofres ativos, quando um agente busca "padrão de commit", então o resultado traz as notas dos dois com o nome de cada cofre.
+3. Requisitos não funcionais
+São 14 requisitos, todos com métrica e forma de verificação. Os valores marcados [A CONFIRMAR] são pontos de partida para você ajustar.
+RNF-01 · Resposta em tempo real · desempenho · ambos (UC-02, TEL-01)
+• Descrição: cada trecho de resposta de um agente aparece na tela logo que chega da CLI.
+• Métrica: até 200 ms entre o evento sair do processo e o texto aparecer, em 95% dos eventos [A CONFIRMAR].
+• Medição: Windows 11, 6 agentes rodando ao mesmo tempo. Verificação: marca de tempo no backend e no frontend, comparada num teste automatizado.
+• Prioridade: essencial. Descumprimento: o terminal parece travado e o Humano perde o acompanhamento.
+RNF-02 · Interface fluida com agentes em paralelo · desempenho · frontend (TEL-01)
+• Descrição: a interface continua respondendo ao clique e à digitação com vários agentes transmitindo.
+• Métrica: nenhuma tarefa da thread principal acima de 50 ms; entrada responde em até 100 ms.
+• Medição: 6 agentes, 1.000 linhas de log por minuto. Verificação: perfil de desempenho do WebView (DevTools), em teste de carga com processos simulados.
+• Prioridade: essencial. Descumprimento: cliques e digitação perdidos no prompt.
+RNF-03 · Uso de memória do app · desempenho · ambos
+• Descrição: o app ocupa pouca memória, sem contar os processos das CLIs.
+• Métrica: até 400 MB de RAM após 8 h de uso com 6 agentes [A CONFIRMAR].
+• Medição: Windows 11, 16 GB de RAM. Verificação: teste de longa duração com coleta pelo Gerenciador de Tarefas.
+• Prioridade: importante. Descumprimento: a máquina fica lenta e o ganho do desktop leve some.
+RNF-04 · Atualização do consumo · desempenho · ambos (RF-17 a RF-19)
+• Descrição: os indicadores de consumo refletem o uso real com pouco atraso.
+• Métrica: consumo do chat atualizado em até 2 s após cada resposta; consumo do plano em até 60 s [A CONFIRMAR].
+• Medição: uso normal. Verificação: comparar o painel com os dados da CLI em 20 amostras.
+• Prioridade: essencial. Descumprimento: a passagem de turno dispara tarde e o limite do plano estoura sem aviso.
+RNF-05 · Credenciais protegidas · segurança · backend (UC-01)
+• Descrição: tokens de OAuth ficam no cofre de credenciais do sistema operacional, nunca em arquivo.
+• Métrica: 0 tokens em texto puro no disco, nos logs, no SQLite e no cofre Obsidian.
+• Medição: após conectar as três integrações e rodar um ciclo completo. Verificação: busca automatizada pelos tokens nas pastas do app e do projeto.
+• Prioridade: essencial. Descumprimento: vazamento de acesso ao GitHub e à conta Claude.
+RNF-06 · Permissão por papel imposta pelo núcleo · segurança · backend (RF-10, RF-29)
+• Descrição: cada processo de agente recebe só as ferramentas e pastas do seu papel.
+• Métrica: 100% das tentativas fora do papel negadas (escrita no cofre por subagente, merge, push --force).
+• Medição: suíte de tentativas proibidas por papel. Verificação: teste automatizado de integração.
+• Prioridade: essencial. Descumprimento: a governança vira só texto e os agentes podem ignorá-la.
+RNF-07 · Detecção de agente parado ou caído · confiabilidade · backend (UC-04)
+• Descrição: processo de agente que encerra com erro ou para de emitir eventos é detectado e marcado.
+• Métrica: queda detectada em até 5 s; silêncio acima de 10 min marcado como parado? [A CONFIRMAR].
+• Medição: matar o processo durante a execução. Verificação: teste automatizado de falha.
+• Prioridade: essencial. Descumprimento: o orquestrador espera para sempre um relatório que não vem.
+RNF-08 · Retomada sem perda · confiabilidade · ambos (UC-12)
+• Descrição: fechar o app ou reiniciar a máquina não perde chats, planos, achados nem logs.
+• Métrica: 100% dos registros confirmados antes do fechamento reaparecem ao reabrir; execuções interrompidas aparecem como interrompida.
+• Medição: encerrar o processo do app durante 3 execuções. Verificação: teste automatizado com SQLite em modo WAL.
+• Prioridade: essencial. Descumprimento: trabalho de agentes perdido e retrabalho pago em tokens.
+RNF-09 · Rastreabilidade das ações · auditoria · ambos
+• Descrição: toda ação relevante tem registro: comando de agente, escrita no cofre, aval do Humano, troca de modelo.
+• Métrica: 100% dessas ações com quem, o quê, quando e de qual chat.
+• Medição: um ciclo completo de funcionalidade. Verificação: inspeção do log contra a lista de ações do ciclo.
+• Prioridade: importante. Descumprimento: não dá para descobrir quem fez uma mudança nem por quê.
+RNF-10 · Economia de contexto · manutenibilidade · backend (RF-10, RF-29)
+• Descrição: cada subagente recebe só o briefing do seu papel e busca o resto pela Obsidian CLI.
+• Métrica: briefing inicial de subagente com até 3 mil tokens; relatório de volta com até 1,5 mil tokens [A CONFIRMAR].
+• Medição: 20 despachos reais. Verificação: contagem de tokens dos eventos de uso.
+• Prioridade: importante. Descumprimento: o contexto do orquestrador enche rápido e as passagens de turno se multiplicam.
+RNF-11 · Integração como módulo trocável · manutenibilidade · backend
+• Descrição: cada integração (Claude CLI, Obsidian CLI, GitHub) fica atrás de uma interface própria no núcleo Rust.
+• Métrica: adicionar uma integração nova não altera arquivos das regras nem das telas existentes.
+• Medição: revisão do diff ao adicionar uma integração de teste. Verificação: inspeção de código.
+• Prioridade: importante. Descumprimento: cada integração nova exige mexer no núcleo inteiro.
+RNF-12 · Acessibilidade e teclado · acessibilidade · frontend (todas as telas)
+• Descrição: as ações principais funcionam pelo teclado e o texto tem contraste legível nos temas claro e escuro.
+• Métrica: contraste WCAG 2.1 AA; enviar, novo chat, trocar de aba e aprovar plano com atalho de teclado.
+• Medição: temas claro e escuro. Verificação: auditoria com axe e roteiro manual só com teclado.
+• Prioridade: desejável. Descumprimento: uso cansativo em sessões longas.
+RNF-13 · Custo fixo dos prompts de papel · desempenho · backend (RF-32)
+• Descrição: o prompt de papel anexado a cada chamada pesa pouco no contexto.
+• Métrica: até 150 tokens por chamada, somando o prompt de papel [A CONFIRMAR].
+• Medição: os 5 prompts de papel vigentes. Verificação: contagem de tokens ao salvar, mostrada na TEL-06.
+• Prioridade: essencial. Descumprimento: cada chamada fica mais cara e o contexto do orquestrador enche mais rápido.
+RNF-14 · Busca em vários cofres · desempenho · backend (RF-34)
+• Descrição: a busca em vários cofres responde rápido o bastante para não travar o agente.
+• Métrica: até 3 s para buscar em 3 cofres de até 2 mil notas cada [A CONFIRMAR].
+• Medição: Obsidian aberto, Windows 11. Verificação: teste cronometrado com 20 termos.
+• Prioridade: importante. Descumprimento: os agentes passam a evitar a busca e leem arquivos inteiros, gastando contexto.
+4. Casos de uso
+São 14 casos de uso. Atores: Humano (validador), Orquestrador (sessão principal do Claude CLI), Subagente de funcionalidade, Subagente de teste, Agente adversarial (sem contexto) e os sistemas Claude CLI, Obsidian CLI, GitHub e Claude in Chrome.
+UC-01 · Conectar integrações
+• Objetivo: deixar Claude CLI, Obsidian CLI e GitHub prontos para uso. Atores: Humano; Claude CLI, Obsidian CLI, GitHub.
+• Gatilho: o app abre, ou o Humano clica numa integração. Pré-condições: nenhuma.
+• Fluxo principal: 1. Humano abre o painel de integrações → sistema mostra o status das três. 2. Humano clica em "Conectar" numa integração → sistema abre o login ou o OAuth. 3. Humano conclui o login → sistema valida e mostra conectado.
+• FA-01 (passo 2): a integração já está conectada → sistema mostra conta e versão; termina.
+• FE-01 (passo 1): Claude CLI não instalado → sistema mostra "Claude CLI não encontrado" com o link de instalação; estado não instalado.
+• FE-02 (passo 3): OAuth cancelado ou recusado → sistema mostra "Conexão com o GitHub não concluída"; estado desconectado.
+• FE-03 (passo 1): Obsidian fechado → sistema mostra a mensagem da CLI e a ação "Abrir Obsidian"; estado desconectado.
+• Pós-condições: sucesso, integração conectado com credencial no cofre do SO; falha, status com o motivo.
+• RN: RN-04, RN-08. Telas: TEL-02.
+• Aceite: principal: dado o GitHub desconectado, quando o OAuth conclui, então o indicador fica verde com o nome da conta. FA-01: dado o CLI logado, quando o painel abre, então mostra a versão sem pedir login. FE-01: dado o CLI ausente, quando o app abre, então o indicador fica em erro com o link. FE-02: dado o OAuth cancelado, quando o navegador fecha, então o status continua desconectado. FE-03: dado o Obsidian fechado, quando o status é checado, então aparece "Abrir Obsidian".
+UC-02 · Conversar com o orquestrador
+• Objetivo: pedir trabalho e receber respostas. Atores: Humano; Orquestrador, Claude CLI.
+• Gatilho: Humano envia um prompt. Pré-condições: Claude CLI conectado; projeto selecionado.
+• Fluxo principal: 1. Humano digita e clica em enviar → sistema envia ao orquestrador com o modelo escolhido. 2. Orquestrador busca contexto no cofre pela CLI → sistema mostra as leituras no painel de contexto. 3. Orquestrador responde → sistema transmite a resposta na aba do orquestrador e atualiza a barra do chat.
+• FA-01 (passo 3): o orquestrador decide dividir o trabalho → segue para UC-03.
+• FA-02 (passo 3): o chat chega ao limite → segue para UC-08.
+• FE-01 (passo 1): Claude CLI desconectado → "Conecte o Claude CLI para enviar"; prompt fica no campo.
+• FE-02 (passo 3): limite de uso do plano atingido → sistema mostra a hora do reinício; chat em pausado.
+• Pós-condições: sucesso, mensagem e resposta no histórico; falha, prompt preservado.
+• RN: RN-02, RN-07, RN-08, RN-23. Telas: TEL-01.
+• Aceite: principal: dado um chat aberto, quando o Humano envia, então a resposta aparece em tempo real. FA-01: dado um pedido com 3 partes, quando o orquestrador decide dividir, então aparece o plano para aval. FA-02: dado o chat no limite, quando a resposta termina, então começa a passagem de turno. FE-01: dado o CLI desconectado, quando o Humano envia, então o texto continua no campo. FE-02: dado o limite do plano atingido, quando o Humano envia, então aparece a hora do reinício.
+UC-03 · Aprovar o plano de delegação
+• Objetivo: decidir como o trabalho é dividido antes de qualquer subagente rodar. Atores: Humano; Orquestrador.
+• Gatilho: orquestrador propõe um plano. Pré-condições: plano em proposto.
+• Fluxo principal: 1. Sistema mostra o plano: tarefas, papel, dependências, paralelo ou série, modelo sugerido. 2. Humano ajusta o modelo de cada tarefa, se quiser. 3. Humano clica em "Aprovar" → sistema grava o aval, o orquestrador registra as decisões no cofre e o despacho começa (UC-04).
+• FA-01 (passo 3): Humano pede alteração com comentário → orquestrador propõe plano novo; volta ao passo 1.
+• FA-02 (passo 3): Humano recusa → plano vira recusado; termina.
+• FE-01 (passo 3): duas tarefas paralelas tocam nos mesmos arquivos → sistema avisa "T1 e T2 tocam src/auth: rodarão em série" e ajusta a ordem; volta ao passo 1.
+• FE-02 (passo 3): integração exigida desconectada → "Conecte o GitHub para aprovar este plano"; plano segue proposto.
+• Pós-condições: sucesso, plano aprovado e decisões no cofre; falha, plano proposto ou recusado.
+• RN: RN-05, RN-06, RN-07, RN-08, RN-14. Telas: TEL-03.
+• Aceite: principal: dado um plano proposto, quando o Humano aprova, então os subagentes iniciam. FA-01: dado um comentário de alteração, quando enviado, então chega uma versão nova do plano. FA-02: dado um plano recusado, quando o Humano volta ao chat, então nenhum subagente rodou. FE-01: dadas duas tarefas sobre src/auth, quando o plano é aprovado, então elas rodam em série. FE-02: dado o GitHub desconectado, quando o Humano aprova, então o app pede a conexão.
+UC-04 · Executar tarefas em paralelo
+• Objetivo: construir as funcionalidades do plano com subagentes. Atores: Orquestrador; Subagentes de funcionalidade, Claude CLI, GitHub.
+• Gatilho: plano aprovado. Pré-condições: plano aprovado; integrações necessárias conectadas.
+• Fluxo principal: 1. Sistema cria worktree e branch por tarefa e inicia um subagente por tarefa, até o teto. 2. Sistema mostra cada subagente numa aba e num cartão de progresso. 3. Subagente termina, faz push e devolve o relatório. 4. Orquestrador registra o relatório no cofre e manda a tarefa para teste (UC-05).
+• FA-01 (passo 1): teto atingido → tarefas extras ficam na fila e iniciam quando uma vaga abre; volta ao passo 2.
+• FA-02 (passo 3): relatório com dúvidas → dúvidas vão para a caixa de aval do Humano; continua no passo 4.
+• FE-01 (passo 3): processo do subagente cai → execução falhou com o último log; o orquestrador decide refazer com subagente novo.
+• FE-02 (passo 3): subagente tenta escrever no cofre ou fazer merge → ação negada, log de violação; a execução continua.
+• Pós-condições: sucesso, branches com push e relatórios no cofre; falha, execução falhou registrada.
+• RN: RN-01, RN-03, RN-12, RN-13, RN-14, RN-16, RN-17. Telas: TEL-01.
+• Aceite: principal: dado um plano com 2 tarefas paralelas, quando aprovado, então 2 abas aparecem e cada relatório chega ao cofre. FA-01: dados 6 implementadores, quando despachados, então o 6º fica na fila. FA-02: dado um relatório com dúvida, quando chega, então a dúvida aparece na caixa de aval. FE-01: dado um processo morto, quando passam 5 s, então a aba mostra falhou. FE-02: dada uma tentativa de merge, quando ocorre, então o log mostra a negação.
+UC-05 · Testar funcionalidade
+• Objetivo: provar que a funcionalidade cumpre os critérios. Atores: Subagente de teste; Orquestrador.
+• Gatilho: relatório de funcionalidade registrado. Pré-condições: funcionalidade em-verificacao; critérios definidos.
+• Fluxo principal: 1. Sistema despacha um subagente de teste novo com critérios e prova. 2. Subagente roda as provas e checa cada critério. 3. Sistema grava ✔/✘ com a prova. 4. Todos ✔ → funcionalidade concluida.
+• FA-01 (passo 4): algum ✘ → bug vai a um implementador novo (UC-04) e o teste roda de novo; volta ao passo 1.
+• FE-01 (passo 4): 3ª reprovação → "Tarefa T reprovou 3 vezes" na caixa de aval; funcionalidade bloqueada.
+• FE-02 (passo 3): critério sem prova → gravado como ✘ "sem prova"; segue o FA-01.
+• Pós-condições: sucesso, funcionalidade concluida; falha, em-verificacao ou bloqueada.
+• RN: RN-09, RN-15, RN-18, RN-19, RN-20. Telas: TEL-01, TEL-05.
+• Aceite: principal: dados 3 critérios ✔ com prova, quando o teste termina, então a funcionalidade fica concluida. FA-01: dado um ✘, quando o teste termina, então um implementador novo recebe o bug. FE-01: dada a 3ª reprovação, quando ocorre, então o Humano recebe o caso. FE-02: dado um ✔ sem prova, quando gravado, então vira ✘ "sem prova".
+UC-06 · Validar fluxos com o adversarial
+• Objetivo: descobrir, sem contexto, se a aplicação é fácil de usar e se os fluxos se completam. Atores: Agente adversarial; Orquestrador, Claude in Chrome.
+• Gatilho: todas as funcionalidades da rodada concluida. Pré-condições: aplicação rodando num endereço de teste; acesso de teste disponível.
+• Fluxo principal: 1. Sistema despacha o adversarial só com objetivos, endereço e acesso. 2. Adversarial tenta cada objetivo pelo navegador. 3. Adversarial devolve achados tipados (bug ou sugestão) com passos e captura. 4. Sistema mostra os achados para decisão (UC-07).
+• FA-01 (passo 3): nenhum achado → rodada aprovada; termina.
+• FE-01 (passo 2): navegador em uso por outro agente → adversarial fica aguardando recurso.
+• FE-02 (passo 2): endereço fora do ar → "Aplicação não responde em <endereço>"; rodada falhou.
+• Pós-condições: sucesso, achados registrados; falha, rodada falhou com motivo.
+• RN: RN-10, RN-11, RN-15, RN-21. Telas: TEL-01, TEL-05.
+• Aceite: principal: dada a rodada concluída, quando o adversarial termina, então cada achado tem tipo e captura. FA-01: dado nenhum achado, quando termina, então a rodada fica aprovada. FE-01: dado o navegador ocupado, quando o adversarial inicia, então aguarda. FE-02: dado o endereço fora do ar, quando o adversarial tenta abrir, então a rodada falha com a mensagem.
+UC-07 · Decidir sobre achados
+• Objetivo: dar a palavra final sobre bugs e sugestões. Atores: Humano; Orquestrador.
+• Gatilho: achados novos. Pré-condições: rodada com achados.
+• Fluxo principal: 1. Sistema lista os achados com evidência. 2. Humano escolhe, para cada sugestão, corrigir, registrar como limite ou deixar opcional. 3. Sistema envia as decisões ao orquestrador, que registra no cofre e cria tarefas para os "corrigir".
+• FA-01 (passo 2): achado é bug → vai direto a correção, sem pedir escolha; continua no passo 3.
+• FE-01 (passo 3): Humano tenta fechar com sugestão sem decisão → "Faltam decisões em 2 sugestões"; rodada aguardando decisão.
+• Pós-condições: sucesso, achados decididos e tarefas criadas; falha, rodada aguardando decisão.
+• RN: RN-20, RN-21, RN-22. Telas: TEL-05.
+• Aceite: principal: dadas 2 sugestões decididas, quando o Humano confirma, então o cofre registra as 2 decisões. FA-01: dado um bug, quando a lista abre, então ele já aparece como "corrigir". FE-01: dada uma sugestão sem decisão, quando o Humano fecha, então o app aponta qual falta.
+UC-08 · Passar o turno
+• Objetivo: continuar o trabalho num chat novo sem perder o fio. Atores: Orquestrador; Humano, Obsidian CLI.
+• Gatilho: chat atinge o limite de contexto, ou o Humano pede. Pré-condições: chat ativo.
+• Fluxo principal: 1. Sistema avisa o orquestrador do limite. 2. Orquestrador registra no cofre o "Onde parei": próximo passo, threads abertas, dúvidas. 3. Sistema abre um chat novo ligado ao anterior. 4. O chat novo começa lendo o "Onde parei".
+• FA-01 (passo 1): Humano adia a passagem → sistema registra o adiamento no diário; o chat segue.
+• FE-01 (passo 2): registro sem "Próximo passo" → "Registro incompleto"; o chat novo não abre e o orquestrador refaz o passo 2.
+• FE-02 (passo 2): Obsidian desconectado → "Conecte o Obsidian para registrar"; a passagem espera.
+• Pós-condições: sucesso, chat anterior encerrado e chat novo ativo; falha, chat anterior ativo.
+• RN: RN-23, RN-24. Telas: TEL-01.
+• Aceite: principal: dado o limite atingido, quando o registro termina, então um chat novo abre com o "Onde parei". FA-01: dado o adiamento, quando o Humano confirma, então o diário contém o adiamento. FE-01: dado o registro sem próximo passo, quando a passagem continua, então o chat novo não abre. FE-02: dado o Obsidian fechado, quando a passagem começa, então ela espera a conexão.
+UC-09 · Gerir modelos
+• Objetivo: definir o modelo padrão de cada papel. Atores: Humano.
+• Gatilho: Humano abre a gestão de modelos. Pré-condições: Claude CLI conectado.
+• Fluxo principal: 1. Sistema lista os modelos disponíveis e o padrão de cada papel. 2. Humano troca um padrão. 3. Sistema salva; as próximas execuções usam o novo padrão.
+• FA-01 (passo 2): Humano restaura os padrões de fábrica → sistema volta aos valores iniciais.
+• FE-01 (passo 3): modelo deixou de existir na CLI → "Modelo indisponível"; o padrão anterior continua.
+• Pós-condições: sucesso, padrões salvos; falha, padrões anteriores.
+• RN: RN-07. Telas: TEL-04.
+• Aceite: principal: dado o padrão do teste trocado, quando um teste é despachado, então usa o novo. FA-01: dado um reset, quando confirmado, então os padrões voltam aos de fábrica. FE-01: dado um modelo removido, quando salvo, então aparece a mensagem e nada muda.
+UC-10 · Integrar entrega
+• Objetivo: levar o código aprovado para a branch principal. Atores: Humano; GitHub.
+• Gatilho: funcionalidade concluida com PR aberto. Pré-condições: PR aberto; GitHub conectado.
+• Fluxo principal: 1. Sistema lista os PRs prontos, com a ordem sugerida. 2. Humano abre o PR e faz o merge no GitHub. 3. Sistema detecta o merge e avisa o orquestrador, que registra no cofre.
+• FA-01 (passo 2): Humano escolhe outra ordem → sistema atualiza a fila; continua no passo 2.
+• FE-01 (passo 2): conflito no merge → "Conflito entre PR-A e PR-B"; o orquestrador cria uma tarefa de ajuste que mantém as duas mudanças.
+• Pós-condições: sucesso, PR merged registrado; falha, PR aberto com tarefa de ajuste.
+• RN: RN-08, RN-17. Telas: TEL-01.
+• Aceite: principal: dado um PR aprovado, quando o Humano faz o merge, então o cofre registra a integração. FA-01: dada uma ordem nova, quando salva, então a fila muda. FE-01: dado um conflito, quando detectado, então aparece uma tarefa de ajuste.
+UC-11 · Gerir contexto
+• Objetivo: ver o que os agentes leem e escolher as pastas em contexto. Atores: Humano.
+• Gatilho: Humano abre o painel de contexto. Pré-condições: projeto selecionado.
+• Fluxo principal: 1. Sistema mostra as três abas: lidos e usados, Obsidian usado, em contexto. 2. Humano adiciona uma pasta na aba "Em contexto". 3. Sistema confirma e as próximas execuções têm acesso a ela.
+• FA-01 (passo 2): Humano remove uma pasta → sistema tira o acesso das próximas execuções.
+• FE-01 (passo 2): pasta inexistente ou sem permissão → "Não foi possível acessar <pasta>"; a lista não muda.
+• Pós-condições: sucesso, lista de contexto atualizada; falha, lista anterior.
+• RN: RN-02. Telas: TEL-01.
+• Aceite: principal: dada uma pasta adicionada, quando o próximo agente inicia, então pode ler nela. FA-01: dada uma pasta removida, quando o próximo agente inicia, então não a acessa. FE-01: dada uma pasta sem permissão, quando adicionada, então aparece a mensagem.
+UC-12 · Retomar do histórico
+• Objetivo: reabrir um projeto ou chat anterior. Atores: Humano.
+• Gatilho: Humano abre o histórico. Pré-condições: existe ao menos um chat salvo.
+• Fluxo principal: 1. Sistema lista projetos e chats, com a cadeia de passagens de turno. 2. Humano seleciona um chat. 3. Sistema reabre o chat; se estava encerrado por passagem, oferece ir ao chat de continuação.
+• FA-01 (passo 2): Humano seleciona um projeto → sistema troca o projeto ativo e abre o último chat dele.
+• FE-01 (passo 3): cofre do projeto não encontrado → "Cofre <nome> não encontrado"; chat abre só para leitura.
+• Pós-condições: sucesso, chat ou projeto ativo; falha, chat só leitura.
+• RN: RN-02. Telas: TEL-01.
+• Aceite: principal: dado um chat de ontem, quando selecionado, então reabre com as mensagens. FA-01: dado outro projeto, quando selecionado, então o painel de contexto muda para ele. FE-01: dado o cofre ausente, quando o chat abre, então o campo de prompt fica desabilitado com a mensagem.
+UC-13 · Editar prompts de papel
+• Objetivo: ajustar as responsabilidades primárias que cada fluxo recebe antes de toda instrução. Atores: Humano.
+• Gatilho: Humano abre Configurações → Prompts de papel. Pré-condições: nenhuma.
+• Fluxo principal: 1. Sistema lista os 5 fluxos com o prompt vigente, a versão e a contagem de palavras e tokens. 2. Humano edita um prompt → a contagem atualiza enquanto digita. 3. Humano salva → sistema grava a versão nova, que vale para as próximas execuções.
+• FA-01 (passo 2): Humano restaura uma versão anterior ou o padrão de fábrica → sistema carrega o texto; continua no passo 3.
+• FA-02 (passo 3): há execuções em andamento → sistema avisa "2 execuções seguem com a versão anterior"; continua.
+• FE-01 (passo 3): texto acima de 80 palavras → "15 palavras acima do limite"; nada é salvo.
+• FE-02 (passo 3): texto vazio → "O prompt de papel não pode ficar vazio"; nada é salvo.
+• Pós-condições: sucesso, versão nova vigente e anterior no histórico; falha, versão anterior vigente.
+• RN: RN-25, RN-26, RN-27, RN-28. Telas: TEL-06.
+• Aceite: principal: dado o prompt de Teste editado, quando salvo, então o próximo teste começa com o texto novo. FA-01: dada a versão 1 restaurada, quando salva, então vira a versão vigente. FA-02: dadas 2 execuções rodando, quando o Humano salva, então o aviso aparece e elas mantêm a versão anterior. FE-01: dado um texto de 95 palavras, quando salvo, então aparece o excesso. FE-02: dado o campo vazio, quando salvo, então aparece a mensagem.
+UC-14 · Ligar cofres de memória e consulta
+• Objetivo: pesquisar em mais de um cofre do Obsidian sem misturar onde se grava. Atores: Humano; Obsidian CLI.
+• Gatilho: Humano abre Configurações → Cofres. Pré-condições: Obsidian aberto; projeto selecionado.
+• Fluxo principal: 1. Sistema lista os cofres que a Obsidian CLI enxerga e os já ligados ao projeto. 2. Humano liga um cofre como consulta → sistema testa uma busca nele. 3. Busca ok → o cofre fica ativo e as próximas buscas dos agentes passam por ele.
+• FA-01 (passo 2): Humano troca qual cofre é a memoria → sistema pede confirmação e o antigo vira consulta; continua no passo 3.
+• FA-02 (passo 2): Humano desativa um cofre de consulta → ele sai das buscas, mas continua ligado; termina.
+• FE-01 (passo 2): o cofre não responde pela CLI → "Cofre <nome> não encontrado pela Obsidian CLI"; fica desconectado.
+• FE-02 (passo 2): Humano tenta tirar o único cofre de memoria → "O projeto precisa de um cofre de memória"; nada muda.
+• Pós-condições: sucesso, lista de cofres do projeto atualizada; falha, lista anterior.
+• RN: RN-02, RN-08, RN-29, RN-30. Telas: TEL-06.
+• Aceite: principal: dado o Vault ligado como consulta, quando um agente busca, então há resultados dele marcados "Vault". FA-01: dada a troca de memória, quando confirmada, então só o novo cofre aceita gravação. FA-02: dado um cofre desativado, quando um agente busca, então ele não aparece. FE-01: dado um cofre que não responde, quando ligado, então aparece a mensagem. FE-02: dado um só cofre de memória, quando o Humano tenta removê-lo, então o app recusa.
+5. Contrato das telas
+São 6 telas. A TEL-01 é a janela principal, sempre aberta; as outras abrem sobre ela como painéis ou diálogos. Todas são acessadas só pelo Humano, com permissão total (uso local, pessoa única). Os estados dos componentes seguem a ordem vazio · carregando · preenchido · erro · sucesso · desabilitado.
+TEL-01 · Área de trabalho
+• Objetivo: conversar com o orquestrador e acompanhar ao vivo agentes, contexto, consumo e logs.
+• Pré-condições: app aberto; projeto selecionado (senão, abre o histórico para escolher).
+Componentes
+CMP-01 · Consumo do plano (canto superior esquerdo)
+• Papel: mostrar o consumo semanal e o da janela de uso com reinício. Recebe: RF-18. Emite: nada.
+• Eventos: passar o mouse mostra a hora do próximo reinício.
+• Estados: vazio (sem dados ainda) · carregando (primeira leitura) · preenchido (dois percentuais) · erro ("consumo indisponível") · sucesso (não se aplica) · desabilitado (Claude CLI desconectado).
+• Regras: fica visível em todas as telas.
+CMP-02 · Painel de contexto (topo, centro)
+• Papel: mostrar o que os agentes leem e as pastas em contexto. Recebe: RF-14, RF-16. Emite: pasta adicionada ou removida.
+• Eventos: trocar de aba (Lidos e usados, Obsidian usado, Em contexto); adicionar pasta; remover pasta; filtrar por agente.
+• Estados: vazio ("nenhuma leitura neste chat") · carregando · preenchido (lista com caminho, agente, hora) · erro (pasta inacessível) · sucesso (pasta adicionada) · desabilitado (sem projeto).
+• Regras: RN-02 (leitura sem CLI aparece marcada "sem CLI"); RN-30 (a aba "Obsidian usado" agrupa as notas por cofre).
+CMP-03 · Indicador de integrações (canto superior direito)
+• Papel: mostrar se Claude CLI, Obsidian CLI e GitHub estão conectados. Recebe: RF-01 a RF-03. Emite: abrir TEL-02.
+• Eventos: clicar abre TEL-02.
+• Estados: vazio (não se aplica) · carregando (checando) · preenchido (um sinal por integração) · erro (integração desconectada, em destaque) · sucesso (todas conectadas) · desabilitado (não se aplica).
+• Regras: RN-08.
+CMP-04 · Terminal com abas por agente (centro, parte inferior)
+• Papel: mostrar a conversa com o orquestrador e a saída de cada subagente. Recebe: RF-05, RF-11. Emite: aba selecionada.
+• Eventos: trocar de aba; fechar aba de agente concluído; rolar.
+• Estados: vazio (chat novo, só a aba do orquestrador) · carregando (resposta chegando) · preenchido · erro (agente falhou, aba em destaque) · sucesso (agente concluido) · desabilitado (chat encerrado por passagem).
+• Regras: abas agrupadas por papel: orquestrador, funcionalidade, teste, adversarial (RN-09, RN-10). As abas de subagente são só leitura (RN-12).
+CMP-05 · Progresso dos subagentes
+• Papel: mostrar lado a lado o andamento de cada subagente e trocar de tela entre eles. Recebe: RF-11. Emite: subagente selecionado (abre a aba no CMP-04).
+• Eventos: clicar num cartão; alternar visão em grade ou em foco.
+• Estados: vazio ("nenhum subagente") · carregando (despachando) · preenchido (cartões com papel, tarefa, modelo, etapa, tokens) · erro (cartão falhou) · sucesso (cartão concluido) · desabilitado (não se aplica).
+• Regras: RN-13 (mostra a fila e o contador "x de 5 que escrevem").
+CMP-06 · Campo de prompt (abaixo do terminal)
+• Papel: receber o pedido do Humano. Recebe: modelo do orquestrador. Emite: prompt e modelo para RF-05.
+• Eventos: digitar; enviar (botão ou atalho); escolher modelo do orquestrador.
+• Estados: vazio (placeholder) · carregando (enviando) · preenchido · erro (falha no envio, texto preservado) · sucesso (campo limpo) · desabilitado (Claude CLI desconectado, chat encerrado ou passagem em andamento).
+• Regras: altura mínima de 1 linha, cresce até 8 linhas e depois rola [A CONFIRMAR]; RN-07, RN-08.
+CMP-07 · Barra do chat e novo chat (abaixo do prompt)
+• Papel: mostrar os tokens usados contra o limite do chat e iniciar chat novo. Recebe: RF-17. Emite: pedido de chat novo, novo limite.
+• Eventos: clicar em "Novo chat"; trocar o limite deste chat.
+• Estados: vazio (0%) · carregando (não se aplica) · preenchido (percentual e tokens) · erro (não se aplica) · sucesso (passagem concluída) · desabilitado (não se aplica).
+• Regras: RN-23; a partir de 80% a barra muda para alerta [A CONFIRMAR].
+CMP-08 · Logs ao vivo (canto inferior esquerdo)
+• Papel: mostrar cada comando executado, minimizado, com a saída ao expandir. Recebe: RF-21. Emite: nada.
+• Eventos: expandir ou recolher o painel; expandir um log; filtrar por agente.
+• Estados: vazio ("nenhum comando ainda") · carregando (comando rodando, com cronômetro) · preenchido · erro (comando com saída diferente de zero) · sucesso (comando ok) · desabilitado (não se aplica).
+• Regras: RN-04 (segredos mascarados).
+CMP-09 · Histórico (canto inferior direito)
+• Papel: listar projetos e chats e reabrir um deles. Recebe: RF-23. Emite: chat ou projeto selecionado.
+• Eventos: buscar; selecionar chat; selecionar projeto.
+• Estados: vazio ("nenhum chat salvo") · carregando · preenchido (lista com cadeia de passagens) · erro (cofre do projeto não encontrado) · sucesso (não se aplica) · desabilitado (não se aplica).
+• Regras: nenhuma.
+CMP-10 · Cartão de plano e caixa de aval (no terminal do orquestrador)
+• Papel: avisar que há algo esperando o Humano: plano proposto, dúvidas de subagente, 3ª reprovação, achados. Recebe: RF-08, RF-11, RF-24, RF-25. Emite: abrir TEL-03 ou TEL-05.
+• Eventos: clicar em "Revisar".
+• Estados: vazio (oculto) · carregando (não se aplica) · preenchido (contador de pendências) · erro (não se aplica) · sucesso (pendência resolvida) · desabilitado (não se aplica).
+• Regras: RN-05, RN-12, RN-19, RN-22.
+Fluxos da TEL-01
+• Fluxo principal: 1. Humano digita no CMP-06 e envia → a resposta aparece no CMP-04 e a barra do CMP-07 sobe. 2. Agentes leem arquivos e notas → o CMP-02 lista as leituras e o CMP-08 os comandos. 3. O orquestrador propõe um plano → o CMP-10 aparece; o Humano clica em "Revisar" e vai a TEL-03. 4. Após o aval, surgem abas no CMP-04 e cartões no CMP-05.
+• FA-01 (passo 4): Humano clica num cartão do CMP-05 → a aba daquele subagente vem para frente; volta ao principal.
+• FA-02 (passo 1): barra chega ao limite → passagem de turno (UC-08); o CMP-04 abre o chat novo.
+• FE-01 (passo 1): Claude CLI cai → o CMP-03 fica em erro e o CMP-06 desabilita com "Claude CLI desconectado"; o texto digitado é mantido.
+• FE-02 (passo 4): subagente falha → aba e cartão em erro com o último log; o orquestrador recebe o aviso.
+• Navegação: chega-se ao abrir o app ou pelo histórico; vai para TEL-02 (CMP-03), TEL-03 e TEL-05 (CMP-10), TEL-04 (seletor de modelo do CMP-06) e TEL-06 (botão Configurações).
+• Pós-condições: ao fechar o app, chats, execuções e logs ficam salvos (RNF-08).
+• Aceite: principal: dado um projeto aberto, quando o Humano envia um prompt, então a resposta e as leituras aparecem ao vivo. FA-01: dados 3 cartões, quando o Humano clica no 2º, então a aba dele fica ativa. FA-02: dada a barra no limite, quando a resposta termina, então abre o chat de continuação. FE-01: dado o CLI caído, quando o Humano tenta enviar, então o campo está desabilitado com a mensagem. FE-02: dado um subagente que falha, quando a falha é detectada, então o cartão fica em erro em até 5 s.
+TEL-02 · Integrações
+• Objetivo: conectar e conferir Claude CLI, Obsidian CLI e GitHub. Pré-condições: nenhuma.
+• CMP-11 · Cartão de integração (um por integração)
+    ◦ Papel: mostrar status, conta ou versão e permitir conectar ou desconectar. Recebe: RF-01 a RF-03. Emite: pedido de conexão ou desconexão.
+    ◦ Eventos: "Conectar", "Desconectar", "Testar conexão".
+    ◦ Estados: vazio (não se aplica) · carregando (login em andamento) · preenchido (conta e versão) · erro (motivo da falha) · sucesso (conectado) · desabilitado ("Desconectar" durante execução que depende da integração).
+    ◦ Regras: RN-04, RN-08.
+• Fluxo principal: 1. Humano clica em "Conectar" → sistema abre login ou OAuth. 2. Login conclui → cartão mostra conectado.
+• FA-01 (passo 1): Humano clica em "Testar conexão" → sistema checa e mostra o resultado; termina.
+• FE-01 (passo 2): login falha → o cartão mostra o motivo; estado desconectado.
+• Navegação: vem do CMP-03; volta à TEL-01.
+• Pós-condições: status das integrações atualizado no CMP-03.
+• Aceite: principal: dado o GitHub desconectado, quando o OAuth conclui, então o cartão mostra a conta. FA-01: dado o Obsidian aberto, quando o Humano testa, então aparece o número de notas indexadas. FE-01: dado o OAuth recusado, quando o navegador fecha, então o cartão mostra o motivo.
+TEL-03 · Revisão do plano de delegação
+• Objetivo: aprovar, ajustar ou recusar a divisão do trabalho antes do despacho. Pré-condições: plano em proposto.
+• CMP-12 · Lista de tarefas do plano
+    ◦ Papel: mostrar cada tarefa com papel, "toca em", dependências, paralelo ou série e modelo. Recebe: RF-08. Emite: modelo por tarefa.
+    ◦ Eventos: trocar o modelo de uma tarefa; expandir os detalhes.
+    ◦ Estados: vazio (não se aplica) · carregando · preenchido · erro (conflito de "toca em" destacado) · sucesso (não se aplica) · desabilitado (depois do aval).
+    ◦ Regras: RN-07, RN-14.
+• CMP-13 · Ações do aval
+    ◦ Papel: registrar a decisão do Humano. Recebe: estado do plano. Emite: aprovar, pedir alteração (com comentário), recusar.
+    ◦ Eventos: "Aprovar", "Pedir alteração", "Recusar".
+    ◦ Estados: vazio (não se aplica) · carregando (gravando) · preenchido (comentário digitado) · erro (integração exigida desconectada) · sucesso (plano aprovado) · desabilitado ("Aprovar" enquanto houver integração exigida desconectada).
+    ◦ Regras: RN-05, RN-06, RN-08.
+• Fluxo principal: 1. Humano revisa as tarefas no CMP-12. 2. Troca modelos, se quiser. 3. Clica em "Aprovar" → sistema grava o aval e volta à TEL-01, onde o despacho começa.
+• FA-01 (passo 3): "Pedir alteração" com comentário → o orquestrador propõe outro plano; a tela recarrega no passo 1.
+• FA-02 (passo 3): "Recusar" → plano recusado; volta à TEL-01.
+• FE-01 (passo 3): integração exigida desconectada → "Conecte o GitHub para aprovar"; o plano fica proposto.
+• Navegação: vem do CMP-10; volta à TEL-01; vai à TEL-02 pelo link da mensagem de erro.
+• Pós-condições: plano aprovado, proposto ou recusado.
+• Aceite: principal: dado um plano, quando aprovado, então as tarefas iniciam com os modelos escolhidos. FA-01: dado um comentário, quando enviado, então chega a versão 2 do plano. FA-02: dado um plano recusado, quando a tela fecha, então nenhum subagente iniciou. FE-01: dado o GitHub desconectado, quando a tela abre, então "Aprovar" está desabilitado com o motivo.
+TEL-04 · Gestão de modelos
+• Objetivo: definir o modelo padrão de cada papel. Pré-condições: Claude CLI conectado.
+• CMP-14 · Tabela de papéis e modelos
+    ◦ Papel: mostrar e editar o padrão de orquestrador, funcionalidade, teste e adversarial. Recebe: RF-13. Emite: padrões novos.
+    ◦ Eventos: trocar o modelo de um papel; "Salvar"; "Restaurar padrões".
+    ◦ Estados: vazio (não se aplica) · carregando (lendo modelos da CLI) · preenchido · erro (modelo indisponível) · sucesso (salvo) · desabilitado ("Salvar" sem mudança).
+    ◦ Regras: RN-07.
+• Fluxo principal: 1. Humano troca um padrão. 2. Clica em "Salvar" → sistema confirma.
+• FA-01 (passo 1): "Restaurar padrões" → a tabela volta aos valores de fábrica; continua no passo 2.
+• FE-01 (passo 2): modelo indisponível → "Modelo indisponível na CLI"; nada é salvo.
+• Navegação: vem do seletor do CMP-06; volta à TEL-01.
+• Pós-condições: padrões usados nas próximas execuções.
+• Aceite: principal: dado o teste trocado para Haiku, quando salvo, então o próximo teste roda com Haiku. FA-01: dado o reset, quando confirmado, então os valores voltam aos de fábrica. FE-01: dado um modelo removido, quando salvo, então aparece a mensagem.
+TEL-05 · Revisão de achados
+• Objetivo: ver bugs e sugestões de UI/UX com evidência e decidir cada um. Pré-condições: rodada de teste ou adversarial com achados.
+• CMP-15 · Lista de achados
+    ◦ Papel: mostrar cada achado com tipo, passos, esperado, obtido e captura. Recebe: RF-24, RF-25. Emite: decisão por achado.
+    ◦ Eventos: abrir a captura; escolher corrigir, limite ou opcional; filtrar por tipo.
+    ◦ Estados: vazio ("nenhum achado") · carregando · preenchido · erro (captura indisponível) · sucesso (todas as decisões dadas) · desabilitado (bug: decisão fixa em "corrigir").
+    ◦ Regras: RN-20, RN-21, RN-22.
+• Fluxo principal: 1. Humano lê cada achado. 2. Decide as sugestões. 3. Clica em "Confirmar" → o orquestrador registra e cria as tarefas de correção.
+• FA-01 (passo 1): Humano filtra só bugs → a lista mostra só bugs; volta ao passo 1.
+• FE-01 (passo 3): sugestão sem decisão → "Faltam decisões em 2 sugestões", com as duas destacadas; a rodada continua aguardando decisão.
+• Navegação: vem do CMP-10; volta à TEL-01.
+• Pós-condições: achados decididos e tarefas de correção no plano.
+• Aceite: principal: dadas 3 sugestões decididas, quando confirmadas, então o cofre registra 3 decisões. FA-01: dado o filtro "bug", quando aplicado, então só bugs aparecem. FE-01: dada uma sugestão sem decisão, quando o Humano confirma, então ela fica destacada.
+TEL-06 · Configurações
+• Objetivo: ajustar os prompts de papel de cada fluxo e os cofres ligados ao projeto. Pré-condições: nenhuma.
+• CMP-16 · Editor de prompts de papel
+    ◦ Papel: mostrar e editar o prompt curto de cada fluxo, com versão e custo. Recebe: RF-31. Emite: texto salvo, versão restaurada.
+    ◦ Eventos: escolher o fluxo; editar; "Salvar"; "Ver versões"; "Restaurar padrão".
+    ◦ Estados: vazio (não se aplica: todo fluxo nasce com o padrão) · carregando · preenchido (texto, versão, palavras e tokens) · erro (acima do limite ou vazio) · sucesso (versão nova salva) · desabilitado ("Salvar" sem mudança).
+    ◦ Regras: RN-26, RN-27, RN-28; o contador fica vermelho acima de 80 palavras.
+• CMP-17 · Cofres do projeto
+    ◦ Papel: ligar, desligar, ativar e definir a função de cada cofre. Recebe: RF-33, lista de cofres da Obsidian CLI. Emite: cofre ligado, função, ativo.
+    ◦ Eventos: "Ligar cofre"; trocar a função (memoria, consulta); ativar ou desativar; "Testar busca".
+    ◦ Estados: vazio ("nenhum cofre ligado") · carregando (testando busca) · preenchido (lista com função e status) · erro (cofre não responde) · sucesso (cofre ligado) · desabilitado (Obsidian desconectado).
+    ◦ Regras: RN-29 (um só memoria, marcado com destaque), RN-30.
+• Fluxo principal: 1. Humano abre Configurações. 2. Edita um prompt no CMP-16 e salva, ou liga um cofre no CMP-17. 3. Sistema confirma e as próximas execuções usam a configuração nova.
+• FA-01 (passo 2): Humano restaura o padrão de um prompt → o texto de fábrica volta ao editor; continua no passo 3.
+• FE-01 (passo 2): prompt acima do limite → "15 palavras acima do limite"; nada é salvo.
+• FE-02 (passo 2): cofre não responde → "Cofre <nome> não encontrado pela Obsidian CLI"; o cofre fica desconectado.
+• Navegação: vem do botão Configurações, ao lado das integrações no canto superior direito [A CONFIRMAR]; volta à TEL-01.
+• Pós-condições: prompts e cofres salvos, valendo para execuções novas.
+• Aceite: principal: dado um prompt editado, quando salvo, então a próxima execução daquele fluxo começa com ele. FA-01: dado "Restaurar padrão", quando confirmado, então o editor mostra o texto de fábrica. FE-01: dado um texto longo, quando salvo, então aparece o excesso. FE-02: dado um cofre inexistente, quando ligado, então aparece a mensagem.
+Prompts de papel de fábrica. Primeira versão, para você ajustar. Cada um diz só a responsabilidade primária; ferramentas e permissões ficam no núcleo (RN-27), e o briefing da tarefa vem depois.
+Fluxo
+Prompt de papel
+Palavras
+Orquestrador
+Você é o orquestrador. Antes de responder, busque na memória pela Obsidian CLI. Divida o trabalho em tarefas pequenas, cada uma com o que toca, do que depende e quando está pronta. Proponha o plano e espere o aval antes de delegar. Registre relatórios e decisões aprovadas assim que chegam. Não implemente: delegue.
+54
+Funcionalidade
+Você implementa uma única tarefa, na sua worktree. Toque só nos arquivos da tarefa. Rode a prova antes de dizer que terminou e termine com push e PR. Devolva o relatório no formato pedido, com dúvidas e o que notou fora do escopo.
+45
+Teste
+Você testa uma funcionalidade que não construiu. Procure falhas; não confirme por confiança. Para cada critério, dê ✔ ou ✘ com a prova. Não corrija nada: cada falha vira bug com passos, esperado e obtido.
+38
+Adversarial
+Você usa esta aplicação pela primeira vez e não sabe como foi feita. Tente cumprir cada objetivo pela tela, como um usuário. Fluxo que não se completa é bug; fluxo que se completa com dificuldade é sugestão de UI/UX. Relate sempre com passos e captura.
+47
+Passagem de turno
+O chat chegou ao limite de contexto. Registre na memória o "Onde parei": próximo passo, threads abertas e dúvidas. Não comece trabalho novo.
+24
+6. Decisões e suposições
+Seis decisões estão tomadas; 15 pontos seguem como suposição até você confirmar.
+Decisões do Humano (2026-11-18)
+#
+Pergunta
+Decisão
+D1
+Onde mora a memória do projeto
+Nos .md do cofre, lidos pela Obsidian CLI e escritos só pelo orquestrador. O app guarda só o estado das execuções (chats, agentes, logs, consumo) num SQLite local
+D2
+Papel do adversarial
+Falha de fluxo é bug e bloqueia a conclusão; problema de UI/UX é sugestão e o Humano decide
+D3
+Até onde o subagente vai no GitHub
+Worktree e branch próprias, push e PR aberto; o merge é do Humano
+D4
+Quem usa
+Uma pessoa, no próprio computador; sem login no app, as permissões são entre papéis
+D5
+Responsabilidades de cada fluxo (2026-11-19)
+Tela de configurações com prompts curtos de responsabilidade primária, anexados antes de cada instrução à LLM (RN-25 a RN-28, TEL-06)
+D6
+Mais de uma memória (2026-11-19)
+O projeto pode ligar mais de um cofre do Obsidian como contexto de pesquisa (RN-29, RN-30, UC-14)
+O que sai do cofre e vira núcleo do harness: os princípios e as etapas do Manual da Orquestra, o núcleo comum (N), o paralelismo (G), os papéis, os cartões de briefing e o formato do relatório viram as RN-01 a RN-30, o RF-29 e os prompts de papel da TEL-06. O que fica no cofre: contexto, roteiro, planos, decisões, bugs e diários do projeto.
+Suposições [A CONFIRMAR]
+#
+Suposição
+Afeta
+Como confirmar
+S1
+Você citou reinício a cada 4 h; os limites de uso do plano Claude funcionam em janelas de 5 h
+RF-18, CMP-01
+Conferir no /usage do Claude CLI
+S2
+A fonte do consumo semanal e da janela é o próprio Claude CLI; se não houver saída legível por máquina, o plano B é estimar pelos registros locais de sessão da CLI
+RF-18, RNF-04
+Protótipo de leitura antes da tela
+S3
+Cada agente é um processo claude -p com saída em fluxo JSON, modelo, ferramentas permitidas, pastas extras e instruções de sistema passados por parâmetro
+RF-05, RF-10, RF-29, RF-32, RNF-06
+Conferir os parâmetros em claude --help da versão instalada
+S4
+Alternativa ao S3: o Claude Agent SDK (o Claude Code como biblioteca, com hooks e permissões por código) rodando num processo Node ao lado do Rust
+Arquitetura do backend
+Decisão de arquitetura antes do RF-10
+S5
+Das três integrações, só o GitHub usa OAuth; o Claude CLI usa o login da própria CLI e a Obsidian CLI é local e exige o Obsidian aberto
+RF-01 a RF-03, TEL-02
+Teste de conexão das três
+S6
+O adversarial usa a integração do Claude CLI com o Chrome (Claude in Chrome); plano B, um servidor MCP de navegador
+RF-25
+Protótipo de um agente abrindo a aplicação
+S7
+O limite padrão de contexto por chat é 100 mil tokens, herdado do método da Orquestra
+RN-23
+Ajustar depois de medir
+S8
+O teto de agentes que escrevem é 5, herdado do método
+RN-13
+Ajustar depois de medir
+S9
+O botão "Novo chat" fica junto da barra de progresso do chat, embaixo, e as integrações no canto superior direito
+CMP-03, CMP-07
+Sua confirmação do layout
+S10
+Subagente só de leitura (pesquisa) pode rodar sem aval do plano
+RN-05
+Sua decisão
+S11
+O Humano pode pedir uma rodada adversarial avulsa, fora do fim da rodada
+RN-11
+Sua decisão
+S12
+As métricas dos RNF (200 ms, 400 MB, 3 mil tokens de briefing) são pontos de partida
+RNF-01, RNF-03, RNF-10
+Medir no primeiro protótipo
+S13
+Os cofres extras são só de consulta; continua havendo um único cofre onde o orquestrador grava
+RN-29, CMP-17
+Sua confirmação
+S14
+O limite do prompt de papel é 80 palavras (cerca de 150 tokens)
+RN-26, RNF-13
+Medir o efeito no primeiro protótipo
+S15
+O botão Configurações fica ao lado das integrações, no canto superior direito
+TEL-06
+Sua confirmação do layout
