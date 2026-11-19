@@ -29,16 +29,16 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
 - **Depende de:** nenhuma
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] trait e tipos de status e erro mapeados ao contrato (UC-01, CMP-03, CMP-11)
-  - [ ] testes unitários cobrindo os estados
+  - [x] trait e tipos de status e erro mapeados ao contrato (UC-01, CMP-03, CMP-11)
+  - [x] testes unitários cobrindo os estados
 - **Prova:** `cargo fmt --check`, `cargo clippy -D warnings`, `cargo test`
 - **Verificação:**
-  - Data: 
-  - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+  - Data: 2026-11-19
+  - Critérios ✔/✘ com a prova de cada um: ✔ mapeamento a ENT-13 e ERR-01 a ERR-07 (testes `nomes_seguem_ent_13`, `ids_e_codigos_seguem_o_catalogo`, `estado_final_de_cada_erro`); ✔ 13 testes por estado, por `dyn` e genérico; ✔ só `crates/core/`, `Cargo.toml` e `Cargo.lock`; ✔ nenhuma credencial em tipo público (RN-04); ✔ commit `feafd97` na branch `feat/setup-integracao-trait`; `fmt`, `clippy`, `cargo test` e `pnpm check` passando.
+  - Devolvido para correção: não
 
 ### T2: mascaramento de segredo
-- **Faz:** módulo que mascara token e segredo em texto (RN-04, RNF-05).
+- **Faz:** módulo que mascara token e segredo em texto (RN-04, RNF-05) e aplicação dele no texto livre da CLI que a T1 leva ao `Display` e ao `Debug` (`ObsidianFechado.mensagem_da_cli`, `LoginClaudeCliFalhou.motivo`).
 - **Toca em:** `crates/core/`
 - **Depende de:** T1
 - **Paralelo:** não
@@ -90,13 +90,16 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-T1 (em andamento) e T2.
+T2 (em andamento) e T3.
 
 ## Prioridades
 Série T1 → T5; cada tarefa passa por um verificador antes da seguinte. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, numa PR única ([[geral-decisao-2026-11-19-branches-e-pr-unica]]).
 
 ## Candidatos a registro
-- (nenhum)
+- Teste `mensagens_seguem_o_catalogo` não cobre ERR-04 a ERR-06 (observação do verificador da T1).
+- `a_partir_do_erro` leva ERR-05 a ERR-07 a desconectado mesmo vindo de sem login ou não instalado; sem efeito na T1, revisar na etapa 3.
+- Link de instalação do ERR-01: tela ou núcleo, decidir na etapa 3.
+- Ambiente: `cargo clippy --workspace` exige GTK e WebKitGTK (`libwebkit2gtk-4.1-dev`, `libgtk-3-dev`, `libayatana-appindicator3-dev`, `librsvg2-dev`).
 
 ### 🔗 Conexões
 - Funcionalidade: [[fundacao-contexto]]

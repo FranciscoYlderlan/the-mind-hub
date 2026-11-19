@@ -18,7 +18,7 @@ Fechar o "Pronto quando" da etapa 2 do [[geral-plano]]: sem estas interfaces, as
 - 2026-11-19 (sessão das 16h56): "ok para todos" ao plano T1 a T5 em série e aos 8 pontos `[a confirmar]` do relatório das 16h18.
 
 ## O que já foi feito
-- 2026-11-19: plano T1 a T5 aprovado; T1 despachada.
+- 2026-11-19: plano T1 a T5 aprovado; T1 (trait `Integracao`) entregue e verificada; T2 despachada.
 
 ## Tempo disponível
 - Humano até as 18h de 2026-11-19.
