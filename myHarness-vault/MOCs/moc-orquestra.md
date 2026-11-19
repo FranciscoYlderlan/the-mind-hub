@@ -21,7 +21,7 @@ origem: Manual da Orquestra
 - [[geral-contexto]]: objetivo, motivação, dial e decisões que valem para o projeto todo.
 
 ## 🚧 Funcionalidades
-- (nenhuma ainda; uma linha por funcionalidade: `[[nome-da-func-contexto]]` + meia frase)
+- [[fundacao-contexto]]: interfaces comuns da etapa 2 (G1).
 
 ## 📦 Arquivadas
 - (nenhuma ainda)
