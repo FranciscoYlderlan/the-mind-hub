@@ -1,0 +1,57 @@
+Relatório do pesquisador do contrato (etapa 2, preparo do aval) — 2026-11-19
+Lido sem a Obsidian CLI (cópias no container). Nenhum arquivo alterado.
+
+LISTA 1 — Mudanças para alinhar o contrato às decisões aprovadas (o orquestrador aplica depois do aval)
+A. 00-requisitos: (1) apagar S1–S6 da tabela de suposições; (2) acrescentar D7 a D14:
+  D7 janela de 5 h e semana de 7 dias pelo rate_limit_event; última leitura no SQLite; plano B registros locais "estimado".
+  D8 cada agente é claude -p direto, quatro camadas de permissão, --setting-sources ""; Agent SDK fora.
+  D9 nenhum agente herda configuração pessoal do Claude CLI do Humano.
+  D10 Claude CLI por /login; GitHub por app OAuth próprio com device flow, token no cofre do SO; Obsidian via MCP da Obsidian CLI.
+  D11 adversarial pelo claude -p --chrome, disponível com --strict-mcp-config.
+  D12 app nativo para Windows; RNF medidos no Windows 11; Gerenciador de Credenciais do Windows.
+  D13 grafia MyHarness; identificador dev.myharness.app (%APPDATA%\dev.myharness.app).
+  D14 só o orquestrador altera docs/contrato/ e notas; subagente propõe no relatório.
+  (3) README:14 "D1 a D14 e S7 a S15".
+B. Requisitos: RF-01 (/login), RF-02 (MCP), RF-03 (device flow, código em github.com/login/device), RF-10 (claude -p), RF-18 (5 h, 7 dias, rate_limit_event, origem e hora da leitura), RNF-04 (comparar com /usage, tolerância [a preencher]), RNF-05 (pasta %APPDATA%\dev.myharness.app), RNF-06 (sem config pessoal; negar escrita em cofre e docs/contrato/), RN-01 (contrato incluído; nenhum subagente escreve em cofre algum nem no contrato), grafia "harness" → "MyHarness" em 00:44, 72, 118; 01:9, 26–28; README:5.
+C. Atores: ATR-06 (/login, authentication_failed), ATR-07 (MCP), ATR-08 (OAuth próprio, device flow), ATR-09 (--chrome, --strict-mcp-config); ATR-01 a ATR-05 e matriz com a linha "Alterar docs/contrato/": Humano sim (fora do MyHarness), orquestrador sim, demais não.
+D. Entidades: ENT-13 (Gerenciador de Credenciais; token do device flow); ENT-14 Consumo ganha semanal_reinicio, lida_em, origem (evento|estimado), janela_status, semanal_status, excedente; guarda só a última leitura; ENT-15 sem escrita em cofre nem contrato, sem configuração pessoal.
+E. UC-01 passo 2 (login da CLI, device flow, teste MCP); UC-04 FE-02 e ERR-13 (cofre ou contrato); CMP-01 (5 h e 7 dias, última leitura com hora, "estimado"); ERR-02 (device flow cancelado, access_denied, expired_token).
+F. AC-04 e AC-129 (device flow recusado/expirado, não "navegador fecha"); AC-58 (orquestra/ e docs/contrato/); AC-116; 08:5 (API = camada de comandos; tela no navegador com núcleo simulado e tauri-driver); README:8 (mesmo repositório my-harness).
+mudancas.md: M-01 rascunho aprovado; M-02 decisões de 2026-11-19 aplicadas (lista completa no relatório original).
+
+LISTA 2 — Dúvidas do humano (recomendação entre colchetes)
+A. Bloqueiam o esquema SQLite e o G1
+ 1 ENT-17 a ENT-25 entram no esquema, mais ENT-26 PastaContexto (RF-16) [sim: Escrita, Briefing, Rodada, Funcionalidade, Configuração, PR, Critério e PastaContexto no SQLite; Decisão como nota com o aval no SQLite; Diário só no cofre]
+ 2 Push e PR: o núcleo faz (RF-27), o subagente só commita na worktree — contradiz RN-17, ATR-03, UC-04 passo 3, prompt de fábrica, AC-114 [núcleo; mantém o P1 válido]
+ 3 Papel "pesquisa" (S10): só leitura, sem aval, fora do teto [sim]
+ 4 Data e hora em ISO 8601 UTC no SQLite, mostrada na hora local [sim]
+ 5 ENT-01 Projeto: nome 1–80 único (ERR-45), repositorio caminho absoluto com .git (ERR-46), limite_contexto_padrao 10 mil a 1 milhão (ERR-47) [aprovar]
+ 6 ENT-02 Cofre e S13: um cofre de memória por projeto, demais só consulta; status conectado|desconectado [aprovar]
+ 7 ENT-03 Chat: limite como ENT-01; adiamento_usado booleano (ERR-48); pausado volta a ativo no resetsAt; encerrado reabre só leitura; só leitura volta a ativo quando o cofre reaparece [aprovar]
+ 8 ENT-04 Mensagem: autor Humano|orquestrador|sistema; texto sem limite próprio, envio bloqueado vazio; uso_tokens obrigatório no orquestrador [aprovar]
+ 9 ENT-06 Tarefa: faz 1–500 (ERR-49 também para pronto_quando e prova vazios); toca_em só no papel funcionalidade; implementada_por e testada_por preenchidos no despacho [aprovar]
+10 ENT-07 Execução: campo chat obrigatório; tarefa opcional só para orquestrador; na fila com motivo_fila (teto|toca_em|recurso); interrompida é final [aprovar]
+11 ENT-09 Relatório resultado concluído|falhou|bloqueado, criterios obrigatório no teste; ENT-10 Achado passos lista ≥1, captura obrigatória no adversarial, status aberto|fechado [aprovar]
+12 Os 44 códigos de erro e o tratamento "aguardar" [aprovar]
+B. Podem esperar a funcionalidade
+13 S7 100 mil tokens e S8 teto 5 como padrão [manter e medir]
+14 S12 métricas dos RNF são ponto de partida [manter, revisar depois do P4]
+15 RNF-04: até 2 s depois de cada rate_limit_event, sem agente a última leitura com hora, tolerância de 2 pontos [sim, em vez dos 60 s]
+16 RNF-07 silêncio > 10 min [só aviso, sem mudar o estado]
+17 RN-26/S14 contagem de palavras: por espaços dá 52, 43, 33, 43, 23 contra 54, 45, 38, 47, 24 da fonte [contar por espaços e corrigir a tabela; tokens do ENT-08 só avisa]
+18 Versão do documento-fonte [citar pelo arquivo e data, "com D5 e D6", sem número]
+19 RF-30 fora de ordem [manter o ID]
+20 Ligações RF↔RN de um lado só (20 com *, 3 com †) [adotar a união]
+21 Mensagens divergentes: ERR-05 "Conecte o Claude CLI para enviar", ERR-06 "Conecte o GitHub para aprovar este plano", ERR-30 "Modelo indisponível na CLI" [aprovar]
+22 ERR-04 separado do ERR-02, texto "Login do Claude CLI não concluído: <motivo>"; demais textos no contrato de cada funcionalidade [aprovar]
+23 RF-01 "iniciar o login": abrir terminal com claude e /login, plano B instrução + botão Verificar [sim]
+24 Escopo do token do GitHub [repo]
+25 Obsidian no app final: stdio e ferramenta de escrita nova só do orquestrador [sim, em vez de HTTP 27180]
+26 Matriz: orquestrador e funcionalidade não usam o Chrome; teste lê o cofre pela CLI [aprovar]
+27 S9 e S15 layout da fonte [aceitar, ajustar pelo roteiro do humano]
+28 S11 rodada adversarial avulsa [permitir, registrada como avulsa]
+29 Pacote de comportamento das telas (estados só mostram; CMP-04 link de continuação; CMP-05 abaixo do terminal; seletor do CMP-06; campo até 8 linhas; alerta 80%; dúvidas na TEL-03; comentário obrigatório; desligar cofre com confirmação; rodada "aguardando decisão"; TEL-06 abre em "Orquestrador") [aprovar]
+30 Lacunas: CMP-18 Fila de PRs; rodada e bloqueio no CMP-10; espera de recurso no CMP-05; CMP-15 para RN-18; RNF sem AC; UC-09 FA-01 e UC-11 FA-01; modelos de fábrica na etapa 7 [aprovar]
+
+Fora do escopo: o contrato não cita nome de nota do cofre (por isso D7 a D14); a decisão do teste da tela fala em "Playwright do Q04" sem suíte no repositório, coerente.
+Candidatos a nota: decisão push e PR (dúvida 2); decisão pacote ENT-17 a ENT-26 (dúvida 1); contagem de palavras divergente (dúvida 17).
