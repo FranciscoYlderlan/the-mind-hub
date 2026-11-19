@@ -33,12 +33,12 @@ Fechar o "Pronto quando" da etapa 2 do [[geral-plano]]: sem estas interfaces, as
 
 ## Mapa
 - Plano: [[fundacao-plano]]
-- Decisões: [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-stack]]
+- Decisões: [[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-stack]]
 - Bugs: (nenhum)
 - Referências: [[geral-plano-arquitetura-e-stack]]
 
 ## Interpretação do agente
-- O código fica em branches `fundacao-tN-...`; o merge na `main` pede confirmação do humano (branch principal). [a confirmar]
+- (nenhuma)
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]

@@ -93,7 +93,7 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
 T1 (em andamento) e T2.
 
 ## Prioridades
-Série T1 → T5; cada tarefa passa por um verificador antes da seguinte.
+Série T1 → T5; cada tarefa passa por um verificador antes da seguinte. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, numa PR única ([[geral-decisao-2026-11-19-branches-e-pr-unica]]).
 
 ## Candidatos a registro
 - (nenhum)
@@ -101,5 +101,6 @@ Série T1 → T5; cada tarefa passa por um verificador antes da seguinte.
 ### 🔗 Conexões
 - Funcionalidade: [[fundacao-contexto]]
 - Projeto: [[geral-contexto]]
+- Branches: [[geral-decisao-2026-11-19-branches-e-pr-unica]]
 - Roteiro: [[geral-plano]]
 - Regras: [[manual-da-orquestra]]
