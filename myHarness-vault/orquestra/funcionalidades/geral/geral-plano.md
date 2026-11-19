@@ -33,7 +33,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 - **Ciclo** (prático): sem funcionalidade de produto; protótipo de pesquisa com relatório e prova (saída real do `claude -p` e da fonte de consumo anexada), depois tarefas-interface (P12, G1).
 - **Funcionalidades:** `fundacao` (sem RF próprio; prepara RF-05, RF-10, RF-18, RF-29, RF-32)
 - **Paralelo:** os protótipos S2, S3/S4 e S5 são pesquisa, só leitura, sem teto (G11) e em paralelo; o esqueleto do repositório é uma cadeia com um agente só (G3); as tarefas-interface rodam em série depois da decisão S3 × S4.
-- **Notas geradas:** [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-fonte-do-consumo]]
+- **Notas geradas:** [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-fonte-do-consumo]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-identificador-do-app]], [[geral-decisao-2026-11-19-versao-inicial]]
 - **Concluída em:** 
 
 ## 3. Integrações
