@@ -73,7 +73,7 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Data: 2026-11-20
   - Critérios ✔/✘ com a prova de cada um (commit `4393810`): ✔ chamada testada contra o `fake-claude` (`tools/fake-claude/tests/chamada_montada.rs`, ambiente limpo); ✔ fake devolve os argumentos em 3 linhas JSON (`system/init`, `fake_args`, `result/success`); ✔ escopo; ✔ `Debug` e `Display` mascarados (caminhos sem máscara, improvável); ✔ commit; ✔ CLI real 2.1.329 sem rede aceitou a chamada inteira (`dontAsk`; prompt que imita uma flag lido como texto); ✘ camada 4: token do GitHub no meio do valor passa (`REPO_URL=https://x-access-token:ghs_…@github.com/…`, `GIT_CONFIG_VALUE_0=Authorization: bearer ghp_…`); ✘ portão terminado em `\` gera comando com aspa aberta. `fmt`, `clippy`, `cargo test` e `pnpm check` passando.
   - Devolvido para correção: sim, 2026-11-20, para um implementador novo: as duas falhas, comparação de ferramenta sem diferenciar maiúsculas e `--strict-mcp-config` sempre ([[geral-decisao-2026-11-20-strict-mcp-sempre]]).
-  - Correção entregue (commit `1a0c889`): variável sai do ambiente se o valor contém token com prefixo do GitHub em qualquer posição (mesma varredura da máscara); portão recusado quando termina em `\` ou tem `\\` (`\` no meio aceito, por causa dos caminhos do Windows na CI); maiúsculas ignoradas na repetição e no conflito; `--strict-mcp-config` em toda chamada. 62 testes passando. Em segunda verificação.
+  - Correção entregue (commit `1a0c889`): variável sai do ambiente se o valor contém token com prefixo do GitHub em qualquer posição (mesma varredura da máscara); portão recusado quando termina em `\` ou tem `\\` (`\` no meio aceito, por causa dos caminhos do Windows na CI); maiúsculas ignoradas na repetição e no conflito; `--strict-mcp-config` em toda chamada. 62 testes passando. Em segunda verificação. Depois dela, um implementador novo aplica [[geral-decisao-2026-11-20-path-sem-a-pasta-do-token]].
 
 ### T4: esquema SQLite das entidades
 - **Faz:** migrações das entidades do `02-entidades`, com as trocas M-23 em diante (pontos 4 e 7).
@@ -122,5 +122,6 @@ Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por
 - Mascaramento: [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]
 - Paralelo: [[geral-decisao-2026-11-20-paralelo-por-padrao]]
 - MCP: [[geral-decisao-2026-11-20-strict-mcp-sempre]]
+- `PATH`: [[geral-decisao-2026-11-20-path-sem-a-pasta-do-token]]
 - Roteiro: [[geral-plano]]
 - Regras: [[manual-da-orquestra]]
