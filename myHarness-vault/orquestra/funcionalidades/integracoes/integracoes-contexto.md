@@ -38,6 +38,7 @@ Fechar a etapa 3 do [[geral-plano]]: AC de UC-01 e TEL-02 (principal, FA-01, FE-
 - Testes do MCP no Windows: tempo esgotado com o servidor fora do ar ([[bug-teste-mcp-tempo-esgotado-no-windows-2026-11-26]]).
 
 ## Mapa
+- Fluxos de teste do humano: [[geral-plano-teste-humano#integracoes (2026-11-26)]]
 - Plano: [[integracoes-plano]], [[integracoes-plano-verificacoes]], [[integracoes-plano-verificacoes-t6-t7]], [[integracoes-plano-t8]]
 - Decisões: [[geral-decisao-2026-11-23-github-real-na-etapa-3]], [[geral-decisao-2026-11-19-github-oauth-proprio]], [[geral-decisao-2026-11-23-falha-interna]], [[geral-decisao-2026-11-23-banco-antigo-apagado]], [[geral-decisao-2026-11-23-filtro-de-comandos-so-comentario]], [[geral-decisao-2026-11-23-comandos-na-tela-de-execucao]], [[geral-decisao-2026-11-24-erro-generico-por-fronteira]], [[geral-decisao-2026-11-24-servidor-mcp-do-obsidian]], [[geral-decisao-2026-11-24-desconectar-sem-logout]], [[geral-decisao-2026-11-24-escopo-repo-no-github]], [[geral-decisao-2026-11-24-cofre-da-integracao-por-variavel]], [[geral-decisao-2026-11-24-estado-da-integracao-com-notas-e-erro]], [[geral-decisao-2026-11-24-falha-no-registro-do-nucleo]], [[geral-decisao-2026-11-26-nucleo-em-crate-sem-tauri]]
 - Interfaces herdadas: [[fundacao-contexto]]

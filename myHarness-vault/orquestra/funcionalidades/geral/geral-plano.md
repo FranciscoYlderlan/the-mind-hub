@@ -118,7 +118,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 - **Objetivo:** com todas as funcionalidades passando nos dois agentes, fazer a aceitação final: verificadores e avaliador independente primeiro; depois, o roteiro final ao humano, curto e didático, passando por todas as funcionalidades. O aceite do humano fecha a etapa.
 - **Pronto quando:** toda funcionalidade coberta no roteiro, roteiro testado pelo humano, achados decididos como opções e aceite do humano registrado.
 - **Funcionalidades:** (nenhuma)
-- **Notas geradas:** `geral-plano-teste-humano`
+- **Notas geradas:** [[geral-plano-teste-humano]]
 - **Concluída em:** 
 
 ## Proposta de arquitetura e stack
