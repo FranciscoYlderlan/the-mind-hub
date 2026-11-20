@@ -51,6 +51,8 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Devolvido para correção: sim, 2026-11-19, para um implementador novo (vazamentos e excesso de máscara); corrigido em `4be7722`.
   - Segunda volta (2026-11-19): ✘ 73 de 83 casos passam; vazam senha com `&` fora de aspas e token antigo como usuário de URL com senha; excesso de máscara depois de `--token` com espaço e depois do esquema do `Authorization`; `api key` com espaço sem máscara. ✔ `Segredo` e `TextoMascarado`, testes dos vazamentos da primeira volta, escopo e commit.
   - Terceira volta: aval do humano em 2026-11-19, sessão das 17h27, para um implementador novo, só nesses pontos.
+  - Terceira volta (2026-11-20, commit `7c6f82e`): ✔ nenhum vazamento em 109 casos; ✔ testes, escopo e commit; ✘ excesso de máscara na mensagem padrão do clap (`--token <TOKEN>` lido como tag XML apaga o resto). Opcional: `Authorization: Digest` mascara `username=` e deixa o hash de `response` à vista.
+  - Quarta volta: 2026-11-20, para um implementador novo, só nesses dois pontos.
 
 ### T3: montagem da chamada ao `claude -p`
 - **Faz:** monta os argumentos (modelo, ferramentas, pastas, instruções, saída em fluxo JSON) conforme [[geral-decisao-2026-11-19-agente-por-claude-p]].
