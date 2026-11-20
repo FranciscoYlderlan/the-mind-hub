@@ -21,6 +21,7 @@ antigo: re:ADIAMENTO_JA_USADO|adiamento_usado|segundo adiamento => limite do cha
 antigo: re:com só o aval guardado no SQLite|no SQLite fica só o aval => aval e registrada_em no SQLite (geral-decisao-2026-11-19-gravacao-dupla)
 antigo: re:valores de chave token/senha/secret/api key => mascarar só prefixos conhecidos e os segredos que o núcleo guarda, sem adivinhar (geral-decisao-2026-11-20-mascaramento-sem-adivinhar)
 antigo: re:Entregar, em série|Série T1 → T5|tarefas-interface rodam em série => paralelo por padrão; série só com arquivo em comum, combinado, cadeia, recurso ou teto (geral-decisao-2026-11-20-paralelo-por-padrao)
+antigo: re:numa PR única|vira uma única PR|Enquanto o GitHub não existe => tudo local, sem PR, merge local na main com confirmação (geral-decisao-2026-11-20-tudo-local-sem-github)
 limite-palavras: 2000
 ```
 
@@ -35,6 +36,6 @@ limite-palavras: 2000
 
 ### 🔗 Conexões
 - Índice: [[CLAUDE]]
-- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]], [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-paralelo-por-padrao]]
+- Decisões: [[geral-decisao-2026-11-19-grafia-do-nome]], [[geral-decisao-2026-11-19-acesso-ao-repositorio]], [[geral-decisao-2026-11-19-agente-por-claude-p]], [[geral-decisao-2026-11-19-gatilho-do-ci]], [[geral-decisao-2026-11-19-subagente-nao-altera-contrato]], [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-20-tudo-local-sem-github]]
 - Mapa: [[moc-orquestra]]
 - Regras: [[manual-da-orquestra]]
