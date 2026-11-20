@@ -21,7 +21,7 @@ aliases: [contexto do MyHarness, MyHarness context]
 - Perfil: prático (Manual da Orquestra - Perfil projeto prático (no Vault)).
 - Publicação: só local, app desktop para uma pessoa (sem o bloco "só com deploy"). Ambiente de desenvolvimento: WSL + Docker (`compose.yaml` do repositório). Plataforma final do app: Windows (nativo).
 - Acesso ao Obsidian: o Obsidian roda no Windows e é acessado via MCP.
-- Repositório de código: pasta local `C:\Users\Ylderlan\Documents\Projetos\my-harness`, onde o agente escreve direto; ele implementa e testa na própria máquina virtual ([[geral-decisao-2026-11-19-acesso-ao-repositorio]]). GitHub: conta sem acesso; tudo local, sem PR ([[geral-decisao-2026-11-20-tudo-local-sem-github]]). Onde fica e o que o agente pode sem perguntar vira decisão em `funcionalidades/geral/`.
+- Repositório de código: pasta local `C:\Users\Ylderlan\Documents\Projetos\my-harness`, onde o agente escreve direto; ele implementa e testa na própria máquina virtual ([[geral-decisao-2026-11-19-acesso-ao-repositorio]]). GitHub: conta sem acesso; tudo local, sem PR ([[geral-decisao-2026-11-20-tudo-local-sem-github]], [[geral-decisao-2026-11-20-github-falso]]). Onde fica e o que o agente pode sem perguntar vira decisão em `funcionalidades/geral/`.
 - Enquanto o MyHarness está em desenvolvimento, o trabalho segue o método manual da orquestra, sem o MyHarness: governança e memória andam juntas neste cofre. Quando o MyHarness estiver pronto, a governança passa para ele e o cofre fica só como memória.
 - Nesta fase inicial: vários agentes em paralelo para acelerar.
 - Escopos de commit: por ID de requisito.
