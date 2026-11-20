@@ -70,9 +70,9 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - [ ] `tools/fake-claude` devolve os argumentos recebidos e emite fluxo JSON
 - **Prova:** `cargo test`
 - **Verificação:**
-  - Data: 
-  - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+  - Data: 2026-11-20
+  - Critérios ✔/✘ com a prova de cada um (commit `4393810`): ✔ chamada testada contra o `fake-claude` (`tools/fake-claude/tests/chamada_montada.rs`, ambiente limpo); ✔ fake devolve os argumentos em 3 linhas JSON (`system/init`, `fake_args`, `result/success`); ✔ escopo; ✔ `Debug` e `Display` mascarados (caminhos sem máscara, improvável); ✔ commit; ✔ CLI real 2.1.329 sem rede aceitou a chamada inteira (`dontAsk`; prompt que imita uma flag lido como texto); ✘ camada 4: token do GitHub no meio do valor passa (`REPO_URL=https://x-access-token:ghs_…@github.com/…`, `GIT_CONFIG_VALUE_0=Authorization: bearer ghp_…`); ✘ portão terminado em `\` gera comando com aspa aberta. `fmt`, `clippy`, `cargo test` e `pnpm check` passando.
+  - Devolvido para correção: sim, 2026-11-20, para um implementador novo: as duas falhas, comparação de ferramenta sem diferenciar maiúsculas e `--strict-mcp-config` sempre ([[geral-decisao-2026-11-20-strict-mcp-sempre]]).
 
 ### T4: esquema SQLite das entidades
 - **Faz:** migrações das entidades do `02-entidades`, com as trocas M-23 em diante (pontos 4 e 7).
@@ -110,6 +110,8 @@ Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por
 - Teste `mensagens_seguem_o_catalogo` não cobre ERR-04 a ERR-06 (observação do verificador da T1).
 - `a_partir_do_erro` leva ERR-05 a ERR-07 a desconectado mesmo vindo de sem login ou não instalado; sem efeito na T1, revisar na etapa 3.
 - Link de instalação do ERR-01: tela ou núcleo, decidir na etapa 3.
+- Para o `AgentRunner` (etapa 3): portão inexistente sai com 127, que a CLI não trata como bloqueio (a ferramenta roda sem o portão); passar `stdin` nulo (sem ele, a CLI espera 3 s); limite de cerca de 32 mil caracteres da linha de comando no Windows.
+- Escolhas da T3 a revisar na tarefa do `harness-gate`: `--tools` só com nomes internos; gancho sem o papel.
 - Ambiente: `cargo clippy --workspace` exige GTK e WebKitGTK (`libwebkit2gtk-4.1-dev`, `libgtk-3-dev`, `libayatana-appindicator3-dev`, `librsvg2-dev`).
 
 ### 🔗 Conexões
