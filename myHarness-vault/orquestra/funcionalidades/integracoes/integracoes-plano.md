@@ -180,9 +180,12 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Prova:** `pnpm check:web`; Playwright abrindo dois cenários pela URL; busca do núcleo simulado no `dist/`
 - **Verificação:** histórico em [[integracoes-plano-verificacoes-t6-t7#T9]].
 
+### T10: carregando curto contra duplo clique nos cartões
+- Detalhe em [[integracoes-plano-t10]].
+
 ## Próxima tarefa e a seguinte
-- Agora: T8 (merge da `main`, verificador e PR) e T9 em paralelo; depois, o verificador de fluxo principal e os dois adversariais de novo, com os cenários da T9 ([[geral-decisao-2026-11-26-adversarial-em-dois]], [[geral-decisao-2026-11-26-build-reaproveitado-na-validacao]]).
-- Depois: o teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
+- Agora: T10, em paralelo com o teste manual.
+- Junto: o teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
 
 ## Prioridades
 - T0a e T0b fecham pendências herdadas e são pequenas; T3 é a mais sensível (token).
@@ -193,6 +196,6 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 ### 🔗 Conexões
 - Funcionalidade: [[integracoes-contexto]]
 - Verificações: [[integracoes-plano-verificacoes]], [[integracoes-plano-verificacoes-t6-t7]]
-- Tarefa T8: [[integracoes-plano-t8]]
+- Tarefas T8 e T10: [[integracoes-plano-t8]], [[integracoes-plano-t10]]
 - Projeto: [[geral-contexto]]
 - Regras: [[manual-da-orquestra]]
