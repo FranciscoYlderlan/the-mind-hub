@@ -89,7 +89,7 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
 
 ### T5: contrato IPC do Tauri
 - **Faz:** comandos e eventos entre a tela e o núcleo, com tipos gerados para o TypeScript.
-- **Toca em:** `src-tauri/src/commands/`, `src/lib/`
+- **Toca em:** `src-tauri/src/commands/`, `src-tauri/src/lib.rs`, `src/lib/`, `src/bindings/`, `Cargo.toml` e `Cargo.lock` da raiz, `src-tauri/Cargo.toml` (`tauri-specta`; aval do humano em 2026-11-20, 09h13)
 - **Depende de:** T3, porque as duas tocam o `Cargo.toml` e o `Cargo.lock` da raiz (`tauri-specta`)
 - **Paralelo:** sim, com T4; o combinado entre as duas são os ENT do `02-entidades` (G1)
 - **Pronto quando:**
@@ -118,5 +118,6 @@ Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por
 - Branches: [[geral-decisao-2026-11-19-branches-e-pr-unica]]
 - Mascaramento: [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]
 - Paralelo: [[geral-decisao-2026-11-20-paralelo-por-padrao]]
+- MCP: [[geral-decisao-2026-11-20-strict-mcp-sempre]]
 - Roteiro: [[geral-plano]]
 - Regras: [[manual-da-orquestra]]
