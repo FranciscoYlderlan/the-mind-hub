@@ -77,7 +77,7 @@ Nenhuma tela existe ainda. A coluna Tela traz a tela prevista na fonte (TEL-xx),
 | RN-28 | UC-13 | FA-02 | CMP-16 | ENT-07, ENT-08 | — | TEL-06 (prevista) | AC-50, AC-85 |
 | RN-29 | UC-14 | FA-01, FE-02 | CMP-17 | ENT-02 | ERR-38, ERR-39 | TEL-06 (prevista) | AC-54, AC-57, AC-86 |
 | RN-30 | UC-11, UC-14 | principal | CMP-02 | ENT-02, ENT-11 | ERR-40 | TEL-01 (prevista) | AC-53, AC-87 |
-| RN-31 | — (decisão do Humano) | — | — (backend) | ENT-05, ENT-06, ENT-09, ENT-10, ENT-18, ENT-12 | ERR-51 | — | AC-147, AC-148 |
+| RN-31 | — (decisão do Humano) | — | — (backend) | ENT-05, ENT-06, ENT-09, ENT-10, ENT-18, ENT-12 | ERR-51, ERR-54 | — | AC-147, AC-148, AC-155 |
 
 ## Requisitos não funcionais
 

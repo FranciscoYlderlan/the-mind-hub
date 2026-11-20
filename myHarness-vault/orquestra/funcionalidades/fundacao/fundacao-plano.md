@@ -89,10 +89,10 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - [ ] migração cria todas as entidades com as restrições do contrato
 - **Prova:** `cargo test`
 - **Verificação:**
-  - Entregue (commit `e57f4bf`, `feat/setup-esquema-sqlite`, 2026-11-20): `0002_contract_entities.sql` com 25 tabelas STRICT (ENT-15 Papel no código; ENT-25 Diário só no cofre), CHECK nomeados, datas com `IS strftime(...)`, triggers para listas JSON, `chat_anterior`, `prompt_versao` (RN-28) e versões de prompt (RF-31); `dual_write.rs` com `commit_with_vault` e ERR-51; 27 testes de banco. Em verificação.
-  - Data: 
-  - Critérios ✔/✘ com a prova de cada um:
-  - Devolvido para correção:
+  - Entregue (commit `e57f4bf`, `feat/setup-esquema-sqlite`, 2026-11-20): `0002_contract_entities.sql` com 25 tabelas STRICT (ENT-15 Papel no código; ENT-25 Diário só no cofre), CHECK nomeados, datas com `IS strftime(...)`, triggers para listas JSON, `chat_anterior`, `prompt_versao` (RN-28) e versões de prompt (RF-31); `dual_write.rs` com `commit_with_vault` e ERR-51; 27 testes de banco.
+  - Data: 2026-11-20
+  - Critérios ✔/✘ com a prova de cada um: ✔ datas UTC com `Z` (fuso, `z`, 30/02, `24:00`, epoch recusados); ✔ gravação dupla (desfaz nos 4 caminhos, ERR-51); ✔ escopo; ✔ banco criado pela `0001` migra e reabre; ✘ `INSERT OR REPLACE` sobrescreve versão de prompt (RF-31) e `prompt_versao` (RN-28), porque o `REPLACE` não dispara o trigger de `DELETE`; ✘ ENT-07 sem a coluna `comandos` (RN-17); ✘ teste do CHECK `chat_chat_anterior_proprio` não o prova (o trigger dispara antes) e não há teste de `REPLACE`; ✘ (menor) emoji `:card_file_box:` fora da tabela de Tipos e emojis de commit (no Vault). Detalhe e ambiguidades: [[fundacao-plano-candidatos]].
+  - Devolvido para correção: a decidir na próxima sessão, junto do contrato M-37 a M-40 (ligações, `incompleta`, erro novo).
 
 ### T5: contrato IPC do Tauri
 - **Faz:** comandos e eventos entre a tela e o núcleo, com tipos gerados para o TypeScript.
@@ -103,30 +103,23 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - [ ] comandos e eventos tipados nos dois lados
 - **Prova:** `pnpm check`
 - **Verificação:**
+  - Entregue (commit `1fad5e7`, `feat/setup-contrato-ipc`, a partir da T3 `4393810`, 2026-11-20): 43 comandos e 7 eventos globais mais `EventoExecucao` por `Channel`, DTOs dos ENT com `DataHoraUtc`, `CodigoErro` ERR-01 a ERR-53 conferido com o `05-erros`, núcleo provisório atrás da interface `Nucleo` (sem regra), `src/bindings/index.ts` gerado por `pnpm bindings` com teste de divergência, zod em `src/lib/ipc/`; `pnpm check` passando. `tauri-specta` só existe como rc (`=2.0.0-rc.29`, `specta =2.0.0-rc.28`, `specta-typescript =0.0.15`): conflita com a S16, pede aval do humano antes do merge. Aguarda verificador.
   - Data: 
   - Critérios ✔/✘ com a prova de cada um:
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-T3 (montagem da chamada ao `claude -p`) e T4 (esquema SQLite), em paralelo, ambas a partir da branch da T2; depois a T5.
+Em paralelo: verificador da T5 e correção da T4 (verificação e contrato M-37 a M-40); depois o ajuste da T5 ao contrato novo e a branch de integração local.
 
 ## Prioridades
 Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]): T3 e T4 juntas, T5 depois da T3; cada tarefa passa pelo seu verificador. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, sem PR; o merge na `main` é local, com a confirmação do humano ([[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-20-tudo-local-sem-github]]).
 
 ## Candidatos a registro
-- Teste `mensagens_seguem_o_catalogo` não cobre ERR-04 a ERR-06 (observação do verificador da T1).
-- `a_partir_do_erro` leva ERR-05 a ERR-07 a desconectado mesmo vindo de sem login ou não instalado; sem efeito na T1, revisar na etapa 3.
-- Link de instalação do ERR-01: tela ou núcleo, decidir na etapa 3.
-- Para o `AgentRunner` (etapa 3): portão inexistente sai com 127, que a CLI não trata como bloqueio (a ferramenta roda sem o portão); passar `stdin` nulo (sem ele, a CLI espera 3 s); limite de cerca de 32 mil caracteres da linha de comando no Windows.
-- Rodar os testes da T3 no Windows (`cargo test` com `#[cfg(windows)]`) e conferir o caso `"` no `PATH`; ajustar o comentário de `execucao.rs` se preciso.
-- Regra "contém" da camada 4 tira variáveis legítimas além do `PATH` (`PWD`, `LS_COLORS`, `PS1`, palavras como `weighs_more`); revisar se o agente precisar delas.
-- Pontos do contrato levantados na T4, para o humano: ligações que faltam (`Tarefa.plano`, `Relatório.execucao`, `Achado.execucao`, `Escrita.cofre`); tarefa incompleta do ERR-49 sem forma de gravar; regras que dependem do papel fora do banco; `concluído` × `concluido` entre Relatório e Execução; ERR-51 diz "nada foi gravado" mesmo quando o desfazer do cofre falha; falta o campo que liga linha a nota (AC-148).
-- Lição de SQLite: CHECK com `=` passa quando a expressão dá NULL; usar `IS`.
-- Escolhas da T3 a revisar na tarefa do `harness-gate`: `--tools` só com nomes internos; gancho sem o papel.
-- Ambiente: `cargo clippy --workspace` exige GTK e WebKitGTK (`libwebkit2gtk-4.1-dev`, `libgtk-3-dev`, `libayatana-appindicator3-dev`, `librsvg2-dev`).
+Os candidatos levantados nas tarefas T1 a T5 (contrato, ambiente, `AgentRunner`) ficam em [[fundacao-plano-candidatos]].
 
 ### 🔗 Conexões
 - Funcionalidade: [[fundacao-contexto]]
+- Candidatos: [[fundacao-plano-candidatos]]
 - Projeto: [[geral-contexto]]
 - Branches: [[geral-decisao-2026-11-19-branches-e-pr-unica]]
 - Mascaramento: [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]

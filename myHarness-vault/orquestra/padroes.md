@@ -22,6 +22,7 @@ antigo: re:com só o aval guardado no SQLite|no SQLite fica só o aval => aval e
 antigo: re:valores de chave token/senha/secret/api key => mascarar só prefixos conhecidos e os segredos que o núcleo guarda, sem adivinhar (geral-decisao-2026-11-20-mascaramento-sem-adivinhar)
 antigo: re:Entregar, em série|Série T1 → T5|tarefas-interface rodam em série => paralelo por padrão; série só com arquivo em comum, combinado, cadeia, recurso ou teto (geral-decisao-2026-11-20-paralelo-por-padrao)
 antigo: re:numa PR única|vira uma única PR|Enquanto o GitHub não existe => tudo local, sem PR, merge local na main com confirmação (geral-decisao-2026-11-20-tudo-local-sem-github)
+antigo: re:`concluido`(?! ×)|\bconcluido, falhou => concluído, com acento, em Execução e Relatório (contrato, M-38)
 limite-palavras: 2000
 ```
 

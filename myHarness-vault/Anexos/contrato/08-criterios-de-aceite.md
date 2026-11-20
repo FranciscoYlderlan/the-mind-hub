@@ -2,7 +2,7 @@
 
 Um critério por fluxo (principal, alternativo e exceção), no formato dado / quando / então. Ao final de cada funcionalidade, o verificador de fluxo principal executa os AC dos fluxos principais e, depois, o adversarial executa os dos FA e FE: no backend pela API e, se a funcionalidade tem interface, também no frontend.
 
-No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Os textos vêm dos "Aceite" da fonte, salvo os escritos por mudança aprovada (`mudancas.md`). Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela; AC-144 e AC-145, por fluxo de UC criado depois, AC-146, por requisito acrescentado depois, AC-147 e AC-148, por regra acrescentada depois, AC-149 a AC-152, por erro de campo que estava sem AC, AC-153, por fluxo de UC criado depois, e AC-154, por regra ampliada depois (na tabela, junto do UC ou do requisito dele).
+No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verificador chama sem a tela; a tela é verificada no navegador com o núcleo simulado e pelo tauri-driver. Os textos vêm dos "Aceite" da fonte, salvo os escritos por mudança aprovada (`mudancas.md`). Ordem: AC-01 a AC-57 por fluxo de UC; AC-58 a AC-87, uma por RN; AC-88 a AC-121, uma por RF; AC-122 a AC-143, por fluxo de tela; AC-144 e AC-145, por fluxo de UC criado depois, AC-146, por requisito acrescentado depois, AC-147 e AC-148, por regra acrescentada depois, AC-149 a AC-152, por erro de campo que estava sem AC, AC-153, por fluxo de UC criado depois, AC-154, por regra ampliada depois, e AC-155, por erro acrescentado depois (na tabela, junto do UC ou do requisito dele).
 
 ## Por fluxo de caso de uso
 
@@ -106,6 +106,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 | AC-87 | UC-11, UC-14 | regra RN-30 | uma busca que acha notas em dois cofres | o resultado volta | cada nota traz o nome do cofre e a aba "Obsidian usado" agrupa por cofre |
 | AC-147 | — (decisão do Humano) | regra RN-31 | o cofre de memória sem permissão de escrita | o núcleo grava uma tarefa | nada fica gravado no SQLite nem no cofre e aparece o ERR-51 |
 | AC-148 | — (decisão do Humano) | regra RN-31 | uma tarefa, um relatório e um achado gravados | a conferência compara o SQLite com as notas | todos os campos batem; uma diferença forçada vai ao Log com o ERR-51 |
+| AC-155 | — (decisão do Humano) | regra RN-31 | o commit do SQLite e o desfazer da nota no cofre forçados a falhar | o núcleo grava uma tarefa | a nota fica no cofre, nada fica no SQLite, o caso vai ao Log (ENT-12) e aparece "A nota <nome> ficou no cofre, mas não no banco. Apague a nota ou grave de novo." (ERR-54) |
 
 ## Por requisito funcional
 
