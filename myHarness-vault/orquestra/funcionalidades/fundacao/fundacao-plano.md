@@ -43,7 +43,7 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
 - **Depende de:** T1
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] nenhum token com prefixo da RN-04 nem segredo guardado pelo núcleo sai em texto puro nos testes; texto sem esses segredos sai igual
+  - [x] nenhum token com prefixo da RN-04 nem segredo guardado pelo núcleo sai em texto puro nos testes; texto sem esses segredos sai igual
 - **Prova:** `cargo test`
 - **Verificação:**
   - Data: 2026-11-19
@@ -57,6 +57,8 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Quinta volta: interrompida em 2026-11-20 pela troca de abordagem ([[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]). A T2 é refeita na branch `feat/setup-mascaramento-por-prefixo`, a partir da T1 (`feafd97`); a branch `feat/setup-mascaramento-segredo` fica fora da PR.
   - Refeita (commit `85dbb72`, 2026-11-20): ✔ valor guardado, sem heurística, prosa intacta, `Segredo` e `TextoMascarado`, escopo e commit; ✘ segredo guardado dentro de um token deixa o resto do token à vista. Lacuna: token depois de `%20` ou `%3D` não mascarado (fronteira). Opcional: prefixo nu (`ghs_`) mascarado.
   - Devolvido para um implementador novo: trechos unidos numa passada só; prefixo sem exigir fronteira; prefixo só vira token com pelo menos 1 caractere depois.
+  - Segunda verificação da refeita (commit `b2dde90`, 2026-11-20): ✔ nos 6 critérios. 1932 casos de token sem vazamento; segredo guardado dentro, colado ou encavalado sem pedaço à vista; prefixo nu intacto; 35 frases de prosa e erro de CLI iguais; `Segredo` e `TextoMascarado` sem valor; só `crates/core/`; `pnpm check` passando. Efeito aceito: palavra com prefixo no meio é mascarada dali em diante (`desk-ant-abc` → `de••••`).
+  - **T2 concluída** na branch `feat/setup-mascaramento-por-prefixo`.
 
 ### T3: montagem da chamada ao `claude -p`
 - **Faz:** monta os argumentos (modelo, ferramentas, pastas, instruções, saída em fluxo JSON) conforme [[geral-decisao-2026-11-19-agente-por-claude-p]].
@@ -98,7 +100,7 @@ Entregar, em série, as interfaces comuns do G1 da etapa 2 do [[geral-plano]].
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-T2 (em andamento) e T3.
+T3 (montagem da chamada ao `claude -p`, a partir da branch da T2) e T4.
 
 ## Prioridades
 Série T1 → T5; cada tarefa passa por um verificador antes da seguinte. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, numa PR única ([[geral-decisao-2026-11-19-branches-e-pr-unica]]).

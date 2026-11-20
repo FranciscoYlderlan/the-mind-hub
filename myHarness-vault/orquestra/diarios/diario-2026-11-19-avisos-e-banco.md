@@ -31,4 +31,5 @@ criado: 2026-11-19
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
 - Parte anterior do dia: [[diario-2026-11-19-contrato-e-p3]]
+- Próxima sessão: [[diario-2026-11-20]]
 - Funcionalidades tocadas: [[geral-contexto]]
