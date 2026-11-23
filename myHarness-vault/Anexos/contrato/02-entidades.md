@@ -164,7 +164,7 @@ Mora em: SQLite.
 | branch | texto | — | sim para funcionalidade | `tipo/ID-descricao` | — | ausente: ERR-16 |
 | status | enumeração | — | sim | — | na fila, rodando, concluído, falhou, interrompida | — |
 | motivo_fila | enumeração | — | sim quando status = na fila | — | teto, toca_em, recurso | — |
-| comandos (RN-17) | lista | — | — | — | sem push, merge nem push --force | ERR-14 |
+| comandos (RN-17) | lista | — | — | — | comandos executados pelo agente; push, merge e push --force nunca entram (o núcleo os nega antes) | ERR-14 |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
 
@@ -229,7 +229,7 @@ Mora em: SQLite + resumo no cofre. Gravação dupla, com o mesmo conteúdo nos d
 | o_que_fez | texto | até 1,5 mil tokens no total (RNF-10) | sim | livre | — | — |
 | arquivos | lista de caminhos | — | não | — | — | — |
 | prova | texto | — | sim | — | — | — |
-| criterios | lista de ENT-24 | — | sim quando `execucao.papel` = teste | — | — | — |
+| criterios | lista de ENT-24 | — | sim quando `execucao.papel` = teste (regra do núcleo; o banco não exige linha filha) | — | — | — |
 | duvidas | lista de texto | — | não | — | — | — |
 | candidatos_a_nota | lista de texto | — | não | — | — | — |
 | registrado_em (RN-03) | data e hora | — | sim antes da próxima delegação | ISO 8601 UTC | — | não registrado: ERR-15 |
