@@ -69,7 +69,7 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
 
 ### T4: esquema SQLite das entidades
 - **Faz:** migrações das entidades do `02-entidades`, com as trocas M-23 em diante (pontos 4 e 7).
-- **Toca em:** `src-tauri/migrations/`, `src-tauri/src/infra/db/`
+- **Toca em:** `src-tauri/migrations/`, `src-tauri/src/infra/db/`, `src-tauri/tests/db_schema.rs` e `src-tauri/tests/db_dual_write.rs` (atualizar os dois; aval do humano em 2026-11-23, 16h45)
 - **Depende de:** as trocas do contrato aplicadas (já aplicadas)
 - **Paralelo:** sim, com T3 e T5 (arquivos sem cruzamento; o `sqlx` já está no `src-tauri/Cargo.toml`)
 - **Pronto quando:**
@@ -81,7 +81,7 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Critérios ✔/✘ com a prova de cada um: ✔ datas UTC com `Z` (fuso, `z`, 30/02, `24:00`, epoch recusados); ✔ gravação dupla (desfaz nos 4 caminhos, ERR-51); ✔ escopo; ✔ banco criado pela `0001` migra e reabre; ✘ `INSERT OR REPLACE` sobrescreve versão de prompt (RF-31) e `prompt_versao` (RN-28), porque o `REPLACE` não dispara o trigger de `DELETE`; ✘ ENT-07 sem a coluna `comandos` (RN-17); ✘ teste do CHECK `chat_chat_anterior_proprio` não o prova (o trigger dispara antes) e não há teste de `REPLACE`; ✘ (menor) emoji `:card_file_box:` fora da tabela de Tipos e emojis de commit (no Vault). Detalhe e ambiguidades: [[fundacao-plano-candidatos]].
   - Mergeada na `main` (`00bd9a1`, PR #1) pelo humano em 2026-11-23, com os ✘ abertos; a correção sobe numa PR nova (aval do humano, 16h36).
   - Devolvido para correção: sim, 2026-11-23, para um implementador novo, com o M-37 a M-40, na branch `feat/setup-esquema-sqlite-correcao`.
-  - Correção (2026-11-23, sem commit): migração nova `0003` (a `0002` já aplicada muda o checksum no sqlx), que refaz `tarefa`, `execucao`, `relatorio`, `achado` e `escrita` com as ligações do M-37, `concluído`, `incompleta` e `comandos`; triggers `BEFORE INSERT` fecham o `REPLACE`; ERR-54 no `dual_write.rs`, registrado no Log; 12 testes novos em `infra/db/tests.rs` (o CHECK `chat_chat_anterior_proprio` agora é provado). `fmt`, `clippy` e `cargo test --lib` passam; ✘ `pnpm check`: os testes antigos `src-tauri/tests/db_schema.rs` e `db_dual_write.rs`, fora do "Toca em", usam o esquema e a API antigos. Parada até o aval para incluir os dois no "Toca em".
+  - Correção (2026-11-23, sem commit): migração nova `0003` (a `0002` já aplicada muda o checksum no sqlx), que refaz `tarefa`, `execucao`, `relatorio`, `achado` e `escrita` com as ligações do M-37, `concluído`, `incompleta` e `comandos`; triggers `BEFORE INSERT` fecham o `REPLACE`; ERR-54 no `dual_write.rs`, registrado no Log; 12 testes novos em `infra/db/tests.rs` (o CHECK `chat_chat_anterior_proprio` agora é provado). `fmt`, `clippy` e `cargo test --lib` passam; ✘ `pnpm check`: os testes antigos `src-tauri/tests/db_schema.rs` e `db_dual_write.rs`, fora do "Toca em", usam o esquema e a API antigos. Com o aval, o mesmo implementador atualiza os dois testes.
 
 ### T5: contrato IPC do Tauri
 - **Faz:** comandos e eventos entre a tela e o núcleo, com tipos gerados para o TypeScript.
@@ -97,6 +97,7 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Data: 2026-11-23
   - Critérios ✔/✘ com a prova de cada um (commit `6b3f878`): ✔ 43 comandos e 7 eventos globais mais `EventoExecucao` e `InstrucaoConexao` por `Channel`, todos nos bindings (`todo_comando_esta_nos_bindings`); ✔ `pnpm check` com EXIT 0; ✔ `pnpm bindings` sem diferença; ✔ escopo (16 arquivos no "Toca em"; `Cargo.lock` só ganhou entradas); ✔ `CodigoErro` ERR-01 a ERR-53 conferido um a um, sem repetido, 53 no TS; ✔ TS e zod iguais ao Rust (mutação: campo novo e valor novo de enum quebram o `tsc`); ✔ núcleo provisório sem regra; ✔ nenhum segredo em DTO (RN-04); ✔ T3 e T4 intactas depois do rebase; ✘ `Achado` sem o campo `execucao` (ENT-10). Menores: o zod aceita fração de segundo com 10 ou mais casas, que o Rust recusa; `desconectar_integracao` devolve `desconectado` sem `nao_implementado`. Ajuste previsto ao M-37 a M-40: ERR-54, `incompleta`, `concluído`, DTO do Relatório (ENT-09) e do Critério (ENT-24).
   - Devolvido para correção: sim, 2026-11-23, para um implementador novo, junto do ajuste ao M-37 a M-40, na branch da #2.
+  - Correção e ajuste (commit `f5ad5ce`, 2026-11-23): `Achado.execucao`; `Tarefa.plano` e `incompleta`; DTOs `Relatorio` (ENT-09) e `Criterio` (ENT-24, `passou`, `falhou`, `nao_verificado_presumido`) só como tipos; ERR-54; `concluido` no fio em ASCII, ligado a "concluído" do contrato por comentário; zod de data com 1 a 9 casas; `desconectar_integracao` devolve `nao_implementado`. `pnpm check` e `pnpm bindings` sem diferença. Em segunda verificação.
 
 ## Próxima tarefa e a seguinte
 Em paralelo: verificador da T5 e correção da T4 (verificação e contrato M-37 a M-40); depois o ajuste da T5 ao contrato novo; cada tarefa verificada vai na sua PR.
