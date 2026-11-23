@@ -42,6 +42,9 @@ criado: 2026-11-20
 - Tipo sem comando nem evento precisa de `.typ::<T>()` no construtor para sair nos bindings.
 - ENT-17 Escrita sem DTO na IPC (nenhum comando a usa).
 
+## Segunda verificação da T5 (2026-11-23)
+- Quando surgir o comando de relatório, o zod de `Relatorio` entra no fluxo de validação; a Escrita (ENT-17) ganha DTO quando surgir o comando dela.
+
 ### 🔗 Conexões
 - Plano: [[fundacao-plano]]
 - Funcionalidade: [[fundacao-contexto]]

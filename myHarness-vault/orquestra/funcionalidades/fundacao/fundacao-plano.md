@@ -89,7 +89,7 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
 - **Depende de:** T3, porque as duas tocam o `Cargo.toml` e o `Cargo.lock` da raiz (`tauri-specta`)
 - **Paralelo:** sim, com T4; o combinado entre as duas são os ENT do `02-entidades` (G1)
 - **Pronto quando:**
-  - [ ] comandos e eventos tipados nos dois lados
+  - [x] comandos e eventos tipados nos dois lados
 - **Prova:** `pnpm check`
 - **Verificação:**
   - Entregue (commit `5d0e88c`, `feat/setup-contrato-ipc`, a partir da T3 `70124c2`, 2026-11-20): 43 comandos e 7 eventos globais mais `EventoExecucao` por `Channel`, DTOs dos ENT com `DataHoraUtc`, `CodigoErro` ERR-01 a ERR-53 conferido com o `05-erros`, núcleo provisório atrás da interface `Nucleo` (sem regra), `src/bindings/index.ts` gerado por `pnpm bindings` com teste de divergência, zod em `src/lib/ipc/`; `pnpm check` passando. `tauri-specta` só existe como rc (`=2.0.0-rc.29`, `specta =2.0.0-rc.28`, `specta-typescript =0.0.15`): conflita com a S16, pede aval do humano antes do merge. Aguarda verificador.
@@ -97,7 +97,9 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Data: 2026-11-23
   - Critérios ✔/✘ com a prova de cada um (commit `6b3f878`): ✔ 43 comandos e 7 eventos globais mais `EventoExecucao` e `InstrucaoConexao` por `Channel`, todos nos bindings (`todo_comando_esta_nos_bindings`); ✔ `pnpm check` com EXIT 0; ✔ `pnpm bindings` sem diferença; ✔ escopo (16 arquivos no "Toca em"; `Cargo.lock` só ganhou entradas); ✔ `CodigoErro` ERR-01 a ERR-53 conferido um a um, sem repetido, 53 no TS; ✔ TS e zod iguais ao Rust (mutação: campo novo e valor novo de enum quebram o `tsc`); ✔ núcleo provisório sem regra; ✔ nenhum segredo em DTO (RN-04); ✔ T3 e T4 intactas depois do rebase; ✘ `Achado` sem o campo `execucao` (ENT-10). Menores: o zod aceita fração de segundo com 10 ou mais casas, que o Rust recusa; `desconectar_integracao` devolve `desconectado` sem `nao_implementado`. Ajuste previsto ao M-37 a M-40: ERR-54, `incompleta`, `concluído`, DTO do Relatório (ENT-09) e do Critério (ENT-24).
   - Devolvido para correção: sim, 2026-11-23, para um implementador novo, junto do ajuste ao M-37 a M-40, na branch da #2.
-  - Correção e ajuste (commit `f5ad5ce`, 2026-11-23): `Achado.execucao`; `Tarefa.plano` e `incompleta`; DTOs `Relatorio` (ENT-09) e `Criterio` (ENT-24, `passou`, `falhou`, `nao_verificado_presumido`) só como tipos; ERR-54; `concluido` no fio em ASCII, ligado a "concluído" do contrato por comentário; zod de data com 1 a 9 casas; `desconectar_integracao` devolve `nao_implementado`. `pnpm check` e `pnpm bindings` sem diferença. Em segunda verificação.
+  - Correção e ajuste (commit `f5ad5ce`, 2026-11-23): `Achado.execucao`; `Tarefa.plano` e `incompleta`; DTOs `Relatorio` (ENT-09) e `Criterio` (ENT-24, `passou`, `falhou`, `nao_verificado_presumido`) só como tipos; ERR-54; `concluido` no fio em ASCII, ligado a "concluído" do contrato por comentário; zod de data com 1 a 9 casas; `desconectar_integracao` devolve `nao_implementado`. `pnpm check` e `pnpm bindings` sem diferença.
+  - Segunda verificação (commit `f5ad5ce`, 2026-11-23): ✔ nos 10 itens: `Achado.execucao`; M-37 a M-39 nos dois lados; ERR-54 e catálogo de 54 iguais ao `05-erros` em Rust, TS e zod; `Relatorio` e `Criterio` nos bindings; zod de data sem divergência do Rust em 34 casos; `desconectar_integracao`; escopo; sem regressão. Mutações quebram o `tsc` ou o `bindings_estao_em_dia`.
+  - **T5 concluída** na branch da #2; o merge é do humano.
 
 ## Próxima tarefa e a seguinte
 Em paralelo: verificador da T5 e correção da T4 (verificação e contrato M-37 a M-40); depois o ajuste da T5 ao contrato novo; cada tarefa verificada vai na sua PR.
