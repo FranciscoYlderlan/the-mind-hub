@@ -25,6 +25,7 @@ Funciona como **as placas de trânsito**. Eu reconheço a placa de "pare" pela c
 | `:wrench:` | 🔧 | `chore` | Configuração e variáveis de ambiente |
 | `:page_facing_up:` | 📄 | `docs` | Documentação e imagens do README |
 | `:white_check_mark:` | ✅ | `test` | Testes |
+| `:construction_worker:` | 👷 | `ci` | Integração contínua: workflows e pipelines de CI |
 | `:tada:` | 🎉 | `chore` | **Só** o primeiro commit do projeto |
 
 ---
@@ -35,6 +36,7 @@ Funciona como **as placas de trânsito**. Eu reconheço a placa de "pare" pela c
 > - `:adhesive_bandage: fix(frontend): Use handler env variables`
 > - `:wrench: chore(frontend): Adjust example environment variables`
 > - `:art: style(frontend): Adjust spacing of layout and table`
+> - `:construction_worker: ci(setup): Run CI on pull requests and pushes to main`
 
 > [!warning] Meu padrão x gitmoji oficial
 > Minha tabela é minha convenção. O [gitmoji](https://gitmoji.dev) oficial usa ♻️ para refactor (⚡ lá é desempenho), 📝 para docs (📄 lá é licença) e 🩹 só para correções simples. Vale a minha tabela, mas é bom saber a diferença ao ler projetos de outras pessoas.
