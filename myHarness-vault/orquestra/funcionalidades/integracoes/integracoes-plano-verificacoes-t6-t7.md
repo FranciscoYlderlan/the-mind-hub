@@ -36,9 +36,10 @@ criado: 2026-11-24
 - 2026-11-26 18h00 (adversarial da API, cerca de 12 min, crate temporário fora do repositório sobre o `target/` de `/home/claude/val`): sem bloqueante e sem "deve corrigir". ✔ AC-02, AC-03, AC-157 (três `conectar` geram 1 código ou 1 `/login`, sem fluxo órfão depois de 2000 s no relógio simulado), AC-04, AC-129, AC-05, AC-89, AC-128, AC-153 e AC-154 (`ghp_` vira `••••` no ERR-03, no ERR-04 e nas instruções do `/login`). Ataques 1, 3, 4, 5 e 9 ✔ (comandos rápidos, de 0,0 a 4,8 ms; só o `conectar` é longo, porque espera o humano); 2 não se aplica; RNF-05 ✔ em respostas, erros, avisos e registros. Opcionais: `notas_indexadas` acima de `u32` é truncado em silêncio (DTO `u32`, core `u64`); `tipo` inválido no comando do Tauri volta como texto, sem ERR do catálogo (leitura de código; os bindings tipados e o zod evitam na prática). Sem proposta de contrato.
 - **Resultado:** AC de UC-01 e TEL-02 passando nos dois adversariais e no verificador de fluxo principal; fluxos registrados em [[geral-plano-teste-humano]].
 - **Opcionais (resposta do humano, 18h10):** duplo clique em "Desconectar" vira a T10 ([[integracoes-plano-t10]]); `notas_indexadas` acima de `u32` fica sem erro, porque nenhum cofre terá esse número de notas. Indicador "checando" durante o login e `tipo` inválido no Tauri sem ERR: `[a preencher]`.
-- 2026-11-26 18h25 (implementador da T10, `fix/integracoes-duplo-clique`, cerca de 15 min): `e278aa3` (carregando mínimo de 500 ms, o tempo padrão de duplo clique do Windows, em `provedor-de-integracoes.tsx`; botões e linha da conta ficam no lugar, inativos, em `cartao-integracao.tsx`) e `ee18b05` (2 testes com relógio falso; 3 testes ajustados), com push e hook ativo. `pnpm check:web` com 67 testes; `check:rapido` de 45 s a 102 s; Playwright 9/9 no duplo clique (Desconectar, Conectar, Testar e Repetir fazem 1 chamada cada); com o código da `main`, o B1 volta. Proposta de contrato: CMP-11, estado "carregando", com os botões no lugar, inativos, por pelo menos 500 ms. Falta o verificador e a decisão sobre a proposta.
+- T10 e T11: histórico em [[integracoes-plano-verificacoes-t10-t11]].
 
 ### 🔗 Conexões
+- Continuação: [[integracoes-plano-verificacoes-t10-t11]]
 - Parte anterior: [[integracoes-plano-verificacoes]]
 - Plano: [[integracoes-plano]]
 - Funcionalidade: [[integracoes-contexto]]

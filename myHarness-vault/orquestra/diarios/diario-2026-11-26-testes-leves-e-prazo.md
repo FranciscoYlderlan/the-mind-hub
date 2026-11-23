@@ -58,5 +58,6 @@ criado: 2026-11-26
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
 - Parte anterior: [[diario-2026-11-26]]
+- Dia seguinte: [[diario-2026-11-27]]
 - Funcionalidades tocadas: [[geral-contexto]], [[integracoes-plano]]
 - Projeto: [[geral-contexto]]
