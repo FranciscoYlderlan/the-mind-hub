@@ -16,7 +16,7 @@ criado: 2026-11-20
 - Rodar os testes da T3 no Windows (`cargo test` com `#[cfg(windows)]`) e conferir o caso `"` no `PATH`; ajustar o comentário de `execucao.rs` se preciso.
 - Regra "contém" da camada 4 tira variáveis legítimas além do `PATH` (`PWD`, `LS_COLORS`, `PS1`, palavras como `weighs_more`); revisar se o agente precisar delas.
 - Pontos do contrato levantados na T4, para o humano: ligações que faltam (`Tarefa.plano`, `Relatório.execucao`, `Achado.execucao`, `Escrita.cofre`); tarefa incompleta do ERR-49 sem forma de gravar; regras que dependem do papel fora do banco; `concluído` × `concluido` entre Relatório e Execução; ERR-51 diz "nada foi gravado" mesmo quando o desfazer do cofre falha; falta o campo que liga linha a nota (AC-148).
-- Pontos do contrato levantados na T5, para o humano: erro interno genérico fora do catálogo (proposta ERR `FALHA_INTERNA`; o ERR-54 já vai para o desfazer que falha, M-40); ENT-20 Rodada sem `id` nem `chat`; ENT-04 Mensagem sem data e hora; percentuais da ENT-14 como inteiros; nomes ASCII para ✔, ✘ e "não verificado, presumido" da ENT-24; CMP-12 sem marca de tarefa incompleta no DTO (resolvido pelo campo `incompleta` do M-39). IDs vão como texto no IPC; converter na fronteira se a T4 usar INTEGER. `src/dev/nucleo-simulado.ts` da decisão do modo simulado ainda não existe. Os bindings importam `@tauri-apps/api/mocks`: conferir no build. `cargo test` passa a exigir `pnpm install` (o gerador usa o Prettier do projeto).
+- Pontos do contrato levantados na T5, para o humano: erro interno genérico resolvido com o ERR-55 `FALHA_INTERNA` (M-43, [[geral-decisao-2026-11-23-falha-interna]]); ENT-20 Rodada sem `id` nem `chat`; ENT-04 Mensagem sem data e hora; percentuais da ENT-14 como inteiros; nomes ASCII para ✔, ✘ e "não verificado, presumido" da ENT-24; CMP-12 sem marca de tarefa incompleta no DTO (resolvido pelo campo `incompleta` do M-39). IDs vão como texto no IPC; converter na fronteira se a T4 usar INTEGER. `src/dev/nucleo-simulado.ts` da decisão do modo simulado ainda não existe. Os bindings importam `@tauri-apps/api/mocks`: conferir no build. `cargo test` passa a exigir `pnpm install` (o gerador usa o Prettier do projeto).
 - Lição de SQLite: CHECK com `=` passa quando a expressão dá NULL; usar `IS`.
 - Escolhas da T3 a revisar na tarefa do `harness-gate`: `--tools` só com nomes internos; gancho sem o papel.
 - Ambiente: o container da nuvem traz `.gitconfig` global com `user.name Claude` e `commit.gpgsign true`; todo commit (orquestrador e subagentes) precisa de autor e committer do humano por variável de ambiente e `-c commit.gpgsign=false`, inclusive cherry-pick e rebase. Candidato a decisão e a lição no Vault.
@@ -39,16 +39,16 @@ criado: 2026-11-20
 - O filtro de `comandos` olha só o subcomando logo após o programa (`git -C x push` passa); a barreira real é o portão (RN-27).
 
 ## Segunda verificação da T4 (2026-11-23)
-- Filtro de `comandos` no banco é melhor esforço, ao contrário do comentário da `0003`: `git` com 9 ou mais espaços antes de `push`, `cd x&&git push`, `"git" push` e `git --no-pager push` passam (além do `git -C x push`); endurecer ou corrigir o comentário [a confirmar com o humano]. A barreira real é o portão (RN-27).
+- Filtro de `comandos` no banco é melhor esforço, ao contrário do comentário da `0003`: `git` com 9 ou mais espaços antes de `push`, `cd x&&git push`, `"git" push` e `git --no-pager push` passam (além do `git -C x push`); fica assim e só o comentário é corrigido ([[geral-decisao-2026-11-23-filtro-de-comandos-so-comentario]]). A barreira real é o portão (RN-27).
 - Mudar `execucao.papel` para `adversarial` depois de um achado sem captura é aceito.
 - `DELETE` e `INSERT` de uma execução sem filhos grava outra `prompt_versao`.
 - `INSERT OR REPLACE` em `tarefa` é aceito e zera `voltas`, `implementada_por` e `incompleta`.
 - `Display` do `HalfUndone` mostra o erro do desfazer sem máscara (RN-04 pede máscara no que é mostrado).
-- Banco da `0002` com linha em `tarefa`, `relatorio`, `achado` ou `escrita` não abre: saída (apagar ou avisar) [a confirmar com o humano].
+- Banco da `0002` com linha em `tarefa`, `relatorio`, `achado` ou `escrita` não abre: o app apaga e cria de novo ([[geral-decisao-2026-11-23-banco-antigo-apagado]]).
 - Lição de SQLite (candidata ao Vault): `replace` encadeado n vezes junta no máximo 2^n espaços.
 
 ## Ajuste da T5 (2026-11-23)
-- Propostas de contrato, aguardam o humano: ENT-24 Critério ganha `descricao` (texto do critério do "Pronto quando"); ENT-24 registra `passou`, `falhou` e `nao_verificado_presumido` como nomes ASCII de ✔, ✘ e "não verificado, presumido".
+- Propostas de contrato recusadas pelo humano (2026-11-23, 17h26): ENT-24 Critério não ganha `descricao` e o contrato não registra os nomes ASCII; `passou`, `falhou` e `nao_verificado_presumido` ficam só no fio da IPC, pela regra do enum ASCII abaixo.
 - Enum da IPC sempre em ASCII snake_case; o texto do contrato com acento fica só na tela e no banco (ver o mapeamento acima).
 - Tipo sem comando nem evento precisa de `.typ::<T>()` no construtor para sair nos bindings.
 - ENT-17 Escrita sem DTO na IPC (nenhum comando a usa).
