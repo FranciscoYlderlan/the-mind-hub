@@ -23,7 +23,7 @@ criado: 2026-11-20
 
 ## Verificação da T4 (2026-11-20)
 - Ambiguidades do contrato que o esquema aceita hoje: `projeto.nome` único sem regra de caixa e espaços (NBSP e espaço de largura zero passam como não vazios); `toca_em` pode sair do repositório (`../fora`, `~/x`) e repetir item; sem unicidade em `integracao.tipo`, `(chat, versao)` do plano e `pasta_contexto (projeto, caminho)`; dependência em ciclo aceita; ciclo de vida sem trava no banco (aprovado volta a recusado, encerrado volta a ativo); `branch` frouxa, `worktree` relativa, `motivo_fila` com `rodando`; prompts de fábrica (ENT-08) sem dono definido; apagar o único cofre de memória é aceito (ERR-38 é do núcleo).
-- Emoji de commit: `:card_file_box:` e `:lock:` (T2, T3 e T4) não estão na tabela de Tipos e emojis de commit (no Vault); `feat` usa `:sparkles:`. Perguntar ao humano se reescreve as mensagens antes do merge local.
+- Emoji de commit: resolvido em 2026-11-23 ([[geral-decisao-2026-11-23-push-e-pr-no-github]]): mensagens reescritas pela tabela de Tipos e emojis de commit (no Vault), que ganhou o tipo `ci`.
 
 ### 🔗 Conexões
 - Plano: [[fundacao-plano]]

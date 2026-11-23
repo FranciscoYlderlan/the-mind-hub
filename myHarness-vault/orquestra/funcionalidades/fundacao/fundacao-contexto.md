@@ -20,6 +20,7 @@ Fechar o "Pronto quando" da etapa 2 do [[geral-plano]]: sem estas interfaces, as
 ## O que já foi feito
 - 2026-11-19: plano T1 a T5 aprovado; T1 (trait `Integracao`) entregue e verificada.
 - 2026-11-20: T2 (mascaramento) refeita sem adivinhar, por prefixo conhecido e segredo guardado ([[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]]), e verificada ([[diario-2026-11-20]]).
+- 2026-11-23: código no GitHub (`FranciscoYlderlan/MyHarness`), histórico com datas de 2026-09-21 a 2026-11-23; a G1 sobe numa PR única ([[geral-decisao-2026-11-23-push-e-pr-no-github]], [[diario-2026-11-23]]).
 
 ## Tempo disponível
 - Humano até as 18h de 2026-11-19.
