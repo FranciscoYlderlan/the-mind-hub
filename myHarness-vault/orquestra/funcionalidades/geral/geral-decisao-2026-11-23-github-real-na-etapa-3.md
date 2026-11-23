@@ -11,7 +11,7 @@ substitui:
 - **Decisão:** o teste com o GitHub real entra na etapa 3 (Integrações) do [[geral-plano]], contra um repositório só de testes, nunca o `MyHarness`. O GitHub falso atrás do `GitHost` segue nos testes automáticos.
 - **Alteração:** o ponto "teste real só na etapa 9" da [[geral-decisao-2026-11-20-github-falso]], que segue aprovada com a linha reescrita.
 - **Motivo:** respostas do humano em 2026-11-23: "Real test earlier" (16h36) e "Etapa 3, repo de teste" (16h45).
-- **Consequências:** a etapa 3 precisa de um repositório de testes [a preencher: nome e dono]; RF-03 passa também contra o GitHub real nessa etapa.
+- **Consequências:** o repositório de testes é `FranciscoYlderlan/myharness-teste`, criado pelo humano em 2026-11-23 (17h45); RF-03 passa também contra o GitHub real nessa etapa.
 
 ### 🔗 Conexões
 - Funcionalidade: [[geral-contexto]]

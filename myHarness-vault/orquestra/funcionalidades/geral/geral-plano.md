@@ -7,7 +7,7 @@ criado: 2026-11-19
 # 🧭 Roteiro — MyHarness
 
 > [!tldr] Onde o projeto está
-> Etapa atual: **3. Integrações** (planejada)
+> Etapa atual: **3. Integrações** (em-construcao)
 
 > [!warning] Proposta da IA até eu aprovar
 > As etapas nascem como proposta. Aprovadas, viram a nota `geral-decisao-AAAA-MM-DD-roteiro` e este plano passa a `status: aprovado`. Mudar a lista de etapas é uma nova decisão.
@@ -37,11 +37,11 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 - **Concluída em:** 2026-11-23
 
 ## 3. Integrações
-- **Status:** planejada
+- **Status:** em-construcao
 - **Objetivo:** conectar e mostrar o status de Claude CLI, Obsidian CLI e GitHub (OAuth com token no cofre de credenciais do SO), cada uma atrás da interface própria.
 - **Pronto quando:** AC de UC-01 e TEL-02 (principal, FA-01, FE-01 a FE-03) passando no verificador de fluxo principal e no adversarial; busca automatizada sem token em texto puro (RNF-05).
 - **Ciclo** (prático): contrato da funcionalidade → implementação → verificador de fluxo principal → adversarial → fluxos de teste registrados
-- **Funcionalidades:** `integracoes` (RF-01, RF-02, RF-03, RF-04)
+- **Funcionalidades:** [[integracoes-contexto]] (RF-01, RF-02, RF-03, RF-04)
 - **Paralelo:** RF-01, RF-02 e RF-03 em paralelo, um módulo por integração sobre a trait da etapa 2 (G1, G2); RF-04 (frontend, CMP-03 e CMP-11) depois deles.
 - **Notas geradas:** 
 - **Concluída em:** 
