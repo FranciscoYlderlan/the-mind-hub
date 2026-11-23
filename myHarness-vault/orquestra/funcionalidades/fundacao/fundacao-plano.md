@@ -109,10 +109,10 @@ Entregar as interfaces comuns do G1 da etapa 2 do [[geral-plano]], em paralelo s
   - Devolvido para correção:
 
 ## Próxima tarefa e a seguinte
-Em paralelo: verificador da T5 e correção da T4 (verificação e contrato M-37 a M-40); depois o ajuste da T5 ao contrato novo, a branch de integração e a PR da G1.
+Em paralelo: verificador da T5 e correção da T4 (verificação e contrato M-37 a M-40); depois o ajuste da T5 ao contrato novo; cada tarefa verificada vai na sua PR.
 
 ## Prioridades
-Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]): T3 e T4 juntas, T5 depois da T3; cada tarefa passa pelo seu verificador. Cada tarefa na sua branch `feat/setup-...`; no fim, juntas na branch de integração `feat/setup-g1-interfaces`, com `pnpm check` local, e push numa PR só; o humano aprova a PR e faz o merge na `main` ([[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-23-push-e-pr-no-github]]).
+Paralelo onde o "Toca em" não se cruza ([[geral-decisao-2026-11-20-paralelo-por-padrao]]): T3 e T4 juntas, T5 depois da T3; cada tarefa passa pelo seu verificador. Cada tarefa na sua branch `feat/setup-...`; verificada, sobe na sua PR, com `pnpm check` local; o humano faz o merge na ordem #3, #4, #1, #2 ([[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-23-uma-pr-por-tarefa]]).
 
 ## Candidatos a registro
 Os candidatos levantados nas tarefas T1 a T5 (contrato, ambiente, `AgentRunner`) ficam em [[fundacao-plano-candidatos]].
