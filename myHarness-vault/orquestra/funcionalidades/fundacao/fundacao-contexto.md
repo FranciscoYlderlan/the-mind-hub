@@ -44,6 +44,7 @@ Fechar o "Pronto quando" da etapa 2 do [[geral-plano]]: sem estas interfaces, as
 
 ### 🔗 Conexões
 - Candidatos: [[fundacao-plano-candidatos]]
+- Verificação da T2: [[fundacao-plano-mascaramento]]
 - Mapa: [[moc-orquestra]]
 - Projeto: [[geral-contexto]]
 - Regras: [[manual-da-orquestra]]
