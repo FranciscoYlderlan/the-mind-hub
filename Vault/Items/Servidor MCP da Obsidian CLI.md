@@ -24,7 +24,7 @@ origem: T2b do integracoes-plano (myHarness-vault), 2026-11-24; arquivo Modelos/
 > [!warning] Limites
 > - Só leitura: não há ferramenta de escrita.
 > - Precisa do Obsidian aberto; logo depois de abrir, `Command "read" not found` é carregamento.
-> - HTTP sem TLS e só local; [a confirmar] se o container alcança o `127.0.0.1` do Windows.
+> - HTTP sem TLS e só local. Do WSL, só com `networkingMode=mirrored` no `.wslconfig` (em `nat`, `Connection refused`); contêiner com `--network host`.
 > - `files ext=md total` devolve só o número (75 no `Vault` em 2026-11-24, igual à contagem dos `.md` na pasta).
 
 ### 🛠️ Resumo direto para o cérebro
