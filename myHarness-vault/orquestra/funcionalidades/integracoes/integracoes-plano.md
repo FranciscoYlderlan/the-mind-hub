@@ -83,6 +83,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
   - [ ] nota no `Vault` explicando o servidor MCP da Obsidian CLI por inteiro (o que é, ferramentas, transportes, como instalar e ligar, como validar, ligação com o bug "Obsidian CLI via MCP não carrega"), escrita pelo orquestrador seguindo o Manual do Meu Cérebro no Obsidian (no Vault)
 - **Prova:** chamada real pelo MCP ao `Vault` e ao `myHarness-vault`
 - **Verificação:**
+  - 2026-11-24: entregue (1.1.0, `obsidian_files`, `--http` só em 127.0.0.1, porta 27180); provas com `obsidian` falso por stdio e HTTP e com o cliente da T2; aplicado no `Vault` pelo orquestrador. Notas no `Vault`: Servidor MCP da Obsidian CLI e Ligar o servidor MCP da Obsidian CLI (no Vault), ligadas no MOC Programação (no Vault). Falta a prova com a CLI real.
 
 ### T3: GitHub por OAuth device flow (RF-03)
 - **Faz:** device flow com o app OAuth próprio (`client_id` do `.env`), token no cofre de credenciais do sistema (Gerenciador de Credenciais no Windows), status com conta e escopos; GitHub falso atrás do `GitHost` nos testes automáticos.
@@ -96,6 +97,16 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Prova:** `pnpm check`; busca automatizada pelo token (RNF-05)
 - **Verificação:**
   - Despachada em 2026-11-24 07h45 (branch `feat/integracoes-github-oauth`).
+
+### Tci: CI verde na `main`
+- **Faz:** corrige o que o `CI` acusou na primeira execução (PR #8) e já estava na `main`: `clippy::result_large_err` no `DualWriteError` (Rust estável 1.100) e `dead_code` no `path_filtrado` no Windows.
+- **Toca em:** `src-tauri/src/infra/db/dual_write.rs`, `crates/core/src/domain/execucao.rs` (só `cfg` de teste)
+- **Depende de:** nenhuma
+- **Paralelo:** sim; as PRs de tarefa só passam no `CI` depois dela
+- **Pronto quando:**
+  - [ ] `CI` verde em Linux e Windows na PR dela
+- **Prova:** clippy estável com `-D warnings`; `pnpm check`; `CI` da PR
+- **Verificação:**
 
 ### T4: núcleo liga as três integrações
 - **Faz:** o `Nucleo` provisório passa a usar T1, T2 e T3 em `listar`, `testar`, `conectar` e `desconectar`, com os eventos de instrução de conexão.
