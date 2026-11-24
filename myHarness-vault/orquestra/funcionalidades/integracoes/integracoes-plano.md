@@ -15,7 +15,7 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 ## Decisões que este plano respeita
 - [[geral-decisao-2026-11-23-comandos-na-tela-de-execucao]], [[geral-decisao-2026-11-23-falha-interna]], [[geral-decisao-2026-11-23-filtro-de-comandos-so-comentario]], [[geral-decisao-2026-11-23-banco-antigo-apagado]] (T0a e T0b)
 - [[geral-decisao-2026-11-19-github-oauth-proprio]], [[geral-decisao-2026-11-23-github-real-na-etapa-3]], [[geral-decisao-2026-11-20-github-falso]] (T3)
-- [[geral-decisao-2026-11-24-erro-generico-por-fronteira]], [[geral-decisao-2026-11-24-servidor-mcp-do-obsidian]], [[geral-decisao-2026-11-24-desconectar-sem-logout]]
+- [[geral-decisao-2026-11-24-erro-generico-por-fronteira]], [[geral-decisao-2026-11-24-servidor-mcp-do-obsidian]], [[geral-decisao-2026-11-24-desconectar-sem-logout]], [[geral-decisao-2026-11-24-escopo-repo-no-github]], [[geral-decisao-2026-11-24-cofre-da-integracao-por-variavel]], [[geral-decisao-2026-11-24-estado-da-integracao-com-notas-e-erro]]
 - [[geral-decisao-2026-11-20-mascaramento-sem-adivinhar]], [[geral-decisao-2026-11-20-strict-mcp-sempre]], [[geral-decisao-2026-11-20-paralelo-por-padrao]], [[geral-decisao-2026-11-23-tauri-specta-rc]]
 
 ## Tarefas
@@ -130,6 +130,17 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Prova:** `pnpm check`
 - **Verificação:**
   - 2026-11-24: entregue `c0a2fb7` sobre merges de T0a, T2, T3 e T1; merge da correção da T1 em `dafcacb` (conflito no `Cargo.lock`, resolvido pelo orquestrador). ERR-53 no `ErroIntegracao`, `ServicoIntegracoes`, `ErroIpc::Interno` removido, máscara do núcleo com o token, `.env.example` e `compose.yaml` (`network_mode: host`). Pontos: registro do ERR-53 fora do Log (ENT-12 exige `execucao`); "desconectada" só em memória; `notas_indexadas` fora do DTO; variável `MYHARNESS_OBSIDIAN_COFRE` criada sem aval. Em verificação.
+
+### T4b: estado da integração com notas e erro (M-46)
+- **Faz:** `notas_indexadas` e `erro` no estado da integração (núcleo, DTO da IPC, bindings e zod) e na TEL-02 (número de notas no cartão da Obsidian CLI; motivo do ERR-53 vindo de `listar`); `ESCOPOS_PADRAO = ["repo"]` sem `[a confirmar]` ([[geral-decisao-2026-11-24-escopo-repo-no-github]]).
+- **Toca em:** `crates/core/src/domain/integracao.rs`, `src-tauri/src/commands/`, `src-tauri/src/infra/{obsidian,github}/`, `src/bindings/`, `src/lib/ipc/`, `src/features/integracoes/`
+- **Depende de:** T4 e T5 verificadas
+- **Paralelo:** não
+- **Pronto quando:**
+  - [ ] AC-128 na API e na tela; motivo do ERR-53 na TEL-02 também depois de `listar`
+  - [ ] `pnpm check` passando
+- **Prova:** `pnpm check`
+- **Verificação:**
 
 ### T5: painel de status (RF-04, CMP-03, CMP-11)
 - **Faz:** indicadores no canto superior direito e a TEL-02 com a ação "Conectar" e as instruções (código do device flow, `/login`).

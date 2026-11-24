@@ -313,6 +313,8 @@ Mora em: SQLite (status) + Gerenciador de Credenciais do Windows (D12).
 | status | enumeração | — | sim | — | conectado, desconectado, sem login, não instalado | ERR-01, ERR-05, ERR-06, ERR-07, ERR-53 |
 | conta | texto | — | não | — | — | — |
 | versao | texto | — | não | — | — | — |
+| notas_indexadas | inteiro | 0 ou mais | não; só Obsidian CLI conectada | — | número de notas `.md` do cofre checado (AC-128) | — |
+| erro | erro do catálogo | — | não; só quando o status vem de uma falha | código, mensagem e motivo mascarado (RN-04) | ERR-01 a ERR-07, ERR-53 | — |
 | credencial (RN-04) | segredo | — | só GitHub: token do device flow (D10) | — | só no Gerenciador de Credenciais do Windows | — |
 
 ### Invariantes (nunca violadas, em nenhum fluxo)
