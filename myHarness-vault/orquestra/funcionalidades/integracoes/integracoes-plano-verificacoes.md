@@ -42,6 +42,11 @@ Parte do [[integracoes-plano]] (dividida pelo limite de palavras): o que cada ve
 ## T5
 - 2026-11-24: entregue `f3004ae` (branch `feat/integracoes-painel`, sobre a T0a): CMP-03, TEL-02 com CMP-11, instruções, mensagens do catálogo, núcleo simulado nos testes, 17 testes novos. Pontos: link do ERR-01 [a confirmar]; `obsidian://open` na janela real [a confirmar]; AC-128 depende do DTO. Em verificação.
 
+## Verificações de 2026-11-24 à tarde
+- Tci: `ffa1d17` (manifesto do Windows embutido nos binários de teste); `CI` da #9 verde em Linux e Windows.
+- T4 (`dafcacb`, inclui a T1 corrigida): ✔ nos 8 critérios, sem bloqueante; a sonda do neto pelo núcleo inteiro não deixa processo. Deve corrigir: `listar` troca `não instalado` por `desconectado`. Registro do ERR-53/55 fora do Log levado ao humano (M-48). Opcionais: corrida residual no GitHub entre `cancelado` e `gravar`; desconectar durante conectar do Claude CLI; dois conectar simultâneos. **T1 e T4 concluídas**; PR #13.
+- T5 (`f3004ae`): sem bloqueante; deve corrigir: textos de erro fora do catálogo (sufixo do ERR-02 e textos de reserva), conta ausente no CMP-03 (AC-01), `checar` passando por cima de `desconectar`, falta de guarda em conectar, desconectar e repetir, e base na T0a em vez da T4 (usa `ErroIpc` `interno`, removido). Tudo para a T4b.
+
 ### 🔗 Conexões
 - Plano: [[integracoes-plano]]
 - Funcionalidade: [[integracoes-contexto]]

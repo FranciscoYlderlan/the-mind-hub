@@ -118,9 +118,9 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T4]].
 
 ### T4b: estado da integração com notas e erro (M-46)
-- **Faz:** `notas_indexadas` e `erro` no estado da integração (núcleo, DTO da IPC, bindings e zod) e na TEL-02 (número de notas no cartão da Obsidian CLI; motivo do ERR-53 vindo de `listar`); `ESCOPOS_PADRAO = ["repo"]` sem `[a confirmar]` ([[geral-decisao-2026-11-24-escopo-repo-no-github]]).
+- **Faz:** em cima da T4 e com a T5 refeita sobre ela: `listar` mostra `não instalado` (hoje `desconectado`) usando o estado do erro; `notas_indexadas` e `erro` no estado da integração (núcleo, DTO da IPC, bindings e zod) e na TEL-02 (número de notas no cartão da Obsidian CLI; motivo do ERR-53 vindo de `listar`); `ESCOPOS_PADRAO = ["repo"]` sem `[a confirmar]` ([[geral-decisao-2026-11-24-escopo-repo-no-github]]); correções da verificação da T5: mensagens só do catálogo (ERR-02 com o motivo, M-47), conta no CMP-03 (AC-01), guarda de operação em andamento para conectar, desconectar, repetir e checar.
 - **Toca em:** `crates/core/src/domain/integracao.rs`, `src-tauri/src/commands/`, `src-tauri/src/infra/{obsidian,github}/`, `src/bindings/`, `src/lib/ipc/`, `src/features/integracoes/`
-- **Depende de:** T4 e T5 verificadas
+- **Depende de:** T4 (PR #13) e T5 verificadas
 - **Paralelo:** não
 - **Pronto quando:**
   - [ ] AC-128 na API e na tela; motivo do ERR-53 na TEL-02 também depois de `listar`

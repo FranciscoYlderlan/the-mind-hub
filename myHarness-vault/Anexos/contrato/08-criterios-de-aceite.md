@@ -107,7 +107,7 @@ No MyHarness, "API" é a camada de comandos do núcleo Rust (Tauri), que o verif
 | AC-147 | — (decisão do Humano) | regra RN-31 | o cofre de memória sem permissão de escrita | o núcleo grava uma tarefa | nada fica gravado no SQLite nem no cofre e aparece o ERR-51 |
 | AC-148 | — (decisão do Humano) | regra RN-31 | uma tarefa, um relatório e um achado gravados | a conferência compara o SQLite com as notas | todos os campos batem; uma diferença forçada vai ao Log com o ERR-51 |
 | AC-155 | — (decisão do Humano) | regra RN-31 | o commit do SQLite e o desfazer da nota no cofre forçados a falhar | o núcleo grava uma tarefa | a nota fica no cofre, nada fica no SQLite, o caso vai ao Log (ENT-12) e aparece "A nota <nome> ficou no cofre, mas não no banco. Apague a nota ou grave de novo." (ERR-54) |
-| AC-156 | — (decisão do Humano) | erro ERR-55 | uma falha interna do núcleo forçada no teste, fora das condições do ERR-01 ao ERR-54 | a tela chama um comando do núcleo | o comando devolve o ERR-55 com "Algo deu errado no MyHarness: <motivo>. Tente de novo.", nada muda no SQLite nem no cofre e o caso vai ao Log (ENT-12) sem segredo em texto puro |
+| AC-156 | — (decisão do Humano) | erro ERR-55 | uma falha interna do núcleo forçada no teste, fora das condições do ERR-01 ao ERR-54 | a tela chama um comando do núcleo | o comando devolve o ERR-55 com "Algo deu errado no MyHarness: <motivo>. Tente de novo.", nada muda no SQLite nem no cofre e o caso vai ao registro do núcleo (saída de erro) sem segredo em texto puro |
 
 ## Por requisito funcional
 
