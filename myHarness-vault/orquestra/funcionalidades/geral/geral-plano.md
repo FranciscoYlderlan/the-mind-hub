@@ -108,6 +108,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 
 ## 10. Roteiro do humano e aceitação final
 - **Status:** planejada
+- **Antes da aceitação:** fixar a versão do Rust no repositório ([[geral-decisao-2026-11-24-rust-fixado-no-fim]]).
 - **Posição:** (prático) sempre a última; etapa nova entra antes dela, e a numeração segue 1..N. O `cofre.py criar` já a põe no roteiro do cofre novo.
 - **Objetivo:** com todas as funcionalidades passando nos dois agentes, fazer a aceitação final: verificadores e avaliador independente primeiro; depois, o roteiro final ao humano, curto e didático, passando por todas as funcionalidades. O aceite do humano fecha a etapa.
 - **Pronto quando:** toda funcionalidade coberta no roteiro, roteiro testado pelo humano, achados decididos como opções e aceite do humano registrado.
