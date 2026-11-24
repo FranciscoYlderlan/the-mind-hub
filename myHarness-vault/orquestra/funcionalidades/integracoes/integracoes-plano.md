@@ -39,12 +39,13 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma
 - **Paralelo:** sim, com T0a, T1, T2 e T3
 - **Pronto quando:**
-  - [ ] banco de antes da `0003` apagado e recriado, com teste
+  - [ ] banco de antes da `0003` apagado e recriado só quando a `0003` para pelo NOT NULL, com teste; outra falha de migração (ex.: checksum errado da `0001` ou `0002`) volta como erro sem apagar, com teste
   - [ ] banco já na `0003` abre sem erro de checksum, com teste
   - [ ] `pnpm check` passando
 - **Prova:** `pnpm check`
 - **Verificação:**
   - Entregue em 2026-11-24: `2f6001a` (branch `feat/integracoes-ajuste-banco`); verificador despachado.
+  - 2026-11-24: ✔ nos 6 critérios, com um "deve corrigir": apagava o banco em qualquer falha de migração (sonda: checksum errado da `0002` apagou os dados). Restrição aprovada pelo humano; devolvida para um implementador novo. Opcional: teste do `DbError::Delete`.
 
 ### T1: Claude CLI (RF-01)
 - **Faz:** implementação da trait `Integracao` para o Claude CLI: acha o executável (caminho opcional), lê a versão, checa a autenticação e inicia o `/login` da CLI quando falta.
