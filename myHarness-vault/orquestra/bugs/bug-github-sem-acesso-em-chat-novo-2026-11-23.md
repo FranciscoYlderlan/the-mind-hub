@@ -27,6 +27,7 @@ Sem o repositório ligado, o chat fica sem API (PRs, `CI`) e sem push; os implem
 - 17h26: o orquestrador pediu ao humano para "liberar o acesso".
 - 17h30: o humano disse que o acesso sempre foi dado; segundo `add_repo` aceito, clone feito e `register_repo_root` chamado; `gh api` passou a responder.
 - 17h38 (chat novo, reapareceu): primeiro `add_repo` (push) negado pelo classificador com `[Unauthorized Access]`; o humano foi avisado em 1 linha e a segunda chamada também foi negada, agora com `[Undermining Oversight]`. O `git clone` público funcionou, só leitura. 17h47: o humano escreveu no chat que libera o acesso ao GitHub; a terceira chamada do `add_repo` foi aceita, clone feito e `register_repo_root` chamado; `gh api` respondeu.
+- 2026-11-27 08h12 (chat novo, reapareceu): o orquestrador chamou o `add_repo` antes do pedido de autorização (passo 1 da Solução pulado); recusa do classificador com `[Unauthorized Access]`. O humano respondeu "pode" e a segunda chamada passou. Mesma causa; o passo 1 segue valendo.
 
 ## Pseudocódigo do problema
 ```text
