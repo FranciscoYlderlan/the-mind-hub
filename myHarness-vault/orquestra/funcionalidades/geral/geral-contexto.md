@@ -34,6 +34,7 @@ aliases: [contexto do MyHarness, MyHarness context]
 ## Tempo disponível
 - Prazo final do projeto: 2026-11-27, às 12h (horário de Brasília). Em 2026-11-26, às 13h47, o projeto está atrasado; o principal atraso é a demora dos testes.
 - Custo: cada agente gasta créditos por hora de uso. Quando os créditos acabam, o humano só volta às 17h, e o trabalho para até lá.
+- Escopo até o prazo: todas as funcionalidades, com as etapas 4 e 7 completas; nada fica para depois do prazo (2026-11-26, 13h53).
 
 ## Dial e modelo de IA
 - Dial: medio

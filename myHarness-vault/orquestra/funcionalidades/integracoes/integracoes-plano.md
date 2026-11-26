@@ -164,6 +164,9 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Prova:** `pnpm check`
 - **Verificação:** histórico em [[integracoes-plano-verificacoes-t6-t7#T7]].
 
+### T8: núcleo e infra num crate sem Tauri e hook leve
+- Detalhe em [[integracoes-plano-t8]].
+
 ## Próxima tarefa e a seguinte
 - Agora (chat novo): T6 e T7 em paralelo, cada uma por um implementador; depois, o verificador de fluxo principal e os dois adversariais de novo ([[geral-decisao-2026-11-26-adversarial-em-dois]], [[geral-decisao-2026-11-26-build-reaproveitado-na-validacao]]).
 - Depois: o teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
@@ -177,5 +180,6 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 ### 🔗 Conexões
 - Funcionalidade: [[integracoes-contexto]]
 - Verificações: [[integracoes-plano-verificacoes]], [[integracoes-plano-verificacoes-t6-t7]]
+- Tarefa T8: [[integracoes-plano-t8]]
 - Projeto: [[geral-contexto]]
 - Regras: [[manual-da-orquestra]]

@@ -37,7 +37,7 @@ Estado falso de desconectado depois de uma conexão certa; RN-08 bloquearia aç�
 - Relatório do adversarial de 2026-11-26, resumido em [[integracoes-plano-verificacoes#T5]].
 
 ## Correção aplicada
-[a preencher]
+T7, PR #16: guarda de conexão em andamento por integração no `NucleoMyHarness`; `ClaudeCli::cancelar()` no "Desconectar"; registro "reaproveita" e "cancela" no log do núcleo. Falta o adversarial de novo.
 
 ## Solução
 O núcleo reaproveita a operação em andamento ([[geral-decisao-2026-11-26-conectar-repetido-reaproveita]]; contrato M-50, UC-01 FA-02, AC-157); aplicação na T7 do [[integracoes-plano]].
