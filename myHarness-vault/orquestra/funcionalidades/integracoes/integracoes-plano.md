@@ -123,8 +123,8 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** T4 (PR #13) e T5 verificadas
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] AC-128 na API e na tela; motivo do ERR-53 na TEL-02 também depois de `listar`
-  - [ ] `pnpm check` passando
+  - [x] AC-128 na API e na tela; motivo do ERR-53 na TEL-02 também depois de `listar`
+  - [x] `pnpm check` passando
 - **Prova:** `pnpm check`
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T4b]].
 
