@@ -35,6 +35,7 @@ Fechar a etapa 3 do [[geral-plano]]: AC de UC-01 e TEL-02 (principal, FA-01, FE-
 - GitHub: [[bug-github-sem-acesso-em-chat-novo-2026-11-23]].
 - Branches de tarefa: push logo depois de cada commit ([[bug-branch-sem-push-some-com-o-container-2026-11-26]]).
 - Operação repetida no núcleo (conectar duas vezes): [[bug-conectar-repetido-abre-segundo-fluxo-2026-11-26]].
+- Links externos na janela real: [[bug-link-do-device-nao-abre-na-janela-real-2026-11-26]].
 - Testes do MCP no Windows: tempo esgotado com o servidor fora do ar ([[bug-teste-mcp-tempo-esgotado-no-windows-2026-11-26]]).
 
 ## Mapa
