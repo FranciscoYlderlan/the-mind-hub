@@ -25,6 +25,7 @@ Os IDs FA e FE são locais a cada UC, como na fonte (cite como "UC-03 FE-01"). O
 | ID | Passo de origem | Variação | Volta ou termina |
 |---|---|---|---|
 | FA-01 | 2 | A integração já está conectada → sistema mostra conta e versão | Termina |
+| FA-02 | 2 | A conexão já está em andamento → sistema mostra a mesma instrução (código do device flow ou `/login`), sem abrir outro fluxo | Volta ao passo 3 |
 
 ### Fluxos de exceção (FE)
 

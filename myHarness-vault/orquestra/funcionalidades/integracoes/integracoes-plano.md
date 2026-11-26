@@ -151,9 +151,22 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Prova:** `pnpm check`; `pnpm dev:simulado` com o Playwright abrindo a TEL-02; busca do núcleo simulado no build de produção
 - **Verificação:** histórico em [[integracoes-plano-verificacoes#T6]].
 
+### T7: conectar repetido no núcleo e opcionais do adversarial
+- **Faz:** guarda de operação em andamento por integração no `Nucleo`: "Conectar" repetido devolve a mesma instrução, sem outro fluxo (GitHub e Claude CLI; UC-01 FA-02, AC-157, [[geral-decisao-2026-11-26-conectar-repetido-reaproveita]]); "Desconectar" durante o login cancela o login e o estado devolvido é o guardado (B2); a tela valida as respostas de comando pelo zod; duplo clique em "Repetir" chama `testar` uma vez.
+- **Toca em:** `src-tauri/src/commands/nucleo.rs`, `src-tauri/src/infra/{claude,github}/` (só o cancelamento), testes do núcleo, `src/lib/ipc/`, `src/features/integracoes/`
+- **Depende de:** nenhuma (parte da `main`)
+- **Paralelo:** sim, com a T6 (cuidado: as duas tocam `src/lib/ipc/`)
+- **Pronto quando:**
+  - [ ] teste com dois `conectar` ao mesmo tempo, no GitHub e no Claude CLI: um fluxo só, a mesma instrução e o status final `conectado` (AC-157)
+  - [ ] teste de "Desconectar" durante o login: o estado devolvido é o guardado
+  - [ ] resposta de comando inválida (ex.: notas negativas) recusada pelo zod; "Repetir" com duplo clique chama `testar` uma vez
+  - [ ] `pnpm check` passando
+- **Prova:** `pnpm check`
+- **Verificação:** histórico em [[integracoes-plano-verificacoes#T7]].
+
 ## Próxima tarefa e a seguinte
-- Agora: aval do humano para a correção do B1 ([[bug-conectar-repetido-abre-segundo-fluxo-2026-11-26]]) e para o texto do AC-03; depois, implementador novo e os validadores de novo (fluxo principal e os dois adversariais, [[geral-decisao-2026-11-26-adversarial-em-dois]]).
-- Depois: T6 (`dev:simulado`), num chat novo; então o teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
+- Agora (chat novo): T6 e T7 em paralelo, cada uma por um implementador; depois, o verificador de fluxo principal e os dois adversariais de novo ([[geral-decisao-2026-11-26-adversarial-em-dois]], [[geral-decisao-2026-11-26-build-reaproveitado-na-validacao]]).
+- Depois: o teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
 
 ## Prioridades
 - T0a e T0b fecham pendências herdadas e são pequenas; T3 é a mais sensível (token).

@@ -53,6 +53,9 @@ Parte do [[integracoes-plano]] (dividida pelo limite de palavras): o que cada ve
 ## T6
 - 2026-11-26: tarefa criada por decisão do humano (12h39); começa num chat novo, depois do adversarial.
 
+## T7
+- 2026-11-26: tarefa criada por decisão do humano (13h10); começa num chat novo, em paralelo com a T6.
+
 ## Merge da `main` nas PRs (2026-11-26)
 - 08h50: merge `--no-ff` da `main` (`e26e145`), sem conflito, `pnpm check` e push com o hook: #8 `e770492`, #10 `c507afa`, #11 `56c83cb`, #12 `25b09d3`, #13 `20d1762`. `CI` Linux verde nas 5; Windows verde em #8, #10 e #11; #12 e #13 falham nos 2 testes do MCP ([[bug-teste-mcp-tempo-esgotado-no-windows-2026-11-26]]). Mensagem do merge: `:package: chore(<escopo>)`; merge não tem tipo na tabela e fica com o que aparecer (Tipos e emojis de commit, no Vault). Nesta sessão o `gh` só funciona por REST (`gh api`).
 - 10h10: Windows corrigido no teste ([[bug-teste-mcp-tempo-esgotado-no-windows-2026-11-26]], `ef8e957`). Merge da `main` na #12 (`43ea5a0`; conflito em `Cargo.toml` e no comentário de `infra/mod.rs`, os dois lados mantidos), da #12 na #13 (`c1b5d69`; conflito com a cópia da T3 da `main`, lado do núcleo mantido, `ErroIpc::falha_interna` duplicado retirado) e das duas na #14 (`bd41b95`, sem conflito). `CI` Linux e Windows verde nas três. O humano mergeou a #12 (`22beaf2`), a #13 (`b52ac95`) e a #14 (10h14) na `main`.
