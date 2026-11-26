@@ -33,7 +33,7 @@ Trabalho entregue e verificado pode sumir com o container; a T5 teria de ser ref
 - `git branch -a` no container de 2026-11-24 listava `feat/integracoes-painel` sem `remotes/origin/...`.
 
 ## Correção aplicada
-Push imediato da `feat/integracoes-painel` (2026-11-26, 07h47). A T4b recomeçou em `feat/integracoes-painel-t4b`, criada da T4, com push depois de cada commit.
+Push imediato da `feat/integracoes-painel` (2026-11-26, 07h47). A T4b foi parada antes de qualquer commit e recomeça num chat novo, a partir das branches do GitHub, com push depois de cada commit.
 
 ## Solução
 Regra de processo: todo commit de implementador recebe push logo em seguida, na branch da tarefa (push sem `--force`), antes da verificação. A PR só abre depois da verificação. Todo briefing de implementador traz o comando de push.
