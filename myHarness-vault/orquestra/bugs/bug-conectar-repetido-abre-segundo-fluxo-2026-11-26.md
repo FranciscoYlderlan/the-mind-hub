@@ -1,7 +1,7 @@
 ---
 tipo: bug
 funcionalidade: integracoes
-status: aberto
+status: resolvido
 criado: 2026-11-26
 aliases: [Conectar repetido no núcleo, Fluxo órfão desfaz o conectado, Duplicate connect opens a second flow]
 ---
@@ -26,6 +26,8 @@ Estado falso de desconectado depois de uma conexão certa; RN-08 bloquearia aç�
 ## Linha do tempo técnica
 - 2026-11-26 13h05: achado B1 do adversarial (deve corrigir).
 - 2026-11-26 13h10: o humano escolheu reaproveitar; contrato M-50.
+- 2026-11-26 14h12: T7 mergeada (PR #16).
+- 2026-11-26 18h00: adversariais de novo na `main` `26923aa`: API ✔ nos ataques 3 e 4 (três `conectar` geram 1 código e 1 `/login`; sem fluxo órfão depois de 2000 s no relógio simulado); tela ✔ no AC-157 na mesma página ([[integracoes-plano-verificacoes-t6-t7#Validação final]]).
 
 ## Pseudocódigo do problema
 `conectar(github)` ×2 → fluxo A e fluxo B; B conclui → `conectado`; A expira → grava `desconectado` + ERR-02 por cima.
@@ -37,7 +39,7 @@ Estado falso de desconectado depois de uma conexão certa; RN-08 bloquearia aç�
 - Relatório do adversarial de 2026-11-26, resumido em [[integracoes-plano-verificacoes#T5]].
 
 ## Correção aplicada
-T7, PR #16: guarda de conexão em andamento por integração no `NucleoMyHarness`; `ClaudeCli::cancelar()` no "Desconectar"; registro "reaproveita" e "cancela" no log do núcleo. Falta o adversarial de novo.
+T7, PR #16: guarda de conexão em andamento por integração no `NucleoMyHarness`; `ClaudeCli::cancelar()` no "Desconectar"; registro "reaproveita" e "cancela" no log do núcleo. Os dois adversariais de 2026-11-26 18h00 passaram.
 
 ## Solução
 O núcleo reaproveita a operação em andamento ([[geral-decisao-2026-11-26-conectar-repetido-reaproveita]]; contrato M-50, UC-01 FA-02, AC-157); aplicação na T7 do [[integracoes-plano]].

@@ -57,4 +57,5 @@ aliases: [contexto do MyHarness, MyHarness context]
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]
+- Fluxos de teste do humano: [[geral-plano-teste-humano]]
 - Regras: [[manual-da-orquestra]]
