@@ -173,10 +173,10 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma
 - **Paralelo:** sim, com a T8 (sem arquivo em comum)
 - **Pronto quando:**
-  - [ ] cada cenário abre a TEL-02 no estado dele, com teste vitest por cenário
-  - [ ] cenário desconhecido cai no padrão e mostra a lista no console do navegador
-  - [ ] o build do app instalado não inclui o núcleo simulado
-  - [ ] `pnpm check:web` passando; `pnpm check` completo uma vez, antes do último push
+  - [x] cada cenário abre a TEL-02 no estado dele, com teste vitest por cenário
+  - [x] cenário desconhecido cai no padrão e mostra a lista no console do navegador
+  - [x] o build do app instalado não inclui o núcleo simulado
+  - [x] `pnpm check:web` passando; `pnpm check` completo uma vez, antes do último push
 - **Prova:** `pnpm check:web`; Playwright abrindo dois cenários pela URL; busca do núcleo simulado no `dist/`
 - **Verificação:** histórico em [[integracoes-plano-verificacoes-t6-t7#T9]].
 
