@@ -21,9 +21,14 @@ criado: 2026-11-26
 - 14h15: chat em 136 mil tokens na linha Messages; passagem de turno a pedido do humano.
 - 14h20: relatório da T8 no chat anterior: `02ae45a` e `a413da2` com push; `check:rapido` frio sem GTK em 2 min 04 s, quente em 22 s (detalhe em [[integracoes-plano-verificacoes-t6-t7]]). Falta o verificador.
 - 14h12: o humano mergeou a #15 (T6) e a #16 (T7); `main` em `cd0dfcc`. Passagem de turno.
+- 14h12 (chat novo): retomada pelo "Onde parei". Container frio, 31 GB livres. Implementador despachado para trazer a `main` (`cd0dfcc`) à branch da T8 por merge, sem reescrever o histórico, com o `cargo test` dos crates e o `check:rapido` sem GTK e o `pnpm check` completo uma vez; `target/` em `/home/claude/t8/target`, para o verificador.
+- 14h27: respostas do humano: cenários do modo simulado por URL, sim ([[geral-decisao-2026-11-26-cenarios-do-modo-simulado]], tarefa T9 no [[integracoes-plano]]); teto de tokens do projeto, quando ligado, sem faixa ([[geral-decisao-2026-11-26-parametros-em-configuracoes]] reescrita, ainda não aplicada).
+- 14h28: T9 despachada em paralelo com a T8.
+- 14h45: relatório da T9: 18 cenários com push (`d137be0`); `pnpm check` completo passando; o último push foi sem o hook, porque o lefthook não estava instalado no clone (detalhe em [[integracoes-plano-verificacoes-t6-t7]]).
+- 14h50: relatório da T8: merge da `main` com push (`e5b373e`), sem mudar o Rust; `pnpm check` completo passando (detalhe em [[integracoes-plano-verificacoes-t6-t7]]). Verificadores leves da T8 e da T9 despachados em paralelo, no mesmo `target/`.
 
 ## Decisões tomadas
-- [[geral-decisao-2026-11-26-teste-leve-na-tarefa]], [[geral-decisao-2026-11-26-validacao-em-modo-dev]], [[geral-decisao-2026-11-26-target-unico-por-chat]]
+- [[geral-decisao-2026-11-26-teste-leve-na-tarefa]], [[geral-decisao-2026-11-26-validacao-em-modo-dev]], [[geral-decisao-2026-11-26-target-unico-por-chat]], [[geral-decisao-2026-11-26-cenarios-do-modo-simulado]]
 
 > [!tip] Onde parei
 > - **Prazo:** 2026-11-27, 12h; todas as funcionalidades, etapas 4 e 7 completas; Opus em todos os subagentes; custo por hora conta ([[geral-contexto]], Tempo disponível).
@@ -31,7 +36,7 @@ criado: 2026-11-26
 > - **PRs:** #8 a #16 na `main` (`cd0dfcc`); nenhuma PR aberta.
 > - **Ambiente:** container novo é frio: compilação do zero e GTK e WebKit para o hook pre-push até a T8 entrar. Testes leves durante a tarefa e `pnpm check` completo uma vez ([[geral-decisao-2026-11-26-teste-leve-na-tarefa]]); um `target/` por chat, apagado no fim da funcionalidade, com `sccache` ([[geral-decisao-2026-11-26-target-unico-por-chat]]). Com o cache quente, o `pnpm check` completo leva de 22 s a 53 s. PR pelo `gh api repos/FranciscoYlderlan/MyHarness/pulls` (o GraphQL não funciona na sessão).
 > - **Threads abertas:** opcionais da verificação da T7 ([[integracoes-plano-verificacoes-t6-t7]]); núcleo simulado de `src/lib/ipc/` sobrescreve a conexão pendente (T6, fora do escopo); `listar` e `testar` durante a conexão mostram o GitHub `desconectado`; corrida antiga entre `cancelado` e `guardar` no GitHub; link de instalação do ERR-01 e `obsidian://open` na janela real `[a confirmar]`; "Desconectar" com ERR-53 do cofre deixa o token; limite de 10 GB do `sccache` `[a confirmar]`; `stonebid-vault` com 1 ERRO no `verificar`; as notas de conceito candidatas de [[diario-2026-11-26]].
-> - **Dúvidas para o humano:** cenários do modo simulado por URL (ex.: `?cenario=erro`) para os verificadores; faixa do teto de tokens do projeto, quando ligado, `[a preencher]` (início da etapa 4).
+> - **Dúvidas para o humano:** nenhuma.
 
 ### 🔗 Conexões
 - Mapa: [[moc-orquestra]]

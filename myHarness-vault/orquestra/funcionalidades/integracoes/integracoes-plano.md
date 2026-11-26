@@ -167,8 +167,21 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 ### T8: núcleo e infra num crate sem Tauri e hook leve
 - Detalhe em [[integracoes-plano-t8]].
 
+### T9: cenários do modo simulado por URL
+- **Faz:** o `dev:simulado` lê `?cenario=<nome>` e põe o núcleo simulado no estado pedido: cada integração sem login, não instalada e com cada erro do catálogo que a TEL-02 mostra (ERR-01 a ERR-04, ERR-53, ERR-55); sem o parâmetro, o cenário de hoje ([[geral-decisao-2026-11-26-cenarios-do-modo-simulado]]). A lista de cenários fica num lugar só, com o nome de cada um.
+- **Toca em:** `src/dev/`, `src/lib/ipc/` (só o núcleo simulado)
+- **Depende de:** nenhuma
+- **Paralelo:** sim, com a T8 (sem arquivo em comum)
+- **Pronto quando:**
+  - [ ] cada cenário abre a TEL-02 no estado dele, com teste vitest por cenário
+  - [ ] cenário desconhecido cai no padrão e mostra a lista no console do navegador
+  - [ ] o build do app instalado não inclui o núcleo simulado
+  - [ ] `pnpm check:web` passando; `pnpm check` completo uma vez, antes do último push
+- **Prova:** `pnpm check:web`; Playwright abrindo dois cenários pela URL; busca do núcleo simulado no `dist/`
+- **Verificação:** histórico em [[integracoes-plano-verificacoes-t6-t7#T9]].
+
 ## Próxima tarefa e a seguinte
-- Agora (chat novo): T6 e T7 em paralelo, cada uma por um implementador; depois, o verificador de fluxo principal e os dois adversariais de novo ([[geral-decisao-2026-11-26-adversarial-em-dois]], [[geral-decisao-2026-11-26-build-reaproveitado-na-validacao]]).
+- Agora: T8 (merge da `main`, verificador e PR) e T9 em paralelo; depois, o verificador de fluxo principal e os dois adversariais de novo, com os cenários da T9 ([[geral-decisao-2026-11-26-adversarial-em-dois]], [[geral-decisao-2026-11-26-build-reaproveitado-na-validacao]]).
 - Depois: o teste manual do humano com o GitHub real (T3) e o `/login` do Claude CLI.
 
 ## Prioridades
