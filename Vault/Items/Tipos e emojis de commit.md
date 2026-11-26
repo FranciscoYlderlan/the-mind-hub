@@ -45,6 +45,7 @@ Funciona como **as placas de trânsito**. Eu reconheço a placa de "pare" pela c
 * **Ponto 1:** Escrevo o **código** (`:sparkles:`) na mensagem, e o GitHub mostra o desenho.
 * **Ponto 2:** `chore` tem dois emojis: 📦 para manutenção, 🔧 para configuração.
 * **Ponto 3:** Na dúvida entre `feat` e `refactor`: o usuário percebe a mudança? Se sim, é `feat`.
+* **Ponto 4:** O emoji é o de menos. Mudança que encaixa na tabela usa o emoji dela; a que não encaixa (ex.: commit de merge) fica com o que aparecer. Emoji errado em commit com push não justifica reescrever o histórico.
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
