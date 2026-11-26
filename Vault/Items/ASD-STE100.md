@@ -26,9 +26,9 @@ origem: Pedido do humano em 2026-11-26 (chat do MyHarness) e pesquisa de subagen
 > Ao escrever um procedimento, revisar uma frase longa ou escolher o verbo de uma mensagem de commit.
 
 ### 🛠️ Resumo direto para o cérebro
-* **Ponto 1:** Regra de frase vale em qualquer idioma; o dicionário é do inglês. Commit segue o [[Padrão de commit]].
+* **Ponto 1:** Regra de frase vale em qualquer idioma. O dicionário é do inglês, e aqui não se confere palavra por palavra: o commit aplica as regras com bom senso ([[Padrão de commit]]).
 * **Ponto 2:** A norma é gratuita, em PDF, pedida em https://www.asd-ste100.org/. O texto e o dicionário são da ASD: aqui só há paráfrase.
-* **Ponto 3:** Ponto fraco: sem o PDF, não há como conferir cada palavra do dicionário `[a confirmar]`. A norma não tem regra própria para títulos.
+* **Ponto 3:** O PDF não é necessário: decisão do humano em 2026-11-26. A norma não tem regra própria para títulos.
 
 ### 🔗 Conexões
 - Mapa: [[MOC Programação]]
