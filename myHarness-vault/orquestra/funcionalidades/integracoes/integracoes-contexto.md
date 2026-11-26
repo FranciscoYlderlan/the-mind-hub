@@ -33,6 +33,7 @@ Fechar a etapa 3 do [[geral-plano]]: AC de UC-01 e TEL-02 (principal, FA-01, FE-
 ## Áreas sensíveis
 - Token do GitHub e mensagens da CLI: mascaramento (RN-04, [[fundacao-plano-mascaramento]]).
 - GitHub: [[bug-github-sem-acesso-em-chat-novo-2026-11-23]].
+- Branches de tarefa: push logo depois de cada commit ([[bug-branch-sem-push-some-com-o-container-2026-11-26]]).
 
 ## Mapa
 - Plano: [[integracoes-plano]], [[integracoes-plano-verificacoes]]
