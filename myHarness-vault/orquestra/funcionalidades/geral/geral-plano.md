@@ -59,6 +59,7 @@ Durante o desenvolvimento, a governança roda pelo método manual da Orquestra (
 
 ## 5. Memória, contexto e vários cofres
 - **Status:** planejada
+- **Herdado:** opção "Criar novo cofre" com nome, que roda o `cofre.py criar` do `Vault` ([[geral-decisao-2026-11-26-criar-cofre-pelo-myharness]]).
 - **Objetivo:** levar ao núcleo as regras de memória (só o orquestrador grava, leitura só pela CLI, um cofre de memória por projeto) e mostrar ao humano o que os agentes leem e quais pastas estão em contexto.
 - **Pronto quando:** AC de UC-11 e UC-14 e de RN-01, RN-02, RN-29, RN-30 passando nos dois agentes; RNF-14 (3 s em 3 cofres) medido.
 - **Ciclo** (prático): contrato da funcionalidade → implementação → verificador de fluxo principal → adversarial → fluxos de teste registrados
