@@ -1,11 +1,11 @@
 ---
 tipo: decisao
 funcionalidade: geral
-status: aprovada
+status: substituida
 criado: 2026-11-26
 substitui: 
 ---
-# ✅ Apagar o target depois do build
+# ❌ Apagar o target depois do build
 
 - **Proposta (plano):** relatório do implementador da T4b em 2026-11-26: o disco do container encheu com os `target/` de clones anteriores (22,5 GB) e a compilação parou com `ld Bus error`.
 - **Decisão:** todo agente que compila e gera a pasta `target/` a apaga ao terminar a tarefa, para não acumular arquivos de build; na validação de uma funcionalidade, o `target/` compartilhado é apagado só no fim dela ([[geral-decisao-2026-11-26-build-reaproveitado-na-validacao]]).
@@ -15,6 +15,7 @@ substitui:
 
 ### 🔗 Conexões
 - Funcionalidade: [[geral-contexto]]
+- Substituída por: [[geral-decisao-2026-11-26-target-unico-por-chat]]
 - Plano: [[geral-plano]]
 - Onde surgiu: [[integracoes-plano-verificacoes]]
 - Ponto alterado: [[geral-decisao-2026-11-26-build-reaproveitado-na-validacao]]

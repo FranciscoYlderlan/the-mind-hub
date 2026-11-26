@@ -145,11 +145,11 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** relatório do adversarial da `integracoes`
 - **Paralelo:** não
 - **Pronto quando:**
-  - [ ] `pnpm dev:simulado` abre a TEL-02 no navegador com as três integrações simuladas e o fluxo de conectar
-  - [ ] o build do app instalado não inclui o núcleo simulado
-  - [ ] `pnpm check` passando
+  - [x] `pnpm dev:simulado` abre a TEL-02 no navegador com as três integrações simuladas e o fluxo de conectar
+  - [x] o build do app instalado não inclui o núcleo simulado
+  - [x] `pnpm check` passando
 - **Prova:** `pnpm check`; `pnpm dev:simulado` com o Playwright abrindo a TEL-02; busca do núcleo simulado no build de produção
-- **Verificação:** histórico em [[integracoes-plano-verificacoes#T6]].
+- **Verificação:** histórico em [[integracoes-plano-verificacoes-t6-t7#T6]].
 
 ### T7: conectar repetido no núcleo e opcionais do adversarial
 - **Faz:** guarda de operação em andamento por integração no `Nucleo`: "Conectar" repetido devolve a mesma instrução, sem outro fluxo (GitHub e Claude CLI; UC-01 FA-02, AC-157, [[geral-decisao-2026-11-26-conectar-repetido-reaproveita]]); "Desconectar" durante o login cancela o login e o estado devolvido é o guardado (B2); a tela valida as respostas de comando pelo zod; duplo clique em "Repetir" chama `testar` uma vez.
@@ -157,12 +157,12 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 - **Depende de:** nenhuma (parte da `main`)
 - **Paralelo:** sim, com a T6 (cuidado: as duas tocam `src/lib/ipc/`)
 - **Pronto quando:**
-  - [ ] teste com dois `conectar` ao mesmo tempo, no GitHub e no Claude CLI: um fluxo só, a mesma instrução e o status final `conectado` (AC-157)
-  - [ ] teste de "Desconectar" durante o login: o estado devolvido é o guardado
-  - [ ] resposta de comando inválida (ex.: notas negativas) recusada pelo zod; "Repetir" com duplo clique chama `testar` uma vez
-  - [ ] `pnpm check` passando
+  - [x] teste com dois `conectar` ao mesmo tempo, no GitHub e no Claude CLI: um fluxo só, a mesma instrução e o status final `conectado` (AC-157)
+  - [x] teste de "Desconectar" durante o login: o estado devolvido é o guardado
+  - [x] resposta de comando inválida (ex.: notas negativas) recusada pelo zod; "Repetir" com duplo clique chama `testar` uma vez
+  - [x] `pnpm check` passando
 - **Prova:** `pnpm check`
-- **Verificação:** histórico em [[integracoes-plano-verificacoes#T7]].
+- **Verificação:** histórico em [[integracoes-plano-verificacoes-t6-t7#T7]].
 
 ## Próxima tarefa e a seguinte
 - Agora (chat novo): T6 e T7 em paralelo, cada uma por um implementador; depois, o verificador de fluxo principal e os dois adversariais de novo ([[geral-decisao-2026-11-26-adversarial-em-dois]], [[geral-decisao-2026-11-26-build-reaproveitado-na-validacao]]).
@@ -176,6 +176,6 @@ Etapa 3 do [[geral-plano]]: as três integrações reais atrás da trait `Integr
 
 ### 🔗 Conexões
 - Funcionalidade: [[integracoes-contexto]]
-- Verificações: [[integracoes-plano-verificacoes]]
+- Verificações: [[integracoes-plano-verificacoes]], [[integracoes-plano-verificacoes-t6-t7]]
 - Projeto: [[geral-contexto]]
 - Regras: [[manual-da-orquestra]]
