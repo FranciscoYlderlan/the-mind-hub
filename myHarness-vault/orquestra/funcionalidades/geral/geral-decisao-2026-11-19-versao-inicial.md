@@ -7,7 +7,7 @@ substitui:
 ---
 # ✅ Versão inicial 0.1.0
 
-- **Proposta (plano):** dúvida do [[diario-2026-11-19]]: versão `0.1.0` fixa na migração inicial do SQLite (`src-tauri/migrations/0001_schema_info.sql`).
+- **Proposta (plano):** dúvida do [[diario-2026-11-19]]: versão `0.1.0` fixa na migração inicial do SQLite (`crates/app/migrations/0001_schema_info.sql`).
 - **Decisão:** o app começa na versão `0.1.0`, gravada na migração inicial.
 - **Alteração:** nenhuma
 - **Motivo:** resposta do humano em 2026-11-19 (opção recomendada).

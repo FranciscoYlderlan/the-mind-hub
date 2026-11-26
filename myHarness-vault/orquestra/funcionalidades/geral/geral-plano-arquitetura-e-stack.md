@@ -61,7 +61,7 @@ Direção: `app → features → components / hooks / lib`; uma feature não imp
 | Peça | Proposta | Por quê | Alternativa |
 |---|---|---|---|
 | Base | Tauri 2 + Rust + `tokio` | Já decidido; `tokio` cuida de muitos processos e fluxos ao mesmo tempo | — |
-| Organização | Dois pacotes Rust: `core` (regras e casos de uso, **sem** Tauri) e `src-tauri` (a ponte com a tela e as integrações) | As 30 RN ficam testáveis sem abrir janela; o núcleo "impõe" as regras num lugar só | Um pacote só, com pastas |
+| Organização | Três pacotes Rust: `core` (regras e casos de uso, **sem** Tauri), `app` (núcleo, DTO e integrações, **sem** Tauri) e `src-tauri` (só a ponte com a tela) ([[geral-decisao-2026-11-26-nucleo-em-crate-sem-tauri]]) | As 30 RN ficam testáveis sem abrir janela; o núcleo "impõe" as regras num lugar só | Um pacote só, com pastas |
 | Camadas | `domain` (RN, papéis, permissões por papel) → `application` (despachar, aprovar plano, passagem de turno) → `infra` (Claude, Obsidian, GitHub, git, banco, segredos) | Mesma ideia da Clean Architecture da Referência; a regra não conhece a ferramenta | — |
 | Integrações | Uma interface (`trait`) por integração: `AgentRunner`, `VaultCli`, `GitHost`, `SecretStore` | RNF-11: integração nova sem mexer em regra nem tela; permite trocar S3 por S4 sem reescrever o resto | — |
 | Erros | Erro com código próprio (`thiserror`), igual ao S15 | A tela mostra a mensagem certa; o teste confere o código | `anyhow` (mais solto) |

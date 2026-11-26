@@ -59,17 +59,19 @@ my-harness/
 ├── docs/contrato/            cópia do contrato (Q01), só na aceitação final; durante o projeto ele mora em Anexos/contrato/ do cofre
 ├── src/                      tela React (seção 1)
 ├── crates/
-│   └── core/                 regras e casos de uso, sem Tauri
-│       └── src/  domain/ (RN, papéis, permissões)  application/ (casos de uso)
-├── src-tauri/
+│   ├── core/                 regras e casos de uso, sem Tauri
+│   │   └── src/  domain/ (RN, papéis, permissões)  application/ (casos de uso)
+│   └── app/                  pacote my-harness-app: núcleo e integrações, sem Tauri
+│       ├── src/              nucleo.rs  integracoes.rs  dto.rs  erro.rs  eventos.rs  canal.rs
+│       │   └── infra/        claude/ obsidian/ github/ git/ db/ secrets/ process/ mcp/
+│       ├── migrations/       SQL versionado
+│       └── tests/            integração do banco e, depois, a suíte de tentativas proibidas
+├── src-tauri/                só a ponte com a tela
 │   ├── src/
-│   │   ├── commands/         ponte tela → casos de uso (um arquivo por feature)
-│   │   ├── infra/            claude/ obsidian/ github/ git/ db/ secrets/ process/ mcp/
+│   │   ├── commands/         registro dos comandos e eventos do núcleo
 │   │   └── main.rs  lib.rs
-│   ├── bin/harness-gate.rs   o portão chamado pelo gancho PreToolUse
-│   ├── migrations/           SQL versionado
-│   ├── capabilities/         permissões do Tauri (o que a tela pode chamar)
-│   └── tests/                integração, incluindo a suíte de tentativas proibidas
+│   ├── bin/harness-gate.rs   o portão chamado pelo gancho PreToolUse (etapa 7, ainda não existe)
+│   └── capabilities/         permissões do Tauri (o que a tela pode chamar)
 ├── tools/fake-claude/        CLI falsa para carga e queda
 ├── .github/workflows/ci.yml  só checagem (sem CD)
 ├── compose.yaml  docker/dev.Dockerfile  ambiente de desenvolvimento no WSL + Docker (já criado)
