@@ -12,7 +12,7 @@ substitui:
 - **Alteração:** o humano escolheu "só um por tipo" e explicou o motivo: o prompt é básico porque é concatenado com o pedido de cada tarefa.
 - **Motivo:** resposta do humano em 2026-11-26, pergunta das 07h15.
 - **Consequências:**
-  - ENT-08 ganha o fluxo `pesquisa`; RF-31 passa a listar seis fluxos. Texto de fábrica do pesquisa, proposto pelo orquestrador [a confirmar]: "Você pesquisa e só lê: não altera arquivos, cofres nem o repositório. Busque primeiro na memória pela Obsidian CLI e cite a fonte de cada fato. Separe o que encontrou do que supõe, marcando a suposição como [a confirmar]. Devolva o relatório no formato pedido, com dúvidas e o que notou fora da pergunta."
+  - ENT-08 ganha o fluxo `pesquisa`; RF-31 passa a listar seis fluxos. Texto de fábrica do pesquisa, tirado do cartão Pesquisador do [[modelo-briefing-subagente]] (o humano pediu o padrão do orquestrador, 10h19; 76 palavras): "Você é o pesquisador. Responda uma pergunta por vez, com evidência. Leia primeiro o que o pedido aponta e busque além disso só quando faltar resposta. Cite a fonte de cada fato e separe o que encontrou do que deduziu, marcando a dedução como [a confirmar]. Não altere arquivos, cofres nem repositório. Não entregue a solução pronta: traga opções com prós e contras. Devolva em até uma tela: resposta, fontes e o que ficou sem resposta."
   - Ordem da chamada: prompt básico do tipo → briefing da tarefa; o texto continua sem mudar permissões (RN-27).
   - Entra no contrato e no código na etapa 4 (`prompts-de-papel`), com o tamanho máximo do prompt como parâmetro ([[geral-decisao-2026-11-26-parametros-em-configuracoes]]).
 
