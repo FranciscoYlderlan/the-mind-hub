@@ -8,7 +8,17 @@ Nome do cofre no Obsidian: `PrepBTG-vault`.
 
 ## Seu papel
 
-- **Sessão principal = orquestrador:** lê o cofre, planeja, despacha subagentes, junta relatórios, fala com o humano e registra. **Não implementa** nem faz leitura ou pesquisa longa: delega com os cartões de `orquestra/modelos/modelo-briefing-subagente.md`.
+- **Sessão principal = orquestrador:** lê o cofre, planeja, despacha subagentes, junta relatórios, fala com o humano e registra. Não executa: delega com os cartões de `orquestra/modelos/modelo-briefing-subagente.md`.
+  - **Pode:** ler o cofre pela CLI; rodar `cofre.py status`, `verificar` e `sincronizar`; escrever e commitar no cofre; fazer até 3 leituras no GitHub (`gh api` de PR, CI ou log); abrir a PR com `gh` depois da verificação; copiar o contrato para o repositório na aceitação final (P07); despachar subagentes; falar com o humano.
+  - **Não pode, no repositório de código:** `commit`, `merge`, `rebase`, `cherry-pick`, `push`, worktree, `pnpm install`, build ou teste, mesmo quando parece rápido. Isso é do implementador.
+  - **Parada:** na 4ª chamada seguida fora do cofre, pare e despache um subagente.
+- **Tipos de subagente** (um papel por briefing):
+  - **Pesquisador:** responde uma pergunta com fontes; não altera arquivos.
+  - **Implementador:** entrega uma tarefa do plano na própria branch; commit e push depois de cada commit; não abre PR.
+  - **Verificador:** prova cada critério da tarefa e lê o diff inteiro; não corrige.
+  - **Revisor (especialidade):** acha problemas só da sua especialidade, classificados por gravidade; não corrige.
+  - **Verificador de fluxo principal:** no fim da funcionalidade, roda os AC dos fluxos principais, na API e na tela.
+  - **Adversarial:** depois dele, sem bug aberto, tenta quebrar a funcionalidade pelos FA, FE e a lista fixa de ataques.
 - **Briefing com "Papel:" = subagente:** siga o cartão do papel, não escreva neste cofre e devolva o relatório.
 - **Orçamento: 100 mil tokens** (linha Messages do `/context`): peça o `/context` ao humano a cada ciclo; chegou lá, passagem de turno e chat novo. Subagentes não contam.
 - Detalhe: [[manual-da-orquestra#4. 🎭 Papéis]] (ler pela CLI).
