@@ -8,7 +8,7 @@ substitui: [[geral-decisao-2026-11-20-tudo-local-sem-github]]
 # ✅ Push e PR no GitHub, com o aval do humano em cada PR
 
 - **Proposta (plano):** pedido do humano em 2026-11-23: subir os commits do projeto para `https://github.com/FranciscoYlderlan/MyHarness.git`, com as datas distribuídas de 2026-09-21 até 2026-11-23.
-- **Decisão:** o repositório remoto é `FranciscoYlderlan/MyHarness`. O orquestrador dá o push e abre as PRs; o humano aprova ou não cada PR, e o merge na `main` é dele, pela PR. Cada tarefa sobe na sua PR, com `pnpm check` local antes do push ([[geral-decisao-2026-11-23-uma-pr-por-tarefa]]). Histórico reescrito antes do primeiro push: datas de autor e de commit de 2026-09-21 a 2026-11-23, só de segunda a sexta, em ordem; autor `franciscoylderlan`; mensagens pela tabela de Tipos e emojis de commit (no Vault). Commits novos levam a data real, também só em dia útil.
+- **Decisão:** o repositório remoto é `FranciscoYlderlan/MyHarness`. O orquestrador dá o push e abre as PRs; o humano aprova ou não cada PR, e o merge na `main` é dele, pela PR. Cada tarefa sobe na sua PR, com `pnpm check` local antes do push ([[geral-decisao-2026-11-23-uma-pr-por-tarefa]]). Histórico com datas de autor e de commit de 2026-09-21 a 2026-11-27, só de segunda a sexta, em ordem ([[geral-decisao-2026-11-27-datas-no-congelamento]]); autor `franciscoylderlan`; mensagens pela tabela de Tipos e emojis de commit (no Vault).
 - **Alteração:** o humano primeiro disse que ele daria o push e depois corrigiu: o orquestrador dá o push e ele aprova as PRs. O tipo `ci` (`:construction_worker:`) entrou na tabela de Tipos e emojis de commit (no Vault), por escolha do humano; os demais emojis fora da tabela foram trocados.
 - **Motivo:** respostas do humano em 2026-11-23, às 15h55, 15h57 e 16h02 ("eu não realizo commits aos sábados e domingos"); a conta do GitHub voltou.
 - **Consequências:** o CI do GitHub ([[geral-decisao-2026-11-19-ci-no-github]], [[geral-decisao-2026-11-19-gatilho-do-ci]]) roda em PR e em push na `main`. As branches antigas ficam em `backup/*` no `Projetos\my-harness`; `feat/setup-mascaramento-segredo` não sobe. Hashes antigos → atuais, depois do merge da #3 e do rebase das outras PRs sobre a `main` (os diários seguem com os antigos):
@@ -32,6 +32,7 @@ substitui: [[geral-decisao-2026-11-20-tudo-local-sem-github]]
 ### 🔗 Conexões
 - Funcionalidade: [[geral-contexto]]
 - Plano: [[fundacao-plano]], [[geral-plano]]
+- Datas no congelamento: [[geral-decisao-2026-11-27-datas-no-congelamento]]
 - Decisão substituída: [[geral-decisao-2026-11-20-tudo-local-sem-github]]
 - Decisões alteradas: [[geral-decisao-2026-11-19-branches-e-pr-unica]], [[geral-decisao-2026-11-19-repositorio-e-ambiente]]
 - Projeto: [[geral-contexto]]
