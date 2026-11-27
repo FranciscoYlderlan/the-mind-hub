@@ -24,6 +24,7 @@ O humano precisa digitar o endereço à mão para concluir o "Conectar" do GitHu
 ## Linha do tempo técnica
 - 2026-11-26 18h32: o humano relatou o sintoma; demais passos ✔.
 - 2026-11-27 07h35: T11 despachada a um implementador.
+- 2026-11-27 08h05: correção na `fix/integracoes-links-externos` (`f42640e`, `626cd3d`); falta o verificador e o teste do humano na janela real.
 
 ## Pseudocódigo do problema
 `<a href="https://github.com/login/device">` na janela do Tauri → clique → nada.
@@ -35,7 +36,7 @@ O humano precisa digitar o endereço à mão para concluir o "Conectar" do GitHu
 - Relato do humano.
 
 ## Correção aplicada
-Nenhuma ainda.
+Plugin `opener` do Tauri 2 e componente `LinkExterno`: na janela do Tauri, os três links chamam o `openUrl`; no navegador, o `<a>` segue igual. Permissão só para os três destinos ([[integracoes-plano-verificacoes-t10-t11]]).
 
 ## Solução
 Tarefa T11 ([[integracoes-plano-t11]]), aprovada pelo humano em 2026-11-27, às 7h30: plugin `opener` do Tauri, com permissão mínima nas `capabilities`, para os três links da TEL-02.
