@@ -242,7 +242,7 @@ As TEL-02 a TEL-06 abrem sobre a TEL-01 como painéis ou diálogos. Navegação 
 | Estado | O que o usuário vê | Ações possíveis |
 |---|---|---|
 | vazio | não se aplica | — |
-| carregando | login em andamento | nenhuma [a confirmar: cancelar?] |
+| carregando | login em andamento ou ação em curso; os botões ficam no lugar, inativos, por pelo menos 500 ms depois do clique (contra duplo clique) | nenhuma [a confirmar: cancelar?] |
 | preenchido | conta e versão | testar, desconectar |
 | erro | motivo da falha (ERR-01, ERR-02, ERR-03, ERR-04, ERR-53) | conectar de novo |
 | sucesso | conectado | testar, desconectar |

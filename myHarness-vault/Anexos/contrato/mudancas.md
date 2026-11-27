@@ -6,6 +6,7 @@ Contrato transcrito de "Harness — especificação funcional" (18 de nov. de 20
 
 | ID | Data | O que mudou | Blocos e IDs afetados | Motivo | Aprovação |
 |---|---|---|---|---|---|
+| M-51 | 2026-11-27 | CMP-11, estado "carregando": depois de um clique numa ação do cartão, os botões ficam no lugar, inativos, por pelo menos 500 ms | 04 (CMP-11) | adversarial da tela da `integracoes` (B1): duplo clique em "Desconectar" disparava um `conectar`; proposta do implementador da T10 (integracoes-plano-t10) | aval do humano em 2026-11-27, às 7h30 |
 | M-50 | 2026-11-26 | UC-01 ganha o FA-02: "Conectar" com a conexão em andamento mostra a mesma instrução, sem outro fluxo (AC-157) | 03 (UC-01 FA-02), 08 (AC-157), 07 (RF-01, RF-03) | adversarial da `integracoes`: `conectar` repetido abria um segundo fluxo e o órfão desfazia o `conectado` (bug-conectar-repetido-abre-segundo-fluxo-2026-11-26) | aval do humano em 2026-11-26, às 13h10 |
 | M-49 | 2026-11-26 | AC-03: o link de instalação do Claude CLI fica no cartão da TEL-02; o indicador só fica em erro | 08 (AC-03) | adversarial da `integracoes`: o CMP-03 não tem link no contrato, só o CMP-11 | aval do humano em 2026-11-26, às 13h10 |
 | M-48 | 2026-11-24 | ERR-53 e ERR-55 vão ao registro do núcleo (saída de erro), não ao Log (ENT-12), até a etapa 6 (logs) | 05 (introdução, ERR-53, ERR-55), 08 (AC-156) | verificação da T4 do integracoes-plano: o Log exige `execucao` e o Log sem execução foi recusado (M-46) | aval do humano em 2026-11-24, às 16h (geral-decisao-2026-11-24-falha-no-registro-do-nucleo) |
